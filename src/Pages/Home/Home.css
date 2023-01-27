@@ -1,0 +1,24 @@
+.background {
+    background-color: #F0F5FF;
+    ;
+
+}
+
+.container {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+.welcome-color {
+    color: #6D747A;
+}
+
+.name {
+    font-weight: normal;
+}
+
+.display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

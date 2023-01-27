@@ -1,11 +1,14 @@
 import './App.css';
+import Home from './Pages/Home/Home';
 
 function App() {
   return (
     <div className="App">
-      <p className='text-lg font-bold'>
-        App
-      </p>
+
+
+
+      <Home></Home>
+
     </div>
   );
 }
