@@ -1,0 +1,23 @@
+.small-text {
+    color: #6D747A;
+}
+
+.price {
+    color: #1B72C0;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.discount {
+    color: #74777F;
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration-line: line-through;
+    font-weight: 400;
+}
+
+.box {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
+    border-radius: 24px;
+}

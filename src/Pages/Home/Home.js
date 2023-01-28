@@ -9,6 +9,8 @@ import Video from './Video';
 import Stories from '../Home/Stories';
 import Activities from './Activities';
 import Sessions from './Sessions';
+import Courses from './Courses';
+import Footer from './Footer';
 
 
 const Home = () => {
@@ -39,6 +41,8 @@ const Home = () => {
             <Stories></Stories>
             <Activities></Activities>
             <Sessions></Sessions>
+            <Courses></Courses>
+            <Footer></Footer>
         </div>
     );
 };
