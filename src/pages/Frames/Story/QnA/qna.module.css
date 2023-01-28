@@ -1,0 +1,78 @@
+/* mcq */
+.storySudoku {
+   width: 100%;
+   bottom: 80px;
+   padding: 0 10px;
+   padding-top: 4rem;
+   display: flex;
+   align-items: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   overflow: auto;
+}
+
+.storyImage {
+   border-radius: 0px;
+}
+
+.sudokuAnswer {
+   margin-top: 10px;
+   min-height: 178px;
+   position: relative;
+   background: #169462;
+   border-radius: 24px;
+   width: 100%;
+   z-index: 1;
+}
+
+.sudokuAnswer img {
+   position: absolute;
+   width: 100%;
+   top: 0px;
+   object-fit: contain;
+   z-index: -1;
+}
+
+.sudokuAnswer h4 {
+   text-align: center;
+   color: #135621;
+   margin-top: 75px;
+   font-weight: 600;
+}
+.answer{
+   text-align: center;
+   color: #F8F9FA;
+   font-weight: 600;
+   word-break: break-word;
+   padding: 0 8px;
+}
+.sudokuBottom {
+   width: 100%;
+   margin-top: 10px;
+   border-radius: 24px;
+   background: #D3E4FF;
+   padding: 16px 16px;
+}
+
+.input {
+   width: 100%;
+   background: #FFFFFF;
+   border-radius: 4px 4px 0px 0px;
+   outline: none;
+   border: none;
+   padding: 6px 8px;
+}
+
+.sudokuBottom button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 16px;
+   background: #1B72C0;
+   border-radius: 39px;
+   margin-top: 16px;
+   color: white;
+   font-weight: 700;
+}
