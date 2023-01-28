@@ -41,7 +41,7 @@ const Sessions = () => {
                                     <p className='font-semibold  text-xs pl-1'><span className='text-white'> Live</span></p>
                                 </div>
 
-                                <h2 class=" font-black text-lg pt-1">
+                                <h2 class=" font-black text-base pt-1">
                                     Seminar on art of doodling
 
                                 </h2>

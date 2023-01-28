@@ -21,11 +21,11 @@
     background-color: #B3261E;
     border-radius: 100px;
     color: white;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     font-weight: 500;
     font-size: 11px;
     position: absolute;
-    top: 0;
-    right: 30%;
+    top: 5%;
+    right: 32%;
 }
