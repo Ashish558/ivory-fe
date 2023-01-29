@@ -11,6 +11,7 @@ import Otp from './pages/Login/Otp';
 import SignUp from './pages/SignUp/SignUp';
 import Congrates from './pages/SignUp/Congrates';
 import LoggedInHome from './pages/Home/LoggedInHome'
+import Profile from './pages/Createprofile/Profile'
 function App() {
   //true for now will change later
   const loggedIn = true
@@ -24,6 +25,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />
+        <Route exact path='/CreateProfile' element={<Profile/>}/>
         <Route path="/"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>
