@@ -1,0 +1,20 @@
+.video-container {
+    position: relative;
+}
+
+#myVideo {
+    width: 100%;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: url("https://cdn-icons-png.flaticon.com/512/0/375.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

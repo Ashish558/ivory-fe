@@ -1,0 +1,18 @@
+.drawer-content {
+    background: linear-gradient(195.35deg, #D3E6FE 0%, #FCEBFF 34.17%, #D3E6FE 67.5%, #E7DEFE 100%);
+    ;
+    height: 100vh;
+}
+
+
+.line {
+    border: 0.5px solid #CED4DA;
+}
+
+.contact-color {
+    color: #44474E;
+}
+
+.boundary-margin-top {
+    margin-top: 224px;
+}
