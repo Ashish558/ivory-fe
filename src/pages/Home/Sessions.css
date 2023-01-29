@@ -1,0 +1,18 @@
+.custom-card {
+    background-color: #D3E4FF;
+    border-radius: 24px;
+    position: relative;
+}
+
+.date-bg {
+    color: #6C7277;
+}
+
+.Live {
+    background-color: #DD1D43;
+    border-radius: 12px;
+    width: 50px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}

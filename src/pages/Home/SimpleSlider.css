@@ -1,0 +1,27 @@
+.slider-bg {
+    background-color: #D3E4FF;
+    border-radius: 24px;
+}
+
+
+
+.items-align {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.banner {
+    position: relative;
+}
+
+.play {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background-image: url('../../Images/play_arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+}
