@@ -2,10 +2,14 @@ import React from 'react'
 import './App.css';
 import { BrowserRouter, Routes, Navigate, Route  } from "react-router-dom";
 
-import Home from './pages/Home/home';
+import Home from './pages/Home/Home.jsx';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
 import StartActivity from './pages/StartActivity/StartActivity';
+import Login from './pages/Login/Login';
+import Otp from './pages/Login/Otp';
+import SignUp from './pages/SignUp/SignUp';
+import Congrates from './pages/SignUp/Congrates';
 
 function App() {
   //true for now will change later
@@ -15,8 +19,11 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-       <Route
-            path="/"
+       <Route path="/login" element={ <Login /> } /> 
+       <Route path="/otp" element={ <Otp /> } /> 
+       <Route path="/signUp" element={ <SignUp /> } /> 
+       <Route path="/Congrates" element={ <Congrates /> } /> 
+       <Route path="/"
             element={
               <RequireAuth loggedIn={loggedIn ? true : false}>
                 <Home />
