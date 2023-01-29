@@ -97,7 +97,10 @@ export default function Activities() {
       activities.map((activity, idx) => {
          temp.push({
             id: idx + 1,
-            children: <div className='flex items-center gap-x-1'> <img src={activity.icon} alt='activity' /> {activity.name} </div>,
+            children: <div className='flex items-center gap-x-1'>
+               <img src={activity.icon} alt='activity' />
+               {activity.name}
+            </div>,
             selected: false
          })
       })
@@ -132,7 +135,7 @@ export default function Activities() {
                         <div className='grid grid-cols-3 gap-x-2'>
                            {activity.types.map(type => {
                               return <div key={type.id} className={styles.activity}
-                              onClick={()=> navigate(`/activities/${activity.id}/${type.id}`)} >
+                                 onClick={() => navigate(`/activities/${activity.id}/${type.id}`)} >
                                  <img src={type.icon} alt='activity-type' />
                                  <p className='mt-2  font-semibold text-center'> {type.name} </p>
                               </div>

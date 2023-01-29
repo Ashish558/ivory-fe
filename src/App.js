@@ -10,8 +10,7 @@ import Login from './pages/Login/Login';
 import Otp from './pages/Login/Otp';
 import SignUp from './pages/SignUp/SignUp';
 import Congrates from './pages/SignUp/Congrates';
-// import Home from './Pages/Home/LoggedInHome';
-
+import LoggedInHome from './pages/Home/LoggedInHome'
 function App() {
   //true for now will change later
   const loggedIn = true
@@ -24,6 +23,7 @@ function App() {
         <Route path="/otp" element={<Otp />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
+        <Route path="/home" element={<LoggedInHome />} />
         <Route path="/"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>

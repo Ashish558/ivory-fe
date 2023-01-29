@@ -13,16 +13,12 @@ import Courses from './Courses';
 import Footer from './Footer';
 
 
-const Home = () => {
-
-
+const LoggedInHome = () => {
 
     return (
 
         <div className='container'>
             <Navbar></Navbar>
-
-
 
 
             {/* <div className='mt-7 mx-5 rounded-lg background grid grid-rows-2'>
@@ -47,4 +43,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default LoggedInHome;

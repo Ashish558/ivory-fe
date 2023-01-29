@@ -1,7 +1,14 @@
 import React from 'react'
 
+//sample items
+// items = [
+//    {
+//       id: 0,
+//       children: <div> child </div>,
+//       selected: true
+//    }
+// ]
 export default function Filterbar({ items }) {
-
 
    return (
       <div className='overflow-auto'>
