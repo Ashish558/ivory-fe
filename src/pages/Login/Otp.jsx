@@ -1,9 +1,10 @@
 import React,{ useState } from 'react';
+import { useEffect } from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
 import "./Otp.module.css";
 const Otp = () => {
-    const [ otp, setOtp ] = useState(false);
+    const [ otp, setOtp ] = useState([]);
      const locaion = useLocation();
      const NewLocation = useLocation();
       const from = locaion.state?.from || "/login";
@@ -11,16 +12,26 @@ const Otp = () => {
      const goBack = () => {
        navigate(from, { replace: true });
   };
-  const handleNextInput = (e) => {
-    if (e.keyCode === 39) {
+
+  const handleOpt = (e) => {
+    e.preventDefault();
+     if (e.keyCode === 39) {
       e.target.nextElementSibling.focus();
     }
     else if(e.keyCode === 37) {
       e.target.previousElementSibling.focus();
     
     }
-  
+    const { name,value } = e.target;
+    const otpValues = { ...otp,[name]: value }
+    if (value.length === 0) {
+      delete otpValues[name];
+    }
+    
+    setOtp(otpValues);
   }
+  const otpValuesArray = Object.values(otp);
+ 
     return (
       <div className="h-screen" style={{ background: "rgb(211, 230, 254,.2)" }}>
         <div className="topAppBar mt-10 ml-8">
@@ -34,73 +45,85 @@ const Otp = () => {
           <h1 className="text-2xl font-bold ml-8">
             Verify with OTP sent to 9876543210
           </h1>
-          <form id="otp" className="flex flex-row mx-auto  mt-5">
-            <input
-              className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="number"
-              maxlength="1"
-              onKeyUp={(e) => handleNextInput(e)}
-            />
-            <input
-              className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="number"
-              maxlength="1"
-              onKeyUp={(e) => handleNextInput(e)}
-            />
-            <input
-              className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="number"
-              maxlength="1"
-              onKeyUp={(e) => handleNextInput(e)}
-            />
-            <input
-              className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="number"
-              maxlength="1"
-              onKeyUp={(e) => handleNextInput(e)}
-            />
-            <input
-              className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="number"
-              maxlength="1"
-              onKeyUp={(e) => handleNextInput(e)}
-            />
-            <input
-              className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="number"
-              maxlength="1"
-              onKeyUp={(e) => handleNextInput(e)}
-            />
-          </form>
-          <div className="flex ml-8 mt-5">
-            <span>
-              <div className="flex items-center justify-center">
-                <div
-                  className="spinner-border inline-block w-5 h-5 border-4 rounded-full mt-1 border-blue-500 border-t-blue-500 border-b-blue-500 border-l-blue-500 border-r-transparent mr-2"
-                  role="status"
-                ></div>
+          <form className="flex flex-col" onKeyUp={handleOpt}>
+            <div className="flex flex-row mx-auto  mt-5">
+              <input
+                className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                type="text"
+                name="filed1"
+                maxlength="1"
+                
+              />
+              <input
+                className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                type="text"
+                name="filed2"
+                maxlength="1"
+                
+              />
+              <input
+                className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                type="text"
+                name="filed3"
+                maxlength="1"
+                
+              />
+              <input
+                className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                type="text"
+                name="filed4"
+                maxlength="1"
+                
+              />
+              <input
+                className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                type="text"
+                name="filed5"
+                maxlength="1"
+                
+              />
+              <input
+                className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                type="text"
+                name="filed6"
+                maxlength="1"
+                
+              />
+            </div>
+            {otpValuesArray.length < 1 && (
+              <div className="flex ml-8 mt-5">
+                <span>
+                  <div className="flex items-center justify-center">
+                    <div
+                      className="spinner-border inline-block w-5 h-5 border-4 rounded-full mt-1 border-blue-500 border-t-blue-500 border-b-blue-500 border-l-blue-500 border-r-transparent mr-2"
+                      role="status"
+                    ></div>
+                  </div>
+                </span>
+
+                <p className="text-gray-500">Auto fetching OTP</p>
               </div>
-            </span>
-            <p className="text-gray-500">Auto fetching OTP</p>
-          </div>
+            )}
+
+            {otpValuesArray.length === 6 ? (
+              <Link
+                to="/signup"
+                state={{ from: NewLocation }}
+                className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+              >
+                Continue
+              </Link>
+            ) : (
+              <Link
+                to="/signup"
+                state={{ from: NewLocation }}
+                className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+              >
+                Continue
+              </Link>
+            )}
+          </form>
         </div>
-        {otp ? (
-          <Link
-            to="/signup"
-            state={{ from: NewLocation }}
-            className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
-          >
-            Continue
-          </Link>
-        ) : (
-          <Link
-            to="/signup"
-            state={{ from: NewLocation }}
-            className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
-          >
-            Continue
-          </Link>
-        )}
 
         <Link to="/resend" className="text-blue-500 ml-8">
           {" "}
