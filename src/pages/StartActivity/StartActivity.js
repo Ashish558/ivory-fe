@@ -23,7 +23,7 @@ export default function StartActivity() {
    return (
       <>
          <div className='pb-5'>
-            <Header />
+            {/* <Header /> */}
             <div className='pt-2 px-4'>
                <p className='text-lightGray font-medium'> Activities {'>'} Acrylic Painting </p>
             </div>

@@ -109,7 +109,7 @@ export default function Activities() {
 
    return (
       <div>
-         <Header />
+         {/* <Header /> */}
 
          <div className='px-4'>
 
