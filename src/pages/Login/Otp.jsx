@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
+import "./Otp.module.css";
 const Otp = () => {
     const [ otp, setOtp ] = useState(false);
      const locaion = useLocation();
@@ -9,7 +10,17 @@ const Otp = () => {
      const navigate = useNavigate();
      const goBack = () => {
        navigate(from, { replace: true });
-     };
+  };
+  const handleNextInput = (e) => {
+    if (e.keyCode === 39) {
+      e.target.nextElementSibling.focus();
+    }
+    else if(e.keyCode === 37) {
+      e.target.previousElementSibling.focus();
+    
+    }
+  
+  }
     return (
       <div className="h-screen" style={{ background: "rgb(211, 230, 254,.2)" }}>
         <div className="topAppBar mt-10 ml-8">
@@ -26,34 +37,39 @@ const Otp = () => {
           <form id="otp" className="flex flex-row mx-auto  mt-5">
             <input
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="text"
-              value="1"
+              type="number"
               maxlength="1"
+              onKeyUp={(e) => handleNextInput(e)}
             />
             <input
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="text"
+              type="number"
               maxlength="1"
+              onKeyUp={(e) => handleNextInput(e)}
             />
             <input
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="text"
+              type="number"
               maxlength="1"
+              onKeyUp={(e) => handleNextInput(e)}
             />
             <input
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="text"
+              type="number"
               maxlength="1"
+              onKeyUp={(e) => handleNextInput(e)}
             />
             <input
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="text"
+              type="number"
               maxlength="1"
+              onKeyUp={(e) => handleNextInput(e)}
             />
             <input
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
-              type="text"
+              type="number"
               maxlength="1"
+              onKeyUp={(e) => handleNextInput(e)}
             />
           </form>
           <div className="flex ml-8 mt-5">
