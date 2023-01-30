@@ -11,19 +11,23 @@ import Otp from './pages/Login/Otp';
 import SignUp from './pages/SignUp/SignUp';
 import Congrates from './pages/SignUp/Congrates';
 import LoggedInHome from './pages/Home/LoggedInHome'
+import Profile from './pages/Createprofile/Profile'
+import Footer from './pages/Home/Footer';
+import Navbar from './pages/Navbar/Navbar';
 function App() {
   //true for now will change later
   const loggedIn = true
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
-
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />
+        <Route exact path='/CreateProfile' element={<Profile />} />
         <Route path="/"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>
@@ -57,6 +61,7 @@ function App() {
         />
 
       </Routes>
+      <Footer />
     </BrowserRouter>
 
   );
