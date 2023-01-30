@@ -40,3 +40,11 @@ export const verifyOtp = (body) => {
 export const registerUser = (body) => {
    return axios.post(`${BASE_URL}/accounts/users/`, body)
 };
+
+// {
+//    "mobile_no" : "",
+//    "password" : ""
+// }
+export const loginUser = (body) => {
+   return axios.post(`${BASE_URL}/accounts/login/`, body)
+};
