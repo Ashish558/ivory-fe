@@ -50,7 +50,7 @@ export default function ActivityType() {
    return (
       <div>
          {/* <Header /> */}
-         <div className='px-4'>
+         <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
                <p className='text-lightGray font-medium'> Activities {'>'} Acrylic Painting </p>
             </div>

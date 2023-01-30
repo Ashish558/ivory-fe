@@ -1,9 +1,9 @@
 .modalContainer {
-   position: absolute;
+   position: fixed;
    top: 0;
    left: 0;
    width: 100%;
-   min-height: 100vh;
+   height: 100%;
    z-index: 5000;
    overflow: auto;
    display: flex;
@@ -71,7 +71,7 @@
 /* FOOTER */
 
 .footer {
-   position: absolute;
+   position: fixed;
    bottom: 0px;
    left: 0;
    margin-top: auto;
@@ -93,8 +93,73 @@
 }
 
 @media only screen and (min-width: 768px) {
+
+
    .cancelBtn {
       right: 30.97px;
       top: 30px;
+   }
+
+   .storyContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-end;
+      padding-top: 50px;
+      padding-bottom: 50px;
+   }
+
+   .storyImg {
+      position: static;
+      max-width: 439px;
+      height: calc(100% - 60px);
+      /* transform: translateX(-50%); */
+   }
+
+   .storyVideo {
+      position: static;
+      max-width: 490px;
+      height: 100%;
+      z-index: 1;
+      min-height: 500px;
+   }
+
+   .storyVideo>div {
+      width: 490px !important;
+      height: 600px !important;
+   }
+
+   .storyImg {
+      border-radius: 25px;
+      max-width: 400px;
+
+   }
+
+   .footer {
+      position: static;
+      width: auto;
+      background-image: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+   }
+
+   .iconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(6px);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-right: 0.5rem;
+   }
+
+   .iconContainer img {
+      margin-bottom: 0;
+      width: 18px;
    }
 }

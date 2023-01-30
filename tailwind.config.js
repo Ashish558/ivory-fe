@@ -13,6 +13,9 @@ module.exports = {
       },
       fontSize: {
         xxs: '10px'
+      },
+      backgroundImage:{
+        'activities-gradient' : 'linear-gradient(180.1deg, #59E3FF 2.72%, #FFFFFF 98.73%)'
       }
     },
   },

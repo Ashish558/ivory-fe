@@ -19,16 +19,23 @@ import QnA from './QnA/QnA';
 const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
-export default function Story() {
+export default function Story({ handleClose }) {
 
    const [storyType, setStoryType] = useState(types[5])
+
+   useEffect(() => {
+      document.body.style.overflow = "hidden";
+      return () => {
+         document.body.style.overflow = "unset";
+      };
+   }, []);
 
 
    return (
       <div className={styles.modalContainer}>
-         <div className="w-full p-0 md:p-3 self-stretch overflow-auto">
+         <div className="w-full p-0  self-stretch overflow-auto">
             <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
-               <div className='flex flex-col self-stretch flex-1 overflow-auto pb-[80px]'>
+               <div className={`flex flex-col self-stretch flex-1 overflow-auto pb-[80px] ${styles.storyContainer} `}>
 
                   {storyType === 'image' ?
                      <div className={styles.storyImg}>
@@ -39,7 +46,7 @@ export default function Story() {
                         <div className={styles.storyVideo}>
                            <ReactPlayer
                               width='100%'
-                              height='80%'
+                              height='100%'
                               url={url}
                               controls={true}
                            />
@@ -51,19 +58,23 @@ export default function Story() {
                               : storyType === 'sudoku' ?
                                  <Sudoku />
                                  : storyType === 'qna' ?
-                                 <QnA />
-                                 : <></>
+                                    <QnA />
+                                    : <></>
                   }
                   <div className={styles.backBtn}>
-                     <img src={BackIcon} alt='back' />
+                     <img src={BackIcon} alt='back' onClick={handleClose} />
                   </div>
                   <div className={styles.footer}>
-                     <div className='flex flex-col items-center ml-auto mr-7'>
-                        <img src={LikeIcon} alt='like' className='' />
+                     <div className='flex flex-col items-center ml-auto mr-7 md:mr-0 md:ml-0 md:flex-row md:mb-6'>
+                        <div className={styles.iconContainer}>
+                           <img src={LikeIcon} alt='like' className='' />
+                        </div>
                         Like
                      </div>
-                     <div className='flex flex-col items-center'>
-                        <img src={ShareIcon} alt='share' />
+                     <div className='flex flex-col items-center md:flex-row'>
+                        <div className={styles.iconContainer}>
+                           <img src={ShareIcon} alt='share' />
+                        </div>
                         Share
                      </div>
                   </div>

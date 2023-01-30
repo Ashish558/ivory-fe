@@ -12,7 +12,7 @@ export default function Filterbar({ items }) {
 
    return (
       <div className='overflow-auto'>
-         <div className='flex items-center flex-nowrap	'>
+         <div className='flex items-center flex-nowrap lg:flex-wrap'>
             {
                items.map(item => {
                   return (

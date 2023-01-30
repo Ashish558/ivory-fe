@@ -4,12 +4,14 @@ import "./Profile.css"
 import photo from "../../assets/smile.png"
 import cross from "../../assets/cross.png"
 import img from "../../assets/iphoto.png"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Profile = () => {
 
   const [email, setemail] = useState("");
   const [gender, setgender] = useState("");
   const [interest, setinterest] = useState([]);
+  const navigate = useNavigate()
+
   console.log(email);
   console.log(gender);
 
@@ -43,7 +45,7 @@ const Profile = () => {
       {/* ----------------------main detail form ----------------------*/}
       <div className='data-input'>
         <div className="head">
-          <img src={arrow} alt="" />
+          <img src={arrow} alt=""  onClick={() => navigate(-1)} />
           <p className='edit-head'>Edit Your Profile</p>
         </div>
         <div className='image'>
