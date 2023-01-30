@@ -112,7 +112,7 @@ export default function Mcq2() {
                {options.map(option => {
                   return (
                      <div key={option.id}
-                        className={`mb-3 bg-white py-1 text-black self-stretch flex justify-center items-center font-bold bg-[#1B72C0] rounded-full cursor-pointer ${option.selected ? 'bg-[#001C38]' : ''} ${mcqResponse.selected === true && option.correct === true ? styles.correctOption : ''}`}
+                        className={`mb-3 bg-white py-1 text-black self-stretch flex justify-center items-center font-bold bg-[#1B72C0] rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true && option.correct === true ? styles.correctOption : ''}`}
                         onClick={() => optionDisabled === false && selectAns(option)} >
                         <p> {option.text} </p>
                      </div>

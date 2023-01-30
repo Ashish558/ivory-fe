@@ -114,7 +114,7 @@ export default function Mcq() {
             <div className='flex justify-around items-center' >
                {options.map(option => {
                   return <div key={option.id}
-                     className={`w-12 bg-white h-12 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? 'bg-[#1B72C0] text-white' : ''} ${mcqResponse.selected === true  && option.correct === true ? 'bg-[#169462] text-white' : '' }`}
+                     className={`w-12 bg-white h-12 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true  && option.correct === true ?`${styles.correctOption}` : '' }`}
                      onClick={() => optionDisabled === false && selectAns(option)} >
                      <p> {option.text} </p>
                   </div>

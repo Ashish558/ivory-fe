@@ -67,6 +67,15 @@
    text-align: center;
    color: #FFFFFF;
 }
+
+.selectedOption {
+   color: white;
+   background-color: #1B72C0;
+}
+.correctOption {
+   color: white;
+   background-color: #169462;
+}
 .mcqResponseInCorrect h2 {
    font-weight: 600;
    font-size: 24px;
@@ -75,3 +84,10 @@
    color: #92011A;
 }
 
+
+@media only screen and (min-width: 768px) {
+
+   .storyMcq {
+      max-width: 460px;
+   }
+}

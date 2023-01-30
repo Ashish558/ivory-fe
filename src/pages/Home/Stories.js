@@ -1,15 +1,17 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import Story1 from '../../Images/Rectangle 5.png'
 import '../Home/Stories.css'
 import Logo from '../../Images/Vector.png'
 import Logo1 from '../../Images/Vector (1).png'
+import Story from "../Frames/Story/Story";
 
 
 const Stories = () => {
-    const settings = {
+    const [storyActive, setStoryActive] = useState(false)
 
+    const settings = {
         infinite: false,
         centerPadding: "60px",
         slidesToShow: 2.3,
@@ -26,12 +28,13 @@ const Stories = () => {
     };
 
     return (
+        <>
         <div>
             <div className='pt-14'>
                 <h1 className='text-xl font-black pl-4 pb-3'>Start your day</h1>
             </div>
             <Slider {...settings}>
-                <div className="p-3 " >
+                <div className="p-3 " onClick={() => setStoryActive(true)} >
                     <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
                         {/* <img className="w-full" src={Story1} alt="" /> */}
                         <div className="pl-3 details">
@@ -74,6 +77,11 @@ const Stories = () => {
 
             </Slider>
         </div>
+        {
+            storyActive &&
+            <Story handleClose={()=>setStoryActive(false)} />
+        }
+        </>
     );
 };
 
