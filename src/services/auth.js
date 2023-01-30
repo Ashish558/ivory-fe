@@ -26,16 +26,8 @@ export const verifyOtp = (body) => {
 
 //3. Pass the necessary fields
 // {
-//    "country_code": "",
-//    "mobile_no": "",
-//    "otp": "",
-//    "otp_token": "",
-//    "email": "",
 //    "name": "",
 //    "dob": null,
-//    "gender": null,
-//    "profile_picture": null,
-//    "intrests": []
 // }
 export const registerUser = (body) => {
    return axios.post(`${BASE_URL}/accounts/users/`, body)

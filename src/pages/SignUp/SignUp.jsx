@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
+import { registerUser,verifyOtp } from '../../services/auth';
 
 
 const SignUp = () => {
@@ -14,7 +15,7 @@ const SignUp = () => {
   const [monthPosition2, setMonthPosition2] = React.useState(9);
   const [monthPosition3,setMonthPosition3] = React.useState(10);
   const [name,setName] = React.useState("");
-  
+
   const months = [
     "January",
     "February",
@@ -30,7 +31,10 @@ const SignUp = () => {
     "December",
   ];
 
- const from = locaion.state?.from || "/otp";
+  const from = locaion.state?.from || "/otp";
+  const stateData = locaion?.state;
+   const { otp, otp_token, phone, countryCode } = stateData;
+
      const navigate = useNavigate();
      const goBack = () => {
        navigate(from, { replace: true });
@@ -106,12 +110,41 @@ const SignUp = () => {
       }
     }
   }
-
   const data = {
     name,
-    date:date2 + " " + months[monthPosition2] + " " + year2,
-  }
+    date: year2 + "-" + monthPosition2 + "-" + date2,
+  };
   console.log(data);
+  const handleReg = (e) => {
+    e.preventDefault();
+    const body = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otp,
+      otp_token: otp_token,
+      name: name,
+      dob: data.date,
+    };
+    const verifyBody = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otp,
+      otp_token: otp_token,
+    };
+    registerUser(body)
+      .then((res) => {
+        // console.log(res.data);
+        verifyOtp(verifyBody)
+          .then((res) => {
+            console.log(res.data);
+          })
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
+      } );
+  }
+  
     return (
       <div
         className="h-[90vh] overflow-hidden"
@@ -121,11 +154,11 @@ const SignUp = () => {
           <h1 className="text-2xl font-bold ml-8">
             &#128588; Create an account
           </h1>
-          <form>
-            <div class="w-full mt-4 relative">
+          <form onSubmit={handleReg}>
+            <div className="w-full mt-4 relative">
               <label className="ml-8 font-semibold text-lg">Name</label>
               <input
-                class=" w-10/12 sm:w-auto  px-4 py-2 mt-2 text-gray-700 bg-white border  border-black placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl ml-8"
+                className=" w-10/12 sm:w-auto  px-4 py-2 mt-2 text-gray-700 bg-white border  border-black placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl ml-8"
                 type="text"
                 placeholder="Name" onChange={(e)=> setName(e.target.value)}
               />
@@ -300,7 +333,7 @@ const SignUp = () => {
                 </div>
               </div>
             </div>
-            <div class="flex items-center justify-between mt-4">
+            <div className="flex items-center justify-between mt-4">
               <button
                 type="submit"
 
