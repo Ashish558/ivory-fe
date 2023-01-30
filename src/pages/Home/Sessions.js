@@ -32,7 +32,7 @@ const Sessions = () => {
 
                 <Slider {...settings}>
                     <div className=' pr-4'>
-                        <div class="card custom-card" width="220px" >
+                        <div class="card custom-card overflow-hidden" width="220px" >
                             <figure><img src={Image} alt="Shoes" height="298px" /></figure>
                             <div class="px-3">
 
@@ -56,7 +56,7 @@ const Sessions = () => {
                         </div>
                     </div>
                     <div className=' pr-4'>
-                        <div class="card custom-card" width="220px" >
+                        <div class="card custom-card overflow-hidden" width="220px" >
                             <figure><img src={Image} alt="Shoes" height="298px" /></figure>
                             <div class="px-3">
                                 <div className='flex items-center justify-center Live px-1 py-1' >
@@ -79,7 +79,7 @@ const Sessions = () => {
                         </div>
                     </div>
                     <div className=' pr-4'>
-                        <div class="card custom-card" width="220px" >
+                        <div class="card custom-card overflow-hidden" width="220px" >
                             <figure><img src={Image} alt="Shoes" height="298px" /></figure>
 
                             <div class="px-3">
