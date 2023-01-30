@@ -168,44 +168,7 @@ const SignUp = () => {
                 Date Of Birth
               </label>
               <div className="mt-2">
-                {/* <ul className="w-10/12 mx-auto flex flex-col">
-                  <li className="bg-gray-30">
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                        17
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        September
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        1967
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="bg-blue-200  rounded">
-                    <ul className=" flex items-center justify-center gap-4">
-                      <li className="  text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        18
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        {" "}
-                        October
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        1968
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg py-3 px-3">19</li>
-                      <li className="text-gray-400 text-lg py-3 px-3">
-                        November
-                      </li>
-                      <li className="text-gray-400 text-lg py-3 px-3">1969</li>
-                    </ul>
-                  </li>
-                </ul> */}
+                
                 <div className="flex items-center justify-between w-[225px] mx-auto">
                   <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
                     {date}
@@ -219,44 +182,7 @@ const SignUp = () => {
                 </div>
               </div>
               <div className="mt-2">
-                {/* <ul className="w-10/12 mx-auto flex flex-col">
-                  <li className="bg-gray-30">
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                        17
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        September
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        1967
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="bg-blue-200  rounded">
-                    <ul className=" flex items-center justify-center gap-4">
-                      <li className="  text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        18
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        {" "}
-                        October
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        1968
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg py-3 px-3">19</li>
-                      <li className="text-gray-400 text-lg py-3 px-3">
-                        November
-                      </li>
-                      <li className="text-gray-400 text-lg py-3 px-3">1969</li>
-                    </ul>
-                  </li>
-                </ul> */}
+               
                 <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
                   <input
                     className="text-gray-700 text-xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "
