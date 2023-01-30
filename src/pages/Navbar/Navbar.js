@@ -34,7 +34,7 @@ const Navbar = () => {
    if (toExclude.includes(location.pathname)) return <></>
 
    return (
-      <div class="navbar background flex py-4 px-3 items-center ">
+      <div class="navbar background flex py-4 px-3 items-center lg:hidden">
          <div class="flex-1">
 
             {
