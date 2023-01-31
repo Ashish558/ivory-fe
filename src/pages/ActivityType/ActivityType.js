@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import styles from './styles.module.css'
 
@@ -10,6 +10,8 @@ import PauseIcon from '../../assets/icons/pause.svg'
 import RedirectIcon from '../../assets/icons/redirect.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { getActivities } from '../../services/activities'
 
 export const tempActivities = [
    {
@@ -45,7 +47,21 @@ export const tempActivities = [
 ]
 export default function ActivityType() {
 
-   const [activities, setActivities] = useState(tempActivities)
+   const [activities, setActivities] = useState([])
+   const { categoryId } = useParams()
+
+   useEffect(() => {
+      getActivities(categoryId)
+      .then(res => {
+         console.log('data', res.data.data);
+         if(res.data.data === null) return
+         setActivities(res.data.data)
+      }).catch(err => {
+         console.log(err.response);
+      })
+   }, [])
+
+   console.log('activities', activities);
 
    return (
       <div>
@@ -57,7 +73,7 @@ export default function ActivityType() {
 
             <div className='mt-4'>
                <h3 className='text-xl font-bold mb-2.5'> Acrylic Painting </h3>
-              <ActivityContent />
+               <ActivityContent />
             </div>
 
             <div className='mt-5'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
 
@@ -14,9 +14,32 @@ import LoggedInHome from './pages/Home/LoggedInHome'
 import Profile from './pages/Createprofile/Profile'
 import Footer from './pages/Home/Footer';
 import Navbar from './pages/Navbar/Navbar';
+import { refreshToken } from './services/auth';
+
 function App() {
   //true for now will change later
   const loggedIn = true
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (localStorage.getItem('refresh')) {
+      let body = {
+        refresh:
+          localStorage.getItem('refresh')
+      }
+      refreshToken(body)
+      .then(res => {
+          setLoading(false)
+          // console.log('ref res', res.data.data.access);
+          localStorage.setItem('access', res.data.data.access)
+          if (res.data.data === null) return
+        }).catch(err => {
+          console.log('ref err', err.response);
+        })
+    } else {
+      setLoading(false)
+    }
+  }, [])
 
   return (
     <BrowserRouter>
@@ -44,7 +67,7 @@ function App() {
           }
         />
         <Route
-          path="/activities/:activityId/:typeId"
+          path="/activities/:categoryId"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>
               <ActivityType />
@@ -52,7 +75,7 @@ function App() {
           }
         />
         <Route
-          path="/activities/:activityId/:typeId/start"
+          path="/activities/:categoryId/:activityId/start"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>
               <StartActivity />

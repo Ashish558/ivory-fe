@@ -2,8 +2,19 @@ import React from 'react'
 import Modal from '../../../components/Modal/modal'
 import BackIcon from '../../../assets/icons/go-back.svg'
 import PrimaryButton from '../../../components/Buttons/PrimaryButton'
+import { startActivity } from '../../../services/user'
 
-export default function StartActivityModal({ handleClose }) {
+export default function StartActivityModal({ handleClose, activityId }) {
+
+   const handleStartActivity = ()=>{
+      startActivity(activityId)
+      .then(res => {
+         console.log('start resp', res);
+       
+      }).catch(err => {
+         console.log('start err', err);
+      })
+   }
 
    return (
       <Modal
@@ -24,7 +35,7 @@ export default function StartActivityModal({ handleClose }) {
                         Later
                      </button>
                      <PrimaryButton children='Start now'
-                        onClick={handleClose}
+                        onClick={handleStartActivity}
                      />
 
                   </div>

@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      spacing: {
+        '3.5': '14px'
+      },
       colors: {
         primaryDark: '#1B1B1E',
         lightGray: '#74777F',
@@ -16,6 +19,9 @@ module.exports = {
       },
       backgroundImage:{
         'activities-gradient' : 'linear-gradient(180.1deg, #59E3FF 2.72%, #FFFFFF 98.73%)'
+      },
+      boxShadow: {
+        'light': '0px 0px 4px rgba(0, 0, 0, 0.18)',
       }
     },
   },
