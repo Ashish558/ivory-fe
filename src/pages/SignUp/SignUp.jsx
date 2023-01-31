@@ -114,7 +114,6 @@ const SignUp = () => {
     name,
     date: year2 + "-" + monthPosition2 + "-" + date2,
   };
-  console.log(data);
   const handleReg = (e) => {
     e.preventDefault();
     const body = {

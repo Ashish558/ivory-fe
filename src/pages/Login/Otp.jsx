@@ -1,10 +1,11 @@
 import React,{ useEffect,useState } from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
-import { verifyOtp } from '../../services/auth';
+import { sendOtp,verifyOtp } from '../../services/auth';
 import "./Otp.module.css";
 const Otp = () => {
-  const [otp, setOtp] = useState([]);
+  const [otp,setOtp] = useState([]);
+  const [otpStatus,setOtpStatus] = useState('');
   const locaion = useLocation();
   const NewLocation = useLocation();
   const from = locaion.state?.from || "/login";
@@ -27,10 +28,16 @@ const Otp = () => {
     setOtp(otpValues);
   }, [stateData]);
 
+  const otpValuesArray = Object.values(otp);
+  
   if (!stateData) {
     return <div>404</div>;
   }
-  
+
+  const goBack = () => {
+    navigate(from, { replace: true });
+  };
+
   const handleOpt = (e) => {
     e.preventDefault();
   const body = {
@@ -42,22 +49,47 @@ const Otp = () => {
     // console.log(body);
     verifyOtp(body)
       .then((res) => {
-        console.log(res);
-          navigate("/signUp", {
-            state: {
-              otp: otpData,
-              otp_token,
-              phone,
-              countryCode,
-            },
-          });
+          if (res.data.data=== null) {
+            navigate("/signUp", {
+              state: {
+                otp: otpData,
+                otp_token,
+                phone,
+                countryCode,
+              },
+            });
+          } else {
+            navigate("/home");
+          }
+          
       })
       .catch((err) => {
         console.log(err);
       });
 
   };
-  const otpValuesArray = Object.values(otp);
+   const handleResend = (e) => {
+     e.preventDefault();
+      setOtpStatus("failed");
+   
+       const body = {
+         country_code: countryCode,
+         mobile_no: phone,
+       };
+     sendOtp(body).then((res) => {
+        
+          if (res.status === 202) {
+            setOtpStatus('success');
+          }
+       })
+         .catch((err) => {
+           console.log(err);
+           
+              setOtpStatus("failed");
+            
+          });
+          
+   };
   const handleOptCursor = (e) => {
     // const { name,value } = e.target;
     // const otpValues = { ...otp,[name]: value }
@@ -78,7 +110,7 @@ const Otp = () => {
       <div className="topAppBar mt-10 ml-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img src={back} alt="" />
+            <img src={back} alt="" onClick={goBack} />
           </div>
         </div>
       </div>
@@ -92,9 +124,8 @@ const Otp = () => {
               className="m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
               type="text"
               value={otp.field1}
-
               name="field1"
-              maxlength="1"
+              maxLength="1"
               onKeyUp={(e) => handleOptCursor(e)}
             />
             <input
@@ -155,8 +186,7 @@ const Otp = () => {
 
           {otpValuesArray.length === 6 ? (
             <button
-             
-              type='submit'
+              type="submit"
               className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
             >
               Continue
@@ -173,15 +203,20 @@ const Otp = () => {
         </form>
       </div>
 
-      <Link to="/resend" className="text-blue-500 ml-8">
-        {" "}
-        Resend OTP
-      </Link>
+      
       <br />
-      <Link to="/resend" className=" ml-8">
-        {" "}
-        Didn't receive OTP? Try again in 00:30
-      </Link>
+      {
+        otpStatus === "failed" && (
+        <div>
+          <Link to="/resend" className="text-blue-500 ml-8" onClick={handleResend}>
+          {" "}
+          Resend OTP
+                </Link>
+                <Link to="/resend" className=" ml-8">
+          {" "}
+          Didn't receive OTP? Try again in 00:30
+                </Link>
+        </div>)}
       <div
         className="text-xl text-center w-[400px] text-gray-500 px-5 mt-5 mb-5"
         style={{

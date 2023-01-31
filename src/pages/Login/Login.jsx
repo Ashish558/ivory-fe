@@ -18,10 +18,10 @@ const Login = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(JSON.stringify(phone).length);
-      if (JSON.stringify(phone).length < 11) {
+      if (JSON.stringify(phone).length < 10) {
 
         setError("Phone number must be 11 digits");
-      } else if (phone.length > 11) {
+      } else if (phone.length > 10) {
         setError("Phone number cannot be more than 11 digits");
       } else if (typeof phone !== "number") {
         console.log(typeof phone);
@@ -64,27 +64,25 @@ const Login = () => {
               <input
                 class=" w-10/12 sm:w-auto  px-4 py-4 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                 // type="tel"
-                
-               type={JSON.stringify(phone)?.length < 11?'number':'text' }
-               maxLength="11"
+
+                type={JSON.stringify(phone)?.length < 11 ? "number" : "text"}
+                maxLength="11"
                 // pattern='[0-9]{11}'
                 onChange={(e) => setPhone(parseInt(e.target.value))}
                 placeholder="Phone Number"
                 required
               />
-              <p>{ error
-              }</p>
+              <p className='ml-8 text-red-300'>{error}</p>
               <select
                 name="countryCode"
                 id=""
                 style={{ appearance: "none" }}
                 className=" border-r-2 border-blue-500 px-1 absolute top-5 left-10 pl-1 text-blue-600 text-lg"
               >
-                <option value="+91">+91</option>
-                <option value="+92">+92</option>
-                <option value="+880" selected>
-                  +880
+                <option value="+91" selected>
+                  +91
                 </option>
+                <option value="+92">+92</option>
               </select>
             </div>
 
