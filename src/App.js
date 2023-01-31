@@ -14,6 +14,7 @@ import LoggedInHome from './pages/Home/LoggedInHome'
 import Profile from './pages/Createprofile/Profile'
 import Footer from './pages/Home/Footer';
 import Navbar from './pages/Navbar/Navbar';
+import Dob from './pages/SignUp/Dob';
 function App() {
   //true for now will change later
   const loggedIn = true
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<Otp />} />
+        <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />
