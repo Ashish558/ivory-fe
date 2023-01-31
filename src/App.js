@@ -15,11 +15,14 @@ import Profile from './pages/Createprofile/Profile'
 import Footer from './pages/Home/Footer';
 import Navbar from './pages/Navbar/Navbar';
 import { refreshToken } from './services/auth';
+import { updateLoggedIn } from './redux/slices/user';
+import { useDispatch } from 'react-redux';
 
 function App() {
   //true for now will change later
   const loggedIn = true
   const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (localStorage.getItem('refresh')) {
@@ -32,6 +35,7 @@ function App() {
           setLoading(false)
           // console.log('ref res', res.data.data.access);
           localStorage.setItem('access', res.data.data.access)
+          dispatch(updateLoggedIn({ loggedIn: true }))
           if (res.data.data === null) return
         }).catch(err => {
           console.log('ref err', err.response);

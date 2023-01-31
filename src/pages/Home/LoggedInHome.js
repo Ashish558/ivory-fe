@@ -11,10 +11,13 @@ import Activities from './Activities';
 import Sessions from './Sessions';
 import Courses from './Courses';
 import Footer from './Footer';
+import { useSelector } from 'react-redux';
 
 
 const LoggedInHome = () => {
 
+    const user = useSelector(state => state.user)
+    console.log('user', user);
     return (
 
         <div className='container pb-12 mb-12'>

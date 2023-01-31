@@ -1,35 +1,38 @@
-import React,{ useEffect,useState } from 'react';
-import { Link,useLocation,useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
-import { sendOtp,verifyOtp } from '../../services/auth';
+import { updateLoggedIn } from '../../redux/slices/user';
+import { sendOtp, verifyOtp } from '../../services/auth';
 import "./Otp.module.css";
 const Otp = () => {
-  const [otp,setOtp] = useState([]);
-  const [otpStatus,setOtpStatus] = useState('');
+  const [otp, setOtp] = useState([]);
+  const [otpStatus, setOtpStatus] = useState('');
   const locaion = useLocation();
   const NewLocation = useLocation();
   const from = locaion.state?.from || "/login";
   const stateData = locaion?.state;
   const { otp: otpData, otp_token, phone, countryCode } = stateData;
+  const dispatch = useDispatch()
 
   // console.log(stateData.otpToken);
   const navigate = useNavigate();
   useEffect(() => {
-    
-    const otpArray = stateData.otp.split(""); ;
-     const otpValues = {
-       field1: otpArray[0],
-       field2: otpArray[1],
-       field3: otpArray[2],
-       field4: otpArray[3],
-       field5: otpArray[4],
-       field6: otpArray[5],
+
+    const otpArray = stateData.otp.split("");;
+    const otpValues = {
+      field1: otpArray[0],
+      field2: otpArray[1],
+      field3: otpArray[2],
+      field4: otpArray[3],
+      field5: otpArray[4],
+      field6: otpArray[5],
     };
     setOtp(otpValues);
   }, [stateData]);
 
   const otpValuesArray = Object.values(otp);
-  
+
   if (!stateData) {
     return <div>404</div>;
   }
@@ -40,56 +43,61 @@ const Otp = () => {
 
   const handleOpt = (e) => {
     e.preventDefault();
-  const body = {
-    country_code: countryCode,
-    mobile_no: phone,
-    otp: otpData,
-    otp_token: otp_token,
-  };
+    const body = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otpData,
+      otp_token: otp_token,
+    };
     // console.log(body);
     verifyOtp(body)
       .then((res) => {
-          if (res.data.data=== null) {
-            navigate("/signUp", {
-              state: {
-                otp: otpData,
-                otp_token,
-                phone,
-                countryCode,
-              },
-            });
-          } else {
-            navigate("/home");
-          }
-          
+        if (res.data.data === null) {
+          navigate("/signUp", {
+            state: {
+              otp: otpData,
+              otp_token,
+              phone,
+              countryCode,
+            },
+          });
+        } else {
+          console.log('verify', res.data.data);
+          const { refresh_token, access_token } = res.data.data
+          dispatch(updateLoggedIn({ loggedIn: true }))
+          localStorage.setItem('access', access_token)
+          localStorage.setItem('refresh', refresh_token)
+          navigate("/home");
+        }
+
       })
       .catch((err) => {
         console.log(err);
       });
 
   };
-   const handleResend = (e) => {
-     e.preventDefault();
-      setOtpStatus("failed");
-   
-       const body = {
-         country_code: countryCode,
-         mobile_no: phone,
-       };
-     sendOtp(body).then((res) => {
-        
-          if (res.status === 202) {
-            setOtpStatus('success');
-          }
-       })
-         .catch((err) => {
-           console.log(err);
-           
-              setOtpStatus("failed");
-            
-          });
-          
-   };
+  const handleResend = (e) => {
+    e.preventDefault();
+    setOtpStatus("failed");
+
+    const body = {
+      country_code: countryCode,
+      mobile_no: phone,
+    };
+    sendOtp(body).then((res) => {
+
+      if (res.status === 202) {
+        setOtpStatus('success');
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+
+        setOtpStatus("failed");
+
+      });
+
+  };
   const handleOptCursor = (e) => {
     // const { name,value } = e.target;
     // const otpValues = { ...otp,[name]: value }
@@ -203,20 +211,20 @@ const Otp = () => {
         </form>
       </div>
 
-      
+
       <br />
       {
         otpStatus === "failed" && (
-        <div>
-          <Link to="/resend" className="text-blue-500 ml-8" onClick={handleResend}>
-          {" "}
-          Resend OTP
-                </Link>
-                <Link to="/resend" className=" ml-8">
-          {" "}
-          Didn't receive OTP? Try again in 00:30
-                </Link>
-        </div>)}
+          <div>
+            <Link to="/resend" className="text-blue-500 ml-8" onClick={handleResend}>
+              {" "}
+              Resend OTP
+            </Link>
+            <Link to="/resend" className=" ml-8">
+              {" "}
+              Didn't receive OTP? Try again in 00:30
+            </Link>
+          </div>)}
       <div
         className="text-xl text-center w-[400px] text-gray-500 px-5 mt-5 mb-5"
         style={{
