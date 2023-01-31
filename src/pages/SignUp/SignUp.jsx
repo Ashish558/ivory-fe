@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
+import { registerUser,verifyOtp } from '../../services/auth';
 
 
 const SignUp = () => {
@@ -14,7 +15,7 @@ const SignUp = () => {
   const [monthPosition2, setMonthPosition2] = React.useState(9);
   const [monthPosition3,setMonthPosition3] = React.useState(10);
   const [name,setName] = React.useState("");
-  
+
   const months = [
     "January",
     "February",
@@ -30,7 +31,10 @@ const SignUp = () => {
     "December",
   ];
 
- const from = locaion.state?.from || "/otp";
+  const from = locaion.state?.from || "/otp";
+  const stateData = locaion?.state;
+   const { otp, otp_token, phone, countryCode } = stateData;
+
      const navigate = useNavigate();
      const goBack = () => {
        navigate(from, { replace: true });
@@ -106,12 +110,40 @@ const SignUp = () => {
       }
     }
   }
-
   const data = {
     name,
-    date:date2 + " " + months[monthPosition2] + " " + year2,
+    date: year2 + "-" + monthPosition2 + "-" + date2,
+  };
+  const handleReg = (e) => {
+    e.preventDefault();
+    const body = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otp,
+      otp_token: otp_token,
+      name: name,
+      dob: data.date,
+    };
+    const verifyBody = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otp,
+      otp_token: otp_token,
+    };
+    registerUser(body)
+      .then((res) => {
+        // console.log(res.data);
+        verifyOtp(verifyBody)
+          .then((res) => {
+            console.log(res.data);
+          })
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
+      } );
   }
-  console.log(data);
+  
     return (
       <div
         className="h-[90vh] overflow-hidden"
@@ -121,11 +153,11 @@ const SignUp = () => {
           <h1 className="text-2xl font-bold ml-8">
             &#128588; Create an account
           </h1>
-          <form>
-            <div class="w-full mt-4 relative">
+          <form onSubmit={handleReg}>
+            <div className="w-full mt-4 relative">
               <label className="ml-8 font-semibold text-lg">Name</label>
               <input
-                class=" w-10/12 sm:w-auto  px-4 py-2 mt-2 text-gray-700 bg-white border  border-black placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl ml-8"
+                className=" w-10/12 sm:w-auto  px-4 py-2 mt-2 text-gray-700 bg-white border  border-black placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl ml-8"
                 type="text"
                 placeholder="Name" onChange={(e)=> setName(e.target.value)}
               />
@@ -135,44 +167,7 @@ const SignUp = () => {
                 Date Of Birth
               </label>
               <div className="mt-2">
-                {/* <ul className="w-10/12 mx-auto flex flex-col">
-                  <li className="bg-gray-30">
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                        17
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        September
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        1967
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="bg-blue-200  rounded">
-                    <ul className=" flex items-center justify-center gap-4">
-                      <li className="  text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        18
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        {" "}
-                        October
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        1968
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg py-3 px-3">19</li>
-                      <li className="text-gray-400 text-lg py-3 px-3">
-                        November
-                      </li>
-                      <li className="text-gray-400 text-lg py-3 px-3">1969</li>
-                    </ul>
-                  </li>
-                </ul> */}
+                
                 <div className="flex items-center justify-between w-[225px] mx-auto">
                   <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
                     {date}
@@ -186,44 +181,7 @@ const SignUp = () => {
                 </div>
               </div>
               <div className="mt-2">
-                {/* <ul className="w-10/12 mx-auto flex flex-col">
-                  <li className="bg-gray-30">
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                        17
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        September
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        1967
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="bg-blue-200  rounded">
-                    <ul className=" flex items-center justify-center gap-4">
-                      <li className="  text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        18
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        {" "}
-                        October
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        1968
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg py-3 px-3">19</li>
-                      <li className="text-gray-400 text-lg py-3 px-3">
-                        November
-                      </li>
-                      <li className="text-gray-400 text-lg py-3 px-3">1969</li>
-                    </ul>
-                  </li>
-                </ul> */}
+               
                 <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
                   <input
                     className="text-gray-700 text-xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "
@@ -300,7 +258,7 @@ const SignUp = () => {
                 </div>
               </div>
             </div>
-            <div class="flex items-center justify-between mt-4">
+            <div className="flex items-center justify-between mt-4">
               <button
                 type="submit"
 
