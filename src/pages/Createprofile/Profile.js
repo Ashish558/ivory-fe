@@ -78,6 +78,9 @@ const Profile = () => {
     <div>
     {/* ----------------------main detail form ----------------------*/}
     <div className={styles.datainput} style={{background:backcolor}}>
+      <div className={styles.navbar}>
+
+      </div>
     <div className={styles.head}>
       <img src={arrow} alt="" />
      <p className={styles.edithead}>Edit Your Profile</p> 

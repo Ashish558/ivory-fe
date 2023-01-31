@@ -1,23 +1,20 @@
 import React from 'react'
-import styles from "./Landing.module.css"
-import slideimage1 from "../../assets/slideimage1.png"
+import styles from "./Third.module.css"
+import slideimage3 from "../../assets/slideimage3.png"
 import { useNavigate } from 'react-router-dom'
 import {delay, easeIn, easeOut, motion as m} from "framer-motion"
 
-const Landing = () => {
-  const navigate = useNavigate();
-  setTimeout(() => {
-    navigate("/second")
-  }, 2000);
-  const nextpage = ()=>{
-  }
+const Second = () => {
+    const navigate = useNavigate();
+    setTimeout(() => {
+        navigate("/four");
+      }, 2000);
   return (
-    <>
     <m.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.75 ,ease:easeOut}} className={styles.fullscreen}>
-      <img className={styles.imgup} src={slideimage1} alt="" />
+      <img className={styles.imgup} src={slideimage3} alt="" />
       <div className={styles.down}>
         <span className={styles.head}>
-            <p>Tailored for adults <span style={{color:"#60FFDE"}}> above 50</span></p>
+            <p><span style={{color:"#60FFDE"}}>Accomplish </span>your creative goals</p>
         </span>
         <div className={styles.circles}>
             <div className={styles.CircleShape1} >
@@ -39,13 +36,11 @@ const Landing = () => {
               "color":"white",
               "font-size": "22px",
               "marginTop": "4px"
-          
-            }} onClick={nextpage}>Let's go</p>
+            }} >Let's go</p>
         </div>
       </div>
     </m.div>
-    </>
   )
 }
 
-export default Landing
+export default Second

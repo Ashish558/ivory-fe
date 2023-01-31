@@ -12,6 +12,11 @@ import SignUp from './pages/SignUp/SignUp';
 import Congrates from './pages/SignUp/Congrates';
 import LoggedInHome from './pages/Home/LoggedInHome'
 import Profile from './pages/Createprofile/Profile'
+import Landing from './pages/splash/Landing';
+import Second from './pages/splash/Second';
+import Third from './pages/splash/Third';
+import Four from './pages/splash/Four';
+import LogoLanding from './pages/splash/LogoLanding';
 function App() {
   //true for now will change later
   const loggedIn = true
@@ -26,6 +31,11 @@ function App() {
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />
         <Route exact path='/CreateProfile' element={<Profile/>}/>
+        <Route exact path='/logolanding' element={<LogoLanding/>}></Route>
+        <Route exact path='/landing' element={<Landing/>}></Route>
+        <Route exact path='/second' element={<Second/>}></Route>
+        <Route exact path='/third' element={<Third/>}></Route>
+        <Route exact path='/four' element={<Four/>}></Route>
         <Route path="/"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>
