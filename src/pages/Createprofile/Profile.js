@@ -4,6 +4,7 @@ import styles from "./Profile.module.css"
 import photo from "../../assets/smile.png"
 import cross from "../../assets/cross.png"
 import img from "../../assets/iphoto.png"
+import ivoryforming from "../../assets/ivoryforming.png"
 import { Link } from 'react-router-dom'
 const Profile = () => {
 
@@ -13,6 +14,7 @@ const Profile = () => {
   const [addnewtextdiv,setaddnewtextdiv]=useState(false);
   const [textColor,setTextColor]=useState('white');
   const [backcolor,setbackcolor]=useState('#FFFFFF');
+  const [blur,setblur]=useState("");
   console.log(addtext);
   // let arr = addtext.split(' '); 
   // console.log(arr);
@@ -60,10 +62,14 @@ const Profile = () => {
     const openinterest = ()=>{
         setshowdiv(true);
         setbackcolor('rgb(145 165 186)')
+        document.querySelector(".Profile_datainput__ZG9n4").classList.add("Profile_blur__z7wX8");
+
+
     }
     const crossbox = ()=>{
         setshowdiv(false)
         setbackcolor('#FFFFFF')
+        document.querySelector(".Profile_datainput__ZG9n4").classList.remove("Profile_blur__z7wX8");
     }
     const addnew= () =>{
         setaddnewtextdiv(true)
@@ -90,7 +96,16 @@ const Profile = () => {
           <img src={photo} className={styles.img2} alt="" />
         </div>
     </div>
+    <div className={styles.formimg}>
     <div className={styles.form}>
+      <div className={styles.input1}>
+        <label htmlFor=""className={styles.emaillabel} >Name</label>
+        <input type="text" placeholder='Sahil Wadhwa' className={styles.emailinput} name="email" onChange={(e)=>setemail(e.target.value)}/>
+      </div>
+      <div className={styles.input1}>
+        <label htmlFor=""className={styles.emaillabel} >Phone Number</label>
+        <input type="text" placeholder='9777766665' className={styles.emailinput} name="email" onChange={(e)=>setemail(e.target.value)}/>
+      </div>
       <div className={styles.input1}>
         <label htmlFor=""className={styles.emaillabel} >Email Address</label>
         <input type="text" placeholder='xyz@gmail.com' className={styles.emailinput} name="email" onChange={(e)=>setemail(e.target.value)}/>
@@ -123,7 +138,9 @@ const Profile = () => {
             </div>{/*-------------Open interest page selecting---------------*/}
       </div>
     </div>
-    <button className={styles.btnUpdate}>Update</button>{/*-------------Go to next page---------------*/}
+    <img src={ivoryforming} className={styles.ivoryForm} alt="" />
+    </div>
+    <button className={styles.btnUpdate}>Save Profile</button>{/*-------------Go to next page---------------*/}
     </div>
     {/* ------------------------------------------------------------------------------ */}
     {/* ---------------------------The interest selecting div------------------------------------ */}

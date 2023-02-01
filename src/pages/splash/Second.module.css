@@ -18,13 +18,13 @@ position: absolute;
 top: 434px;
 }   
 .headsecond{
-    position: absolute;
-    top: 56px;
-    left: 36px;
-    font-weight: 500;
-    width: 79%;
-    text-align: center;
-    font-size: 30px;
+  position: absolute;
+  top: 20%;
+  left: 9%;
+  font-weight: 500;
+  width: 83%;
+  text-align: center;
+  font-size: 30px;
 }
 .headsecond>p{
     color: #D7FFFD;
