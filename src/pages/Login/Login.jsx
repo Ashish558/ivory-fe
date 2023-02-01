@@ -47,10 +47,7 @@ const Login = () => {
       }
     }
     return (
-      <div
-        className="h-screen overflow-hidden"
-        style={{ background: "rgb(211, 230, 254,.2)" }}
-      >
+      <div className="h-screen overflow-hidden bg-[#EEFDFC]">
         {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -63,7 +60,12 @@ const Login = () => {
           <div className="topAppBar mt-10 ml-8 sm:hidden">
             <div className="flex justify-between items-center">
               <div className="flex items-end justify-end content-end w-full">
-                <Link to='/home' className=' bg-slate-400 px-3 py-1 text-center mr-10 text-white rounded-full absolute text-lg'>skip</Link>
+                <Link
+                  to="/home"
+                  className=" bg-slate-400 px-3 py-1 text-center mr-10 text-white rounded-full absolute text-lg"
+                >
+                  skip
+                </Link>
               </div>
             </div>
           </div>

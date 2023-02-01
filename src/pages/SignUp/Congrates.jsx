@@ -23,9 +23,8 @@ const Congrates = () => {
   //   },2000);
   // }, [navigate]);
     return (
-      <div className="h-[100vh] overflow-hidden">
-        
-        <div className="sm:flex justify-around w-screen mt-20 sm:mt-0 sm:m-0">
+      <div className="h-[100vh] overflow-hidden bg-[#EEFDFC]">
+        <div className="sm:flex justify-around w-screen mt-28 sm:mt-0 sm:m-0">
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{
@@ -51,7 +50,7 @@ const Congrates = () => {
           <div className="h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-start sm:mt-48 ">
             <div className="">
               <h1
-                className={`sm:text-4xl text-3xl font-bold flex justify-center text-center text-[#004499] ${styles.cusLineH}`}
+                className={`sm:text-4xl text-3xl font-bold flex justify-center text-center text-[#1E63A9] ${styles.cusLineH}`}
               >
                 Congratulations! <br /> Your account is created.
               </h1>
@@ -83,9 +82,19 @@ const Congrates = () => {
                 className={`sm:hidden ${styles.vector3}`}
               />
               <img
+                src={vector3}
+                alt=""
+                className={`sm:hidden ${styles.vector7}`}
+              />
+              <img
                 src={vector4}
                 alt=""
                 className={`sm:hidden ${styles.vector4}`}
+              />
+              <img
+                src={vector4}
+                alt=""
+                className={`sm:hidden ${styles.vector6}`}
               />
               <img
                 src={vector5}
