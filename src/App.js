@@ -25,6 +25,7 @@ import Third from './pages/splash/Third';
 import Four from './pages/splash/Four';
 import LogoLanding from './pages/splash/LogoLanding';
 
+import Dob from './pages/SignUp/Dob';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -70,6 +71,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<Otp />} />
+        <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />

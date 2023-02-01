@@ -1,284 +1,166 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { updateLoggedIn } from '../../redux/slices/user';
-import { registerUser, verifyOtp } from '../../services/auth';
-
+import React from "react";
+import { Link,useLocation,useNavigate } from "react-router-dom";
+import back from "../../assets/Back.svg";
+import logo from "../../assets/images/login/logolight.png";
+import signupTree from "../../assets/images/login/signupTree.png";
+import { sendOtp } from "../../services/auth";
+import styles from "./SignUp.module.css";
 
 const SignUp = () => {
-   const locaion = useLocation();
-   const [date, setDate] = React.useState(16);
-   const [date2, setDate2] = React.useState(17);
-   const [date3, setDate3] = React.useState(18);
-   const [year, setYear] = React.useState(1966);
-   const [year2, setYear2] = React.useState(1967);
-   const [year3, setYear3] = React.useState(1968);
-   const [monthPosition, setMonthPosition] = React.useState(8);
-   const [monthPosition2, setMonthPosition2] = React.useState(9);
-   const [monthPosition3, setMonthPosition3] = React.useState(10);
-   const [name, setName] = React.useState("");
-   const dispatch = useDispatch()
+  const locaion = useLocation();
+  const NewLocation = useLocation();
+  const from = locaion.state?.from || "/";
+  const navigate = useNavigate();
+  const [phone, setPhone] = React.useState(null);
+  const [error, setError] = React.useState("");
+  const [countryCode, setCountryCode] = React.useState("+880");
 
-   const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-   ];
 
-   const from = locaion.state?.from || "/otp";
-   const stateData = locaion?.state;
-   const { otp, otp_token, phone, countryCode } = stateData;
+  const goBack = () => {
+    navigate(from, { replace: true });
+  };
 
-   const navigate = useNavigate();
-   const goBack = () => {
-      navigate(from, { replace: true });
-   };
-   const handleDate = (e) => {
-      // e.preventDefault();
-
-      if (e.deltaY > 0) {
-
-         if (date2 <= 30) {
-            setDate(date + 1);
-            setDate2(date2 + 1);
-            setDate3(date3 + 1);
-         }
-         // if (date2 === 31) {
-         //   setDate3(1);
-         // }
-         if (date2 === 1) {
-            setDate(31);
-         }
-      } else {
-         if (date2 >= 2) {
-            setDate(date - 1);
-            setDate2(date2 - 1);
-            setDate3(date3 - 1);
-         }
-         // if (date2 === 1) {
-         //   setDate(31);
-         // }
-         // if (date2 === 31) {
-         //   setDate3(31);
-         // }
-      }
-   };
-   const handleYear = (e) => {
-      // e.preventDefault();
-      if (e.deltaY > 0) {
-         setYear(year + 1);
-         setYear2(year2 + 1);
-         setYear3(year3 + 1);
-      } else {
-         setYear(year - 1);
-         setYear2(year2 - 1);
-         setYear3(year3 - 1);
-      }
-   };
-   const handleMonth = (e) => {
-      // e.preventDefault();
-      if (e.deltaY > 0) {
-         if (monthPosition2 < 11) {
-
-            setMonthPosition(monthPosition + 1);
-            setMonthPosition2(monthPosition2 + 1);
-            setMonthPosition3(monthPosition3 + 1);
-            // if (monthPosition2 === 11) {
-            //   setMonthPosition3(0);
-            // }
-            // if (monthPosition2 === 11) {
-            //   setMonthPosition3(11);
-            // }
-         }
-         if (monthPosition2 === 1) {
-            setMonthPosition(1);
-         }
-      } else {
-         if (monthPosition2 > 0) {
-            setMonthPosition(monthPosition - 1);
-            setMonthPosition2(monthPosition2 - 1);
-            setMonthPosition3(monthPosition3 - 1);
-         }
-         if (monthPosition2 === 1) {
-            setMonthPosition(11);
-         }
-      }
-   }
-   const data = {
-      name,
-      date: year2 + "-" + monthPosition2 + "-" + date2,
-   };
-   const handleReg = (e) => {
-      e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(JSON.stringify(phone).length);
+    if (JSON.stringify(phone).length < 10) {
+      setError("Phone number must be 11 digits");
+    } else if (phone.length > 10) {
+      setError("Phone number cannot be more than 11 digits");
+    } else if (typeof phone !== "number") {
+      console.log(typeof phone);
+      setError("Phone number must be a number");
+    } else {
+      setCountryCode(e.target.countryCode.value);
       const body = {
-         country_code: countryCode,
-         mobile_no: phone,
-         otp: otp,
-         otp_token: otp_token,
-         name: name,
-         dob: data.date,
+        country_code: countryCode,
+        mobile_no: phone,
       };
-      const verifyBody = {
-         country_code: countryCode,
-         mobile_no: phone,
-         otp: otp,
-         otp_token: otp_token,
-      };
-      registerUser(body)
-         .then((res) => {
-            // console.log(res.data);
-            verifyOtp(verifyBody)
-               .then((res) => {
-                  console.log('verify', res.data);
-                  dispatch(updateLoggedIn({ loggedIn: true }))
-                  const { refresh_token, access_token } = res.data.data
-                  localStorage.setItem('access', access_token)
-                  localStorage.setItem('refresh', refresh_token)
-                  localStorage.setItem('phone', phone)
-               })
-            navigate("/home");
-         })
-         .catch((err) => {
-            console.log(err.response.data.error);
-         });
-   }
-
-   return (
-      <div
-         className="h-[90vh] overflow-hidden"
-         style={{ background: "rgb(211, 230, 254,.2)" }}
-      >
-         <div className="mt-10">
-            <h1 className="text-2xl font-bold ml-8">
-               &#128588; Create an account
-            </h1>
-            <form onSubmit={handleReg}>
-               <div className="w-full mt-4 relative">
-                  <label className="ml-8 font-semibold text-lg">Name</label>
-                  <input
-                     className=" w-10/12 sm:w-auto  px-4 py-2 mt-2 text-gray-700 bg-white border  border-black placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl ml-8"
-                     type="text"
-                     placeholder="Name" onChange={(e) => setName(e.target.value)}
-                  />
-               </div>
-               <div className="mt-8">
-                  <label className="ml-8 font-semibold text-lg">
-                     Date Of Birth
-                  </label>
-                  <div className="mt-2">
-
-                     <div className="flex items-center justify-between w-[225px] mx-auto">
-                        <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                           {date}
-                        </div>
-                        <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                           {months[monthPosition]}
-                        </div>
-                        <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                           {year}
-                        </div>
-                     </div>
-                  </div>
-                  <div className="mt-2">
-
-                     <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
-                        <input
-                           className="text-gray-700 text-xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "
-                           onWheel={handleDate}
-                           name="date"
-                           type="text"
-                           value={date2}
-                        />
-
-                        <input
-                           className="text-gray-700 text-xl font-semibold border-b py-3 border-gray-400 w-[100px] bg-transparent mx-auto text-center "
-                           onWheel={handleMonth}
-                           name="month"
-                           value={months[monthPosition2]}
-                        />
-                        <input
-                           className="text-gray-700 text-xl font-semibold border-b py-3 border-gray-400 px-3 w-[70px]  bg-transparent text-center "
-                           onWheel={handleYear}
-                           type="text"
-                           name="year"
-                           value={year2}
-                        />
-                     </div>
-                  </div>
-                  <div className="mt-2">
-                     {/* <ul className="w-10/12 mx-auto flex flex-col">
-                  <li className="bg-gray-30">
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                        17
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        September
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        1967
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="bg-blue-200  rounded">
-                    <ul className=" flex items-center justify-center gap-4">
-                      <li className="  text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        18
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        {" "}
-                        October
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        1968
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg py-3 px-3">19</li>
-                      <li className="text-gray-400 text-lg py-3 px-3">
-                        November
-                      </li>
-                      <li className="text-gray-400 text-lg py-3 px-3">1969</li>
-                    </ul>
-                  </li>
-                </ul> */}
-                     <div className="flex items-center justify-between w-[225px] mx-auto ">
-                        <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
-                           {date3}
-                        </div>
-                        <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
-                           {months[monthPosition3]}
-                        </div>
-                        <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
-                           {year3}
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div className="flex items-center justify-between mt-4">
-                  <button
-                     type="submit"
-
-                     className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-2"
-                  >
-                     Continue
-                  </button>
-               </div>
-            </form>
-         </div>
+      sendOtp(body).then((res) => {
+        console.log(res);
+        navigate("/otp", {
+          state: {
+            otp: res.data.data.otp,
+            otp_token: res.data.data.otp_token,
+            phone: phone,
+            countryCode: countryCode,
+          },
+        });
+      });
+    }
+  };
+  return (
+    <div
+      className="h-screen overflow-hidden"
+      style={{ background: "rgb(211, 230, 254,.2)" }}
+    >
+      <div className="topAppBar mt-10 ml-8 sm:hidden">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <img src={back} alt="" onClick={goBack} />
+          </div>
+        </div>
       </div>
-   );
+
+      <div className="sm:flex justify-around w-screen mt-10 sm:m-0">
+        <div
+          className="hidden sm:block h-screen sm:w-[40vw]"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
+          }}
+        >
+          <div className="pl-4 md:pl-20 pt-10">
+            <img src={logo} alt="" />
+          </div>
+          <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-28 md:pl-10 pl-0 sm:w-[500px]">
+            <h1
+              className={`text-4xl font-bold text-sky-50 mt-20 ${styles.cusStyle}`}
+            >
+              <span className="text-[#59E3FF]">Accomplish</span> your creative
+              goals
+            </h1>
+          </div>
+          <div className="flex justify-center items-center px-10 content-center mt-20 ">
+            <img src={signupTree} alt="" className="" />
+          </div>
+        </div>
+        <div className="  h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
+          >
+            <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
+              &#128075; Hi, <br /> Welcome to Ivory!
+            </h1>
+            <div class="w-full sm:w-[300px] mx-auto mt-4 relative">
+              <input
+                class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
+                // type="tel"
+                type={JSON.stringify(phone)?.length < 11 ? "number" : "text"}
+                maxLength="11"
+                // pattern='[0-9]{11}'
+                onChange={(e) => setPhone(parseInt(e.target.value))}
+                placeholder="Phone Number"
+                required
+              />
+              <p className="ml-8 text-red-300">{error}</p>
+              <select
+                name="countryCode"
+                id=""
+                style={{ appearance: "none" }}
+                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-lg"
+              >
+                <option value="+91" selected>
+                  +91
+                </option>
+                <option value="+92">+92</option>
+              </select>
+            </div>
+            <div class="flex items-center justify-between mt-4">
+              <button
+                type="submit"
+                className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
+              >
+                Continue
+              </button>
+            </div>
+            <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
+              By clicking continue, I accept the{" "}
+              <Link to="/" className="text-black font-bold underline">
+                terms of service
+              </Link>{" "}
+              and{" "}
+              <Link to="/" className="text-black font-bold underline">
+                {" "}
+                privacy policy
+              </Link>
+            </div>
+          </form>
+          <div
+            className="text-lg text-center w-[400px] text-gray-500 px-5 mt-5 mb-5 sm:hidden"
+            style={{
+              position: "absolute",
+              bottom: 10,
+              width: "100%",
+              textAlign: "center",
+              left: "0",
+            }}
+          >
+            By clicking continue, I accept the{" "}
+            <Link to="/" className="text-black font-bold underline">
+              terms of service
+            </Link>{" "}
+            and{" "}
+            <Link to="/" className="text-black font-bold underline">
+              {" "}
+              privacy policy
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default SignUp;
