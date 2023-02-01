@@ -53,15 +53,15 @@ const Login = () => {
         className="h-screen overflow-hidden"
         style={{ background: "rgb(211, 230, 254,.2)" }}
       >
-        <div className="topAppBar mt-10 ml-8 sm:hidden">
+        {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <img src={back} alt="" onClick={goBack} />
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="sm:flex justify-around w-screen mt-10 sm:m-0">
+        <div className="sm:flex justify-around w-screen mt-16 sm:m-0">
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{

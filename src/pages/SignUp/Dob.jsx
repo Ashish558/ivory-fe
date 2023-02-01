@@ -201,6 +201,7 @@ const Dob = () => {
                   type="text"
                   placeholder="Name"
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
               <div className="mt-8  ">
