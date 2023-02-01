@@ -92,7 +92,7 @@ const Login = () => {
               <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
                 &#128075; Hi, <br /> Welcome to Ivory!
               </h1>
-              <div class="w-full sm:w-[300px] mx-auto mt-4 relative">
+              <div class="w-full sm:w-[300px] mx-auto mt-10 relative">
                 <input
                   class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                   // type="tel"

@@ -1,13 +1,13 @@
 import React from 'react';
-import home from '../../Images/Home.png';
+import { useLocation,useNavigate } from 'react-router-dom';
 import activity from '../../Images/Activities.png';
+import community from '../../Images/Community.png';
+import home from '../../Images/Home.png';
 import learn from '../../Images/Learn.png';
-import community from '../../Images/Community.png'
-import '../Home/Footer.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import '../Home/Footer.css';
 
 
-const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob', '/']
+const toExclude = ['/login','/otp','/signup','/congrates','/dob','/']
 
 const Footer = () => {
 

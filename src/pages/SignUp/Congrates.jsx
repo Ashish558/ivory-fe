@@ -18,21 +18,15 @@ const Congrates = () => {
     const goBack = () => {
       navigate(from, { replace: true });
   };
-  useEffect(() => {
-    setTimeout(() => {
-      return navigate('/home');
-    },2000);
-  }, [navigate]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     return navigate('/home');
+  //   },2000);
+  // }, [navigate]);
     return (
       <div className="h-[100vh] overflow-hidden">
-        <div className="topAppBar mt-10 ml-8 sm:hidden">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <img src={back} alt="" onClick={goBack} />
-            </div>
-          </div>
-        </div>
-        <div className="sm:flex justify-around w-screen sm:mt-10 sm:m-0">
+        
+        <div className="sm:flex justify-around w-screen mt-10 sm:mt-0 sm:m-0">
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{

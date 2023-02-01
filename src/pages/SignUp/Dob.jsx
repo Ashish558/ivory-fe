@@ -197,7 +197,7 @@ const Dob = () => {
                   Name
                 </label>
                 <input
-                  className=" w-full sm:w-[300px]  px-4 py-3 sm:py-4 text-gray-700 bg-white border  border-gray-400 shadow-sm placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl sm:rounded-md sm:ml-0 mt-5 sm:text-lg"
+                  className=" w-full sm:w-[300px]  px-4 py-4 sm:py-4 text-gray-700 bg-white border  border-gray-400 shadow-sm placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-md sm:rounded-md sm:ml-0 mt-5 sm:text-lg"
                   type="text"
                   placeholder="Name"
                   onChange={(e) => setName(e.target.value)}
