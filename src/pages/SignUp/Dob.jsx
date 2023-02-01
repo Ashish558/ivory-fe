@@ -3,7 +3,7 @@ import { useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
-import { registerUser } from '../../services/auth';
+import { registerUser,verifyOtp } from '../../services/auth';
 import styles from "./SignUp.module.css";
 
 const Dob = () => {
@@ -127,20 +127,22 @@ const Dob = () => {
       name: name,
       dob: data.date,
     };
-    // const verifyBody = {
-    //   country_code: countryCode,
-    //   mobile_no: phone,
-    //   otp: otp,
-    //   otp_token: otp_token,
-    // };
+    const verifyBody = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otp,
+      otp_token: otp_token,
+    };
     registerUser(body)
       .then((res) => {
-        // console.log(res.data);
-        // verifyOtp(verifyBody)
-        //   .then((res) => {
-        //     console.log(res.data);
-        //   })
-        navigate("/congrates");
+        verifyOtp(verifyBody)
+          .then((res) => {
+           navigate("/congrates");
+          })
+          .catch((err) => {
+            console.log(err.response.data.error);
+          });
+        
       })
       .catch((err) => {
         console.log(err.response.data.error);

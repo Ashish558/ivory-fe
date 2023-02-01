@@ -10,14 +10,161 @@
     letter-spacing: 2px !important;
     line-height: 50px;
     font-size: 42px;
-  width:500px;
-  margin-left: 20px !important;
+    width: 500px;
+    margin-left: 20px !important;
   }
   .cusLineH {
-   
     line-height: 60px;
     font-size: 42px;
+
+    margin-left: 20px !important;
+  }
+}
+
+.vector {
   
-  margin-left: 20px !important;
+  animation: myAnim 1s ease 1s 1 normal forwards;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  position: absolute;
+   bottom: 47%;
+  left: 40%;
+  z-index: 9999;
+}
+.vector1 {
+  
+  animation: myAnim1 1s ease 1s 1 normal forwards;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  position: absolute;
+   bottom: 40%;
+  left: 28%;
+  z-index: 9999;
+}
+.vector2 {
+ 
+  animation: myAnim2 1s ease 1s 1 normal forwards;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  position: absolute;
+   bottom: 34%;
+  left: 18%;
+  z-index: 9999;
+}
+.vector3 {
+ 
+  animation: myAnim3 1.2s ease-in-out 1s 1 normal forwards;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  position: absolute;
+   bottom: 51%;
+  left: 53%;
+  z-index: 9999;
+}
+.vector4 {
+ 
+  animation: myAnim4 1.2s ease-in-out 1s 1 normal forwards;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  position: absolute;
+   bottom: 40%;
+  left: 42%;
+  z-index: 9999;
+}
+.vector5 {
+ 
+  animation: myAnim5 1.2s ease-in-out 1s 1 normal forwards;
+  animation-delay: 0ms;
+  animation-fill-mode: forwards;
+  position: absolute;
+   bottom: 28%;
+  left: 44%;
+  z-index: 9999;
+}
+@keyframes myAnim5 {
+  0% {
+    transform: translateX(0px);
+    
+  }
+  90% {
+    transform: translate(20px,-21px);
+  
+  }
+  100% {
+    transform: translate(20px,-20px);
+   
+  }
+}
+ @keyframes myAnim4 {
+  0% {
+    transform: translateX(0px);
+    
+  }
+  90% {
+    transform: translate(30px,-31px);
+  
+  }
+  100% {
+    transform: translate(30px,-30px);
+   
+  }
+}
+@keyframes myAnim1 {
+  0% {
+    transform: translateX(0px);
+    
+  }
+  90% {
+    transform: translate(39px,-132px);
+  
+  }
+  100% {
+    transform: translate(40px,-130px);
+   
+  }
+}
+ @keyframes myAnim3 {
+  0% {
+    transform: translateX(0px);
+    
+  }
+  90% {
+    transform: translate(75px,-83px);
+  
+  }
+  100% {
+    transform: translate(70px,-80px);
+   
+  }
+}
+@keyframes myAnim2 {
+  0% {
+    transform: translateX(0px);
+    
+  }
+  90% {
+    transform: translate(47px,-83px);
+    transition: ease-in-out;
+    
+  }
+  100% {
+    transform: translate(45px,-80px);
+    transition-duration: 100ms;
+    
+  }
+}
+@keyframes myAnim {
+  0% {
+    transform: translateX(0px);
+   
+  }
+  90% {
+    transform: translate(41px,-46px);
+    transition: ease-in-out;
+    
+  }
+  100% {
+    transform: translate(40px,-45px);
+     
   }
 }

@@ -7,7 +7,7 @@ import '../Home/Footer.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob']
+const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob', '/']
 
 const Footer = () => {
 

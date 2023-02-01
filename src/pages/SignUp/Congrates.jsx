@@ -1,9 +1,15 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import back from '../../assets/Back.svg';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
-import smile from '../../assets/smile.png';
+import mobileSignupTree from "../../assets/images/login/mobileSignupTree.png";
+import vector from "../../assets/images/login/Vector.png";
+import vector1 from "../../assets/images/login/Vector1.png";
+import vector2 from "../../assets/images/login/Vector2.png";
+import vector3 from "../../assets/images/login/Vector3.png";
+import vector4 from "../../assets/images/login/Vector4.png";
+import vector5 from "../../assets/images/login/Vector5.png";
 import styles from "./Congrates.module.css";
 const Congrates = () => {
     const locaion = useLocation();
@@ -11,9 +17,14 @@ const Congrates = () => {
     const navigate = useNavigate();
     const goBack = () => {
       navigate(from, { replace: true });
-    };
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      return navigate('/home');
+    },2000);
+  }, [navigate]);
     return (
-      <div className="h-screen overflow-hidden">
+      <div className="h-[100vh] overflow-hidden">
         <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -21,7 +32,7 @@ const Congrates = () => {
             </div>
           </div>
         </div>
-        <div className="sm:flex justify-around w-screen mt-10 sm:m-0">
+        <div className="sm:flex justify-around w-screen sm:mt-10 sm:m-0">
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{
@@ -44,15 +55,51 @@ const Congrates = () => {
               <img src={loginMan} alt="" className="" />
             </div>
           </div>
-          <div className="h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-start justify-center mt-48 ">
-            <div className=''>
+          <div className="h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-start sm:mt-48 ">
+            <div className="">
               <h1
-                className={`text-4xl font-bold  text-[#004499] ${styles.cusLineH}`}
+                className={`sm:text-4xl text-3xl font-bold flex justify-center text-center text-[#004499] ${styles.cusLineH}`}
               >
                 Congratulations! <br /> Your account is created.
               </h1>
             </div>
-            <img src={smile} alt="" className="sm:hidden" />
+            <div className="">
+              <img
+                src={mobileSignupTree}
+                alt=""
+                className="sm:hidden absolute bottom-0 w-[200px]"
+              />
+              <img
+                src={vector}
+                alt=""
+                className={`sm:hidden ${styles.vector}`}
+              />
+              <img
+                src={vector1}
+                alt=""
+                className={`sm:hidden ${styles.vector1}`}
+              />
+              <img
+                src={vector2}
+                alt=""
+                className={`sm:hidden ${styles.vector2}`}
+              />
+              <img
+                src={vector3}
+                alt=""
+                className={`sm:hidden ${styles.vector3}`}
+              />
+              <img
+                src={vector4}
+                alt=""
+                className={`sm:hidden ${styles.vector4}`}
+              />
+              <img
+                src={vector5}
+                alt=""
+                className={`sm:hidden ${styles.vector5}`}
+              />
+            </div>
           </div>
         </div>
       </div>
