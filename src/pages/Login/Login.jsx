@@ -1,19 +1,17 @@
 import React from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
-import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 const Login = () => {
     const locaion = useLocation();
-    const NewLocation = useLocation();
      const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone,setPhone] = React.useState(null);
   const [error,setError] = React.useState("");
   const [countryCode,setCountryCode] = React.useState("+880");
-    const goBack = () => {
+    const skip = () => {
         navigate(from,{replace:true})
   }
   
@@ -62,6 +60,13 @@ const Login = () => {
         </div> */}
 
         <div className="sm:flex justify-around w-screen mt-16 sm:m-0">
+          <div className="topAppBar mt-10 ml-8 sm:hidden">
+            <div className="flex justify-between items-center">
+              <div className="flex items-end justify-end content-end w-full">
+                <Link to='/home' className=' bg-slate-400 px-3 py-1 text-center mr-10 text-white rounded-full absolute text-lg'>skip</Link>
+              </div>
+            </div>
+          </div>
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{
@@ -84,7 +89,7 @@ const Login = () => {
               <img src={loginMan} alt="" className="md:w-full mx-auto" />
             </div>
           </div>
-          <div className="  h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
+          <div className="  h-screen sm:w-[60vw] mt-10 sm:mt-0 sm:flex sm:flex-col sm:items-center sm:justify-center">
             <form
               onSubmit={(e) => handleSubmit(e)}
               className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"

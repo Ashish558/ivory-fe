@@ -1,6 +1,5 @@
-import React,{ useEffect } from 'react';
+import React from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
-import back from '../../assets/Back.svg';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import mobileSignupTree from "../../assets/images/login/mobileSignupTree.png";
@@ -26,7 +25,7 @@ const Congrates = () => {
     return (
       <div className="h-[100vh] overflow-hidden">
         
-        <div className="sm:flex justify-around w-screen mt-10 sm:mt-0 sm:m-0">
+        <div className="sm:flex justify-around w-screen mt-20 sm:mt-0 sm:m-0">
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{
@@ -61,7 +60,7 @@ const Congrates = () => {
               <img
                 src={mobileSignupTree}
                 alt=""
-                className="sm:hidden absolute bottom-0 w-[200px]"
+                className="sm:hidden absolute bottom-0 w-[250px]"
               />
               <img
                 src={vector}
