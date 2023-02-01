@@ -143,6 +143,7 @@ const SignUp = () => {
                   const { refresh_token, access_token } = res.data.data
                   localStorage.setItem('access', access_token)
                   localStorage.setItem('refresh', refresh_token)
+                  localStorage.setItem('phone', phone)
                })
             navigate("/home");
          })

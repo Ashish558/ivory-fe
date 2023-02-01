@@ -14,8 +14,9 @@ import ActivityIcon from '../../assets/images/activity.png'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Activity from '../../components/Activity/Activity'
 import { getSingleActivity } from '../../services/activities'
-import { getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
+import { completeActivity, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
 import Feedback from '../../components/Feedback/Feedback'
+import { useSelector } from 'react-redux'
 
 
 export default function StartActivity() {
@@ -27,8 +28,9 @@ export default function StartActivity() {
    const [isAlreadyStarted, setIsAlreadyStarted] = useState(false)
    const inputRef = useRef(null)
    const [currentIndex, setCurrentIndex] = useState(0)
-
+   const { loggedIn } = useSelector(state => state.user)
    const { categoryId, activityId } = useParams()
+   const [userActivityId, setUserActivityId] = useState(activityId)
 
    useEffect(() => {
       getSingleActivity(activityId)
@@ -45,11 +47,12 @@ export default function StartActivity() {
    useEffect(() => {
       getMyActivities()
          .then(res => {
-            // console.log('my activities', res.data.data);
+            console.log('my activities', res.data.data);
             if (res.data.data === null) return
             res.data.data.forEach(myActivity => {
                if (myActivity.activity.id === parseInt(activityId)) {
-                  setIsAlreadyStarted(false)
+                  setIsAlreadyStarted(true)
+                  setUserActivityId(myActivity.id)
                }
             })
          }).catch(err => {
@@ -59,24 +62,33 @@ export default function StartActivity() {
 
    useEffect(() => {
       getSubmissions()
-   }, [])
+   }, [userActivityId])
 
    const getSubmissions = () => {
-      getUserSubmissions(activityId)
+      getUserSubmissions(userActivityId)
          .then(res => {
-            // console.log('submission res', res.data.data);
+            console.log('submission res', res.data.data);
             if (res.data.data === null) return
             setSubmissions(res.data.data)
          }).catch(err => {
             console.log('submission err', err);
          })
    }
+
+   const handleUploadClick = () => {
+      if (isAlreadyStarted === false) {
+         setStartModalActive(true)
+      } else {
+         inputRef.current.click()
+      }
+   }
+
    const handleUpload = e => {
       const file = e.target.files[0]
       if (file === undefined) return
       let formData = new FormData();
       formData.append('submission', file);
-      formData.append('activity', activityId);
+      formData.append('activity', userActivityId);
 
       uploadActivity(formData)
          .then(res => {
@@ -92,6 +104,19 @@ export default function StartActivity() {
          setCurrentIndex(0)
       }
    }
+
+   const handleComplete = () => {
+      completeActivity(activityId)
+         .then(res => {
+            console.log('compl res', res.data);
+         }).catch(err => {
+            console.log('compl err', err);
+         })
+   }
+   //384480
+   // console.log('loggedIn', loggedIn);
+   console.log('userActivityId', userActivityId);
+   // console.log('activityId', activityId);
    // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    if (Object.keys(activity).length === 0) return <></>
@@ -142,10 +167,13 @@ export default function StartActivity() {
 
                }
                <div className='flex items-center gap-x-3 mt-8 mb-8'>
-                  <PrimaryButton className='flex items-center pl-4 pr-4' disabled={true}
+                  <PrimaryButton className='flex items-center pl-4 pr-4'
+                     disabled={submissions.length === 0 ? true : false}
+                     onClick={handleComplete} 
                      children={
                         <>
-                           <img src={MarkIcon} className='mr-2.5' alt='mark' />
+                           <img src={MarkIcon} className='mr-2.5' alt='mark'
+                          />
                            Mark Completed
                         </>
                      }
@@ -168,7 +196,7 @@ export default function StartActivity() {
                      <img src={UploadIcon}
                         className='mr-3 cursor-pointer'
                         alt='UploadIcon'
-                        onClick={() => inputRef.current.click()} />
+                        onClick={handleUploadClick} />
                      <p className='font-semibold' > Upload your work </p>
                      <input type='file' className='hidden' ref={inputRef}
                         onChange={e => handleUpload(e)} />

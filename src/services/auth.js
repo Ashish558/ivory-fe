@@ -42,5 +42,5 @@ export const loginUser = (body) => {
 };
 
 export const refreshToken = (body) => {
-   return axios.post(`${BASE_URL}/accounts/users/refresh-token/`, body,  getAuthHeaders())
+   return axios.post(`${BASE_URL}/accounts/users/refresh-token/`, body)
 };

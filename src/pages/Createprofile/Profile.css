@@ -113,7 +113,7 @@
     margin-top: 19px;
     margin-left: 20px;
     border-radius: 30px;
-    background: #CED4DA;
+    background: #0055BF;
     border: none;
     font-size: 20px;
     color: white;
@@ -167,6 +167,10 @@
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+.interest-selected.butt1{
+    border: 0;
+    background-color: #BDF4FF;
 }
 .butt1>h3{
     color: #49454F;
@@ -345,8 +349,8 @@
 }
 .inttopic{
     display: flex;
-    /* flex-wrap: wrap; */
-    width: 100%;
+    flex-wrap: wrap;
+  
 }
 .cho{
     margin-left: 20px;
@@ -373,8 +377,9 @@
     border: 1px solid #CED4DA;
 }
 .int-topic{
-    height: 289px;
-    width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 .more{
     text-align: center;

@@ -99,7 +99,7 @@ export default function Activities() {
    }, [activities])
 
    useEffect(() => {
-      getInterests()
+      getInterests(true)
          .then(res => {
             // console.log(res.data.data);
             setActivities(res.data.data.map(item => ({ ...item, categories: [] })))

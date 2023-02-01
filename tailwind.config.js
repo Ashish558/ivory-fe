@@ -9,10 +9,11 @@ module.exports = {
         '3.5': '14px'
       },
       colors: {
+        primary: '#1B72C0',
+        secondary: '#CDF7FF',
         primaryDark: '#1B1B1E',
         lightGray: '#74777F',
         lightBlack: '#49454F',
-        primary: '#1B72C0'
       },
       fontSize: {
         xxs: '10px'

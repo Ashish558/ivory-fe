@@ -10,6 +10,14 @@ export const startActivity = (activityId) => {
    return axios.post(`${BASE_URL}/accounts/user-activities/`, body, getAuthHeaders())
 };
 
+export const completeActivity = (activityId) => {
+   let body = {
+      is_completed: true,
+      activity: activityId
+   }
+   return axios.patch(`${BASE_URL}/accounts/user-activities/`, body, getAuthHeaders())
+};
+
 export const getMyActivitiesProgress = () => {
    return axios.get(`${BASE_URL}/accounts/user-activities/progress/`, getAuthHeaders())
 };
@@ -32,4 +40,20 @@ export const getUserSubmissions = (activityId) => {
 export const uploadActivity = (body) => {
    return axios.post(`${BASE_URL}/accounts/user-activity-submissions/`, body, getAuthHeaders())
 };
+
+export const getUserDetail = (phone) => {
+   return axios.get(`${BASE_URL}/accounts/users/`, 
+   {
+      // params: {
+      //    phone: phone,
+      // },
+      ...getAuthHeaders()
+
+   })
+};
+
+export const editProfile = (body, mobile) => {
+   return axios.patch(`${BASE_URL}/accounts/users/${mobile}/`, body, getAuthHeaders())
+};
+
 

@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 const LoggedInHome = () => {
 
     const user = useSelector(state => state.user)
-    console.log('user', user);
+    // console.log('user', user);
     return (
 
         <div className='container pb-12 mb-12'>
