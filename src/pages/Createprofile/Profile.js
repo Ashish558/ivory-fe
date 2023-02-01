@@ -27,31 +27,31 @@ const Profile = () => {
   // }
   const [interest,setinterest] = useState([
     {
-        name:"dknkmvcam",
+        name:"Socializing",
         selected:false
     },
     {
-        name:"dknkmvcam",
+        name:"Community work",
         selected:false
     },
     {
-        name:"dknkmvcam",
+        name:"Photography",
         selected:false
     },
     {
-        name:"dknkmvcam",
+        name:"Writing",
         selected:false
     },
     {
-        name:"dknkmvcam",
+        name:"Gardening",
         selected:false
     },
     {
-        name:"dknkmvcam",
+        name:"Arts & Crafts",
         selected:false
     },
     {
-        name:"dknkmvcam",
+        name:"Mythology",
         selected:false
     }
   ])
@@ -95,6 +95,7 @@ const Profile = () => {
         <div className={styles.ssmmillee}>
           <img src={photo} className={styles.img2} alt="" />
         </div>
+          <p className={styles.addpit}>Add Profile picture</p>
     </div>
     <div className={styles.formimg}>
     <div className={styles.form}>
@@ -115,11 +116,11 @@ const Profile = () => {
         <div className={styles.genderinput}>
           <div className={styles.checkboxdiv1}>
           <label className={styles.gendermale} htmlFor="">Male</label>
-        <input label="Male" checked={gender === 'Male'} value="Male" type="radio" onChange={(e)=>setgender(e.target.value)} className={styles.maleinput}/>
+        <input label="Male" checked={gender === 'Male'} value="Male" type="checkbox" onChange={(e)=>setgender(e.target.value)} className={styles.maleinput}/>
           </div>
           <div className={styles.checkboxdiv2}>
           <label className={styles.genderFemale} htmlFor="">Female</label>
-        <input label="Female" checked={gender === 'Female'} value="Female" type="radio" onChange={(e)=>setgender(e.target.value)} className={styles.femaleinput}/>
+        <input label="Female" checked={gender === 'Female'} value="Female" type="checkbox" onChange={(e)=>setgender(e.target.value)} className={styles.femaleinput}/>
         </div>
           </div>
       </div>
@@ -148,7 +149,7 @@ const Profile = () => {
     <div className={styles.allinterest}>
     <div className={styles.int}>
       <img src={cross} onClick={crossbox} alt="" className={styles.closeinterest}/>{/*-------------Cross the open interest page selecting---------------*/}
-      <p className={styles.intp}>Interest</p>
+      <p className={styles.intp}>Interests</p>
       </div>
     <hr className={styles.brk}/>
     <p className={styles.cho}>Choose one or more:</p>

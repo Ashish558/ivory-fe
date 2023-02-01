@@ -2,6 +2,13 @@
 .navbar{
     height: 50px;
 }
+.addpit{
+    top: 40%;
+    margin: 0;
+    position: relative;
+    left: 8%;
+    color: blue;
+}
 .datainput{
     height: 738px;
     width: 100%;
@@ -31,6 +38,7 @@
     rotate: 232deg;
 }
 .image{
+    display: flex;
     height: 92px;
     /* background-color: antiquewhite; */
 }
@@ -155,7 +163,7 @@
     width: 334px;
     border: 2px solid #1717b2;
 }
-.choose-input::placeholder{
+.chooseinput::placeholder{
     padding-left: 20px;
     font-size: 20px;
 }
@@ -195,17 +203,17 @@
 }
 .closeinterest{
     position: absolute;
-    left: 6%;
-    height: 5%;
-    width: 4%;
-    top: 2%;
+    left: 8%;
+    height: 4%;
+    width: 3%;
+    top: 3%;
     cursor: pointer;
 }
 .intp{
     position: relative;
-    /* top: -1%; */
+    top: 3%;
     left: 37%;
-    font-size: 21px;
+    font-size: 19px;
 }
 .cho{
     margin-left: 2%;
@@ -292,6 +300,9 @@
     border: 1px solid #79747E;
     border-radius: 3px;
 }
+.parainput::placeholder{
+    padding-left: 10px;
+}
 .send{
     height: 40px;
     width: 90px;
@@ -317,31 +328,37 @@ background: #1B72C0;
 } 
 .head{
     display: flex;
-    height: 70px;
+    height: 86px;
     /* background-color: aqua; */
 }
 .head1{
     display: flex;
     /* height: 70px; */
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-bottom: 20px;
     /* background-color: aqua; */
 }
 .edithead{
     width: 100%;
-    margin-left: 80px;
-    margin-top: 20px;
+    margin-left: 91px;
+    margin-top: 42px;
     font-size: 18px;
     font-weight: 700;
+}
+.addpit{
+    margin-left: 27%;
+    margin-top: 6%;
+    font-size: 20px;
+    color: #3d85de;
 }
 .head>img{
     height: 20px;
     width: 20px;
-    margin-top: 20px;
+    margin-top: 46px;
     margin-left: 20px;
 }
 .image{
-    height: 170px;
+    height: 146px;
     width: 100%;
 }
 .ssmmillee{
@@ -350,8 +367,8 @@ background: #1B72C0;
     /* justify-content: center; */
     width: 91px;
     position: relative;
-    top: 57px;
-    left: 155px;
+    top: 21px;
+    left: 36%;
      background: linear-gradient(0deg, #D3E4FF, #D3E4FF),
     linear-gradient(0deg, #FFFFFF, #FFFFFF);
     ;
@@ -385,24 +402,27 @@ background: #1B72C0;
 .emailinput{
     height: 56px;
     width: 100%;
-    border: 1px solid #79747E;
+    border: 2px solid #79747E;
     font-size: 20px;
+    border-radius: 5px;
     margin-top: 6px;
 }
 .chooseinput{
+    border-radius: 5px;
     height: 56px;
     width: 100%;
     display: flex;
-    border: 1px solid #79747E;
+    border: 2px solid #79747E;
     font-size: 20px;
     margin-top: 6px;
 }
 .emaillabel{
-    margin-bottom: 10px;
-    font-size: 21px;
+    margin-bottom: 2%;
+    font-size: 19px;
+    margin-left: 1%;
     font-weight: 600;
 }
-.email-input::placeholder{
+.emailinput::placeholder{
     padding-left: 20px;
     font-size: 20px;
 }
@@ -428,13 +448,11 @@ background: #1B72C0;
 }
 .maleinput{
     width: 22px;
-    margin-left: 55px;
-    
+    margin-left: 50%;
 }
 .femaleinput{
     width: 22px;
-    margin-left: 55px;
-    
+    margin-left: 45%;
 }
 .btnUpdate{
     height: 50px;
@@ -463,19 +481,20 @@ background: #1B72C0;
 }
 .closeinterest{
     position: relative;
-    top: 20px;
-    left: 20px;
-    height: 7%;
+    top: 31%;
+    left: 8%;
+    height: 33%;
     width: 7%;
 }
 .int{
     display: flex;
     width: 100%;
+    height: 63px;
 }
 .intp{
-    margin-top: 10px;
-    margin-left: 100px;
-    font-size: 25px;
+    margin-top: 3%;
+    margin-left: 31%;
+    font-size: 22px;
     font-weight: 500;
     width: 100%;
 }
@@ -487,7 +506,7 @@ background: #1B72C0;
     height: 40px;
     width: 43%;
     /* background-color: black; */
-    border: 1px solid #79747E;
+    border: 2px solid #79747E;
     /* padding-left: 10px; */
     text-align: center;
     margin-left: 10px;
@@ -499,13 +518,18 @@ background: #1B72C0;
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+  /* box-shadow: 0px 0px 1px 1px; */
 }
 .butt1>h3{
     color: #49454F;
-    margin: 8px 0px;
+    margin: 5px 0px;
     padding: 0px 0px;
-    font-size: 16px;
+    font-size: 17px;
+    /* line-height: 20px; */
+    /* letter-spacing: 0.1 ; */
     /* text-align: end; */
+    font-weight: 500;
+    
     margin-left: 7px;
     /* overflowwrap: break-word; */
 }
@@ -688,15 +712,15 @@ background: #1B72C0;
 .addint{
     position: relative;
     top: 37px;
-    left: 218px;
+    left: 64%;
     height: 45px;
     width: 28%;
     /* border: 1px solid gray; */
-    border-radius: 13px;
+    border-radius: 100px;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     border: none;
-    background-color: #1B72C0;
+    background-color: #0055BF;
 }
 .hend{
     /* position: relative;
@@ -711,9 +735,11 @@ background: #1B72C0;
 }
 .more{
     text-align: center;
-    font-size: 18px;
-    margin-top:40px;
+    font-size: 19px;
+    margin-top: 7%;
     color: #1B72C0;
+    text-decoration: underline;
+    font-weight: 400;
 }
 .addtext{
     height: 504px;
@@ -737,17 +763,17 @@ background: #1B72C0;
     font-size: 19px;
     font-weight: 600;
     margin-bottom: 12px;
+    margin-left: 3px;
 }
 .parainput{
-    height: 40px;
-    /* background-color: ; */
-    width: 300px;
-    border: 1px solid #79747E;
-    border-radius: 3px;
+    height: 53px;
+    width: 316px;
+    border: 2px solid #828181;
+    border-radius: 5px;
 }
-.para>::placeholder{
-    font-size: 19px;
-    margin-left: 30px;
+.parainput::placeholder{
+    font-size: 20px;
+    padding-left: 20px;
 }
 .send{
     height: 50px;
@@ -755,10 +781,10 @@ background: #1B72C0;
     font-size: 17px;
     color: white;
     position: relative;
-    top: 167px;
-    left: 220px;
+    top: 29%;
+    left: 68%;
     border: none;
-    border-radius: 15px;
+    border-radius: 25px;
 background: #1B72C0;
 }
 
@@ -767,13 +793,15 @@ background: #1B72C0;
     width: 50%;
     /* background-color: aqua; */
     display: flex;
-    border: 1px solid #79747E
+    border: 2px solid #79747E;
+    border-radius: 5px;
 }
 .checkboxdiv2{
     height: 54px;
+    border-radius: 5px;
     width: 50%;
     /* background-color: aqua; */
-    border: 1px solid #79747E;
+    border: 2px solid #79747E;
     display: flex;
     margin-left: 20px;
 }
