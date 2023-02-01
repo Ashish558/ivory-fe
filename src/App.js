@@ -19,6 +19,12 @@ import { updateLoggedIn, updateProfileData } from './redux/slices/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetail } from './services/user';
 
+import Landing from './pages/splash/Landing';
+import Second from './pages/splash/Second';
+import Third from './pages/splash/Third';
+import Four from './pages/splash/Four';
+import LogoLanding from './pages/splash/LogoLanding';
+
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -67,6 +73,13 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />
+
+        <Route exact path='/logolanding' element={<LogoLanding />}></Route>
+        <Route exact path='/landing' element={<Landing />}></Route>
+        <Route exact path='/second' element={<Second />}></Route>
+        <Route exact path='/third' element={<Third />}></Route>
+        <Route exact path='/four' element={<Four />}></Route>
+
         <Route
           path="/CreateProfile"
           element={
@@ -99,9 +112,9 @@ function App() {
           }
         />
 
-      </Routes>
+      </Routes >
       <Footer />
-    </BrowserRouter>
+    </BrowserRouter >
 
   );
 }
