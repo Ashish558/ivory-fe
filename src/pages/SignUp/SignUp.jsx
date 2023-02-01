@@ -7,7 +7,6 @@ import { sendOtp } from "../../services/auth";
 import styles from "./SignUp.module.css";
 const SignUp = () => {
   const locaion = useLocation();
-  const NewLocation = useLocation();
   const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState(null);

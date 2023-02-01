@@ -1,5 +1,5 @@
-import React from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import React,{ useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import mobileSignupTree from "../../assets/images/login/mobileSignupTree.png";
@@ -11,17 +11,13 @@ import vector4 from "../../assets/images/login/Vector4.png";
 import vector5 from "../../assets/images/login/Vector5.png";
 import styles from "./Congrates.module.css";
 const Congrates = () => {
-    const locaion = useLocation();
-    const from = locaion.state?.from || '/signup';
     const navigate = useNavigate();
-    const goBack = () => {
-      navigate(from, { replace: true });
-  };
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     return navigate('/home');
-  //   },2000);
-  // }, [navigate]);
+  
+  useEffect(() => {
+    setTimeout(() => {
+      return navigate('/home');
+    },2000);
+  }, [navigate]);
     return (
       <div className="h-[100vh] overflow-hidden bg-[#EEFDFC]">
         <div className="sm:flex justify-around w-screen mt-28 sm:mt-0 sm:m-0">
