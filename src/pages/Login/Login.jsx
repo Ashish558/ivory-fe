@@ -18,7 +18,6 @@ const Login = () => {
  
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(JSON.stringify(phone).length);
       if (JSON.stringify(phone).length < 10) {
 
         setError("Phone number must be 11 digits");
@@ -124,12 +123,23 @@ const Login = () => {
                 </select>
               </div>
               <div class="flex items-center justify-between mt-4">
+                {JSON.stringify(phone).length === 11?
+                (
                 <button
                   type="submit"
                   className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
                 >
                   Continue
                 </button>
+                ) : (
+                <button
+                
+                 
+                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+                >
+                  Continue
+                </button>
+              )}
               </div>
               <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
                 By clicking continue, I accept the{" "}
