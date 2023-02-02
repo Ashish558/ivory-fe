@@ -1,21 +1,15 @@
 import React from 'react';
-import { Link,useLocation,useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 const Login = () => {
-    const locaion = useLocation();
-     const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone,setPhone] = React.useState(null);
   const [error,setError] = React.useState("");
   const [countryCode,setCountryCode] = React.useState("+880");
-    const skip = () => {
-        navigate(from,{replace:true})
-  }
-  
- 
+
     const handleSubmit = (e) => {
       e.preventDefault();
       if (JSON.stringify(phone).length < 10) {
@@ -102,7 +96,7 @@ const Login = () => {
                 <input
                   class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                   // type="tel"
-                  type={JSON.stringify(phone)?.length < 11 ? "number" : "text"}
+                  type={JSON.stringify(phone)?.length < 10 ? "number" : "text"}
                   maxLength="11"
                   // pattern='[0-9]{11}'
                   onChange={(e) => setPhone(parseInt(e.target.value))}
@@ -123,7 +117,7 @@ const Login = () => {
                 </select>
               </div>
               <div class="flex items-center justify-between mt-4">
-                {JSON.stringify(phone).length === 11?
+                {JSON.stringify(phone).length === 10?
                 (
                 <button
                   type="submit"
@@ -135,7 +129,7 @@ const Login = () => {
                 <button
                 
                  
-                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5" disabled
                 >
                   Continue
                 </button>

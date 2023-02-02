@@ -21,6 +21,7 @@ const Dob = () => {
   const [monthPosition3, setMonthPosition3] = React.useState(10);
   const [name, setName] = React.useState("");
   const dispatch = useDispatch()
+  const [nameError, setNameError] = React.useState("");
 
   const months = [
     "January",
@@ -49,8 +50,8 @@ const Dob = () => {
     // e.preventDefault();
 
     if (e.deltaY > 0) {
-
-      if (date2 <= 30) {
+      
+      if (date2 < 30) {
         setDate(date + 1);
         setDate2(date2 + 1);
         setDate3(date3 + 1);
@@ -58,9 +59,9 @@ const Dob = () => {
       // if (date2 === 31) {
       //   setDate3(1);
       // }
-      if (date2 === 1) {
-        setDate(31);
-      }
+      // if (date2 === 1) {
+      //   setDate(31);
+      // }
     } else {
       if (date2 >= 2) {
         setDate(date - 1);
@@ -122,6 +123,7 @@ const Dob = () => {
   };
   const handleReg = (e) => {
     e.preventDefault();
+    console.log(data.name);
     const body = {
       country_code: countryCode,
       mobile_no: phone,
@@ -156,9 +158,23 @@ const Dob = () => {
         console.log(err.response.data.error);
       });
   }
+  const handleName = (e) => {
+    const { value } = e.target;
+    // name should not be any number
+    if (value.match(/^[a-zA-Z ]*$/)) {
+      setNameError("")
+      console.log(value);
+      setName(value);
+    } else {
+      setNameError("Name should not contain any number");
 
-  return (
-    <div className="h-screen overflow-hidden bg-[#EEFDFC]">
+      setName("");
+    }
+  
+
+  }
+    return (
+      <div className="h-screen overflow-hidden bg-[#EEFDFC]">
         <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -205,9 +221,10 @@ const Dob = () => {
                   className=" w-full sm:w-[300px]  px-4 py-4 sm:py-4 text-gray-700 bg-white border  border-gray-400 shadow-sm placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-md sm:rounded-md sm:ml-0 mt-5 sm:text-lg"
                   type="text"
                   placeholder="Name"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => handleName(e)}
                   required
                 />
+                <p className="text-red-500 text-sm">{nameError}</p>
               </div>
               <div className="mt-8  ">
                 <h1 className="sm:ml-0 font-semibold text-lg mx-auto w-[300px]">
@@ -301,12 +318,18 @@ const Dob = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between mt-4">
-                <button
-                  type="submit"
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-[80vw] sm:w-[300px] text-center justify-center flex mx-auto mt-2"
-                >
-                  Continue
-                </button>
+                {nameError ? (
+                  <button className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5" disabled >
+                    Continue
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-[80vw] sm:w-[300px] text-center justify-center flex mx-auto mt-2"
+                  >
+                    Continue
+                  </button>
+                )}
               </div>
             </form>
           </div>
