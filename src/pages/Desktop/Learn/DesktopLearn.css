@@ -1,0 +1,33 @@
+.custom-card-learn {
+    background-color: white;
+    border-radius: 48px;
+    position: relative;
+    width: 348px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.125);
+    margin-bottom: 2px;
+}
+
+.position-Ivory {
+    position: absolute;
+    top: 5%;
+    left: 7%;
+    color: white;
+}
+
+
+
+.price-learn {
+
+
+    color: #1B72C0;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.discount-learn {
+    text-decoration-line: line-through;
+
+    color: #74777F;
+    font-weight: 400;
+    font-size: 24px;
+}

@@ -1,0 +1,39 @@
+.bg-desktop-1 {
+    background-image: url('../../../Images//Desktop\ \(3\).png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    border-radius: 44px;
+    position: relative;
+}
+
+.bg-desktop-2 {
+    background-image: url('../../../Images//Desktop\ \(1\).png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    border-radius: 44px;
+    position: relative;
+}
+
+.bg-desktop-3 {
+    background-image: url('../../../Images//Desktop\ \(2\).png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    border-radius: 44px;
+    position: relative;
+}
+
+.detailsDesktop {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 26px;
+    padding-left: 26px;
+}
