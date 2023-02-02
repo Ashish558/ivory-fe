@@ -1,38 +1,42 @@
-import React,{ useEffect,useState } from 'react';
-import { Link,useLocation,useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
+import { updateLoggedIn } from '../../redux/slices/user';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp,verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
+
 const Otp = () => {
-  const [otp,setOtp] = useState([]);
-  const [otpStatus,setOtpStatus] = useState('');
+  const [otp, setOtp] = useState([]);
+  const [otpStatus, setOtpStatus] = useState('');
   const locaion = useLocation();
   const NewLocation = useLocation();
   const from = locaion.state?.from || "/login";
   const stateData = locaion?.state;
   const { otp: otpData, otp_token, phone, countryCode } = stateData;
+  const dispatch = useDispatch()
 
   // console.log(stateData.otpToken);
   const navigate = useNavigate();
   useEffect(() => {
-    
-    const otpArray = stateData.otp.split(""); ;
-     const otpValues = {
-       field1: otpArray[0],
-       field2: otpArray[1],
-       field3: otpArray[2],
-       field4: otpArray[3],
-       field5: otpArray[4],
-       field6: otpArray[5],
+
+    const otpArray = stateData.otp.split("");;
+    const otpValues = {
+      field1: otpArray[0],
+      field2: otpArray[1],
+      field3: otpArray[2],
+      field4: otpArray[3],
+      field5: otpArray[4],
+      field6: otpArray[5],
     };
     setOtp(otpValues);
   }, [stateData]);
 
   const otpValuesArray = Object.values(otp);
-  
+
   if (!stateData) {
     return <div>404</div>;
   }
@@ -43,28 +47,34 @@ const Otp = () => {
 
   const handleOpt = (e) => {
     e.preventDefault();
-  const body = {
-    country_code: countryCode,
-    mobile_no: phone,
-    otp: otpData,
-    otp_token: otp_token,
-  };
+    const body = {
+      country_code: countryCode,
+      mobile_no: phone,
+      otp: otpData,
+      otp_token: otp_token,
+    };
     // console.log(body);
     verifyOtp(body)
       .then((res) => {
-          if (res.data.data=== null) {
-            navigate("/dob", {
-              state: {
-                otp: otpData,
-                otp_token,
-                phone,
-                countryCode,
-              },
-            });
-          } else {
-            navigate("/home");
-          }
-          
+        if (res.data.data === null) {
+          navigate("/dob", {
+            state: {
+              otp: otpData,
+              otp_token,
+              phone,
+              countryCode,
+            },
+          });
+        } else {
+          console.log('verify', res.data.data);
+          const { refresh_token, access_token } = res.data.data
+          dispatch(updateLoggedIn({ loggedIn: true }))
+          localStorage.setItem('access', access_token)
+          localStorage.setItem('refresh', refresh_token)
+          localStorage.setItem('phone', phone)
+          navigate("/home");
+        }
+
       })
       .catch((err) => {
         console.log(err);

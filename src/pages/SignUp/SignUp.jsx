@@ -5,6 +5,7 @@ import logo from "../../assets/images/login/logolight.png";
 import signupTree from "../../assets/images/login/signupTree.png";
 import { sendOtp } from "../../services/auth";
 import styles from "./SignUp.module.css";
+
 const SignUp = () => {
   const locaion = useLocation();
   const from = locaion.state?.from || "/";
@@ -12,6 +13,8 @@ const SignUp = () => {
   const [phone, setPhone] = React.useState(null);
   const [error, setError] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+880");
+
+
   const goBack = () => {
     navigate(from, { replace: true });
   };

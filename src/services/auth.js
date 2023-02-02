@@ -1,6 +1,6 @@
 // for register - 
 import axios from "axios";
-import { BASE_URL } from "./constants";
+import { BASE_URL, getAuthHeaders } from "./constants";
 
 // REGISTER
 //1. send otp body. You will get otp and otp_token in response. save it in a state
@@ -31,4 +31,16 @@ export const verifyOtp = (body) => {
 // }
 export const registerUser = (body) => {
    return axios.post(`${BASE_URL}/accounts/users/`, body)
+};
+
+// {
+//    "mobile_no" : "",
+//    "password" : ""
+// }
+export const loginUser = (body) => {
+   return axios.post(`${BASE_URL}/accounts/login/`, body)
+};
+
+export const refreshToken = (body) => {
+   return axios.post(`${BASE_URL}/accounts/users/refresh-token/`, body)
 };

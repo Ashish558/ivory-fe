@@ -11,7 +11,6 @@ const tempOptions = [
       text: '8',
       selected: false,
       correct: false,
-
    },
    {
       id: 2,
@@ -33,14 +32,15 @@ const tempOptions = [
    },
 ]
 
-export default function Mcq() {
+export default function Mcq({ image, choices }) {
 
-   const [options, setOptions] = useState(tempOptions)
+   const [options, setOptions] = useState(choices.map(choice => ({ ...choice, selected: false })))
 
    const [mcqResponse, setMcqResponse] = useState({
       selected: false,
       isCorrect: false
    })
+
    const [optionDisabled, setOptionDisabled] = useState(false)
    let timeOutId = null
 
@@ -54,7 +54,7 @@ export default function Mcq() {
       })
       setOptionDisabled(true)
       setOptions(updated)
-      if (option.correct === true) {
+      if (option.is_correct === true) {
          timeOutId = setTimeout(() => {
             setMcqResponse({
                selected: true,
@@ -103,8 +103,8 @@ export default function Mcq() {
                         </div>
                      </div>
                      : <></> :
-               <div className='flx items-center self-streth flex-1 overflow-auto h-[342px]'>
-                  <img src={McqStoryImg} className={styles.storyImage} />
+               <div className='flx items-center self-streth flex-1 overflow-aut h-[342px]'>
+                  <img src={image} className={styles.storyImage} />
                </div>
          }
          <div className={styles.mcqOptions}>
@@ -114,9 +114,9 @@ export default function Mcq() {
             <div className='flex justify-around items-center' >
                {options.map(option => {
                   return <div key={option.id}
-                     className={`w-12 bg-white h-12 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true  && option.correct === true ?`${styles.correctOption}` : '' }`}
+                     className={`w-12 bg-white h-12 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true && option.is_correct === true ? `${styles.correctOption}` : ''}`}
                      onClick={() => optionDisabled === false && selectAns(option)} >
-                     <p> {option.text} </p>
+                     <p> {option.choice} </p>
                   </div>
                })}
             </div>

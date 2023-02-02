@@ -60,7 +60,9 @@
    align-items: center;
    z-index: -1;
 }
-
+.iconContainer{
+   cursor: pointer;
+}
 
 .storyImg img {
    width: 100%;

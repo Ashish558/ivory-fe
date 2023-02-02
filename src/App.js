@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
 
@@ -14,10 +14,56 @@ import LoggedInHome from './pages/Home/LoggedInHome'
 import Profile from './pages/Createprofile/Profile'
 import Footer from './pages/Home/Footer';
 import Navbar from './pages/Navbar/Navbar';
+import { refreshToken } from './services/auth';
+import { updateLoggedIn, updateProfileData } from './redux/slices/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserDetail } from './services/user';
+
+import Landing from './pages/splash/Landing';
+import Second from './pages/splash/Second';
+import Third from './pages/splash/Third';
+import Four from './pages/splash/Four';
+import LogoLanding from './pages/splash/LogoLanding';
+
 import Dob from './pages/SignUp/Dob';
 function App() {
   //true for now will change later
-  const loggedIn = true
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  const { loggedIn, profileData } = useSelector(state => state.user)
+
+  useEffect(() => {
+    if (localStorage.getItem('refresh')) {
+      let body = {
+        refresh:
+          localStorage.getItem('refresh')
+      }
+      refreshToken(body)
+        .then(res => {
+          // console.log('ref res', res.data.data.access);
+          localStorage.setItem('access', res.data.data.access)
+          dispatch(updateLoggedIn({ loggedIn: true }))
+          getUserDetail()
+            .then(res => {
+              // console.log('profile', res.data.data[0]);
+              dispatch(updateProfileData({ profileData: res.data.data[0] }))
+              setLoading(false)
+            })
+            .catch(err => {
+              console.log('profile err', err);
+              setLoading(false)
+            })
+          if (res.data.data === null) return
+        }).catch(err => {
+          setLoading(false)
+          console.log('ref err', err.response);
+        })
+    } else {
+      setLoading(false)
+    }
+  }, [loggedIn])
+
+  if (loading === true) return <></>
 
   return (
     <BrowserRouter>
@@ -29,42 +75,48 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
         <Route path="/home" element={<LoggedInHome />} />
-        <Route exact path='/CreateProfile' element={<Profile />} />
-        <Route path="/"
+
+        <Route exact path='/logolanding' element={<LogoLanding />}></Route>
+        <Route exact path='/landing' element={<Landing />}></Route>
+        <Route exact path='/second' element={<Second />}></Route>
+        <Route exact path='/third' element={<Third />}></Route>
+        <Route exact path='/four' element={<Four />}></Route>
+
+        <Route
+          path="/CreateProfile"
           element={
             <RequireAuth loggedIn={loggedIn ? true : false}>
-              <Home />
+              <Profile />
             </RequireAuth>
+          }
+        />
+        <Route path="/"
+          element={
+            <Home />
           }
         />
         <Route
           path="/activities"
           element={
-            <RequireAuth loggedIn={loggedIn ? true : false}>
-              <Activities />
-            </RequireAuth>
+            <Activities />
           }
         />
         <Route
-          path="/activities/:activityId/:typeId"
+          path="/activities/:categoryId"
           element={
-            <RequireAuth loggedIn={loggedIn ? true : false}>
-              <ActivityType />
-            </RequireAuth>
+            <ActivityType />
           }
         />
         <Route
-          path="/activities/:activityId/:typeId/start"
+          path="/activities/:categoryId/:activityId/start"
           element={
-            <RequireAuth loggedIn={loggedIn ? true : false}>
-              <StartActivity />
-            </RequireAuth>
+            <StartActivity />
           }
         />
 
-      </Routes>
+      </Routes >
       <Footer />
-    </BrowserRouter>
+    </BrowserRouter >
 
   );
 }

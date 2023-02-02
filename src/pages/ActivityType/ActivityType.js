@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import styles from './styles.module.css'
 
@@ -10,6 +10,10 @@ import PauseIcon from '../../assets/icons/pause.svg'
 import RedirectIcon from '../../assets/icons/redirect.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { getActivities, getCategories } from '../../services/activities'
+import { getMyActivities } from '../../services/user'
+import { useSelector } from 'react-redux'
 
 export const tempActivities = [
    {
@@ -45,23 +49,99 @@ export const tempActivities = [
 ]
 export default function ActivityType() {
 
-   const [activities, setActivities] = useState(tempActivities)
+   const [activities, setActivities] = useState([])
+   const { categoryId } = useParams()
+   const [userActivities, setUserActivities] = useState([])
+   const [filteredUserActivities, setFilteredUserActivities] = useState([])
+   const [category, setCategory] = useState({})
+   const [completedTabActive, setCompletedTabActive] = useState(false)
+   const { loggedIn } = useSelector(state => state.user)
+
+   useEffect(() => {
+      getMyActivities()
+         .then(res => {
+            console.log('my activities', res.data.data);
+            if (res.data.data === null) return setUserActivities([])
+            let filtered = res.data.data.filter(item => item.activity.category === parseInt(categoryId))
+            setUserActivities(filtered)
+            console.log('my activities filtered', filtered);
+
+         }).catch(err => {
+            console.log('err', err);
+         })
+   }, [])
+
+
+   useEffect(() => {
+      getCategories()
+         .then(res => {
+            console.log('categories', res.data.data);
+            if(res.data.data === null) return
+            let currentCategory = res.data.data.find(item => item.id === parseInt(categoryId))
+            setCategory(currentCategory)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
+   // useEffect(() => {
+   //    if (userActivities.length === 0) return
+   //    let temp = userActivities.filter(activity => activity.is_completed === false)
+   //    setFilteredUserActivities(temp)
+   // }, [userActivities])
+
+   useEffect(() => {
+      if (userActivities.length === 0) return
+      // console.log('userActivities', userActivities);
+      let temp = userActivities.filter(item => item.is_completed === completedTabActive)
+      setFilteredUserActivities(temp)
+   }, [userActivities, completedTabActive])
+
+   useEffect(() => {
+      getActivities(categoryId)
+         .then(res => {
+            console.log('data', res.data.data);
+            if (res.data.data === null) return
+            setActivities(res.data.data)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
+
+   // console.log('category', category);
+   // console.log('userActivities', userActivities);
+   // console.log('activities', activities);
 
    return (
       <div>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
-               <p className='text-lightGray font-medium'> Activities {'>'} Acrylic Painting </p>
+               <p className='text-lightGray font-medium'> Activities {'>'} {category.name} </p>
             </div>
 
             <div className='mt-4'>
-               <h3 className='text-xl font-bold mb-2.5'> Acrylic Painting </h3>
-              <ActivityContent />
+               <h3 className='text-xl font-bold mb-2.5'>  {category.name} </h3>
+               <ActivityContent />
             </div>
-
+            {
+               userActivities.length > 0 &&
+               <div className='flex justify-center my-7'>
+                  <button className={`rounded-l-full border py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
+                     onClick={() => setCompletedTabActive(false)} >
+                     On going
+                  </button>
+                  <button className={`rounded-r-full border py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
+                     onClick={() => setCompletedTabActive(true)}  >
+                     completed
+                  </button>
+               </div>
+            }
             <div className='mt-5'>
-               {
+               {userActivities.length > 0 ?
+                  filteredUserActivities.map(activity => {
+                     return <Activity {...activity.activity} key={activity.id} />
+                  })
+                  :
                   activities.map(activity => {
                      return <Activity {...activity} key={activity.id} />
                   })

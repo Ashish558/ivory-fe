@@ -72,37 +72,37 @@ const Navbar = () => {
                <div className='line mt-6' height="1px"></div>
                <div className='mt-7'>
 
-                  <div className='flex items-center'>
+                  <div className='flex items-center cursor-pointer' onClick={()=> navigate('/CreateProfile')} >
                      <p><img src={edit} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Edit Profile</p>
                   </div>
-                  <div className='flex items-center mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7'>
                      <p><img src={play} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>How to use app</p>
                   </div>
-                  <div className='flex items-center mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7'>
                      <p><img src={programs} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>My Programs</p>
                   </div>
-                  <div className='flex items-center mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7'>
                      <p><img src={activities} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Activities</p>
                   </div>
-                  <div className='flex items-center mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7'>
                      <p><img src={sessions} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Live Sessions</p>
                   </div>
 
                   <div className='boundary-margin-top'>
-                     <div className='flex items-center'>
+                     <div className='flex items-center cursor-pointer'>
                         <p><img src={exit} alt="" /></p>
                         <p className='text-sm font-semibold pl-4'>Sign out</p>
                      </div>
-                     <div className='flex items-center mt-7'>
+                     <div className='flex items-center cursor-pointer mt-7'>
                         <p><img src={faq} alt="" /></p>
                         <p className='text-sm font-semibold pl-4 contact-color'>FAQ</p>
                      </div>
-                     <div className='flex items-center mt-7'>
+                     <div className='flex items-center cursor-pointer mt-7'>
                         <p><img src={contact} alt="" /></p>
                         <p className='text-sm font-semibold pl-4 contact-color'>Contact us</p>
                      </div>

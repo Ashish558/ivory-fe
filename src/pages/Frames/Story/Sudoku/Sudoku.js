@@ -7,14 +7,28 @@ import EyeHideIcon from '../../../../assets/icons/eye-hide.svg'
 import SudokuStoryImg from '../../../../assets/images/sudoku-unsolved.png'
 import SudokuSolvedSImg from '../../../../assets/images/sudoku-solved.png'
 import McqCorrectImg from '../../../../assets/images/mcq-correct.png'
+import axios from 'axios';
+import { getAuthHeaders } from '../../../../services/constants';
 
 
 
-export default function Sudoku() {
+export default function Sudoku({ image, answer_image, answer_viewed, type, url, updateStory }) {
 
 
    const [answerActive, setAnswerActive] = useState(false)
 
+   useEffect(() => {
+      if (answerActive === true) {
+         if (answer_viewed === true) return
+         axios.get(`${url}view-answer/`, getAuthHeaders())
+            .then(res => {
+               console.log('view-answer res', res.data.data);
+               updateStory({ ...res.data.data, type })
+            }).catch(err => {
+               console.log('view-answer err', err.data);
+            })
+      }
+   }, [answerActive, answer_viewed])
 
    return (
       <div className={styles.storySudoku}>
@@ -23,9 +37,9 @@ export default function Sudoku() {
          <div className='flx items-center self-streth flex-1 overflow-auto h-[342px]'>
             {
                answerActive ?
-                  <img src={SudokuSolvedSImg} className={styles.storyImage} />
+                  <img src={image} className={styles.storyImage} />
                   :
-                  <img src={SudokuStoryImg} className={styles.storyImage} />
+                  <img src={answer_image} className={styles.storyImage} />
             }
 
          </div>
