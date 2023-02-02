@@ -15,7 +15,9 @@ export default function ShareModal({ open, close }) {
    return (
       <BottomSheet isOpen={open} close={close}>
          <div className='px-4 py-6'>
-
+            <h3 className='text-xl mb-10 font-bold'>
+               Share
+            </h3>
             <div className='flex items-center justify-around'>
                <WhatsappShareButton url={shareUrl}>
                   <img className='cursor-pointer'

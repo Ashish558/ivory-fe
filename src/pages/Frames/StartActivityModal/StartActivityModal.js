@@ -3,10 +3,19 @@ import Modal from '../../../components/Modal/modal'
 import BackIcon from '../../../assets/icons/go-back.svg'
 import PrimaryButton from '../../../components/Buttons/PrimaryButton'
 import { startActivity } from '../../../services/user'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function StartActivityModal({ handleClose, activityId }) {
 
+   const { loggedIn } = useSelector(state => state.user)
+   const navigate = useNavigate()
+
    const handleStartActivity = ()=>{
+      if (loggedIn === false) {
+         navigate('/login')
+         return
+      }
       startActivity(activityId)
       .then(res => {
          console.log('start resp', res);

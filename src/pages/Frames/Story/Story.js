@@ -33,6 +33,11 @@ export default function Story(props) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
    }
+
+   useEffect(() => {
+      hideHtmlOverflow()
+   }, [shareModalOpen])
+
    useEffect(() => {
       hideHtmlOverflow()
       return () => {
@@ -73,7 +78,7 @@ export default function Story(props) {
          })
    }
 
-   console.log('story', story)
+   // console.log('story', story)
    return (
       <>
 
@@ -133,7 +138,6 @@ export default function Story(props) {
          </div>
          <ShareModal open={shareModalOpen} close={() => {
             setShareModalOpen(false);
-            hideHtmlOverflow()
          }} />
       </>
    )

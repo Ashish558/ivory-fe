@@ -7,6 +7,8 @@ import Logo from '../../Images/Vector.png'
 import Logo1 from '../../Images/Vector (1).png'
 import Story from "../Frames/Story/Story";
 import { getStories } from "../../services/stories";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const Stories = () => {
@@ -14,6 +16,8 @@ const Stories = () => {
    const [selectedStory, setSelectedStory] = useState({})
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [stories, setStories] = useState([])
+   const { loggedIn } = useSelector(state => state.user)
+   const navigate = useNavigate()
 
    const settings = {
       infinite: false,
@@ -64,12 +68,16 @@ const Stories = () => {
    }, [])
 
    const handleClick = (story, idx) => {
-      setStoryActive(true)
-      setSelectedStory(story)
-      setSelectedIndex(idx)
+      if (loggedIn === false) {
+         navigate('/login')
+      } else {
+         setStoryActive(true)
+         setSelectedStory(story)
+         setSelectedIndex(idx)
+      }
    }
    // console.log('selectedIndex', selectedIndex)
-   // console.log('stories', stories)
+   console.log('stories', stories)
    // console.log('selectedStory', selectedStory)
 
    return (
@@ -85,7 +93,9 @@ const Stories = () => {
                         <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
                            {/* <img className="w-full" src={Story1} alt="" /> */}
                            <div className="pl-3 details">
-                              <p className="text-sm text-white"> Good morning </p>
+                              <p className="text-sm text-white">
+                                 {story.share_message ? story.share_message : ''}
+                              </p>
                               <div className="flex items-center">
                                  <p className="text-white"> <img src={story.image ? story.image : Logo} alt="" /></p>
                                  <p className="text-sm text-white pl-1"> {story.views} views</p>

@@ -61,8 +61,11 @@ export default function ActivityType() {
       getMyActivities()
          .then(res => {
             console.log('my activities', res.data.data);
-            if (res.data.data === null) return
-            setUserActivities(res.data.data)
+            if (res.data.data === null) return setUserActivities([])
+            let filtered = res.data.data.filter(item => item.activity.category === parseInt(categoryId))
+            setUserActivities(filtered)
+            console.log('my activities filtered', filtered);
+
          }).catch(err => {
             console.log('err', err);
          })

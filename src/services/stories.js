@@ -3,5 +3,5 @@ import { BASE_URL, getAuthHeaders } from "./constants";
 
 
 export const getStories = () => {
-   return axios.get(`${BASE_URL}/story/story-groups/`, getAuthHeaders())
+   return axios.get(`${BASE_URL}/story/story-groups/`)
 };
