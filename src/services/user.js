@@ -13,9 +13,9 @@ export const startActivity = (activityId) => {
 export const completeActivity = (activityId) => {
    let body = {
       is_completed: true,
-      activity: activityId
+      // activity: activityId
    }
-   return axios.patch(`${BASE_URL}/accounts/user-activities/`, body, getAuthHeaders())
+   return axios.patch(`${BASE_URL}/accounts/user-activities/${activityId}/`, body, getAuthHeaders())
 };
 
 export const getMyActivitiesProgress = () => {

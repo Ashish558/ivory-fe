@@ -13,6 +13,7 @@ import { getCategories, getInterests } from '../../services/activities'
 import { sendOtp, verifyOtp } from '../../services/auth'
 import MyActivityCard from '../../components/MyActivityCard/MyActivityCard'
 import { getMyActivitiesProgress } from '../../services/user'
+import { useSelector } from 'react-redux'
 
 export const tempActivities = [
    {
@@ -90,6 +91,7 @@ export default function Activities() {
    const [categories, setCategories] = useState([])
    const [filterItems, setFilterItems] = useState([])
    const navigate = useNavigate()
+   const { loggedIn } = useSelector(state => state.user)
 
    useEffect(() => {
       if (filterItems.length > 0) return
@@ -146,6 +148,7 @@ export default function Activities() {
    }, [activities.length])
 
    useEffect(() => {
+      if(loggedIn === false) return
       getMyActivitiesProgress()
          .then(res => {
             console.log('my acts', res.data.data);
@@ -154,7 +157,7 @@ export default function Activities() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }, [loggedIn])
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
 

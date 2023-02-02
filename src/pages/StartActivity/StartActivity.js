@@ -13,7 +13,7 @@ import UploadIcon from '../../assets/icons/upload.svg'
 import ActivityIcon from '../../assets/images/activity.png'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Activity from '../../components/Activity/Activity'
-import { getSingleActivity } from '../../services/activities'
+import { getCategories, getSingleActivity } from '../../services/activities'
 import { completeActivity, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
 import Feedback from '../../components/Feedback/Feedback'
 import { useSelector } from 'react-redux'
@@ -31,11 +31,12 @@ export default function StartActivity() {
    const { loggedIn } = useSelector(state => state.user)
    const { categoryId, activityId } = useParams()
    const [userActivityId, setUserActivityId] = useState(activityId)
+   const [category, setCategory] = useState({})
 
    useEffect(() => {
       getSingleActivity(activityId)
          .then(res => {
-            console.log('data', res.data.data);
+            console.log('activity data', res.data.data);
             if (res.data.data === null) return
             // setActivities(res.data.data)
             setActivity(res.data.data)
@@ -44,7 +45,22 @@ export default function StartActivity() {
          })
    }, [])
 
+   //fetch category details
    useEffect(() => {
+      getCategories()
+         .then(res => {
+            // console.log('categories', res.data.data);
+            if(res.data.data === null) return
+            let currentCategory = res.data.data.find(item => item.id === parseInt(categoryId))
+            setCategory(currentCategory)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
+
+   //fetch users activities
+   useEffect(() => {
+      if(loggedIn === false) return
       getMyActivities()
          .then(res => {
             console.log('my activities', res.data.data);
@@ -58,16 +74,17 @@ export default function StartActivity() {
          }).catch(err => {
             console.log('err', err);
          })
-   }, [])
+   }, [loggedIn])
 
    useEffect(() => {
+      if(loggedIn === false) return
       getSubmissions()
-   }, [userActivityId])
+   }, [userActivityId, loggedIn])
 
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
          .then(res => {
-            console.log('submission res', res.data.data);
+            // console.log('submission res', res.data.data);
             if (res.data.data === null) return
             setSubmissions(res.data.data)
          }).catch(err => {
@@ -84,6 +101,7 @@ export default function StartActivity() {
    }
 
    const handleUpload = e => {
+      if(loggedIn === false) return
       const file = e.target.files[0]
       if (file === undefined) return
       let formData = new FormData();
@@ -93,6 +111,8 @@ export default function StartActivity() {
       uploadActivity(formData)
          .then(res => {
             console.log('upload res', res.data);
+            alert('uploaded successfully')
+            getSubmissions()
          }).catch(err => {
             console.log('upload err', err);
          })
@@ -106,7 +126,7 @@ export default function StartActivity() {
    }
 
    const handleComplete = () => {
-      completeActivity(activityId)
+      completeActivity(userActivityId)
          .then(res => {
             console.log('compl res', res.data);
          }).catch(err => {
@@ -115,7 +135,7 @@ export default function StartActivity() {
    }
    //384480
    // console.log('loggedIn', loggedIn);
-   console.log('userActivityId', userActivityId);
+   // console.log('userActivityId', userActivityId);
    // console.log('activityId', activityId);
    // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
@@ -127,7 +147,7 @@ export default function StartActivity() {
          <div className='pb-12 mb-10'>
             {/* <Header /> */}
             <div className='pt-2 px-4'>
-               <p className='text-lightGray font-medium'> Activities {'>'} Acrylic Painting </p>
+               <p className='text-lightGray font-medium'> Activities {'>'} {category.name}  </p>
             </div>
 
             <div className='mt-3'>

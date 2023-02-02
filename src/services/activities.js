@@ -8,11 +8,7 @@ export const getInterests = (fromAdmin) => {
          params: {
             created_by: 1,
          },
-         ...getAuthHeaders()
-
       }
-   }else{
-      config = { ...getAuthHeaders()}
    }
 
    return axios.get(`${BASE_URL}/activity/intrests/`, config)
@@ -23,7 +19,7 @@ export const addInterest = (body) => {
 };
 
 export const getCategories = () => {
-   return axios.get(`${BASE_URL}/activity/categories/`, getAuthHeaders())
+   return axios.get(`${BASE_URL}/activity/categories/`)
 };
 
 export const getActivities = (categoryId) => {
@@ -31,12 +27,10 @@ export const getActivities = (categoryId) => {
       params: {
          category: categoryId,
       },
-      ...getAuthHeaders()
-
    })
 };
 
 export const getSingleActivity = (activityId) => {
-   return axios.get(`${BASE_URL}/activity/activities/${activityId}/`, getAuthHeaders())
+   return axios.get(`${BASE_URL}/activity/activities/${activityId}/`)
 };
 

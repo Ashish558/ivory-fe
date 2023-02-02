@@ -11,8 +11,9 @@ import RedirectIcon from '../../assets/icons/redirect.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { getActivities } from '../../services/activities'
+import { getActivities, getCategories } from '../../services/activities'
 import { getMyActivities } from '../../services/user'
+import { useSelector } from 'react-redux'
 
 export const tempActivities = [
    {
@@ -52,8 +53,9 @@ export default function ActivityType() {
    const { categoryId } = useParams()
    const [userActivities, setUserActivities] = useState([])
    const [filteredUserActivities, setFilteredUserActivities] = useState([])
-
+   const [category, setCategory] = useState({})
    const [completedTabActive, setCompletedTabActive] = useState(false)
+   const { loggedIn } = useSelector(state => state.user)
 
    useEffect(() => {
       getMyActivities()
@@ -66,6 +68,18 @@ export default function ActivityType() {
          })
    }, [])
 
+
+   useEffect(() => {
+      getCategories()
+         .then(res => {
+            console.log('categories', res.data.data);
+            if(res.data.data === null) return
+            let currentCategory = res.data.data.find(item => item.id === parseInt(categoryId))
+            setCategory(currentCategory)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
    // useEffect(() => {
    //    if (userActivities.length === 0) return
    //    let temp = userActivities.filter(activity => activity.is_completed === false)
@@ -90,8 +104,7 @@ export default function ActivityType() {
          })
    }, [])
 
-
-
+   // console.log('category', category);
    // console.log('userActivities', userActivities);
    // console.log('activities', activities);
 
@@ -100,11 +113,11 @@ export default function ActivityType() {
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
-               <p className='text-lightGray font-medium'> Activities {'>'} Acrylic Painting </p>
+               <p className='text-lightGray font-medium'> Activities {'>'} {category.name} </p>
             </div>
 
             <div className='mt-4'>
-               <h3 className='text-xl font-bold mb-2.5'> Acrylic Painting </h3>
+               <h3 className='text-xl font-bold mb-2.5'>  {category.name} </h3>
                <ActivityContent />
             </div>
             {
