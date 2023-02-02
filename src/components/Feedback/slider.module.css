@@ -1,0 +1,56 @@
+.container {
+   position: absolute;
+   background-color: white;
+   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
+   border-radius: 24px;
+   transition: 0.5s;
+   top: 0;
+   width: 100%;
+}
+
+.item {
+   position: absolute;
+   top: 0;
+   width: 100%;
+   transition: 0.2s ease-out;
+}
+
+.active {
+   opacity: 1;
+   left: 0;
+}
+
+.prev {
+   left: -100%;
+   opacity: 0;
+}
+
+.next {
+   left: 100%;
+   opacity: 0;
+}
+
+.imgContainer {
+   width: 120px;
+   height: 120px;
+   border: 1px dashed #1B72C0;
+   border-radius: 16px;
+   padding: 6px 6px;
+}
+
+.imgContainer img {
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+}
+
+.line {
+   position: absolute;
+   top: 50%;
+   left: 0;
+   width: 100%;
+   /* height: 2px; */
+   border: 1px solid #000000;
+   opacity: 0.1;
+   z-index: -1;
+}

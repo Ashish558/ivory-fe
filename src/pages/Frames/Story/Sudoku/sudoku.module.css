@@ -1,0 +1,54 @@
+/* mcq */
+.storySudoku {
+   width: 100%;
+   bottom: 80px;
+   padding: 0 10px;
+   padding-top: 4rem;
+   display: flex;
+   align-items: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   overflow: auto;
+}
+
+.storyImage {
+   border-radius: 0px;
+}
+
+.helpContainer {
+   display: flex;
+   align-items: center;
+   border: 1px solid #74777F;
+   border-radius: 12px;
+   padding: 8px 21px;
+}
+
+.sudokuBottom {
+   width: 100%;
+   margin-top: 10px;
+   border-radius: 24px;
+   background: #D3E4FF;
+   padding: 16px 16px;
+}
+
+.sudokuBottom button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 16px;
+   background: #1B72C0;
+   border-radius: 39px;
+   margin-top: 16px;
+   color: white;
+   font-weight: 700;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+   .storySudoku {
+      max-width: 460px;
+   }
+}
