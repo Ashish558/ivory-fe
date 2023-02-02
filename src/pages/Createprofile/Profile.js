@@ -162,7 +162,7 @@ const Profile = () => {
 
         </div>
         <div className={styles.head}>
-          <img src={arrow} alt="" />
+          <img src={arrow} alt="" onClick={() => navigate(-1)} />
           <p className={styles.edithead}>Edit Your Profile</p>
         </div>
         <div className={styles.image}>
@@ -203,7 +203,7 @@ const Profile = () => {
               </div>
             </div>
             <div className={styles.input1}>
-              <label htmlFor="" className={styles.emaillabel}  onClick={openinterest} >Interests</label>
+              <label htmlFor="" className={styles.emaillabel} onClick={openinterest} >Interests</label>
 
               {
                 userInterests.length === 0 ?
@@ -257,7 +257,7 @@ const Profile = () => {
             {
               allInterests.map(int => {
                 return <div className={`${styles.butt1} ${int.selected === true ? `${styles.interestSelected}` : ''} `}
-                 key={int.id} onClick={() => toggleInt(int.id)} >
+                  key={int.id} onClick={() => toggleInt(int.id)} >
                   <img src={int.icon} alt="" />
                   <h3> {int.name} </h3>
                 </div>
