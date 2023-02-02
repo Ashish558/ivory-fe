@@ -1,26 +1,23 @@
 import React from 'react';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
-import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 const Login = () => {
     const locaion = useLocation();
-    const NewLocation = useLocation();
      const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone,setPhone] = React.useState(null);
   const [error,setError] = React.useState("");
   const [countryCode,setCountryCode] = React.useState("+880");
-    const goBack = () => {
+    const skip = () => {
         navigate(from,{replace:true})
   }
   
  
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(JSON.stringify(phone).length);
       if (JSON.stringify(phone).length < 10) {
 
         setError("Phone number must be 11 digits");
@@ -49,10 +46,7 @@ const Login = () => {
       }
     }
     return (
-      <div
-        className="h-screen overflow-hidden"
-        style={{ background: "rgb(211, 230, 254,.2)" }}
-      >
+      <div className="h-screen overflow-hidden bg-[#EEFDFC]">
         {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -62,6 +56,18 @@ const Login = () => {
         </div> */}
 
         <div className="sm:flex justify-around w-screen mt-16 sm:m-0">
+          <div className="topAppBar mt-10 ml-8 sm:hidden">
+            <div className="flex justify-between items-center">
+              <div className="flex items-end justify-end content-end w-full">
+                <Link
+                  to="/home"
+                  className=" bg-slate-400 px-3 py-1 text-center mr-10 text-white rounded-full absolute text-lg"
+                >
+                  skip
+                </Link>
+              </div>
+            </div>
+          </div>
           <div
             className="hidden sm:block h-screen sm:w-[40vw]"
             style={{
@@ -84,7 +90,7 @@ const Login = () => {
               <img src={loginMan} alt="" className="md:w-full mx-auto" />
             </div>
           </div>
-          <div className="  h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
+          <div className="  h-screen sm:w-[60vw] mt-10 sm:mt-0 sm:flex sm:flex-col sm:items-center sm:justify-center">
             <form
               onSubmit={(e) => handleSubmit(e)}
               className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
@@ -92,7 +98,7 @@ const Login = () => {
               <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
                 &#128075; Hi, <br /> Welcome to Ivory!
               </h1>
-              <div class="w-full sm:w-[300px] mx-auto mt-4 relative">
+              <div class="w-full sm:w-[300px] mx-auto mt-10 relative">
                 <input
                   class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                   // type="tel"
@@ -117,12 +123,23 @@ const Login = () => {
                 </select>
               </div>
               <div class="flex items-center justify-between mt-4">
+                {JSON.stringify(phone).length === 11?
+                (
                 <button
                   type="submit"
                   className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
                 >
                   Continue
                 </button>
+                ) : (
+                <button
+                
+                 
+                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+                >
+                  Continue
+                </button>
+              )}
               </div>
               <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
                 By clicking continue, I accept the{" "}

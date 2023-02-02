@@ -8,7 +8,6 @@ import styles from "./SignUp.module.css";
 
 const SignUp = () => {
   const locaion = useLocation();
-  const NewLocation = useLocation();
   const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState(null);
@@ -50,10 +49,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div
-      className="h-screen overflow-hidden"
-      style={{ background: "rgb(211, 230, 254,.2)" }}
-    >
+    <div className="h-screen overflow-hidden bg-[#EEFDFC]">
       <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">

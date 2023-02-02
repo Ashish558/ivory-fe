@@ -118,7 +118,7 @@ const Otp = () => {
     }
   };
   return (
-    <div className="h-screen" style={{ background: "rgb(211, 230, 254,.2)" }}>
+    <div className="h-screen bg-[#EEFDFC]">
       <div className="topAppBar pt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">

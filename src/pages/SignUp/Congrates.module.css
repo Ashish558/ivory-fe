@@ -28,7 +28,7 @@
   animation-fill-mode: forwards;
   position: absolute;
    bottom: 47%;
-  left: 40%;
+  left: 42%;
   z-index: 9999;
 }
 .vector1 {
@@ -37,8 +37,8 @@
   animation-delay: 0ms;
   animation-fill-mode: forwards;
   position: absolute;
-   bottom: 40%;
-  left: 28%;
+   bottom: 42%;
+  left: 31%;
   z-index: 9999;
 }
 .vector2 {
@@ -47,8 +47,8 @@
   animation-delay: 0ms;
   animation-fill-mode: forwards;
   position: absolute;
-   bottom: 34%;
-  left: 18%;
+   bottom: 36%;
+  left: 19%;
   z-index: 9999;
 }
 .vector3 {
@@ -57,8 +57,8 @@
   animation-delay: 0ms;
   animation-fill-mode: forwards;
   position: absolute;
-   bottom: 51%;
-  left: 53%;
+   bottom: 50%;
+  left: 56%;
   z-index: 9999;
 }
 .vector4 {
@@ -67,8 +67,8 @@
   animation-delay: 0ms;
   animation-fill-mode: forwards;
   position: absolute;
-   bottom: 40%;
-  left: 42%;
+   bottom: 41%;
+  left: 49%;
   z-index: 9999;
 }
 .vector5 {
@@ -78,7 +78,23 @@
   animation-fill-mode: forwards;
   position: absolute;
    bottom: 28%;
-  left: 44%;
+  left: 52%;
+  z-index: 9999;
+}
+.vector6 {
+ 
+
+  position: absolute;
+   bottom: 22%;
+  left: 45%;
+  z-index: 9999;
+}
+.vector7 {
+ 
+
+  position: absolute;
+   bottom: 32%;
+  left: 11%;
   z-index: 9999;
 }
 @keyframes myAnim5 {
@@ -101,7 +117,7 @@
     
   }
   90% {
-    transform: translate(30px,-31px);
+    transform: translate(30px,-32px);
   
   }
   100% {
@@ -115,11 +131,11 @@
     
   }
   90% {
-    transform: translate(39px,-132px);
+    transform: translate(31px,-152px);
   
   }
   100% {
-    transform: translate(40px,-130px);
+    transform: translate(30px,-150px);
    
   }
 }
@@ -129,11 +145,11 @@
     
   }
   90% {
-    transform: translate(75px,-83px);
+    transform: translate(60px,-122px);
   
   }
   100% {
-    transform: translate(70px,-80px);
+    transform: translate(60px,-120px);
    
   }
 }
@@ -143,12 +159,12 @@
     
   }
   90% {
-    transform: translate(47px,-83px);
+    transform: translate(66px,-102px);
     transition: ease-in-out;
     
   }
   100% {
-    transform: translate(45px,-80px);
+    transform: translate(65px,-100px);
     transition-duration: 100ms;
     
   }
@@ -159,12 +175,12 @@
    
   }
   90% {
-    transform: translate(41px,-46px);
+    transform: translate(36px,-72px);
     transition: ease-in-out;
     
   }
   100% {
-    transform: translate(40px,-45px);
+    transform: translate(36px,-70px);
      
   }
 }
