@@ -4,7 +4,7 @@ import Event3 from '../../../Images/Events/Rectangle 3034 (1).png'
 import Event4 from '../../../Images/Events/Rectangle 3034 (2).png'
 import Event1 from '../../../Images/Events/Rectangle 3034.png'
 import Event2 from '../../../Images/Events/Rectangle 3034(5).png'
-import Image from '../../../Images/faces.jpg'
+
 import './DesktopEvents.css'
 import Slider from 'react-slick';
 import Arrow from '../../../Images/Icon.png';

@@ -1,9 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick';
-import Image from '../../Images/faces.jpg'
+import Image from '../../Images/faces.png'
 import './Sessions.css'
 import User from '../../Images/user1.png'
 import LiveImg from '../../Images/Ellipse 3.png'
+import Arrow from '../../Images/north.png'
 
 
 const Sessions = () => {
@@ -11,7 +12,7 @@ const Sessions = () => {
 
         infinite: false,
         centerPadding: "60px",
-        slidesToShow: 1.3,
+        slidesToShow: 1.5,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
@@ -32,16 +33,19 @@ const Sessions = () => {
 
                 <Slider {...settings}>
                     <div className=' pr-4'>
-                        <div class="card custom-card overflow-hidden" width="220px" >
-                            <figure><img src={Image} alt="Shoes" height="298px" /></figure>
-                            <div class="px-3">
+                        <div class="card custom"  >
+                            <figure ><img style={{ height: '450px' }} src={Image} alt="Shoes" /></figure>
+                            <div class="px-2">
 
                                 <div className='flex items-center justify-center Live px-1 py-1' >
                                     <p className=''><img src={LiveImg} alt="" /></p>
                                     <p className='font-semibold  text-xs pl-1'><span className='text-white'> Live</span></p>
                                 </div>
+                                <div className='ball rounded-full  flex items-center justify-center'>
+                                    <p><img src={Arrow} alt="" /></p>
+                                </div>
 
-                                <h2 class=" font-black text-base pt-1">
+                                <h2 class=" font-semibold text-base pt-1">
                                     Seminar on art of doodling
 
                                 </h2>
@@ -56,15 +60,19 @@ const Sessions = () => {
                         </div>
                     </div>
                     <div className=' pr-4'>
-                        <div class="card custom-card overflow-hidden" width="220px" >
-                            <figure><img src={Image} alt="Shoes" height="298px" /></figure>
-                            <div class="px-3">
+                        <div class="card custom"  >
+                            <figure ><img style={{ height: '450px' }} src={Image} alt="Shoes" /></figure>
+                            <div class="px-2">
+
                                 <div className='flex items-center justify-center Live px-1 py-1' >
                                     <p className=''><img src={LiveImg} alt="" /></p>
                                     <p className='font-semibold  text-xs pl-1'><span className='text-white'> Live</span></p>
                                 </div>
+                                <div className='ball rounded-full  flex items-center justify-center'>
+                                    <p><img src={Arrow} alt="" /></p>
+                                </div>
 
-                                <h2 class=" font-black text-lg pt-1">
+                                <h2 class=" font-semibold text-base pt-1">
                                     Seminar on art of doodling
 
                                 </h2>
@@ -77,19 +85,20 @@ const Sessions = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className=' pr-4'>
-                        <div class="card custom-card overflow-hidden" width="220px" >
-                            <figure><img src={Image} alt="Shoes" height="298px" /></figure>
-
-                            <div class="px-3">
-
+                    </div><div className=' pr-4'>
+                        <div class="card custom"  >
+                            <figure ><img style={{ height: '450px' }} src={Image} alt="Shoes" /></figure>
+                            <div class="px-2">
 
                                 <div className='flex items-center justify-center Live px-1 py-1' >
                                     <p className=''><img src={LiveImg} alt="" /></p>
                                     <p className='font-semibold  text-xs pl-1'><span className='text-white'> Live</span></p>
                                 </div>
-                                <h2 class=" font-black text-lg pt-1">
+                                <div className='ball rounded-full  flex items-center justify-center'>
+                                    <p><img src={Arrow} alt="" /></p>
+                                </div>
+
+                                <h2 class=" font-semibold text-base pt-1">
                                     Seminar on art of doodling
 
                                 </h2>

@@ -39,8 +39,8 @@ const LoggedInHome = () => {
 
             </div>
 
-            <div className='mobile'>
-                <Navbar></Navbar>
+            <div className='mobile pb-24'>
+                {/* <Navbar></Navbar> */}
                 <SimpleSlider></SimpleSlider>
                 {/* <Video></Video>
             <Banner></Banner> */}

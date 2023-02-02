@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import activity from '../../Images/Activities.png';
 import community from '../../Images/Community.png';
 import home from '../../Images/Home.png';
@@ -7,7 +7,7 @@ import learn from '../../Images/Learn.png';
 import '../Home/Footer.css';
 
 
-const toExclude = ['/login','/otp','/signup','/congrates','/dob','/']
+const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob', '/']
 
 const Footer = () => {
 
@@ -19,7 +19,7 @@ const Footer = () => {
    let currentPath = `/${location.pathname.split('/')[1]}`
    // console.log(currentPath);
    return (
-      <div className='pt-4 mt-6 footer-bg px-3 pb-3'>
+      <div className='pt-4 mt-6 footer-bg px-3 pb-3 lg:hidden'>
          <div className='flex justify-around'>
             <div className='flex flex-col cursor-pointer justify-around items-center'
                onClick={() => navigate('/home')}>
