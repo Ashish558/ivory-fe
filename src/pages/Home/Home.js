@@ -6,12 +6,11 @@ import video from '../../Images/SampleVideo_1280x720_1mb.mp4'
 import Banner from './Banner';
 import SimpleSlider from './SimpleSlider';
 import Video from './Video';
-import Stories from '../Home/Stories';
+import Stories from './Stories';
 import Activities from './Activities';
 import Sessions from './Sessions';
 import Courses from './Courses';
 import Footer from './Footer';
-import { useSelector } from 'react-redux';
 
 import DesktopBanner from '../Desktop/DesktopBanner/DesktopBanner';
 import NavbarDesktop from '../Desktop/NavbarDesktop/NavbarDesktop';
@@ -20,28 +19,26 @@ import DesktopActivities from '../Desktop/DesktopActivities/DesktopActivities';
 import DesktopEvents from '../Desktop/DesktopEvents/DesktopEvents';
 import DesktopLearn from '../Desktop/Learn/DesktopLearn';
 
-const LoggedInHome = () => {
 
-    const user = useSelector(state => state.user)
-    // console.log('user', user);
+const Home = () => {
+
     return (
 
-        <div className='container mx-auto'>
+        <div className='container'>
 
 
             <div className='desktop'>
-                {/* <NavbarDesktop></NavbarDesktop> */}
+                <NavbarDesktop></NavbarDesktop>
                 <DesktopBanner></DesktopBanner>
                 <DesktopStories></DesktopStories>
-                {/* <DesktopActivities></DesktopActivities> */}
-                <Activities></Activities>
+                <DesktopActivities></DesktopActivities>
                 <DesktopEvents></DesktopEvents>
                 <DesktopLearn></DesktopLearn>
 
             </div>
 
-            <div className='mobile pb-12 mb-12'>
-                {/* <Navbar></Navbar> */}
+            <div className='mobile'>
+                <Navbar></Navbar>
                 <SimpleSlider></SimpleSlider>
                 {/* <Video></Video>
             <Banner></Banner> */}
@@ -68,4 +65,4 @@ const LoggedInHome = () => {
     );
 };
 
-export default LoggedInHome;
+export default Home;

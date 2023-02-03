@@ -4,6 +4,7 @@ import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from '../../services/auth';
 import styles from "./Login.module.css";
+
 const Login = () => {
   const navigate = useNavigate();
   const [phone,setPhone] = React.useState(null);

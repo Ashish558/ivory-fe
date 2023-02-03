@@ -9,6 +9,7 @@ import Story from "../Frames/Story/Story";
 import { getStories } from "../../services/stories";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 
 const Stories = () => {
@@ -17,6 +18,7 @@ const Stories = () => {
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [stories, setStories] = useState([])
    const { loggedIn } = useSelector(state => state.user)
+   const {width} = useWindowDimensions()
    const navigate = useNavigate()
 
    const settings = {
@@ -77,7 +79,7 @@ const Stories = () => {
       }
    }
    // console.log('selectedIndex', selectedIndex)
-   console.log('stories', stories)
+   // console.log('stories', stories)
    // console.log('selectedStory', selectedStory)
 
    return (

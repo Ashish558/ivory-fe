@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,useLocation,useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import back from "../../assets/Back.svg";
 import logo from "../../assets/images/login/logolight.png";
 import signupTree from "../../assets/images/login/signupTree.png";

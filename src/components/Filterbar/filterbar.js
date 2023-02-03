@@ -8,7 +8,7 @@ import React from 'react'
 //       selected: true
 //    }
 // ]
-export default function Filterbar({ items }) {
+export default function Filterbar({ items, onChange }) {
 
    return (
       <div className='overflow-auto'>
@@ -17,7 +17,8 @@ export default function Filterbar({ items }) {
                items.map(item => {
                   return (
                      <div key={item.id}
-                      className='text-lightBlack text-sm font-medium border border-[#79747E] fle justify-center items-center mr-2 rounded-lg px-2 py-1 shrink-0'>
+                        onClick={() => onChange(item)}
+                        className={` text-sm font-medium cursor-pointer border border-[#79747E] fle justify-center items-center mr-2 rounded-lg px-2 py-1 shrink-0 ${item.selected ? 'bg-primary text-white' : 'text-lightBlack'} `}>
                         {item.children}
                      </div>
                   )

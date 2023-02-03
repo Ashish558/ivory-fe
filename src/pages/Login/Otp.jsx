@@ -5,7 +5,7 @@ import back from "../../assets/Back.svg";
 import { updateLoggedIn } from '../../redux/slices/user';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
-import { sendOtp,verifyOtp } from '../../services/auth';
+import { sendOtp, verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
 
@@ -81,27 +81,27 @@ const Otp = () => {
       });
 
   };
-   const handleResend = (e) => {
-     e.preventDefault();
-      setOtpStatus("failed");
-   
-       const body = {
-         country_code: countryCode,
-         mobile_no: phone,
-       };
-     sendOtp(body).then((res) => {
-          if (res.status === 202) {
-            setOtpStatus('success');
-          }
-       })
-         .catch((err) => {
-           console.log(err);
-           
-              setOtpStatus("failed");
-            
-          });
-          
-   };
+  const handleResend = (e) => {
+    e.preventDefault();
+    setOtpStatus("failed");
+
+    const body = {
+      country_code: countryCode,
+      mobile_no: phone,
+    };
+    sendOtp(body).then((res) => {
+      if (res.status === 202) {
+        setOtpStatus('success');
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+
+        setOtpStatus("failed");
+
+      });
+
+  };
   const handleOptCursor = (e) => {
     // const { name,value } = e.target;
     // const otpValues = { ...otp,[name]: value }
