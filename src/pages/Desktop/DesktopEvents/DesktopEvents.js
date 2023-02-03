@@ -16,7 +16,7 @@ const DesktopEvents = () => {
 
         infinite: false,
         centerPadding: "60px",
-        slidesToShow: 3.5,
+        slidesToShow: 3,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,

@@ -26,20 +26,22 @@ const LoggedInHome = () => {
     // console.log('user', user);
     return (
 
-        <div className='container'>
+        <div className='container mx-auto'>
 
 
             <div className='desktop'>
-                <NavbarDesktop></NavbarDesktop>
+                {/* <NavbarDesktop></NavbarDesktop> */}
                 <DesktopBanner></DesktopBanner>
-                <DesktopStories></DesktopStories>
-                <DesktopActivities></DesktopActivities>
+                {/* <DesktopStories></DesktopStories> */}
+                <Stories></Stories>
+                {/* <DesktopActivities></DesktopActivities> */}
+                <Activities></Activities>
                 <DesktopEvents></DesktopEvents>
                 <DesktopLearn></DesktopLearn>
 
             </div>
 
-            <div className='mobile pb-24'>
+            <div className='mobile pb-12 mb-12'>
                 {/* <Navbar></Navbar> */}
                 <SimpleSlider></SimpleSlider>
                 {/* <Video></Video>

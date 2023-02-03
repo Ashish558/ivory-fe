@@ -26,6 +26,7 @@ import Four from './pages/splash/Four';
 import LogoLanding from './pages/splash/LogoLanding';
 
 import Dob from './pages/SignUp/Dob';
+import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -68,6 +69,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <NavbarDesktop />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/otp" element={<Otp />} />
