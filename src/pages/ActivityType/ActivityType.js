@@ -111,6 +111,14 @@ export default function ActivityType() {
    // console.log('userActivities', userActivities);
    // console.log('activities', activities);
 
+   const Array = [
+      {},
+      {},
+      {},
+      {},
+      {},
+   ]
+
    return (
       <div>
          {/* <Header /> */}
@@ -136,9 +144,9 @@ export default function ActivityType() {
                   </button>
                </div>
             }
-            <div className='mt-5'>
+            <div className='mt-5 sm:grid sm:grid-cols-4 sm:mx-20'>
                {userActivities.length > 0 ?
-                  filteredUserActivities.map(activity => {
+                  userActivities.map(activity => {
                      return <Activity {...activity.activity} key={activity.id} />
                   })
                   :

@@ -18,7 +18,7 @@ const Dob = () => {
   const [monthPosition2, setMonthPosition2] = React.useState(9);
   const [monthPosition3, setMonthPosition3] = React.useState(10);
   const [name, setName] = React.useState("");
-  const dispatch = useDispatch()
+
   const [nameError, setNameError] = React.useState("");
 
   const months = [
