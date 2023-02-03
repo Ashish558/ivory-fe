@@ -40,7 +40,7 @@ const LoggedInHome = () => {
             </div>
 
             <div className='mobile'>
-                <Navbar></Navbar>
+                {/* <Navbar></Navbar> */}
                 <SimpleSlider></SimpleSlider>
                 {/* <Video></Video>
             <Banner></Banner> */}
