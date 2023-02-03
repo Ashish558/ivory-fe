@@ -12,6 +12,8 @@ import { editProfile } from '../../services/user'
 
 const Profile = () => {
 
+  const [name, setname] = useState("");
+  const [number, setnumber] = useState("");
   const [email, setemail] = useState("");
   const [addtext, settext] = useState("");
   const [showdiv, setshowdiv] = useState(false);
@@ -175,15 +177,15 @@ const Profile = () => {
           <div className={styles.form}>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Name</label>
-              <input type="text" placeholder='Sahil Wadhwa' className={styles.emailinput} name="email" onChange={(e) => setemail(e.target.value)} />
+              <input type="text" placeholder='Sahil Wadhwa' className={styles.emailinput} name="email" onChange={(e) => setname(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
-              <input type="text" placeholder='9777766665' className={styles.emailinput} name="email" onChange={(e) => setemail(e.target.value)} />
+              <input type="Number" placeholder='9777766665' className={styles.emailinput} name="email" onChange={(e) => setnumber(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Email Address</label>
-              <input type="text" placeholder='xyz@gmail.com' className={styles.emailinput} name="email"
+              <input type="email" placeholder='xyz@gmail.com' className={styles.emailinput} name="email"
                 value={email} onChange={(e) => setemail(e.target.value)} />
             </div>
             <div className={styles.input2}>
@@ -275,7 +277,7 @@ const Profile = () => {
         addnewtextdiv == true ?
           <div className={styles.addtext}>
             <div className={styles.int}>
-              <img src={cross} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
+              <img src={arrow} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
               <p className={styles.intp}>Interest</p>
             </div>
             <hr className={styles.head1} />

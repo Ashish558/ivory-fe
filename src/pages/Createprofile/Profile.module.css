@@ -1,6 +1,6 @@
 @media screen and (min-width: 480px) {
 .navbar{
-    height: 50px;
+    /* height: 50px; */
 }
 .addpit{
     top: 40%;
@@ -90,12 +90,13 @@
 .emailinput{
     height: 40px;
     border-radius: 5px;
+    padding-left: 20px;
     width: 334px;
     border: 1px solid #79747E;
     background: none;
 }
 .emailinput::placeholder{
-    padding-left:20px;
+    /* padding-left:20px; */
 }
 .input2{
     padding: 10px 10px;
@@ -402,9 +403,12 @@ background: #1B72C0;
 .emailinput{
     height: 56px;
     width: 100%;
+    background-color: white;
     border: 2px solid #79747E;
     font-size: 20px;
     border-radius: 5px;
+    padding: 20px;
+    /* margin-left: 10px; */
     margin-top: 6px;
 }
 .chooseinput{
@@ -423,7 +427,7 @@ background: #1B72C0;
     font-weight: 600;
 }
 .emailinput::placeholder{
-    padding-left: 20px;
+    /* padding-left: 20px; */
     font-size: 20px;
 }
 .choose-input::placeholder{
@@ -452,7 +456,7 @@ background: #1B72C0;
 }
 .femaleinput{
     width: 22px;
-    margin-left: 45%;
+    margin-left:36%;
 }
 .btnUpdate{
     height: 50px;
@@ -534,7 +538,7 @@ background: #1B72C0;
     /* text-align: end; */
     font-weight: 500;
     
-    margin-left: 7px;
+    /* margin-left: 7px; */
     /* overflowwrap: break-word; */
 }
 .butt1>img{
@@ -770,10 +774,12 @@ background: #1B72C0;
     margin-left: 3px;
 }
 .parainput{
-    height: 53px;
-    width: 316px;
+        height: 52px;
+    width: 302px;
+    background-color: white;
     border: 2px solid #828181;
     border-radius: 5px;
+    padding: 20px;
 }
 .parainput::placeholder{
     font-size: 20px;
