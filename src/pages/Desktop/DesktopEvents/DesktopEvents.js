@@ -4,7 +4,7 @@ import Event3 from '../../../Images/Events/Rectangle 3034 (1).png'
 import Event4 from '../../../Images/Events/Rectangle 3034 (2).png'
 import Event1 from '../../../Images/Events/Rectangle 3034.png'
 import Event2 from '../../../Images/Events/Rectangle 3034(5).png'
-import Image from '../../../Images/faces.jpg'
+
 import './DesktopEvents.css'
 import Slider from 'react-slick';
 import Arrow from '../../../Images/Icon.png';
@@ -41,8 +41,8 @@ const DesktopEvents = () => {
                 <Slider {...settings}>
 
                     <div >
-                        <div class="card   custom-card-event">
-                            <figure><img className='w-full' style={{ height: '220px' }} src={Event1} alt="Shoes" /></figure>
+                        <div class="card   custom-card-event w-84">
+                            <figure ><img className='w-full' style={{ height: '220px' }} src={Event1} alt="Shoes" /></figure>
                             <div class="pl-4">
 
                                 <div className='flex items-center justify-center Live-Desktop  py-1' >

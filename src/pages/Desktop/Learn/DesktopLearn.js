@@ -19,6 +19,42 @@ const DesktopLearn = () => {
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    settings: {
+                        slidesToShow: 3.3,
+                        initialSlide: 0,
+                    },
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    initialSlide: 0,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2.3,
+                    initialSlide: 0,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1.5,
+                    initialSlide: 0,
+                },
+                // state: {
+                //    display: true,
+                //    height: 600
+                // }
+            }
+        ],
 
 
         afterChange: function (index) {

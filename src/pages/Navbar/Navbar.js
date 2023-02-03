@@ -45,8 +45,8 @@ const Navbar = () => {
                      <p className=' font-bold text-sm'>Welcome,</p>
                      <p className='pl-2  name text-sm'>Sahil</p>
                   </div> :
-                  <img src={BackIcon} alt='back' className='p-2 cursor-pointer' 
-                  onClick={() => navigate(-1)} />
+                  <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
+                     onClick={() => navigate(-1)} />
             }
 
          </div>
@@ -59,7 +59,7 @@ const Navbar = () => {
             </button>
 
          </div>
-         <Drawer open={isOpen} onClose={toggleDrawer} size="80vw" direction='right'>
+         <Drawer open={isOpen} onClose={toggleDrawer} size="85vw" direction='right'>
             <div className='drawer-content pt-8 px-5'>
 
 
@@ -72,7 +72,7 @@ const Navbar = () => {
                <div className='line mt-6' height="1px"></div>
                <div className='mt-7'>
 
-                  <div className='flex items-center cursor-pointer' onClick={()=> navigate('/CreateProfile')} >
+                  <div className='flex items-center cursor-pointer' onClick={() => navigate('/CreateProfile')} >
                      <p><img src={edit} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Edit Profile</p>
                   </div>

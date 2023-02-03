@@ -93,22 +93,23 @@ const Activities = () => {
                {
                   activities.map((activity) =>
                      <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'
-                     onClick={() => navigate(`/activities/${activity.id}`)}>
+                        onClick={() => navigate(`/activities/${activity.id}`)}>
                         <p><img src={activity.icon} alt="" /></p>
                         {
                            activity?.name.length <= '17' ?
-                              <p className='text-center pt-1 font-semibold text-sm' style={{ color: activity?.color }}>{activity?.name}</p>
-                              : <p className='text-center pt-1 font-semibold text-xs' style={{ color: activity?.color }}>{activity?.name}</p>
+
+                              <p className='text-center pt-2 font-semibold text-sm' style={{ color: activity?.color }}>{activity?.name}</p>
+                              : <p className='text-center pt-2 font-semibold text-xs' style={{ color: activity?.color }}>{activity?.name}</p>
                         }
                      </div>
                   )
 
 
                }
-               <div style={{ backgroundColor: '#D3E4FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'>
+               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'>
                   <p><img src={SeeLogo} alt="" /></p>
-                  <div>
-                     <p className='text-center text-sm pt-1 font-semibold' >See </p>
+                  <div style={{ color: '#1B72C0' }}>
+                     <p className='text-center text-sm pt-2 font-semibold' >See </p>
                      <p className='text-center text-sm  font-semibold pt-0' >All</p>
                   </div>
                </div>

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Story1 from '../../Images/Rectangle 5.png'
@@ -10,6 +9,7 @@ import { getStories } from "../../services/stories";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import Arrow from '../../Images/Icon.png';
 
 
 const Stories = () => {
@@ -18,17 +18,45 @@ const Stories = () => {
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [stories, setStories] = useState([])
    const { loggedIn } = useSelector(state => state.user)
-   const {width} = useWindowDimensions()
+   const { width } = useWindowDimensions()
    const navigate = useNavigate()
 
    const settings = {
       infinite: false,
       centerPadding: "60px",
-      slidesToShow: 2.3,
+      slidesToShow: 3.5,
       initialSlide: 0,
       arrows: false,
       swipeToSlide: true,
-
+      responsive: [
+         {
+            breakpoint: 1024,
+            settings: {
+               settings: {
+                  slidesToShow: 3.5,
+                  initialSlide: 0,
+               },
+            }
+         },
+         {
+            breakpoint: 600,
+            settings: {
+               slidesToShow: 3.5,
+               initialSlide: 0,
+            },
+         },
+         {
+            breakpoint: 480,
+            settings: {
+               slidesToShow: 2.3,
+               initialSlide: 0,
+            },
+            // state: {
+            //    display: true,
+            //    height: 600
+            // }
+         }
+      ],
       afterChange: function (index) {
          console.log(
             `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -84,22 +112,30 @@ const Stories = () => {
 
    return (
       <>
-         <div>
-            <div className='pt-14'>
-               <h1 className='text-xl font-black pl-4 pb-3'>Start your day</h1>
+         <div className=" lg:ml-24 lg:mt-20 mt-14">
+            <div className='lg:flex lg:items-center lg:mb-20'>
+               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-medium'>Start your day</h1>
+               <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
             </div>
+
+            {/* <div className=' flex items-center mb-20'>
+               <h1 className='text-5xl font-medium  '>Start your day <span></span></h1>
+               <p className='pl-7'><img src={Arrow} alt="" /></p>
+            </div> */}
+
+
             <Slider {...settings}>
                {stories.map((story, idx) => {
                   return (
                      <div className="p-3 " onClick={() => handleClick(story, idx)} >
-                        <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
-                           {/* <img className="w-full" src={Story1} alt="" /> */}
+                        <div className="" >
+                           <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
                            <div className="pl-3 details">
                               <p className="text-sm text-white">
                                  {story.share_message ? story.share_message : ''}
                               </p>
                               <div className="flex items-center">
-                                 <p className="text-white"> <img src={story.image ? story.image : Logo} alt="" /></p>
+                                 <p className="text-white"> <img src={Logo} alt="" /></p>
                                  <p className="text-sm text-white pl-1"> {story.views} views</p>
                               </div>
                            </div>

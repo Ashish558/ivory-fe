@@ -22,7 +22,7 @@ const NavbarDesktop = () => {
 
     const navigate = useNavigate()
     const location = useLocation()
-    
+
     if (toExclude.includes(location.pathname)) return <></>
 
     let currentPath = `/${location.pathname.split('/')[1]}`
@@ -74,7 +74,7 @@ const NavbarDesktop = () => {
                             <div>
                                 <div className='flex  items-center cursor-pointer'>
                                     <p><img src={edit} alt="" /></p>
-                                    <p className='text-sm font-semibold pl-4'> Edit Profile</p>
+                                    <p className='text-sm font-semibold pl-4' onClick={()=>navigate('/CreateProfile')} > Edit Profile</p>
                                 </div>
                                 <div className='flex  items-center pt-9 cursor-pointer'>
                                     <p><img src={play} alt="" /></p>
