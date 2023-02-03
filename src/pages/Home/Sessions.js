@@ -12,7 +12,7 @@ const Sessions = () => {
 
         infinite: false,
         // centerPadding: "60px",
-        slidesToShow: 3,
+        slidesToShow: 3.4,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
@@ -21,7 +21,7 @@ const Sessions = () => {
                 breakpoint: 1024,
                 settings: {
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 3.4,
                         initialSlide: 0,
                     },
                 }
