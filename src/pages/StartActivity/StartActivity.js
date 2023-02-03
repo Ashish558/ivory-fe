@@ -1,69 +1,68 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React,{ useEffect,useRef,useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './styles.module.css'
 
-import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
+import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 
+import { useSelector } from 'react-redux'
 import MarkIcon from '../../assets/icons/mark.svg'
 import NextIcon from '../../assets/icons/next.svg'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
 import UploadIcon from '../../assets/icons/upload.svg'
 import ActivityIcon from '../../assets/images/activity.png'
-import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Activity from '../../components/Activity/Activity'
-import { getCategories, getSingleActivity } from '../../services/activities'
-import { completeActivity, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
+import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
-import { useSelector } from 'react-redux'
+import { getCategories,getSingleActivity } from '../../services/activities'
+import { completeActivity,getMyActivities,getUserSubmissions,uploadActivity } from '../../services/user'
 
 
 export default function StartActivity() {
 
-   const [startModalActive, setStartModalActive] = useState(false)
-   const [activity, setActivity] = useState({})
-   const [activities, setActivities] = useState([])
-   const [submissions, setSubmissions] = useState([])
-   const [isAlreadyStarted, setIsAlreadyStarted] = useState(false)
+   const [startModalActive,setStartModalActive] = useState(false)
+   const [activity,setActivity] = useState({})
+   const [activities,setActivities] = useState([])
+   const [submissions,setSubmissions] = useState([])
+   const [isAlreadyStarted,setIsAlreadyStarted] = useState(false)
    const inputRef = useRef(null)
-   const [currentIndex, setCurrentIndex] = useState(0)
+   const [currentIndex,setCurrentIndex] = useState(0)
    const { loggedIn } = useSelector(state => state.user)
-   const { categoryId, activityId } = useParams()
-   const [userActivityId, setUserActivityId] = useState(activityId)
-   const [category, setCategory] = useState({})
+   const { categoryId,activityId } = useParams()
+   const [userActivityId,setUserActivityId] = useState(activityId)
+   const [category,setCategory] = useState({})
 
    useEffect(() => {
       getSingleActivity(activityId)
          .then(res => {
-            console.log('activity data', res.data.data);
+            console.log('activity data',res.data.data);
             if (res.data.data === null) return
             // setActivities(res.data.data)
             setActivity(res.data.data)
          }).catch(err => {
-            console.log('err', err);
+            console.log('err',err);
          })
-   }, [])
+   },[])
 
    //fetch category details
    useEffect(() => {
       getCategories()
          .then(res => {
             // console.log('categories', res.data.data);
-            if(res.data.data === null) return
+            if (res.data.data === null) return
             let currentCategory = res.data.data.find(item => item.id === parseInt(categoryId))
             setCategory(currentCategory)
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   },[])
 
    //fetch users activities
    useEffect(() => {
-      if(loggedIn === false) return
+      if (loggedIn === false) return
       getMyActivities()
          .then(res => {
-            console.log('my activities', res.data.data);
             if (res.data.data === null) return
             res.data.data.forEach(myActivity => {
                if (myActivity.activity.id === parseInt(activityId)) {
@@ -72,14 +71,14 @@ export default function StartActivity() {
                }
             })
          }).catch(err => {
-            console.log('err', err);
+            console.log('err',err);
          })
-   }, [loggedIn])
+   },[loggedIn])
 
    useEffect(() => {
-      if(loggedIn === false) return
+      if (loggedIn === false) return
       getSubmissions()
-   }, [userActivityId, loggedIn])
+   },[userActivityId,loggedIn])
 
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
@@ -88,7 +87,7 @@ export default function StartActivity() {
             if (res.data.data === null) return
             setSubmissions(res.data.data)
          }).catch(err => {
-            console.log('submission err', err);
+            console.log('submission err',err);
          })
    }
 
@@ -101,20 +100,20 @@ export default function StartActivity() {
    }
 
    const handleUpload = e => {
-      if(loggedIn === false) return
+      if (loggedIn === false) return
       const file = e.target.files[0]
       if (file === undefined) return
       let formData = new FormData();
-      formData.append('submission', file);
-      formData.append('activity', userActivityId);
+      formData.append('submission',file);
+      formData.append('activity',userActivityId);
 
       uploadActivity(formData)
          .then(res => {
-            console.log('upload res', res.data);
+            console.log('upload res',res.data);
             alert('uploaded successfully')
             getSubmissions()
          }).catch(err => {
-            console.log('upload err', err);
+            console.log('upload err',err);
          })
    }
    const increaseIndex = () => {
@@ -128,9 +127,9 @@ export default function StartActivity() {
    const handleComplete = () => {
       completeActivity(userActivityId)
          .then(res => {
-            console.log('compl res', res.data);
+            console.log('compl res',res.data);
          }).catch(err => {
-            console.log('compl err', err);
+            console.log('compl err',err);
          })
    }
    //384480
@@ -140,38 +139,38 @@ export default function StartActivity() {
    // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    if (Object.keys(activity).length === 0) return <></>
-   const { name, description, image, steps, video, video_link } = activity
+   const { name,description,image,steps,video,video_link } = activity
 
    return (
       <>
          <div className='pb-12 mb-10'>
             {/* <Header /> */}
-            <div className='pt-2 px-4'>
-               <p className='text-lightGray font-medium'> Activities {'>'} {category.name}  </p>
+            <div className='pt-2 px-4 sm:mx-20'>
+               <p className='text-lightGray font-medium sm:py-2'> Activities {'>'} {category.name}  </p>
             </div>
 
-            <div className='mt-3'>
-               <p className='text-xl font-bold mb-2.5 px-4'> {name} </p>
-               <div>
+            <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
+               <p className='text-xl sm:text-2xl font-bold mb-2.5 px-4 sm:py-4'> {name} </p>
+               <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
                   <img src={image === null ? ActivityIcon : image}
-                     className={styles.image} alt='Profile' />
+                     className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
                </div>
             </div>
 
-            <div className='px-4 mt-5'>
+            <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
 
-               <p className='text-xl font-semibold mb-2.5'> Description </p>
-               <p className='text-sm'>
+               <p className='text-xl sm:text-2xl font-semibold mb-2.5'> Description </p>
+               <p className='text-sm sm:text-xl'>
                   {description}
                </p>
                {
                   isAlreadyStarted === false ?
 
-                     <span className={styles.seeMoreBtn} onClick={() => setStartModalActive(true)} >
+                     <span className={`${styles.seeMoreBtn} text-sm sm:text-lg`} onClick={() => setStartModalActive(true)} >
                         See More
                      </span> :
                      <div>
-                        {steps.map((step, idx) => {
+                        {steps.map((step,idx) => {
                            return (
                               <div className='mb-5 mt-6'>
                                  <p className='font-semibold text-[#7B34FB] mb-4'>
@@ -189,11 +188,11 @@ export default function StartActivity() {
                <div className='flex items-center gap-x-3 mt-8 mb-8'>
                   <PrimaryButton className='flex items-center pl-4 pr-4'
                      disabled={submissions.length === 0 ? true : false}
-                     onClick={handleComplete} 
+                     onClick={handleComplete}
                      children={
                         <>
                            <img src={MarkIcon} className='mr-2.5' alt='mark'
-                          />
+                           />
                            Mark Completed
                         </>
                      }
@@ -209,10 +208,10 @@ export default function StartActivity() {
                </div>
 
                <div className='mb-12'>
-                  <p className='font-medium' >
+                  <p className='font-medium sm:text-lg sm:font-semibold' >
                      Submit your work to get feedback from our expert:
                   </p>
-                  <div className='border border-primary border-dashed h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70'>
+                  <div className='border-2 border-primary border-dashed w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                      <img src={UploadIcon}
                         className='mr-3 cursor-pointer'
                         alt='UploadIcon'
@@ -226,16 +225,22 @@ export default function StartActivity() {
 
             {
                submissions.length > 0 &&
-               <div className='px-4 py-5 bg-[#F0F5FF]'>
+               <div className='px-4 py-5 bg-[#F0F5FF] sm:px-20'>
                   <h4 className='text-xl font-semibold mb-5'> Your submissions </h4>
-                  <div className='relative'>
-                     <div className={styles.slider}>
+                  <div className='relative sm:grid sm:grid-cols-2  sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto'>
+                     <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
 
-                        {submissions.map((sub, idx) => {
+                        {submissions.map((sub,idx) => {
                            return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} />
                         })}
                      </div>
-                     <img src={NextIcon} className={styles.nextIcon} onClick={increaseIndex} />
+                     <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] hidden sm:block`}>
+
+                        {submissions.map((sub,idx) => {
+                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} />
+                        })}
+                     </div>
+                     <img src={NextIcon} className={`${styles.nextIcon} sm:hidden`} alt='' onClick={increaseIndex} />
                   </div>
                </div>
             }
@@ -243,7 +248,7 @@ export default function StartActivity() {
             <div className='border-b border-lightGray w-full opacity-20'> </div>
             <div className='mt-10 px-4'>
                <ActivityContent />
-               <h4 className='font-bold text-xl mt-8'>
+               <h4 className='font-bold text-xl mt-8 sm:mx-20'>
                   Next Activities
                </h4>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import arrow from "../../assets/arrow_back.png"
 import styles from "./Profile.module.css"
 import photo from "../../assets/smile.png"
@@ -6,9 +6,10 @@ import cross from "../../assets/cross.png"
 import img from "../../assets/iphoto.png"
 import ivoryforming from "../../assets/ivoryforming.png"
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addInterest, getInterests } from '../../services/activities'
-import { editProfile } from '../../services/user'
+import { editProfile, uploadProfile } from '../../services/user'
+import { updateProfileData } from '../../redux/slices/user'
 
 const Profile = () => {
 
@@ -28,9 +29,9 @@ const Profile = () => {
   const [interestInput, setInterestInput] = useState('')
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { loggedIn, profileData } = useSelector(state => state.user)
-
-  console.log(addtext);
+  const photoRef = useRef(null)
   // let arr = addtext.split(' '); 
   // console.log(arr);
   const [gender, setgender] = useState("");
@@ -101,6 +102,7 @@ const Profile = () => {
     editProfile(body, profileData.mobile_no)
       .then(res => {
         console.log(res.data);
+        dispatch(updateProfileData({ profileData: res.data.data }))
         alert('profile data saved')
       })
       .catch(err => {
@@ -155,6 +157,24 @@ const Profile = () => {
     // setbackcolor('#001C38')
   }
 
+  const handlePhotoUpload = e => {
+    const file = e.target.files[0]
+    console.log(file);
+    if (file === undefined) return
+
+    const formData = new FormData();
+    formData.append("profile_picture", file);
+    uploadProfile(formData, profileData.mobile_no)
+      .then(res => {
+        console.log(res.data);
+        dispatch(updateProfileData({ profileData: res.data.data }))
+        alert('profile data saved')
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  console.log('profileData', profileData);
   // ------------------------------------------------------------
   return (
     <div className=''>
@@ -169,9 +189,17 @@ const Profile = () => {
         </div>
         <div className={styles.image}>
           <div className={styles.ssmmillee}>
-            <img src={photo} className={styles.img2} alt="" />
+            <img src={profileData.profile_picture ? profileData.profile_picture : photo}
+              className={styles.img2} alt=""
+              onClick={() => photoRef.current.click()} />
+            <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
+              onChange={(e) => handlePhotoUpload(e)} />
           </div>
-          <p className={styles.addpit}>Add Profile picture</p>
+          <p className={`cursor-pointer ${styles.addpit}`}
+            onClick={() => photoRef.current.click()}
+
+          >Add Profile picture
+          </p>
         </div>
         <div className={styles.formimg}>
           <div className={styles.form}>

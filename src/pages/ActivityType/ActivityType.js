@@ -111,16 +111,18 @@ export default function ActivityType() {
    // console.log('userActivities', userActivities);
    // console.log('activities', activities);
 
+
+
    return (
       <div>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
-               <p className='text-lightGray font-medium'> Activities {'>'} {category.name} </p>
+               <p className='text-lightGray font-medium sm:mx-20'> Activities {'>'} {category.name} </p>
             </div>
 
             <div className='mt-4'>
-               <h3 className='text-xl font-bold mb-2.5'>  {category.name} </h3>
+               <h3 className='text-xl font-bold mb-2.5 sm:mx-20'>  {category.name} </h3>
                <ActivityContent />
             </div>
             {
@@ -136,9 +138,9 @@ export default function ActivityType() {
                   </button>
                </div>
             }
-            <div className='mt-5'>
+            <div className='mt-5 sm:grid sm:grid-cols-4 sm:mx-20'>
                {userActivities.length > 0 ?
-                  filteredUserActivities.map(activity => {
+                  userActivities.map(activity => {
                      return <Activity {...activity.activity} key={activity.id} />
                   })
                   :

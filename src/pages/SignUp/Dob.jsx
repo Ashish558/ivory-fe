@@ -1,12 +1,10 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
-import { registerUser, verifyOtp } from '../../services/auth';
+import { registerUser,verifyOtp } from '../../services/auth';
 import styles from "./SignUp.module.css";
-import { updateLoggedIn } from '../../redux/slices/user';
-import { useDispatch } from 'react-redux';
 
 const Dob = () => {
   const locaion = useLocation();
@@ -15,12 +13,12 @@ const Dob = () => {
   const [date3, setDate3] = React.useState(18);
   const [year, setYear] = React.useState(1966);
   const [year2, setYear2] = React.useState(1967);
-  const [year3, setYear3] = React.useState(1968);
+  const [year3,setYear3] = React.useState(1968);
   const [monthPosition, setMonthPosition] = React.useState(8);
   const [monthPosition2, setMonthPosition2] = React.useState(9);
   const [monthPosition3, setMonthPosition3] = React.useState(10);
   const [name, setName] = React.useState("");
-  const dispatch = useDispatch()
+
   const [nameError, setNameError] = React.useState("");
 
   const months = [
@@ -40,15 +38,15 @@ const Dob = () => {
 
   const from = locaion.state?.from || "/otp";
   const stateData = locaion?.state;
-  const { otp, otp_token, phone, countryCode } = stateData;
+   const { otp, otp_token, phone, countryCode } = stateData;
 
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(from, { replace: true });
+     const navigate = useNavigate();
+     const goBack = () => {
+       navigate(from, { replace: true });
   };
   const handleDate = (e) => {
     // e.preventDefault();
-
+    
     if (e.deltaY > 0) {
       
       if (date2 < 30) {
@@ -92,7 +90,7 @@ const Dob = () => {
     // e.preventDefault();
     if (e.deltaY > 0) {
       if (monthPosition2 < 11) {
-
+        
         setMonthPosition(monthPosition + 1);
         setMonthPosition2(monthPosition2 + 1);
         setMonthPosition3(monthPosition3 + 1);
@@ -112,7 +110,7 @@ const Dob = () => {
         setMonthPosition2(monthPosition2 - 1);
         setMonthPosition3(monthPosition3 - 1);
       }
-      if (monthPosition2 === 1) {
+      if ( monthPosition2 ===1) {
         setMonthPosition(11);
       }
     }
@@ -142,21 +140,16 @@ const Dob = () => {
       .then((res) => {
         verifyOtp(verifyBody)
           .then((res) => {
-            navigate("/congrates");
-            dispatch(updateLoggedIn({ loggedIn: true }))
-            const { refresh_token, access_token } = res.data.data
-            localStorage.setItem('access', access_token)
-            localStorage.setItem('refresh', refresh_token)
-            localStorage.setItem('phone', phone)
+           navigate("/congrates");
           })
           .catch((err) => {
             console.log(err.response.data.error);
           });
-
+        
       })
       .catch((err) => {
         console.log(err.response.data.error);
-      });
+      } );
   }
   const handleName = (e) => {
     const { value } = e.target;
@@ -335,7 +328,7 @@ const Dob = () => {
           </div>
         </div>
       </div>
-  );
+    );
 };
 
 export default Dob;

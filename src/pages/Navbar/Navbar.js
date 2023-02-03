@@ -17,20 +17,34 @@ import cross from '../../Images/cross.png'
 import BackIcon from '../../assets/icons/go-back.svg'
 
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
 
-const toExclude = ['/login', '/otp','/dob', '/signup', '/congrates', '/', '/CreateProfile']
+const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing']
 const basePaths = ['/home', '/activities']
 
 const Navbar = () => {
 
    const [isOpen, setIsOpen] = React.useState(false)
    const navigate = useNavigate()
+   const dispatch = useDispatch()
    const location = useLocation()
+   const { loggedIn, profileData } = useSelector(state => state.user)
 
    const toggleDrawer = () => {
       setIsOpen((prevState) => !prevState)
    }
 
+   const handleLogout = () => {
+      if (loggedIn) {
+
+         localStorage.clear()
+         dispatch(updateLoggedIn({ loggedIn: false }))
+         dispatch(updateProfileData({ profileData: {} }))
+         navigate('/home')
+         window.location.reload()
+      }
+   }
    if (toExclude.includes(location.pathname)) return <></>
 
    return (
@@ -45,8 +59,8 @@ const Navbar = () => {
                      <p className=' font-bold text-sm'>Welcome,</p>
                      <p className='pl-2  name text-sm'>Sahil</p>
                   </div> :
-                  <img src={BackIcon} alt='back' className='p-2 cursor-pointer' 
-                  onClick={() => navigate(-1)} />
+                  <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
+                     onClick={() => navigate(-1)} />
             }
 
          </div>
@@ -54,25 +68,29 @@ const Navbar = () => {
          <div class="flex-none gap-2">
             <button className='flex'>
                <div onClick={toggleDrawer} class="w-8 rounded-full flex">
-                  <img src={User} alt='' />
+                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' />
                </div>
             </button>
 
          </div>
-         <Drawer open={isOpen} onClose={toggleDrawer} size="80vw" direction='right'>
+         <Drawer open={isOpen} onClose={toggleDrawer} size="85vw" direction='right'>
             <div className='drawer-content pt-8 px-5'>
 
 
                <div className='flex justify-between'>
-                  <p className=''><img src={ProfilePic} alt="" /></p>
+                  <p className=''>
+                     <img src={profileData.profile_picture ? profileData.profile_picture : ProfilePic} alt="" className='w-12 h-12 object-cover rounded-full' />
+                  </p>
                   <button onClick={toggleDrawer} className='mb-6 p-0'><img src={cross} alt="" /></button>
                </div>
-               <p className='text-sm font-semibold pt-2'>Sahil Wadhwa</p>
+               <p className='text-sm font-semibold pt-2'>
+                  {profileData.name ? profileData.name : ''}
+               </p>
                <p className='text-xs'>user created  JUL 22</p>
                <div className='line mt-6' height="1px"></div>
                <div className='mt-7'>
 
-                  <div className='flex items-center cursor-pointer' onClick={()=> navigate('/CreateProfile')} >
+                  <div className='flex items-center cursor-pointer' onClick={() => navigate('/CreateProfile')} >
                      <p><img src={edit} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Edit Profile</p>
                   </div>
@@ -96,7 +114,7 @@ const Navbar = () => {
                   <div className='boundary-margin-top'>
                      <div className='flex items-center cursor-pointer'>
                         <p><img src={exit} alt="" /></p>
-                        <p className='text-sm font-semibold pl-4'>Sign out</p>
+                        <p className='text-sm font-semibold pl-4' onClick={handleLogout} >Sign out</p>
                      </div>
                      <div className='flex items-center cursor-pointer mt-7'>
                         <p><img src={faq} alt="" /></p>
