@@ -7,6 +7,9 @@
 /.firebase
 /.firebaserc
 /firebase.json
+/capacitor.config.json
+/ionic.config.json
+/android
 
 # testing
 /coverage
