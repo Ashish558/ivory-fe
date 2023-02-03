@@ -36,7 +36,9 @@ const LoggedInHome = () => {
                 <Stories></Stories>
                 {/* <DesktopActivities></DesktopActivities> */}
                 <Activities></Activities>
-                <DesktopEvents></DesktopEvents>
+
+                <Sessions></Sessions>
+                {/* <DesktopEvents></DesktopEvents> */}
                 <DesktopLearn></DesktopLearn>
 
             </div>

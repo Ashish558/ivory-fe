@@ -16,7 +16,7 @@ const DesktopEvents = () => {
 
         infinite: false,
         centerPadding: "60px",
-        slidesToShow: 3,
+        slidesToShow: 3.5,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
@@ -41,8 +41,8 @@ const DesktopEvents = () => {
                 <Slider {...settings}>
 
                     <div >
-                        <div class="card   custom-card-event">
-                            <figure><img className='w-full' style={{ height: '220px' }} src={Event1} alt="Shoes" /></figure>
+                        <div class="card   custom-card-event w-84">
+                            <figure ><img className='w-full' style={{ height: '220px' }} src={Event1} alt="Shoes" /></figure>
                             <div class="pl-4">
 
                                 <div className='flex items-center justify-center Live-Desktop  py-1' >
