@@ -16,14 +16,16 @@ import cross from '../../../Images/cross.png'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
+const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob', '/', '/logolanding', '/four', '/third', '/second', '/landing']
 
 const NavbarDesktop = () => {
 
-
-
     const navigate = useNavigate()
     const location = useLocation()
+    
+    if (toExclude.includes(location.pathname)) return <></>
 
+    let currentPath = `/${location.pathname.split('/')[1]}`
     const handleSidebar = () => {
 
         const elem = document.activeElement;
