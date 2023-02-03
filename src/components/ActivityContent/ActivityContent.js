@@ -23,7 +23,7 @@ export default function ActivityContent() {
                painting basics in 8 hrs
             </p>
 
-            <div className="flex flex-col  justify-between sm:gap-16 sm:px-2 sm:w-8/12 sm:h-[200px] md:h-[300px]">
+            <div className="flex flex-col  justify-between sm:gap-16 sm:px-2 sm:w-8/12 sm:h-[200px] md:h-[250px]">
                <p className='font-bold text-xl md:text-3xl flex-1 hidden sm:block'>
                   Learn Acrylic
                   painting basics in 8 hrs
