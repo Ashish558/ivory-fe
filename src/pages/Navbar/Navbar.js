@@ -17,6 +17,7 @@ import cross from '../../Images/cross.png'
 import BackIcon from '../../assets/icons/go-back.svg'
 
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const toExclude = ['/login', '/otp','/dob', '/signup', '/congrates', '/', '/CreateProfile','/logolanding','/four','/third','/second','/landing']
 const basePaths = ['/home', '/activities']
@@ -26,6 +27,7 @@ const Navbar = () => {
    const [isOpen, setIsOpen] = React.useState(false)
    const navigate = useNavigate()
    const location = useLocation()
+   const { loggedIn, profileData } = useSelector(state => state.user)
 
    const toggleDrawer = () => {
       setIsOpen((prevState) => !prevState)
@@ -54,7 +56,7 @@ const Navbar = () => {
          <div class="flex-none gap-2">
             <button className='flex'>
                <div onClick={toggleDrawer} class="w-8 rounded-full flex">
-                  <img src={User} alt='' />
+                  <img src={profileData.profile_picture ? profileData.profile_picture :User} alt='' />
                </div>
             </button>
 
@@ -64,7 +66,9 @@ const Navbar = () => {
 
 
                <div className='flex justify-between'>
-                  <p className=''><img src={ProfilePic} alt="" /></p>
+                  <p className=''>
+                     <img src={profileData.profile_picture ? profileData.profile_picture :ProfilePic} alt="" className='w-12 h-12 object-cover rounded-full' />
+                     </p>
                   <button onClick={toggleDrawer} className='mb-6 p-0'><img src={cross} alt="" /></button>
                </div>
                <p className='text-sm font-semibold pt-2'>Sahil Wadhwa</p>
