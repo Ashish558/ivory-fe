@@ -23,20 +23,20 @@
 .image{
    width: 100%;
    max-width: 500px;
-   margin: 0 auto;
+ 
    object-fit: contain;
 }
 .seeMoreBtn{
    color: #1B72C0;
    display: inline-block;
    font-weight: 500;
-   font-size: 14px;
    cursor: pointer;
 }
 
 .slider{
    position: relative;
-   min-height: 450px;
+   min-height: 416px;
+   border-radius: 20px;
    overflow-x: hidden;
 }
 .nextIcon{

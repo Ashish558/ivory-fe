@@ -7,7 +7,7 @@ import learn from '../../Images/Learn.png';
 import '../Home/Footer.css';
 
 
-const toExclude = ['/login','/otp','/signup','/congrates','/dob','/']
+const toExclude = ['/login','/otp','/signup','/congrates','/dob','/','/logolanding','/four','/third','/second','/landing']
 
 const Footer = () => {
 

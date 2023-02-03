@@ -98,7 +98,7 @@ const Login = () => {
                   class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                   // type="tel"
                   type={JSON.stringify(phone)?.length < 10 ? "number" : "text"}
-                  maxLength="11"
+                  maxLength="10"
                   // pattern='[0-9]{11}'
                   onChange={(e) => setPhone(parseInt(e.target.value))}
                   placeholder="Phone Number"

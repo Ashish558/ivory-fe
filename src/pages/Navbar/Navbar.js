@@ -18,7 +18,7 @@ import BackIcon from '../../assets/icons/go-back.svg'
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const toExclude = ['/login', '/otp','/dob', '/signup', '/congrates', '/', '/CreateProfile']
+const toExclude = ['/login', '/otp','/dob', '/signup', '/congrates', '/', '/CreateProfile','/logolanding','/four','/third','/second','/landing']
 const basePaths = ['/home', '/activities']
 
 const Navbar = () => {
