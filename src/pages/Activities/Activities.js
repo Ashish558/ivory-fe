@@ -87,8 +87,8 @@ export const tempActivities = [
 export default function Activities() {
 
    const [activities, setActivities] = useState([])
+   const [filteredActivities, setFilteredActivities] = useState([])
    const [myActivities, setMyActivities] = useState([])
-   const [categories, setCategories] = useState([])
    const [filterItems, setFilterItems] = useState([])
    const navigate = useNavigate()
    const { loggedIn } = useSelector(state => state.user)
@@ -105,6 +105,7 @@ export default function Activities() {
          .then(res => {
             // console.log(res.data.data);
             setActivities(res.data.data.map(item => ({ ...item, categories: [] })))
+            setFilteredActivities(res.data.data.map(item => ({ ...item, categories: [] })))
             let temp = [
                {
                   id: 0,
@@ -119,7 +120,7 @@ export default function Activities() {
                      <img src={activity.icon} alt='activity' />
                      {activity.name}
                   </div>,
-                  selected: false
+                  selected: true
                })
             })
             setFilterItems(temp)
@@ -140,7 +141,7 @@ export default function Activities() {
                tempActivities[idx].categories.push(category)
             })
             setActivities(tempActivities)
-            // console.log(' updated', tempActivities);
+            setFilteredActivities(tempActivities)
 
          }).catch(err => {
             console.log(err.response);
@@ -148,7 +149,7 @@ export default function Activities() {
    }, [activities.length])
 
    useEffect(() => {
-      if(loggedIn === false) return
+      if (loggedIn === false) return
       getMyActivitiesProgress()
          .then(res => {
             console.log('my acts', res.data.data);
@@ -158,6 +159,48 @@ export default function Activities() {
             console.log(err.response);
          })
    }, [loggedIn])
+
+   const onChange = (item) => {
+      // console.log('item', item);
+      if (item.id === 0) {
+         let temp = filterItems.map(filterItem => {
+            let sel = false
+            if (item.selected === false) {
+               sel = true
+            } else {
+               sel = false
+            }
+            return { ...filterItem, selected: sel }
+         })
+         setFilterItems(temp)
+      } else {
+
+         let temp = filterItems.map(filterItem => {
+            // if (filterItem.id === 0) {
+            //    let allVal = false
+            //    if(item.selected === false){
+
+            //    }
+            //    return { ...filterItem, selected: !item.selected }
+            // }
+            if (filterItem.id === item.id) {
+               return { ...filterItem, selected: !filterItem.selected }
+            } else {
+               return { ...filterItem }
+            }
+         })
+         setFilterItems(temp)
+      }
+   }
+
+   useEffect(() => {
+      const activeItems = filterItems.filter(item => item.selected === true)
+      let activeIds = activeItems.map(item => item.id)
+
+      let filteredArr = activities.filter(activity => activeIds.includes(activity.id))
+      setFilteredActivities(filteredArr)
+
+   }, [filterItems])
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
 
@@ -169,7 +212,7 @@ export default function Activities() {
 
             <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 lg:px-[80px] lg:bg-activities-gradient'>
                <div className='lg:flex lg:justify-center flex-col'>
-                  <h3 className='text-xl font-bold mb-2.5 lg:text-5xl lg:font-medium'> My Activities
+                  <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-5xl lg:font-medium'> My Activities
                   </h3>
                   {myActivities.length > 0 ?
                      myActivities.map(activity => {
@@ -189,12 +232,12 @@ export default function Activities() {
             <div className='lg:px-[80px] lg:max-w-[1000px] lg:pb-[150px]'>
                <div className=''>
                   <h3 className='text-xl font-bold mb-2.5'> All Activities </h3>
-                  <Filterbar items={filterItems} />
+                  <Filterbar items={filterItems} onChange={onChange} />
                </div>
 
                <div className='mt-7'>
 
-                  {activities.map((activity, indx) => {
+                  {filteredActivities.map((activity, indx) => {
                      return (
                         <div key={indx} className='mb-8' >
                            <div className='flex items-center mb-3'>

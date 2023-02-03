@@ -25,8 +25,7 @@
 
 
 
-/*---------- Media Query --------------*/
-@media only screen and (min-width: 426px) {
+@media only screen and (min-width: 976px) {
 
     .mobile {
 
@@ -34,14 +33,12 @@
 
     }
 
+} 
 
-}
 
-
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 976px) {
     .desktop {
         display: none;
     }
 
-
-}
+} 

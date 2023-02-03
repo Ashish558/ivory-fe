@@ -13,6 +13,7 @@ import contact from '../../../Images/contact.png'
 import exit from '../../../Images/exit.png';
 import faq from '../../../Images/faq.png'
 import cross from '../../../Images/cross.png'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
@@ -20,6 +21,8 @@ const NavbarDesktop = () => {
 
 
 
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const handleSidebar = () => {
 
@@ -31,15 +34,15 @@ const NavbarDesktop = () => {
 
 
     return (
-        <div class="  navbar bg-base-100">
+        <div class="navbar-desktop  navbar bg-base-100">
             <div class="navbar-start flex justify-between font-medium">
                 <div class="pl-28">
                     <p><img src={Logo} alt="" /></p>
                 </div>
 
 
-                <div><a href=' '>Home</a></div>
-                <div><a href=' '>Activities</a></div>
+                <div><a href='/home'>Home</a></div>
+                <div><a href='/activities'>Activities</a></div>
                 <div><a href=' '>Learn</a></div>
                 <div><a href=' '>Community</a></div>
 

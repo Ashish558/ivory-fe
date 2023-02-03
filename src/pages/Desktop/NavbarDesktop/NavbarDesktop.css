@@ -9,3 +9,10 @@
 .border {
     border: 0.5px solid #8BB3E5;
 }
+
+@media only screen and (max-width: 976px) {
+    .navbar-desktop {
+        display: none;
+    }
+
+} 

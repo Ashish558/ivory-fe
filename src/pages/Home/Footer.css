@@ -5,6 +5,11 @@
     left: 0;
     width: 100%;
 }
+@media only screen and (min-width: 976px) {
+    .footer-bg {
+        display: none;
+    }
+} 
 
 .icon-bg {
     background-color: #CDDCFA;
