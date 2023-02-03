@@ -84,14 +84,15 @@ const Activities = () => {
 
    return (
       <div>
-         <div className='pt-4'>
-            <h1 className='text-xl font-black pl-4 pb-3'>Recommended activities</h1>
+         <div className='pt-4 lg:ml-24 lg:mt-24'>
+            <h1 className='text-xl lg:text-[48px] lg:font-normal font-black pl-4 pb-3 lg:mb-12'>
+               Recommended activities</h1>
 
 
-            <div className='grid grid-cols-3 max-w-[600px] gap-3 px-3'>
+            <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
                {
                   activities.map((activity) =>
-                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box'
+                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'
                      onClick={() => navigate(`/activities/${activity.id}`)}>
                         <p><img src={activity.icon} alt="" /></p>
                         {
@@ -104,7 +105,7 @@ const Activities = () => {
 
 
                }
-               <div style={{ backgroundColor: '#D3E4FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box'>
+               <div style={{ backgroundColor: '#D3E4FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'>
                   <p><img src={SeeLogo} alt="" /></p>
                   <div>
                      <p className='text-center text-sm pt-1 font-semibold' >See </p>

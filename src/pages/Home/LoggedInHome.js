@@ -33,7 +33,8 @@ const LoggedInHome = () => {
                 {/* <NavbarDesktop></NavbarDesktop> */}
                 <DesktopBanner></DesktopBanner>
                 <DesktopStories></DesktopStories>
-                <DesktopActivities></DesktopActivities>
+                {/* <DesktopActivities></DesktopActivities> */}
+                <Activities></Activities>
                 <DesktopEvents></DesktopEvents>
                 <DesktopLearn></DesktopLearn>
 
