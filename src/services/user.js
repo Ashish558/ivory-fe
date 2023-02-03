@@ -56,4 +56,8 @@ export const editProfile = (body, mobile) => {
    return axios.patch(`${BASE_URL}/accounts/users/${mobile}/`, body, getAuthHeaders())
 };
 
+export const uploadProfile = (body, mobile) => {
+   return axios.patch(`${BASE_URL}/accounts/users/${mobile}/`, body, getAuthHeaders())
+};
+
 
