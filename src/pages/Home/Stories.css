@@ -36,7 +36,12 @@
     right: 10%;
 }
 
-
+.story-checked{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1000;
+}
 @media only screen and (min-width: 768px) {
 
     .responsive-width,
