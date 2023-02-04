@@ -14,6 +14,7 @@ import { updateProfileData } from '../../redux/slices/user'
 const Profile = () => {
   const [name, setName] = useState('')
   const [mobile_no, setMobile_no] = useState('')
+  const [email,setemail] = useState("");
   const [addtext, settext] = useState("");
   const [showdiv, setshowdiv] = useState(false);
   const [addnewtextdiv, setaddnewtextdiv] = useState(false);
@@ -206,13 +207,13 @@ const Profile = () => {
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Name</label>
               <input type="text" placeholder='Sahil Wadhwa' value={name}
-                name="email"
+                name="name"
                 className={styles.emailinput}
                 onChange={(e) => setName(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
-              <input type="text" placeholder='9777766665' className={styles.emailinput} name="email" onChange={(e) => setMobile_no(e.target.value)} />
+              <input type="Number" placeholder='9777766665' className={styles.emailinput} name="mobile_no" onChange={(e) => setMobile_no(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Email Address</label>
