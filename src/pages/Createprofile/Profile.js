@@ -213,7 +213,8 @@ const Profile = () => {
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
-              <input type="Number" placeholder='9777766665' className={styles.emailinput} name="mobile_no" onChange={(e) => setMobile_no(e.target.value)} />
+              <input type="Number" placeholder='9777766665' className={styles.emailinput} 
+              value={mobile_no} name="mobile_no" onChange={(e) => setMobile_no(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Email Address</label>

@@ -65,10 +65,9 @@
     /* padding-top: 15px;
     padding-left: 15px;*/
     position: relative;
-    top: 10px;
-    left: 9px;
-    /* height: 62px; */
-    /* width: 57px;  */
+   height: 100%; 
+    width: 100%; 
+    object-fit: contain;
 }
 
 .form{
