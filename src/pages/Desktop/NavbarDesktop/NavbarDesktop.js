@@ -111,7 +111,7 @@ const NavbarDesktop = () => {
                            <p className='text-sm font-semibold pl-4'> My Programs</p>
                         </div>
 
-                        <div className='flex  items-center pt-9 cursor-pointer'>
+                        <div className='flex  items-center pt-9 cursor-pointer' onClick={() => navigate('/activities')}>
                            <p onClick={handleSidebar}><img src={activities} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> My Activities</p>
                         </div>
