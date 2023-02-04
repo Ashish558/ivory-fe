@@ -47,7 +47,7 @@ export default function StartActivity() {
          }).catch(err => {
             console.log('err', err);
          })
-   }, [])
+   }, [activityId])
 
    //fetch category details
    useEffect(() => {
@@ -60,7 +60,7 @@ export default function StartActivity() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }, [categoryId])
 
    //fetch users activities
    const fetchUserActivities = () => {
@@ -84,7 +84,7 @@ export default function StartActivity() {
    useEffect(() => {
       if (loggedIn === false) return
       fetchUserActivities()
-   }, [loggedIn])
+   }, [loggedIn, activityId])
 
    useEffect(() => {
       if (loggedIn === false) return
@@ -158,13 +158,13 @@ export default function StartActivity() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }, [categoryId, activityId])
 
    //384480
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
    // console.log('activityId', activityId);
-   console.log('submission', submissions);
+   // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    // console.log('isCompleted', isCompleted);
    // console.log('nextActivities', nextActivities);
