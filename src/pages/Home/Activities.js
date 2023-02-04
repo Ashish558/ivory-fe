@@ -88,7 +88,7 @@ const Activities = () => {
       <div>
          <div className='pt-4 lg:ml-24 lg:mt-24'>
          <div className='lg:flex lg:items-center lg:mb-20'>
-               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-medium'>Recommended activities</h1>
+               <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Recommended activities</h1>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
             </div>
             <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>

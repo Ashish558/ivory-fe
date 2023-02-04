@@ -90,7 +90,7 @@ const DesktopActivities = () => {
     return (
         <div style={{ marginTop: '88px', marginRight: '436px' }} className='ml-24'>
             <div className=' flex items-center mb-20'>
-                <h1 className='text-5xl font-semibold  '>Recommended activities <span></span></h1>
+                <h1 className='text-5xl font-semibold '>Recommended activities <span></span></h1>
                 <p className='pl-7'><img src={Arrow} alt="" /></p>
             </div>
             <div className='grid grid-cols-6 gap-4 px-3'>

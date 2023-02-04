@@ -128,7 +128,7 @@ const Stories = () => {
       <>
          <div className=" lg:ml-24 lg:mt-20 mt-14">
             <div className='lg:flex lg:items-center lg:mb-20'>
-               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-medium'>Start your day</h1>
+               <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Start your day</h1>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
             </div>
 
