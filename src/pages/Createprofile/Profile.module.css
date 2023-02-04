@@ -529,7 +529,7 @@ background: #1B72C0;
 }
 .interestSelected.butt1{
     border: 0;
-    background-color: #BDF4FF;
+    background-color: #BDF4FF !important;
 }
 .butt1>h3{
     color: #49454F;
@@ -844,4 +844,8 @@ background: #1B72C0;
 }
 .divaddinput>p{
 }
+}
+.interestSelected.butt1{
+    border: 0;
+    background-color: #BDF4FF !important;
 }
