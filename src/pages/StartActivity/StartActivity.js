@@ -164,7 +164,7 @@ export default function StartActivity() {
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
    // console.log('activityId', activityId);
-   // console.log('submission', submissions);
+   console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    // console.log('isCompleted', isCompleted);
    // console.log('nextActivities', nextActivities);
@@ -278,9 +278,8 @@ export default function StartActivity() {
                         })}
                      </div>
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] hidden sm:block`}>
-
                         {submissions.map((sub, idx) => {
-                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} />
+                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex + 1} idx={idx} />
                         })}
                      </div>
                      <img src={NextIcon} className={`${styles.nextIcon} sm:hidden`} alt='' onClick={increaseIndex} />
