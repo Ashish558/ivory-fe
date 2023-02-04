@@ -138,10 +138,10 @@ const Stories = () => {
             </div> */}
 
 
-            <Slider {...settings}>
+            <Slider {...settings} className='home-stories-slider' >
                {stories.map((story, idx) => {
                   return (
-                     <div className="p-3 relative" onClick={() => handleClick(story, idx)} >
+                     <div className="p-3 relative single-story-container" onClick={() => handleClick(story, idx)} >
                         <div className='story-checked flex'>
                            <img src={CheckedIcon} />
                         </div>
