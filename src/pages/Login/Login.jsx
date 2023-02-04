@@ -73,7 +73,7 @@ const Login = () => {
             <div className="pl-4 md:pl-20 pt-10">
               <img src={logo} alt="" />
             </div>
-            <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-28 md:pl-10 pl-0 sm:w-[500px]">
+            <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
               <h1
                 className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
               >

@@ -1,4 +1,4 @@
-import React,{ useEffect,useRef,useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './styles.module.css'
 
@@ -15,35 +15,39 @@ import ActivityIcon from '../../assets/images/activity.png'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
-import { getCategories,getSingleActivity } from '../../services/activities'
-import { completeActivity,getMyActivities,getUserSubmissions,uploadActivity } from '../../services/user'
+import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
+import { completeActivity, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
 
 
 export default function StartActivity() {
 
-   const [startModalActive,setStartModalActive] = useState(false)
-   const [activity,setActivity] = useState({})
-   const [activities,setActivities] = useState([])
-   const [submissions,setSubmissions] = useState([])
-   const [isAlreadyStarted,setIsAlreadyStarted] = useState(false)
+   const [startModalActive, setStartModalActive] = useState(false)
+   const [activity, setActivity] = useState({})
+   const [activities, setActivities] = useState([])
+   const [submissions, setSubmissions] = useState([])
+   const [isAlreadyStarted, setIsAlreadyStarted] = useState(false)
+   const [isCompleted, setIsCompleted] = useState(false)
+   const { categoryId, activityId } = useParams()
+   const [category, setCategory] = useState({})
+
+   const [nextActivities, setNextActivities] = useState([])
    const inputRef = useRef(null)
-   const [currentIndex,setCurrentIndex] = useState(0)
+
+   const [currentIndex, setCurrentIndex] = useState(0)
    const { loggedIn } = useSelector(state => state.user)
-   const { categoryId,activityId } = useParams()
-   const [userActivityId,setUserActivityId] = useState(activityId)
-   const [category,setCategory] = useState({})
+   const [userActivityId, setUserActivityId] = useState(activityId)
 
    useEffect(() => {
       getSingleActivity(activityId)
          .then(res => {
-            console.log('activity data',res.data.data);
+            console.log('activity data', res.data.data);
             if (res.data.data === null) return
             // setActivities(res.data.data)
             setActivity(res.data.data)
          }).catch(err => {
-            console.log('err',err);
+            console.log('err', err);
          })
-   },[])
+   }, [])
 
    //fetch category details
    useEffect(() => {
@@ -56,29 +60,36 @@ export default function StartActivity() {
          }).catch(err => {
             console.log(err.response);
          })
-   },[])
+   }, [])
 
    //fetch users activities
-   useEffect(() => {
-      if (loggedIn === false) return
+   const fetchUserActivities = () => {
       getMyActivities()
          .then(res => {
             if (res.data.data === null) return
             res.data.data.forEach(myActivity => {
                if (myActivity.activity.id === parseInt(activityId)) {
                   setIsAlreadyStarted(true)
+                  console.log('my act', myActivity);
+                  if (myActivity.is_completed === true) {
+                     setIsCompleted(true)
+                  }
                   setUserActivityId(myActivity.id)
                }
             })
          }).catch(err => {
-            console.log('err',err);
+            console.log('err', err);
          })
-   },[loggedIn])
+   }
+   useEffect(() => {
+      if (loggedIn === false) return
+      fetchUserActivities()
+   }, [loggedIn])
 
    useEffect(() => {
       if (loggedIn === false) return
       getSubmissions()
-   },[userActivityId,loggedIn])
+   }, [userActivityId, loggedIn])
 
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
@@ -87,7 +98,7 @@ export default function StartActivity() {
             if (res.data.data === null) return
             setSubmissions(res.data.data)
          }).catch(err => {
-            console.log('submission err',err);
+            console.log('submission err', err);
          })
    }
 
@@ -104,16 +115,16 @@ export default function StartActivity() {
       const file = e.target.files[0]
       if (file === undefined) return
       let formData = new FormData();
-      formData.append('submission',file);
-      formData.append('activity',userActivityId);
+      formData.append('submission', file);
+      formData.append('activity', userActivityId);
 
       uploadActivity(formData)
          .then(res => {
-            console.log('upload res',res.data);
+            console.log('upload res', res.data);
             alert('uploaded successfully')
             getSubmissions()
          }).catch(err => {
-            console.log('upload err',err);
+            console.log('upload err', err);
          })
    }
    const increaseIndex = () => {
@@ -127,19 +138,38 @@ export default function StartActivity() {
    const handleComplete = () => {
       completeActivity(userActivityId)
          .then(res => {
-            console.log('compl res',res.data);
+            console.log('compl res', res.data);
+            fetchUserActivities()
          }).catch(err => {
-            console.log('compl err',err);
+            console.log('compl err', err);
          })
    }
+
+   //next activities
+   useEffect(() => {
+      getActivities(categoryId)
+         .then(res => {
+            console.log('next activity data', res.data.data);
+            if (res.data.data === null) return
+            let next = res.data.data.filter(item => item.id > parseInt(activityId))
+            // console.log('next', next);
+            setNextActivities(next)
+            // setActivities(res.data.data)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
+
    //384480
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
    // console.log('activityId', activityId);
-   // console.log('submission', submissions);
+   console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
+   // console.log('isCompleted', isCompleted);
+   // console.log('nextActivities', nextActivities);
    if (Object.keys(activity).length === 0) return <></>
-   const { name,description,image,steps,video,video_link } = activity
+   const { name, description, image, steps, video, video_link } = activity
 
    return (
       <>
@@ -170,7 +200,7 @@ export default function StartActivity() {
                         See More
                      </span> :
                      <div>
-                        {steps.map((step,idx) => {
+                        {steps.map((step, idx) => {
                            return (
                               <div className='mb-5 mt-6'>
                                  <p className='font-semibold text-[#7B34FB] mb-4'>
@@ -186,17 +216,30 @@ export default function StartActivity() {
 
                }
                <div className='flex items-center gap-x-3 mt-8 mb-8'>
-                  <PrimaryButton className='flex items-center pl-4 pr-4'
-                     disabled={submissions.length === 0 ? true : false}
-                     onClick={handleComplete}
-                     children={
-                        <>
-                           <img src={MarkIcon} className='mr-2.5' alt='mark'
-                           />
-                           Mark Completed
-                        </>
-                     }
-                  />
+                  {
+                     isCompleted === true ?
+                        <PrimaryButton className={`flex items-center pl-4 pr-4 bg-primaryGreen`}
+                           disabled={submissions.length === 0 ? true : false}
+                           // onClick={handleComplete}
+                           children={
+                              <>
+                                 <img src={MarkIcon} className='mr-2.5' alt='mark' />
+                                 Completed
+                              </>
+                           }
+                        /> :
+                        <PrimaryButton className={`flex items-center pl-4 pr-4`}
+                           disabled={submissions.length === 0 ? true : false}
+                           onClick={handleComplete}
+                           children={
+                              <>
+                                 <img src={MarkIcon} className='mr-2.5' alt='mark'
+                                 />
+                                 Mark Completed
+                              </>
+                           }
+                        />
+                  }
                   <SecondaryButton className='flex items-center pl-5 pr-5' disabled={true}
                      children={
                         <>
@@ -230,14 +273,13 @@ export default function StartActivity() {
                   <div className='relative sm:grid sm:grid-cols-2  sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto'>
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
 
-                        {submissions.map((sub,idx) => {
+                        {submissions.map((sub, idx) => {
                            return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} />
                         })}
                      </div>
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] hidden sm:block`}>
-
-                        {submissions.map((sub,idx) => {
-                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} />
+                        {submissions.map((sub, idx) => {
+                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex + 1} idx={idx} />
                         })}
                      </div>
                      <img src={NextIcon} className={`${styles.nextIcon} sm:hidden`} alt='' onClick={increaseIndex} />
@@ -252,9 +294,9 @@ export default function StartActivity() {
                   Next Activities
                </h4>
 
-               <div className='mt-5'>
-                  {
-                     activities.map(activity => {
+               <div className='mt-5 max-w-[600px]  sm:mx-[60px]'>
+                  {nextActivities.length > 0 &&
+                     nextActivities.map(activity => {
                         return <Activity {...activity} key={activity.id} />
                      })
                   }
@@ -264,7 +306,8 @@ export default function StartActivity() {
          {
             startModalActive &&
             <StartActivityModal handleClose={() => setStartModalActive(false)}
-               activityId={activityId} />
+               activityId={activityId}
+               setIsAlreadyStarted={setIsAlreadyStarted} />
          }
       </>
    )

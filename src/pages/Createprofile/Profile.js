@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import arrow from "../../assets/arrow_back.png"
 import styles from "./Profile.module.css"
 import photo from "../../assets/smile.png"
@@ -6,14 +6,16 @@ import cross from "../../assets/cross.png"
 import img from "../../assets/iphoto.png"
 import ivoryforming from "../../assets/ivoryforming.png"
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addInterest, getInterests } from '../../services/activities'
-import { editProfile } from '../../services/user'
+import { editProfile, uploadProfile } from '../../services/user'
+import { updateProfileData } from '../../redux/slices/user'
 
 const Profile = () => {
-
-  const [email, setemail] = useState("");
-  const [addtext, settext] = useState("");
+  const [name, setName] = useState('')
+  const [mobile_no, setMobile_no] = useState('')
+  const [email,setemail] = useState("");
+  const [text, settext] = useState("");
   const [showdiv, setshowdiv] = useState(false);
   const [addnewtextdiv, setaddnewtextdiv] = useState(false);
   const [textColor, setTextColor] = useState('white');
@@ -26,9 +28,9 @@ const Profile = () => {
   const [interestInput, setInterestInput] = useState('')
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { loggedIn, profileData } = useSelector(state => state.user)
-
-  console.log(addtext);
+  const photoRef = useRef(null)
   // let arr = addtext.split(' '); 
   // console.log(arr);
   const [gender, setgender] = useState("");
@@ -41,6 +43,8 @@ const Profile = () => {
 
       setemail(profileData.email !== null ? profileData.email : '')
       setgender(profileData.gender !== null ? profileData.gender : '')
+      setName(profileData.name !== null ? profileData.name : '')
+      setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
       setUserInterests(profileData.intrests)
     }
   }, [profileData, loggedIn])
@@ -94,11 +98,12 @@ const Profile = () => {
     let intIds = userInterests.map(item => item.id)
     console.log(intIds);
     let body = {
-      gender, email, intrests: intIds
+      gender, email, intrests: intIds, name
     }
     editProfile(body, profileData.mobile_no)
       .then(res => {
         console.log(res.data);
+        dispatch(updateProfileData({ profileData: res.data.data }))
         alert('profile data saved')
       })
       .catch(err => {
@@ -153,6 +158,24 @@ const Profile = () => {
     // setbackcolor('#001C38')
   }
 
+  const handlePhotoUpload = e => {
+    const file = e.target.files[0]
+    console.log(file);
+    if (file === undefined) return
+
+    const formData = new FormData();
+    formData.append("profile_picture", file);
+    uploadProfile(formData, profileData.mobile_no)
+      .then(res => {
+        console.log(res.data);
+        dispatch(updateProfileData({ profileData: res.data.data }))
+        alert('profile data saved')
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  console.log('text', interestInput);
   // ------------------------------------------------------------
   return (
     <div className=''>
@@ -167,23 +190,35 @@ const Profile = () => {
         </div>
         <div className={styles.image}>
           <div className={styles.ssmmillee}>
-            <img src={photo} className={styles.img2} alt="" />
+            <img src={profileData.profile_picture ? profileData.profile_picture : photo}
+              className={styles.img2} alt=""
+              onClick={() => photoRef.current.click()} />
+            <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
+              onChange={(e) => handlePhotoUpload(e)} />
           </div>
-          <p className={styles.addpit}>Add Profile picture</p>
+          <p className={`cursor-pointer ${styles.addpit}`}
+            onClick={() => photoRef.current.click()}
+
+          >Add Profile picture
+          </p>
         </div>
         <div className={styles.formimg}>
           <div className={styles.form}>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Name</label>
-              <input type="text" placeholder='Sahil Wadhwa' className={styles.emailinput} name="email" onChange={(e) => setemail(e.target.value)} />
+              <input type="text" placeholder='Sahil Wadhwa' value={name}
+                name="name"
+                className={styles.emailinput}
+                onChange={(e) => setName(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
-              <input type="text" placeholder='9777766665' className={styles.emailinput} name="email" onChange={(e) => setemail(e.target.value)} />
+              <input type="Number" placeholder='9777766665' className={styles.emailinput} 
+              value={mobile_no} name="mobile_no" onChange={(e) => setMobile_no(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Email Address</label>
-              <input type="text" placeholder='xyz@gmail.com' className={styles.emailinput} name="email"
+              <input type="email" placeholder='xyz@gmail.com' className={styles.emailinput} name="email"
                 value={email} onChange={(e) => setemail(e.target.value)} />
             </div>
             <div className={styles.input2}>
@@ -275,7 +310,7 @@ const Profile = () => {
         addnewtextdiv == true ?
           <div className={styles.addtext}>
             <div className={styles.int}>
-              <img src={cross} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
+              <img src={arrow} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
               <p className={styles.intp}>Interest</p>
             </div>
             <hr className={styles.head1} />
@@ -284,7 +319,10 @@ const Profile = () => {
                 try our best to add more relavent
                 categories:
               </p>
-              <input type="text" name='addtext' onChange={(e) => settext(e.target.value)} className={styles.parainput} placeholder='Type here..' />
+              <input type="text" name='addtext'
+              value={interestInput}
+               onChange={(e) => setInterestInput(e.target.value)} className={styles.parainput} placeholder='Type here..'
+               />
             </div>
             <button className={styles.send}
               onClick={handleAddInterest}>Send</button>
