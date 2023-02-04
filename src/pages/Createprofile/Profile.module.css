@@ -173,7 +173,7 @@
     width: 20%;
     margin-left: 36%;
     border-radius: 30px;
-    background: #9fc0e7;
+    background: #4D88D3;
     border: none;
     position:relative;
     top: 45px;
@@ -807,6 +807,7 @@ background: #1B72C0;
     display: flex;
     border: 2px solid #79747E;
     border-radius: 5px;
+    
 }
 .checkboxdiv2{
     height: 54px;
