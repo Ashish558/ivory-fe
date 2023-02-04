@@ -15,7 +15,7 @@ const Profile = () => {
   const [name, setName] = useState('')
   const [mobile_no, setMobile_no] = useState('')
   const [email,setemail] = useState("");
-  const [addtext, settext] = useState("");
+  const [text, settext] = useState("");
   const [showdiv, setshowdiv] = useState(false);
   const [addnewtextdiv, setaddnewtextdiv] = useState(false);
   const [textColor, setTextColor] = useState('white');
@@ -175,7 +175,7 @@ const Profile = () => {
         console.log(err);
       })
   }
-  console.log('profileData', profileData);
+  console.log('text', interestInput);
   // ------------------------------------------------------------
   return (
     <div className=''>
@@ -318,7 +318,10 @@ const Profile = () => {
                 try our best to add more relavent
                 categories:
               </p>
-              <input type="text" name='addtext' onChange={(e) => settext(e.target.value)} className={styles.parainput} placeholder='Type here..' />
+              <input type="text" name='addtext'
+              value={interestInput}
+               onChange={(e) => setInterestInput(e.target.value)} className={styles.parainput} placeholder='Type here..'
+               />
             </div>
             <button className={styles.send}
               onClick={handleAddInterest}>Send</button>

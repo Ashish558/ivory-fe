@@ -5,12 +5,13 @@
   width: 240px;
   margin-left: 20px;
 }
+
 @media (min-width: 992px) {
   .cusStyle {
     letter-spacing: 2px !important;
     line-height: 50px;
     font-size: 42px;
-  width:500px;
-  margin-left: 20px !important;
+    width: 100%;
+    margin-left: 0px !important;
   }
 }
