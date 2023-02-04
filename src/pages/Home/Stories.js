@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Arrow from '../../Images/Icon.png';
+import LogoDesktop from '../../Images/Vector(6).png';
+
+
 
 
 const Stories = () => {
@@ -131,11 +134,12 @@ const Stories = () => {
                         <div className="" >
                            <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
                            <div className="pl-3 details">
-                              <p className="text-sm text-white">
+                              <p className="text-sm lg:text-xl text-white">
                                  {story.share_message ? story.share_message : ''}
                               </p>
-                              <div className="flex items-center">
-                                 <p className="text-white"> <img src={Logo} alt="" /></p>
+                              <div className="flex items-center lg:mt-[10px] ">
+                                 <p className="text-white "> <img src={Logo} alt="" /></p>
+                                 {/* <p className="text-white md:hidden sm:hidden"> <img src={LogoDesktop} alt="" /></p> */}
                                  <p className="text-sm text-white pl-1"> {story.views} views</p>
                               </div>
                            </div>

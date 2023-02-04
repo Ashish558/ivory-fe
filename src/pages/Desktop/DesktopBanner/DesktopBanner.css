@@ -38,7 +38,8 @@
     border: 3px solid blue;
     border-image: linear-gradient(90deg, blue, blue, grey, grey);
     border-image-slice: 1; */
-
+    width: 442px;
+    height: 442px;
     border-radius: 51px;
     border: double 3px transparent;
     background-image: linear-gradient(white, white), linear-gradient(rgba(128, 128, 128, 0.244), rgba(128, 128, 128, 0.11), blue, blue);
