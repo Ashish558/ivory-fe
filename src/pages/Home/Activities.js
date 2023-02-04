@@ -106,7 +106,8 @@ const Activities = () => {
 
 
                }
-               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'>
+               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'
+               onClick={()=> navigate('/activities')} >
                   <p><img src={SeeLogo} alt="" /></p>
                   <div style={{ color: '#1B72C0' }}>
                      <p className='text-center text-sm pt-2 font-semibold' >See </p>

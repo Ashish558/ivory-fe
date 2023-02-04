@@ -200,7 +200,7 @@ export default function Activities() {
       let filteredArr = activities.filter(activity => activeIds.includes(activity.id))
       setFilteredActivities(filteredArr)
 
-   }, [filterItems])
+   }, [filterItems, activities])
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
 
