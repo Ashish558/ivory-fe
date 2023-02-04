@@ -57,10 +57,26 @@ const NavbarDesktop = () => {
             </div>
 
 
-            <div><a href='/home'>Home</a></div>
-            <div><a href='/activities'>Activities</a></div>
-            <div><a href=' '>Learn</a></div>
-            <div><a href=' '>Community</a></div>
+            <div className='px-4 py-1.5 transition hover:bg-secondary rounded-lg'>
+               <a href='/home'>
+                  Home
+               </a>
+            </div>
+            <div className='px-4 py-1.5 transition hover:bg-secondary rounded-lg'>
+               <a href='/activities'>
+                  Activities
+               </a>
+            </div>
+            <div className='px-4 py-1.5 transition hover:bg-secondary rounded-lg'>
+               <a href=' '>
+                  Learn
+               </a>
+            </div>
+            <div className='px-4 py-1.5 transition hover:bg-secondary rounded-lg'>
+               <a href=' '>
+                  Community
+               </a>
+            </div>
 
 
          </div>
