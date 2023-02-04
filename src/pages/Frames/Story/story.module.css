@@ -109,12 +109,14 @@
       align-items: flex-end;
       padding-top: 50px;
       padding-bottom: 50px;
+      /* min-height: 600px; */
+      /* height: 100vh; */
    }
 
    .storyImg {
       position: static;
       max-width: 439px;
-      height: calc(100% - 60px);
+      height: calc(100vh - 120px);
       /* transform: translateX(-50%); */
    }
 

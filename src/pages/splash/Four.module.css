@@ -78,4 +78,5 @@ top: 434px;
     box-shadow: 0px 0px 10px 0px #86f8ff2e;
     border: 1px solid #47A8FF;
     border-radius: 31px;
+    cursor: pointer;
   }

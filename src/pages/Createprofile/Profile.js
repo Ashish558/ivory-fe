@@ -12,9 +12,10 @@ import { editProfile, uploadProfile } from '../../services/user'
 import { updateProfileData } from '../../redux/slices/user'
 
 const Profile = () => {
-
-  const [email, setemail] = useState("");
-  const [addtext, settext] = useState("");
+  const [name, setName] = useState('')
+  const [mobile_no, setMobile_no] = useState('')
+  const [email,setemail] = useState("");
+  const [text, settext] = useState("");
   const [showdiv, setshowdiv] = useState(false);
   const [addnewtextdiv, setaddnewtextdiv] = useState(false);
   const [textColor, setTextColor] = useState('white');
@@ -42,6 +43,8 @@ const Profile = () => {
 
       setemail(profileData.email !== null ? profileData.email : '')
       setgender(profileData.gender !== null ? profileData.gender : '')
+      setName(profileData.name !== null ? profileData.name : '')
+      setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
       setUserInterests(profileData.intrests)
     }
   }, [profileData, loggedIn])
@@ -95,7 +98,7 @@ const Profile = () => {
     let intIds = userInterests.map(item => item.id)
     console.log(intIds);
     let body = {
-      gender, email, intrests: intIds
+      gender, email, intrests: intIds, name
     }
     editProfile(body, profileData.mobile_no)
       .then(res => {
@@ -172,7 +175,7 @@ const Profile = () => {
         console.log(err);
       })
   }
-  console.log('profileData', profileData);
+  console.log('text', interestInput);
   // ------------------------------------------------------------
   return (
     <div className=''>
@@ -203,15 +206,19 @@ const Profile = () => {
           <div className={styles.form}>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Name</label>
-              <input type="text" placeholder='Sahil Wadhwa' className={styles.emailinput} name="email" onChange={(e) => setemail(e.target.value)} />
+              <input type="text" placeholder='Sahil Wadhwa' value={name}
+                name="name"
+                className={styles.emailinput}
+                onChange={(e) => setName(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
-              <input type="text" placeholder='9777766665' className={styles.emailinput} name="email" onChange={(e) => setemail(e.target.value)} />
+              <input type="Number" placeholder='9777766665' className={styles.emailinput} 
+              value={mobile_no} name="mobile_no" onChange={(e) => setMobile_no(e.target.value)} />
             </div>
             <div className={styles.input1}>
               <label htmlFor="" className={styles.emaillabel} >Email Address</label>
-              <input type="text" placeholder='xyz@gmail.com' className={styles.emailinput} name="email"
+              <input type="email" placeholder='xyz@gmail.com' className={styles.emailinput} name="email"
                 value={email} onChange={(e) => setemail(e.target.value)} />
             </div>
             <div className={styles.input2}>
@@ -303,7 +310,7 @@ const Profile = () => {
         addnewtextdiv == true ?
           <div className={styles.addtext}>
             <div className={styles.int}>
-              <img src={cross} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
+              <img src={arrow} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
               <p className={styles.intp}>Interest</p>
             </div>
             <hr className={styles.head1} />
@@ -312,7 +319,10 @@ const Profile = () => {
                 try our best to add more relavent
                 categories:
               </p>
-              <input type="text" name='addtext' onChange={(e) => settext(e.target.value)} className={styles.parainput} placeholder='Type here..' />
+              <input type="text" name='addtext'
+              value={interestInput}
+               onChange={(e) => setInterestInput(e.target.value)} className={styles.parainput} placeholder='Type here..'
+               />
             </div>
             <button className={styles.send}
               onClick={handleAddInterest}>Send</button>
