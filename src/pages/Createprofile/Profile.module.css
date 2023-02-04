@@ -189,6 +189,7 @@
     width: 400px;
 }
 .allinterest{
+    z-index: 5000;
     height: 400px;
     width:38%;
     position: absolute;
@@ -278,6 +279,7 @@
     left: 30%;
     border-radius: 20px;
     background-color: white;
+    z-index: 5000;
 }
 .head1{
     display: flex;
@@ -309,12 +311,11 @@
     width: 90px;
     font-size: 17px;
     color: white;
-    position: relative;
-    top: 31%;
-    left: 79%;
+   margin-top: 1rem;
+   margin-left: 1rem;
     border: none;
     border-radius: 15px;
-background: #1B72C0;
+    background: #1B72C0;
 }
 
 }
@@ -792,10 +793,9 @@ background: #1B72C0;
     width: 100px;
     font-size: 17px;
     color: white;
-    position: relative;
-    top: 29%;
-    left: 68%;
     border: none;
+    margin-top: 1rem;
+    margin-left: 1rem;
     border-radius: 25px;
 background: #1B72C0;
 }
