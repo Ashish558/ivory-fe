@@ -169,7 +169,7 @@ const Otp = () => {
                   type="text"
                   value={otp.field2}
                   name="field2"
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -177,7 +177,7 @@ const Otp = () => {
                   type="text"
                   name="field3"
                   value={otp.field3}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -185,7 +185,7 @@ const Otp = () => {
                   type="text"
                   name="field4"
                   value={otp.field4}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -193,7 +193,7 @@ const Otp = () => {
                   type="text"
                   name="field5"
                   value={otp.field5}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -201,7 +201,7 @@ const Otp = () => {
                   type="text"
                   name="field6"
                   value={otp.field6}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
               </div>
