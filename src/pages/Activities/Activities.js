@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
-
+import Arrow from '../../Images/Icon.png';
 import PaintingIcon from '../../assets/icons/painting-icon.svg'
 import PhotographyIcon from '../../assets/icons/photography-icon.svg'
 import TechnologyIcon from '../../assets/icons/technology-icon.svg'
@@ -204,9 +204,12 @@ export default function Activities() {
          <div className='px-4 lg:px-0'>
 
             <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 lg:px-[80px] lg:bg-activities-gradient'>
-               <div className='lg:flex lg:justify-center flex-col'>
-                  <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-5xl lg:font-medium'> My Activities
+               <div className='lg:flex mt-10 flex-col'>
+               <div className=' flex items-center mb-2'>
+                  <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'> My activities
                   </h3>
+                  <p className='pl-7'><img src={Arrow} alt="" /></p>
+                  </div>
                   {myActivities.length > 0 ?
                      myActivities.map(activity => {
                         return <MyActivityCard key={activity.id} {...activity} />
@@ -224,7 +227,10 @@ export default function Activities() {
 
             <div className='lg:px-[80px] lg:max-w-[1000px] lg:pb-[150px]'>
                <div className=''>
+               <div className=' flex items-center mb-2'>
                   <h3 className='text-4xl font-semibold mb-2.5'> All Activities </h3>
+                  <p className='pl-7'><img src={Arrow} alt="" /></p>
+                  </div>
                   <Filterbar items={filterItems} onChange={onChange} />
                </div>
 

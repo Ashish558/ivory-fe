@@ -11,7 +11,6 @@ import Logo8 from '../../../Images/Activity/Desktop (6).png'
 import './DesktopActivities.css'
 import SeeLogo from '../../../Images/Group.png'
 
-
 const DesktopActivities = () => {
     const activities = [
         {
@@ -82,11 +81,7 @@ const DesktopActivities = () => {
             img: Logo3,
             color: '#7B34FB'
         },
-
-
     ]
-
-
     return (
         <div style={{ marginTop: '88px', marginRight: '436px' }} className='ml-24'>
             <div className=' flex items-center mb-20'>

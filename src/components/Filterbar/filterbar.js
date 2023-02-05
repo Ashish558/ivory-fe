@@ -18,7 +18,7 @@ export default function Filterbar({ items, onChange }) {
                   return (
                      <div key={item.id}
                         onClick={() => onChange(item)}
-                        className={` text-sm font-medium cursor-pointer border border-[#79747E] fle justify-center items-center mr-2 rounded-lg px-2 py-1 shrink-0 ${item.selected ? 'bg-primary text-white' : 'text-lightBlack'} `}>
+                        className={` text-base font-medium cursor-pointer border border-[#79747E] fle justify-center items-center mr-2 rounded-lg px-2 py-1 shrink-0 ${item.selected ? 'bg-primary text-white' : 'text-lightBlack'} `}>
                         {item.children}
                      </div>
                   )
