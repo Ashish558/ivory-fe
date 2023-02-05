@@ -31,8 +31,8 @@ export default function QnA({ image, answer_image, type, url, updateStory }) {
    }, [answerActive])
    // console.log(answerActive)
    return (
-      <div className={styles.storySudoku}>
-         <div className='flx items-center self-streth flex-1 overflow-aut'>
+      <div className={`${styles.storySudoku} lg:grid-rows-6 lg:grid-cols-4`}>
+         <div className='flx items-center self-streth flex- lg:row-span-4  lg:col-span-4 lg:h-full '>
             {
                answerActive ?
                   <img src={image} className={styles.storyImage} alt='unsolved' />
@@ -43,7 +43,7 @@ export default function QnA({ image, answer_image, type, url, updateStory }) {
 
          {
             answerActive ?
-               <div className={styles.sudokuAnswer}>
+               <div className={`${styles.sudokuAnswer}  lg:row-span-2  lg:col-span-4  lg:w-full`}>
                   <img src={StarsIcon} className={styles.storyImage} alt='stars' />
                   <h4>
                      You submitted:
@@ -53,7 +53,7 @@ export default function QnA({ image, answer_image, type, url, updateStory }) {
                   </p>
                </div>
                :
-               <div className={styles.sudokuBottom}>
+               <div className={`${styles.sudokuBottom} lg:w-full  lg:col-span-4  lg:row-span-2`}>
                   <p className='font-semibold text-center text-lg mb-3'>
                      Write the words you can spot:
                   </p>

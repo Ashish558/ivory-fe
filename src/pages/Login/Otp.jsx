@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React,{ useEffect,useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link,useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
-import { updateLoggedIn } from '../../redux/slices/user';
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
-import { sendOtp, verifyOtp } from '../../services/auth';
+import { updateLoggedIn } from '../../redux/slices/user';
+import { sendOtp,verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
 
@@ -221,7 +221,7 @@ const Otp = () => {
               {otpValuesArray.length === 6 ? (
                 <button
                   type="submit"
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-1"
                 >
                   Continue
                 </button>
@@ -238,20 +238,20 @@ const Otp = () => {
             <br />
             {otpStatus === "failed" && (
               <div>
-                <Link
-                  to="/resend"
-                  className="text-blue-500 ml-8"
-                  onClick={handleResend}
-                >
-                  {" "}
-                  Resend OTP
-                </Link>
                 <Link to="/resend" className=" ml-8">
                   {" "}
                   Didn't receive OTP? Try again in 00:30
                 </Link>
               </div>
             )}
+            <Link
+              to="/resend"
+              className="text-blue-500 ml-8"
+              onClick={handleResend}
+            >
+              {" "}
+              Resend OTP
+            </Link>
           </div>
         </div>
       </div>

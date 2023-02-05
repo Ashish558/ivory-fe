@@ -11,13 +11,14 @@ import { useSelector } from "react-redux";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Arrow from '../../Images/Icon.png';
 import CheckedIcon from '../../assets/icons/circle-checked.svg'
+import LogoDesktop from '../../Images/Vector(6).png';
 
 const Stories = () => {
    const [storyActive, setStoryActive] = useState(false)
    const [selectedStory, setSelectedStory] = useState({})
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [stories, setStories] = useState([])
-   const { loggedIn } = useSelector(state => state.user)
+   const { loggedIn, profileData } = useSelector(state => state.user)
    const { width } = useWindowDimensions()
    const navigate = useNavigate()
 
@@ -117,7 +118,7 @@ const Stories = () => {
       if (selectedIndex < stories.length - 1) {
          setSelectedStory(stories[selectedIndex + 1])
          setSelectedIndex(selectedIndex + 1)
-       
+
       }
    }
    // console.log('selectedIndex', selectedIndex)
@@ -126,7 +127,7 @@ const Stories = () => {
 
    return (
       <>
-         <div className=" lg:ml-24 lg:mt-20 mt-14">
+         <div className=" lg:ml-24 lg:mt-[90px] mt-14">
             <div className='lg:flex lg:items-center lg:mb-20'>
                <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Start your day</h1>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
@@ -142,17 +143,22 @@ const Stories = () => {
                {stories.map((story, idx) => {
                   return (
                      <div className="p-3 relative single-story-container" onClick={() => handleClick(story, idx)} >
-                        <div className='story-checked flex'>
-                           <img src={CheckedIcon} />
-                        </div>
+                        {
+                           story.viewed_by.includes(profileData.id) &&
+                           <div className='story-checked flex'>
+                              <img src={CheckedIcon} />
+                           </div>
+                        }
+
                         <div className="" >
                            <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
                            <div className="pl-3 details">
-                              <p className="text-sm text-white">
+                              <p className="text-sm lg:text-xl text-white">
                                  {story.share_message ? story.share_message : ''}
                               </p>
-                              <div className="flex items-center">
-                                 <p className="text-white"> <img src={Logo} alt="" /></p>
+                              <div className="flex items-center lg:mt-[10px] ">
+                                 <p className="text-white "> <img src={Logo} alt="" /></p>
+                                 {/* <p className="text-white md:hidden sm:hidden"> <img src={LogoDesktop} alt="" /></p> */}
                                  <p className="text-sm text-white pl-1"> {story.views} views</p>
                               </div>
                            </div>

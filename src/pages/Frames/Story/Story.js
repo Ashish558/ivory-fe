@@ -35,7 +35,7 @@ export default function Story(props) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
    }
-
+ 
    useEffect(() => {
       setStoryType(type)
    }, [type])
@@ -56,7 +56,7 @@ export default function Story(props) {
    useEffect(() => {
       axios.get(`${url}view/`, getAuthHeaders())
          .then(res => {
-            // console.log('view res', res.data);
+            console.log('view res', res.data);
             updateStory({ ...res.data.data, type })
          })
          .catch(err => {

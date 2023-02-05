@@ -84,6 +84,9 @@ const Activities = () => {
          })
    }, [])
 
+
+   // lg:text-[48px]
+
    return (
       <div>
          <div className='pt-4 lg:ml-24 lg:mt-24'>
@@ -108,8 +111,8 @@ const Activities = () => {
 
 
                }
-               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'
-               onClick={()=> navigate('/activities')} >
+               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 cursor-pointer'
+                  onClick={() => navigate('/activities')} >
                   <p><img src={SeeLogo} alt="" /></p>
                   <div style={{ color: '#1B72C0' }}>
                      <p className='text-center text-sm pt-2 font-semibold' >See </p>
