@@ -176,17 +176,10 @@ export default function Activities() {
       } else {
 
          let temp = filterItems.map(filterItem => {
-            // if (filterItem.id === 0) {
-            //    let allVal = false
-            //    if(item.selected === false){
-
-            //    }
-            //    return { ...filterItem, selected: !item.selected }
-            // }
             if (filterItem.id === item.id) {
-               return { ...filterItem, selected: !filterItem.selected }
+               return { ...filterItem, selected: true }
             } else {
-               return { ...filterItem }
+               return { ...filterItem, selected: false }
             }
          })
          setFilterItems(temp)

@@ -17,6 +17,7 @@ import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
 import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
 import { completeActivity, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
+import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 
 
 export default function StartActivity() {
@@ -29,7 +30,8 @@ export default function StartActivity() {
    const [isCompleted, setIsCompleted] = useState(false)
    const { categoryId, activityId } = useParams()
    const [category, setCategory] = useState({})
-
+   const [viewSubModal, setViewSubModal] = useState(false)
+   const [sourceToView, setSourceToView] = useState('')
    const [nextActivities, setNextActivities] = useState([])
    const inputRef = useRef(null)
 
@@ -47,7 +49,7 @@ export default function StartActivity() {
          }).catch(err => {
             console.log('err', err);
          })
-   }, [])
+   }, [activityId])
 
    //fetch category details
    useEffect(() => {
@@ -60,7 +62,7 @@ export default function StartActivity() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }, [categoryId])
 
    //fetch users activities
    const fetchUserActivities = () => {
@@ -84,7 +86,7 @@ export default function StartActivity() {
    useEffect(() => {
       if (loggedIn === false) return
       fetchUserActivities()
-   }, [loggedIn])
+   }, [loggedIn, activityId])
 
    useEffect(() => {
       if (loggedIn === false) return
@@ -158,13 +160,18 @@ export default function StartActivity() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }, [categoryId, activityId])
 
+   const onView = (item) => {
+      console.log(item);
+      setSourceToView(item)
+      setViewSubModal(true)
+   }
    //384480
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
    // console.log('activityId', activityId);
-   console.log('submission', submissions);
+   // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    // console.log('isCompleted', isCompleted);
    // console.log('nextActivities', nextActivities);
@@ -274,12 +281,12 @@ export default function StartActivity() {
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
 
                         {submissions.map((sub, idx) => {
-                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} />
+                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} onView={onView} />
                         })}
                      </div>
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] hidden sm:block`}>
                         {submissions.map((sub, idx) => {
-                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex + 1} idx={idx} />
+                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex + 1} idx={idx} onView={onView} />
                         })}
                      </div>
                      <img src={NextIcon} className={`${styles.nextIcon} sm:hidden`} alt='' onClick={increaseIndex} />
@@ -308,6 +315,11 @@ export default function StartActivity() {
             <StartActivityModal handleClose={() => setStartModalActive(false)}
                activityId={activityId}
                setIsAlreadyStarted={setIsAlreadyStarted} />
+         }
+         {
+            viewSubModal &&
+            <ViewSubmission handleClose={() => setViewSubModal(false)}
+            source={sourceToView} />
          }
       </>
    )

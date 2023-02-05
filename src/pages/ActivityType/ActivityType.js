@@ -69,7 +69,7 @@ export default function ActivityType() {
          }).catch(err => {
             console.log('err', err);
          })
-   }, [])
+   }, [categoryId])
 
 
    useEffect(() => {
@@ -82,12 +82,7 @@ export default function ActivityType() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
-   // useEffect(() => {
-   //    if (userActivities.length === 0) return
-   //    let temp = userActivities.filter(activity => activity.is_completed === false)
-   //    setFilteredUserActivities(temp)
-   // }, [userActivities])
+   }, [categoryId])
 
    useEffect(() => {
       if (userActivities.length === 0) return
@@ -105,13 +100,11 @@ export default function ActivityType() {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }, [categoryId])
 
    // console.log('category', category);
-   // console.log('userActivities', userActivities);
+   console.log('userActivities', userActivities);
    // console.log('activities', activities);
-
-
 
    return (
       <div>
@@ -140,7 +133,7 @@ export default function ActivityType() {
             }
             <div className='mt-5 sm:grid sm:grid-cols-4 sm:mx-20'>
                {userActivities.length > 0 ?
-                  userActivities.map(activity => {
+                  filteredUserActivities.map(activity => {
                      return <Activity {...activity.activity} key={activity.id} />
                   })
                   :

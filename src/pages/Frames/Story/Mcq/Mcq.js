@@ -78,12 +78,12 @@ export default function Mcq({ image, choices }) {
    }, [])
 
    return (
-      <div className={styles.storyMcq}>
+      <div className={`${styles.storyMcq} lg:grid-rows-6`}>
          {
             mcqResponse.selected === true
                ?
                mcqResponse.isCorrect === true ?
-                  <div className={`${styles.mcqResponseCorrect}`}>
+                  <div className={`${styles.mcqResponseCorrect} lg:row-span-4`}>
                      <img src={McqCorrectImg} className={styles.storyImage} />
                      <div className='px-4'>
                         <h2>
@@ -94,7 +94,7 @@ export default function Mcq({ image, choices }) {
                   </div>
                   :
                   mcqResponse.isCorrect === false ?
-                     <div className={`${styles.mcqResponseInCorrect}`}>
+                     <div className={`${styles.mcqResponseInCorrect} lg:row-span-4`}>
                         <div className='px-4'>
                            <h1>
                               OOPS!
@@ -103,11 +103,11 @@ export default function Mcq({ image, choices }) {
                         </div>
                      </div>
                      : <></> :
-               <div className='flx items-center self-streth flex-1 overflow-aut h-[342px]'>
+               <div className='flx lg:row-span-4 items-center self-streth flex-1 overflow-aut lg:h-full'>
                   <img src={image} className={styles.storyImage} />
                </div>
          }
-         <div className={styles.mcqOptions}>
+         <div className={`${styles.mcqOptions} lg:row-span-2`}>
             <p className='font-semibold mb-4' >
                How many differences can you spot?
             </p>

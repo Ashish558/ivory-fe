@@ -60,7 +60,8 @@
    align-items: center;
    z-index: -1;
 }
-.iconContainer{
+
+.iconContainer {
    cursor: pointer;
 }
 
@@ -94,6 +95,11 @@
    margin-bottom: 6.55px;
 }
 
+.leftIcon,
+.RightIcon {
+   display: none;
+}
+
 @media only screen and (min-width: 768px) {
 
 
@@ -109,12 +115,33 @@
       align-items: flex-end;
       padding-top: 50px;
       padding-bottom: 50px;
+      max-width: 800px;
+      margin: 0 auto;
+      /* min-height: 600px; */
+      /* height: 100vh; */
+   }
+
+   .leftIcon,
+   .RightIcon {
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+   }
+
+   .leftIcon {
+      left: 10px;
+   }
+
+   .RightIcon {
+      right: 10px;
    }
 
    .storyImg {
       position: static;
       max-width: 439px;
-      height: calc(100% - 60px);
+      height: calc(100vh - 120px);
       /* transform: translateX(-50%); */
    }
 

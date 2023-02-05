@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Arrow from '../../Images/Icon.png';
-
+import CheckedIcon from '../../assets/icons/circle-checked.svg'
 
 const Stories = () => {
    const [storyActive, setStoryActive] = useState(false)
@@ -106,6 +106,20 @@ const Stories = () => {
          setSelectedIndex(idx)
       }
    }
+
+   const selectPrevStory = () => {
+      if (selectedIndex > 0) {
+         setSelectedStory(stories[selectedIndex - 1])
+         setSelectedIndex(selectedIndex - 1)
+      }
+   }
+   const selectNextStory = () => {
+      if (selectedIndex < stories.length - 1) {
+         setSelectedStory(stories[selectedIndex + 1])
+         setSelectedIndex(selectedIndex + 1)
+       
+      }
+   }
    // console.log('selectedIndex', selectedIndex)
    // console.log('stories', stories)
    // console.log('selectedStory', selectedStory)
@@ -124,10 +138,13 @@ const Stories = () => {
             </div> */}
 
 
-            <Slider {...settings}>
+            <Slider {...settings} className='home-stories-slider' >
                {stories.map((story, idx) => {
                   return (
-                     <div className="p-3 " onClick={() => handleClick(story, idx)} >
+                     <div className="p-3 relative single-story-container" onClick={() => handleClick(story, idx)} >
+                        <div className='story-checked flex'>
+                           <img src={CheckedIcon} />
+                        </div>
                         <div className="" >
                            <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
                            <div className="pl-3 details">
@@ -187,6 +204,9 @@ const Stories = () => {
             storyActive &&
             <Story handleClose={() => setStoryActive(false)}
                story={selectedStory}
+               selectedIndex={selectedIndex}
+               selectPrevStory={selectPrevStory}
+               selectNextStory={selectNextStory}
                updateStory={updateStory} />
          }
       </>

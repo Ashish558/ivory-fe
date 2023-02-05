@@ -5,6 +5,8 @@ import BackIcon from '../../../assets/icons/back.svg'
 import LikeIcon from '../../../assets/icons/like.svg'
 import LikedIcon from '../../../assets/icons/liked.svg'
 import ShareIcon from '../../../assets/icons/share.svg'
+import LeftIcon from '../../../assets/icons/left.svg'
+import RightIcon from '../../../assets/icons/right.svg'
 
 import StoryImg from '../../../assets/images/story-1.png'
 import McqStoryImg from '../../../assets/images/story-mcq.png'
@@ -23,7 +25,7 @@ const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
 export default function Story(props) {
-   const { handleClose, updateStory } = props
+   const { handleClose, updateStory, selectNextStory, selectPrevStory, selectedIndex } = props
    let story = props.story
    let { id, image, type, liked, share_message, title, url, views } = story
    const [storyType, setStoryType] = useState(type)
@@ -33,6 +35,10 @@ export default function Story(props) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
    }
+
+   useEffect(() => {
+      setStoryType(type)
+   }, [type])
 
    useEffect(() => {
       hideHtmlOverflow()
@@ -56,7 +62,7 @@ export default function Story(props) {
          .catch(err => {
             console.log('view err', err.data);
          })
-   }, [])
+   }, [selectedIndex])
 
    const handleLike = () => {
       axios.get(`${url}like/`, getAuthHeaders())
@@ -78,14 +84,14 @@ export default function Story(props) {
          })
    }
 
-   // console.log('story', story)
+   // console.log('story', storyType)
    return (
       <>
 
          <div className={styles.modalContainer}>
             <div className="w-full p-0  self-stretch overflow-aut">
                <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
-                  <div className={`flex flex-col self-stretch flex-1 overflow-aut pb-[80px] ${styles.storyContainer} `}>
+                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} `}>
 
                      {storyType === 'image' ?
                         <div className={styles.storyImg}>
@@ -101,7 +107,7 @@ export default function Story(props) {
                                  controls={true}
                               />
                            </div>
-                           : storyType === 'mcq' ?
+                           : storyType === 'mcq' && story.choices !== undefined ?
                               <Mcq {...story} />
                               : storyType === 'mcq2' ?
                                  <Mcq2 />
@@ -130,6 +136,11 @@ export default function Story(props) {
                            Share
                         </div>
                      </div>
+
+                     <img src={LeftIcon} alt='left' className={styles.leftIcon} 
+                     onClick={selectPrevStory} />
+                     <img src={RightIcon} alt='right' className={styles.RightIcon}
+                       onClick={selectNextStory} />
                   </div>
                </div>
 

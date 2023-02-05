@@ -75,7 +75,8 @@ const Activities = () => {
          .then(res => {
             console.log('categories', res.data.data);
             if (res.data.data === null) return
-            setActivities(res.data.data)
+            let data = res.data.data .filter(item => item.is_recommended === true)
+            setActivities(data)
             // console.log(' updated', tempActivities);
          }).catch(err => {
             console.log(err.response);
