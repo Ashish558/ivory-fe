@@ -149,7 +149,7 @@ const Login = () => {
               </div>
             </form>
             <div
-              className="text-lg text-center w-[400px] text-gray-500 px-5 mt-5 mb-5 sm:hidden"
+              className=" text-[11px] text-center w-[400px] text-gray-500 px-1 mt-5 mb-5 sm:hidden"
               style={{
                 position: "absolute",
                 bottom: 10,
