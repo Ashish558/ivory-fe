@@ -1,45 +1,45 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import React,{ useEffect,useRef,useState } from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+import { Link,useNavigate } from 'react-router-dom'
 import arrow from "../../assets/arrow_back.png"
 import cross from "../../assets/cross.png"
+import CancelIcon from '../../assets/icons/x-icon.svg'
 import img from "../../assets/iphoto.png"
 import ivoryforming from "../../assets/ivoryforming.png"
 import photo from "../../assets/smile.png"
-import { updateProfileData } from '../../redux/slices/user'
-import { addInterest, getInterests } from '../../services/activities'
-import { editProfile, uploadProfile } from '../../services/user'
-import styles from "./Profile.module.css"
 import Modal from '../../components/Modal/modal'
-import CancelIcon from '../../assets/icons/x-icon.svg'
+import { updateProfileData } from '../../redux/slices/user'
+import { addInterest,getInterests } from '../../services/activities'
+import { editProfile,uploadProfile } from '../../services/user'
+import styles from "./Profile.module.css"
 
 const Profile = () => {
-  const [name, setName] = useState('')
-  const [mobile_no, setMobile_no] = useState(null)
-  const [email, setemail] = useState("");
-  const [text, settext] = useState("");
-  const [showdiv, setshowdiv] = useState(false);
-  const [addnewtextdiv, setaddnewtextdiv] = useState(false);
-  const [textColor, setTextColor] = useState('white');
-  const [backcolor, setbackcolor] = useState('#FFFFFF');
-  const [blur, setblur] = useState("");
+  const [name,setName] = useState('')
+  const [mobile_no,setMobile_no] = useState(null)
+  const [email,setemail] = useState("");
+  const [text,settext] = useState("");
+  const [showdiv,setshowdiv] = useState(false);
+  const [addnewtextdiv,setaddnewtextdiv] = useState(false);
+  const [textColor,setTextColor] = useState('white');
+  const [backcolor,setbackcolor] = useState('#FFFFFF');
+  const [blur,setblur] = useState("");
 
-  const [interest, setinterest] = useState([]);
-  const [allInterests, setAllInterests] = useState([])
-  const [userInterests, setUserInterests] = useState([])
-  const [interestInput, setInterestInput] = useState('')
+  const [interest,setinterest] = useState([]);
+  const [allInterests,setAllInterests] = useState([])
+  const [userInterests,setUserInterests] = useState([])
+  const [interestInput,setInterestInput] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [error, setError] = useState('')
+  const [error,setError] = useState('')
 
 
 
-  const { loggedIn, profileData } = useSelector(state => state.user)
+  const { loggedIn,profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
 
   // let arr = addtext.split(' '); 
   // console.log(arr);
-  const [gender, setgender] = useState("");
+  const [gender,setgender] = useState("");
   const colorchange = () => {
     setTextColor('Blue')
   }
@@ -53,12 +53,12 @@ const Profile = () => {
       setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
       setUserInterests(profileData.intrests)
     }
-  }, [profileData, loggedIn])
+  },[profileData,loggedIn])
 
 
   useEffect(() => {
     fetchInterests()
-  }, [])
+  },[])
 
   const fetchInterests = () => {
     getInterests()
@@ -72,13 +72,13 @@ const Profile = () => {
           }
         })
         const profileIntIds = profileData.intrests.map(int => int.id)
-        intData = intData.map(item => ({ ...item, selected: false }))
+        intData = intData.map(item => ({ ...item,selected: false }))
 
         intData = intData.map(item => {
           if (profileIntIds.includes(item.id)) {
-            return { ...item, selected: true }
+            return { ...item,selected: true }
           } else {
-            return { ...item, selected: false }
+            return { ...item,selected: false }
           }
         })
 
@@ -93,7 +93,7 @@ const Profile = () => {
     if (allInterests.length === 0) return
     let tempInt = allInterests.filter(item => item.selected === true)
     setUserInterests(tempInt)
-  }, [allInterests])
+  },[allInterests])
 
 
   const handleSubmit = (e) => {
@@ -111,9 +111,9 @@ const Profile = () => {
     } else {
       setError('')
       const body = {
-        gender, email, intrests: intIds, name, mobile_no
+        gender,email,intrests: intIds,name,mobile_no
       }
-      editProfile(body, profileData.mobile_no)
+      editProfile(body,profileData.mobile_no)
         .then(res => {
           console.log(res.data);
           dispatch(updateProfileData({ profileData: res.data.data }))
@@ -124,12 +124,12 @@ const Profile = () => {
         })
     }
   }
-  const [intIndex, setIntIndex] = useState([])
+  const [intIndex,setIntIndex] = useState([])
   const toggleInt = id => {
 
     let tempint = allInterests.map(int => {
       if (int.id === id) {
-        return { ...int, selected: !int.selected }
+        return { ...int,selected: !int.selected }
       } else {
         return { ...int }
       }
@@ -149,7 +149,7 @@ const Profile = () => {
 
 
   const handleAddInterest = () => {
-    addInterest({ name: interestInput, icon: null })
+    addInterest({ name: interestInput,icon: null })
       .then(res => {
         console.log(res.data);
         addcrossbox()
@@ -163,7 +163,7 @@ const Profile = () => {
       })
   }
 
-  const [selec, setselec] = useState("true");
+  const [selec,setselec] = useState("true");
 
   //------call to next page hide and show div----------
   const openinterest = () => {
@@ -190,10 +190,10 @@ const Profile = () => {
     if (file === undefined) return
 
     const formData = new FormData();
-    formData.append("profile_picture", file);
+    formData.append("profile_picture",file);
 
 
-    uploadProfile(formData, profileData.mobile_no)
+    uploadProfile(formData,profileData.mobile_no)
       .then(res => {
         console.log(res.data);
         dispatch(updateProfileData({ profileData: res.data.data }))
@@ -205,11 +205,11 @@ const Profile = () => {
 
   }
 
-  const deselectInterest = (e, id) => {
+  const deselectInterest = (e,id) => {
     e.stopPropagation()
     let filtered = userInterests.filter(item => item.id !== id)
     let filteredAll = allInterests.map(item => {
-     return item.id === id ? { ...item, selected: false } : { ...item }
+      return item.id === id ? { ...item,selected: false } : { ...item }
     })
     setUserInterests(filtered)
     setAllInterests(filteredAll)
@@ -314,7 +314,7 @@ const Profile = () => {
                             <img src={CancelIcon}
                               className='ml-1.5 cursor-pointer'
                               alt='cancel'
-                              onClick={(e) => deselectInterest(e, int.id)} />
+                              onClick={(e) => deselectInterest(e,int.id)} />
                           </div>
                         })
                       }
@@ -345,7 +345,7 @@ const Profile = () => {
                 <p className={styles.cho}>Choose one or more:</p>
                 <div className={styles.intttopic}>
                   {
-                    interest?.map((ele, index) => {
+                    interest?.map((ele,index) => {
                       return (
                         // <div className={styles.inttopic}>
                         <span className={styles.butt1} style={{ background: textColor }}
@@ -357,7 +357,7 @@ const Profile = () => {
                     })
                   }
                   {
-                    allInterests.map((int, i) => {
+                    allInterests.map((int,i) => {
                       return <div className={`${styles.butt1} ${int.selected === true ? `${styles.interestSelected}` : ''}`}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int.id)} >
@@ -405,7 +405,7 @@ const Profile = () => {
         }
         {/* ------------------------------------------------------------------------------------------------------- */}
       </div>
-    
+    </>
 
   )
 }
