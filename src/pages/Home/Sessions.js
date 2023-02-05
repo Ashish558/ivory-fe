@@ -5,6 +5,7 @@ import './Sessions.css'
 import User from '../../Images/user1.png'
 import LiveImg from '../../Images/Ellipse 3.png'
 import Arrow from '../../Images/Icon.png';
+import North from '../../Images/north.png';
 
 
 const Sessions = () => {
@@ -80,7 +81,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -107,7 +108,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -134,7 +135,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -161,7 +162,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
