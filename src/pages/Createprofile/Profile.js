@@ -202,9 +202,10 @@ const Profile = () => {
       })
 
   }
+  console.log(gender);
   // ------------------------------------------------------------
   return (
-    <div className=''>
+    <div className='mb-20 sm:mb-0'>
       {/* ----------------------main detail form ----------------------*/}
       <div className={styles.datainput} style={{ background: backcolor }}>
         <div className={styles.navbar}>
@@ -268,17 +269,15 @@ const Profile = () => {
             <div className={styles.input2}>
               <label htmlFor="" className={styles.emaillabel} >Gender</label>
               <div className={styles.genderinput}>
-                <div className={`${styles.checkboxdiv1} ${gender === 'male' ? 'bg-[#BDF4FF]' : ''}`} >
+                <div className={`${styles.checkboxdiv1} ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')}>
                   <label className={styles.gendermale} htmlFor="">Male</label>
-                  {console.log(gender)}
-                  <input label="Male" value="male" type="checkbox"
-                    checked={gender === 'male' ? true : false}
-                    onChange={(e) => setgender(e.target.value)} className={`${styles.maleinput}`}
-                  />
+                  {gender === 'male' ?
+                  <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span>:''}
                 </div>
-                <div className={`${styles.checkboxdiv2} ${gender === 'female' ? 'bg-[#BDF4FF]' : ''}`}>
+                <div className={`${styles.checkboxdiv2} ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')}>
                   <label className={styles.genderFemale} htmlFor="">Female</label>
-                  <input label="Female" checked={gender === 'female'} value='female' type="checkbox" onChange={(e) => setgender(e.target.value)} className={styles.femaleinput} />
+                  {gender === 'female' ?
+                    <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
                 </div>
               </div>
             </div>
