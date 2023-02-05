@@ -205,9 +205,9 @@ const Profile = () => {
   console.log(gender);
   // ------------------------------------------------------------
   return (
-    <div className='mb-20 sm:mb-0'>
+    <div className='mb-20 sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
       {/* ----------------------main detail form ----------------------*/}
-      <div className={styles.datainput} style={{ background: backcolor }}>
+      <div className={styles.datainput} >
         <div className={styles.navbar}>
 
         </div>
@@ -272,7 +272,7 @@ const Profile = () => {
                 <div className={`${styles.checkboxdiv1} ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')}>
                   <label className={styles.gendermale} htmlFor="">Male</label>
                   {gender === 'male' ?
-                  <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span>:''}
+                    <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
                 </div>
                 <div className={`${styles.checkboxdiv2} ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')}>
                   <label className={styles.genderFemale} htmlFor="">Female</label>
@@ -286,9 +286,9 @@ const Profile = () => {
 
               {
                 userInterests.length === 0 ?
-                  <div type="text" placeholder='Click to choose' onClick={openinterest}
+                  <input type="text" placeholder='Click to choose' onClick={openinterest}
                     className={styles.chooseinput}>
-                  </div>
+                  </input>
                   :
                   <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                     {
