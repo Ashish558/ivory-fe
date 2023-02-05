@@ -36,7 +36,6 @@ const SimpleSlider = () => {
                                     <h1>app</h1></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div>

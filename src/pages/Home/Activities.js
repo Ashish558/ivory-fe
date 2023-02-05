@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Arrow from '../../Images/Icon.png';
 import Logo1 from '../../Images/形状 (1).png'
 import Logo2 from '../../Images/形状 (2).png'
 import Logo3 from '../../Images/形状 (3).png'
@@ -11,7 +12,6 @@ import '../Home/Activities.css'
 import SeeLogo from '../../Images/Group.png'
 import { getCategories } from '../../services/activities';
 import { useNavigate } from 'react-router-dom';
-import Arrow from '../../Images/Icon.png';
 
 
 const Activities = () => {
@@ -89,20 +89,15 @@ const Activities = () => {
 
    return (
       <div>
-         <div className='pt-4 lg:ml-24 lg:mt-[96px]'>
-
-            <div className='lg:flex lg:items-center lg:mb-20 pb-4 lg:pb-0'>
-               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-medium'>Recommended activities</h1>
+         <div className='pt-4 lg:ml-24 lg:mt-24'>
+         <div className='lg:flex lg:items-center lg:mb-20'>
+               <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Recommended activities</h1>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
             </div>
-
-
-
-
             <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
                {
                   activities.map((activity) =>
-                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 cursor-pointer'
+                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 activitycard'
                         onClick={() => navigate(`/activities/${activity.id}`)}>
                         <p><img src={activity.icon} alt="" /></p>
                         {

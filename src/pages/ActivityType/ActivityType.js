@@ -113,9 +113,8 @@ export default function ActivityType() {
             <div className='pt-2'>
                <p className='text-lightGray font-medium sm:mx-20'> Activities {'>'} {category.name} </p>
             </div>
-
             <div className='mt-4'>
-               <h3 className='text-xl font-bold mb-2.5 sm:mx-20'>  {category.name} </h3>
+               <h3 className='text-4xl font-medium mb-2.5 sm:mx-20'>  {category.name} </h3>
                <ActivityContent />
             </div>
             {
