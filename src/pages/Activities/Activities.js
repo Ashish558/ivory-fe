@@ -224,7 +224,7 @@ export default function Activities() {
 
             <div className='lg:px-[80px] lg:max-w-[1000px] lg:pb-[150px]'>
                <div className=''>
-                  <h3 className='text-xl font-bold mb-2.5'> All Activities </h3>
+                  <h3 className='text-4xl font-semibold mb-2.5'> All Activities </h3>
                   <Filterbar items={filterItems} onChange={onChange} />
                </div>
 
@@ -235,7 +235,7 @@ export default function Activities() {
                         <div key={indx} className='mb-8' >
                            <div className='flex items-center mb-3'>
                               <img src={activity.icon} alt='activity' />
-                              <p className='ml-2 font-semibold'> {activity.name} </p>
+                              <p className='ml-2 text-2xl font-semibold'> {activity.name} </p>
                            </div>
                            <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-3'>
                               {activity.categories.map((category, idx) => {

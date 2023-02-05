@@ -34,7 +34,7 @@ const DesktopEvents = () => {
         <div className='pt-10'>
             <div style={{ marginTop: '88px' }} className='ml-24'>
                 <div className=' flex items-center mb-20'>
-                    <h1 className='text-5xl font-medium  '>Events <span></span></h1>
+                    <h1 className='text-5xl font-semibold '>Events<span></span></h1>
                     <p className='pl-7'><img src={Arrow} alt="" /></p>
                 </div>
 

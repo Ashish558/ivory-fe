@@ -69,7 +69,7 @@ const DesktopLearn = () => {
         <div className='pt-10 pb-40'>
             <div style={{ marginTop: '88px' }} className='ml-24'>
                 <div className=' flex items-center mb-20'>
-                    <h1 className='text-5xl font-medium  '>Learn with Ivory<span></span></h1>
+                    <h1 className='text-4xl  font-semibold  '>Learn with Ivory<span></span></h1>
                     <p className='pl-7'><img src={Arrow} alt="" /></p>
                 </div>
 
@@ -77,7 +77,7 @@ const DesktopLearn = () => {
                 <Slider {...settings}>
 
                     <div >
-                        <div class="card custom-card-learn  ">
+                        <div class="card custom-card-learn  cursor-pointer">
                             <figure><img className='w-full' src={Learn3} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
@@ -119,7 +119,7 @@ const DesktopLearn = () => {
                         </div>
                     </div>
                     <div >
-                        <div class="card custom-card-learn  ">
+                        <div class="card custom-card-learn  cursor-pointer">
                             <figure><img className='w-full' src={Learn2} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
@@ -158,7 +158,7 @@ const DesktopLearn = () => {
                         </div>
                     </div>
                     <div >
-                        <div class="card custom-card-learn  ">
+                        <div class="card custom-card-learn  cursor-pointer">
                             <figure ><img style={{ height: '228px' }} className='w-full' src={Learn1} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
@@ -197,7 +197,7 @@ const DesktopLearn = () => {
                         </div>
                     </div>
                     <div >
-                        <div class="card custom-card-learn  ">
+                        <div class="card custom-card-learn  cursor-pointer">
                             <figure><img className='w-full' src={Learn4} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>

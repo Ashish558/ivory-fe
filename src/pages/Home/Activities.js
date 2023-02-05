@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Arrow from '../../Images/Icon.png';
 import Logo1 from '../../Images/形状 (1).png'
 import Logo2 from '../../Images/形状 (2).png'
 import Logo3 from '../../Images/形状 (3).png'
@@ -83,17 +84,20 @@ const Activities = () => {
          })
    }, [])
 
+
+   // lg:text-[48px]
+
    return (
       <div>
          <div className='pt-4 lg:ml-24 lg:mt-24'>
-            <h1 className='text-xl lg:text-[48px] lg:font-normal font-black pl-4 pb-3 lg:mb-12'>
-               Recommended activities</h1>
-
-
+         <div className='lg:flex lg:items-center lg:mb-20'>
+               <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Recommended activities</h1>
+               <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+            </div>
             <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
                {
                   activities.map((activity) =>
-                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'
+                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 activitycard'
                         onClick={() => navigate(`/activities/${activity.id}`)}>
                         <p><img src={activity.icon} alt="" /></p>
                         {
@@ -107,8 +111,8 @@ const Activities = () => {
 
 
                }
-               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2'
-               onClick={()=> navigate('/activities')} >
+               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 cursor-pointer'
+                  onClick={() => navigate('/activities')} >
                   <p><img src={SeeLogo} alt="" /></p>
                   <div style={{ color: '#1B72C0' }}>
                      <p className='text-center text-sm pt-2 font-semibold' >See </p>

@@ -28,7 +28,6 @@ const Courses = () => {
     return (
         <div className='pt-8'>
             <h1 className='text-xl font-black pl-4 '>Learn with Ivory</h1>
-
             {
                 courses.map(course =>
                     <div className="m-4 box">

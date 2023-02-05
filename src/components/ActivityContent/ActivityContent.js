@@ -12,7 +12,7 @@ export default function ActivityContent() {
 
 
    return (
-      <div className={`${styles.activityContent} sm:mx-20`} >
+      <div className={`${styles.activityContent} sm:mx-20 mt-6`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
             <div className='relative flex-1 sm:flex  sm:w-[4/12] w-full'>
                <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-full' />
@@ -38,7 +38,7 @@ export default function ActivityContent() {
                         <p className='text-xxs sm:text-lg font-semild md:text-xl'> International Artist </p>
                      </div>
                   </div>
-                  <div className='sm:flex text-center justify-center items-center text-white  w-[70px] md:w-[90px] h-[35px] md:h-[45px] md:text-xl md:font-bold bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer hidden mr-10'>
+                  <div className='sm:flex text-center justify-center items-center text-white  w-[70px] md:w-[90px] h-[35px] md:h-[45px] md:text-xl md:font-bold bg-[#0055BF] rounded-full overflow-hidden cursor-pointer hidden mr-10'>
                      <h1>Join</h1>
                   </div>
                </div>

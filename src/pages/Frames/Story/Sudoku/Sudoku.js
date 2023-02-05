@@ -31,10 +31,10 @@ export default function Sudoku({ image, answer_image, answer_viewed, type, url, 
    }, [answerActive, answer_viewed])
 
    return (
-      <div className={styles.storySudoku}>
+      <div className={`${styles.storySudoku} lg:grid-rows-6`}>
 
 
-         <div className='flx items-center self-streth flex-1 overflow-auto h-[342px]'>
+         <div className='flx items-center self-streth flex- lg:h-full lg:row-span-4 lg:gap-y-1'>
             {
                answerActive ?
                   <img src={image} className={styles.storyImage} />
@@ -44,7 +44,7 @@ export default function Sudoku({ image, answer_image, answer_viewed, type, url, 
 
          </div>
 
-         <div className={styles.sudokuBottom}>
+         <div className={`${styles.sudokuBottom}  lg:row-span-2`}>
             <div className={styles.helpContainer}>
                <p className='text-[#001C38] font-semibold pr-3 flex-1'>
                   Need help? <br></br> Check how to play Sudoku
