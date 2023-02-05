@@ -3,7 +3,7 @@ import Arrow from '../../../Images/Icon.png';
 
 import Slider from 'react-slick';
 import './DesktopStories.css';
-import Play from '../../../Images//Vector.png'
+import Play from '../../../Images/Vector.png'
 
 
 

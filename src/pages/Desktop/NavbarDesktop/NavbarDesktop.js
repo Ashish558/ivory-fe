@@ -41,7 +41,6 @@ const NavbarDesktop = () => {
 
    let currentPath = `/${location.pathname.split('/')[1]}`
    const handleSidebar = () => {
-
       const elem = document.activeElement;
       if (elem) {
          elem?.blur();
@@ -114,25 +113,25 @@ const NavbarDesktop = () => {
                   <div className='flex  justify-between px-4 pt-10'>
                      <div>
                         <div className='flex  items-center cursor-pointer'>
-                           <p><img src={edit} alt="" /></p>
+                           <p onClick={handleSidebar}><img src={edit} alt="" /></p>
                            <p className='text-sm font-semibold pl-4' onClick={() => navigate('/CreateProfile')} > Edit Profile</p>
                         </div>
                         <div className='flex  items-center pt-9 cursor-pointer'>
-                           <p><img src={play} alt="" /></p>
+                           <p onClick={handleSidebar}><img src={play} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> How to use app</p>
                         </div>
 
                         <div className='flex  items-center pt-9 cursor-pointer'>
-                           <p><img src={programs} alt="" /></p>
+                           <p onClick={handleSidebar}><img src={programs} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> My Programs</p>
                         </div>
 
-                        <div className='flex  items-center pt-9 cursor-pointer'>
-                           <p><img src={activities} alt="" /></p>
+                        <div className='flex  items-center pt-9 cursor-pointer' onClick={() => navigate('/activities')}>
+                           <p onClick={handleSidebar}><img src={activities} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> My Activities</p>
                         </div>
                         <div className='flex  items-center pt-9 cursor-pointer'>
-                           <p><img src={sessions} alt="" /></p>
+                           <p onClick={handleSidebar}><img src={sessions} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> My Live Sessions</p>
                         </div>
 
@@ -142,16 +141,17 @@ const NavbarDesktop = () => {
 
                      <div className=''>
 
-                        <div className='flex  items-center cursor-pointer'>
-                           <p><img src={exit} alt="" /></p>
-                           <p className='text-sm font-semibold pl-4' onClick={() => handleLogout()} > My Sign out</p>
+                        <div className='flex  items-center cursor-pointer'
+                           onClick={() => { handleLogout(); handleSidebar() }} >
+                           <p onClick={handleSidebar}><img src={exit} alt="" /></p>
+                           <p className='text-sm font-semibold pl-4'> My Sign out</p>
                         </div>
                         <div className='flex  items-center pt-9 cursor-pointer'>
-                           <p><img src={faq} alt="" /></p>
+                           <p onClick={handleSidebar}><img src={faq} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> My FAQ</p>
                         </div>
                         <div className='flex  items-center pt-9 cursor-pointer'>
-                           <p><img src={contact} alt="" /></p>
+                           <p onClick={handleSidebar}><img src={contact} alt="" /></p>
                            <p className='text-sm font-semibold pl-4'> My Contact us</p>
                         </div>
 

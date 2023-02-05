@@ -12,7 +12,7 @@ const Sessions = () => {
 
         infinite: false,
         // centerPadding: "60px",
-        slidesToShow: 3,
+        slidesToShow: 3.4,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
@@ -21,7 +21,7 @@ const Sessions = () => {
                 breakpoint: 1024,
                 settings: {
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 3.4,
                         initialSlide: 0,
                     },
                 }
@@ -62,7 +62,7 @@ const Sessions = () => {
 
 
     return (
-        <div className=" lg:ml-24 lg:mt-20 mt-14">
+        <div className=" lg:ml-24 lg:mt-[120px] mt-10 ">
             <div className='lg:flex lg:items-center lg:mb-20'>
                 <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-medium'>Live Sessions</h1>
                 <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
@@ -71,7 +71,7 @@ const Sessions = () => {
 
             <Slider {...settings}>
                 <div className=' p-3 lg:p-0'>
-                    <div class="card custom"  >
+                    <div class="card custom cursor-pointer"  >
                         <figure ><img className='session-img w-full' src={Image} alt="Shoes" /></figure>
                         <div class="px-2 lg:pl-4">
 
@@ -98,7 +98,7 @@ const Sessions = () => {
                     </div>
                 </div>
                 <div className=' p-3 lg:p-0'>
-                    <div class="card custom"  >
+                    <div class="card custom cursor-pointer"  >
                         <figure ><img className='session-img w-full' src={Image} alt="Shoes" /></figure>
                         <div class="px-2 lg:pl-4">
 
@@ -125,7 +125,7 @@ const Sessions = () => {
                     </div>
                 </div>
                 <div className=' p-3 lg:p-0'>
-                    <div class="card custom"  >
+                    <div class="card custom cursor-pointer"  >
                         <figure ><img className='session-img w-full' src={Image} alt="Shoes" /></figure>
                         <div class="px-2 lg:pl-4">
 
@@ -152,7 +152,7 @@ const Sessions = () => {
                     </div>
                 </div>
                 <div className=' p-3 lg:p-0'>
-                    <div class="card custom"  >
+                    <div class="card custom cursor-pointer"  >
                         <figure ><img className='session-img w-full' src={Image} alt="Shoes" /></figure>
                         <div class="px-2 lg:pl-4">
 
