@@ -37,9 +37,9 @@ export default function Sudoku({ image, answer_image, answer_viewed, type, url, 
          <div className='flx items-center self-streth flex- lg:h-full lg:row-span-4 lg:gap-y-1'>
             {
                answerActive ?
-                  <img src={image} className={styles.storyImage} />
-                  :
                   <img src={answer_image} className={styles.storyImage} />
+                  :
+                  <img src={image} className={styles.storyImage} />
             }
 
          </div>
