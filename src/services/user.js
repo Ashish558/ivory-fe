@@ -41,6 +41,10 @@ export const uploadActivity = (body) => {
    return axios.post(`${BASE_URL}/accounts/user-activity-submissions/`, body, getAuthHeaders())
 };
 
+export const deleteSubmission = (id) => {
+   return axios.delete(`${BASE_URL}/accounts/user-activity-submissions/${id}/`, getAuthHeaders())
+};
+
 export const getUserDetail = (phone) => {
    return axios.get(`${BASE_URL}/accounts/users/`, 
    {

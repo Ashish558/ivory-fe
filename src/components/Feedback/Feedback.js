@@ -4,7 +4,7 @@ import styles from './slider.module.css'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import CatImg from '../../assets/images/cat.png'
 
-export default function Feedback({ created_at, activity, submission, feedbacks, is_feedbacked, currentIndex, idx, onView }) {
+export default function Feedback({ created_at, activity, submission, feedbacks, is_feedbacked, currentIndex, idx, onView, onDelete, id }) {
    return (
       <div className={`${styles.container}  ${currentIndex === idx ? styles.active : idx < currentIndex ? styles.prev : styles.next}`}>
          <p className='text-lightGray text-sm font-normal mb-3.5 mt-4 px-4 pt-4'>
@@ -15,11 +15,11 @@ export default function Feedback({ created_at, activity, submission, feedbacks, 
                <img src={submission} alt='submission' />
             </div>
             <div className='flex flex-col ml-4'>
-               <SecondaryButton children='View' onClick={()=>onView(submission)}
+               <SecondaryButton children='View' onClick={() => onView(submission)}
                   className='text-sm shadow-light w-[68px] h-8 px-2 pt-1 pb-1 mb-2 border-none' />
                <SecondaryButton children='Share'
                   className='text-sm w-[68px] h-8 shadow-light px-2 pt-1 pb-1 mb-2 border-none' />
-               <SecondaryButton children='Delete'
+               <SecondaryButton children='Delete' onClick={() => onDelete(id)}
                   className='text-sm w-[68px] h-8 shadow-light px-2 pt-1 pb-1 border-none' />
             </div>
          </div>
