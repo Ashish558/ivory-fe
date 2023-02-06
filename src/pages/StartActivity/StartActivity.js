@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './styles.module.css'
+import ReactPlayer from 'react-player/youtube'
 
 import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
@@ -16,7 +17,7 @@ import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
 import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
-import { completeActivity, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
+import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 
 
@@ -96,8 +97,8 @@ export default function StartActivity() {
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
          .then(res => {
-            // console.log('submission res', res.data.data);
-            if (res.data.data === null) return
+            console.log('submission res', res.data.data);
+            if (res.data.data === null) return setSubmissions([])
             setSubmissions(res.data.data)
          }).catch(err => {
             console.log('submission err', err);
@@ -162,6 +163,17 @@ export default function StartActivity() {
          })
    }, [categoryId, activityId])
 
+   const onDelete = (id) => {
+      console.log(id);
+      deleteSubmission(id)
+         .then(res => {
+            console.log('delete res', res.data);
+            alert('deleted successfully')
+            getSubmissions()
+         }).catch(err => {
+            console.log('delete err', err);
+         })
+   }
    const onView = (item) => {
       console.log(item);
       setSourceToView(item)
@@ -188,10 +200,23 @@ export default function StartActivity() {
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
                <p className='text-xl sm:text-2xl font-bold mb-2.5 px-4 sm:py-4'> {name} </p>
-               <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
-                  <img src={image === null ? ActivityIcon : image}
-                     className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
-               </div>
+               {
+                  video_link !== null ?
+                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
+                        <ReactPlayer
+                           width='100%'
+                           height='400px'
+                           url={video_link}
+                           controls={true}
+                        />
+                     </div>
+                     :
+                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
+                        <img src={image === null ? ActivityIcon : image}
+                           className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
+                     </div>
+               }
+
             </div>
 
             <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
@@ -281,12 +306,20 @@ export default function StartActivity() {
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
 
                         {submissions.map((sub, idx) => {
-                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex} idx={idx} onView={onView} />
+                           return <Feedback key={sub.id} {...sub}
+                              currentIndex={currentIndex}
+                              idx={idx}
+                              onView={onView}
+                              onDelete={onDelete} />
                         })}
                      </div>
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] hidden sm:block`}>
                         {submissions.map((sub, idx) => {
-                           return <Feedback key={sub.id} {...sub} currentIndex={currentIndex + 1} idx={idx} onView={onView} />
+                           return <Feedback key={sub.id} {...sub}
+                              currentIndex={currentIndex + 1}
+                              idx={idx}
+                              onView={onView}
+                              onDelete={onDelete} />
                         })}
                      </div>
                      <img src={NextIcon} className={`${styles.nextIcon} sm:hidden`} alt='' onClick={increaseIndex} />
@@ -319,7 +352,7 @@ export default function StartActivity() {
          {
             viewSubModal &&
             <ViewSubmission handleClose={() => setViewSubModal(false)}
-            source={sourceToView} />
+               source={sourceToView} />
          }
       </>
    )
