@@ -244,7 +244,7 @@ const Dob = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-2">
+              <div className="mt-">
                 <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
                   <div
                     className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "

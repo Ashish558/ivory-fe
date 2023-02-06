@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './styles.module.css'
+import ReactPlayer from 'react-player/youtube'
 
 import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
@@ -199,10 +200,23 @@ export default function StartActivity() {
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
                <p className='text-xl sm:text-2xl font-medium mb-2.5 px-4 sm:py-4'> {name} </p>
-               <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
-                  <img src={image === null ? ActivityIcon : image}
-                     className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
-               </div>
+               {
+                  video_link !== null ?
+                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
+                        <ReactPlayer
+                           width='100%'
+                           height='400px'
+                           url={video_link}
+                           controls={true}
+                        />
+                     </div>
+                     :
+                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
+                        <img src={image === null ? ActivityIcon : image}
+                           className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
+                     </div>
+               }
+
             </div>
 
             <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
