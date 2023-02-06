@@ -25,15 +25,15 @@ const SimpleSlider = () => {
                         <div style={{ height: '140px', margin: "0 auto" }} className="grid grid-cols-2 mx">
                             <div className="flex items-center pl-6">
                                 <div className="banner">
-                                    <img className="rounded-3xl " src={Image} alt="" />
+                                    <img className="rounded-2xl " src={Image} alt="" />
                                     <p className="play bg-black rounded-full"></p>
                                 </div>
                             </div>
                             <div className="flex items-center pl-2">
-                                <div className="font-bold   text-xl ">
-                                    <h1 >Learn How</h1>
-                                    <h1>to use Ivory</h1>
-                                    <h1>app</h1></div>
+                                <div style={{ fontWeight: '700' }} className=" text-xl ">
+                                    <p >Learn how</p>
+                                    <p>to use Ivory</p>
+                                    <p>app</p></div>
                             </div>
                         </div>
                     </div>
@@ -44,15 +44,15 @@ const SimpleSlider = () => {
                         <div style={{ height: '140px', margin: "0 auto" }} className="grid grid-cols-2 mx">
                             <div className="flex items-center pl-6">
                                 <div className="banner">
-                                    <img className="rounded-3xl " src={Image} alt="" />
+                                    <img className="rounded-2xl " src={Image} alt="" />
                                     <p className="play bg-black rounded-full"></p>
                                 </div>
                             </div>
                             <div className="flex items-center pl-2">
-                                <div className="font-bold   text-xl ">
-                                    <h1 >Learn How</h1>
-                                    <h1>to use Ivory</h1>
-                                    <h1>app</h1></div>
+                                <div style={{ fontWeight: '700' }} className=" text-xl ">
+                                    <p >Learn how</p>
+                                    <p>to use Ivory</p>
+                                    <p>app</p></div>
                             </div>
                         </div>
 
@@ -64,15 +64,15 @@ const SimpleSlider = () => {
                         <div style={{ height: '140px', margin: "0 auto" }} className="grid grid-cols-2 mx">
                             <div className="flex items-center pl-6">
                                 <div className="banner">
-                                    <img className="rounded-3xl " src={Image} alt="" />
+                                    <img className="rounded-2xl " src={Image} alt="" />
                                     <p className="play bg-black rounded-full"></p>
                                 </div>
                             </div>
                             <div className="flex items-center pl-2">
-                                <div className="font-bold   text-xl ">
-                                    <h1 >Learn How</h1>
-                                    <h1>to use Ivory</h1>
-                                    <h1>app</h1></div>
+                                <div style={{ fontWeight: '700' }} className=" text-xl ">
+                                    <p >Learn how</p>
+                                    <p>to use Ivory</p>
+                                    <p>app</p></div>
                             </div>
                         </div>
 

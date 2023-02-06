@@ -78,6 +78,10 @@
 
 @media only screen and (min-width: 768px) {
 
+    .HideplayLogo {
+        display: none;
+    }
+
     .responsive-width,
     .background-story-1 {
         height: 480px;
@@ -116,6 +120,9 @@
         height: 209px;
     }
 
+    .HideplayDesktopLogo {
+        display: none;
+    }
 
 
 
