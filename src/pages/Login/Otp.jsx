@@ -14,7 +14,7 @@ const Otp = () => {
   const [otpStatus, setOtpStatus] = useState('');
   const locaion = useLocation();
   const NewLocation = useLocation();
-  const from = locaion.state?.from || "/login";
+  const from = locaion?.state?.from || "/login";
   const stateData = locaion?.state;
   const { otp: otpData, otp_token, phone, countryCode } = stateData;
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const Otp = () => {
   const navigate = useNavigate();
   useEffect(() => {
 
-    const otpArray = stateData.otp.split("");;
+    const otpArray = stateData?.otp.split("");;
     const otpValues = {
       field1: otpArray[0],
       field2: otpArray[1],

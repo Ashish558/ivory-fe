@@ -45,7 +45,14 @@ const Dob = () => {
 
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(from, { replace: true });
+    navigate(from,{
+      state: {
+        otp: otp,
+        otp_token: otp_token,
+        phone: phone,
+        countryCode: countryCode,
+      
+    } });
   };
   const handleDate = (e) => {
     // e.preventDefault();

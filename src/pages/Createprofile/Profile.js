@@ -244,7 +244,7 @@ const Profile = () => {
             >Add Profile picture
             </p>
           </div>
-          <div className={styles.formimg}>
+          <div className={`${styles.formimg} sm:mt-3`}>
             <div className={styles.form}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
@@ -254,7 +254,7 @@ const Profile = () => {
                   onChange={(e) => setName(e.target.value)} />
               </div>
               <div className={styles.input1}>
-                <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
+                <label htmlFor="" className={`${styles.emaillabel} sm:mt-3`} >Phone Number</label>
                 <input
                   // type="Number"
                   placeholder='9777766665' className={styles.emailinput}
@@ -269,7 +269,7 @@ const Profile = () => {
                 <p className="ml-8 text-red-300">{error}</p>
               </div>
               <div className={styles.input1}>
-                <label htmlFor="" className={styles.emaillabel} >Email Address</label>
+                <label htmlFor="" className={`${styles.emaillabel} sm:mt-3`} >Email Address</label>
 
                 <input
                   className={styles.emailinput} name="email"
@@ -303,7 +303,7 @@ const Profile = () => {
                   userInterests.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
                       className={styles.chooseinput}>
-                      <p> Click to choose</p>
+                      <p className=' pl-3 pt-2'> Click to choose</p>
                     </div>
                     :
                     <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
@@ -329,7 +329,8 @@ const Profile = () => {
             </div>
             <img src={ivoryforming} className={styles.ivoryForm} alt="" />
           </div>
-          <button className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>{/*-------------Go to next page---------------*/}
+          <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>{/*-------------Go to next page---------------*/}
+          <button type='submit' className={styles.btnUpdate2} onClick={handleSubmit}>Save Profile</button>
         </div>
         {/* ------------------------------------------------------------------------------ */}
         {/* ---------------------------The interest selecting div------------------------------------ */}
@@ -342,7 +343,7 @@ const Profile = () => {
                   <p className={styles.intp}>Interests</p>
                 </div>
                 <hr className={styles.brk} />
-                <p className={styles.cho}>Choose one or more:</p>
+                <p className={`${styles.cho}`}>Choose one or more:</p>
                 <div className={styles.intttopic}>
                   {
                     interest?.map((ele,index) => {

@@ -26,16 +26,16 @@
   .edithead {
     position: relative;
     top: 19px;
-    width: 170px;
+    /* width: 170px; */
     left: 110px;
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 500;
   }
   .head > img {
     width: 18px;
     position: relative;
     top: 40px;
-    left: 256px;
+    left: 330px;
     rotate: 232deg;
   }
   .image {
@@ -91,6 +91,7 @@
     width: 334px;
     border: 1px solid #79747e;
     background: none;
+    font-size: 16px;
   }
   .emailinput::placeholder {
     /* padding-left:20px; */
@@ -103,7 +104,7 @@
   }
   .emaillabel {
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
   }
   .genderinput {
@@ -159,13 +160,13 @@
     height: 40px;
     border-radius: 5px;
     width: 334px;
-    border: 2px solid #1B72C0;
+    border: 2px solid #1b72c0;
     border-radius: 4px;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
-  .chooseinput p{
+  .chooseinput p {
     margin-left: 1rem;
   }
   .chooseinput::placeholder {
@@ -178,6 +179,18 @@
     margin-left: 36%;
     border-radius: 30px;
     background: #4d88d3;
+    border: none;
+    position: relative;
+    top: 45px;
+    font-size: 15px;
+    color: white;
+  }
+  .btnUpdate2 {
+    height: 40px;
+    width: 20%;
+    margin-left: 36%;
+    border-radius: 30px;
+    background: #B5CFEC;
     border: none;
     position: relative;
     top: 45px;
