@@ -84,6 +84,7 @@ export default function StartActivity() {
             console.log('err', err);
          })
    }
+
    useEffect(() => {
       if (loggedIn === false) return
       fetchUserActivities()
@@ -164,7 +165,6 @@ export default function StartActivity() {
    }, [categoryId, activityId])
 
    const onDelete = (id) => {
-      console.log(id);
       deleteSubmission(id)
          .then(res => {
             console.log('delete res', res.data);
@@ -175,14 +175,14 @@ export default function StartActivity() {
          })
    }
    const onView = (item) => {
-      console.log(item);
+      // console.log(item);
       setSourceToView(item)
       setViewSubModal(true)
    }
    //384480
    // console.log('loggedIn', loggedIn);
-   // console.log('userActivityId', userActivityId);
-   // console.log('activityId', activityId);
+   console.log('userActivityId', userActivityId);
+   console.log('activityId', activityId);
    // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    // console.log('isCompleted', isCompleted);
@@ -347,7 +347,8 @@ export default function StartActivity() {
             startModalActive &&
             <StartActivityModal handleClose={() => setStartModalActive(false)}
                activityId={activityId}
-               setIsAlreadyStarted={setIsAlreadyStarted} />
+               setIsAlreadyStarted={setIsAlreadyStarted}
+               fetchUserActivities={fetchUserActivities} />
          }
          {
             viewSubModal &&

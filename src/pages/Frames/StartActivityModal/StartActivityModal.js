@@ -6,7 +6,7 @@ import { startActivity } from '../../../services/user'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export default function StartActivityModal({ handleClose, activityId, setIsAlreadyStarted }) {
+export default function StartActivityModal({ handleClose, activityId, setIsAlreadyStarted, fetchUserActivities }) {
 
    const { loggedIn } = useSelector(state => state.user)
    const navigate = useNavigate()
@@ -20,6 +20,7 @@ export default function StartActivityModal({ handleClose, activityId, setIsAlrea
       .then(res => {
          console.log('start resp', res);
          setIsAlreadyStarted(true)
+         fetchUserActivities()
          handleClose()
       }).catch(err => {
          console.log('start err', err);
