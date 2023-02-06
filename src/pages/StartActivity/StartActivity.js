@@ -198,7 +198,7 @@ export default function StartActivity() {
             </div>
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
-               <p className='text-xl sm:text-2xl font-bold mb-2.5 px-4 sm:py-4'> {name} </p>
+               <p className='text-xl sm:text-2xl font-medium mb-2.5 px-4 sm:py-4'> {name} </p>
                <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
                   <img src={image === null ? ActivityIcon : image}
                      className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
@@ -207,8 +207,8 @@ export default function StartActivity() {
 
             <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
 
-               <p className='text-xl sm:text-2xl font-semibold mb-2.5'> Description </p>
-               <p className='text-sm sm:text-xl'>
+               <p className='text-xl sm:text-2xl font-semibold mb-1.5'> Description </p>
+               <p className='text-sm sm:text-xl lg:w-7/12'>
                   {description}
                </p>
                {
@@ -224,7 +224,7 @@ export default function StartActivity() {
                                  <p className='font-semibold text-[#7B34FB] mb-4'>
                                     Step {` ${idx}`}
                                  </p>
-                                 <div className='font-semibold'>
+                                 <div  lassName='font-semibold'>
                                     {step.description}
                                  </div>
                               </div>
@@ -320,7 +320,7 @@ export default function StartActivity() {
                   Next Activities
                </h4>
 
-               <div className='mt-5 max-w-[600px]  sm:mx-[60px]'>
+               <div className='mt-5 flex sm:mx-[60px]'>
                   {nextActivities.length > 0 &&
                      nextActivities.map(activity => {
                         return <Activity {...activity} key={activity.id} />

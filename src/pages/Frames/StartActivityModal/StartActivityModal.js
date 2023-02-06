@@ -41,7 +41,7 @@ export default function StartActivityModal({ handleClose, activityId, setIsAlrea
                <div className='px-4 font-normal	mt-6 sm:text-xl sm:px-8 sm:flex sm:flex-col sm:justify-between'>
                   <p>You have unlocked 5 free activities. Take advantage of this opportunity and start one for free today. Don't miss out!</p> 
                   <div className='flex justify-end mt-12 sm:absolute sm:bottom-5 sm:right-5'>
-                     <button className='text-primary px-4 py-2.5 font-semibold mr-1'
+                     <button className='text-primary px-8 py-2.5 font-semibold mr-1'
                         onClick={handleClose}>
                         Later
                      </button>

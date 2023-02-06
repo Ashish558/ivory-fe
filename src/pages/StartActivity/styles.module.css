@@ -22,9 +22,8 @@
 }
 .image{
    width: 100%;
-   max-width: 500px;
- 
-   object-fit: contain;
+    height: 321px;
+    max-width: 748px;
 }
 .seeMoreBtn{
    color: #1B72C0;

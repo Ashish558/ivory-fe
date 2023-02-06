@@ -203,7 +203,7 @@ export default function Activities() {
 
          <div className='px-4 lg:px-0'>
 
-            <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 lg:px-[80px] lg:bg-activities-gradient'>
+            <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 lg:px-[80px] lg:bg-sky-50'>
                <div className='lg:flex mt-10 flex-col'>
                <div className=' flex items-center mb-2'>
                   <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'> My activities

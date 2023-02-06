@@ -15,7 +15,7 @@ export default function ActivityContent() {
       <div className={`${styles.activityContent} sm:mx-20 mt-6`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
             <div className='relative flex-1 sm:flex  sm:w-[4/12] w-full'>
-               <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-full' />
+               <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-80' />
                <img src={PauseIcon} alt='play' className={styles.playIcon} />
             </div>
             <p className='font-bold text-xl flex-1 sm:hidden'>
@@ -23,7 +23,7 @@ export default function ActivityContent() {
                painting basics in 8 hrs
             </p>
 
-            <div className="flex flex-col  justify-between sm:gap-16 sm:px-2 sm:w-8/12 sm:h-[200px] md:h-[250px]">
+            <div className="flex flex-col  justify-between sm:gap-16 sm:px-2 sm:w-8/12 sm:h-[200px] md:h-[197px]">
                <p className='font-bold text-xl md:text-3xl flex-1 hidden sm:block'>
                   Learn Acrylic
                   painting basics in 8 hrs
