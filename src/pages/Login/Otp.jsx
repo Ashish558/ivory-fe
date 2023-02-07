@@ -47,7 +47,7 @@ const Otp = () => {
   const [otpStatus, setOtpStatus] = useState('');
   const locaion = useLocation();
   const NewLocation = useLocation();
-  const from = locaion.state?.from || "/login";
+  const from = locaion?.state?.from || "/login";
   const stateData = locaion?.state;
   const { otp: otpData, otp_token, phone, countryCode } = stateData;
   const dispatch = useDispatch()
@@ -56,7 +56,7 @@ const Otp = () => {
   const navigate = useNavigate();
   useEffect(() => {
 
-    const otpArray = stateData.otp.split("");;
+    const otpArray = stateData?.otp.split("");;
     const otpValues = {
       field1: otpArray[0],
       field2: otpArray[1],
@@ -215,7 +215,7 @@ const Otp = () => {
                   type="text"
                   value={otp.field2}
                   name="field2"
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -223,7 +223,7 @@ const Otp = () => {
                   type="text"
                   name="field3"
                   value={otp.field3}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -231,7 +231,7 @@ const Otp = () => {
                   type="text"
                   name="field4"
                   value={otp.field4}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -239,7 +239,7 @@ const Otp = () => {
                   type="text"
                   name="field5"
                   value={otp.field5}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
@@ -247,7 +247,7 @@ const Otp = () => {
                   type="text"
                   name="field6"
                   value={otp.field6}
-                  maxlength="1"
+                  maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
               </div>

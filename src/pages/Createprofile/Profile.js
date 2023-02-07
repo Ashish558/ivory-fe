@@ -1,45 +1,46 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import React,{ useEffect,useRef,useState } from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+import { Link,useNavigate } from 'react-router-dom'
 import arrow from "../../assets/arrow_back.png"
 import cross from "../../assets/cross.png"
+import CancelIcon from '../../assets/icons/x-icon.svg'
 import img from "../../assets/iphoto.png"
 import ivoryforming from "../../assets/ivoryforming.png"
 import photo from "../../assets/smile.png"
-import { updateProfileData } from '../../redux/slices/user'
-import { addInterest, getInterests } from '../../services/activities'
-import { editProfile, uploadProfile } from '../../services/user'
-import styles from "./Profile.module.css"
 import Modal from '../../components/Modal/modal'
-import CancelIcon from '../../assets/icons/x-icon.svg'
+import { updateProfileData } from '../../redux/slices/user'
+import { addInterest,getInterests } from '../../services/activities'
+import { editProfile,uploadProfile } from '../../services/user'
+import styles from "./Profile.module.css"
 
 const Profile = () => {
-  const [name, setName] = useState('')
-  const [mobile_no, setMobile_no] = useState(null)
-  const [email, setemail] = useState("");
-  const [text, settext] = useState("");
-  const [showdiv, setshowdiv] = useState(false);
-  const [addnewtextdiv, setaddnewtextdiv] = useState(false);
-  const [textColor, setTextColor] = useState('white');
-  const [backcolor, setbackcolor] = useState('#FFFFFF');
-  const [blur, setblur] = useState("");
+  const [name,setName] = useState('')
+  const [mobile_no,setMobile_no] = useState(null)
+  const [email,setemail] = useState("");
+  const [text,settext] = useState("");
+  const [showdiv,setshowdiv] = useState(false);
+  const [addnewtextdiv,setaddnewtextdiv] = useState(false);
+  const [textColor,setTextColor] = useState('white');
+  const [backcolor,setbackcolor] = useState('#FFFFFF');
+  const [blur,setblur] = useState("");
 
-  const [interest, setinterest] = useState([]);
-  const [allInterests, setAllInterests] = useState([])
-  const [userInterests, setUserInterests] = useState([])
-  const [interestInput, setInterestInput] = useState('')
+  const [interest,setinterest] = useState([]);
+  const [allInterests,setAllInterests] = useState([])
+  const [userInterests,setUserInterests] = useState([])
+  const [interestInput,setInterestInput] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [error, setError] = useState('')
+  const [error,setError] = useState('')
+  const [empty,setEmpty] = useState(true)
 
 
 
-  const { loggedIn, profileData } = useSelector(state => state.user)
+  const { loggedIn,profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
 
   // let arr = addtext.split(' '); 
   // console.log(arr);
-  const [gender, setgender] = useState("");
+  const [gender,setgender] = useState("");
   const colorchange = () => {
     setTextColor('Blue')
   }
@@ -53,12 +54,12 @@ const Profile = () => {
       setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
       setUserInterests(profileData.intrests)
     }
-  }, [profileData, loggedIn])
+  },[profileData,loggedIn])
 
 
   useEffect(() => {
     fetchInterests()
-  }, [])
+  },[])
 
   const fetchInterests = () => {
     getInterests()
@@ -72,13 +73,13 @@ const Profile = () => {
           }
         })
         const profileIntIds = profileData.intrests.map(int => int.id)
-        intData = intData.map(item => ({ ...item, selected: false }))
+        intData = intData.map(item => ({ ...item,selected: false }))
 
         intData = intData.map(item => {
           if (profileIntIds.includes(item.id)) {
-            return { ...item, selected: true }
+            return { ...item,selected: true }
           } else {
-            return { ...item, selected: false }
+            return { ...item,selected: false }
           }
         })
 
@@ -93,27 +94,30 @@ const Profile = () => {
     if (allInterests.length === 0) return
     let tempInt = allInterests.filter(item => item.selected === true)
     setUserInterests(tempInt)
-  }, [allInterests])
+  },[allInterests])
 
+  let intIds = userInterests.map(item => item.id)
+  const body = {
+    gender,email,intrests: intIds,name,mobile_no
+  }
+
+  useEffect(() => {
+
+    if (gender === "" || email === "" || intIds.length === 0 || name === "") {
+      setEmpty(true)
+    } else {
+      setError('')
+      setEmpty(false)
+    }
+  },[email,gender,intIds.length,mobile_no,name])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     parseInt(mobile_no)
 
-    let intIds = userInterests.map(item => item.id)
-
-    if (JSON.stringify(mobile_no).length < 10) {
-
-      setError("Phone number must be 10 digits");
-    } else if (mobile_no.length > 10) {
-      console.log(mobile_no.length);
-      setError("Phone number cannot be more than 10 digits");
-    } else {
+    if (!empty) {
       setError('')
-      const body = {
-        gender, email, intrests: intIds, name, mobile_no
-      }
-      editProfile(body, profileData.mobile_no)
+      editProfile(body,profileData.mobile_no)
         .then(res => {
           console.log(res.data);
           dispatch(updateProfileData({ profileData: res.data.data }))
@@ -122,14 +126,18 @@ const Profile = () => {
         .catch(err => {
           console.log(err);
         })
+    } else {
+      setError('please fill all the fields')
     }
+
+
   }
-  const [intIndex, setIntIndex] = useState([])
+  const [intIndex,setIntIndex] = useState([])
   const toggleInt = id => {
 
     let tempint = allInterests.map(int => {
       if (int.id === id) {
-        return { ...int, selected: !int.selected }
+        return { ...int,selected: !int.selected }
       } else {
         return { ...int }
       }
@@ -149,7 +157,7 @@ const Profile = () => {
 
 
   const handleAddInterest = () => {
-    addInterest({ name: interestInput, icon: null })
+    addInterest({ name: interestInput,icon: null })
       .then(res => {
         console.log(res.data);
         addcrossbox()
@@ -163,7 +171,7 @@ const Profile = () => {
       })
   }
 
-  const [selec, setselec] = useState("true");
+  const [selec,setselec] = useState("true");
 
   //------call to next page hide and show div----------
   const openinterest = () => {
@@ -190,10 +198,10 @@ const Profile = () => {
     if (file === undefined) return
 
     const formData = new FormData();
-    formData.append("profile_picture", file);
+    formData.append("profile_picture",file);
 
 
-    uploadProfile(formData, profileData.mobile_no)
+    uploadProfile(formData,profileData.mobile_no)
       .then(res => {
         console.log(res.data);
         dispatch(updateProfileData({ profileData: res.data.data }))
@@ -205,11 +213,11 @@ const Profile = () => {
 
   }
 
-  const deselectInterest = (e, id) => {
+  const deselectInterest = (e,id) => {
     e.stopPropagation()
     let filtered = userInterests.filter(item => item.id !== id)
     let filteredAll = allInterests.map(item => {
-     return item.id === id ? { ...item, selected: false } : { ...item }
+      return item.id === id ? { ...item,selected: false } : { ...item }
     })
     setUserInterests(filtered)
     setAllInterests(filteredAll)
@@ -221,8 +229,8 @@ const Profile = () => {
 
   return (
     <>
-      <div className='mb-20 sm:mb-0'>
-        <div className={styles.datainput} style={{ background: backcolor }}>
+      <div className='mb-20 sm:mb-0  bg-[#EEFDFC] sm:bg-white overflow-hidden'>
+        <div className={styles.datainput} >
           <div className={styles.navbar}>
 
           </div>
@@ -244,7 +252,7 @@ const Profile = () => {
             >Add Profile picture
             </p>
           </div>
-          <div className={styles.formimg}>
+          <div className={`${styles.formimg} sm:mt-3 `}>
             <div className={styles.form}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
@@ -254,22 +262,22 @@ const Profile = () => {
                   onChange={(e) => setName(e.target.value)} />
               </div>
               <div className={styles.input1}>
-                <label htmlFor="" className={styles.emaillabel} >Phone Number</label>
+                <label htmlFor="" className={`${styles.emaillabel} sm:mt-3`} >Phone Number</label>
                 <input
                   // type="Number"
-                  placeholder='9777766665' className={styles.emailinput}
+                  placeholder='9777766665' className={`${styles.emailinput} text-gray-400`}
                   value={mobile_no} name="mobile_no"
-                  onChange={(e) => setMobile_no(parseInt(e.target.value))}
+                  disabled style={{ border: '1px solid #ccc' }}
 
                   type={JSON.stringify(mobile_no)?.length < 10 ? "number" : "text"}
                   maxLength="10"
                 // pattern='[0-9]{11}'
                 // onChange={(e) => setPhone(parseInt(e.target.value))}
                 />
-                <p className="ml-8 text-red-300">{error}</p>
+
               </div>
               <div className={styles.input1}>
-                <label htmlFor="" className={styles.emaillabel} >Email Address</label>
+                <label htmlFor="" className={`${styles.emaillabel} sm:mt-3`} >Email Address</label>
 
                 <input
                   className={styles.emailinput} name="email"
@@ -303,7 +311,7 @@ const Profile = () => {
                   userInterests.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
                       className={styles.chooseinput}>
-                      <p> Click to choose</p>
+                      <p className=' pl-3 pt-2 sm:pt-0'> Click to choose</p>
                     </div>
                     :
                     <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
@@ -314,7 +322,7 @@ const Profile = () => {
                             <img src={CancelIcon}
                               className='ml-1.5 cursor-pointer'
                               alt='cancel'
-                              onClick={(e) => deselectInterest(e, int.id)} />
+                              onClick={(e) => deselectInterest(e,int.id)} />
                           </div>
                         })
                       }
@@ -326,50 +334,54 @@ const Profile = () => {
               </div> */}
                 {/*-------------Open interest page selecting---------------*/}
               </div>
+              <p className="ml-8 sm:ml-20 sm:mt-3 text-red-300 capitalize">{error}</p>
             </div>
             <img src={ivoryforming} className={styles.ivoryForm} alt="" />
           </div>
-          <button className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>{/*-------------Go to next page---------------*/}
+
+          {empty ? <button type='submit' className={styles.btnUpdate2} onClick={handleSubmit}>Save Profile</button> : <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>}
+          {/*-------------Go to next page---------------*/}
+
         </div>
         {/* ------------------------------------------------------------------------------ */}
         {/* ---------------------------The interest selecting div------------------------------------ */}
         {showdiv == true ?
-          <Modal classname='max-w-[434px] rounded-[20px]'
+          <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
             body={
               <>
-                <div className={styles.int}>
+                <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
                   <img src={cross} onClick={crossbox} alt="" className={styles.closeinterest} />{/*-------------Cross the open interest page selecting---------------*/}
-                  <p className={styles.intp}>Interests</p>
+                  <p className={`${styles.intp} font-semibold`}>Interests</p>
                 </div>
                 <hr className={styles.brk} />
-                <p className={styles.cho}>Choose one or more:</p>
-                <div className={styles.intttopic}>
+                <p className={`py-4 font-semibold sm:ml-6 ml-3`}>Choose one or more:</p>
+                <div className='flex flex-wrap gap-3 sm:ml-6 '>
                   {
-                    interest?.map((ele, index) => {
+                    interest?.map((ele,index) => {
                       return (
                         // <div className={styles.inttopic}>
-                        <span className={styles.butt1} style={{ background: textColor }}
+                        <div className='flex justify-center flex-row items-center sm:gap-2 cursor-pointer border-gray-400 rounded-md sm:px-2 sm:py-1 text-sm border-2'
                           onClick={colorchange}>
                           <img src={img} alt="" />
                           <h3>{ele.name}</h3>
-                        </span>
+                        </div>
                       )
                     })
                   }
                   {
-                    allInterests.map((int, i) => {
-                      return <div className={`${styles.butt1} ${int.selected === true ? `${styles.interestSelected}` : ''}`}
+                    allInterests.map((int,i) => {
+                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${int.selected === true ? `${styles.interestSelected}` : ''}`} style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
-                        key={int.id} onClick={() => toggleInt(int.id)} >
+                        key={int.id} onClick={() => toggleInt(int.id)}>
                         <img src={int.icon} alt="" />
                         <h3> {int.name} </h3>
                       </div>
                     })
                   }
                 </div>
-                <button className={styles.addint} onClick={addnew}>Add</button>{/*-------------Add Your interest page open---------------*/}
+                <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={addnew}>Add</button></div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />
-                <Link to="/"><p className={styles.more}>Suggest more interest categories.</p></Link>
+                <Link to="/"><p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6'>Suggest more interest categories.</p></Link>
               </>
             } />
 
@@ -379,26 +391,27 @@ const Profile = () => {
         {/* -----------------------------------Add your interest div------------------------------------------------ */}
         {
           addnewtextdiv == true ?
-            <Modal classname='max-w-[434px] rounded-[20px]'
+            <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
               body={
                 <>
-                  <div className={styles.int}>
+                  <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
                     <img src={arrow} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
-                    <p className={styles.intp}>Interest</p>
+                    <p className={`${styles.intp}`}>Interest</p>
                   </div>
                   <hr className={styles.head1} />
                   <div className={styles.para}>
-                    <p>Didn't find your top interests?No worries! Let us know and we will
+                    <p className='text-lg'>Didn't find your top interests?No worries! Let us know and we will
                       try our best to add more relavent
                       categories:
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className={styles.parainput} placeholder='Type here..'
-                    />
+                      onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
+
                   </div>
-                  <button className={styles.send}
-                    onClick={handleAddInterest}>Send</button>
+                  <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button></div>
+
+
                 </>
               } />
             : <></>
