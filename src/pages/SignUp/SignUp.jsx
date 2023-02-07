@@ -2,10 +2,42 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import back from "../../assets/Back.svg";
 import logo from "../../assets/images/login/logolight.png";
-import signupTree from "../../assets/images/login/signupTree.png";
 import { sendOtp } from "../../services/auth";
 import styles from "./SignUp.module.css";
+import Slider from "react-slick";
+import loginMan from "../../assets/images/login/loginMan.png";
+import SignupTree from "../../assets/images/login/signupTree.png";
 
+const settings = {
+  infinite: true,
+  centerPadding: "10px",
+  slidesToShow: 1,
+  initialSlide: 0,
+  arrows: false,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  // dots: true,
+  afterChange: function (index) {
+    console.log(
+      `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+    );
+  }
+};
+const sliderData = [
+  {
+    textPrimary: 'Engage',
+    textSec: 'in interests that sharpen your mind',
+    img: loginMan,
+    imgClassName: ''
+  },
+  {
+    textPrimary: 'Engage',
+    textSec: 'in interests that sharpen your mind',
+    img: SignupTree,
+    imgClassName: 'max-w-[270px]'
+  },
+]
 const SignUp = () => {
   const locaion = useLocation();
   const from = locaion.state?.from || "/";
@@ -49,7 +81,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="h-screen overflow-hidden bg-[#EEFDFC]">
+    <div className="h-screen overflow-hidden overflow-y-auto bg-[#EEFDFC]">
       <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -58,27 +90,39 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div className="sm:flex justify-around w-screen mt-10 sm:m-0">
+      <div className="sm:flex  min-h-[667px] overflow-y-auto justify-around w-screen mt-10 sm:m-0">
         <div
-          className="hidden sm:block h-screen sm:w-[40vw]"
+          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw]"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
           }}
         >
-          <div className="pl-4 md:pl-20 pt-10">
+          <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-28 md:pl-10 pl-0 sm:w-[500px]">
-            <h1
-              className={`text-4xl font-bold text-sky-50 mt-20 ${styles.cusStyle}`}
-            >
-              <span className="text-[#59E3FF]">Accomplish</span> your creative
-              goals
-            </h1>
-          </div>
-          <div className="flex justify-center items-center px-10 content-center mt-20 ">
-            <img src={signupTree} alt="" className="" />
+          <div className='flex-1 w-full'>
+            <Slider {...settings} className='w-full flex-1 h-auto' >
+              {
+                sliderData.map((item, idx) => {
+                  return (
+                    <div>
+                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                        <h1
+                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                        >
+                          <span className="text-[#59E3FF]"> {item.textPrimary} </span>
+                          {item.textSec}
+                        </h1>
+                      </div>
+                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </Slider>
           </div>
         </div>
         <div className="  h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
