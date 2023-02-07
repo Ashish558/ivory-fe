@@ -78,12 +78,11 @@ const Stories = () => {
       setStories(temp)
    }
 
-   useEffect(() => {
-      getStories()
+   const fetchStories = () => {
+      getStories(loggedIn)
          .then(res => {
             let resdata = res.data.data[0]
             let allStories = []
-
             allStories = [...allStories,
             ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
             ...resdata.mcq_stories.map(story => ({ ...story, type: 'mcq' })),
@@ -96,7 +95,11 @@ const Stories = () => {
          .catch(err => {
             console.log(err.response);
          })
-   }, [])
+   }
+
+   useEffect(() => {
+      fetchStories()
+   }, [loggedIn])
 
    const handleClick = (story, idx) => {
       if (loggedIn === false) {

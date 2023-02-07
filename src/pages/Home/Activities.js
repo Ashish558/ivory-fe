@@ -74,7 +74,7 @@ const Activities = () => {
    useEffect(() => {
       getCategories()
          .then(res => {
-            console.log('categories', res.data.data);
+            // console.log('categories', res.data.data);
             if (res.data.data === null) return
             let data = res.data.data.filter(item => item.is_recommended === true)
             setActivities(data)
