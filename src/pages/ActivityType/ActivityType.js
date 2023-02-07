@@ -56,27 +56,36 @@ export default function ActivityType() {
    const [category, setCategory] = useState({})
    const [completedTabActive, setCompletedTabActive] = useState(false)
    const { loggedIn } = useSelector(state => state.user)
+   const [isActivitiesFetched, setIsActivitiesFetched] = useState(false)
 
    useEffect(() => {
       getMyActivities()
          .then(res => {
-            console.log('my activities', res.data.data);
+            if (isActivitiesFetched === false) return
             if (res.data.data === null) return setUserActivities([])
             let filtered = res.data.data.filter(item => item.activity.category === parseInt(categoryId))
-            setUserActivities(filtered)
-            console.log('my activities filtered', filtered);
-
+            
+            let data = activities.map(item => {
+               let is_completed = null
+               filtered.forEach(userAct => {
+                  if (item.id === userAct.activity.id) {
+                     is_completed = userAct.is_completed
+                  }
+               })
+               return { ...item, is_completed }
+            })
+            setUserActivities(data)
          }).catch(err => {
             console.log('err', err);
          })
-   }, [categoryId])
+   }, [categoryId, isActivitiesFetched, activities])
 
 
    useEffect(() => {
       getCategories()
          .then(res => {
-            console.log('categories', res.data.data);
-            if(res.data.data === null) return
+            // console.log('categories', res.data.data);
+            if (res.data.data === null) return
             let currentCategory = res.data.data.find(item => item.id === parseInt(categoryId))
             setCategory(currentCategory)
          }).catch(err => {
@@ -86,24 +95,32 @@ export default function ActivityType() {
 
    useEffect(() => {
       if (userActivities.length === 0) return
-      // console.log('userActivities', userActivities);
-      let temp = userActivities.filter(item => item.is_completed === completedTabActive)
-      setFilteredUserActivities(temp)
+      console.log('userActivities', userActivities);
+      if (completedTabActive === false) {
+         let temp = userActivities.filter(item => item.is_completed === completedTabActive || item.is_completed === null)
+         setFilteredUserActivities(temp)
+      } else {
+         let temp = userActivities.filter(item => item.is_completed === completedTabActive)
+         setFilteredUserActivities(temp)
+      }
    }, [userActivities, completedTabActive])
 
    useEffect(() => {
       getActivities(categoryId)
          .then(res => {
-            console.log('data', res.data.data);
+            setIsActivitiesFetched(true)
+            
+            // console.log('data', res.data.data);
             if (res.data.data === null) return
             setActivities(res.data.data)
          }).catch(err => {
+            setIsActivitiesFetched(true)
             console.log(err.response);
          })
    }, [categoryId])
 
    // console.log('category', category);
-   console.log('userActivities', userActivities);
+   // console.log('userActivities', userActivities);
    // console.log('activities', activities);
 
    return (
@@ -133,7 +150,7 @@ export default function ActivityType() {
             <div className='mt-5 sm:grid md:grid-cols-3 2xl:grid-cols-4 sm:mx-20'>
                {userActivities.length > 0 ?
                   filteredUserActivities.map(activity => {
-                     return <Activity {...activity.activity} key={activity.id} />
+                     return <Activity {...activity} key={activity.id} />
                   })
                   :
                   activities.map(activity => {
