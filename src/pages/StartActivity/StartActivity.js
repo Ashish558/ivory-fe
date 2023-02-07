@@ -361,7 +361,7 @@ export default function StartActivity({ fetchUserDetails }) {
 
             {
                submissions.length > 0 &&
-               <div className='px-4 py-5 bg-[#F0F5FF] sm:px-20'>
+               <div className='px-4 py-5 bg-[#e6faff] sm:px-20'>
                   <h4 className='text-xl font-semibold mb-5'> Your submissions </h4>
 
                   <div className='relative sm:grid sm:grid-cols-1  sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto md:hidden'>
