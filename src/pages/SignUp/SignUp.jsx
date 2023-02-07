@@ -1,12 +1,12 @@
 import React from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from "../../services/auth";
 import styles from "./SignUp.module.css";
 import Slider from "react-slick";
 import loginMan from "../../assets/images/login/loginMan.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
-import back from "../../assets/back.svg";
+
 
 const settings = {
   infinite: true,
@@ -39,13 +39,19 @@ const sliderData = [
   },
 ]
 const SignUp = () => {
+  const locaion = useLocation ();
+  const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState(null);
   const [error, setError] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+880");
+  const goBack = () => {
+    navigate(from, { replace: true });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(JSON.stringify(phone).length);
     if (JSON.stringify(phone).length < 10) {
       setError("Phone number must be 11 digits");
     } else if (phone.length > 10) {
@@ -72,20 +78,19 @@ const SignUp = () => {
       });
     }
   };
-  const
   return (
-    <div className="h-screen overflow-hidden bg-[#EEFDFC]">
-      <div className="topAppBar mt-10 ml-8 sm:hidden">
+    <div className="h-screen overflow-hidden overflow-y-auto bg-[#EEFDFC]">
+      {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img src={back} alt="" onClick={goBack} />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="sm:flex justify-around w-screen mt-10 sm:m-0">
+      <div className="sm:flex  min-h-[667px] overflow-y-auto justify-around w-screen mt-10 sm:m-0">
         <div
-          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw]"
+          className="hidden sm:flex  flex-col items-center min-h-screen h-full sm:w-[40vw]"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
@@ -94,19 +99,31 @@ const SignUp = () => {
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-28 md:pl-10 pl-0 sm:w-[500px]">
-            <h1
-              className={`text-4xl font-bold text-sky-50 mt-20 ${styles.cusStyle}`}
-            >
-              <span className="text-[#59E3FF]">Accomplish</span> your creative
-              goals
-            </h1>
-          </div>
-          <div className="flex justify-center items-center px-10 content-center mt-20 ">
-            <img src={signupTree} alt="" className="" />
+          <div className='flex-1 w-full'>
+            <Slider {...settings} className='w-full flex-1 h-auto' >
+              {
+                sliderData.map((item, idx) => {
+                  return (
+                    <div>
+                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                        <h1
+                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                        >
+                          <span className="text-[#59E3FF]"> {item.textPrimary} </span>
+                          {item.textSec}
+                        </h1>
+                      </div>
+                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </Slider>
           </div>
         </div>
-        <div className="  h-screen sm:w-[60vw] mt-10 sm:mt-0 sm:flex sm:flex-col sm:items-center sm:justify-center">
+        <div className="  h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
           <form
             onSubmit={(e) => handleSubmit(e)}
             className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
@@ -114,12 +131,12 @@ const SignUp = () => {
             <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
               &#128075; Hi, <br /> Welcome to Ivory!
             </h1>
-            <div class="w-full sm:w-[300px] mx-auto mt-10 relative">
+            <div class="w-full sm:w-[300px] mx-auto mt-4 relative">
               <input
                 class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                 // type="tel"
-                type={JSON.stringify(phone)?.length < 10 ? "number" : "text"}
-                maxLength="10"
+                type={JSON.stringify(phone)?.length < 11 ? "number" : "text"}
+                maxLength="11"
                 // pattern='[0-9]{11}'
                 onChange={(e) => setPhone(parseInt(e.target.value))}
                 placeholder="Phone Number"
@@ -139,21 +156,12 @@ const SignUp = () => {
               </select>
             </div>
             <div class="flex items-center justify-between mt-4">
-              {JSON.stringify(phone).length === 10 ? (
-                <button
-                  type="submit"
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
-                >
-                  Continue
-                </button>
-              ) : (
-                <button
-                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
-                  disabled
-                >
-                  Continue
-                </button>
-              )}
+              <button
+                type="submit"
+                className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
+              >
+                Continue
+              </button>
             </div>
             <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
               By clicking continue, I accept the{" "}
@@ -168,7 +176,7 @@ const SignUp = () => {
             </div>
           </form>
           <div
-            className=" text-[11px] text-center w-[400px] text-gray-500 px-1 mt-5 mb-5 sm:hidden"
+            className="text-lg text-center w-[400px] text-gray-500 px-5 mt-5 mb-5 sm:hidden"
             style={{
               position: "absolute",
               bottom: 10,

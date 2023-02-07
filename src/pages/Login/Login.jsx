@@ -173,7 +173,6 @@ const Login = () => {
                     Continue
                   </button>
                 ) : (
-<<<<<<< HEAD
                 <button
                 
                  
@@ -195,39 +194,6 @@ const Login = () => {
                 </Link>
               </div>
             </form>
-            <div
-              className=" text-[10px] text-center w-[400px] text-gray-500 px-1 mt-5 mb-5 sm:hidden"
-              style={{
-                position: "absolute",
-                bottom: 10,
-                width: "100%",
-                textAlign: "center",
-                left: "0",
-              }}
-            >
-=======
-                  <button
-
-
-                    className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5" disabled
-                  >
-                    Continue
-                  </button>
-                )}
-            </div>
-            <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
->>>>>>> 76d7401079e7104a9e3ddf0efda1d99d0f5eafc3
-              By clicking continue, I accept the{" "}
-              <Link to="/" className="text-black font-bold underline">
-                terms of service
-              </Link>{" "}
-              and{" "}
-              <Link to="/" className="text-black font-bold underline">
-                {" "}
-                privacy policy
-              </Link>
-            </div>
-          </form>
           <div
             className=" text-[11px] text-center w-[400px] text-gray-500 px-1 mt-5 mb-5 sm:hidden"
             style={{
