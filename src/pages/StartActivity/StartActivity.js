@@ -199,7 +199,7 @@ export default function StartActivity() {
             </div>
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
-               <p className='text-xl sm:text-2xl font-medium mb-2.5 px-4 sm:py-4'> {name} </p>
+               <p className='text-xl sm:text-4xl font-medium mb-2.5 px-4 sm:py-4'> {name} </p>
                {
                   video_link !== null ?
                      <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
@@ -284,7 +284,7 @@ export default function StartActivity() {
 
                <div className='mb-12'>
                   <p className='font-medium sm:text-lg sm:font-semibold' >
-                     Submit your work to get feedback from our expert:
+                     Submit your work to get feedback from our <br></br>expert:
                   </p>
                   <div className='border-2 border-primary border-dashed w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                      <img src={UploadIcon}
@@ -334,7 +334,7 @@ export default function StartActivity() {
                   Next Activities
                </h4>
 
-               <div className='mt-5 flex sm:mx-[60px]'>
+               <div className='mt-5  sm:mx-[60px]'>
                   {nextActivities.length > 0 &&
                      nextActivities.map(activity => {
                         return <Activity {...activity} key={activity.id} />

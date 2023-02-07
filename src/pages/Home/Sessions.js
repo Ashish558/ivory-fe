@@ -80,7 +80,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p className='arrow-rotate'><img src={Arrow} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -107,7 +107,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p className='arrow-rotate'><img src={Arrow} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -134,7 +134,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p className='arrow-rotate'><img src={Arrow} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -161,7 +161,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p className='arrow-rotate'><img src={Arrow} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -179,10 +179,6 @@ const Sessions = () => {
                     </div>
                 </div>
             </Slider>
-
-
-
-
         </div>
     );
 };

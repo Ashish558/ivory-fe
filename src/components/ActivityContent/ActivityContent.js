@@ -9,8 +9,6 @@ import PauseIcon from '../../assets/icons/pause.svg'
 import RedirectIcon from '../../assets/icons/redirect.svg'
 
 export default function ActivityContent() {
-
-
    return (
       <div className={`${styles.activityContent} sm:mx-20 mt-6`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
@@ -56,8 +54,9 @@ export default function ActivityContent() {
                   <p className='text-xxs font-semild'> International Artist </p>
                </div>
             </div>
-            <div className='flex  items-center justify-center w-10 h-10 bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer'>
-               <img src={RedirectIcon} alt='redirect' className='rounded-full' />
+            <div className='flex  items-center justify-center w-1/5 h-10 bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer'>
+               <h1 className='text-slate-100'>Join</h1>
+               {/* <img src={RedirectIcon} alt='redirect' className='rounded-full' /> */}
             </div>
          </div>
       </div>
