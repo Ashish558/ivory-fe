@@ -4,7 +4,6 @@ import { Link,useNavigate } from 'react-router-dom'
 import arrow from "../../assets/arrow_back.png"
 import cross from "../../assets/cross.png"
 import CancelIcon from '../../assets/icons/x-icon.svg'
-import img from "../../assets/iphoto.png"
 import ivoryforming from "../../assets/ivoryforming.png"
 import photo from "../../assets/smile.png"
 import Modal from '../../components/Modal/modal'
@@ -17,10 +16,8 @@ const Profile = () => {
   const [name,setName] = useState('')
   const [mobile_no,setMobile_no] = useState(null)
   const [email,setemail] = useState("");
-  const [text,settext] = useState("");
   const [showdiv,setshowdiv] = useState(false);
   const [addnewtextdiv,setaddnewtextdiv] = useState(false);
-  const [textColor,setTextColor] = useState('white');
   const [backcolor,setbackcolor] = useState('#FFFFFF');
   const [blur,setblur] = useState("");
 
@@ -34,17 +31,10 @@ const Profile = () => {
   const [empty,setEmpty] = useState(true)
 
 
-
   const { loggedIn,profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
 
-  // let arr = addtext.split(' '); 
-  // console.log(arr);
   const [gender,setgender] = useState("");
-  const colorchange = () => {
-    setTextColor('Blue')
-  }
-
   useEffect(() => {
     if (loggedIn === true) {
 
@@ -52,7 +42,7 @@ const Profile = () => {
       setgender(profileData.gender !== null ? profileData.gender : '')
       setName(profileData.name !== null ? profileData.name : '')
       setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
-      setUserInterests(profileData.intrests)
+      setinterest(profileData.intrests)
     }
   },[profileData,loggedIn])
 
@@ -96,46 +86,36 @@ const Profile = () => {
     setUserInterests(tempInt)
   },[allInterests])
 
-  let intIds = userInterests.map(item => item.id)
+  let intIds = interest.map(item => item.id)
+
+
+
   const body = {
-    gender,email,intrests: intIds,name,mobile_no
+    gender: gender ? gender : '',
+    name: name ? name : '',
+    email: email ? email : '',
+    intrests: intIds ? intIds : [],
+    mobile_no: mobile_no ? mobile_no : ''
   }
-
-  useEffect(() => {
-
-    if (gender === "" || email === "" || intIds.length === 0 || name === "") {
-      setEmpty(true)
-    } else {
-      setError('')
-      setEmpty(false)
-    }
-  },[email,gender,intIds.length,mobile_no,name])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    parseInt(mobile_no)
 
-    if (!empty) {
-      setError('')
-      editProfile(body,profileData.mobile_no)
-        .then(res => {
-          console.log(res.data);
-          dispatch(updateProfileData({ profileData: res.data.data }))
-          alert('profile data saved')
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    } else {
-      setError('please fill all the fields')
-    }
-
-
+    editProfile(body,profileData.mobile_no)
+      .then(res => {
+        dispatch(updateProfileData({ profileData: res.data.data }))
+        alert('profile data saved')
+        navigate('/home')
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
-  const [intIndex,setIntIndex] = useState([])
+
+
+  //toogle interest
   const toggleInt = int => {
     const id = int.id;
-    setinterest([...interest,int.name])
     let tempint = allInterests.map(int => {
       if (int.id === id) {
         return { ...int,selected: !int.selected }
@@ -144,37 +124,35 @@ const Profile = () => {
       }
     })
     const filteredInt = tempint.filter(item => item.selected === true)
-    setIntIndex(filteredInt)
+    const notInclueds = filteredInt.filter(item => !interest.includes(item))
+    setinterest(notInclueds)
 
     setAllInterests(tempint)
-    // console.log('clickec');
   }
   // console.log(intIndex)
-  const filterIndexIds = intIndex.map(item => item.id)
-  console.log(filterIndexIds);
+  const filterIndexIds = interest.map(item => item.id)
 
 
+  const handleAddInterest = (e) => {
+    e.stopPropagation()
 
-  
-
-  const handleAddInterest = () => {
-    setinterest([...interest,interestInput])
     setInterestInput('')
     addInterest({ name: interestInput,icon: null })
       .then(res => {
-        console.log(res.data);
+
         addcrossbox()
-        fetchInterests()
+        setAllInterests([...allInterests,{ ...res.data.data,selected: true }])
+        const newInterest = {
+          id: res.data.data.id,
+          name: res.data.data.name,
+        }
+        setinterest([...interest,newInterest])
       })
       .catch(err => {
         console.log(err);
         addcrossbox()
-        fetchInterests()
-
       })
   }
-
-  const [selec,setselec] = useState("true");
 
   //------call to next page hide and show div----------
   const openinterest = () => {
@@ -206,7 +184,6 @@ const Profile = () => {
 
     uploadProfile(formData,profileData.mobile_no)
       .then(res => {
-        console.log(res.data);
         dispatch(updateProfileData({ profileData: res.data.data }))
         alert('profile data saved')
       })
@@ -222,6 +199,8 @@ const Profile = () => {
     let filteredAll = allInterests.map(item => {
       return item.id === id ? { ...item,selected: false } : { ...item }
     })
+    const deselectInterest = interest.filter(item => item.id !== id)
+    setinterest(deselectInterest)
     setUserInterests(filtered)
     setAllInterests(filteredAll)
   }
@@ -229,10 +208,12 @@ const Profile = () => {
   // console.log('interest', interest);
   // console.log('allInterests', allInterests);
   // console.log('userInterests', userInterests);
-
+  if (interest.length < 0) {
+    console.log('interest',interest);
+  }
   return (
     <>
-      <div className='mb-20 sm:mb-0  bg-[#EEFDFC] sm:bg-white overflow-hidden'>
+      <div className='pb-32 sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
         <div className={styles.datainput} >
           <div className={styles.navbar}>
 
@@ -287,6 +268,7 @@ const Profile = () => {
                   placeholder='xyz@gmail.com'
                   onChange={(e) => setemail(e.target.value)}
                   value={email ? email : profileData.email ? profileData.email : ''}
+                  required
                 />
 
 
@@ -311,7 +293,7 @@ const Profile = () => {
                 <label htmlFor="" className={styles.emaillabel} onClick={openinterest} >Interests</label>
 
                 {
-                  userInterests.length === 0 ?
+                  interest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
                       className={styles.chooseinput}>
                       <p className=' pl-3 pt-2 sm:pt-0'> Click to choose</p>
@@ -319,7 +301,7 @@ const Profile = () => {
                     :
                     <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
-                        userInterests.map(int => {
+                        interest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
                             {int.name}
                             <img src={CancelIcon}
@@ -337,17 +319,16 @@ const Profile = () => {
               </div> */}
                 {/*-------------Open interest page selecting---------------*/}
               </div>
-             
+
             </div>
             <img src={ivoryforming} className={styles.ivoryForm} alt="" />
           </div>
 
-           <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
+          <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
           {/*-------------Go to next page---------------*/}
 
         </div>
-        {/* ------------------------------------------------------------------------------ */}
-        {/* ---------------------------The interest selecting div------------------------------------ */}
+
         {showdiv == true ?
           <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
             body={
@@ -358,11 +339,11 @@ const Profile = () => {
                 </div>
                 <hr className={styles.brk} />
                 <p className={`py-4 font-semibold sm:ml-6 ml-3`}>Choose one or more:</p>
-                <div className='flex flex-wrap gap-3 sm:ml-6 '>
-                  
+                <div className='flex flex-wrap gap-3 sm:ml-6 ml-3'>
+
                   {
                     allInterests.map((int,i) => {
-                      return <div className={`${styles.butt1} text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-red-400' : ''}`} style={{ border: '2px solid #939CA3' }}
+                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-sky-300' : ''}`} style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int)}>
                         <img src={int.icon} alt="" />
@@ -400,6 +381,7 @@ const Profile = () => {
                       value={interestInput}
                       onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
                   </div>
+                  
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button></div>
 
                   {/* onClick={handleAddInterest} */}
