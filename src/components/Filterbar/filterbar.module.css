@@ -1,0 +1,6 @@
+.item:hover {
+   border-image: linear-gradient(180deg, #0055BF 1.84%, #59E3FF 130.78%);
+   border-width: 2px;
+   border-style: solid;
+   /* border-image-source: linear-gradient(180deg, #0055BF 1.84%, #59E3FF 130.78%); */
+}

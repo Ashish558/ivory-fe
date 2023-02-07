@@ -117,7 +117,7 @@ export default function Activities() {
                temp.push({
                   id: activity.id,
                   children: <div className='flex items-center gap-x-1'>
-                     <img src={activity.icon} alt='activity' />
+                     <img src={activity.icon} alt='activity' className='max-h-[18px]' />
                      {activity.name}
                   </div>,
                   selected: true
