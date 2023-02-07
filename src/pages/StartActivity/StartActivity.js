@@ -17,11 +17,35 @@ import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
 import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
-import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, uploadActivity } from '../../services/user'
+import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, uploadActivity } from '../../services/user'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
+import Slider from "react-slick";
 
+const settings = {
+   infinite: false,
+   centerPadding: "20px",
+   slidesToShow: 2,
+   initialSlide: 0,
+   arrows: false,
+   swipeToSlide: true,
+   dots: true,
+   responsive: [
+      {
+         breakpoint: 700,
+         settings: {
+            settings: {
+               slidesToShow: 2,
+               initialSlide: 0,
+            },
+         }
+      },
+   ],
+   afterChange: function (index) {
 
-export default function StartActivity() {
+   }
+};
+
+export default function StartActivity({ fetchUserDetails }) {
 
    const [startModalActive, setStartModalActive] = useState(false)
    const [activity, setActivity] = useState({})
@@ -34,10 +58,11 @@ export default function StartActivity() {
    const [viewSubModal, setViewSubModal] = useState(false)
    const [sourceToView, setSourceToView] = useState('')
    const [nextActivities, setNextActivities] = useState([])
+   const [isLastFeedbacked, setIsLastFeedbacked] = useState(false)
    const inputRef = useRef(null)
 
    const [currentIndex, setCurrentIndex] = useState(0)
-   const { loggedIn } = useSelector(state => state.user)
+   const { loggedIn, profileData } = useSelector(state => state.user)
    const [userActivityId, setUserActivityId] = useState(activityId)
 
    useEffect(() => {
@@ -76,6 +101,8 @@ export default function StartActivity() {
                   console.log('my act', myActivity);
                   if (myActivity.is_completed === true) {
                      setIsCompleted(true)
+                  } else {
+                     setIsCompleted(false)
                   }
                   setUserActivityId(myActivity.id)
                }
@@ -103,14 +130,29 @@ export default function StartActivity() {
             setSubmissions(res.data.data)
          }).catch(err => {
             console.log('submission err', err);
+            // setSubmissions([])
          })
    }
+
+   useEffect(() => {
+      if (!submissions) return
+      if (submissions.length === 0) return
+      setIsLastFeedbacked(submissions[submissions.length - 1].is_feedbacked)
+   }, [submissions])
 
    const handleUploadClick = () => {
       if (isAlreadyStarted === false) {
          setStartModalActive(true)
       } else {
-         inputRef.current.click()
+         if (submissions.length === 0 && isCompleted === false) {
+            inputRef.current.click()
+         } else if (submissions.length >= 1 && isCompleted === false) {
+            alert('Please delete your submission to reupload')
+         } else if (isLastFeedbacked === false) {
+            alert('Please wait for the feedback')
+         } else {
+            inputRef.current.click()
+         }
       }
    }
 
@@ -149,11 +191,21 @@ export default function StartActivity() {
          })
    }
 
+   const handleInComplete = () => {
+      inCompleteActivity(userActivityId)
+         .then(res => {
+            console.log('compl res', res.data);
+            fetchUserActivities()
+         }).catch(err => {
+            console.log('compl err', err);
+         })
+   }
+
    //next activities
    useEffect(() => {
       getActivities(categoryId)
          .then(res => {
-            console.log('next activity data', res.data.data);
+            // console.log('next activity data', res.data.data);
             if (res.data.data === null) return
             let next = res.data.data.filter(item => item.id > parseInt(activityId))
             // console.log('next', next);
@@ -169,11 +221,19 @@ export default function StartActivity() {
          .then(res => {
             console.log('delete res', res.data);
             alert('deleted successfully')
-            getSubmissions()
+            if (submissions.length === 1) {
+               handleInComplete()
+                  .then(res => { getSubmissions() })
+                  .catch(err => { getSubmissions() })
+            } else {
+               getSubmissions()
+            }
          }).catch(err => {
-            console.log('delete err', err);
+            console.log('delete err', err.response);
+            getSubmissions()
          })
    }
+
    const onView = (item) => {
       // console.log(item);
       setSourceToView(item)
@@ -181,12 +241,13 @@ export default function StartActivity() {
    }
    //384480
    // console.log('loggedIn', loggedIn);
-   console.log('userActivityId', userActivityId);
-   console.log('activityId', activityId);
+   // console.log('userActivityId', userActivityId);
+   // console.log('activityId', activityId);
    // console.log('submission', submissions);
    // console.log('currentIndex', currentIndex);
    // console.log('isCompleted', isCompleted);
    // console.log('nextActivities', nextActivities);
+   // console.log('isLastFeedbacked', isLastFeedbacked);
    if (Object.keys(activity).length === 0) return <></>
    const { name, description, image, steps, video, video_link } = activity
 
@@ -302,9 +363,9 @@ export default function StartActivity() {
                submissions.length > 0 &&
                <div className='px-4 py-5 bg-[#F0F5FF] sm:px-20'>
                   <h4 className='text-xl font-semibold mb-5'> Your submissions </h4>
-                  <div className='relative sm:grid sm:grid-cols-2  sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto'>
-                     <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
 
+                  <div className='relative sm:grid sm:grid-cols-1  sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto md:hidden'>
+                     <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
                         {submissions.map((sub, idx) => {
                            return <Feedback key={sub.id} {...sub}
                               currentIndex={currentIndex}
@@ -313,17 +374,29 @@ export default function StartActivity() {
                               onDelete={onDelete} />
                         })}
                      </div>
-                     <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] hidden sm:block`}>
-                        {submissions.map((sub, idx) => {
-                           return <Feedback key={sub.id} {...sub}
-                              currentIndex={currentIndex + 1}
-                              idx={idx}
-                              onView={onView}
-                              onDelete={onDelete} />
-                        })}
-                     </div>
-                     <img src={NextIcon} className={`${styles.nextIcon} sm:hidden`} alt='' onClick={increaseIndex} />
+                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='' onClick={increaseIndex} />
                   </div>
+
+                  <div className='relative sm:grid sm:grid-cols-1 sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto hidden md:block'>
+                     <Slider {...settings} className='w-full h-[480px] max-w-[800px] mx-auto' >
+
+
+                        {submissions.map((sub, idx) => {
+                           return <div className='px-10'>
+                              <Feedback key={sub.id} {...sub}
+                                 notAbsolute={true}
+                                 currentIndex={currentIndex}
+                                 idx={idx}
+                                 onView={onView}
+                                 onDelete={onDelete} />
+                           </div>
+                        })}
+
+                     </Slider>
+                     {/* <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='' onClick={increaseIndex} /> */}
+                  </div>
+
+
                </div>
             }
 
@@ -334,7 +407,7 @@ export default function StartActivity() {
                   Next Activities
                </h4>
 
-               <div className='mt-5 max-w-[600px]  sm:mx-[60px]'>
+               <div className='mt-5 lg:grid lg:grid-cols-3 2xl:grid-cols-4 sm:mx-[60px] '>
                   {nextActivities.length > 0 &&
                      nextActivities.map(activity => {
                         return <Activity {...activity} key={activity.id} />
@@ -348,7 +421,9 @@ export default function StartActivity() {
             <StartActivityModal handleClose={() => setStartModalActive(false)}
                activityId={activityId}
                setIsAlreadyStarted={setIsAlreadyStarted}
-               fetchUserActivities={fetchUserActivities} />
+               fetchUserActivities={fetchUserActivities}
+               profileData={profileData}
+               fetchUserDetails={fetchUserDetails} />
          }
          {
             viewSubModal &&

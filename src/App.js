@@ -61,8 +61,8 @@ function App() {
     getUserDetail()
       .then(res => {
         // console.log('profile', res.data.data[0]);
+        dispatch(updateProfileData({ profileData: res.data.data[0] }))
         if(isInitial){
-          dispatch(updateProfileData({ profileData: res.data.data[0] }))
           setLoading(false)
         }
       })
@@ -127,7 +127,7 @@ function App() {
         <Route
           path="/activities/:categoryId/:activityId/start"
           element={
-            <StartActivity />
+            <StartActivity fetchUserDetails={fetchUserDetails} />
           }
         />
 
