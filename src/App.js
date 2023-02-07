@@ -44,24 +44,39 @@ function App() {
           // console.log('ref res', res.data.data.access);
           localStorage.setItem('access', res.data.data.access)
           dispatch(updateLoggedIn({ loggedIn: true }))
-          getUserDetail()
-            .then(res => {
-              // console.log('profile', res.data.data[0]);
-              dispatch(updateProfileData({ profileData: res.data.data[0] }))
-              setLoading(false)
-            })
-            .catch(err => {
-              console.log('profile err', err);
-              setLoading(false)
-            })
+          fetchUserDetails(true)
+
           if (res.data.data === null) return
         }).catch(err => {
           setLoading(false)
+          dispatch(updateLoggedIn({ loggedIn: false }))
           console.log('ref err', err.response);
         })
     } else {
       setLoading(false)
     }
+  }, [])
+
+  const fetchUserDetails = (isInitial) => {
+    getUserDetail()
+      .then(res => {
+        // console.log('profile', res.data.data[0]);
+        dispatch(updateProfileData({ profileData: res.data.data[0] }))
+        if(isInitial){
+          setLoading(false)
+        }
+      })
+      .catch(err => {
+        console.log('profile err', err);
+        if(isInitial){
+          dispatch(updateLoggedIn({ loggedIn: false }))
+          setLoading(false)
+        }
+      })
+  }
+
+  useEffect(() => {
+    fetchUserDetails()
   }, [loggedIn])
 
   if (loading === true) return <></>
@@ -112,7 +127,7 @@ function App() {
         <Route
           path="/activities/:categoryId/:activityId/start"
           element={
-            <StartActivity />
+            <StartActivity fetchUserDetails={fetchUserDetails} />
           }
         />
 

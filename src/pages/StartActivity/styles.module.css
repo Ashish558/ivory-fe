@@ -34,7 +34,7 @@
 
 .slider{
    position: relative;
-   min-height: 416px;
+   min-height: 430px;
    border-radius: 20px;
    overflow-x: hidden;
 }

@@ -69,7 +69,7 @@ const DesktopLearn = () => {
         <div className='pt-10 pb-40'>
             <div style={{ marginTop: '88px' }} className='ml-24'>
                 <div className=' flex items-center mb-20'>
-                    <h1 className='text-4xl  font-semibold  '>Learn with Ivory<span></span></h1>
+                    <h1 className='text-5xl  font-semibold  '>Learn with Ivory<span></span></h1>
                     <p className='pl-7'><img src={Arrow} alt="" /></p>
                 </div>
 
