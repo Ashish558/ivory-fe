@@ -5,6 +5,7 @@ import './Sessions.css'
 import User from '../../Images/user1.png'
 import LiveImg from '../../Images/Ellipse 3.png'
 import Arrow from '../../Images/Icon.png';
+import North from '../../Images/north.png';
 
 
 const Sessions = () => {
@@ -64,7 +65,8 @@ const Sessions = () => {
     return (
         <div className=" lg:ml-24 lg:mt-[120px] mt-10 ">
             <div className='lg:flex lg:items-center lg:mb-20'>
-                <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Live sessions</h1>
+                <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold show-sessions'>Live sessions</h1>
+                <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold show-events'>Events</h1>
                 <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
             </div>
 
@@ -80,7 +82,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -107,7 +109,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -134,7 +136,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
@@ -161,7 +163,7 @@ const Sessions = () => {
                                 <p className='font-semibold lg:text-xl lg:pl-2  text-xs pl-1 '><span className='text-white'> Live</span></p>
                             </div>
                             <div className=' lg:hidden ball rounded-full  flex items-center justify-center'>
-                                <p><img src={Arrow} alt="" /></p>
+                                <p><img src={North} alt="" /></p>
                             </div>
 
                             <h2 class=" font-semibold text-base lg:text-2xl pt-1">
