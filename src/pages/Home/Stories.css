@@ -1,6 +1,5 @@
 .background-story-1 {
     /* background-image: url('../../Images/Rectangle\ 5.png');
-
     
     background-position: center;
     background-repeat: no-repeat;
@@ -40,7 +39,7 @@
     position: absolute;
     right: 20px;
     top: 20px;
-    z-index: 1000;
+    z-index: 6000;
     transform: scale(1);
 }
 
@@ -58,7 +57,7 @@
     transform: scale(1.06);
 }
 
-/* .single-story-container::before {
+.single-story-container::before {
     position: relative;
     content: 'View';
     display: flex;
@@ -74,18 +73,16 @@
     background-color: rgba(0, 0, 0, 0.267);
     z-index: 5000;
     transition: 0.3s;
-} */
+    color: white;
+}
 
 @media only screen and (min-width: 768px) {
-
     .HideplayLogo {
         display: none;
     }
-
     .responsive-width,
     .background-story-1 {
         height: 480px;
-        width: 360px;
     }
 
     .home-stories-slider .slick-slide.slick-current {
@@ -105,11 +102,13 @@
         opacity: 1;
     }
 
-
-    .background-story-1 {
-
-        border-radius: 44px;
+    .single-story-container::before {
+        bottom: 18px;
     }
+    .home-stories-slider .slick-slide{
+        max-width: 395px;
+    }
+
 }
 
 @media only screen and (max-width: 769px) {
@@ -119,11 +118,8 @@
 
         height: 209px;
     }
-
     .HideplayDesktopLogo {
         display: none;
     }
-
-
 
 }
