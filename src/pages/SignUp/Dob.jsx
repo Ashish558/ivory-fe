@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { updateLoggedIn } from '../../redux/slices/user';
-import { registerUser, verifyOtp } from '../../services/auth';
+import { registerUser,verifyOtp } from '../../services/auth';
 import styles from "./SignUp.module.css";
 import Slider from "react-slick";
 import SignupTree from "../../assets/images/login/signupTree.png";
@@ -132,7 +132,14 @@ const Dob = () => {
 
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(from, { replace: true });
+    navigate(from,{
+      state: {
+        otp: otp,
+        otp_token: otp_token,
+        phone: phone,
+        countryCode: countryCode,
+      
+    } });
   };
   const handleDate = (e) => {
     // e.preventDefault();
@@ -354,19 +361,24 @@ const Dob = () => {
                 <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
                   <div
                     className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "
+                    
+                    onTouchMove={handleDate}
                     onWheel={handleDate}
                   >
                     {date2}
                   </div>
                   <div
                     className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400 w-[100px] bg-transparent mx-auto text-center "
-                    onWheel={handleMonth}
+                    
+                    onTouchMove={handleMonth} 
+                    onWheel={handleMonth} 
                   >
                     {months[monthPosition2]}
                   </div>
                   <div
                     className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400 px-3 w-[70px]  bg-transparent text-center "
-                    onWheel={handleYear}
+                    
+                    onWheel={handleYear} onTouchMove={handleYear}
                   >
                     {year2}
                   </div>
@@ -412,7 +424,10 @@ const Dob = () => {
             </div>
             <div className="flex items-center justify-between mt-4">
               {nameError ? (
-                <button className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5" disabled >
+                <button
+                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+                  disabled
+                >
                   Continue
                 </button>
               ) : (
