@@ -1,12 +1,11 @@
 .drawer-content {
-    background: linear-gradient(195.35deg, #D3E6FE 0%, #FCEBFF 34.17%, #D3E6FE 67.5%, #E7DEFE 100%);
-    ;
+    background: linear-gradient(188.34deg, rgba(0, 85, 191, 0.48) -7.07%, rgba(205, 247, 255, 0.48) 43.92%, rgba(89, 227, 255, 0.48) 95.82%), #FFFFFF;
     height: 100vh;
 }
 
 
 .line {
-    border: 0.5px solid #CED4DA;
+    border: 0.5px solid #8BB3E5;
 }
 
 .contact-color {
@@ -15,4 +14,24 @@
 
 .boundary-margin-top {
     margin-top: 224px;
+}
+
+.welcome-color {
+    color: #6D747A;
+}
+
+.name {
+    font-weight: normal;
+}
+
+.display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drawerProfile {
+    background-image: url('../../Images/profile-pic-1.png');
+    width: 48px;
+    height: 48px;
 }

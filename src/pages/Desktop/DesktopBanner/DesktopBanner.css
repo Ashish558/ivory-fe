@@ -1,0 +1,49 @@
+.big-text {
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 80px;
+}
+
+.container-banner {
+    background-image: url('../../../Images//Vector\ 4.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+
+}
+
+.blur-img {
+    background-color: #CDF7FF;
+    filter: blur(10000px);
+    height: 62px;
+}
+
+/* .container::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.5));
+    filter: blur(35px);
+} */
+
+.banner-pic {
+    /* border-radius: 51px;
+    border-bottom: 3px solid blue; */
+
+    /* border-radius: 51px;
+    border: 3px solid blue;
+    border-image: linear-gradient(90deg, blue, blue, grey, grey);
+    border-image-slice: 1; */
+    width: 442px;
+    height: 442px;
+    border-radius: 51px;
+    border: double 3px transparent;
+    background-image: linear-gradient(white, white), linear-gradient(rgba(128, 128, 128, 0.244), rgba(128, 128, 128, 0.11), blue, blue);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+
+}

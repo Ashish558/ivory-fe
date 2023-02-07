@@ -1,0 +1,34 @@
+.custom-card-event {
+    background-color: #CDF7FF;
+    border-radius: 48px;
+    position: relative;
+    width: 348px;
+}
+
+.date-bg {
+    color: #6C7277;
+}
+
+
+.Live-Desktop {
+    background-color: #DD1D43;
+    border-radius: 47px;
+    width: 92px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+
+}
+
+.Soon-Desktop {
+    background: #FF922B;
+    border-radius: 47px;
+    width: 183px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.big-author-name {
+    color: #6D747A;
+}

@@ -1,13 +1,12 @@
 .background-story-1 {
-    background-image: url('../../Images/Rectangle\ 5.png');
-
-    /* color:transparent; */
+    /* background-image: url('../../Images/Rectangle\ 5.png');
+    
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed; */
     border-radius: 24px;
-
+    /* height: 209px; */
     position: relative;
 }
 
@@ -27,11 +26,100 @@
 .details {
     position: absolute;
     bottom: 0;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
 }
 
 .topcorner {
     position: absolute;
     top: 5%;
     right: 10%;
+}
+
+.story-checked {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 6000;
+    transform: scale(1);
+}
+
+
+.home-stories-slider .slick-slide.slick-current {
+    transform: scale(1.04);
+}
+
+.home-stories-slider .slick-slide {
+    transform: scale(1);
+    transition: all 0.3s;
+}
+
+.home-stories-slider .slick-slide:hover {
+    transform: scale(1.06);
+}
+
+.single-story-container::before {
+    position: relative;
+    content: 'View';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    top: 12px;
+    right: 12px;
+    border-radius: 24px;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.267);
+    z-index: 5000;
+    transition: 0.3s;
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .HideplayLogo {
+        display: none;
+    }
+    .responsive-width,
+    .background-story-1 {
+        height: 480px;
+    }
+
+    .home-stories-slider .slick-slide.slick-current {
+        transform: scale(1);
+    }
+
+    .home-stories-slider .slick-slide {
+        transform: scale(1);
+        transition: all 0.3s;
+    }
+
+    .home-stories-slider .slick-slide:hover {
+        transform: scale(1);
+    }
+
+    .home-stories-slider .slick-slide:hover .single-story-container::before {
+        opacity: 1;
+    }
+
+    .single-story-container::before {
+        bottom: 18px;
+    }
+    .home-stories-slider .slick-slide{
+        max-width: 395px;
+    }
+
+}
+
+@media only screen and (max-width: 769px) {
+
+    .responsive-width,
+    .background-story-1 {
+
+        height: 209px;
+    }
+    .HideplayDesktopLogo {
+        display: none;
+    }
+
 }

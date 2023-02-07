@@ -22,11 +22,27 @@
 }
 .image{
    width: 100%;
-   object-fit: contain;
+    height: 321px;
+    max-width: 748px;
 }
 .seeMoreBtn{
    color: #1B72C0;
    display: inline-block;
    font-weight: 500;
-   font-size: 14px;
+   cursor: pointer;
+}
+
+.slider{
+   position: relative;
+   min-height: 430px;
+   border-radius: 20px;
+   overflow-x: hidden;
+}
+.nextIcon{
+   position: absolute;
+   right: 0;
+   top: 50%;
+   transform: translate(30%,-50%);
+   z-index: 100;
+   cursor: pointer;
 }

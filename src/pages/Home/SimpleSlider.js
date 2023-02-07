@@ -22,54 +22,57 @@ const SimpleSlider = () => {
                 <div>
                     <div className="slider-bg mx-4">
 
-                        <div style={{ height: '140px' }} className="items-align">
-                            <div className="">
+                        <div style={{ height: '140px', margin: "0 auto" }} className="grid grid-cols-2 mx">
+                            <div className="flex items-center pl-6">
                                 <div className="banner">
-                                    <img className="rounded-3xl " src={Image} alt="" />
+                                    <img className="rounded-2xl " src={Image} alt="" />
                                     <p className="play bg-black rounded-full"></p>
                                 </div>
                             </div>
-                            <div className="font-black   text-xl ">
-                                <div><h1 >Learn How</h1>
-                                    <h1>to use Ivory</h1>
-                                    <h1>app</h1></div>
+                            <div className="flex items-center pl-2">
+                                <div style={{ fontWeight: '700' }} className=" text-xl ">
+                                    <p >Learn how</p>
+                                    <p>to use Ivory</p>
+                                    <p>app</p></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div>
                     <div className="slider-bg mx-4">
 
-                        <div style={{ height: '140px' }} className="items-align">
-                            <div className="banner">
-                                <img className="rounded-3xl " src={Image} alt="" />
-                                <p className="play bg-black rounded-full"></p>
-                            </div>
-                            <div className=" font-black  text-xl ">
-                                <div><h1 >Learn How</h1>
-                                    <h1>to use Ivory</h1>
-                                    <h1>app</h1></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div>
-                    <div className="slider-bg mx-4">
-
-                        <div style={{ height: '140px' }} className="items-align">
-                            <div className="">
-                                <div> <img className="rounded-3xl " src={Image1} alt="" /></div>
-                            </div>
-                            <div className=" text-xl ">
-                                <div>
-                                    <h1 className="font-black">Complete</h1>
-                                    <h1 className="font-black">your Profile !</h1>
-                                    <p className="text-sm"><small>For a better customized
-                                    </small></p>
-                                    <p className="text-sm">  <small>experience.</small></p>
+                        <div style={{ height: '140px', margin: "0 auto" }} className="grid grid-cols-2 mx">
+                            <div className="flex items-center pl-6">
+                                <div className="banner">
+                                    <img className="rounded-2xl " src={Image} alt="" />
+                                    <p className="play bg-black rounded-full"></p>
                                 </div>
+                            </div>
+                            <div className="flex items-center pl-2">
+                                <div style={{ fontWeight: '700' }} className=" text-xl ">
+                                    <p >Learn how</p>
+                                    <p>to use Ivory</p>
+                                    <p>app</p></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+                    <div className="slider-bg mx-4">
+
+                        <div style={{ height: '140px', margin: "0 auto" }} className="grid grid-cols-2 mx">
+                            <div className="flex items-center pl-6">
+                                <div className="banner">
+                                    <img className="rounded-2xl " src={Image} alt="" />
+                                    <p className="play bg-black rounded-full"></p>
+                                </div>
+                            </div>
+                            <div className="flex items-center pl-2">
+                                <div style={{ fontWeight: '700' }} className=" text-xl ">
+                                    <p >Learn how</p>
+                                    <p>to use Ivory</p>
+                                    <p>app</p></div>
                             </div>
                         </div>
 

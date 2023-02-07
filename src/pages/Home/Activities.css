@@ -1,4 +1,8 @@
-.box {
+.activity-box {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
     border-radius: 12px;
+}
+
+.activitycard:hover {
+    background-color: rgb(205, 247, 255);
 }

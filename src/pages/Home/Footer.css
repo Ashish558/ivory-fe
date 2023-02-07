@@ -1,9 +1,15 @@
 .footer-bg {
-    background-color: #F0F5FF;
+    background-color: #EEFCFF;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+}
+
+@media only screen and (min-width: 976px) {
+    .footer-bg {
+        display: none;
+    }
 }
 
 .icon-bg {
