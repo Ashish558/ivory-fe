@@ -89,7 +89,7 @@ const NavbarDesktop = () => {
                      <p ><img width="34px" height="34px" src={profileData.profile_picture ? profileData.profile_picture : User} alt="" /></p>
                   }
                </label>
-               <ul tabindex="0" class="sidebar menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 " >
+               <ul style={{ width: '616px', height: '520px' }} tabindex="0" class="sidebar menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 " >
                   <div className='pt-6'>
 
                      <div className='flex justify-between'>

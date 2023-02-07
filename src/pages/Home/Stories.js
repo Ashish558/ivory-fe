@@ -24,8 +24,8 @@ const Stories = () => {
 
    const settings = {
       infinite: false,
-      centerPadding: "60px",
-      slidesToShow: 3.5,
+      // centerPadding: "60px",
+      slidesToShow: 3,
       initialSlide: 0,
       arrows: false,
       swipeToSlide: true,
@@ -42,7 +42,7 @@ const Stories = () => {
          {
             breakpoint: 600,
             settings: {
-               slidesToShow: 3.5,
+               slidesToShow: 3,
                initialSlide: 0,
             },
          },
@@ -126,10 +126,10 @@ const Stories = () => {
    // console.log('selectedStory', selectedStory)
 
    return (
-      <>
+      <div>
          <div className=" lg:ml-24 lg:mt-[90px] mt-14">
             <div className='lg:flex lg:items-center lg:mb-20'>
-               <h1 className='text-xl font-black pl-4  lg:text-4xl lg:font-semibold'>Start your day</h1>
+               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
             </div>
 
@@ -142,24 +142,27 @@ const Stories = () => {
             <Slider {...settings} className='home-stories-slider' >
                {stories.map((story, idx) => {
                   return (
-                     <div className="p-3 relative single-story-container" onClick={() => handleClick(story, idx)} >
-                        {
-                           story.viewed_by.includes(profileData.id) &&
-                           <div className='story-checked flex'>
-                              <img src={CheckedIcon} />
-                           </div>
-                        }
+                     <div>
+                        <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
+                           {
+                              story.viewed_by.includes(profileData.id) &&
+                              <div className='story-checked flex'>
+                                 <img src={CheckedIcon} alt='' />
+                              </div>
+                           }
 
-                        <div className="" >
-                           <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
-                           <div className="pl-3 details">
-                              <p className="text-sm lg:text-xl text-white">
-                                 {story.share_message ? story.share_message : ''}
-                              </p>
-                              <div className="flex items-center lg:mt-[10px] ">
-                                 <p className="text-white "> <img src={Logo} alt="" /></p>
-                                 {/* <p className="text-white md:hidden sm:hidden"> <img src={LogoDesktop} alt="" /></p> */}
-                                 <p className="text-sm text-white pl-1"> {story.views} views</p>
+                           <div className="" >
+                              <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
+                              <div className="pl-3 details lg:pl-6">
+                                 <p className="text-sm lg:text-xl text-white">
+                                    {story.share_message ? story.share_message : ''}
+                                 </p>
+                                 <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
+                                    <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
+                                    <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
+
+                                    <p className="text-sm text-white pl-1"> {story.views} views</p>
+                                 </div>
                               </div>
                            </div>
                         </div>
@@ -203,7 +206,7 @@ const Stories = () => {
                      </div>
                   </div>
                </div> */}
-
+               <div></div>
             </Slider>
          </div>
          {
@@ -215,7 +218,7 @@ const Stories = () => {
                selectNextStory={selectNextStory}
                updateStory={updateStory} />
          }
-      </>
+      </div>
    );
 };
 

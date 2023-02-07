@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation,useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
@@ -7,6 +7,41 @@ import logo from "../../assets/images/login/logolight.png";
 import { updateLoggedIn } from '../../redux/slices/user';
 import { registerUser,verifyOtp } from '../../services/auth';
 import styles from "./SignUp.module.css";
+import Slider from "react-slick";
+import SignupTree from "../../assets/images/login/signupTree.png";
+import { genNumbers } from '../../utils/utils';
+import './slider.css'
+
+const settings = {
+  infinite: true,
+  centerPadding: "10px",
+  slidesToShow: 1,
+  initialSlide: 0,
+  arrows: false,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  // dots: true,
+  afterChange: function (index) {
+    // console.log(
+    //   `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+    // );
+  }
+};
+const sliderData = [
+  {
+    textPrimary: 'Engage',
+    textSec: 'in interests that sharpen your mind',
+    img: loginMan,
+    imgClassName: ''
+  },
+  {
+    textPrimary: 'Engage',
+    textSec: 'in interests that sharpen your mind',
+    img: SignupTree,
+    imgClassName: 'max-w-[270px]'
+  },
+]
 
 const Dob = () => {
   const locaion = useLocation();
@@ -20,6 +55,58 @@ const Dob = () => {
   const [monthPosition2, setMonthPosition2] = React.useState(9);
   const [monthPosition3, setMonthPosition3] = React.useState(10);
   const [name, setName] = React.useState("");
+
+  const dateSliderRef = useRef();
+  const monthSliderRef = useRef();
+  const yearSliderRef = useRef();
+
+  const [totalYears, setTotalYears] = useState(genNumbers(1950, 2023))
+  const [totalDates, setTotalDates] = useState(genNumbers(1, 32))
+  const [dateData, setDateData] = useState({
+    month: 'February',
+    date: '2',
+    year: '1951',
+  })
+
+  const common = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    vertical: true,
+    verticalSwiping: true,
+    swipeToSlide: true,
+    arrows: false,
+  }
+  const dateSettings = {
+    ...common,
+    afterChange: function (currentSlide) {
+      let val = totalDates[currentSlide + 1]
+      if (val === undefined) {
+        val = totalDates[0]
+      }
+      setDateData({ ...dateData, date: val })
+    }
+  };
+  const monthsSettings = {
+    ...common,
+    afterChange: function (currentSlide) {
+      let val = months[currentSlide + 1]
+      if (val === undefined) {
+        val = months[0]
+      }
+      setDateData({ ...dateData, month: val })
+    }
+  };
+  const yearsSettings = {
+    ...common,
+    afterChange: function (currentSlide) {
+      let val = totalYears[currentSlide + 1]
+      if (val === undefined) {
+        val = totalYears[0]
+      }
+      setDateData({ ...dateData, year: val })
+    }
+  };
 
   const [nameError, setNameError] = React.useState("");
 
@@ -181,8 +268,13 @@ const Dob = () => {
 
 
   }
+
+  // console.log('dates', totalDates);
+  // console.log('years', totalYears);
+  console.log('dateData', dateData);
+
   return (
-    <div className="h-screen overflow-hidden bg-[#EEFDFC]">
+    <div className="h-screen overflow-x-hidden   bg-[#EEFDFC]">
       <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -190,30 +282,43 @@ const Dob = () => {
           </div>
         </div>
       </div>
-      <div className="sm:flex justify-around w-screen mt-10 sm:m-0">
+      <div className="sm:flex min-h-[100px] lg:min-h-[600px] overflow-y-auto  justify-around w-screen mt-0 sm:m-0">
         <div
-          className="hidden sm:block h-screen sm:w-[40vw]"
+          className="hidden sm:flex flex flex-col items-center min-h-screen self-stretch sm:w-[40vw]"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
           }}
         >
-          <div className="pl-4 md:pl-20 pt-10">
+          <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-28 md:pl-10 pl-0 sm:w-[500px]">
-            <h1
-              className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
-            >
-              <span className="text-[#59E3FF]">Engage</span> in interests that
-              sharpen your mind
-            </h1>
-          </div>
-          <div className="flex-justify-center items-center px-10">
-            <img src={loginMan} alt="" className="md:w-full mx-auto" />
+          <div className='flex-1 w-full'>
+            <Slider {...settings} className='w-full flex-1 h-auto' >
+              {
+                sliderData.map((item, idx) => {
+                  return (
+                    <div>
+                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                        <h1
+                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                        >
+                          <span className="text-[#59E3FF]"> {item.textPrimary} </span>
+                          {item.textSec}
+                        </h1>
+                      </div>
+                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
+                      </div>
+                    </div>
+                  )
+                })
+              }
+
+            </Slider>
           </div>
         </div>
-        <div className="mt-10 h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
+        <div className="mt-10 h-scren lg:h-auto sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
           <form
             onSubmit={handleReg}
             className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
@@ -234,7 +339,8 @@ const Dob = () => {
               />
               <p className="text-red-500 text-sm">{nameError}</p>
             </div>
-            <div className="mt-8  ">
+
+            {/* <div className="mt-8  ">
               <h1 className="sm:ml-0 font-semibold text-lg mx-auto w-[300px]">
                 Date Of Birth
               </h1>
@@ -251,7 +357,7 @@ const Dob = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-2">
+              <div className="mt-">
                 <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
                   <div
                     className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "
@@ -279,44 +385,6 @@ const Dob = () => {
                 </div>
               </div>
               <div className="mt-2">
-                {/* <ul className="w-10/12 mx-auto flex flex-col">
-                  <li className="bg-gray-30">
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                        17
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        September
-                      </li>
-                      <li className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                        1967
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="bg-blue-200  rounded">
-                    <ul className=" flex items-center justify-center gap-4">
-                      <li className="  text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        18
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        {" "}
-                        October
-                      </li>
-                      <li className="text-2xl font-bold border-b py-3 border-gray-600 px-2">
-                        1968
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <ul className="flex items-center justify-center gap-5">
-                      <li className="text-gray-400 text-lg py-3 px-3">19</li>
-                      <li className="text-gray-400 text-lg py-3 px-3">
-                        November
-                      </li>
-                      <li className="text-gray-400 text-lg py-3 px-3">1969</li>
-                    </ul>
-                  </li>
-                </ul> */}
                 <div className="flex items-center justify-between w-[225px] mx-auto ">
                   <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
                     {date3}
@@ -329,6 +397,30 @@ const Dob = () => {
                   </div>
                 </div>
               </div>
+            </div> */}
+
+            <div className='flex items-center  mt-8'>
+              <Slider {...dateSettings} className={` h-[200px] w-[80px] dateSlider`} ref={dateSliderRef} >
+                {totalDates.map(str => {
+                  return <div className='px-2 py-4 flex justify-center items-center text-center'>
+                    <p> {str} </p>
+                  </div>
+                })}
+              </Slider>
+              <Slider {...monthsSettings} className=' h-[200px] w-[130px] dateSlider' ref={monthSliderRef} >
+                {months.map(str => {
+                  return <div className='px-2 py-4 flex justify-center items-center text-center'>
+                    <p> {str} </p>
+                  </div>
+                })}
+              </Slider>
+              <Slider {...yearsSettings} className=' h-[200px] w-[80px] dateSlider' ref={yearSliderRef} >
+                {totalYears.map(str => {
+                  return <div className='px-2 py-4 flex justify-center items-center text-center'>
+                    <p> {str} </p>
+                  </div>
+                })}
+              </Slider>
             </div>
             <div className="flex items-center justify-between mt-4">
               {nameError ? (

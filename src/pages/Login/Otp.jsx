@@ -1,14 +1,47 @@
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link,useLocation,useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import { updateLoggedIn } from '../../redux/slices/user';
-import { sendOtp,verifyOtp } from '../../services/auth';
+import { sendOtp, verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
+import SignupTree from "../../assets/images/login/signupTree.png";
+import Slider from "react-slick";
 
+const settings = {
+  infinite: true,
+  centerPadding: "10px",
+  slidesToShow: 1,
+  initialSlide: 0,
+  arrows: false,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  // dots: true,
+  afterChange: function (index) {
+    console.log(
+      `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+    );
+  }
+};
+
+const sliderData = [
+  {
+    textPrimary: 'Engage',
+    textSec: 'in interests that sharpen your mind',
+    img: loginMan,
+    imgClassName: ''
+  },
+  {
+    textPrimary: 'Engage',
+    textSec: 'in interests that sharpen your mind',
+    img: SignupTree,
+    imgClassName: 'max-w-[270px]'
+  },
+]
 const Otp = () => {
   const [otp, setOtp] = useState([]);
   const [otpStatus, setOtpStatus] = useState('');
@@ -118,7 +151,7 @@ const Otp = () => {
     }
   };
   return (
-    <div className="h-screen bg-[#EEFDFC]">
+    <div className="overflow-x-hidden bg-[#EEFDFC]">
       <div className="topAppBar pt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -126,27 +159,40 @@ const Otp = () => {
           </div>
         </div>
       </div>
-      <div className="sm:flex justify-around w-screen">
+      <div className="sm:flex  min-h-[667px] overflow-y-auto  justify-around   w-screen">
         <div
-          className="hidden sm:block h-screen sm:w-[40vw]"
+          className="hidden sm:flex flex flex-col items-center min-h-screen h-ful sm:w-[40vw]"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
           }}
         >
-          <div className="pl-4 md:pl-20 pt-10">
+          <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-28 md:pl-10 pl-0 sm:w-[500px]">
-            <h1
-              className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
-            >
-              <span className="text-[#59E3FF]">Engage</span> in interests that
-              sharpen your mind
-            </h1>
-          </div>
-          <div className="flex-justify-center items-center px-10">
-            <img src={loginMan} alt="" className="md:w-full mx-auto" />
+          <div className='flex-1 w-full'>
+            <Slider {...settings} className='w-full flex-1 h-auto' >
+              {
+                sliderData.map((item, idx) => {
+                  return (
+                    <div>
+                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                        <h1
+                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                        >
+                          <span className="text-[#59E3FF]"> {item.textPrimary} </span>
+                          {item.textSec}
+                        </h1>
+                      </div>
+                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
+                      </div>
+                    </div>
+                  )
+                })
+              }
+
+            </Slider>
           </div>
         </div>
         <div className=" h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center mt-20 sm:mt-0">

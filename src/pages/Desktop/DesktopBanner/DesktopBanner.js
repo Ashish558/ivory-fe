@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import BannerDesktop from '../../../Images/DesktopBanner.png';
+import BannerDesktop from '../../../Images/bannerPic.jpg';
 import Download from '../../../Images/Group 5.png'
 import './DesktopBanner.css'
 

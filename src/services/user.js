@@ -17,6 +17,13 @@ export const completeActivity = (activityId) => {
    }
    return axios.patch(`${BASE_URL}/accounts/user-activities/${activityId}/`, body, getAuthHeaders())
 };
+export const inCompleteActivity = (activityId) => {
+   let body = {
+      is_completed: false,
+      // activity: activityId
+   }
+   return axios.patch(`${BASE_URL}/accounts/user-activities/${activityId}/`, body, getAuthHeaders())
+};
 
 export const getMyActivitiesProgress = () => {
    return axios.get(`${BASE_URL}/accounts/user-activities/progress/`, getAuthHeaders())

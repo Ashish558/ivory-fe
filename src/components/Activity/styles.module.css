@@ -1,17 +1,16 @@
-
-
 .activity {
-   border: 1px solid #EBEDF0;
-   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
-   border-radius: 24px;
-   width: 296px;
-    height: 260px;
-    margin-top: 1rem;
-   display: flex;
-   column-gap: 7px;
-   margin-bottom: 1rem;
+  border: 1px solid #EBEDF0;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
+  border-radius: 24px;
+  /* width: 296px;
+    height: 260px; */
+  margin-top: 1rem;
+  display: flex;
+  column-gap: 7px;
+  margin-bottom: 1rem;
 }
-.image{
+
+.image {
   height: 153px;
-   
+
 }
