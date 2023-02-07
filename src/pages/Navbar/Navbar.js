@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
-import Logo from '../../Images/形状.png';
-import User from '../../Images/profile-pic.png';
-import ProfilePic from '../../Images/profile-pic-1.png';
-import './Navbar.css';
+import React from 'react';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
+import BackIcon from '../../assets/icons/go-back.svg';
+import activities from '../../Images/activities(1).png';
+import contact from '../../Images/contact.png';
+import cross from '../../Images/cross.png';
 import edit from '../../Images/edit.png';
-import play from '../../Images/how.png';
-import programs from '../../Images/programs.png';
-import activities from '../../Images/activities(1).png'
-import sessions from '../../Images/sessions.png'
-import contact from '../../Images/contact.png'
 import exit from '../../Images/exit.png';
-import faq from '../../Images/faq.png'
-import cross from '../../Images/cross.png'
-import BackIcon from '../../assets/icons/go-back.svg'
+import faq from '../../Images/faq.png';
+import play from '../../Images/how.png';
+import ProfilePic from '../../Images/profile-pic-1.png';
+import User from '../../Images/profile-pic.png';
+import programs from '../../Images/programs.png';
+import sessions from '../../Images/sessions.png';
+import Logo from '../../Images/形状.png';
+import './Navbar.css';
 
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
+import { useDispatch,useSelector } from 'react-redux';
+import { useLocation,useNavigate } from 'react-router-dom';
+import { updateLoggedIn,updateProfileData } from '../../redux/slices/user';
 
-const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing']
-const basePaths = ['/home', '/activities']
+const toExclude = ['/login','/otp','/dob','/signup','/congrates','/','/CreateProfile','/logolanding','/four','/third','/second','/landing']
+const basePaths = ['/home','/activities']
 
 const Navbar = () => {
 
-   const [isOpen, setIsOpen] = React.useState(false)
+   const [isOpen,setIsOpen] = React.useState(false)
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const location = useLocation()
-   const { loggedIn, profileData } = useSelector(state => state.user)
+   const { loggedIn,profileData } = useSelector(state => state.user)
 
    const toggleDrawer = () => {
       setIsOpen((prevState) => !prevState)
@@ -68,7 +68,7 @@ const Navbar = () => {
          <div class="flex-none gap-2">
             <button className='flex'>
                <div onClick={toggleDrawer} class="w-8 rounded-full flex">
-                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' />
+                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full'  />
                </div>
             </button>
 
@@ -79,7 +79,7 @@ const Navbar = () => {
 
                <div className='flex justify-between'>
                   <p className=''>
-                     <img src={profileData.profile_picture ? profileData.profile_picture : ProfilePic} alt="" className='w-12 h-12 object-cover rounded-full' />
+                     <img src={profileData.profile_picture ? profileData.profile_picture : User} alt="" className='w-12 h-12 object-cover rounded-full' />
                   </p>
                   <button onClick={toggleDrawer} className='mb-6 p-0'><img src={cross} alt="" /></button>
                </div>

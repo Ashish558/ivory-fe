@@ -133,8 +133,9 @@ const Profile = () => {
 
   }
   const [intIndex,setIntIndex] = useState([])
-  const toggleInt = id => {
-
+  const toggleInt = int => {
+    const id = int.id;
+    setinterest([...interest,int.name])
     let tempint = allInterests.map(int => {
       if (int.id === id) {
         return { ...int,selected: !int.selected }
@@ -150,13 +151,15 @@ const Profile = () => {
   }
   // console.log(intIndex)
   const filterIndexIds = intIndex.map(item => item.id)
-  // console.log(filterIndexIds);
+  console.log(filterIndexIds);
 
 
 
-
+  
 
   const handleAddInterest = () => {
+    setinterest([...interest,interestInput])
+    setInterestInput('')
     addInterest({ name: interestInput,icon: null })
       .then(res => {
         console.log(res.data);
@@ -334,12 +337,12 @@ const Profile = () => {
               </div> */}
                 {/*-------------Open interest page selecting---------------*/}
               </div>
-              <p className="ml-8 sm:ml-20 sm:mt-3 text-red-300 capitalize">{error}</p>
+             
             </div>
             <img src={ivoryforming} className={styles.ivoryForm} alt="" />
           </div>
 
-          {empty ? <button type='submit' className={styles.btnUpdate2} onClick={handleSubmit}>Save Profile</button> : <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>}
+           <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
           {/*-------------Go to next page---------------*/}
 
         </div>
@@ -356,23 +359,12 @@ const Profile = () => {
                 <hr className={styles.brk} />
                 <p className={`py-4 font-semibold sm:ml-6 ml-3`}>Choose one or more:</p>
                 <div className='flex flex-wrap gap-3 sm:ml-6 '>
-                  {
-                    interest?.map((ele,index) => {
-                      return (
-                        // <div className={styles.inttopic}>
-                        <div className='flex justify-center flex-row items-center sm:gap-2 cursor-pointer border-gray-400 rounded-md sm:px-2 sm:py-1 text-sm border-2'
-                          onClick={colorchange}>
-                          <img src={img} alt="" />
-                          <h3>{ele.name}</h3>
-                        </div>
-                      )
-                    })
-                  }
+                  
                   {
                     allInterests.map((int,i) => {
-                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${int.selected === true ? `${styles.interestSelected}` : ''}`} style={{ border: '2px solid #939CA3' }}
+                      return <div className={`${styles.butt1} text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-red-400' : ''}`} style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
-                        key={int.id} onClick={() => toggleInt(int.id)}>
+                        key={int.id} onClick={() => toggleInt(int)}>
                         <img src={int.icon} alt="" />
                         <h3> {int.name} </h3>
                       </div>
@@ -407,11 +399,10 @@ const Profile = () => {
                     <input type="text" name='addtext'
                       value={interestInput}
                       onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
-
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button></div>
 
-
+                  {/* onClick={handleAddInterest} */}
                 </>
               } />
             : <></>
