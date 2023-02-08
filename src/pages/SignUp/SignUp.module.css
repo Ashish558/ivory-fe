@@ -1,3 +1,7 @@
+
+:root {
+  --backgroundHeight: 62px;
+}
 .cusStyle {
   letter-spacing: 1px !important;
   line-height: 38px;
@@ -10,11 +14,11 @@
   background: #BDF4FF;
   border-radius: 4px;
   position: absolute;
-  top: 50%;
+  top: calc(50% + 2px);
   left: 0;
   width: 100%;
   transform: translateY(-50%);
-  height: 66px;
+  height: var(--backgroundHeight);
   z-index: -1;
 }
 
@@ -33,37 +37,37 @@
   left: 33px;
   width: 48px;
   z-index: 1000;
-  transform: translateY(-33px);
+  transform: translateY(calc(var(--backgroundHeight)/-2 + 2px));
 }
 .bottomLeftBorder{
   left: 33px;
   width: 48px;
   z-index: 1000;
-  transform: translateY(+33px);
+  transform: translateY(calc(var(--backgroundHeight)/2 + 2px));
 }
 .topRightBorder{
   right: 33px;
   width: 72px;
   z-index: 1000;
-  transform: translateY(-33px);
+  transform: translateY(calc(var(--backgroundHeight)/-2  + 2px));
 }
 .bottomRightBorder{
   right: 33px;
   width: 72px;
   z-index: 1000;
-  transform: translateY(+33px);
+  transform: translateY(calc(var(--backgroundHeight)/2 + 2px));
 }
 .midTopBorder{
   left: 94px;
   width: 115px;
   z-index: 1000;
-  transform: translateY(-33px);
+  transform: translateY(calc(var(--backgroundHeight)/-2  + 2px));
 }
 .midBottomBorder{
   left: 94px;
   width: 115px;
   z-index: 1000;
-  transform: translateY(+33px);
+  transform: translateY(calc(var(--backgroundHeight)/2 + 2px));
 }
 @media (min-width: 992px) {
   .cusStyle {

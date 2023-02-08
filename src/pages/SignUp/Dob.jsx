@@ -401,22 +401,22 @@ const Dob = () => {
               </div>
             </div> */}
 
-            <div className='flex items-center relative h-[200px] gap-x-3 px-[33px] z-10 mt-8'>
-              <Slider {...dateSettings} className={` h-[200px] w-[48px] dateSlider`} ref={dateSliderRef} >
+            <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] z-10 mt-8'>
+              <Slider {...dateSettings} className={` h-[174px] w-[48px] dateSlider`} ref={dateSliderRef} >
                 {totalDates.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
                     <p> {str} </p>
                   </div>
                 })}
               </Slider>
-              <Slider {...monthsSettings} className=' h-[200px] w-[115px] dateSlider' ref={monthSliderRef} >
+              <Slider {...monthsSettings} className=' h-[174px] w-[115px] dateSlider' ref={monthSliderRef} >
                 {months.map(str => {
                   return <div className='py-4 flex justify-center items-center text-center'>
                     <p> {str} </p>
                   </div>
                 })}
               </Slider>
-              <Slider {...yearsSettings} className=' h-[200px] w-[72px] dateSlider' ref={yearSliderRef} >
+              <Slider {...yearsSettings} className=' h-[174px] w-[72px] dateSlider' ref={yearSliderRef} >
                 {totalYears.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
                     <p> {str} </p>
