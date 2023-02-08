@@ -88,7 +88,7 @@
     height: 40px;
     border-radius: 5px;
     padding-left: 20px;
-    width: 334px;
+    width: 50%;
     border: 1px solid #68656c;
     background: none;
     font-size: 16px;
@@ -159,7 +159,7 @@
   .chooseinput {
     height: 40px;
     border-radius: 5px;
-    width: 334px;
+    /* width: 334px; */
     border: 2px solid #1b72c0;
     border-radius: 4px;
     display: flex;
@@ -439,7 +439,7 @@
   .chooseinput {
     border-radius: 5px;
     height: 56px;
-    width: 100%;
+    width: 50%;
     display: flex;
     border: 2px solid #79747e;
     font-size: 20px;
@@ -831,7 +831,7 @@
 
   .checkboxdiv1 {
     height: 54px;
-    width: 50%;
+    width: 100%;
     /* background-color: aqua; */
     display: flex;
     border: 2px solid #79747e;
@@ -840,7 +840,7 @@
   .checkboxdiv2 {
     height: 54px;
     border-radius: 5px;
-    width: 50%;
+    width: 100%;
     /* background-color: aqua; */
     border: 2px solid #79747e;
     display: flex;

@@ -276,14 +276,14 @@ const Profile = () => {
               </div>
               <div className={styles.input2}>
                 <label htmlFor="" className={styles.emaillabel} >Gender</label>
-                <div className={styles.genderinput}>
-                  <div className={`${styles.checkboxdiv1} ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')}>
-                    <label className={styles.gendermale} htmlFor="">Male</label>
+                <div className={`w-[50%] flex justify-between gap-4`}>
+                  <div className={`w-full border border-gray-600 flex justify-center items-center  ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{border:'1px solid gray'}}>
+                    <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
                       <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
                   </div>
-                  <div className={`${styles.checkboxdiv2} ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')}>
-                    <label className={styles.genderFemale} htmlFor="">Female</label>
+                  <div className={`w-full border border-gray-500 flex justify-center items-center ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{border:'1px solid gray'}}>
+                    <label className='py-4 text-lg' htmlFor="">Female</label>
                     {gender === 'female' ?
                       <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
                   </div>
@@ -295,8 +295,8 @@ const Profile = () => {
                 {
                   interest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
-                      className={styles.chooseinput}>
-                      <p className=' pl-3 pt-2 sm:pt-0'> Click to choose</p>
+                      className={`${styles.chooseinput} w-[50%]`}>
+                      <p className=' pl-3  pt-2 sm:pt-0'> Click to choose</p>
                     </div>
                     :
                     <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
@@ -326,7 +326,7 @@ const Profile = () => {
 
           <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
           {/*-------------Go to next page---------------*/}
-
+              
         </div>
 
         {showdiv == true ?
