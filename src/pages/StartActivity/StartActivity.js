@@ -251,7 +251,7 @@ export default function StartActivity({ fetchUserDetails }) {
    // console.log('isLastFeedbacked', isLastFeedbacked);
    if (Object.keys(activity).length === 0) return <></>
    const { name, description, image, steps, video, video_link } = activity
-   // console.log('video_link', video_link);
+   console.log('steps', steps);
 
    return (
       <>
@@ -306,11 +306,16 @@ export default function StartActivity({ fetchUserDetails }) {
                      <div>
                         {steps.map((step, idx) => {
                            return (
-                              <div className='mb-5 mt-6'>
-                                 <p className='font-semibold text-[#7B34FB] mb-4'>
-                                    Step {` ${idx}`}
+                              <div className='mb-6 mt-6 max-w-[650px]'>
+                                 <p className='font-semibold text-[#7B34FB] mb-3'>
+                                    {`${step.name}`}
                                  </p>
-                                 <div lassName='font-semibold'>
+                                 {step.image &&
+                                    <div className={styles.stepImageContainer}>
+                                       <img src={step.image} alt='step-image' />
+                                    </div>
+                                 }
+                                 <div className='font-normal text-sm'>
                                     {step.description}
                                  </div>
                               </div>
@@ -358,7 +363,7 @@ export default function StartActivity({ fetchUserDetails }) {
                   <p className='font-medium sm:text-lg sm:font-semibold' >
                      Submit your work to get feedback from our <br></br>expert:
                   </p>
-                  <div className='border-2 border-primary border-dashed w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
+                  <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                      <img src={UploadIcon}
                         className='mr-3 cursor-pointer'
                         alt='UploadIcon'
