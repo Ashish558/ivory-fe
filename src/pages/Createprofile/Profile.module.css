@@ -56,6 +56,7 @@
     background: linear-gradient(0deg, #d3e4ff, #d3e4ff),
       linear-gradient(0deg, #ffffff, #ffffff);
     border-radius: 100px;
+    overflow: hidden;
   }
 
   .ssmmillee > img {
