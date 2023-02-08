@@ -315,7 +315,7 @@ export default function StartActivity({ fetchUserDetails }) {
                                        <img src={step.image} alt='step-image' />
                                     </div>
                                  }
-                                 <div className='font-normal text-sm'>
+                                 <div className='font-normal text-sm md:text-base '>
                                     {step.description}
                                  </div>
                               </div>
