@@ -273,7 +273,7 @@ const Dob = () => {
 
   // console.log('dates', totalDates);
   // console.log('years', totalYears);
-  console.log('dateData', dateData);
+  // console.log('dateData', dateData);
 
   return (
     <div className="h-screen overflow-x-hidden   bg-[#EEFDFC]">
@@ -323,7 +323,7 @@ const Dob = () => {
         <div className="mt-10 h-scren lg:h-auto sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
           <form
             onSubmit={handleReg}
-            className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
+            className="sm:w-[328px] mx-auto sm:flex sm:flex-col sm:justify-start"
           >
             <div className=" w-[300px] mx-auto relative">
               <h1 className="text-2xl font-bold  sm:ml-0 mb-6">
@@ -401,22 +401,22 @@ const Dob = () => {
               </div>
             </div> */}
 
-            <div className='flex items-center relative z-10 mt-8'>
-              <Slider {...dateSettings} className={` h-[200px] w-[80px] dateSlider`} ref={dateSliderRef} >
+            <div className='flex items-center relative h-[200px] gap-x-3 px-[33px] z-10 mt-8'>
+              <Slider {...dateSettings} className={` h-[200px] w-[48px] dateSlider`} ref={dateSliderRef} >
                 {totalDates.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
                     <p> {str} </p>
                   </div>
                 })}
               </Slider>
-              <Slider {...monthsSettings} className=' h-[200px] w-[130px] dateSlider' ref={monthSliderRef} >
+              <Slider {...monthsSettings} className=' h-[200px] w-[115px] dateSlider' ref={monthSliderRef} >
                 {months.map(str => {
-                  return <div className='px-2 py-4 flex justify-center items-center text-center'>
+                  return <div className='py-4 flex justify-center items-center text-center'>
                     <p> {str} </p>
                   </div>
                 })}
               </Slider>
-              <Slider {...yearsSettings} className=' h-[200px] w-[80px] dateSlider' ref={yearSliderRef} >
+              <Slider {...yearsSettings} className=' h-[200px] w-[72px] dateSlider' ref={yearSliderRef} >
                 {totalYears.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
                     <p> {str} </p>
@@ -424,6 +424,12 @@ const Dob = () => {
                 })}
               </Slider>
               <div className={styles.sliderMiddleBg}> </div>
+              <div className={styles.topLeftBorder}> </div>
+              <div className={styles.topRightBorder}> </div>
+              <div className={styles.bottomLeftBorder}> </div>
+              <div className={styles.bottomRightBorder}> </div>
+              <div className={styles.midTopBorder}> </div>
+              <div className={styles.midBottomBorder}> </div>
             </div>
             <div className="flex items-center justify-between mt-4">
               {nameError ? (
