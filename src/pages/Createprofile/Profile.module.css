@@ -21,7 +21,7 @@
     /* background-color: red; */
   }
   .blur {
-    filter: blur(3px);
+    filter: blur(2px);
   }
   .edithead {
     position: relative;
@@ -85,7 +85,7 @@
     /* margin: 10px 0px; */
   }
   .emailinput {
-    height: 40px;
+    height: 50px;
     border-radius: 5px;
     padding-left: 20px;
     width: 50%;
@@ -157,7 +157,7 @@
     margin-left: 40%;
   }
   .chooseinput {
-    height: 40px;
+    height: 50px;
     border-radius: 5px;
     /* width: 334px; */
     border: 2px solid #1b72c0;
@@ -439,7 +439,6 @@
   .chooseinput {
     border-radius: 5px;
     height: 56px;
-    width: 50%;
     display: flex;
     border: 2px solid #79747e;
     font-size: 20px;
