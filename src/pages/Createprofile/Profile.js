@@ -213,7 +213,7 @@ const Profile = () => {
   // }
   return (
     <>
-      <div className='pb-32 sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
+      <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
         <div className={styles.datainput} >
           <div className={styles.navbar}>
 

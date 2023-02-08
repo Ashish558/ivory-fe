@@ -149,8 +149,7 @@ const Dob = () => {
     return months.findIndex((item) => item === month);
   }
   const monthpos = findMonthIndex(dateData.month)
-  console.log(monthpos)
-  console.log(monthpos)
+
   const data = {
     name,
     date: dateData.year + "-" + (monthpos + 1) + "-" + dateData.date,

@@ -85,7 +85,7 @@ export default function Story(props) {
    }
 
    // console.log('story', story)
-   console.log('video', video)
+   // console.log('video', video)
 
    return (
       <>
