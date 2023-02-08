@@ -37,7 +37,6 @@ const Profile = () => {
   const [gender,setgender] = useState("");
   useEffect(() => {
     if (loggedIn === true) {
-
       setemail(profileData.email !== null ? profileData.email : '')
       setgender(profileData.gender !== null ? profileData.gender : '')
       setName(profileData.name !== null ? profileData.name : '')
@@ -166,6 +165,7 @@ const Profile = () => {
     document.querySelector(".Profile_datainput__ZG9n4").classList.remove("Profile_blur__z7wX8");
   }
   const addnew = () => {
+    
     setaddnewtextdiv(true)
     setbackcolor('rgb(145 165 186)')
   }
@@ -205,8 +205,8 @@ const Profile = () => {
     setAllInterests(filteredAll)
   }
 
-  // console.log('interest', interest);
-  console.log('allInterests', allInterests);
+  console.log('interest', interest);
+  // console.log('allInterests', allInterests);
   // console.log('userInterests', userInterests);
   // if (interest.length < 0) {
   //   console.log('interest',interest);
@@ -225,14 +225,13 @@ const Profile = () => {
           <div className={styles.image}>
             <div className={styles.ssmmillee}>
               <img src={profileData.profile_picture ? profileData.profile_picture : photo}
-                className={styles.img2} alt=""
+                className={`w-[200px] customStyle`} alt=""
                 onClick={() => photoRef.current.click()} />
               <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
                 onChange={(e) => handlePhotoUpload(e)} />
             </div>
             <p className={`cursor-pointer ${styles.addpit}`}
               onClick={() => photoRef.current.click()}
-
             >Add Profile picture
             </p>
           </div>
@@ -299,7 +298,7 @@ const Profile = () => {
                       <p className=' pl-3  pt-2 sm:pt-0'> Click to choose</p>
                     </div>
                     :
-                    <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
+                    <div className='h-[85px]  sm:w-[50%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
                         interest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
@@ -352,9 +351,13 @@ const Profile = () => {
                     })
                   }
                 </div>
-                <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={addnew}>Add</button></div>{/*-------------Add Your interest page open---------------*/}
+                <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
+                  {
+                  interest.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button>: <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'  onClick={crossbox}>Add</button>
+                  }
+                  </div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />
-                <Link to="/"><p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6'>Suggest more interest categories.</p></Link>
+                <p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
               </>
             } />
 
@@ -381,10 +384,13 @@ const Profile = () => {
                       value={interestInput}
                       onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
                   </div>
-
-                  <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button></div>
-                  <hr className={styles.hend} />
-                <Link to="/"><p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6'>Suggest more interest categories.</p></Link>
+                  <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
+                  {
+                    interestInput.length ===0?<button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button>:<button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
+                  }
+                  </div>
+                 
+              
 
                   {/* onClick={handleAddInterest} */}
                 </>
