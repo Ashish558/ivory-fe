@@ -74,6 +74,8 @@ export default function ActivityType() {
                })
                return { ...item, is_completed }
             })
+            data = data.sort(item => item.is_completed === null ? 1 : -1)
+            console.log('data',data);
             setUserActivities(data)
          }).catch(err => {
             console.log('err', err);
@@ -95,7 +97,7 @@ export default function ActivityType() {
 
    useEffect(() => {
       if (userActivities.length === 0) return
-      console.log('userActivities', userActivities);
+      // console.log('userActivities', userActivities);
       if (completedTabActive === false) {
          let temp = userActivities.filter(item => item.is_completed === completedTabActive || item.is_completed === null)
          setFilteredUserActivities(temp)
