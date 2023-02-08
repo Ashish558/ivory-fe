@@ -21,7 +21,7 @@
     /* background-color: red; */
   }
   .blur {
-    filter: blur(3px);
+    filter: blur(2px);
   }
   .edithead {
     position: relative;
@@ -85,10 +85,10 @@
     /* margin: 10px 0px; */
   }
   .emailinput {
-    height: 40px;
+    height: 50px;
     border-radius: 5px;
     padding-left: 20px;
-    width: 334px;
+    width: 50%;
     border: 1px solid #68656c;
     background: none;
     font-size: 16px;
@@ -157,9 +157,9 @@
     margin-left: 40%;
   }
   .chooseinput {
-    height: 40px;
+    height: 50px;
     border-radius: 5px;
-    width: 334px;
+    /* width: 334px; */
     border: 2px solid #1b72c0;
     border-radius: 4px;
     display: flex;
@@ -276,13 +276,11 @@
     flex-wrap: wrap;
     align-content: space-around;
     justify-content: flex-start;
-    gap: 10px;
   }
   .Profile_butt1__8cHd5 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 20px;
     align-content: center;
     border: 1px solid;
     border-radius: 5px;
@@ -441,7 +439,6 @@
   .chooseinput {
     border-radius: 5px;
     height: 56px;
-    width: 100%;
     display: flex;
     border: 2px solid #79747e;
     font-size: 20px;
@@ -494,7 +491,7 @@
     top: 28%;
     left: 5%;
     border-radius: 30px;
-    background: #0055bf;
+    background: #1b72c0;
     border: none;
     font-size: 20px;
     color: white;
@@ -833,7 +830,7 @@
 
   .checkboxdiv1 {
     height: 54px;
-    width: 50%;
+    width: 100%;
     /* background-color: aqua; */
     display: flex;
     border: 2px solid #79747e;
@@ -842,7 +839,7 @@
   .checkboxdiv2 {
     height: 54px;
     border-radius: 5px;
-    width: 50%;
+    width: 100%;
     /* background-color: aqua; */
     border: 2px solid #79747e;
     display: flex;
@@ -877,4 +874,28 @@
 .interestSelected.butt1 {
   border: 0;
   background-color: #bdf4ff !important;
+}
+.Profile_butt1__8cHd5 {
+    height: 40px;
+    width: auto;
+    /* background-color: black; */
+    border: 2px solid #79747e;
+    /* padding-left: 10px; */
+    text-align: center;
+    margin-left: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: inline-flex;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    /* box-shadow: 0px 0px 1px 1px; */
+}
+.Profile_butt1__8cHd5 > img {
+    height: 23px;
+    width: 23px;
+    margin-top: 0;
+    margin-left: 0;
 }

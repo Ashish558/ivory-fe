@@ -1,16 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Slider from "react-slick";
 import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
-import { updateLoggedIn } from '../../redux/slices/user';
-import { registerUser,verifyOtp } from '../../services/auth';
-import styles from "./SignUp.module.css";
-import Slider from "react-slick";
 import SignupTree from "../../assets/images/login/signupTree.png";
+import { updateLoggedIn } from '../../redux/slices/user';
+import { registerUser, verifyOtp } from '../../services/auth';
 import { genNumbers } from '../../utils/utils';
-import './slider.css'
+import styles from "./SignUp.module.css";
+import './slider.css';
 
 const settings = {
   infinite: true,
@@ -134,90 +134,28 @@ const Dob = () => {
 
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(from,{
+    navigate(from, {
       state: {
         otp: otp,
         otp_token: otp_token,
         phone: phone,
         countryCode: countryCode,
-      
-    } });
-  };
-  const handleDate = (e) => {
-    // e.preventDefault();
 
-    if (e.deltaY > 0) {
-
-      if (date2 < 30) {
-        setDate(date + 1);
-        setDate2(date2 + 1);
-        setDate3(date3 + 1);
       }
-      // if (date2 === 31) {
-      //   setDate3(1);
-      // }
-      // if (date2 === 1) {
-      //   setDate(31);
-      // }
-    } else {
-      if (date2 >= 2) {
-        setDate(date - 1);
-        setDate2(date2 - 1);
-        setDate3(date3 - 1);
-      }
-      // if (date2 === 1) {
-      //   setDate(31);
-      // }
-      // if (date2 === 31) {
-      //   setDate3(31);
-      // }
-    }
+    });
   };
-  const handleYear = (e) => {
-    // e.preventDefault();
-    if (e.deltaY > 0) {
-      setYear(year + 1);
-      setYear2(year2 + 1);
-      setYear3(year3 + 1);
-    } else {
-      setYear(year - 1);
-      setYear2(year2 - 1);
-      setYear3(year3 - 1);
-    }
-  };
-  const handleMonth = (e) => {
-    // e.preventDefault();
-    if (e.deltaY > 0) {
-      if (monthPosition2 < 11) {
-
-        setMonthPosition(monthPosition + 1);
-        setMonthPosition2(monthPosition2 + 1);
-        setMonthPosition3(monthPosition3 + 1);
-        // if (monthPosition2 === 11) {
-        //   setMonthPosition3(0);
-        // }
-        // if (monthPosition2 === 11) {
-        //   setMonthPosition3(11);
-        // }
-      }
-      if (monthPosition2 === 1) {
-        setMonthPosition(1);
-      }
-    } else {
-      if (monthPosition2 > 0) {
-        setMonthPosition(monthPosition - 1);
-        setMonthPosition2(monthPosition2 - 1);
-        setMonthPosition3(monthPosition3 - 1);
-      }
-      if (monthPosition2 === 1) {
-        setMonthPosition(11);
-      }
-    }
+  // find index number of month
+  const findMonthIndex = (month) => {
+    return months.findIndex((item) => item === month);
   }
+  const monthpos = findMonthIndex(dateData.month)
+  console.log(monthpos)
+  console.log(monthpos)
   const data = {
     name,
-    date: year2 + "-" + monthPosition2 + "-" + date2,
+    date: dateData.year + "-" + (monthpos + 1) + "-" + dateData.date,
   };
+
   const handleReg = (e) => {
     e.preventDefault();
     console.log(data.name);
@@ -257,6 +195,7 @@ const Dob = () => {
   }
   const handleName = (e) => {
     const { value } = e.target;
+
     // name should not be any number
     if (value.match(/^[a-zA-Z ]*$/)) {
       setNameError("")
@@ -267,7 +206,6 @@ const Dob = () => {
 
       setName("");
     }
-
 
   }
 
@@ -342,64 +280,7 @@ const Dob = () => {
               <p className="text-red-500 text-sm">{nameError}</p>
             </div>
 
-            {/* <div className="mt-8  ">
-              <h1 className="sm:ml-0 font-semibold text-lg mx-auto w-[300px]">
-                Date Of Birth
-              </h1>
-              <div className="mt-2">
-                <div className="flex items-center justify-between w-[225px]  mx-auto">
-                  <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3">
-                    {date}
-                  </div>
-                  <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                    {months[monthPosition]}
-                  </div>
-                  <div className="text-gray-400 text-lg border-b py-3 border-gray-400 px-3 ">
-                    {year}
-                  </div>
-                </div>
-              </div>
-              <div className="mt-">
-                <div className="flex items-center justify-center w-[300px] mx-auto bg-blue-200  rounded px-5">
-                  <div
-                    className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400  px-2 w-10 bg-transparent mx-auto text-center "
-                    
-                    onTouchMove={handleDate}
-                    onWheel={handleDate}
-                  >
-                    {date2}
-                  </div>
-                  <div
-                    className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400 w-[100px] bg-transparent mx-auto text-center "
-                    
-                    onTouchMove={handleMonth} 
-                    onWheel={handleMonth} 
-                  >
-                    {months[monthPosition2]}
-                  </div>
-                  <div
-                    className="text-gray-700 text-2xl font-semibold border-b py-3 border-gray-400 px-3 w-[70px]  bg-transparent text-center "
-                    
-                    onWheel={handleYear} onTouchMove={handleYear}
-                  >
-                    {year2}
-                  </div>
-                </div>
-              </div>
-              <div className="mt-2">
-                <div className="flex items-center justify-between w-[225px] mx-auto ">
-                  <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
-                    {date3}
-                  </div>
-                  <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
-                    {months[monthPosition3]}
-                  </div>
-                  <div className="text-gray-400 text-lg  py-3 border-gray-400 px-3 ">
-                    {year3}
-                  </div>
-                </div>
-              </div>
-            </div> */}
+
 
             <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] z-10 mt-8'>
               <Slider {...dateSettings} className={` h-[174px] w-[48px] dateSlider`} ref={dateSliderRef} >
@@ -409,11 +290,13 @@ const Dob = () => {
                   </div>
                 })}
               </Slider>
-              <Slider {...monthsSettings} className=' h-[174px] w-[115px] dateSlider' ref={monthSliderRef} >
-                {months.map(str => {
-                  return <div className='py-4 flex justify-center items-center text-center'>
-                    <p> {str} </p>
-                  </div>
+              <Slider {...monthsSettings} className=' h-[200px] w-[130px] dateSlider' ref={monthSliderRef} >
+                {months.map((str, i) => {
+                  return (
+                    <div className="px-2 py-4 flex justify-center items-center text-center">
+                      <p> {str} </p>
+                    </div>
+                  );
                 })}
               </Slider>
               <Slider {...yearsSettings} className=' h-[174px] w-[72px] dateSlider' ref={yearSliderRef} >

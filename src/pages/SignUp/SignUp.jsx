@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import back from "../../assets/Back.svg";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from "../../services/auth";
 import styles from "./SignUp.module.css";
 import Slider from "react-slick";
 import loginMan from "../../assets/images/login/loginMan.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
+
 
 const settings = {
   infinite: true,
@@ -39,14 +39,12 @@ const sliderData = [
   },
 ]
 const SignUp = () => {
-  const locaion = useLocation();
+  const locaion = useLocation ();
   const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState(null);
   const [error, setError] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+880");
-
-
   const goBack = () => {
     navigate(from, { replace: true });
   };
@@ -82,17 +80,17 @@ const SignUp = () => {
   };
   return (
     <div className="h-screen overflow-hidden overflow-y-auto bg-[#EEFDFC]">
-      <div className="topAppBar mt-10 ml-8 sm:hidden">
+      {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img src={back} alt="" onClick={goBack} />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="sm:flex  min-h-[667px] overflow-y-auto justify-around w-screen mt-10 sm:m-0">
         <div
-          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw]"
+          className="hidden sm:flex  flex-col items-center min-h-screen h-full sm:w-[40vw]"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../../../Images/ivory logo dark 1.png';
-import User from '../../../Images/profile-pic-1.png';
+import User from '../../../Images/profile-pic.png';
 import './NavbarDesktop.css';
 
 
@@ -86,7 +86,7 @@ const NavbarDesktop = () => {
                <label tabindex="0" className='cursor-pointer'>
                   {
                      loggedIn &&
-                     <p ><img width="34px" height="34px" src={profileData.profile_picture ? profileData.profile_picture : User} alt="" /></p>
+                     <p ><img width="34px" height="34px" src={profileData.profile_picture ? profileData.profile_picture : User} alt="" className='rounded-full' /></p>
                   }
                </label>
                <ul style={{ width: '616px', height: '520px' }} tabindex="0" class="sidebar menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 " >
@@ -96,7 +96,7 @@ const NavbarDesktop = () => {
                         {
                            loggedIn &&
                            <p className='pl-11'>
-                              <img src={profileData.profile_picture ? profileData.profile_picture : User} width="48px" alt="" />
+                              <img src={profileData.profile_picture ? profileData.profile_picture : User} width="48px" alt=""  className='rounded-full' />
                            </p>
                         }
 
