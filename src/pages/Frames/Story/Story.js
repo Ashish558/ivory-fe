@@ -93,7 +93,7 @@ export default function Story(props) {
          <div className={styles.modalContainer}>
             <div className="w-full p-0  self-stretch overflow-aut">
                <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
-                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} `}>
+                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full '  : ''} `}>
 
                      {storyType === 'image' ?
                         <div className={styles.storyImg}>
