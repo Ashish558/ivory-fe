@@ -93,7 +93,7 @@ const Profile = () => {
   const body = {
     gender: gender ? gender : '',
     name: name ? name : '',
-    email: email ? email : '',
+    email: email ? email : null,
     intrests: intIds ? intIds : [],
     mobile_no: mobile_no ? mobile_no : ''
   }
@@ -381,7 +381,7 @@ const Profile = () => {
                       value={interestInput}
                       onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
                   </div>
-                  
+
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button></div>
 
                   {/* onClick={handleAddInterest} */}
