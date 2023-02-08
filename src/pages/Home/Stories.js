@@ -82,14 +82,15 @@ const Stories = () => {
       getStories(loggedIn)
          .then(res => {
             let resdata = res.data.data[0]
+            console.log('Stories', res.data.data)
             let allStories = []
             allStories = [...allStories,
             ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
             ...resdata.mcq_stories.map(story => ({ ...story, type: 'mcq' })),
             ...resdata.puzzle_stories.map(story => ({ ...story, type: 'sudoku' })),
-            ...resdata.qna_stories.map(story => ({ ...story, type: 'qna' }))
+            ...resdata.qna_stories.map(story => ({ ...story, type: 'qna' })),
+            ...resdata.video_stories.map(story => ({ ...story, type: 'video' }))
             ]
-            // console.log('allStories', allStories)
             setStories(allStories)
          })
          .catch(err => {
@@ -130,49 +131,51 @@ const Stories = () => {
 
    return (
       <div>
-         <div className=" lg:ml-24 lg:mt-[90px] mt-14">
-            <div className='lg:flex lg:items-center lg:mb-20'>
-               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
-               <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
-            </div>
+         {
+            stories.length >= 1 &&
+            <div className=" lg:ml-24 lg:mt-[90px] mt-14">
+               <div className='lg:flex lg:items-center lg:mb-20'>
+                  <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
+                  <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+               </div>
 
-            {/* <div className=' flex items-center mb-20'>
+               {/* <div className=' flex items-center mb-20'>
                <h1 className='text-5xl font-medium  '>Start your day <span></span></h1>
                <p className='pl-7'><img src={Arrow} alt="" /></p>
             </div> */}
 
 
-            <Slider {...settings} className='home-stories-slider' >
-               {stories.map((story, idx) => {
-                  return (
-                     <div>
-                        <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
-                           {
-                              story.viewed_by.includes(profileData.id) &&
-                              <div className='story-checked flex'>
-                                 <img src={CheckedIcon} alt='' />
-                              </div>
-                           }
+               <Slider {...settings} className='home-stories-slider' >
+                  {stories.map((story, idx) => {
+                     return (
+                        <div>
+                           <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
+                              {
+                                 story.viewed_by.includes(profileData.id) &&
+                                 <div className='story-checked flex'>
+                                    <img src={CheckedIcon} alt='' />
+                                 </div>
+                              }
 
-                           <div className="" >
-                              <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
-                              <div className="pl-3 details lg:pl-6">
-                                 <p className="text-sm lg:text-xl text-white">
-                                    {story.share_message ? story.share_message : ''}
-                                 </p>
-                                 <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
-                                    <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
-                                    <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
+                              <div className="" >
+                                 <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
+                                 <div className="pl-3 details lg:pl-6">
+                                    <p className="text-sm lg:text-xl text-white">
+                                       {story.share_message ? story.share_message : ''}
+                                    </p>
+                                    <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
+                                       <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
+                                       <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
 
-                                    <p className="text-sm text-white pl-1"> {story.views} views</p>
+                                       <p className="text-sm text-white pl-1"> {story.views} views</p>
+                                    </div>
                                  </div>
                               </div>
                            </div>
                         </div>
-                     </div>
-                  )
-               })}
-               {/* <div className="p-3 " onClick={() => handleClick()} >
+                     )
+                  })}
+                  {/* <div className="p-3 " onClick={() => handleClick()} >
                   <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
    
                      <div className="pl-3 details">
@@ -209,9 +212,11 @@ const Stories = () => {
                      </div>
                   </div>
                </div> */}
-               <div></div>
-            </Slider>
-         </div>
+                  <div></div>
+               </Slider>
+            </div>
+         }
+
          {
             storyActive &&
             <Story handleClose={() => setStoryActive(false)}

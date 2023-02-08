@@ -35,9 +35,9 @@ export default function QnA({ image, answer_image, type, url, updateStory }) {
          <div className='flx items-center self-streth flex- lg:row-span-4  lg:col-span-4 lg:h-full '>
             {
                answerActive ?
-                  <img src={image} className={styles.storyImage} alt='unsolved' />
+                  <img src={answer_image} className={styles.storyImage} alt='unsolved' />
                   :
-                  <img src={answer_image} className={styles.storyImage} alt='solved' />
+                  <img src={image} className={styles.storyImage} alt='solved' />
             }
          </div>
 

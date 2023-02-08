@@ -12,7 +12,7 @@ import StoryImg from '../../../assets/images/story-1.png'
 import McqStoryImg from '../../../assets/images/story-mcq.png'
 import McqCorrectImg from '../../../assets/images/mcq-correct.png'
 
-import ReactPlayer from 'react-player/youtube'
+import ReactPlayer from 'react-player'
 import Mcq from './Mcq/Mcq';
 import Mcq2 from './Mcq2/Mcq2';
 import Sudoku from './Sudoku/Sudoku';
@@ -27,7 +27,7 @@ const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 export default function Story(props) {
    const { handleClose, updateStory, selectNextStory, selectPrevStory, selectedIndex } = props
    let story = props.story
-   let { id, image, type, liked, share_message, title, url, views } = story
+   let { id, image, type, liked, share_message, title, url, views, video } = story
    const [storyType, setStoryType] = useState(type)
    const [shareModalOpen, setShareModalOpen] = useState(false)
 
@@ -35,7 +35,7 @@ export default function Story(props) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
    }
- 
+
    useEffect(() => {
       setStoryType(type)
    }, [type])
@@ -84,7 +84,9 @@ export default function Story(props) {
          })
    }
 
-   // console.log('story', storyType)
+   // console.log('story', story)
+   console.log('video', video)
+
    return (
       <>
 
@@ -100,12 +102,23 @@ export default function Story(props) {
 
                         : storyType === 'video' ?
                            <div className={styles.storyVideo}>
-                              <ReactPlayer
-                                 width='100%'
-                                 height='100%'
-                                 url={url}
+                              {/* <ReactPlayer
+                                 width='300px'
+                                 height='500px'
+                                 url={video}
+                                 src={video}
                                  controls={true}
-                              />
+                                 // file={video}
+                                 config={{
+                                    file: {
+                                       forceVideo: true,
+                                    }
+                                 
+                                 }}
+                              /> */}
+                              <video width='100%' height='100%' className='max-h-[500px]' controls  >
+                                 <source src={video} type="video/mp4" />
+                              </video>
                            </div>
                            : storyType === 'mcq' && story.choices !== undefined ?
                               <Mcq {...story} />
@@ -137,10 +150,10 @@ export default function Story(props) {
                         </div>
                      </div>
 
-                     <img src={LeftIcon} alt='left' className={styles.leftIcon} 
-                     onClick={selectPrevStory} />
+                     <img src={LeftIcon} alt='left' className={styles.leftIcon}
+                        onClick={selectPrevStory} />
                      <img src={RightIcon} alt='right' className={styles.RightIcon}
-                       onClick={selectNextStory} />
+                        onClick={selectNextStory} />
                   </div>
                </div>
 

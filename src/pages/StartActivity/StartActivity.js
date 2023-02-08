@@ -60,6 +60,8 @@ export default function StartActivity({ fetchUserDetails }) {
    const [nextActivities, setNextActivities] = useState([])
    const [isLastFeedbacked, setIsLastFeedbacked] = useState(false)
    const inputRef = useRef(null)
+   const videoRef = useRef(null)
+
 
    const [currentIndex, setCurrentIndex] = useState(0)
    const { loggedIn, profileData } = useSelector(state => state.user)
@@ -239,7 +241,6 @@ export default function StartActivity({ fetchUserDetails }) {
       setSourceToView(item)
       setViewSubModal(true)
    }
-   //384480
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
    // console.log('activityId', activityId);
@@ -250,6 +251,7 @@ export default function StartActivity({ fetchUserDetails }) {
    // console.log('isLastFeedbacked', isLastFeedbacked);
    if (Object.keys(activity).length === 0) return <></>
    const { name, description, image, steps, video, video_link } = activity
+   // console.log('video_link', video_link);
 
    return (
       <>
@@ -263,13 +265,22 @@ export default function StartActivity({ fetchUserDetails }) {
                <p className='text-xl sm:text-4xl font-medium mb-2.5 px-4 sm:py-4'> {name} </p>
                {
                   video_link !== null ?
-                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
-                        <ReactPlayer
+                     <div className='sm:flex sm:items-start sm:justify-start relative sm:w-[100%]'>
+                        {
+                           isAlreadyStarted === false &&
+                           <div className={styles.overlay} onClick={() => setStartModalActive(true)} > </div>
+                        }
+                        <ReactPlayer ref={videoRef}
                            width='100%'
                            height='400px'
+                           className={styles.video}
                            url={video_link}
                            controls={true}
+                           disabled={true}
                         />
+                        {/* <video width='100%' height='400px' className='max-h-[400px]' controls  >
+                           <source src={video_link}  />
+                        </video> */}
                      </div>
                      :
                      <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
@@ -299,7 +310,7 @@ export default function StartActivity({ fetchUserDetails }) {
                                  <p className='font-semibold text-[#7B34FB] mb-4'>
                                     Step {` ${idx}`}
                                  </p>
-                                 <div  lassName='font-semibold'>
+                                 <div lassName='font-semibold'>
                                     {step.description}
                                  </div>
                               </div>

@@ -5,6 +5,16 @@
   width: 240px;
   margin-left: 20px;
 }
+.sliderMiddleBg {
+  background-color: rgb(191 219 254);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  height: 60px;
+  z-index: -1;
+}
 @media (min-width: 992px) {
   .cusStyle {
     letter-spacing: 2px !important;

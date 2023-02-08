@@ -76,6 +76,8 @@ const Dob = () => {
     verticalSwiping: true,
     swipeToSlide: true,
     arrows: false,
+    speed: 100,
+    touchThreshold: 10
   }
   const dateSettings = {
     ...common,
@@ -399,7 +401,7 @@ const Dob = () => {
               </div>
             </div> */}
 
-            <div className='flex items-center  mt-8'>
+            <div className='flex items-center relative z-10 mt-8'>
               <Slider {...dateSettings} className={` h-[200px] w-[80px] dateSlider`} ref={dateSliderRef} >
                 {totalDates.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
@@ -421,6 +423,7 @@ const Dob = () => {
                   </div>
                 })}
               </Slider>
+              <div className={styles.sliderMiddleBg}> </div>
             </div>
             <div className="flex items-center justify-between mt-4">
               {nameError ? (

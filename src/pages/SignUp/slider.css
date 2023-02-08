@@ -3,11 +3,8 @@
 }
 
 .dateSlider .slick-current+.slick-slide {
-   background-color: rgb(191 219 254);
+   /* background-color: rgb(191 219 254); */
    color: rgb(55 65 81 / 1);
-font-weight: 600;
-font-size: 1.5rem;
+   font-weight: 600;
+   font-size: 1.5rem;
 }
-
-
-
