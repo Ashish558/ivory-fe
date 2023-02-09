@@ -86,7 +86,7 @@ const NavbarDesktop = () => {
                <label tabindex="0" className='cursor-pointer'>
                   {
                      loggedIn &&
-                     <p ><img width="34px" height="34px" src={profileData.profile_picture ? profileData.profile_picture : User} alt="" className='rounded-full' /></p>
+                     <p ><img width="34px" height="34px" src={profileData.profile_picture ? profileData.profile_picture : User} alt="" className='rounded-full w-[40px] h-[40px] object-cover' /></p>
                   }
                </label>
                <ul style={{ width: '616px', height: '520px' }} tabindex="0" class="sidebar menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 flex flex-col" >
@@ -96,7 +96,7 @@ const NavbarDesktop = () => {
                            {
                               loggedIn &&
                               <p className='pl-11'>
-                                 <img src={profileData.profile_picture ? profileData.profile_picture : User} width="48px" alt=""  className='rounded-full' />
+                                 <img src={profileData.profile_picture ? profileData.profile_picture : User} width="48px" alt=""  className='rounded-full  w-[40px] h-[40px] object-cover' />
                               </p>
                            }
                            <p onClick={handleSidebar} className='pr-7'><img className='cursor-pointer' src={cross} alt="" />
