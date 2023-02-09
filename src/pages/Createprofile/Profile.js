@@ -278,12 +278,12 @@ const Profile = () => {
               <div className={styles.input2}>
                 <label htmlFor="" className={styles.emaillabel} >Gender</label>
                 <div className={`sm:w-[50%] flex justify-between gap-4`}>
-                  <div className={`w-full border border-gray-600 flex justify-center items-center  ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
+                  <div className={`w-full border border-gray-600 flex justify-between items-center px-2 sm:px-5 ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
                       <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
                   </div>
-                  <div className={`w-full border border-gray-500 flex justify-center items-center ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
+                  <div className={`w-full border border-gray-500 flex justify-between items-center px-2 sm:px-5  items-center ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Female</label>
                     {gender === 'female' ?
                       <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
