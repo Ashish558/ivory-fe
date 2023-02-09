@@ -196,7 +196,7 @@ export default function Activities() {
    }, [filterItems, activities])
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
-
+   console.log('my Activity', myActivities);
    return (
       <div>
          {/* <Header /> */}

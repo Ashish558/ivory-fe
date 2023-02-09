@@ -1,13 +1,14 @@
 .container {
    display: flex;
    align-items: center;
-   padding: 16px 16px;
+   /* padding: 16px 16px; */
    background: #F4FFFE;
    border: 1px solid #EBEDF0;
    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.18);
    border-radius: 12px;
    justify-content: space-between;
    max-width: 450px;
+   margin-top: 11px;
 }
 
 .progressContainer {
@@ -23,6 +24,20 @@
    left: 0;
    height: 100%;
    border-radius: 26px;
-
+   
    background-color: #26A925;
+}
+.hover_activity{
+   /* padding: 16px 16px; */
+   /* height: 78px; */
+    width: 145px;
+    transition: width 2s, height 4s;
+    background-color: antiquewhite;
+    /* position: ; */
+    /* top: 25.6%; */
+    display: none;
+    /* border-bottom-left-radius: 12px; */
+}
+.container:hover>.hover_activity{
+   display: block;
 }
