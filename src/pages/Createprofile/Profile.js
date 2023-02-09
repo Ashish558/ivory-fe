@@ -1,6 +1,6 @@
 import React,{ useEffect,useRef,useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { Link,useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import arrow from "../../assets/arrow_back.png"
 import cross from "../../assets/cross.png"
 import CancelIcon from '../../assets/icons/x-icon.svg'
@@ -25,6 +25,7 @@ const Profile = () => {
   const [allInterests,setAllInterests] = useState([])
   const [userInterests,setUserInterests] = useState([])
   const [interestInput,setInterestInput] = useState('')
+  const [selectedInterest,setSelectedInterest] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [error,setError] = useState('')
@@ -165,7 +166,7 @@ const Profile = () => {
     document.querySelector(".Profile_datainput__ZG9n4").classList.remove("Profile_blur__z7wX8");
   }
   const addnew = () => {
-    
+
     setaddnewtextdiv(true)
     setbackcolor('rgb(145 165 186)')
   }
@@ -205,13 +206,13 @@ const Profile = () => {
     setAllInterests(filteredAll)
   }
 
-  console.log('interest', interest);
+  console.log('interest',interest);
   // console.log('allInterests', allInterests);
   // console.log('userInterests', userInterests);
   // if (interest.length < 0) {
   //   console.log('interest',interest);
   // }
-console.log('profileData',profileData);
+  console.log('profileData',profileData);
   return (
     <>
       <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
@@ -236,7 +237,7 @@ console.log('profileData',profileData);
             >Add Profile picture
             </p>
           </div>
-          <div className={`${styles.formimg} sm:mt-3 `}>
+          <div className={`${styles.formimg} sm:mt-10 `}>
             <div className={styles.form}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
@@ -277,12 +278,12 @@ console.log('profileData',profileData);
               <div className={styles.input2}>
                 <label htmlFor="" className={styles.emaillabel} >Gender</label>
                 <div className={`sm:w-[50%] flex justify-between gap-4`}>
-                  <div className={`w-full border border-gray-600 flex justify-center items-center  ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{border:'1px solid gray'}}>
+                  <div className={`w-full border border-gray-600 flex justify-center items-center  ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
                       <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
                   </div>
-                  <div className={`w-full border border-gray-500 flex justify-center items-center ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{border:'1px solid gray'}}>
+                  <div className={`w-full border border-gray-500 flex justify-center items-center ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Female</label>
                     {gender === 'female' ?
                       <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
@@ -326,7 +327,7 @@ console.log('profileData',profileData);
 
           <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
           {/*-------------Go to next page---------------*/}
-              
+
         </div>
 
         {showdiv == true ?
@@ -354,9 +355,9 @@ console.log('profileData',profileData);
                 </div>
                 <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                   {
-                  interest.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button>: <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'  onClick={crossbox}>Add</button>
+                    interest.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button> : <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={crossbox}>Add</button>
                   }
-                  </div>{/*-------------Add Your interest page open---------------*/}
+                </div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />
                 <p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
               </>
@@ -386,12 +387,12 @@ console.log('profileData',profileData);
                       onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
-                  {
-                    interestInput.length ===0?<button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button>:<button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
-                  }
+                    {
+                      interestInput.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button> : <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
+                    }
                   </div>
-                 
-              
+
+
 
                   {/* onClick={handleAddInterest} */}
                 </>
