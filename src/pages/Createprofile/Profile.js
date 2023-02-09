@@ -25,7 +25,7 @@ const Profile = () => {
   const [allInterests,setAllInterests] = useState([])
   const [userInterests,setUserInterests] = useState([])
   const [interestInput,setInterestInput] = useState('')
-  const [selectedInterest,setSelectedInterest] = useState('')
+  const [selectedInterest,setSelectedInterest] = useState([])
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [error,setError] = useState('')
@@ -146,7 +146,7 @@ const Profile = () => {
           id: res.data.data.id,
           name: res.data.data.name,
         }
-        setinterest([...interest,newInterest])
+        
       })
       .catch(err => {
         console.log(err);
@@ -161,6 +161,7 @@ const Profile = () => {
     document.querySelector(".Profile_datainput__ZG9n4").classList.add("Profile_blur__z7wX8");
   }
   const crossbox = () => {
+    setSelectedInterest(interest)
     setshowdiv(false)
     setbackcolor('#FFFFFF')
     document.querySelector(".Profile_datainput__ZG9n4").classList.remove("Profile_blur__z7wX8");
@@ -171,6 +172,7 @@ const Profile = () => {
     setbackcolor('rgb(145 165 186)')
   }
   const addcrossbox = () => {
+
     setaddnewtextdiv(false);
     // setbackcolor('#001C38')
   }
@@ -204,6 +206,7 @@ const Profile = () => {
     setinterest(deselectInterest)
     setUserInterests(filtered)
     setAllInterests(filteredAll)
+    setSelectedInterest(deselectInterest)
   }
 
   console.log('interest',interest);
@@ -212,7 +215,7 @@ const Profile = () => {
   // if (interest.length < 0) {
   //   console.log('interest',interest);
   // }
-  console.log('profileData',profileData);
+  console.log('selected',selectedInterest);
   return (
     <>
       <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
@@ -302,7 +305,7 @@ const Profile = () => {
                     :
                     <div className='h-[85px]  sm:w-[50%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
-                        interest.map(int => {
+                        selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
                             {int.name}
                             <img src={CancelIcon}
