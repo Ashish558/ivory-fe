@@ -211,6 +211,7 @@ const Profile = () => {
   // if (interest.length < 0) {
   //   console.log('interest',interest);
   // }
+console.log('profileData',profileData);
   return (
     <>
       <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
