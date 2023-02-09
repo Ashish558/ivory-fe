@@ -56,7 +56,7 @@ export default function Story(props) {
    useEffect(() => {
       axios.get(`${url}view/`, getAuthHeaders())
          .then(res => {
-            console.log('view res', res.data);
+            // console.log('view res', res.data);
             updateStory({ ...res.data.data, type })
          })
          .catch(err => {
@@ -84,16 +84,16 @@ export default function Story(props) {
          })
    }
 
-   // console.log('story', story)
+   console.log('story', story)
    // console.log('video', video)
-
+   let storyProps = { url, updateStory, type }
    return (
       <>
 
          <div className={styles.modalContainer}>
             <div className="w-full p-0  self-stretch overflow-aut">
                <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
-                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full '  : ''} `}>
+                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full ' : ''} `}>
 
                      {storyType === 'image' ?
                         <div className={styles.storyImg}>
@@ -121,13 +121,13 @@ export default function Story(props) {
                               </video>
                            </div>
                            : storyType === 'mcq' && story.choices !== undefined ?
-                              <Mcq {...story} />
+                              <Mcq {...story} {...storyProps} />
                               : storyType === 'mcq2' ?
                                  <Mcq2 />
                                  : storyType === 'sudoku' ?
                                     <Sudoku {...story} updateStory={updateStory} />
                                     : storyType === 'qna' ?
-                                       <QnA {...story} updateStory={updateStory} />
+                                       <QnA {...story} updateStory={updateStory} {...storyProps} />
                                        : <></>
                      }
                      <div className={styles.backBtn}>
