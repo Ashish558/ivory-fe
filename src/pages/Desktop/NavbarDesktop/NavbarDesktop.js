@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../../../Images/ivory logo dark 1.png';
-import User from '../../../Images/profile-pic.png';
+import User from '../../../Images/profile-pic.jfif';
 import './NavbarDesktop.css';
 
 
