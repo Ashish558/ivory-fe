@@ -30,14 +30,16 @@
 .hover_activity{
    /* padding: 16px 16px; */
    /* height: 78px; */
-    width: 145px;
-    transition: width 2s, height 4s;
+    width: 0px;
+    transition: width 2s, 4s;
     background-color: antiquewhite;
     /* position: ; */
     /* top: 25.6%; */
-    display: none;
+    /* display: none; */
+    transition: 0.15s;
     /* border-bottom-left-radius: 12px; */
 }
 .container:hover>.hover_activity{
-   display: block;
+   width: 145px;
+
 }
