@@ -127,7 +127,7 @@ export default function ActivityType() {
    // console.log('activities', activities);
 
    return (
-      <div>
+      <div className='lg:mt-[64px]'>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>

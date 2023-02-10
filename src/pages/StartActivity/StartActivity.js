@@ -274,7 +274,7 @@ export default function StartActivity({ fetchUserDetails }) {
 
    return (
       <>
-         <div className='pb-12 mb-10'>
+         <div className='pb-12 mb-10 lg:mt-[64px]'>
             {/* <Header /> */}
             <div className='pt-2 px-4 sm:mx-20'>
                <p className='text-lightGray font-medium sm:py-2'> Activities {'>'} {category.name}  </p>
