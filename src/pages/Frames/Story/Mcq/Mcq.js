@@ -34,7 +34,7 @@ const tempOptions = [
    },
 ]
 
-export default function Mcq({ image, choices, url, updateStory, type }) {
+export default function Mcq({ image, choices, url, updateStory, type, question}) {
    const [options, setOptions] = useState([])
 
    const [mcqResponse, setMcqResponse] = useState({
@@ -87,7 +87,6 @@ export default function Mcq({ image, choices, url, updateStory, type }) {
       })
    }, [options])
 
-
    useEffect(() => {
       return () => {
          setOptions([])
@@ -136,8 +135,6 @@ export default function Mcq({ image, choices, url, updateStory, type }) {
    }
 
    useEffect(() => {
-
-
       return () => clearTimeout(timeOutId)
    }, [])
 
@@ -173,7 +170,7 @@ export default function Mcq({ image, choices, url, updateStory, type }) {
          }
          <div className={`${styles.mcqOptions} lg:row-span-2`}>
             <p className='font-semibold mb-4' >
-               How many differences can you spot?
+              {question}
             </p>
             <div className='flex justify-around items-center' >
                {options.map(option => {

@@ -37,8 +37,22 @@ export default function Story(props) {
    }
 
    useEffect(() => {
-      setStoryType(type)
-   }, [type])
+      if(type === 'mcq'){
+         let isSngleLetteredAnswer = true
+         story.choices.forEach(choice => {
+            if(choice.choice.length > 3){
+               isSngleLetteredAnswer = false
+            }
+         })
+         if(isSngleLetteredAnswer === true){
+            setStoryType(type)
+         }else{
+            setStoryType('mcq2')
+         }
+      }else{
+         setStoryType(type)
+      }
+   }, [type, image])
 
    useEffect(() => {
       hideHtmlOverflow()
@@ -84,7 +98,8 @@ export default function Story(props) {
          })
    }
 
-   console.log('story', story)
+   // console.log('story', storyType)
+   // console.log('story', story)
    // console.log('video', video)
    let storyProps = { url, updateStory, type }
    return (
@@ -123,7 +138,7 @@ export default function Story(props) {
                            : storyType === 'mcq' && story.choices !== undefined ?
                               <Mcq {...story} {...storyProps} />
                               : storyType === 'mcq2' ?
-                                 <Mcq2 />
+                                 <Mcq2  {...story} {...storyProps} />
                                  : storyType === 'sudoku' ?
                                     <Sudoku {...story} updateStory={updateStory} />
                                     : storyType === 'qna' ?
