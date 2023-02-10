@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from './styles.module.css'
 import ReactPlayer from 'react-player/youtube'
 
@@ -17,7 +17,7 @@ import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
 import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
-import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, uploadActivity } from '../../services/user'
+import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import Slider from "react-slick";
 
@@ -62,6 +62,7 @@ export default function StartActivity({ fetchUserDetails }) {
    const inputRef = useRef(null)
    const videoRef = useRef(null)
 
+   const navigate = useNavigate()
 
    const [currentIndex, setCurrentIndex] = useState(0)
    const { loggedIn, profileData } = useSelector(state => state.user)
@@ -240,6 +241,22 @@ export default function StartActivity({ fetchUserDetails }) {
       // console.log(item);
       setSourceToView(item)
       setViewSubModal(true)
+   }
+   const handleStartActivity = () => {
+      if (loggedIn === false) {
+         navigate('/login')
+         return
+      }
+      startActivity(activityId)
+         .then(res => {
+            console.log('start resp', res);
+            alert('Activity started!')
+            setIsAlreadyStarted(true)
+            fetchUserActivities()
+            fetchUserDetails()
+         }).catch(err => {
+            console.log('start err', err);
+         })
    }
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
@@ -432,6 +449,14 @@ export default function StartActivity({ fetchUserDetails }) {
                </div>
             </div>
          </div>
+         {
+            isAlreadyStarted === false &&
+            <div className={styles.startActivityFooter}>
+               <div className='max-w-[328px] mx-auto'>
+                  <PrimaryButton children={'START for free'} onClick={handleStartActivity} className='w-full pt-2.5 pb-2.5' />
+               </div>
+            </div>
+         }
          {
             startModalActive &&
             <StartActivityModal handleClose={() => setStartModalActive(false)}
