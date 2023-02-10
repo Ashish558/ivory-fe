@@ -12,20 +12,29 @@ const Sessions = () => {
     const settings = {
 
         infinite: false,
-        // centerPadding: "60px",
-        slidesToShow: 3,
+        centerPadding: "60px",
+        slidesToShow: 3.3,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1025,
                 settings: {
                     settings: {
-                        slidesToShow: 3.4,
+                        slidesToShow: 3.3,
                         initialSlide: 0,
                     },
                 }
+            },
+            {
+                breakpoint: 1024,
+
+                settings: {
+                    slidesToShow: 2.5,
+                    initialSlide: 0,
+                },
+
             },
             {
                 breakpoint: 768,

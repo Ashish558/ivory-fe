@@ -2,11 +2,13 @@
     background-color: white;
     border-radius: 48px;
     position: relative;
-    width: 327px;
+    width: 348px;
+    height: 421px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.125);
     margin-bottom: 2px;
 }
-.slick-slide{
+
+.slick-slide {
     width: 405px;
 }
 
@@ -16,6 +18,7 @@
     left: 7%;
     color: white;
 }
+
 .price-learn {
     color: #1B72C0;
     font-weight: 600;
@@ -27,4 +30,14 @@
     color: #74777F;
     font-weight: 400;
     font-size: 24px;
+}
+
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+    /* .custom-card-learn {
+        max-width: 275px;
+    } */
+
+
 }
