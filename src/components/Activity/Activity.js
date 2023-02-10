@@ -14,8 +14,8 @@ export default function Activity({ image, name, duration, category, id, is_compl
          navigate(`/activities/${category}/${id}/start`);
          window.location.reload()
       }}>
-         <div className=''>
-            <img src={image === null ? ActivityIcon : image} className={`${styles.image} mx-auto sm:rounded-b-none rounded-3xl sm:h-[125px] w-full object-cover`} alt='Profile' />
+         <div className='max-w-[135px] md:max-w-[100%]'>
+            <img src={image === null ? ActivityIcon : image} className={`${styles.image}  h-[90px] mx-auto sm:rounded-b-none rounded-3xl sm:h-[125px] w-full object-cover`} alt='Profile' />
          </div>
          <div className='sm:p-3 sm:flex flex-col sm:justify-start sm:h-[150px]'>
             <p className='font-bold mb-0 mt-0.5 sm:mt-1'> {name} </p>
