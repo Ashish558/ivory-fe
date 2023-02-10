@@ -8,6 +8,7 @@ import ActivityIcon from '../../assets/images/activity.png'
 
 import PauseIcon from '../../assets/icons/pause.svg'
 import RedirectIcon from '../../assets/icons/redirect.svg'
+import CheckedIcon from '../../assets/icons/checked-category.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import { useParams, useSearchParams } from 'react-router-dom'
@@ -64,7 +65,7 @@ export default function ActivityType() {
             if (isActivitiesFetched === false) return
             if (res.data.data === null) return setUserActivities([])
             let filtered = res.data.data.filter(item => item.activity.category === parseInt(categoryId))
-            
+
             let data = activities.map(item => {
                let is_completed = null
                filtered.forEach(userAct => {
@@ -75,7 +76,7 @@ export default function ActivityType() {
                return { ...item, is_completed }
             })
             data = data.sort(item => item.is_completed === null ? 1 : -1)
-            console.log('data',data);
+            console.log('data', data);
             setUserActivities(data)
          }).catch(err => {
             console.log('err', err);
@@ -111,7 +112,7 @@ export default function ActivityType() {
       getActivities(categoryId)
          .then(res => {
             setIsActivitiesFetched(true)
-            
+
             // console.log('data', res.data.data);
             if (res.data.data === null) return
             setActivities(res.data.data)
@@ -139,13 +140,21 @@ export default function ActivityType() {
             {
                userActivities.length > 0 &&
                <div className='flex justify-center my-7'>
-                  <button className={`rounded-l-full border py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-l-full border flex items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(false)} >
+                     {
+                        completedTabActive === false &&
+                        <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+                     }
                      On going
                   </button>
-                  <button className={`rounded-r-full border py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-r-full border flex items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(true)}  >
                      completed
+                     {
+                        completedTabActive === true &&
+                        <img src={CheckedIcon} alt='checked' className='ml-[8.25px]' />
+                     }
                   </button>
                </div>
             }
