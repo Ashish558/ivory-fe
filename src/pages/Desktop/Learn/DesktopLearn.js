@@ -15,53 +15,42 @@ const DesktopLearn = () => {
 
         infinite: false,
         centerPadding: "60px",
-        slidesToShow: 3.3,
+        slidesToShow: 3,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
+        initialSlide: 0,
         responsive: [
             {
-                breakpoint: 1025,
+                breakpoint: 1300,
                 settings: {
-                    settings: {
-                        slidesToShow: 3.3,
-                        initialSlide: 0,
-                    },
+                    slidesToShow: 3,
                 }
             },
             {
-                breakpoint: 1024,
-
+                breakpoint: 1200,
                 settings: {
                     slidesToShow: 2.5,
-                    initialSlide: 0,
                 },
 
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2.8,
-                    initialSlide: 0,
+                    slidesToShow: 2.5,
                 },
             },
             {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2.3,
-                    initialSlide: 0,
                 },
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1.5,
-                    initialSlide: 0,
                 },
-                // state: {
-                //    display: true,
-                //    height: 600
-                // }
             }
         ],
 

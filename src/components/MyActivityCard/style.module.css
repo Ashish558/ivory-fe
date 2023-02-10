@@ -9,6 +9,8 @@
    justify-content: space-between;
    max-width: 450px;
    margin-top: 11px;
+   flex: 1;
+overflow: hidden;
 }
 
 .progressContainer {
@@ -19,27 +21,30 @@
    border-radius: 26px;
    position: relative;
 }
-.progress{
+
+.progress {
    position: absolute;
    left: 0;
    height: 100%;
    border-radius: 26px;
-   
+
    background-color: #26A925;
 }
-.hover_activity{
+
+.hover_activity {
    /* padding: 16px 16px; */
    /* height: 78px; */
-    width: 0px;
-    transition: width 2s, 4s;
-    background-color: antiquewhite;
-    /* position: ; */
-    /* top: 25.6%; */
-    /* display: none; */
-    transition: 0.15s;
-    /* border-bottom-left-radius: 12px; */
+   width: 0px;
+   transition: width 2s, 4s;
+   background-color: antiquewhite;
+   /* position: ; */
+   /* top: 25.6%; */
+   /* display: none; */
+   transition: 0.15s;
+   /* border-bottom-left-radius: 12px; */
 }
-.container:hover>.hover_activity{
-   width: 145px;
 
+.container:hover>.hover_activity {
+   width: 145px;
+   max-height: 104px;
 }

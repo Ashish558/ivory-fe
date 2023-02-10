@@ -218,8 +218,8 @@ export default function Activities() {
                      <p className='pl-7'><img src={Arrow} alt="" /></p>
                   </div>
                   {myActivities.length > 0 ?
-                     myActivities.map(activity => {
-                        return <MyActivityCard key={activity.id} {...activity} />
+                     myActivities.map((activity, idx) => {
+                        return <MyActivityCard key={activity.id} {...activity} idx={idx} />
                      }) :
                      <p className='text-lightGray font-medium'>
                         No activities started yet
