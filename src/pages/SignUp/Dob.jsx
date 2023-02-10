@@ -289,7 +289,7 @@ const Dob = () => {
                   </div>
                 })}
               </Slider>
-              <Slider {...monthsSettings} className=' h-[200px] w-[130px] dateSlider' ref={monthSliderRef} >
+              <Slider {...monthsSettings} className=' h-[174px] w-[130px] dateSlider' ref={monthSliderRef} >
                 {months.map((str, i) => {
                   return (
                     <div className="px-2 py-4 flex justify-center items-center text-center">

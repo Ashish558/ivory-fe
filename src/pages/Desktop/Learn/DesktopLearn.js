@@ -78,7 +78,7 @@ const DesktopLearn = () => {
 
                     <div >
                         <div class="card custom-card-learn  cursor-pointer">
-                            <figure><img className='w-full' src={Learn3} alt="Shoes" /></figure>
+                            <figure><img className='w-full max-h-[214px]' src={Learn3} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
                                     <p className='text-base font-bold position-Ivory'>Ivory Exclusive</p>
@@ -159,7 +159,7 @@ const DesktopLearn = () => {
                     </div>
                     <div >
                         <div class="card custom-card-learn  cursor-pointer">
-                            <figure ><img style={{ height: '228px' }} className='w-full' src={Learn1} alt="Shoes" /></figure>
+                            <figure ><img style={{ height: '214px' }} className='w-full' src={Learn1} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
                                     <p className='text-base font-bold position-Ivory'>Ivory Exclusive</p>

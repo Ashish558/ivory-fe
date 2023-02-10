@@ -74,7 +74,7 @@ const Sessions = () => {
             <Slider {...settings}>
                 <div className=' p-3 lg:p-0'>
                     <div class="card custom cursor-pointer"  >
-                        <figure ><img className='session-img w-full' src={Image} alt="Shoes" /></figure>
+                        <figure ><img className='session-img w-full ' src={Image} alt="Shoes" /></figure>
                         <div class="px-2 lg:pl-4">
 
                             <div className='flex items-center justify-center Live px-1 py-1' >

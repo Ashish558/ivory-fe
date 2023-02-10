@@ -5,12 +5,11 @@
     /* height: 50px; */
   }
   .addpit {
-    top: 40%;
     margin: 0;
     position: relative;
-    left: 8%;
     color: blue;
     cursor: pointer;
+    margin-left: 1rem;
   }
   .datainput {
     height: 738px;
@@ -44,6 +43,8 @@
   .image {
     display: flex;
     height: 92px;
+    padding: 0 99px;
+    align-items: center;
     /* background-color: antiquewhite; */
   }
   .ssmmillee {
@@ -52,8 +53,8 @@
     justify-content: center;
     width: 90px;
     position: relative;
-    top: 17px;
-    left: 99px;
+    /* top: 17px; */
+    /* left: 99px; */
     align-items: center;
     /* margin-top: 30px; */
     /* margin-left: 70px; */
@@ -462,7 +463,8 @@
   .emailinput {
     height: 56px;
     width: 100%;
-    background-color: white;
+    background-color: transparent;
+    outline: none;
     border: 2px solid #79747e;
     font-size: 20px;
     border-radius: 5px;
