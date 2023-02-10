@@ -209,13 +209,13 @@ const Profile = () => {
     setSelectedInterest(deselectInterest)
   }
 
-  console.log('interest',interest);
+  // console.log('interest',interest);
   // console.log('allInterests', allInterests);
   // console.log('userInterests', userInterests);
   // if (interest.length < 0) {
   //   console.log('interest',interest);
   // }
-  console.log('selected',selectedInterest);
+  // console.log('selected',selectedInterest);
   return (
     <>
       <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
