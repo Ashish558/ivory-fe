@@ -10,6 +10,7 @@ import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 import { useSelector } from 'react-redux'
 import MarkIcon from '../../assets/icons/mark.svg'
 import NextIcon from '../../assets/icons/next.svg'
+import UploadOutlineIcon from '../../assets/icons/upload-outline.svg'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
 import UploadIcon from '../../assets/icons/upload.svg'
 import ActivityIcon from '../../assets/images/activity.png'
@@ -395,10 +396,18 @@ export default function StartActivity({ fetchUserDetails }) {
                         </div>
                      </div> :
                      <div className='mb-12'>
-                        <p className='font-medium sm:text-lg sm:font-semibold' >
+                        <p className='font-medium sm:text-lg sm:font-semibold mb-4' >
                            Want to submit more?
                         </p>
-                        <SecondaryButton className='w-full pt-2.5 pb-2.5 px-3 h-[40px]' />
+                        <SecondaryButton className='w-full pt-2.5 flex items-center justify-center pb-2.5 px-3 h-[40px] max-w-[320px]'
+                           onClick={handleUploadClick}
+                           children={
+                              <> <img src={UploadOutlineIcon} className='mr-3'
+                              /> Upload
+                                 <input type='file' className='hidden' ref={inputRef}
+                                    onChange={e => handleUpload(e)} />
+                              </>
+                           } />
                      </div>
                }
 
