@@ -12,6 +12,8 @@ import zoom from "../../assets/images/enroll/zoom.svg";
 import zoom2 from "../../assets/images/enroll/zoom2.svg";
 
 const Enroll = () => {
+    //enrollType "", "reg", "free"
+    const [enrollType, setEnrollType] = React.useState("free");
   return (
     <div>
       <div className="flex flex-col gap-5 mb-20 sm:mb-0">
@@ -67,29 +69,69 @@ const Enroll = () => {
             </div>
           </div>
         </div>
-        <div className="text-2xl font-bold text-black ml-6">Priceng</div>
-        <div className="text-gray-500 text-lg ml-6">
-          Next Batch starts on
-          <span className="text-blue-500"> 20-Feb-2023</span>
+        <div className="flex flex-col gap-2">
+          <div className="text-2xl font-bold text-black ml-6">Pricing</div>
+          {enrollType === "free" ? (
+            ""
+          ) : (
+            <div>
+              <div className="text-gray-500 text-lg ml-6">
+                Next Batch starts on
+                <span className="text-blue-500"> 20-Feb-2023</span>
+              </div>
+              <div className="text-2xl font-bold text-black ml-6 flex items-center gap-1">
+                $1200{" "}
+                <span className="text-gray-400 line-through font-normal text-base">
+                  $3499
+                </span>{" "}
+                <span className="text-blue-500 text-lg ml-2">80% OFF</span>
+              </div>
+            </div>
+                  )}
+                  {enrollType === "free" && (
+                      <div className="text-2xl font-bold text-black ml-6 flex items-center gap-1">
+                          $0{" "}
+                          <span className="text-gray-400 line-through font-normal text-base">
+                              $3499
+                          </span>{" "}
+                          <span className="text-blue-500 text-lg ml-2">100% OFF</span>
+                      </div>)}
+
+          {enrollType === "reg" && (
+            <div className="text-yellow-600 text-md mx-6">
+              To participate in the program, simply register for free. Once
+              batches are scheduled, you will be notified. If the timings align
+              with your schedule, you can choose to enroll in one of the
+              available batches by making a payment
+            </div>
+          )}
         </div>
-        <div className="text-2xl font-bold text-black ml-6 flex items-center gap-1">
-          $1200{" "}
-          <span className="text-gray-400 line-through font-normal text-base">
-            $3499
-          </span>{" "}
-          <span className="text-blue-500 text-lg ml-2">80% OFF</span>
-        </div>
-        <button className="bg-sky-200 text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-10 mx-5">
-          {" "}
-          Enroll
-        </button>
-        <div className=" mx-4 shadow-md rounded-md border-gray-300 border mb-10">
+        {enrollType === "" && (
+          <button className="bg-sky-200 text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-10 mx-5">
+            {" "}
+            Enroll
+          </button>
+        )}
+        {enrollType === "reg" && (
+          <button className="bg-sky-200 text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-10 mx-5">
+            {" "}
+            Register for free
+          </button>
+        )}
+        {enrollType === "free" && (
+          <button className="bg-sky-200 text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-10 mx-5">
+            {" "}
+            Enroll for free
+          </button>
+        )}
+
+        <div className=" mx-4 shadow-md rounded-md mb-10 border-t border-gray-100">
           <div className="text-2xl font-bold text-black ml-6 mt-3">
             Program content
           </div>
           <div className="">
             <div className="flex flex-col gap-6 mb-5 sm:mb-0 mt-6 ml-6">
-              <ul className=" flex  flex-col gap-4 leading-none text-sm">
+              <ul className=" flex  flex-col gap-5 leading-none text-sm">
                 <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
                   <img src={zoom2} alt="" />
                   How to meditate.
@@ -135,13 +177,18 @@ const Enroll = () => {
             Similar Programs
           </div>
         </div>
-        <div className="enrollFooter bg-sky-200 border-2 border-blue-400 flex flex-col py-5">
+        <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5">
           <div className="text-gray-500 text-lg ml-6">
-            Next Batch starts on
-            <span className="text-blue-500"> 20-Feb-2023</span>
+            {enrollType === "" && (
+              <span>
+                Batch starts
+                <span className="text-blue-500"> 20-Feb-2023</span>
+              </span>
+            )}
+
             <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center">
               {" "}
-             Pay $ 1200 to Enroll
+              Pay $ 1200 to Enroll
             </button>
           </div>
         </div>
