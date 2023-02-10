@@ -17,6 +17,10 @@
    border-radius: 24px;
 }
 
+.storyImage img {
+   border-radius: 24px;
+}
+
 .mcqOptions {
    margin-top: 10px;
    border-radius: 24px;

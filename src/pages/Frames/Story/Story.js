@@ -10,7 +10,7 @@ import RightIcon from '../../../assets/icons/right.svg'
 
 import StoryImg from '../../../assets/images/story-1.png'
 import McqStoryImg from '../../../assets/images/story-mcq.png'
-import McqCorrectImg from '../../../assets/images/mcq-correct.png'
+import Logo from '../../../assets/images/logo.png'
 
 import ReactPlayer from 'react-player'
 import Mcq from './Mcq/Mcq';
@@ -147,6 +147,7 @@ export default function Story(props) {
                      }
                      <div className={styles.backBtn}>
                         <img src={BackIcon} alt='back' onClick={handleClose} />
+                        <img src={Logo} alt='logo' className={styles.logo} />
                      </div>
                      <div className={styles.footer}>
                         <div className='flex flex-col items-center ml-auto mr-7 md:mr-0 md:ml-0 md:flex-row md:mb-6'>

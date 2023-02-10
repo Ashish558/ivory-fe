@@ -13,3 +13,17 @@ export const genNumbers = (start, end) => {
    })
    return numArray
 }
+
+
+export const getColors= (totalLength, idx) => {
+   let index = idx
+   if (idx > totalLength - 1) {
+      index = index % totalLength
+   }
+   const backgrounds = [
+      '#7B34FB',
+      '#22B8CF',
+      '#F28400',
+   ]
+   return backgrounds[index]
+}

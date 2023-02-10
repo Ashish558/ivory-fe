@@ -205,15 +205,16 @@ export default function Activities() {
    // console.log('filterItems', filterItems);
    console.log('my Activity', myActivities);
    return (
-      <div>
+      <div className=' lg:mt-[64px]'>
          {/* <Header /> */}
 
          <div className='px-4 lg:px-0'>
 
             <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
-               <div className='lg:flex mt-10 flex-col lg:mt-0 '>
+               <div className={`lg:flex mt-10 flex-col lg:mt-0 lg:self-start lg:mt-[100px] ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'> My activities
+                     <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'>
+                         My activities
                      </h3>
                      <p className='pl-7'><img src={Arrow} alt="" /></p>
                   </div>
@@ -221,7 +222,7 @@ export default function Activities() {
                      myActivities.map((activity, idx) => {
                         return <MyActivityCard key={activity.id} {...activity} idx={idx} />
                      }) :
-                     <p className='text-lightGray font-medium'>
+                     <p className='text-lightGray font-medium lg:text-end lg:text-[24px]'>
                         No activities started yet
                      </p>
                   }

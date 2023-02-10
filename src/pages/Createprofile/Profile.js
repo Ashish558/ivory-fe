@@ -54,7 +54,7 @@ const Profile = () => {
   const fetchInterests = () => {
     getInterests()
       .then(res => {
-        // console.log('allInterests', res.data.data);
+        console.log('All Interests', res.data.data);
 
         let intData = res.data.data
         intData = intData.filter(item => {

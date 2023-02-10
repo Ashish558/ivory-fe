@@ -20,6 +20,7 @@ import { getActivities, getCategories, getSingleActivity } from '../../services/
 import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import Slider from "react-slick";
+import { getColors } from '../../utils/utils'
 
 const settings = {
    infinite: false,
@@ -322,9 +323,10 @@ export default function StartActivity({ fetchUserDetails }) {
                      </span> :
                      <div>
                         {steps.map((step, idx) => {
+                           let color = getColors(steps.length, idx)
                            return (
                               <div className='mb-6 mt-6 max-w-[650px]'>
-                                 <p className='font-semibold text-[#7B34FB] mb-3'>
+                                 <p className={`font-semibold text-[${color}] mb-3`} style={{ color }} >
                                     {`${step.name}`}
                                  </p>
                                  {step.image &&
@@ -376,20 +378,30 @@ export default function StartActivity({ fetchUserDetails }) {
                   />
                </div>
 
-               <div className='mb-12'>
-                  <p className='font-medium sm:text-lg sm:font-semibold' >
-                     Submit your work to get feedback from our <br></br>expert:
-                  </p>
-                  <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
-                     <img src={UploadIcon}
-                        className='mr-3 cursor-pointer'
-                        alt='UploadIcon'
-                        onClick={handleUploadClick} />
-                     <p className='font-semibold' > Upload your work </p>
-                     <input type='file' className='hidden' ref={inputRef}
-                        onChange={e => handleUpload(e)} />
-                  </div>
-               </div>
+               {
+                  submissions.length === 0 ?
+                     <div className='mb-12'>
+                        <p className='font-medium sm:text-lg sm:font-semibold' >
+                           Submit your work to get feedback from our <br></br>expert:
+                        </p>
+                        <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
+                           <img src={UploadIcon}
+                              className='mr-3 cursor-pointer'
+                              alt='UploadIcon'
+                              onClick={handleUploadClick} />
+                           <p className='font-semibold' > Upload your work </p>
+                           <input type='file' className='hidden' ref={inputRef}
+                              onChange={e => handleUpload(e)} />
+                        </div>
+                     </div> :
+                     <div className='mb-12'>
+                        <p className='font-medium sm:text-lg sm:font-semibold' >
+                           Want to submit more?
+                        </p>
+                        <SecondaryButton className='w-full pt-2.5 pb-2.5 px-3 h-[40px]' />
+                     </div>
+               }
+
             </div>
 
             {

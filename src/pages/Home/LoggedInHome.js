@@ -29,7 +29,7 @@ const LoggedInHome = () => {
         <div className='container mx-auto'>
 
 
-            <div className='desktop'>
+            <div className='desktop lg:mt-[64px]'>
                 {/* <NavbarDesktop></NavbarDesktop> */}
                 <DesktopBanner></DesktopBanner>
                 {/* <DesktopStories></DesktopStories> */}
