@@ -123,7 +123,7 @@ export default function Activities() {
             res.data.data.map((activity, idx) => {
                temp.push({
                   id: activity.id,
-                  children: <div className='flex items-center gap-x-1'>
+                  children: <div className='flex items-center gap-x-1 lg:gap-x-3'>
                      <img src={activity.icon} alt='activity' className='max-h-[18px]' />
                      {activity.name}
                   </div>,
@@ -205,15 +205,16 @@ export default function Activities() {
    // console.log('filterItems', filterItems);
    console.log('my Activity', myActivities);
    return (
-      <div>
+      <div className=' lg:mt-[64px]'>
          {/* <Header /> */}
 
          <div className='px-4 lg:px-0'>
 
             <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
-               <div className='lg:flex mt-10 flex-col lg:mt-0 '>
+               <div className={`lg:flex mt-10 flex-col lg:mt-0 lg:self-start lg:mt-[100px] ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'> My activities
+                     <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'>
+                         My activities
                      </h3>
                      <p className='pl-7'><img src={Arrow} alt="" /></p>
                   </div>
@@ -221,7 +222,7 @@ export default function Activities() {
                      myActivities.map((activity, idx) => {
                         return <MyActivityCard key={activity.id} {...activity} idx={idx} />
                      }) :
-                     <p className='text-lightGray font-medium'>
+                     <p className='text-lightGray font-medium lg:text-end lg:text-[24px]'>
                         No activities started yet
                      </p>
                   }
@@ -245,10 +246,10 @@ export default function Activities() {
 
                   {filteredActivities.map((activity, indx) => {
                      return (
-                        <div key={indx} className='mb-8' >
-                           <div className='flex items-center mb-3'>
+                        <div key={indx} className='mb-8 lg:mb-[60px]' >
+                           <div className='flex items-center mb-3  lg:mb-[48px]'>
                               <img src={activity.icon} alt='activity' />
-                              <p className='ml-2 text-2xl font-semibold'> {activity.name} </p>
+                              <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
                            <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-3'>
                               {activity.categories.map((category, idx) => {

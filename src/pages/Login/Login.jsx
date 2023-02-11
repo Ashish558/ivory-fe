@@ -168,15 +168,13 @@ const Login = () => {
                 (
                   <button
                     type="submit"
-                    className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
+                    className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 lg:w-full"
                   >
                     Continue
                   </button>
                 ) : (
-                <button
-                
-                 
-                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5" disabled
+                <button       
+                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 mb-5" disabled
                 >
                   Continue
                 </button>

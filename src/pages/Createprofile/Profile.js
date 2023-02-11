@@ -54,7 +54,7 @@ const Profile = () => {
   const fetchInterests = () => {
     getInterests()
       .then(res => {
-        // console.log('allInterests', res.data.data);
+        console.log('All Interests', res.data.data);
 
         let intData = res.data.data
         intData = intData.filter(item => {
@@ -218,7 +218,7 @@ const Profile = () => {
   // console.log('selected',selectedInterest);
   return (
     <>
-      <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
+      <div className='pb-32 overflow-x-hidden sm:mb-0 lg:mt-[64px]  bg-[#EEFDFC] sm:bg-white'>
         <div className={styles.datainput} >
           <div className={styles.navbar}>
 
@@ -387,11 +387,11 @@ const Profile = () => {
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
+                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-2 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] rounded-lg lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                     {
-                      interestInput.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button> : <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
+                      interestInput.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
                     }
                   </div>
 

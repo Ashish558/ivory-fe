@@ -13,3 +13,27 @@ export const genNumbers = (start, end) => {
    })
    return numArray
 }
+
+
+export const getColors= (totalLength, idx) => {
+   let index = idx
+   if (idx > totalLength - 1) {
+      index = index % totalLength
+   }
+   const backgrounds = [
+      '#7B34FB',
+      '#22B8CF',
+      '#F28400',
+   ]
+   return backgrounds[index]
+}
+
+export const getFormattedDuration = (arg)=>{
+   if(!arg) return ''
+   let durationArr = arg.split(':')
+   let hours = durationArr[0]
+   let mins = durationArr[1]
+
+   return `${parseInt(hours)} hrs ${parseInt(mins)} min`
+
+}

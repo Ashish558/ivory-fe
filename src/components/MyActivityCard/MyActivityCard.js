@@ -7,7 +7,7 @@ export default function MyActivityCard({ icon, name, percentage_completed, new_a
 
    return (
       <div className='flex items-end'>
-         <p className='text-[36px] text-lightGray mr-8'> {idx + 1}. </p>
+         <p className='text-[36px] text-lightGray mr-8 hidden lg:block'> {idx + 1}. </p>
          <div className={styles.container}>
             <m.div transition={{ delay: 5 }} className={styles.hover_activity} >
                <img src={thumbnail} alt="" />

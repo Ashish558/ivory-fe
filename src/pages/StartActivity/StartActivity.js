@@ -10,6 +10,7 @@ import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 import { useSelector } from 'react-redux'
 import MarkIcon from '../../assets/icons/mark.svg'
 import NextIcon from '../../assets/icons/next.svg'
+import UploadOutlineIcon from '../../assets/icons/upload-outline.svg'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
 import UploadIcon from '../../assets/icons/upload.svg'
 import ActivityIcon from '../../assets/images/activity.png'
@@ -20,6 +21,7 @@ import { getActivities, getCategories, getSingleActivity } from '../../services/
 import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import Slider from "react-slick";
+import { getColors } from '../../utils/utils'
 
 const settings = {
    infinite: false,
@@ -272,7 +274,7 @@ export default function StartActivity({ fetchUserDetails }) {
 
    return (
       <>
-         <div className='pb-12 mb-10'>
+         <div className='pb-12 mb-10 lg:mt-[64px]'>
             {/* <Header /> */}
             <div className='pt-2 px-4 sm:mx-20'>
                <p className='text-lightGray font-medium sm:py-2'> Activities {'>'} {category.name}  </p>
@@ -289,7 +291,7 @@ export default function StartActivity({ fetchUserDetails }) {
                         }
                         <ReactPlayer ref={videoRef}
                            width='100%'
-                           height='400px'
+                           // height='400px'
                            className={styles.video}
                            url={video_link}
                            controls={true}
@@ -322,9 +324,10 @@ export default function StartActivity({ fetchUserDetails }) {
                      </span> :
                      <div>
                         {steps.map((step, idx) => {
+                           let color = getColors(steps.length, idx)
                            return (
                               <div className='mb-6 mt-6 max-w-[650px]'>
-                                 <p className='font-semibold text-[#7B34FB] mb-3'>
+                                 <p className={`font-semibold text-[${color}] mb-3`} style={{ color }} >
                                     {`${step.name}`}
                                  </p>
                                  {step.image &&
@@ -376,20 +379,38 @@ export default function StartActivity({ fetchUserDetails }) {
                   />
                </div>
 
-               <div className='mb-12'>
-                  <p className='font-medium sm:text-lg sm:font-semibold' >
-                     Submit your work to get feedback from our <br></br>expert:
-                  </p>
-                  <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
-                     <img src={UploadIcon}
-                        className='mr-3 cursor-pointer'
-                        alt='UploadIcon'
-                        onClick={handleUploadClick} />
-                     <p className='font-semibold' > Upload your work </p>
-                     <input type='file' className='hidden' ref={inputRef}
-                        onChange={e => handleUpload(e)} />
-                  </div>
-               </div>
+               {
+                  submissions.length === 0 ?
+                     <div className='mb-12'>
+                        <p className='font-medium sm:text-lg sm:font-semibold' >
+                           Submit your work to get feedback from our <br></br>expert:
+                        </p>
+                        <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
+                           <img src={UploadIcon}
+                              className='mr-3 cursor-pointer'
+                              alt='UploadIcon'
+                              onClick={handleUploadClick} />
+                           <p className='font-semibold' > Upload your work </p>
+                           <input type='file' className='hidden' ref={inputRef}
+                              onChange={e => handleUpload(e)} />
+                        </div>
+                     </div> :
+                     <div className='mb-12'>
+                        <p className='font-medium sm:text-lg sm:font-semibold mb-4' >
+                           Want to submit more?
+                        </p>
+                        <SecondaryButton className='w-full pt-2.5 flex items-center justify-center pb-2.5 px-3 h-[40px] max-w-[320px]'
+                           onClick={handleUploadClick}
+                           children={
+                              <> <img src={UploadOutlineIcon} className='mr-3'
+                              /> Upload
+                                 <input type='file' className='hidden' ref={inputRef}
+                                    onChange={e => handleUpload(e)} />
+                              </>
+                           } />
+                     </div>
+               }
+
             </div>
 
             {
@@ -450,7 +471,7 @@ export default function StartActivity({ fetchUserDetails }) {
             </div>
          </div>
          {
-            isAlreadyStarted === false &&
+            isAlreadyStarted === false && startModalActive === false &&
             <div className={styles.startActivityFooter}>
                <div className='max-w-[328px] mx-auto'>
                   <PrimaryButton children={'START for free'} onClick={handleStartActivity} className='w-full pt-2.5 pb-2.5' />
