@@ -1,15 +1,15 @@
 import React from "react";
-import batch from "../../assets/images/enroll/batch.svg";
-import doc from "../../assets/images/enroll/doc.svg";
-import doc2 from "../../assets/images/enroll/doc2.svg";
-import live from "../../assets/images/enroll/live.svg";
-import playIcon from "../../assets/images/enroll/play.png";
-import redLive from "../../assets/images/enroll/redLive.svg";
-import tik from "../../assets/images/enroll/tik.svg";
-import tik2 from "../../assets/images/enroll/tik2.svg";
-import videoBg from "../../assets/images/enroll/videoBg.png";
-import zoom from "../../assets/images/enroll/zoom.svg";
-import zoom2 from "../../assets/images/enroll/zoom2.svg";
+import batch from "../../../assets/images/enroll/batch.svg";
+import doc from "../../../assets/images/enroll/doc.svg";
+import doc2 from "../../../assets/images/enroll/doc2.svg";
+import live from "../../../assets/images/enroll/live.svg";
+import playIcon from "../../../assets/images/enroll/play.png";
+import redLive from "../../../assets/images/enroll/redLive.svg";
+import tik from "../../../assets/images/enroll/tik.svg";
+import tik2 from "../../../assets/images/enroll/tik2.svg";
+import videoBg from "../../../assets/images/enroll/videoBg.png";
+import zoom from "../../../assets/images/enroll/zoom.svg";
+import zoom2 from "../../../assets/images/enroll/zoom2.svg";
 
 const Enroll = () => {
     //enrollType "", "reg", "free"

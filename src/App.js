@@ -26,7 +26,9 @@ import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
-import Enroll from './pages/Enroll/Enroll';
+
+import Enroll from './pages/Learn/Enroll/Enroll';
+import LiveSession from './pages/Learn/LiveSession/LiveSession';
 import Dob from './pages/SignUp/Dob';
 function App() {
   //true for now will change later
@@ -89,6 +91,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/enroll" element={<Enroll />} />
+        <Route path="/live" element={<LiveSession />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
