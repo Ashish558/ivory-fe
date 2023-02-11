@@ -300,7 +300,7 @@ const Profile = () => {
                   interest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
                       className={`${styles.chooseinput} sm:w-[50%]`}>
-                      <p className=' pl-3  pt-2 sm:pt-0'> Click to choose</p>
+                      <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>
                     </div>
                     :
                     <div className='h-[85px]  sm:w-[50%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
@@ -334,7 +334,7 @@ const Profile = () => {
         </div>
 
         {showdiv == true ?
-          <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
+          <Modal classname='max-w-[370px] pt-0 md:pt-6 rounded-[20px] sm:max-w-[740px] overflow-hidden'
             body={
               <>
                 <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
@@ -347,7 +347,8 @@ const Profile = () => {
 
                   {
                     allInterests.map((int,i) => {
-                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-sky-300' : ''}`} style={{ border: '2px solid #939CA3' }}
+                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer  rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-secondary' : 'border border-[#79747E] '}`} 
+                      // style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int)}>
                         <img src={int.icon} alt="" />
@@ -387,7 +388,7 @@ const Profile = () => {
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-2 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] rounded-lg lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
+                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-2 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-lg lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                     {

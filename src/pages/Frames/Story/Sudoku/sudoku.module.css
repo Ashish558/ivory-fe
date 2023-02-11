@@ -14,7 +14,7 @@
 }
 
 .storyImage {
-   border-radius: 0px;
+   border-radius: 12px;
 }
 
 .helpContainer {
@@ -27,7 +27,7 @@
 
 .sudokuBottom {
    width: 100%;
-   margin-top: 10px;
+   margin-top: 31px;
    border-radius: 24px;
    background: #D3E4FF;
    padding: 16px 16px;

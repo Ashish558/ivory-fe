@@ -210,13 +210,13 @@ export default function Activities() {
 
          <div className='px-4 lg:px-0'>
 
-            <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
+            <div className='pt-0 lg:pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
                <div className={`lg:flex mt-10 flex-col lg:mt-0 lg:self-start lg:mt-[100px] ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'>
+                     <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-4xl lg:font-medium'>
                          My activities
                      </h3>
-                     <p className='pl-7'><img src={Arrow} alt="" /></p>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   {myActivities.length > 0 ?
                      myActivities.map((activity, idx) => {
@@ -236,8 +236,8 @@ export default function Activities() {
             <div className='lg:px-[80px] lg:max-w-[1000px] lg:pb-[10px]'>
                <div className=''>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-4xl font-semibold mb-2.5'> All Activities </h3>
-                     <p className='pl-7'><img src={Arrow} alt="" /></p>
+                     <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   <Filterbar items={filterItems} onChange={onChange} />
                </div>
@@ -267,7 +267,7 @@ export default function Activities() {
                </div>
 
             </div>
-            <div className='flex justify-end px-[80px] pb-10 lg:pb-100px'>
+            <div className='flex justify-end px-4 lg:px-[80px] pb-[60px] lg:pb-100px'>
                <div className='flex flex-col items-center'>
                   <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
                   <p> scroll to top </p>
