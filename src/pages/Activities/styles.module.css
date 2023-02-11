@@ -4,11 +4,12 @@
    border-radius: 12px;
    min-height: 104px;
    padding: 17px;
-   display: flex;
+   /* display: flex; */
    flex-direction: column;
-   margin-left: 7px;
+   /* margin-left: 7px; */
    align-items: center;
    justify-content: center;
+   max-height: 100px;
 }
 .activity:hover{
    background-color: rgb(205, 247, 255);

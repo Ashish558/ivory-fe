@@ -146,7 +146,7 @@ export default function Story(props) {
                                        : <></>
                      }
                      <div className={styles.backBtn}>
-                        <img src={BackIcon} alt='back' onClick={handleClose} />
+                        <img src={BackIcon} alt='back' className='cursor-pointer' onClick={handleClose} />
                         <img src={Logo} alt='logo' className={styles.logo} />
                      </div>
                      <div className={styles.footer}>

@@ -251,12 +251,12 @@ export default function Activities() {
                               <img src={activity.icon} alt='activity' />
                               <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
-                           <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-3'>
+                           <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-2'>
                               {activity.categories.map((category, idx) => {
-                                 return <div key={idx} className={styles.activity}
+                                 return <div key={idx} className={`grid grid-rows-2 ${styles.activity}`}
                                     onClick={() => navigate(`/activities/${category.id}`)} >
-                                    <img src={category.icon} alt='activity-type' />
-                                    <p className='mt-2  font-semibold text-center'>
+                                    <img src={category.icon} alt='activity-type' className='row-span-1 mx-auto' />
+                                    <p className='mt-2  font-semibold text-center leading-none row-span-1	'>
                                        {category.name} </p>
                                  </div>
                               })}

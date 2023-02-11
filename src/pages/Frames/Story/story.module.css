@@ -37,6 +37,7 @@
    background-color: rgba(0, 28, 56, 0.2);
    backdrop-filter: blur(6px);
    border-radius: 50%;
+   z-index: 6000;
 }
 
 .storyImg {
