@@ -1,9 +1,12 @@
 import React from 'react';
 // import liveSession from './assets/images/learn/liveSession.png';
-import liveSession from "../../../assets/images/learn/liveSession.png";
 import greenTik from "../../../assets/images/learn/greenTik.png";
+import liveSession from "../../../assets/images/learn/liveSession.png";
+import module2 from "../../../assets/images/learn/module2.png";
+import module3 from "../../../assets/images/learn/module3.png";
+import module4 from "../../../assets/images/learn/module4.png";
 const LiveSession = () => {
-    const [sesstionStatus, setSesstionStatus] = React.useState("upcomming");
+    const [sesstionStatus, setSesstionStatus] = React.useState("finished");
     return (
       <div className="mb-28">
         <div>
@@ -32,9 +35,9 @@ const LiveSession = () => {
                 <img
                   src={liveSession}
                   alt=""
-                  className="h-full object-cover rounded-xl"
+                  className="h-[90px] object-cover rounded-xl"
                 />
-                <div className="flex flex-col justify-center items center h-full bg-[#30313026] absolute">
+                <div className="flex flex-col justify-center items center h-full bg-[#30313026] absolute rounded-l-xl">
                   <img src={greenTik} className="h-[30px] px-3" alt="" />
                 </div>
               </div>
@@ -44,9 +47,6 @@ const LiveSession = () => {
                 </h1>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-400">1 hr 25 min</span>
-                  <button className="bg-red-100 text-red-500 px-1 rounded-full">
-                    live session
-                  </button>
                 </div>
                 <h1>
                   <span className="text-gray-400">held on</span>
@@ -117,6 +117,81 @@ const LiveSession = () => {
         <h1 className="font-bold text-lg ml-5 mt-5">
           Getting Started with Arcrylics
         </h1>
+
+        <div className="py-4 mt-3 mx-5 border-t border-gray-200 flex">
+          <div className="h-[90px] flex justify-start items-center w-[40vw] relative">
+            <img
+              src={module2}
+              alt=""
+              className="h-full object-cover rounded-xl"
+            />
+          </div>
+          <div className="flex flex-col justify-between ml-3 w-[60vw]">
+            <h1 className="text-normal font-semibold">
+              Module 2
+            </h1>
+            <div className="flex justify-between">
+              <span className="text-sm text-gray-400">1 hr 25 min</span>
+              <button className="bg-red-100 text-red-500 px-1 rounded-full">
+                live session
+              </button>
+            </div>
+            <h1>
+              <span className="text-gray-400">scheduled</span>
+              <span className="text-blue-800 font-bold"> 04 Mar 2023</span>
+            </h1>
+          </div>
+        </div>
+        <div className="py-4 mx-5 border-t border-gray-200 flex">
+          <div className="h-[90px] flex justify-start items-center w-[40vw] relative">
+            <img
+              src={module3}
+              alt=""
+              className="h-full object-cover rounded-xl"
+            />
+          </div>
+          <div className="flex flex-col justify-between ml-3 w-[60vw]">
+            <h1 className="text-normal font-semibold">
+             Module 3
+            </h1>
+            <div className="flex justify-between">
+              <span className="text-sm text-gray-400">1 hr 25 min</span>
+              <button className="bg-red-100 text-red-500 px-1 rounded-full">
+                live session
+              </button>
+            </div>
+            <h1>
+              <span className="text-blue-800 font-bold">
+                yet to be scheduled
+              </span>
+            </h1>
+          </div>
+        </div>
+        <div className="py-4  mx-5 border-t border-gray-200 flex mb-28">
+          <div className="h-[90px] flex justify-start items-center w-[40vw] relative">
+            <img
+              src={module4}
+              alt=""
+              className="h-full object-cover rounded-xl"
+            />
+          </div>
+          <div className="flex flex-col justify-between ml-3 w-[60vw]">
+            <h1 className="text-normal font-semibold">
+              Module 4
+            </h1>
+            <div className="flex justify-between">
+              <span className="text-sm text-gray-400">1 hr 25 min</span>
+              <button className="bg-red-100 text-red-500 px-1 rounded-full">
+                live session
+              </button>
+            </div>
+            <h1>
+              <span className="text-blue-800 font-bold">
+                yet to be scheduled
+              </span>
+            </h1>
+          </div>
+        </div>
       </div>
     );
 };

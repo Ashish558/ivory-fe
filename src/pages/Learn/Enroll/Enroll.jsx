@@ -10,10 +10,11 @@ import tik2 from "../../../assets/images/enroll/tik2.svg";
 import videoBg from "../../../assets/images/enroll/videoBg.png";
 import zoom from "../../../assets/images/enroll/zoom.svg";
 import zoom2 from "../../../assets/images/enroll/zoom2.svg";
+import module2 from "../../../assets/images/learn/module2.png";
 
 const Enroll = () => {
     //enrollType "", "reg", "free"
-    const [enrollType, setEnrollType] = React.useState("free");
+    const [enrollType, setEnrollType] = React.useState("reg");
   return (
     <div>
       <div className="flex flex-col gap-5 mb-20 sm:mb-0">
@@ -87,15 +88,16 @@ const Enroll = () => {
                 <span className="text-blue-500 text-lg ml-2">80% OFF</span>
               </div>
             </div>
-                  )}
-                  {enrollType === "free" && (
-                      <div className="text-2xl font-bold text-black ml-6 flex items-center gap-1">
-                          $0{" "}
-                          <span className="text-gray-400 line-through font-normal text-base">
-                              $3499
-                          </span>{" "}
-                          <span className="text-blue-500 text-lg ml-2">100% OFF</span>
-                      </div>)}
+          )}
+          {enrollType === "free" && (
+            <div className="text-2xl font-bold text-black ml-6 flex items-center gap-1">
+              $0{" "}
+              <span className="text-gray-400 line-through font-normal text-base">
+                $3499
+              </span>{" "}
+              <span className="text-blue-500 text-lg ml-2">100% OFF</span>
+            </div>
+          )}
 
           {enrollType === "reg" && (
             <div className="text-yellow-600 text-md mx-6">
@@ -125,7 +127,7 @@ const Enroll = () => {
           </button>
         )}
 
-        <div className=" mx-4 shadow-md rounded-md mb-10 border-t border-gray-100">
+        <div className=" mx-4 shadow-md rounded-md  border-t border-gray-100">
           <div className="text-2xl font-bold text-black ml-6 mt-3">
             Program content
           </div>
@@ -172,25 +174,93 @@ const Enroll = () => {
             </div>
           </div>
         </div>
-        <div className="">
-          <div className="text-2xl font-bold text-black ml-6 mt-3">
-            Similar Programs
-          </div>
+      </div>
+      <div className="">
+        <div className="text-2xl font-bold text-black ml-6 mt-3">
+          Similar Programs
         </div>
-        <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5">
-          <div className="text-gray-500 text-lg ml-6">
-            {enrollType === "" && (
-              <span>
-                Batch starts
-                <span className="text-blue-500"> 20-Feb-2023</span>
-              </span>
-            )}
+      </div>
 
-            <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center">
-              {" "}
-              Pay $ 1200 to Enroll
+      <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
+        <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
+          <img
+            src={module2}
+            alt=""
+            className="h-full object-cover rounded-xl"
+          />
+        </div>
+        <div className="flex flex-col justify-between ml-3 w-[60vw]">
+          <h1 className="text-normal font-bold">Learn to CANVA</h1>
+          <span className="text-sm text-gray-400">Ankit dua</span>
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-400">16 Lessons</span>
+            <button className="bg-red-100 text-red-500 px-1 rounded-full">
+              4 live sessions
             </button>
           </div>
+          <h1>
+            <span className="text-sky-600 font-bold text-lg"> Free</span>
+          </h1>
+        </div>
+      </div>
+      <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
+        <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
+          <img
+            src={module2}
+            alt=""
+            className="h-full object-cover rounded-xl"
+          />
+        </div>
+        <div className="flex flex-col justify-between ml-3 w-[60vw]">
+          <h1 className="text-normal font-bold">Learn to CANVA</h1>
+          <span className="text-sm text-gray-400">Ankit dua</span>
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-400">16 Lessons</span>
+            <button className="bg-red-100 text-red-500 px-1 rounded-full">
+              4 live sessions
+            </button>
+          </div>
+          <h1>
+            <span className="text-sky-600 font-bold text-lg"> Free</span>
+          </h1>
+        </div>
+      </div>
+      <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
+        <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
+          <img
+            src={module2}
+            alt=""
+            className="h-full object-cover rounded-xl"
+          />
+        </div>
+        <div className="flex flex-col justify-between ml-3 w-[60vw]">
+          <h1 className="text-normal font-bold">Learn to CANVA</h1>
+          <span className="text-sm text-gray-400">Ankit dua</span>
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-400">16 Lessons</span>
+            <button className="bg-red-100 text-red-500 px-1 rounded-full">
+              4 live sessions
+            </button>
+          </div>
+          <h1>
+            <span className="text-sky-600 font-bold text-lg"> Free</span>
+          </h1>
+        </div>
+      </div>
+
+      <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5 mb-20">
+        <div className="text-gray-500 text-lg ml-6">
+          {enrollType === "" && (
+            <span>
+              Batch starts
+              <span className="text-blue-500"> 20-Feb-2023</span>
+            </span>
+          )}
+
+          <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center">
+            {" "}
+            Pay $ 1200 to Enroll
+          </button>
         </div>
       </div>
     </div>
