@@ -11,9 +11,6 @@
    justify-content: center;
    max-height: 100px;
 }
-.activity:hover{
-   background-color: rgb(205, 247, 255);
-}
 
 .guitar {
    width: 80%;
