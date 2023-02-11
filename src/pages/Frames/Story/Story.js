@@ -131,7 +131,7 @@ export default function Story(props) {
                                  
                                  }}
                               /> */}
-                              <video width='100%' height='100%' className='max-h-[500px]' controls  >
+                              <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls  >
                                  <source src={video} type="video/mp4" />
                               </video>
                            </div>

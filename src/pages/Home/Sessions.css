@@ -73,6 +73,7 @@
 
     .session-img {
         height: 220px;
+        transition: 0.4s;
     }
 
     .name-author {
@@ -83,6 +84,9 @@
         width: 48px;
     }
 
+    .single-session-container:hover .session-img {
+        transform: scale(1.4);
+    }
 
     .Live {
         background-color: #DD1D43;

@@ -144,7 +144,7 @@ export default function Mcq({ image, choices, url, updateStory, type, question})
             mcqResponse.selected === true
                ?
                mcqResponse.isCorrect === true ?
-                  <div className={`${styles.mcqResponseCorrect} lg:row-span-4`}>
+                  <div className={`${styles.mcqResponseCorrect} lg:row-span-3`}>
                      <img src={McqCorrectImg} className={styles.storyImage} />
                      <div className='px-4'>
                         <h2>
@@ -155,7 +155,7 @@ export default function Mcq({ image, choices, url, updateStory, type, question})
                   </div>
                   :
                   mcqResponse.isCorrect === false ?
-                     <div className={`${styles.mcqResponseInCorrect} lg:row-span-4`}>
+                     <div className={`${styles.mcqResponseInCorrect} lg:row-span-3`}>
                         <div className='px-4'>
                            <h1>
                               OOPS!

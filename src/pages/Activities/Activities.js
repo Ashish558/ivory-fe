@@ -123,7 +123,7 @@ export default function Activities() {
             res.data.data.map((activity, idx) => {
                temp.push({
                   id: activity.id,
-                  children: <div className='flex items-center gap-x-1'>
+                  children: <div className='flex items-center gap-x-1 lg:gap-x-3'>
                      <img src={activity.icon} alt='activity' className='max-h-[18px]' />
                      {activity.name}
                   </div>,
@@ -246,10 +246,10 @@ export default function Activities() {
 
                   {filteredActivities.map((activity, indx) => {
                      return (
-                        <div key={indx} className='mb-8' >
-                           <div className='flex items-center mb-3'>
+                        <div key={indx} className='mb-8 lg:mb-[60px]' >
+                           <div className='flex items-center mb-3  lg:mb-[48px]'>
                               <img src={activity.icon} alt='activity' />
-                              <p className='ml-2 text-2xl font-semibold'> {activity.name} </p>
+                              <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
                            <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-3'>
                               {activity.categories.map((category, idx) => {

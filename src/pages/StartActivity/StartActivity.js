@@ -471,7 +471,7 @@ export default function StartActivity({ fetchUserDetails }) {
             </div>
          </div>
          {
-            isAlreadyStarted === false &&
+            isAlreadyStarted === false && startModalActive === false &&
             <div className={styles.startActivityFooter}>
                <div className='max-w-[328px] mx-auto'>
                   <PrimaryButton children={'START for free'} onClick={handleStartActivity} className='w-full pt-2.5 pb-2.5' />

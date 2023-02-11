@@ -103,14 +103,19 @@
 
 @media only screen and (min-width: 976px) {
    .stepImageContainer {
-      max-width: 600px;
+      width: 800px;
+      max-width: 800px;
       height: 396px;
       margin-bottom: 1rem;
       border-radius: 48px;
+      overflow: hidden;
    }
 
    .stepImageContainer img {
       border-radius: 48px;
-      width: 600px;
+      object-fit: cover;
+      width: 800px;
+      height: 100%;
+      object-position: center;
    }
 }

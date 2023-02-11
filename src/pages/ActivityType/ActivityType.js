@@ -140,7 +140,7 @@ export default function ActivityType() {
             {
                userActivities.length > 0 &&
                <div className='flex justify-center my-7'>
-                  <button className={`rounded-l-full border flex items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-l-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(false)} >
                      {
                         completedTabActive === false &&
@@ -148,17 +148,17 @@ export default function ActivityType() {
                      }
                      On going
                   </button>
-                  <button className={`rounded-r-full border flex items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-r-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(true)}  >
-                     completed
                      {
                         completedTabActive === true &&
-                        <img src={CheckedIcon} alt='checked' className='ml-[8.25px]' />
+                        <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
                      }
+                     completed
                   </button>
                </div>
             }
-            <div className='mt-5 sm:grid md:grid-cols-3 2xl:grid-cols-4 sm:mx-20'>
+            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 sm:mx-20 [&>div]:max-w-[280px]'>
                {userActivities.length > 0 ?
                   filteredUserActivities.map(activity => {
                      return <Activity {...activity} key={activity.id} />
