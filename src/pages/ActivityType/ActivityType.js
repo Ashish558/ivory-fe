@@ -158,7 +158,8 @@ export default function ActivityType() {
                   </button>
                </div>
             }
-            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 sm:mx-20 [&>div]:max-w-[280px]'>
+            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 sm:mx-20 
+            [&>div]:max-w[280px]'>
                {userActivities.length > 0 ?
                   filteredUserActivities.map(activity => {
                      return <Activity {...activity} key={activity.id} />
