@@ -8,7 +8,7 @@ import Instagram from '../../assets/icons/instagram.svg'
 import { FacebookShareButton, FacebookIcon, WhatsappShareButton, TwitterShareButton, InstapaperShareButton } from 'react-share';
 
 export default function ShareModal({ open, close }) {
-   const shareUrl = "http://localhost:3000/home"
+   const shareUrl = "https://ivory-test.netlify.app/home"
 
    const handleWhatsAppShare = () => window.open(shareUrl)
 

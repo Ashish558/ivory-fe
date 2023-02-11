@@ -147,8 +147,6 @@ const Stories = () => {
 
                <Slider {...settings} className='home-stories-slider' >
                   {stories.map((story, idx) => {
-   console.log('story', story)
-
                      return (
                         <div>
                            <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >

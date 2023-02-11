@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 import ActivityIcon from '../../assets/images/activity.png'
 import StartedIcon from '../../assets/icons/checked.svg'
 import CompletedIcon from '../../assets/icons/checked-green.svg'
+import { getFormattedDuration } from '../../utils/utils'
 
 export default function Activity({ image, name, duration, category, id, is_completed }) {
 
@@ -19,7 +20,7 @@ export default function Activity({ image, name, duration, category, id, is_compl
          </div>
          <div className='sm:p-3 sm:flex flex-col sm:justify-start sm:h-[150px]'>
             <p className='font-bold mb-0 mt-0.5 sm:mt-1'> {name} </p>
-            <p className='text-sm text-[#6D747A] sm:mt-1'> {duration} </p>
+            <p className='text-sm text-[#6D747A] sm:mt-1'> {getFormattedDuration(duration)} </p>
             {is_completed === undefined ? <></> :
                is_completed === false ?
                   <div className='mt-auto flex justify-end'>

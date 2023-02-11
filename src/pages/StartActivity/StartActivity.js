@@ -291,7 +291,7 @@ export default function StartActivity({ fetchUserDetails }) {
                         }
                         <ReactPlayer ref={videoRef}
                            width='100%'
-                           height='400px'
+                           // height='400px'
                            className={styles.video}
                            url={video_link}
                            controls={true}

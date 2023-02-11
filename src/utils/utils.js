@@ -27,3 +27,13 @@ export const getColors= (totalLength, idx) => {
    ]
    return backgrounds[index]
 }
+
+export const getFormattedDuration = (arg)=>{
+   if(!arg) return ''
+   let durationArr = arg.split(':')
+   let hours = durationArr[0]
+   let mins = durationArr[1]
+
+   return `${parseInt(hours)} hrs ${parseInt(mins)} min`
+
+}
