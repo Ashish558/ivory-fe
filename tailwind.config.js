@@ -27,9 +27,6 @@ module.exports = {
       }
     },
   },
-  daisyui: {
-    themes: ["cupcake", "cmyk"],
- }, 
   plugins: [require("daisyui")]
 
 }

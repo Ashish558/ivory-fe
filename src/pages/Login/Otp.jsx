@@ -30,14 +30,14 @@ const settings = {
 
 const sliderData = [
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: 'Accomplish',
+    textSec: 'your creative goals',
     img: loginMan,
     imgClassName: ''
   },
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: 'Accomplish',
+    textSec: 'your creative goals',
     img: SignupTree,
     imgClassName: 'max-w-[270px]'
   },
@@ -198,8 +198,8 @@ const Otp = () => {
         <div className=" h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center mt-20 sm:mt-0">
           <div className="flex flex-col  justify-between mt-8">
             <form className="flex flex-col" onSubmit={handleOpt}>
-              <h1 className="text-2xl font-bold ml-8">
-                Verify with OTP sent to 9876543210
+              <h1 className="text-2xl lg:text-[22px] font-bold ml-8 lg:max-w-[300px]">
+                Verify with OTP sent to {phone ? phone : '9863727272'}
               </h1>
               <div className="flex flex-row mx-auto  mt-5">
                 <input
@@ -267,7 +267,7 @@ const Otp = () => {
               {otpValuesArray.length === 6 ? (
                 <button
                   type="submit"
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-1"
+                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w2 sm:w-auto text-center justify-center mx-4 flex mx-auto mt-5 mb-1"
                 >
                   Continue
                 </button>
