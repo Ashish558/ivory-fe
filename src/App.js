@@ -1,37 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React,{ useEffect,useState } from 'react';
+import { BrowserRouter,Navigate,Route,Routes } from "react-router-dom";
 import './App.css';
-import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
 
-import Home from './pages/Home/Home.jsx';
+import { useDispatch,useSelector } from 'react-redux';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
-import StartActivity from './pages/StartActivity/StartActivity';
+import Profile from './pages/Createprofile/Profile';
+import Footer from './pages/Home/Footer';
+import Home from './pages/Home/Home.jsx';
+import LoggedInHome from './pages/Home/LoggedInHome';
 import Login from './pages/Login/Login';
 import Otp from './pages/Login/Otp';
-import SignUp from './pages/SignUp/SignUp';
-import Congrates from './pages/SignUp/Congrates';
-import LoggedInHome from './pages/Home/LoggedInHome'
-import Profile from './pages/Createprofile/Profile'
-import Footer from './pages/Home/Footer';
 import Navbar from './pages/Navbar/Navbar';
+import Congrates from './pages/SignUp/Congrates';
+import SignUp from './pages/SignUp/SignUp';
+import StartActivity from './pages/StartActivity/StartActivity';
+import { updateLoggedIn,updateProfileData } from './redux/slices/user';
 import { refreshToken } from './services/auth';
-import { updateLoggedIn, updateProfileData } from './redux/slices/user';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetail } from './services/user';
 
+import Four from './pages/splash/Four';
 import Landing from './pages/splash/Landing';
+import LogoLanding from './pages/splash/LogoLanding';
 import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
-import Four from './pages/splash/Four';
-import LogoLanding from './pages/splash/LogoLanding';
 
-import Dob from './pages/SignUp/Dob';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
+
+import Enroll from './pages/Learn/Enroll/Enroll';
+import LiveSession from './pages/Learn/LiveSession/LiveSession';
+import Dob from './pages/SignUp/Dob';
 function App() {
   //true for now will change later
-  const [loading, setLoading] = useState(true)
+  const [loading,setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { loggedIn, profileData } = useSelector(state => state.user)
+  const { loggedIn,profileData } = useSelector(state => state.user)
 
   useEffect(() => {
     if (localStorage.getItem('refresh')) {
@@ -42,7 +45,7 @@ function App() {
       refreshToken(body)
         .then(res => {
           // console.log('ref res', res.data.data.access);
-          localStorage.setItem('access', res.data.data.access)
+          localStorage.setItem('access',res.data.data.access)
           dispatch(updateLoggedIn({ loggedIn: true }))
           fetchUserDetails(true)
 
@@ -50,25 +53,25 @@ function App() {
         }).catch(err => {
           setLoading(false)
           dispatch(updateLoggedIn({ loggedIn: false }))
-          console.log('ref err', err.response);
+          console.log('ref err',err.response);
         })
     } else {
       setLoading(false)
     }
-  }, [])
+  },[])
 
   const fetchUserDetails = (isInitial) => {
     getUserDetail()
       .then(res => {
         // console.log('profile', res.data.data[0]);
         dispatch(updateProfileData({ profileData: res.data.data[0] }))
-        if(isInitial){
+        if (isInitial) {
           setLoading(false)
         }
       })
       .catch(err => {
-        console.log('profile err', err);
-        if(isInitial){
+        console.log('profile err',err);
+        if (isInitial) {
           dispatch(updateLoggedIn({ loggedIn: false }))
           setLoading(false)
         }
@@ -77,7 +80,7 @@ function App() {
 
   useEffect(() => {
     fetchUserDetails()
-  }, [loggedIn])
+  },[loggedIn])
 
   if (loading === true) return <></>
 
@@ -87,6 +90,8 @@ function App() {
       <NavbarDesktop />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/enroll" element={<Enroll />} />
+        <Route path="/live" element={<LiveSession />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
@@ -138,7 +143,7 @@ function App() {
   );
 }
 
-function RequireAuth({ children, loggedIn }) {
+function RequireAuth({ children,loggedIn }) {
   return loggedIn ? children : <Navigate to="/" />;
 }
 
