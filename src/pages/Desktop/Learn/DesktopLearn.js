@@ -15,44 +15,42 @@ const DesktopLearn = () => {
 
         infinite: false,
         centerPadding: "60px",
-        slidesToShow: 3.3,
+        slidesToShow: 3,
         initialSlide: 0,
         arrows: false,
         swipeToSlide: true,
+        initialSlide: 0,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1300,
                 settings: {
-                    settings: {
-                        slidesToShow: 3.3,
-                        initialSlide: 0,
-                    },
+                    slidesToShow: 3,
                 }
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2.5,
+                },
+
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 3,
-                    initialSlide: 0,
+                    slidesToShow: 2.5,
                 },
             },
             {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2.3,
-                    initialSlide: 0,
                 },
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1.5,
-                    initialSlide: 0,
                 },
-                // state: {
-                //    display: true,
-                //    height: 600
-                // }
             }
         ],
 
@@ -78,7 +76,7 @@ const DesktopLearn = () => {
 
                     <div >
                         <div class="card custom-card-learn  cursor-pointer">
-                            <figure><img className='w-full' src={Learn3} alt="Shoes" /></figure>
+                            <figure><img className='w-full max-h-[214px]' src={Learn3} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
                                     <p className='text-base font-bold position-Ivory'>Ivory Exclusive</p>
@@ -159,7 +157,7 @@ const DesktopLearn = () => {
                     </div>
                     <div >
                         <div class="card custom-card-learn  cursor-pointer">
-                            <figure ><img style={{ height: '228px' }} className='w-full' src={Learn1} alt="Shoes" /></figure>
+                            <figure ><img style={{ height: '214px' }} className='w-full' src={Learn1} alt="Shoes" /></figure>
                             <div class="px-4">
                                 <div>
                                     <p className='text-base font-bold position-Ivory'>Ivory Exclusive</p>

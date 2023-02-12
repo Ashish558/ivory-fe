@@ -4,6 +4,8 @@ import styles from "./mcq.module.css";
 import StoryImg from '../../../../assets/images/story-1.png'
 import McqStoryImg from '../../../../assets/images/story-mcq.png'
 import McqCorrectImg from '../../../../assets/images/mcq-correct.png'
+import axios from 'axios';
+import { getAuthHeaders } from '../../../../services/constants';
 
 const tempOptions = [
    {
@@ -32,19 +34,80 @@ const tempOptions = [
    },
 ]
 
-export default function Mcq({ image, choices }) {
-
-   const [options, setOptions] = useState(choices.map(choice => ({ ...choice, selected: false })))
+export default function Mcq({ image, choices, url, updateStory, type, question}) {
+   const [options, setOptions] = useState([])
 
    const [mcqResponse, setMcqResponse] = useState({
       selected: false,
       isCorrect: false
    })
 
+   useEffect(() => {
+      setOptions(choices.map(choice => ({ ...choice, selected: false })))
+   }, [choices])
+
+   useEffect(() => {
+      setMcqResponse({
+         selected: false,
+         isCorrect: false
+      })
+   }, [choices])
+
    const [optionDisabled, setOptionDisabled] = useState(false)
    let timeOutId = null
 
+   // console.log(mcqResponse);
+   // console.log(options);
+   useEffect(() => {
+      if (!options) return
+      if (mcqResponse.selected) return
+      options.map(choice => {
+         if (choice.is_answered === true) {
+            if (choice.is_correct === true) {
+               setMcqResponse({
+                  selected: true,
+                  isCorrect: true
+               })
+               let tempOptions = options.map(item => {
+                  return item.id === choice.id ? { ...item, selected: true } : { ...item, selected: false }
+               })
+               setOptions(tempOptions)
+            } else {
+               let tempOptions = options.map(item => {
+                  return item.id === choice.id ? { ...item, selected: true } : { ...item, selected: false }
+               })
+               setOptions(tempOptions)
+               setMcqResponse({
+                  selected: true,
+                  isCorrect: false
+               })
+            }
+         }
+
+      })
+   }, [options])
+
+   useEffect(() => {
+      return () => {
+         setOptions([])
+         setMcqResponse({
+            selected: false,
+            isCorrect: false
+         })
+      }
+   }, [])
    const selectAns = option => {
+      console.log(option);
+
+      axios.post(`${url}answer/`, { answer: option.id }, getAuthHeaders())
+         .then(res => {
+            console.log('answer res', res.data.data);
+            updateStory({ ...res.data.data, type })
+         }).catch(err => {
+            console.log('answer err', err.data);
+         })
+
+      // return
       let updated = options.map(opt => {
          if (opt.id === option.id) {
             return { ...opt, selected: true }
@@ -72,8 +135,6 @@ export default function Mcq({ image, choices }) {
    }
 
    useEffect(() => {
-
-
       return () => clearTimeout(timeOutId)
    }, [])
 
@@ -83,7 +144,7 @@ export default function Mcq({ image, choices }) {
             mcqResponse.selected === true
                ?
                mcqResponse.isCorrect === true ?
-                  <div className={`${styles.mcqResponseCorrect} lg:row-span-4`}>
+                  <div className={`${styles.mcqResponseCorrect} lg:row-span-3`}>
                      <img src={McqCorrectImg} className={styles.storyImage} />
                      <div className='px-4'>
                         <h2>
@@ -94,7 +155,7 @@ export default function Mcq({ image, choices }) {
                   </div>
                   :
                   mcqResponse.isCorrect === false ?
-                     <div className={`${styles.mcqResponseInCorrect} lg:row-span-4`}>
+                     <div className={`${styles.mcqResponseInCorrect} lg:row-span-3`}>
                         <div className='px-4'>
                            <h1>
                               OOPS!
@@ -109,7 +170,7 @@ export default function Mcq({ image, choices }) {
          }
          <div className={`${styles.mcqOptions} lg:row-span-2`}>
             <p className='font-semibold mb-4' >
-               How many differences can you spot?
+              {question}
             </p>
             <div className='flex justify-around items-center' >
                {options.map(option => {

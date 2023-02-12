@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../../../Images/ivory logo dark 1.png';
-import User from '../../../Images/profile-pic.png';
+import User from '../../../Images/profile-pic.jfif';
 import './NavbarDesktop.css';
 
 
@@ -110,23 +110,24 @@ const NavbarDesktop = () => {
                      
                      <div className='flex  justify-between px-4'>
                         <div>
-                           <div className='flex  items-center  mt-7 p-3 cursor-pointer hover:bg-[#CDF7FF] rounded-md'>
-                              <p onClick={handleSidebar}><img src={edit} alt="" /></p>
-                              <p className='text-sm font-semibold pl-4' onClick={() => navigate('/CreateProfile')} > Edit Profile</p>
+                           <div className='flex  items-center  mt-7 p-3 cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={() => {navigate('/CreateProfile'); handleSidebar()}}>
+                              <p ><img src={edit} alt="" /></p>
+                              <p className='text-sm font-semibold pl-4'
+                              > Edit Profile</p>
                            </div>
-                           <div className='flex  items-center  mt-7 p-3 cursor-pointer hover:bg-[#CDF7FF] rounded-md'>
-                              <p onClick={handleSidebar}><img src={play} alt="" /></p>
+                           <div className='flex  items-center  mt-7 p-3 cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={handleSidebar} >
+                              <p ><img src={play} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> How to use app</p>
                            </div>
-                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md'>
-                              <p onClick={handleSidebar}><img src={programs} alt="" /></p>
+                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={handleSidebar}>
+                              <p ><img src={programs} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> My Programs</p>
                            </div>
-                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={() => navigate('/activities')}>
-                              <p onClick={handleSidebar}><img src={activities} alt="" /></p>
+                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={() => {navigate('/activities'); handleSidebar()}}>
+                              <p><img src={activities} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> My Activities</p>
                            </div>
-                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md'>
+                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={handleSidebar}>
                               <p onClick={handleSidebar}><img src={sessions} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> My Live Sessions</p>
                            </div>
@@ -137,11 +138,11 @@ const NavbarDesktop = () => {
                               <p onClick={handleSidebar}><img src={exit} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> My Sign out</p>
                            </div>
-                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md'>
+                           <div className='flex  items-center  mt-7 p-3  cursor-pointer hover:bg-[#CDF7FF] rounded-md' onClick={handleSidebar}>
                               <p onClick={handleSidebar}><img src={faq} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> My FAQ</p>
                            </div>
-                           <div className='flex  items-center mt-7 p-3 cursor-pointer  hover:bg-[#CDF7FF] rounded-md'>
+                           <div className='flex  items-center mt-7 p-3 cursor-pointer  hover:bg-[#CDF7FF] rounded-md' onClick={handleSidebar}>
                               <p onClick={handleSidebar}><img src={contact} alt="" /></p>
                               <p className='text-sm font-semibold pl-4'> My Contact us</p>
                            </div>

@@ -281,7 +281,7 @@ const Dob = () => {
 
 
 
-            <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] z-10 mt-8'>
+            <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] w-[328px] mx-auto z-10 mt-8'>
               <Slider {...dateSettings} className={` h-[174px] w-[48px] dateSlider`} ref={dateSliderRef} >
                 {totalDates.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
@@ -289,7 +289,7 @@ const Dob = () => {
                   </div>
                 })}
               </Slider>
-              <Slider {...monthsSettings} className=' h-[200px] w-[130px] dateSlider' ref={monthSliderRef} >
+              <Slider {...monthsSettings} className=' h-[174px] w-[130px] dateSlider' ref={monthSliderRef} >
                 {months.map((str, i) => {
                   return (
                     <div className="px-2 py-4 flex justify-center items-center text-center">

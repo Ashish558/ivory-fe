@@ -27,6 +27,7 @@ import Dob from './pages/SignUp/Dob';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 import Progress from "./pages/Home/Progress";
 import Assignment from './pages/Home/Assignment';
+import Assignment1 from './pages/Home/Assignment1';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -134,6 +135,12 @@ function App() {
           path="/Assignment"
           element={
             <Assignment/>
+          }
+        />
+        <Route
+          path="/Assignment1"
+          element={
+            <Assignment1/>
           }
         />
         <Route

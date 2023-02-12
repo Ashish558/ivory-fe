@@ -106,7 +106,15 @@
         bottom: 18px;
     }
     .home-stories-slider .slick-slide{
-        max-width: 395px;
+        max-width: 360px;
+    }
+    .home-stories-slider .slick-slide {
+        margin: 0 20px;
+    }
+  
+    /* the parent */
+    .home-stories-slider .slick-list {
+        margin: 0 -20px;
     }
 
 }

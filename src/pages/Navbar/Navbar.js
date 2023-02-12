@@ -9,27 +9,27 @@ import edit from '../../Images/edit.png';
 import exit from '../../Images/exit.png';
 import faq from '../../Images/faq.png';
 import play from '../../Images/how.png';
-import ProfilePic from '../../Images/profile-pic-1.png';
-import User from '../../Images/profile-pic.png';
+// import ProfilePic from '../../Images/profile-pic-1.jfif';
+import User from '../../Images/profile-pic.jfif';
 import programs from '../../Images/programs.png';
 import sessions from '../../Images/sessions.png';
 import Logo from '../../Images/形状.png';
 import './Navbar.css';
 
-import { useDispatch,useSelector } from 'react-redux';
-import { useLocation,useNavigate } from 'react-router-dom';
-import { updateLoggedIn,updateProfileData } from '../../redux/slices/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
 
-const toExclude = ['/login','/otp','/dob','/signup','/congrates','/','/CreateProfile','/logolanding','/four','/third','/second','/landing']
-const basePaths = ['/home','/activities']
+const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing']
+const basePaths = ['/home', '/activities']
 
 const Navbar = () => {
 
-   const [isOpen,setIsOpen] = React.useState(false)
+   const [isOpen, setIsOpen] = React.useState(false)
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const location = useLocation()
-   const { loggedIn,profileData } = useSelector(state => state.user)
+   const { loggedIn, profileData } = useSelector(state => state.user)
 
    const toggleDrawer = () => {
       setIsOpen((prevState) => !prevState)
@@ -67,7 +67,7 @@ const Navbar = () => {
          <div class="flex-none gap-2">
             <button className='flex'>
                <div onClick={toggleDrawer} class="w-8 rounded-full flex">
-                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full'  />
+                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full' />
                </div>
             </button>
 
@@ -89,37 +89,41 @@ const Navbar = () => {
                <div className='line mt-6' height="1px"></div>
                <div className='mt-7'>
 
-                  <div className='flex items-center cursor-pointer' onClick={() => navigate('/CreateProfile')} >
+                  <div className='flex items-center cursor-pointer'
+                     onClick={() => { navigate('/CreateProfile'); toggleDrawer() }} >
                      <p><img src={edit} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Edit Profile</p>
                   </div>
-                  <div className='flex items-center cursor-pointer mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
                      <p><img src={play} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>How to use app</p>
                   </div>
-                  <div className='flex items-center cursor-pointer mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
                      <p><img src={programs} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>My Programs</p>
                   </div>
-                  <div className='flex items-center cursor-pointer mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7'
+                     onClick={() => { navigate('/activities'); toggleDrawer() }}>
                      <p><img src={activities} alt="" /></p>
-                     <p className='text-sm font-semibold pl-4' onClick={() => navigate('/activities')}>Activities</p>
+                     <p className='text-sm font-semibold pl-4' >
+                        Activities
+                     </p>
                   </div>
-                  <div className='flex items-center cursor-pointer mt-7'>
+                  <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
                      <p><img src={sessions} alt="" /></p>
                      <p className='text-sm font-semibold pl-4'>Live Sessions</p>
                   </div>
 
                   <div className='boundary-margin-top'>
-                     <div className='flex items-center cursor-pointer'>
+                     <div className='flex items-center cursor-pointer' onClick={toggleDrawer} >
                         <p><img src={exit} alt="" /></p>
                         <p className='text-sm font-semibold pl-4' onClick={handleLogout} >Sign out</p>
                      </div>
-                     <div className='flex items-center cursor-pointer mt-7'>
+                     <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
                         <p><img src={faq} alt="" /></p>
                         <p className='text-sm font-semibold pl-4 contact-color'>FAQ</p>
                      </div>
-                     <div className='flex items-center cursor-pointer mt-7'>
+                     <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
                         <p><img src={contact} alt="" /></p>
                         <p className='text-sm font-semibold pl-4 contact-color'>Contact us</p>
                      </div>

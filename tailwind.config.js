@@ -16,6 +16,7 @@ module.exports = {
         lightBlack: '#49454F',
         LightSky : "#DEF9FF",
         primaryGreen: '#26A925',
+        gray:'#EFEFEF'
       },
       fontSize: {
         xxs: '10px'
@@ -28,6 +29,9 @@ module.exports = {
       }
     },
   },
+  daisyui: {
+    themes: ["cupcake", "cmyk"],
+ }, 
   plugins: [require("daisyui")]
 
 }

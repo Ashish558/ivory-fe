@@ -8,6 +8,7 @@ import ActivityIcon from '../../assets/images/activity.png'
 
 import PauseIcon from '../../assets/icons/pause.svg'
 import RedirectIcon from '../../assets/icons/redirect.svg'
+import CheckedIcon from '../../assets/icons/checked-category.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import { useParams, useSearchParams } from 'react-router-dom'
@@ -64,7 +65,7 @@ export default function ActivityType() {
             if (isActivitiesFetched === false) return
             if (res.data.data === null) return setUserActivities([])
             let filtered = res.data.data.filter(item => item.activity.category === parseInt(categoryId))
-            
+
             let data = activities.map(item => {
                let is_completed = null
                filtered.forEach(userAct => {
@@ -75,7 +76,7 @@ export default function ActivityType() {
                return { ...item, is_completed }
             })
             data = data.sort(item => item.is_completed === null ? 1 : -1)
-            console.log('data',data);
+            console.log('data', data);
             setUserActivities(data)
          }).catch(err => {
             console.log('err', err);
@@ -111,7 +112,7 @@ export default function ActivityType() {
       getActivities(categoryId)
          .then(res => {
             setIsActivitiesFetched(true)
-            
+
             // console.log('data', res.data.data);
             if (res.data.data === null) return
             setActivities(res.data.data)
@@ -126,7 +127,7 @@ export default function ActivityType() {
    // console.log('activities', activities);
 
    return (
-      <div>
+      <div className='lg:mt-[64px]'>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
@@ -139,17 +140,26 @@ export default function ActivityType() {
             {
                userActivities.length > 0 &&
                <div className='flex justify-center my-7'>
-                  <button className={`rounded-l-full border py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-l-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(false)} >
+                     {
+                        completedTabActive === false &&
+                        <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+                     }
                      On going
                   </button>
-                  <button className={`rounded-r-full border py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-r-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(true)}  >
+                     {
+                        completedTabActive === true &&
+                        <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+                     }
                      completed
                   </button>
                </div>
             }
-            <div className='mt-5 sm:grid md:grid-cols-3 2xl:grid-cols-4 sm:mx-20'>
+            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 sm:mx-20 
+            [&>div]:max-w[280px]'>
                {userActivities.length > 0 ?
                   filteredUserActivities.map(activity => {
                      return <Activity {...activity} key={activity.id} />

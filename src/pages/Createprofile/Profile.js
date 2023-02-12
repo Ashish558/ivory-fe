@@ -54,7 +54,7 @@ const Profile = () => {
   const fetchInterests = () => {
     getInterests()
       .then(res => {
-        // console.log('allInterests', res.data.data);
+        console.log('All Interests', res.data.data);
 
         let intData = res.data.data
         intData = intData.filter(item => {
@@ -209,16 +209,16 @@ const Profile = () => {
     setSelectedInterest(deselectInterest)
   }
 
-  console.log('interest',interest);
+  // console.log('interest',interest);
   // console.log('allInterests', allInterests);
   // console.log('userInterests', userInterests);
   // if (interest.length < 0) {
   //   console.log('interest',interest);
   // }
-  console.log('selected',selectedInterest);
+  // console.log('selected',selectedInterest);
   return (
     <>
-      <div className='pb-32 overflow-x-hidden sm:mb-0  bg-[#EEFDFC] sm:bg-white'>
+      <div className='pb-32 overflow-x-hidden sm:mb-0 lg:mt-[64px]  bg-[#EEFDFC] sm:bg-white'>
         <div className={styles.datainput} >
           <div className={styles.navbar}>
 
@@ -240,7 +240,7 @@ const Profile = () => {
             >Add Profile picture
             </p>
           </div>
-          <div className={`${styles.formimg} sm:mt-10 `}>
+          <div className={`${styles.formimg} `}>
             <div className={styles.form}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
@@ -255,7 +255,7 @@ const Profile = () => {
                   // type="Number"
                   placeholder='9777766665' className={`${styles.emailinput} text-gray-400`}
                   value={mobile_no} name="mobile_no"
-                  disabled style={{ border: '1px solid #ccc' }}
+                  disabled style={{ border: '1px solid #68656c' }}
 
                   type={JSON.stringify(mobile_no)?.length < 10 ? "number" : "text"}
                   maxLength="10"
@@ -280,7 +280,7 @@ const Profile = () => {
               </div>
               <div className={styles.input2}>
                 <label htmlFor="" className={styles.emaillabel} >Gender</label>
-                <div className={`sm:w-[50%] flex justify-between gap-4`}>
+                <div className={`sm:w-[59%] flex justify-between gap-4`}>
                   <div className={`w-full border border-gray-600 flex justify-between items-center px-2 sm:px-5 rounded-md ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
@@ -300,10 +300,10 @@ const Profile = () => {
                   interest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
                       className={`${styles.chooseinput} sm:w-[50%]`}>
-                      <p className=' pl-3  pt-2 sm:pt-0'> Click to choose</p>
+                      <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>
                     </div>
                     :
-                    <div className='h-[85px]  sm:w-[50%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
+                    <div className='h-[85px]  sm:w-[58%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
                         selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
@@ -334,7 +334,7 @@ const Profile = () => {
         </div>
 
         {showdiv == true ?
-          <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
+          <Modal classname='max-w-[370px] pt-0 md:pt-6 rounded-[20px] sm:max-w-[740px] overflow-hidden'
             body={
               <>
                 <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
@@ -347,7 +347,8 @@ const Profile = () => {
 
                   {
                     allInterests.map((int,i) => {
-                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-sky-300' : ''}`} style={{ border: '2px solid #939CA3' }}
+                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer  rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-secondary' : 'border border-[#79747E] '}`} 
+                      // style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int)}>
                         <img src={int.icon} alt="" />
@@ -387,11 +388,11 @@ const Profile = () => {
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
+                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-2 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-lg lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                     {
-                      interestInput.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button> : <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
+                      interestInput.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
                     }
                   </div>
 

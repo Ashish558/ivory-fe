@@ -19,7 +19,7 @@ linear-gradient(0deg, #D9D9D9, #D9D9D9);
 .logoland>img{
     position: absolute;
     top: 19%;
-    left:32%;
+    left:30%;
 }
     
 @keyframes logoland{

@@ -161,7 +161,7 @@ const Stories = () => {
                                  <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
                                  <div className="pl-3 details lg:pl-6">
                                     <p className="text-sm lg:text-xl text-white">
-                                       {story.share_message ? story.share_message : ''}
+                                       {story.title ? story.title : ''}
                                     </p>
                                     <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
                                        <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>

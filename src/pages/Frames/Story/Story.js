@@ -10,7 +10,7 @@ import RightIcon from '../../../assets/icons/right.svg'
 
 import StoryImg from '../../../assets/images/story-1.png'
 import McqStoryImg from '../../../assets/images/story-mcq.png'
-import McqCorrectImg from '../../../assets/images/mcq-correct.png'
+import Logo from '../../../assets/images/logo.png'
 
 import ReactPlayer from 'react-player'
 import Mcq from './Mcq/Mcq';
@@ -37,8 +37,22 @@ export default function Story(props) {
    }
 
    useEffect(() => {
-      setStoryType(type)
-   }, [type])
+      if(type === 'mcq'){
+         let isSngleLetteredAnswer = true
+         story.choices.forEach(choice => {
+            if(choice.choice.length > 3){
+               isSngleLetteredAnswer = false
+            }
+         })
+         if(isSngleLetteredAnswer === true){
+            setStoryType(type)
+         }else{
+            setStoryType('mcq2')
+         }
+      }else{
+         setStoryType(type)
+      }
+   }, [type, image])
 
    useEffect(() => {
       hideHtmlOverflow()
@@ -56,7 +70,7 @@ export default function Story(props) {
    useEffect(() => {
       axios.get(`${url}view/`, getAuthHeaders())
          .then(res => {
-            console.log('view res', res.data);
+            // console.log('view res', res.data);
             updateStory({ ...res.data.data, type })
          })
          .catch(err => {
@@ -84,16 +98,17 @@ export default function Story(props) {
          })
    }
 
+   // console.log('story', storyType)
    // console.log('story', story)
    // console.log('video', video)
-
+   let storyProps = { url, updateStory, type }
    return (
       <>
 
          <div className={styles.modalContainer}>
             <div className="w-full p-0  self-stretch overflow-aut">
                <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
-                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full '  : ''} `}>
+                  <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full ' : ''} `}>
 
                      {storyType === 'image' ?
                         <div className={styles.storyImg}>
@@ -116,22 +131,23 @@ export default function Story(props) {
                                  
                                  }}
                               /> */}
-                              <video width='100%' height='100%' className='max-h-[500px]' controls  >
+                              <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" >
                                  <source src={video} type="video/mp4" />
                               </video>
                            </div>
                            : storyType === 'mcq' && story.choices !== undefined ?
-                              <Mcq {...story} />
+                              <Mcq {...story} {...storyProps} />
                               : storyType === 'mcq2' ?
-                                 <Mcq2 />
+                                 <Mcq2  {...story} {...storyProps} />
                                  : storyType === 'sudoku' ?
                                     <Sudoku {...story} updateStory={updateStory} />
                                     : storyType === 'qna' ?
-                                       <QnA {...story} updateStory={updateStory} />
+                                       <QnA {...story} updateStory={updateStory} {...storyProps} />
                                        : <></>
                      }
                      <div className={styles.backBtn}>
-                        <img src={BackIcon} alt='back' onClick={handleClose} />
+                        <img src={BackIcon} alt='back' className='cursor-pointer' onClick={handleClose} />
+                        <img src={Logo} alt='logo' className={styles.logo} />
                      </div>
                      <div className={styles.footer}>
                         <div className='flex flex-col items-center ml-auto mr-7 md:mr-0 md:ml-0 md:flex-row md:mb-6'>

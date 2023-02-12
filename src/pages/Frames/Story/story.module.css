@@ -37,6 +37,7 @@
    background-color: rgba(0, 28, 56, 0.2);
    backdrop-filter: blur(6px);
    border-radius: 50%;
+   z-index: 6000;
 }
 
 .storyImg {
@@ -58,7 +59,7 @@
    bottom: 40px;
    display: flex;
    align-items: center;
-   z-index: -1;
+   z-index: 1;
 }
 
 .iconContainer {
@@ -68,7 +69,8 @@
 .storyImg img {
    width: 100%;
    height: 100%;
-   object-fit: contain;
+   object-fit: cover;
+   border-radius: 0px;
 }
 
 /* FOOTER */
@@ -83,6 +85,7 @@
    justify-items: end;
    align-items: center;
    padding: 3px 23px 20px 20px;
+   z-index: 8000;
    color: white;
    /* font-family: Roboto; */
    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) -10.94%, rgba(0, 0, 0, 0.7) 100%);
@@ -97,6 +100,28 @@
 
 .leftIcon,
 .RightIcon {
+   display: block;
+   z-index: 5000;
+}
+
+.leftIcon,
+.RightIcon {
+   display: block;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   cursor: pointer;
+}
+
+.leftIcon {
+   left: 10px;
+}
+
+.RightIcon {
+   right: 10px;
+}
+
+.logo {
    display: none;
 }
 
@@ -106,14 +131,37 @@
       top: 50%;
       transform: translateY(-50%);
    }
+
+   
+
+   .storyVideo {
+      position: static;
+      margin-top: 2rem;
+      min-height: 400px;
+      height: calc(100vh - 4rem);
+   }
+
+   .leftIcon,
+   .RightIcon {
+      position: fixed;
+   }
 }
 
 @media only screen and (min-width: 768px) {
 
-
+   .storyImg img {
+      border-radius: 24px;
+   }
    .cancelBtn {
       right: 30.97px;
       top: 30px;
+   }
+   .backBtn {
+      left: 0;
+   }
+
+   .logo {
+      display: inline-block;
    }
 
    .storyContainer {
@@ -132,18 +180,6 @@
    .leftIcon,
    .RightIcon {
       display: block;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-   }
-
-   .leftIcon {
-      left: 10px;
-   }
-
-   .RightIcon {
-      right: 10px;
    }
 
    .storyImg {

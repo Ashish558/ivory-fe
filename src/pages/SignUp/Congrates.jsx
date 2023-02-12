@@ -47,9 +47,9 @@ const Congrates = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      return navigate('/home');
-    }, 2000);
+    // setTimeout(() => {
+    //   return navigate('/home');
+    // }, 2000);
   }, [navigate]);
 
   return (
@@ -93,7 +93,7 @@ const Congrates = () => {
         <div className="h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-start sm:mt-48 ">
           <div className="">
             <h1
-              className={`sm:text-4xl text-3xl font-bold flex justify-center text-center text-[#1E63A9] ${styles.cusLineH}`}
+              className={`sm:text-4xl text-[22px] font-bold flex justify-center text-center text-[#1E63A9] ${styles.cusLineH}`}
             >
               Congratulations! <br /> Your account is created.
             </h1>
