@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css';
 import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
-
 import Home from './pages/Home/Home.jsx';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
@@ -18,15 +17,16 @@ import { refreshToken } from './services/auth';
 import { updateLoggedIn, updateProfileData } from './redux/slices/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetail } from './services/user';
-
 import Landing from './pages/splash/Landing';
 import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
 import Four from './pages/splash/Four';
 import LogoLanding from './pages/splash/LogoLanding';
-
+import Learn from "./pages/Home/Learn";
 import Dob from './pages/SignUp/Dob';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
+import Progress from "./pages/Home/Progress";
+import Assignment from './pages/Home/Assignment';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -116,6 +116,24 @@ function App() {
           path="/activities"
           element={
             <Activities />
+          }
+        />
+        <Route
+          path="/learn"
+          element={
+            <Learn />
+          }
+        />
+        <Route
+          path="/progress"
+          element={
+            <Progress />
+          }
+        />
+        <Route
+          path="/Assignment"
+          element={
+            <Assignment/>
           }
         />
         <Route

@@ -38,7 +38,8 @@ const Footer = () => {
                </p>
                <p className='text-base pt-3'>Activities</p>
             </div>
-            <div className='flex flex-col cursor-pointer justify-center items-center'>
+            <div className='flex flex-col cursor-pointer justify-center items-center'
+            onClick={() => navigate('/learn')}>
                <p>
                   <img className={`${currentPath === '/learn' ? 'icon-bg' : 'icon-bg-2'}`}
                      src={learn} alt="" /></p>
