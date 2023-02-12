@@ -1,7 +1,7 @@
 .cusStyle {
   letter-spacing: 1px !important;
   line-height: 38px;
-  font-size: 35px;
+  font-size: 32px;
   width: 240px;
   margin-left: 20px;
 }
@@ -10,14 +10,14 @@
   .cusStyle {
     letter-spacing: 2px !important;
     line-height: 50px;
-    font-size: 42px;
+    font-size: 32px;
     width: 100%;
     margin-left: 0 !important;
   }
 
   .cusLineH {
     line-height: 60px;
-    font-size: 42px;
+    font-size: 32px;
 
     margin-left: 20px !important;
   }

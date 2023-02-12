@@ -14,7 +14,11 @@
 
 .guitar {
    width: 80%;
-    position: relative;
-    top: 6%;
-    left: 32%;
+   position: relative;
+   top: 6%;
+   left: 32%;
+}
+
+.guitarSmall {
+   width: 295px;
 }
