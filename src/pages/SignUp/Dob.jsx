@@ -263,7 +263,7 @@ const Dob = () => {
             className="sm:w-[328px] mx-auto sm:flex sm:flex-col sm:justify-start"
           >
             <div className=" w-[300px] mx-auto relative">
-              <h1 className="text-2xl font-bold  sm:ml-0 mb-6">
+              <h1 className="text-2xl font-bold  sm:ml-0 mb-6 lg:text-[22px]">
                 &#128588; Create an account
               </h1>
               <label className="ml-2 sm:ml-0  font-semibold text-lg sm:text-xl ">
@@ -278,10 +278,10 @@ const Dob = () => {
               />
               <p className="text-red-500 text-sm">{nameError}</p>
             </div>
+            <p className='font-semibold mb- w-[300px] mx-auto lg:mt-6'> Date Of Birth </p>
 
 
-
-            <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] w-[328px] mx-auto z-10 mt-8'>
+            <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] w-[328px] mx-auto z-10 mt-8 lg:mt-0'>
               <Slider {...dateSettings} className={` h-[174px] w-[48px] dateSlider`} ref={dateSliderRef} >
                 {totalDates.map(str => {
                   return <div className='px-2 py-4 flex justify-center items-center text-center'>
@@ -316,7 +316,7 @@ const Dob = () => {
             <div className="flex items-center justify-between mt-4">
               {nameError ? (
                 <button
-                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
+                  className="bg-[#B5CFEC] lg:h-[43px] flex items-center font-semibold lg:text-sm text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5"
                   disabled
                 >
                   Continue
@@ -324,7 +324,7 @@ const Dob = () => {
               ) : (
                 <button
                   type="submit"
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-[80vw] sm:w-[300px] text-center justify-center flex mx-auto mt-2"
+                  className="bg-[#1B72C0]  lg:h-[43px] flex items-center font-semibold lg:text-sm  text-xl py-2 px-20 rounded-full text-white w-[80vw] sm:w-[300px] text-center justify-center flex mx-auto mt-2"
                 >
                   Continue
                 </button>
