@@ -30,6 +30,9 @@ import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 import Enroll from './pages/Learn/Enroll/Enroll';
 import LiveSession from './pages/Learn/LiveSession/LiveSession';
 import Dob from './pages/SignUp/Dob';
+import LiveEvents from './pages/LiveEvents/LiveEvents';
+import SingleSession from './pages/SingleSession/SingleSession';
+
 function App() {
   //true for now will change later
   const [loading,setLoading] = useState(true)
@@ -91,6 +94,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/enroll" element={<Enroll />} />
+        <Route path="/live-events" element={<LiveEvents />} />
+        <Route path="/live-events/:id" element={<SingleSession />} />
         <Route path="/live" element={<LiveSession />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/dob" element={<Dob />} />

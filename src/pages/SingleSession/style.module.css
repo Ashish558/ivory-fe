@@ -1,0 +1,55 @@
+.image {
+   width: 100%;
+   height: 200px;
+   max-width: 748px;
+}
+
+
+.dashed {
+   color: #939CA3;
+   position: relative;
+   text-decoration-line: line-through;
+}
+
+.discount {
+   color: #0055BF;
+   font-weight: 600;
+}
+
+.nextIcon {
+   position: absolute;
+   right: 0;
+   top: 50%;
+   transform: translate(30%, -50%);
+   z-index: 100;
+   cursor: pointer;
+}
+
+.overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 200px;
+   z-index: 50;
+   background-color: rgba(68, 68, 68, 0.274);
+}
+
+
+.video {
+   height: 200px !important;
+}
+
+
+@media only screen and (min-width: 769px) {
+   .video {
+      height: 400px !important;
+   }
+
+
+   .overlay {
+      height: 400px;
+
+   }
+
+}
