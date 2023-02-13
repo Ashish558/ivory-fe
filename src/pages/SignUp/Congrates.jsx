@@ -47,9 +47,9 @@ const Congrates = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   return navigate('/home');
-    // }, 2000);
+    setTimeout(() => {
+      return navigate('/home');
+    }, 2000);
   }, [navigate]);
 
   return (
