@@ -227,8 +227,8 @@ export default function Activities() {
                      </p>
                   }
                </div>
-               <div className='hidden lg:block px-[60px]'>
-                  <img src={GuitarImg} alt='guitar' className={styles.guitar} />
+               <div className={`hidden lg:block ${myActivities.length === 0 ? 'px-[20px]' : 'px-[60px]'} `}>
+                  <img src={GuitarImg} alt='guitar' className={myActivities.length === 0 ? styles.guitarSmall : styles.guitar} />
                </div>
 
             </div>
@@ -251,7 +251,7 @@ export default function Activities() {
                               <img src={activity.icon} alt='activity' />
                               <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
-                           <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-2'>
+                           <div className='grid grid-cols-3 lg:grid-cols-6 lg:gap-x-[17px] lg:gap-y-6 gap-x-2 gap-y-2'>
                               {activity.categories.map((category, idx) => {
                                  return <div key={idx} className={`grid grid-rows-2 ${styles.activity}`}
                                     onClick={() => navigate(`/activities/${category.id}`)} >

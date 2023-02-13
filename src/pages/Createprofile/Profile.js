@@ -303,7 +303,7 @@ const Profile = () => {
                       <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>
                     </div>
                     :
-                    <div className='h-[85px]  sm:w-[58%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
+                    <div className='h-[58px]  sm:w-[58%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
                         selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
@@ -382,7 +382,7 @@ const Profile = () => {
                   </div>
                   <hr className={styles.head1} />
                   <div className={styles.para}>
-                    <p className='text-lg'>Didn't find your top interests?No worries! Let us know and we will
+                    <p className='text-lg font-semibold'>Didn't find your top interests?No worries! Let us know and we will
                       try our best to add more relavent
                       categories:
                     </p>
