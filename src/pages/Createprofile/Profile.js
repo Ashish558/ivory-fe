@@ -230,7 +230,8 @@ const Profile = () => {
           <div className={styles.image}>
             <div className={styles.ssmmillee}>
               <img src={profileData.profile_picture ? profileData.profile_picture : photo}
-                className={`w-[200px] customStyle`} alt=""
+                className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt=""
+    
                 onClick={() => photoRef.current.click()} />
               <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
                 onChange={(e) => handlePhotoUpload(e)} />
