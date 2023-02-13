@@ -6,11 +6,15 @@ import live from "../../../assets/images/enroll/live.svg";
 import playIcon from "../../../assets/images/enroll/play.png";
 import redLive from "../../../assets/images/enroll/redLive.svg";
 import tik from "../../../assets/images/enroll/tik.svg";
-import tik2 from "../../../assets/images/enroll/tik2.svg";
 import videoBg from "../../../assets/images/enroll/videoBg.png";
 import zoom from "../../../assets/images/enroll/zoom.svg";
 import zoom2 from "../../../assets/images/enroll/zoom2.svg";
-import module2 from "../../../assets/images/learn/module2.png";
+import acrilyc from "../../../assets/images/learn/acrylic.png";
+import canva from "../../../assets/images/learn/canva.png";
+import shortStory from "../../../assets/images/learn/shortStory.png";
+
+
+
 
 const Enroll = () => {
     //enrollType "", "reg", "free"
@@ -146,10 +150,7 @@ const Enroll = () => {
                   <img src={redLive} alt="" />
                   Live Control anger
                 </li>
-                <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                  <img src={tik2} alt="" />
-                  Assignment 1
-                </li>
+                
                 <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
                   <img src={zoom2} alt="" />
                   Brainstrom ideas
@@ -166,10 +167,7 @@ const Enroll = () => {
                   <img src={doc2} alt="" />
                   Think fast and correct
                 </li>
-                <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                  <img src={tik2} alt="" />
-                  Assignment 2
-                </li>
+                
               </ul>
             </div>
           </div>
@@ -184,7 +182,7 @@ const Enroll = () => {
       <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
         <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
           <img
-            src={module2}
+            src={canva}
             alt=""
             className="h-full object-cover rounded-xl"
           />
@@ -193,7 +191,6 @@ const Enroll = () => {
           <h1 className="text-normal font-bold">Learn to CANVA</h1>
           <span className="text-sm text-gray-400">Ankit dua</span>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-400">16 Lessons</span>
             <button className="bg-red-100 text-red-500 px-1 rounded-full">
               4 live sessions
             </button>
@@ -206,7 +203,7 @@ const Enroll = () => {
       <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
         <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
           <img
-            src={module2}
+            src={shortStory}
             alt=""
             className="h-full object-cover rounded-xl"
           />
@@ -215,9 +212,8 @@ const Enroll = () => {
           <h1 className="text-normal font-bold">Learn to CANVA</h1>
           <span className="text-sm text-gray-400">Ankit dua</span>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-400">16 Lessons</span>
             <button className="bg-red-100 text-red-500 px-1 rounded-full">
-              4 live sessions
+              6 live sessions
             </button>
           </div>
           <h1>
@@ -228,7 +224,7 @@ const Enroll = () => {
       <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
         <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
           <img
-            src={module2}
+            src={acrilyc}
             alt=""
             className="h-full object-cover rounded-xl"
           />
@@ -237,9 +233,8 @@ const Enroll = () => {
           <h1 className="text-normal font-bold">Learn to CANVA</h1>
           <span className="text-sm text-gray-400">Ankit dua</span>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-400">16 Lessons</span>
             <button className="bg-red-100 text-red-500 px-1 rounded-full">
-              4 live sessions
+              6 live sessions
             </button>
           </div>
           <h1>
