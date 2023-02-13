@@ -34,8 +34,8 @@ const Second = () => {
             <p style={{
               "textAlign":"center",
               "color":"white",
-              "font-size": "22px",
-              "marginTop": "4px"
+              "font-size": "18px",
+              "marginTop": "6px"
             }} >Let's go</p>
         </div>
       </div>

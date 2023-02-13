@@ -15,7 +15,11 @@ module.exports = {
         primaryDark: '#1B1B1E',
         lightGray: '#74777F',
         lightBlack: '#49454F',
+        LightSky : "#DEF9FF",
         primaryGreen: '#26A925',
+        gray:'#EFEFEF',
+        SkyBlue:"#1B72C0",
+        green:"#85FFB2"
       },
       fontSize: {
         xxs: '10px'

@@ -240,7 +240,7 @@ const Profile = () => {
             >Add Profile picture
             </p>
           </div>
-          <div className={`${styles.formimg} sm:mt-10 `}>
+          <div className={`${styles.formimg} `}>
             <div className={styles.form}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
@@ -255,7 +255,7 @@ const Profile = () => {
                   // type="Number"
                   placeholder='9777766665' className={`${styles.emailinput} text-gray-400`}
                   value={mobile_no} name="mobile_no"
-                  disabled style={{ border: '1px solid #ccc' }}
+                  disabled style={{ border: '1px solid #68656c' }}
 
                   type={JSON.stringify(mobile_no)?.length < 10 ? "number" : "text"}
                   maxLength="10"
@@ -280,7 +280,7 @@ const Profile = () => {
               </div>
               <div className={styles.input2}>
                 <label htmlFor="" className={styles.emaillabel} >Gender</label>
-                <div className={`sm:w-[50%] flex justify-between gap-4`}>
+                <div className={`sm:w-[59%] flex justify-between gap-4`}>
                   <div className={`w-full border border-gray-600 flex justify-between items-center px-2 sm:px-5 rounded-md ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
@@ -303,7 +303,7 @@ const Profile = () => {
                       <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>
                     </div>
                     :
-                    <div className='h-[85px]  sm:w-[50%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
+                    <div className='h-[58px]  sm:w-[58%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
                         selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
@@ -382,7 +382,7 @@ const Profile = () => {
                   </div>
                   <hr className={styles.head1} />
                   <div className={styles.para}>
-                    <p className='text-lg'>Didn't find your top interests?No worries! Let us know and we will
+                    <p className='text-lg font-semibold'>Didn't find your top interests?No worries! Let us know and we will
                       try our best to add more relavent
                       categories:
                     </p>
