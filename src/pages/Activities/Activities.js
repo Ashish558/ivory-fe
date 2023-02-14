@@ -210,13 +210,13 @@ export default function Activities() {
 
          <div className='px-4 lg:px-0'>
 
-            <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
+            <div className='pt-0 lg:pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
                <div className={`lg:flex mt-10 flex-col lg:mt-0 lg:self-start lg:mt-[100px] ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'>
+                     <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-4xl lg:font-medium'>
                          My activities
                      </h3>
-                     <p className='pl-7'><img src={Arrow} alt="" /></p>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   {myActivities.length > 0 ?
                      myActivities.map((activity, idx) => {
@@ -227,8 +227,8 @@ export default function Activities() {
                      </p>
                   }
                </div>
-               <div className='hidden lg:block px-[60px]'>
-                  <img src={GuitarImg} alt='guitar' className={styles.guitar} />
+               <div className={`hidden lg:block ${myActivities.length === 0 ? 'px-[20px]' : 'px-[60px]'} `}>
+                  <img src={GuitarImg} alt='guitar' className={myActivities.length === 0 ? styles.guitarSmall : styles.guitar} />
                </div>
 
             </div>
@@ -236,8 +236,8 @@ export default function Activities() {
             <div className='lg:px-[80px] lg:max-w-[1000px] lg:pb-[10px]'>
                <div className=''>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-4xl font-semibold mb-2.5'> All Activities </h3>
-                     <p className='pl-7'><img src={Arrow} alt="" /></p>
+                     <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   <Filterbar items={filterItems} onChange={onChange} />
                </div>
@@ -251,12 +251,12 @@ export default function Activities() {
                               <img src={activity.icon} alt='activity' />
                               <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
-                           <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-3'>
+                           <div className='grid grid-cols-3 lg:grid-cols-6 lg:gap-x-[17px] lg:gap-y-6 gap-x-2 gap-y-2'>
                               {activity.categories.map((category, idx) => {
-                                 return <div key={idx} className={styles.activity}
+                                 return <div key={idx} className={`grid grid-rows-2 ${styles.activity}`}
                                     onClick={() => navigate(`/activities/${category.id}`)} >
-                                    <img src={category.icon} alt='activity-type' />
-                                    <p className='mt-2  font-semibold text-center'>
+                                    <img src={category.icon} alt='activity-type' className='row-span-1 mx-auto' />
+                                    <p className='mt-2  font-semibold text-center leading-none row-span-1	'>
                                        {category.name} </p>
                                  </div>
                               })}
@@ -267,7 +267,7 @@ export default function Activities() {
                </div>
 
             </div>
-            <div className='flex justify-end px-[80px] pb-10 lg:pb-100px'>
+            <div className='flex justify-end px-4 lg:px-[80px] pb-[60px] lg:pb-100px'>
                <div className='flex flex-col items-center'>
                   <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
                   <p> scroll to top </p>

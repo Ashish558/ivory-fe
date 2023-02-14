@@ -140,7 +140,7 @@ export default function ActivityType() {
             {
                userActivities.length > 0 &&
                <div className='flex justify-center my-7'>
-                  <button className={`rounded-l-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === false ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-l-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold border-r-0 text-sm lg:border-[#79747E] ${completedTabActive === false ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(false)} >
                      {
                         completedTabActive === false &&
@@ -148,7 +148,7 @@ export default function ActivityType() {
                      }
                      On going
                   </button>
-                  <button className={`rounded-r-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm ${completedTabActive === true ? 'bg-secondary' : ''} `}
+                  <button className={`rounded-r-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm  lg:border-[#79747E] ${completedTabActive === true ? 'bg-secondary' : ''} `}
                      onClick={() => setCompletedTabActive(true)}  >
                      {
                         completedTabActive === true &&

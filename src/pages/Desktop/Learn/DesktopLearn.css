@@ -15,6 +15,9 @@
 .slick-slide {
     width: 405px;
 }
+.slick-track{
+    /* width: 1860px !important; */
+}
 
 .position-Ivory {
     position: absolute;

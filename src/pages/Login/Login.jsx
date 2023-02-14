@@ -26,14 +26,14 @@ const settings = {
 
 const sliderData = [
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: 'Accomplish',
+    textSec: 'your creative goals',
     img: loginMan,
     imgClassName: ''
   },
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: 'Accomplish',
+    textSec: 'your creative goals',
     img: SignupTree,
     imgClassName: 'max-w-[270px]'
   },
@@ -134,14 +134,14 @@ const Login = () => {
         <div className="  h-screen sm:w-[60vw] mt-10 sm:mt-0 sm:flex sm:flex-col sm:items-center sm:justify-center">
           <form
             onSubmit={(e) => handleSubmit(e)}
-            className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
+            className="sm:w-[328px] mx-auto sm:flex sm:flex-col sm:justify-start"
           >
             <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
               &#128075; Hi, <br /> Welcome to Ivory!
             </h1>
-            <div class="w-full sm:w-[300px] mx-auto mt-10 relative">
+            <div class="w-full sm:w-[328px] mx-auto lg:mt-6 mt-10 relative">
               <input
-                class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
+                class=" w-10/12 sm:w-[328px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                 // type="tel"
                 type={JSON.stringify(phone)?.length < 10 ? "number" : "text"}
                 maxLength="10"
@@ -168,19 +168,19 @@ const Login = () => {
                 (
                   <button
                     type="submit"
-                    className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 lg:w-full"
+                    className="bg-[#1B72C0] flex items-center lg:h-[43px] text-xl py-2 lg:text-sm font-semibold px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 lg:w-full"
                   >
                     Continue
                   </button>
                 ) : (
                 <button       
-                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 mb-5" disabled
+                  className="bg-[#B5CFEC] flex items-center lg:h-[43px]  text-xl py-2 px-20 lg:text-sm font-semibold rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 mb-5" disabled
                 >
                   Continue
                 </button>
               )}
               </div>
-              <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
+              <div className="lg:text-xs lg:text-left text-center w-[328px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
                 By clicking continue, I accept the{" "}
                 <Link to="/" className="text-black font-bold underline">
                   terms of service

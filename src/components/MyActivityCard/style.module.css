@@ -43,8 +43,9 @@ overflow: hidden;
    transition: 0.15s;
    /* border-bottom-left-radius: 12px; */
 }
-
-.container:hover>.hover_activity {
-   width: 145px;
-   max-height: 104px;
+@media only screen and (min-width: 769px) {
+   .container:hover>.hover_activity {
+      width: 145px;
+      max-height: 104px;
+   }
 }
