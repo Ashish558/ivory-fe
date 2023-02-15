@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import BackIcon from '../../assets/icons/go-back.svg'
-import Profile from '../../assets/images/profile.png'
-import style from './Learn.module.css'
-import { useNavigate } from 'react-router-dom'
-import Filterbar from '../../components/Filterbar/filterbar'
+import React,{ useEffect,useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getCategories, getInterests } from '../../services/activities'
-import { getMyActivitiesProgress } from '../../services/user'
+import { useNavigate } from 'react-router-dom'
+import CheckedIcon from '../../assets/icons/checked-category.svg'
+import AcivityContent from '../../components/ActivityContent/ActivityContent'
+import Filterbar from '../../components/Filterbar/filterbar'
 import Logo from '../../Images/Canva.png'
+import { getCategories,getInterests } from '../../services/activities'
+import { getMyActivitiesProgress } from '../../services/user'
+import style from './Learn.module.css'
 const Learn = () => {
-   const [activities, setActivities] = useState([])
-   const [filteredActivities, setFilteredActivities] = useState([])
-   const [myActivities, setMyActivities] = useState([])
-   const [filterItems, setFilterItems] = useState([])
+   const [activities,setActivities] = useState([])
+   const [filteredActivities,setFilteredActivities] = useState([])
+   const [myActivities,setMyActivities] = useState([])
+   const [filterItems,setFilterItems] = useState([])
+   const [completedTabActive,setCompletedTabActive] = useState(false)
+   // design changes if my programs is active
+   const [myPrograms,setMyPrograms] = useState(false)
    const navigate = useNavigate();
    const { loggedIn } = useSelector(state => state.user)
 
@@ -21,14 +24,14 @@ const Learn = () => {
       if (activities.length === 0) return
 
 
-   }, [activities])
+   },[activities])
 
    useEffect(() => {
       getInterests(true)
          .then(res => {
             // console.log(res.data.data);
-            setActivities(res.data.data.map(item => ({ ...item, categories: [] })))
-            setFilteredActivities(res.data.data.map(item => ({ ...item, categories: [] })))
+            setActivities(res.data.data.map(item => ({ ...item,categories: [] })))
+            setFilteredActivities(res.data.data.map(item => ({ ...item,categories: [] })))
             let temp = [
                {
                   id: 0,
@@ -36,7 +39,7 @@ const Learn = () => {
                   selected: true
                }
             ]
-            res.data.data.map((activity, idx) => {
+            res.data.data.map((activity,idx) => {
                temp.push({
                   id: activity.id,
                   children: <div className='flex items-center gap-x-1'>
@@ -51,7 +54,7 @@ const Learn = () => {
             console.log(err.response);
          })
 
-   }, [])
+   },[])
 
    useEffect(() => {
       if (activities.length === 0) return
@@ -69,19 +72,19 @@ const Learn = () => {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [activities.length])
+   },[activities.length])
 
    useEffect(() => {
       if (loggedIn === false) return
       getMyActivitiesProgress()
          .then(res => {
-            console.log('my acts', res.data.data);
+            console.log('my acts',res.data.data);
             if (res.data.data === null) return
             setMyActivities(res.data.data)
          }).catch(err => {
             console.log(err.response);
          })
-   }, [loggedIn])
+   },[loggedIn])
 
    const onChange = (item) => {
       // console.log('item', item);
@@ -93,16 +96,16 @@ const Learn = () => {
             } else {
                sel = false
             }
-            return { ...filterItem, selected: sel }
+            return { ...filterItem,selected: sel }
          })
          setFilterItems(temp)
       } else {
 
          let temp = filterItems.map(filterItem => {
             if (filterItem.id === item.id) {
-               return { ...filterItem, selected: true }
+               return { ...filterItem,selected: true }
             } else {
-               return { ...filterItem, selected: false }
+               return { ...filterItem,selected: false }
             }
          })
          setFilterItems(temp)
@@ -116,10 +119,10 @@ const Learn = () => {
       let filteredArr = activities.filter(activity => activeIds.includes(activity.id))
       setFilteredActivities(filteredArr)
 
-   }, [filterItems, activities])
+   },[filterItems,activities])
 
-   const [toggleButton, settoggleButton] = useState(true);
-   const [toggleButton1, settoggleButton1] = useState(true);
+   const [toggleButton,settoggleButton] = useState(true);
+   const [toggleButton1,settoggleButton1] = useState(true);
    const handleClick = () => {
       settoggleButton(!toggleButton);
       const toggle = document.querySelector(".Learn_toggle__yXQQe");
@@ -137,7 +140,7 @@ const Learn = () => {
       }
    }
 
-   const [card, setcard] = useState([
+   const [card,setcard] = useState([
       {
          Content: "Learn to CANVA",
          name: "Ankit dua",
@@ -172,12 +175,38 @@ const Learn = () => {
    //  const navigate = useNavigate()
 
    return (
-      <>
-         <div className="h-20 w-full flex justify-around bg-sky-100" >
-            <button className="h-12 w-28 font-bold text-lg rounded-3xl bg-cyan-200 mt-5" >Programs</button>
-            <button className="h-12 w-32 font-bold text-lg rounded-3xl bg-cyan-200 mt-5" onClick={() => navigate('/progress')}>My Program</button>
+      <div className='lg:mx-20 mt-20'>
+         <div className="bg-sky-100 p-5">
+            <h1 className='text-xl font-semibold lg:hidden block'>Welcome Sahil ji! <span className='text-sm font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+            <div className=" w-full flex justify-around lg:bg-white my-5" >
+               <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
+               <button className={`font-bold text-lg rounded-full border px-4  ${myPrograms && ' bg-cyan-200'}`} onClick={() => setMyPrograms(true)}>My Program</button>
+            </div>
          </div>
-         <div className='h-32  mt-4 mx-4 bg-LightSky rounded-3xl'></div>
+         <h1 className='text-2xl font-semibold hidden lg:block'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+         {/* <div className='h-32  mt-4 mx-4 bg-LightSky rounded-3xl'></div> */}
+         <div className="px-5">
+            <AcivityContent>
+            </AcivityContent>
+         </div>
+         <div className='flex justify-center my-7'>
+            <button className={`rounded-l-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold border-r-0 text-sm lg:border-[#79747E] ${completedTabActive === false ? 'bg-secondary' : ''} `}
+               onClick={() => setCompletedTabActive(false)} >
+               {
+                  completedTabActive === false &&
+                  <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+               }
+               On going
+            </button>
+            <button className={`rounded-r-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm  lg:border-[#79747E] ${completedTabActive === true ? 'bg-secondary' : ''} `}
+               onClick={() => setCompletedTabActive(true)}  >
+               {
+                  completedTabActive === true &&
+                  <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+               }
+               completed
+            </button>
+         </div>
          <div className='flex h-10 mx-4 mt-4'>
             <span className='mx-4 text-xl'>only free</span>
             {/* <Switch/> */}
@@ -194,23 +223,58 @@ const Learn = () => {
             {/* <ToggleSwitch label="Notifications" />
     <ToggleSwitch label="Subscribe" /> */}
          </div>
-         <Filterbar items={filterItems} onChange={onChange} />
-         <div className='h-full w-full'>
+         <div className="px-5">
+            <Filterbar items={filterItems} onChange={onChange} />
+         </div>
+         <div className="lg:grid lg:grid-cols-3 mt-10">
             {
-               card.map((ele, index) => (
-                  <div className='h-36 flex py-2 mt-4 mx-4 shadow-md rounded-3xl border-gray-300'>
-                     <img src={Logo} className='h-32 mx-2 w-32 rounded-3xl ' />
-                     <div className='h-32 w-72 '>
-                        <h1 className='text-xl font-bold'>{ele.Content}</h1>
-                        <p>{ele.name}</p>
-                        <p className='text-lg font-normal'>{ele.lesson}</p>
-                        <p className='text-2xl text-sky-700 mt-3 font-bold '>{ele.price}</p>
+               card.map((ele,index) => (
+                  <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
+                     <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
+                        <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
+                           Ivory Exclusive
+                        </span>
+                        <img
+                           src={Logo}
+                           alt=""
+                           className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
+                        />
+                     </div>
+                     <div className="flex flex-col justify-between ml-4 w-[60vw] lg:w-full lg:gap-2">
+                        <span className="text-sm text-gray-500 hidden lg:block">
+                           2 hrs 30 mins
+                        </span>
+                        <h1 className="text-normal font-bold lg:text-xl">
+                           Learn to CANVA
+                        </h1>
+                        <span className="text-sm text-gray-400">Ankit dua</span>
+                        <div className="flex justify-between">
+                           <button className="bg-red-100 text-red-500 px-1 rounded-full">
+                              4 live sessions
+                           </button>
+                        </div>
+
+                        {
+                           myPrograms ? <div>
+                              <p className='mt-2'>20% completed</p>
+                              <progress className="progress progress-primary w-56" value="40" max="100"></progress>
+                           </div> : <div className="ml-auto mr-10 lg:mt-5 lg:p-3"><div className="text-2xl font-bold text-sky-600 ml-6 lg:ml-0 flex items-center gap-1">
+                              &#8377;3000 {"  "}
+                              <span className="text-gray-400 line-through font-normal text-base">
+                                 &#8377;3499
+                              </span>{" "}
+
+                           </div>
+                           </div>
+                        }
+
+
                      </div>
                   </div>
                ))
             }
          </div>
-      </>
+      </div>
    )
 }
 

@@ -1,7 +1,7 @@
 import React,{ useEffect,useState } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { BrowserRouter,Navigate,Route,Routes } from "react-router-dom";
 import './App.css';
-import { useDispatch,useSelector } from 'react-redux';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
 import Profile from './pages/Createprofile/Profile';
@@ -18,21 +18,20 @@ import { updateLoggedIn,updateProfileData } from './redux/slices/user';
 import { refreshToken } from './services/auth';
 import { getUserDetail } from './services/user';
 
+import Assignment from './pages/Home/Assignment';
+import Assignment1 from './pages/Home/Assignment1';
+import Learn from './pages/Home/Learn';
+import Four from './pages/splash/Four';
 import Landing from './pages/splash/Landing';
 import LogoLanding from './pages/splash/LogoLanding';
 import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
-import Four from './pages/splash/Four';
-import Learn from './pages/Home/Learn'
-import Progress  from './pages/Home/Progress';
-import Assignment  from './pages/Home/Assignment';
-import Assignment1  from './pages/Home/Assignment1';
 // import Enroll from './pages/Home'
 // import LogoLanding from './pages/splash/LogoLanding';
 import Enroll from './pages/Learn/Enroll/Enroll';
 import LiveSession from './pages/Learn/LiveSession/LiveSession';
-import Dob from './pages/SignUp/Dob';
 import LiveEvents from './pages/LiveEvents/LiveEvents';
+import Dob from './pages/SignUp/Dob';
 import SingleSession from './pages/SingleSession/SingleSession';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
@@ -138,21 +137,15 @@ function App() {
           }
         />
         <Route
-          path="/progress"
-          element={
-            <Progress />
-          }
-        />
-        <Route
           path="/Assignment"
           element={
-            <Assignment/>
+            <Assignment />
           }
         />
         <Route
           path="/Assignment1"
           element={
-            <Assignment1/>
+            <Assignment1 />
           }
         />
         <Route

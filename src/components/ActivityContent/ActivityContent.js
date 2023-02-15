@@ -1,20 +1,16 @@
 import React from 'react'
-import styles from './styles.module.css'
-
-
+import PauseIcon from '../../assets/icons/pause.svg'
 import ProfileImg from '../../assets/images/profile.png'
 import Thumbnail from '../../assets/images/thumbnail.png'
-
-import PauseIcon from '../../assets/icons/pause.svg'
-import RedirectIcon from '../../assets/icons/redirect.svg'
+import styles from './styles.module.css'
 
 export default function ActivityContent() {
    return (
-      <div className={`${styles.activityContent} sm:mx-20 mt-6`} >
+      <div className={`${styles.activityContent} my-8`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
-            <div className='relative flex-1 sm:flex  sm:w-[4/12] w-full'>
-               <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-80' />
-               <img src={PauseIcon} alt='play' className={styles.playIcon} />
+            <div className='relative flex-1 sm:flex  sm:w-[4/12]'>
+               <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-full object-cover' />
+               <img src={PauseIcon} alt='play' className='absolute w-[60px]' style={{ top: '50%',left: '50%',transform: 'translate(-50%,-50%)' }} />
             </div>
             <p className='font-bold text-xl flex-1 sm:hidden'>
                Learn Acrylic
