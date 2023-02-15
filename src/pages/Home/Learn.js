@@ -175,8 +175,8 @@ const Learn = () => {
    //  const navigate = useNavigate()
 
    return (
-      <div className='lg:mx-20 mt-20'>
-         <div className="bg-sky-100 p-5">
+      <div className='lg:mx-20'>
+         <div className="bg-sky-50 p-5">
             <h1 className='text-xl font-semibold lg:hidden block'>Welcome Sahil ji! <span className='text-sm font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
             <div className=" w-full flex justify-around lg:bg-white my-5" >
                <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
@@ -210,12 +210,12 @@ const Learn = () => {
          <div className='flex h-10 mx-4 mt-4'>
             <span className='mx-4 text-xl'>only free</span>
             {/* <Switch/> */}
-            <div className={style.toggle} onClick={handleClick}>
+            <div className={`${style.toggle} ${toggleButton ? 'bg-gray-400' : ' bg-blue-400'}`} onClick={handleClick}>
                {toggleButton ? <div className={style.toggle_left}></div> :
                   <div className={style.toggle_right}></div>}
             </div>
             <span className='mx-4 text-xl'>only live</span>
-            <div className={style.toggle1} onClick={handleOnclick}>
+            <div className={`${style.toggle1} ${toggleButton1 ? 'bg-gray-400' : ' bg-blue-400'}`} onClick={handleOnclick}>
                {toggleButton1 ? <div className={style.toggle_left}></div> :
                   <div className={style.toggle_right}></div>}
             </div>
