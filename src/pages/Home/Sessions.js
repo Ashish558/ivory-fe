@@ -6,6 +6,7 @@ import User from '../../Images/user1.png'
 import LiveImg from '../../Images/Ellipse 3.png'
 import Arrow from '../../Images/Icon.png';
 import North from '../../Images/north.png';
+import { useNavigate } from 'react-router';
 
 
 const Sessions = () => {
@@ -63,12 +64,17 @@ const Sessions = () => {
       }
    };
 
+   const navigate = useNavigate()
 
    return (
       <div className=" lg:ml-24 lg:mt-[120px] mt-10 ">
          <div className='lg:flex lg:items-center lg:mb-20'>
-            <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold show-sessions'>Live sessions</h1>
-            <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold show-events'>Events</h1>
+            <h1 className='text-xl font-black pl-4 cursor-pointer lg:text-5xl lg:font-semibold show-sessions'
+            onClick={()=> navigate('/live-events')} >
+               Live sessions
+            </h1>
+            <h1 className='text-xl font-black pl-4 cursor-pointer lg:text-5xl lg:font-semibold show-events'
+               onClick={()=> navigate('/live-events')}>Events</h1>
             <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
          </div>
 

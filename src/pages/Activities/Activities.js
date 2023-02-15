@@ -203,7 +203,7 @@ export default function Activities() {
    }, [filterItems, activities])
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
-   console.log('my Activity', myActivities);
+   // console.log('my Activity', myActivities);
    return (
       <div className=' lg:mt-[64px]'>
          {/* <Header /> */}

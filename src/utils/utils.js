@@ -15,7 +15,7 @@ export const genNumbers = (start, end) => {
 }
 
 
-export const getColors= (totalLength, idx) => {
+export const getColors = (totalLength, idx) => {
    let index = idx
    if (idx > totalLength - 1) {
       index = index % totalLength
@@ -28,12 +28,19 @@ export const getColors= (totalLength, idx) => {
    return backgrounds[index]
 }
 
-export const getFormattedDuration = (arg)=>{
-   if(!arg) return ''
+export const getFormattedDuration = (arg) => {
+   if (!arg) return ''
    let durationArr = arg.split(':')
    let hours = durationArr[0]
    let mins = durationArr[1]
 
    return `${parseInt(hours)} hrs ${parseInt(mins)} min`
+
+}
+export const getFormattedDateWeek = (argDate) => {
+   let date = new Date(argDate)
+   const month = date.toLocaleString('default', { month: 'short' });
+   const week = date.toLocaleDateString('default', { weekday: 'long' });
+   return `${date.getDate()} ${month}, ${week}`
 
 }
