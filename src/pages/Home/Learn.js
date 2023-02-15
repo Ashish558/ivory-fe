@@ -9,11 +9,15 @@ import { useSelector } from 'react-redux'
 import { getCategories, getInterests } from '../../services/activities'
 import { getMyActivitiesProgress } from '../../services/user'
 import Logo from '../../Images/Canva.png'
+import { getPrograms } from '../../services/program';
+
 const Learn = () => {
    const [activities, setActivities] = useState([])
    const [filteredActivities, setFilteredActivities] = useState([])
    const [myActivities, setMyActivities] = useState([])
    const [filterItems, setFilterItems] = useState([])
+   const [allPrograms, setAllPrograms] = useState([])
+   const [filteredPrograms, setFilteredPrograms] = useState([])
    const navigate = useNavigate();
    const { loggedIn } = useSelector(state => state.user)
 
@@ -138,6 +142,14 @@ const Learn = () => {
       }
    }
 
+   useEffect(() => {
+      getPrograms()
+         .then(res => {
+            console.log(res);
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
    const [card, setcard] = useState([
       {
          Content: "Learn to CANVA",

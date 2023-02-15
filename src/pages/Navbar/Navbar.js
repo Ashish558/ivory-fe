@@ -66,8 +66,8 @@ const Navbar = () => {
 
          <div class="flex-none gap-2">
             <button className='flex'>
-               <div onClick={toggleDrawer} class="w-8 rounded-full flex">
-                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full' />
+               <div onClick={toggleDrawer} class="w-11 h-11 rounded-full flex">
+                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full object-cover' />
                </div>
             </button>
 
