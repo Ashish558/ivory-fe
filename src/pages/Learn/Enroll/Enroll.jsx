@@ -11,6 +11,7 @@ import zoom from "../../../assets/images/enroll/zoom.svg";
 import zoom2 from "../../../assets/images/enroll/zoom2.svg";
 import acrilyc from "../../../assets/images/learn/acrylic.png";
 import canva from "../../../assets/images/learn/canva.png";
+import shareImg from "../../../assets/images/learn/share.svg";
 import shortStory from "../../../assets/images/learn/shortStory.png";
 
 
@@ -20,8 +21,8 @@ const Enroll = () => {
     //enrollType "", "reg", "free"
     const [enrollType, setEnrollType] = React.useState("");
   return (
-    <div className=" flex sm:mx-20">
-      <div className="sm:w-[calc(100%-400px)]">
+    <div className=" lg:flex sm:mx-20 mb-20">
+      <div className="lg:w-[calc(100%-400px)]">
         <div className="flex flex-col gap-5 mb-20 sm:mb-0">
           <div className="text-gray-500 text-lg ml-6 mt-2">
             Programs > Publish your story
@@ -116,9 +117,9 @@ const Enroll = () => {
               </div>
             )}
           </div>
-          <div className="sm:flex sm:mb-10">
+          <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
             {enrollType === "" && (
-              <button className="bg-sky-200 w-[30%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-10 sm:mb-0 mx-5">
+              <button className="bg-sky-200 sm:w-[40%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5">
                 {" "}
                 Enroll
               </button>
@@ -135,9 +136,10 @@ const Enroll = () => {
                 Enroll for free
               </button>
             )}
-            <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[30%] rounded-full border border-[#1B72C0]  self-center">
+            <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
               {" "}
-              Share
+              <img src={shareImg} alt="" />
+              <span> Share</span>
             </button>
           </div>
           <div className=" mx-4 shadow-md rounded-md  border-t border-gray-100 w-[336px] pb-5">
@@ -182,76 +184,103 @@ const Enroll = () => {
           </div>
         </div>
         <div className="">
-          <div className="text-2xl font-bold text-black ml-6 mt-3">
+          <div className="text-2xl font-bold text-black ml-6 my-3 mt-5">
             Similar Programs
           </div>
         </div>
-        <div className="md:grid md:grid-cols-2">
-          <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
-            <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
+        <div className="lg:grid lg:grid-cols-2 ">
+          <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
+            <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
+              <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
+                Ivory Exclusive
+              </span>
               <img
                 src={canva}
                 alt=""
-                className="h-full object-cover rounded-xl"
+                className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
               />
             </div>
-            <div className="flex flex-col justify-between ml-3 w-[60vw]">
-              <h1 className="text-normal font-bold">Learn to CANVA</h1>
+            <div className="flex flex-col justify-between ml-3 w-[60vw] lg:w-full lg:gap-2">
+              <span className="text-sm text-gray-500 hidden lg:block">
+                2 hrs 30 mins
+              </span>
+              <h1 className="text-normal font-bold lg:text-xl">
+                Learn to CANVA
+              </h1>
               <span className="text-sm text-gray-400">Ankit dua</span>
               <div className="flex justify-between">
                 <button className="bg-red-100 text-red-500 px-1 rounded-full">
                   4 live sessions
                 </button>
               </div>
-              <h1>
+              <h1 className="ml-auto mr-10 lg:mt-5 lg:p-3">
                 <span className="text-sky-600 font-bold text-lg"> Free</span>
               </h1>
             </div>
           </div>
-          <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
-            <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
-              <img
-                src={shortStory}
-                alt=""
-                className="h-full object-cover rounded-xl"
-              />
-            </div>
-            <div className="flex flex-col justify-between ml-3 w-[60vw]">
-              <h1 className="text-normal font-bold">Learn to CANVA</h1>
-              <span className="text-sm text-gray-400">Ankit dua</span>
-              <div className="flex justify-between">
-                <button className="bg-red-100 text-red-500 px-1 rounded-full">
-                  6 live sessions
-                </button>
-              </div>
-              <h1>
-                <span className="text-sky-600 font-bold text-lg"> Free</span>
-              </h1>
-            </div>
-          </div>
-          <div className="py-3 my-3 mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex">
-            <div className="h-[110px] flex justify-start items-center w-[40vw] relative">
+          <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
+            <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
+              <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
+                Ivory Exclusive
+              </span>
               <img
                 src={acrilyc}
                 alt=""
-                className="h-full object-cover rounded-xl"
+                className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
               />
             </div>
-            <div className="flex flex-col justify-between ml-3 w-[60vw]">
-              <h1 className="text-normal font-bold">Learn to CANVA</h1>
+            <div className="flex flex-col justify-between ml-3 w-[60vw] lg:w-full lg:gap-2">
+              <span className="text-sm text-gray-500 hidden lg:block">
+                2 hrs 30 mins
+              </span>
+              <h1 className="text-normal font-bold lg:text-xl">
+                Learn to CANVA
+              </h1>
               <span className="text-sm text-gray-400">Ankit dua</span>
               <div className="flex justify-between">
                 <button className="bg-red-100 text-red-500 px-1 rounded-full">
                   6 live sessions
                 </button>
               </div>
-              <h1>
+              <h1 className="ml-auto mr-10 lg:mt-5 lg:p-3">
+                <span className="text-sky-600 font-bold text-lg"> Free</span>
+              </h1>
+            </div>
+          </div>
+          <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
+            <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
+              <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
+                Ivory Exclusive
+              </span>
+              <img
+                src={shortStory}
+                alt=""
+                className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
+              />
+            </div>
+            <div className="flex flex-col justify-between ml-3 w-[60vw] lg:w-full lg:gap-2">
+              <span className="text-sm text-gray-500 hidden lg:block">
+                2 hrs 30 mins
+              </span>
+              <h1 className="text-normal font-bold lg:text-xl">
+                Learn to CANVA
+              </h1>
+              <span className="text-sm text-gray-400">Ankit dua</span>
+              <div className="flex justify-between">
+                <button className="bg-red-100 text-red-500 px-1 rounded-full">
+                  6 live sessions
+                </button>
+              </div>
+              <h1 className="ml-auto mr-10 lg:mt-5 lg:p-3">
                 <span className="text-sky-600 font-bold text-lg"> Free</span>
               </h1>
             </div>
           </div>
         </div>
-        <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5 mb-20 sm:hidden">
+        <div className="lg:flex justify-end w-full hidden ">
+          <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
+        </div>
+        <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5 mb-20 lg:hidden">
           <div className="text-lightGray text-lg ml-6">
             {enrollType === "" && (
               <span>
@@ -266,7 +295,7 @@ const Enroll = () => {
           </div>
         </div>
       </div>
-      <div className="w-[400px] mt-28 ml-5 hidden sm:block">
+      <div className="w-[400px] mt-28 ml-5 hidden lg:block">
         <div className="enrollFooter bg-sky-100  flex flex-col py-10 mb-20 rounded-[48px] p-3">
           <div className="text-2xl font-bold text-black ml-6 mb-5">
             Publish your own story
@@ -287,9 +316,10 @@ const Enroll = () => {
               {" "}
               Pay &#8377; 1200 to Enroll
             </button>
-            <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[90%] rounded-full border mt-3 border-[#1B72C0] mx-auto  self-center">
+            <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[90%] rounded-full border mt-3 border-[#1B72C0] mx-auto  self-center flex justify-center items-center gap-3">
               {" "}
-              Share
+              <img src={shareImg} alt="" />
+              <span> Share</span>
             </button>
           </div>
         </div>
