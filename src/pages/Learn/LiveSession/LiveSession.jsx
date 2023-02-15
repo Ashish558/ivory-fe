@@ -8,9 +8,11 @@ import module2 from "../../../assets/images/learn/module2.png";
 import module3 from "../../../assets/images/learn/module3.png";
 import module4 from "../../../assets/images/learn/module4.png";
 const LiveSession = () => {
-  const [sesstionStatus,setSesstionStatus] = React.useState("upcomming");
+
+  const [sesstionStatus,setSesstionStatus] = React.useState("");
   const [moduleStatus,setModuleStatus] = React.useState('running');
-  const [tab, setTab] = React.useState("liveSession");
+  const [tab,setTab] = React.useState("assignments");
+  
     return (
       <div className="mb-28">
         <div>
@@ -179,7 +181,7 @@ const LiveSession = () => {
           </div>
         </div>
         <div
-          className={`py-4 mt-3 mx-5 border-t border-gray-200 flex ${
+          className={`py-4 mt-3 mx-5 border-t border-gray-200 flex &#8377;{
             moduleStatus === "running" && "bg-sky-200 rounded-md"
           }`}
         >

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import BackIcon from '../../assets/icons/go-back.svg'
 import Profile from '../../assets/images/profile.png'
 import style from './Learn.module.css'
-import { Switch } from "antd";
 import { useNavigate } from 'react-router-dom'
 import Filterbar from '../../components/Filterbar/filterbar'
 import { useSelector } from 'react-redux'
