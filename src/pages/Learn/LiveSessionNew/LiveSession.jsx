@@ -17,14 +17,14 @@ const LiveSession = () => {
 
   const [sesstionStatus, setSesstionStatus] = useState("");
   const [moduleStatus, setModuleStatus] = useState('running');
-  const [tab, setTab] = useState("allModules");
+  const [tab, setTab] = useState("liveSession");
   const [tabIndex, setTabIndex] = useState(0)
 
   return (
     <div className="mb-28 mt-[0px] lg:px-10 lg:mt-[70px]">
       <div>
         {tab === "liveSession" && (
-          <img src={liveSession} alt="" className="w-full" />
+          <img src={liveSession} alt="" className="w-full lg:hidden" />
         )}
         {tab === "allModules" && (
           <div className="video flex justify-center items-center relative lg:hidden">
@@ -186,9 +186,11 @@ const LiveSession = () => {
           | 4 live sessions
         </div>
       )}
+      <div className='lg:max-w-[350px]'>
       {tempData.map(item => {
         return <SingleLiveSession key={item.id} {...item} />
       })}
+      </div>
     </div>
   );
 };
