@@ -21,13 +21,6 @@ const Learn = () => {
    const { loggedIn } = useSelector(state => state.user)
 
    useEffect(() => {
-      if (filterItems.length > 0) return
-      if (activities.length === 0) return
-
-
-   }, [activities])
-
-   useEffect(() => {
       getInterests(true)
          .then(res => {
             // console.log(res.data.data);
@@ -184,7 +177,7 @@ const Learn = () => {
    //  const navigate = useNavigate()
 
    return (
-      <>
+      <div className='lg:mt-[65px]'>
          <div className="h-20 w-full flex justify-around bg-sky-100" >
             <button className="h-12 w-28 font-bold text-lg rounded-3xl bg-cyan-200 mt-5" >Programs</button>
             <button className="h-12 w-32 font-bold text-lg rounded-3xl bg-cyan-200 mt-5" onClick={() => navigate('/progress')}>My Program</button>
@@ -222,7 +215,7 @@ const Learn = () => {
                ))
             }
          </div>
-      </>
+      </div>
    )
 }
 
