@@ -6,9 +6,9 @@ import style from '../Community/Community.module.css';
 const Confirmation = () => {
     return (
       <>
-        <div className={` h-screen ${style.cusBg} sm:relative sm:px-24`}>
+        <div className={` h-screen ${style.cusBg} sm:relative sm:px-24 hidden sm:block`}>
           <div className=" flex justify-center items-center pt-28">
-            <div className="w-[490px] h-[607px]  bg-white rounded-[48px] shadow-xl relative pt-16">
+            <div className="w-[490px] h-[607px]  bg-white rounded-[48px] shadow-xl relative pt-16 ">
               <div className="shadow-lg sm:shadow-none  flex justify-left gap-3 items-center bg-white mx-6">
                 <img src={greenTik} className="h-[40px] pb-1 px-3" alt="" />
                 <div className="flex flex-col justify-center items-left ">
@@ -18,7 +18,11 @@ const Confirmation = () => {
                   a pathway opens, to gain new abilities and broaden horizons.
                 </div>
               </div>
-              <img src={confimation} className="rounded-b-[48px] w-[300px] absolute bottom-0" alt="" />
+              <img
+                src={confimation}
+                className="rounded-b-[48px] w-[300px] absolute bottom-0"
+                alt=""
+              />
             </div>
           </div>
         </div>
