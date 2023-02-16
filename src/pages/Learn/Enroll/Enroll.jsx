@@ -21,7 +21,7 @@ import shortStory from "../../../assets/images/learn/shortStory.png";
 const Enroll = () => {
     //enrollType "", "reg", "free"
   const [enrollType,setEnrollType] = React.useState("reg");
-  const [enrollStatus,setEnrollStatus] = React.useState("");
+  const [enrollStatus,setEnrollStatus] = React.useState("enrolled");
   return (
     <div className=" lg:flex sm:mx-20 mb-20">
       <div className="lg:w-[calc(100%-400px)]">

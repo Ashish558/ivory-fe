@@ -35,6 +35,8 @@ import Dob from './pages/SignUp/Dob';
 import SingleSession from './pages/SingleSession/SingleSession';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
+import Confirmation from './pages/Learn/Confirmation/Confirmation';
+import Community from './pages/Learn/Community/Community';
 function App() {
   //true for now will change later
   const [loading,setLoading] = useState(true)
@@ -128,6 +130,18 @@ function App() {
           path="/activities"
           element={
             <Activities />
+          }
+        />
+        <Route
+          path="/confirmation"
+          element={
+            <Confirmation />
+          }
+        />
+        <Route
+          path="/community"
+          element={
+            <Community />
           }
         />
         <Route
