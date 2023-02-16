@@ -175,8 +175,8 @@ const Learn = () => {
    //  const navigate = useNavigate()
 
    return (
-      <div className='lg:mx-20'>
-         <div className="bg-sky-50 p-5">
+      <div className='lg:mx-20 lg:my-20'>
+         <div className="bg-sky-50 sm:bg-white p-5">
             <h1 className='text-xl font-semibold lg:hidden block'>Welcome Sahil ji! <span className='text-sm font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
             <div className=" w-full flex justify-around lg:bg-white my-5" >
                <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
@@ -226,7 +226,7 @@ const Learn = () => {
          <div className="px-5">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3 mt-10">
+         <div className="lg:grid lg:grid-cols-3 mt-10 2xl:grid-cols-4">
             {
                card.map((ele,index) => (
                   <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
