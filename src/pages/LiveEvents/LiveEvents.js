@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import styles from './style.module.css'
+import { useNavigate } from 'react-router-dom';
+
 import Slider from "react-slick";
 import Image from '../../Images/faces.png'
 import User from '../../Images/user1.png'
@@ -7,11 +10,10 @@ import Arrow from '../../Images/Icon.png';
 import North from '../../Images/north.png';
 import Session from '../../components/Session/Session';
 import { settings } from './settings';
-import { useEffect } from 'react';
 import { getLiveSessions } from '../../services/liveSession';
 import Filterbar from '../../components/Filterbar/filterbar';
 import { getInterests } from '../../services/activities';
-import { useState } from 'react';
+import Background from '../../assets/images/background.svg'
 
 
 export const tempSessionData = [
@@ -64,7 +66,12 @@ export default function LiveEvents() {
 
    const [filterItems, setFilterItems] = useState([])
    const [allPrograms, setAllPrograms] = useState([])
-const [filteredPrograms, setFilteredPrograms] = useState([])
+   const [filteredPrograms, setFilteredPrograms] = useState([])
+
+   const [todaySessions, setTodaySessions] = useState([])
+   const [upcoming, setUpcoming] = useState([])
+
+   const navigate = useNavigate()
 
    useEffect(() => {
       getLiveSessions()
@@ -106,6 +113,27 @@ const [filteredPrograms, setFilteredPrograms] = useState([])
 
    }, [])
 
+   useEffect(() => {
+      if (filteredPrograms.length === 0) {
+         setTodaySessions([])
+         setUpcoming([])
+      } else {
+         let today = filteredPrograms.filter(item => {
+            var inputDate = new Date(item.scheduled_on);
+            var todaysDate = new Date();
+            if (inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0)) {
+               return item
+            }
+         })
+         setTodaySessions(today)
+         let todayIds = today.map(item => item.id)
+         let upcomingSessions = filteredPrograms.filter(item => !todayIds.includes(item.id))
+         setUpcoming(upcomingSessions)
+         // console.log('today', today);
+         // console.log('upcomingSessions', upcomingSessions);
+      }
+   }, [filteredPrograms])
+
    const onChange = (item) => {
       if (item.id === 0) {
          let temp = filterItems.map(filterItem => {
@@ -130,14 +158,33 @@ const [filteredPrograms, setFilteredPrograms] = useState([])
       }
    }
    // console.log('filterItems', filterItems);
-   console.log('allPrograms', allPrograms);
+   // console.log('allPrograms', allPrograms);
 
    return (
-      <div className='px-4 py-4 overflow-x-hidden lg:mt-[70px] lg:px-[70px]'>
+      <div className='px-4 py-4 overflow-x-hidden pb-[70px] lg:mt-[70px] lg:px-[70px] z-10'>
+         <img src={Background} className={styles.backgroundImage} />
+         <div className={styles.container}>
+            <h4 className='text-lg font-semibold mb-5 lg:mb-4 hidden'> Upcoming live sessions </h4>
 
-         <h4 className='text-lg font-semibold mb-5 lg:mb-4'> Upcoming live sessions </h4>
+            <div className='hidden lg:flex items-center gap-x-7 mb-5 mt-4'>
+               <h1 className='text-xl font-black cursor-pointer lg:text-5xl lg:font-semibold show-events'
+                  onClick={() => navigate('/live-events')}>Events</h1>
+               <p className='p '><img src={Arrow} alt="" /></p>
+            </div>
+            {
+               todaySessions.length > 0 &&
+               <div className='mb-[30px] hidden lg:block'>
+                  <h4 className='text-2xl font-semibold mb-5 lg:mb-8 '> Today </h4>
+                  <Slider {...settings} >
+                     {todaySessions.map((session, idx) => {
+                        return <Session key={idx} {...session} />
+                     })}
+                  </Slider>
+               </div>
+            }
+         </div>
 
-         <div className='mb-4 max-w-[900px]'>
+         <div className='mb-4 max-w-[900px] lg:mb-8'>
             <div className=' flex items-center mb-2 '>
                {/* <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p> */}
@@ -145,11 +192,31 @@ const [filteredPrograms, setFilteredPrograms] = useState([])
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
 
-         <Slider {...settings} >
-            {allPrograms.map((session, idx) => {
-               return <Session key={idx} {...session} />
-            })}
-         </Slider>
+         {
+            todaySessions.length > 0 &&
+            <div className='mb-[30px] lg:hidden'>
+               <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Today </h4>
+               <Slider {...settings} >
+                  {todaySessions.map((session, idx) => {
+                     return <Session key={idx} {...session} />
+                  })}
+               </Slider>
+            </div>
+         }
+         {
+            todaySessions.length > 0 &&
+            <div className='mb-[30px]'>
+               <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
+               <Slider {...settings} >
+                  {upcoming.map((session, idx) => {
+                     return <Session key={idx} {...session} />
+                  })}
+               </Slider>
+            </div>
+         }
+
+
+
       </div>
    )
 }
