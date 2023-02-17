@@ -29,9 +29,9 @@ import Third from './pages/splash/Third';
 // import Enroll from './pages/Home'
 // import LogoLanding from './pages/splash/LogoLanding';
 import Enroll from './pages/Learn/Enroll/Enroll';
-import LiveSession from './pages/Learn/LiveSession/LiveSession';
-import LiveEvents from './pages/LiveEvents/LiveEvents';
+import LiveSession from './pages/Learn/LiveSessionNew/LiveSession';
 import Dob from './pages/SignUp/Dob';
+import LiveEvents from './pages/LiveEvents/LiveEvents';
 import SingleSession from './pages/SingleSession/SingleSession';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';

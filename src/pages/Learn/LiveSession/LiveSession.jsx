@@ -11,7 +11,7 @@ const LiveSession = () => {
 
   const [sesstionStatus,setSesstionStatus] = React.useState("");
   const [moduleStatus,setModuleStatus] = React.useState('running');
-  const [tab,setTab] = React.useState("assignments");
+  const [tab,setTab] = React.useState("allModules");
   
     return (
       <div className="mb-28">

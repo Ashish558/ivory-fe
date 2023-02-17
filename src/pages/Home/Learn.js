@@ -1,6 +1,6 @@
 import React,{ useEffect,useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import AcivityContent from '../../components/ActivityContent/ActivityContent'
 import Filterbar from '../../components/Filterbar/filterbar'
@@ -16,6 +16,8 @@ const Learn = () => {
    const [completedTabActive,setCompletedTabActive] = useState(false)
    // design changes if my programs is active
    const [myPrograms,setMyPrograms] = useState(false)
+   const [allPrograms,setAllPrograms] = useState([])
+   const [filteredPrograms,setFilteredPrograms] = useState([])
    const navigate = useNavigate();
    const { loggedIn } = useSelector(state => state.user)
 
@@ -175,7 +177,7 @@ const Learn = () => {
    //  const navigate = useNavigate()
 
    return (
-      <div className='lg:mx-20 lg:my-20'>
+      <div className='lg:mx-20 lg:my-20 mb-28 sm:mb-0'>
          <div className="bg-sky-50 sm:bg-white p-5">
             <h1 className='text-xl font-semibold lg:hidden block'>Welcome Sahil ji! <span className='text-sm font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
             <div className=" w-full flex justify-around lg:bg-white my-5" >
@@ -229,7 +231,7 @@ const Learn = () => {
          <div className="lg:grid lg:grid-cols-3 mt-10 2xl:grid-cols-4">
             {
                card.map((ele,index) => (
-                  <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
+                  <Link to='/enroll' className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2" >
                      <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
                         <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
                            Ivory Exclusive
@@ -270,7 +272,7 @@ const Learn = () => {
 
 
                      </div>
-                  </div>
+                  </Link>
                ))
             }
          </div>

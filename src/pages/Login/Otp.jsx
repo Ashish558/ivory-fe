@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React,{ useEffect,useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link,useLocation,useNavigate } from 'react-router-dom';
+import Slider from "react-slick";
 import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
+import SignupTree from "../../assets/images/login/signupTree.png";
 import { updateLoggedIn } from '../../redux/slices/user';
-import { sendOtp, verifyOtp } from '../../services/auth';
+import { sendOtp,verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
-import SignupTree from "../../assets/images/login/signupTree.png";
-import Slider from "react-slick";
 
 const settings = {
   infinite: true,
@@ -151,7 +151,7 @@ const Otp = () => {
     }
   };
   return (
-    <div className="overflow-x-hidden bg-[#EEFDFC]">
+    <div className="overflow-x-hidden bg-[#EEFDFC] ">
       <div className="topAppBar pt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -159,7 +159,7 @@ const Otp = () => {
           </div>
         </div>
       </div>
-      <div className="sm:flex  min-h-[667px] overflow-y-auto  justify-around   w-screen">
+      <div className="sm:flex  min-h-[667px] overflow-y-auto  justify-around   w-screen ml-8 sm:ml-0">
         <div
           className="hidden sm:flex flex flex-col items-center min-h-screen h-ful sm:w-[40vw]"
           style={{
@@ -170,28 +170,32 @@ const Otp = () => {
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className='flex-1 w-full'>
-            <Slider {...settings} className='w-full flex-1 h-auto' >
-              {
-                sliderData.map((item, idx) => {
-                  return (
-                    <div>
-                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
-                        <h1
-                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
-                        >
-                          <span className="text-[#59E3FF]"> {item.textPrimary} </span>
-                          {item.textSec}
-                        </h1>
-                      </div>
-                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
-                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
-                      </div>
+          <div className="flex-1 w-full">
+            <Slider {...settings} className="w-full flex-1 h-auto">
+              {sliderData.map((item, idx) => {
+                return (
+                  <div>
+                    <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                      <h1
+                        className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                      >
+                        <span className="text-[#59E3FF]">
+                          {" "}
+                          {item.textPrimary}{" "}
+                        </span>
+                        {item.textSec}
+                      </h1>
                     </div>
-                  )
-                })
-              }
-
+                    <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                      <img
+                        src={item.img}
+                        alt=""
+                        className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </Slider>
           </div>
         </div>
@@ -199,7 +203,7 @@ const Otp = () => {
           <div className="flex flex-col max-w-[328px] justify-between mt-8">
             <form className="flex flex-col" onSubmit={handleOpt}>
               <h1 className=" text-[22px] font-bold ml-2 lg:ml-0 lg:max-w-[300px]">
-                Verify with OTP sent to {phone ? phone : '9863727272'}
+                Verify with OTP sent to {phone ? phone : "9863727272"}
               </h1>
               <div className="flex flex-row mx-auto lg:mx-0  mt-5">
                 <input
@@ -265,20 +269,18 @@ const Otp = () => {
                 </div>
               )}
               {otpValuesArray.length === 6 ? (
-                <button
-                  type="submit"
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w2 lg:w-full text-center justify-center mx-4 flex mx-auto lg:mx-0 mt-5 mb-1"
+               <button type='submit'
+                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w2 lg:w-full text-center justify-center mx-4 flex  lg:mx-0 mt-5 mb-1"
                 >
                   Continue
                 </button>
               ) : (
-                <Link
-                  to="/signup"
-                  state={{ from: NewLocation }}
+                <button
+                  
                   className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white 2 lg:w-full text-center justify-center flex mx-auto lg:mx-0 mt-5 mb-5"
                 >
                   Continue
-                </Link>
+                </button>
               )}
             </form>
             <br />

@@ -53,7 +53,7 @@
 
 .mcqResponseInCorrect {
    align-self: stretch;
-   height: 238px;
+   height: 50vh;
    width: 100%;
    background-color: #FF6273;
    border-radius: 24px;

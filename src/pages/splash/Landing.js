@@ -1,23 +1,35 @@
 import React from 'react'
 import styles from "./Landing.module.css"
 import slideimage1 from "../../assets/slideimage1.png"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {delay, easeIn, easeOut, motion as m} from "framer-motion"
 
 const Landing = () => {
   const navigate = useNavigate();
   setTimeout(() => {
     navigate("/second")
-  }, 2000);
+  }, 3000);
   const nextpage = ()=>{
   }
   return (
     <>
-    <m.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.75 ,ease:easeOut}} className={styles.fullscreen}>
+      <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75,ease: easeOut }} className={styles.fullscreen}>
+        <div className="topAppBar ml-8 z-[9999] absolute top-16 right-0">
+          <div className="flex justify-between items-center">
+            <div className="flex items-end justify-end content-end w-full">
+              <Link
+                to="/home"
+                className=" bg-[#00000027] px-3 py-1 text-center mr-10 text-white rounded-full absolute text-lg"
+              >
+                skip
+              </Link>
+            </div>
+          </div>
+        </div>
       <img className={styles.imgup} src={slideimage1} alt="" />
       <div className={styles.down}>
         <span className={styles.head}>
-            <p>Tailored for adults <span style={{color:"#60FFDE"}}> above 50</span></p>
+            <p className='text-2xl tracking-widest font-bold'>Tailored for adults <span style={{color:"#60FFDE"}}> above 50</span></p>
         </span>
         <div className={styles.circles}>
             <div className={styles.CircleShape1} >

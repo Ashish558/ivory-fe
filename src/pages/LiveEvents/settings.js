@@ -1,7 +1,7 @@
 export const settings = {
    infinite: false,
    centerPadding: "10px",
-   slidesToShow: 1.3,
+   slidesToShow: 4,
    initialSlide: 0,
    arrows: false,
    swipeToSlide: true,
@@ -10,26 +10,32 @@ export const settings = {
       {
          breakpoint: 1300,
          settings: {
-            slidesToShow: 3,
+            slidesToShow: 4,
          }
       },
       {
          breakpoint: 1204,
          settings: {
-            slidesToShow: 3,
+            slidesToShow: 2.9,
          },
 
       },
       {
          breakpoint: 768,
          settings: {
-            slidesToShow: 1.3,
+            slidesToShow: 2,
          },
       },
       {
          breakpoint: 600,
          settings: {
-            slidesToShow: 1.3,
+            slidesToShow: 1.8,
+         },
+      },
+      {
+         breakpoint: 500,
+         settings: {
+            slidesToShow: 1.7,
          },
       },
       {

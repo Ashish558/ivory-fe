@@ -1,30 +1,47 @@
-.logoland{
-    height: 930px;
-    width: 100%;
-    background-color: #004499;
-    animation-name: logoland;
-    animation-duration: 2s;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    border-radius: 48px 48px 0px 0px;
-    background: linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%),
-linear-gradient(0deg, #D9D9D9, #D9D9D9);
+.logoland {
+  height: 930px;
+  width: 100%;
+  background-color: #004499;
+  animation-name: logoland;
+  animation-duration: 3s;
+  /* animation: all ; */
+  transition: all 3s ease-in-out;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 48px 48px 0px 0px;
+  background: linear-gradient(
+      180deg,
+      rgba(0, 85, 191, 0.8) 1.84%,
+      rgba(89, 227, 255, 0.8) 130.78%
+    ),
+    linear-gradient(0deg, #d9d9d9, #d9d9d9);
 }
 
-.imgg{
-    height:494px;
-    width: 100%;
+.imgg {
+  height: 510px;
+  width: 100%;
 }
-.logoland>img{
-    position: absolute;
-    top: 19%;
-    left:30%;
+.logoland > img {
+  position: absolute;
+  top: 19%;
+  left: 30%;
 }
-    
-@keyframes logoland{
-    100%{
-        /* transform: translateY(300%); */
-        height: 367px;
-    }
+
+@keyframes logoland {
+  60% {
+    /* transform: translateY(300%); */
+    height: 367px;
+  }
+  70% {
+    /* transform: translateY(300%); */
+    height: 377px;
+    box-shadow: 2px 4px 45px 0px #00000099;
+  }
+  100% {
+    /* transform: translateY(300%); */
+    height: 367px;
+
+    box-shadow: 2px 4px 45px 0px #00000099;
+  }
 }
