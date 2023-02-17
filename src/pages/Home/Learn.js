@@ -1,31 +1,73 @@
-import React, { useState, useEffect } from 'react'
-import BackIcon from '../../assets/icons/go-back.svg'
-import Profile from '../../assets/images/profile.png'
-import style from './Learn.module.css'
-import { useNavigate } from 'react-router-dom'
-import Filterbar from '../../components/Filterbar/filterbar'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getCategories, getInterests } from '../../services/activities'
-import { getMyActivitiesProgress } from '../../services/user'
+import { useNavigate } from 'react-router-dom'
+import CheckedIcon from '../../assets/icons/checked-category.svg'
+import AcivityContent from '../../components/ActivityContent/ActivityContent'
+import Filterbar from '../../components/Filterbar/filterbar'
+import ProgramCard from '../../components/ProgramCard/ProgramCard'
+import Toggle from '../../components/Toggle/Toggle'
 import Logo from '../../Images/Canva.png'
-import { getPrograms } from '../../services/program';
+import { getCategories, getInterests } from '../../services/activities'
+import { getAllUserPrograms, getPrograms } from '../../services/program'
+import { getMyActivitiesProgress } from '../../services/user'
+import style from './Learn.module.css'
+
+const card = [
+   {
+      Content: "Learn to CANVA",
+      name: "Ankit dua",
+      lesson: "16 lessons",
+      price: "FREE"
+   },
+   {
+      Content: "Publish your short story",
+      name: "Ankit dua",
+      lesson: "16 lessons",
+      price: "RS 399"
+   },
+   {
+      Content: "Learn to use acrylic paints",
+      name: "Ankit dua",
+      lesson: "16 lessons",
+      price: "FREE"
+   },
+   {
+      Content: "Learn to use acrylic paints",
+      name: "Ankit dua",
+      lesson: "16 lessons",
+      price: "FREE"
+   },
+   {
+      Content: "Learn to CANVA",
+      name: "Ankit dua",
+      lesson: "16 lessons",
+      price: "FREE"
+   }
+]
 
 const Learn = () => {
    const [activities, setActivities] = useState([])
-   const [filteredActivities, setFilteredActivities] = useState([])
-   const [myActivities, setMyActivities] = useState([])
+   // const [filteredActivities,setFilteredActivities] = useState([])
    const [filterItems, setFilterItems] = useState([])
+   const [completedTabActive, setCompletedTabActive] = useState(false)
+   // design changes if my programs is active
+   const [myPrograms, setMyPrograms] = useState(false)
+
    const [allPrograms, setAllPrograms] = useState([])
-   const [filteredPrograms, setFilteredPrograms] = useState([])
+   const [userPrograms, setUserPrograms] = useState([])
+
+
    const navigate = useNavigate();
    const { loggedIn } = useSelector(state => state.user)
+
+   const [onlyFreeActive, setOnlyFreeActive] = useState(true)
+   const [onlyLiveActive, setOnlyLiveActive] = useState(false)
 
    useEffect(() => {
       getInterests(true)
          .then(res => {
             // console.log(res.data.data);
             setActivities(res.data.data.map(item => ({ ...item, categories: [] })))
-            setFilteredActivities(res.data.data.map(item => ({ ...item, categories: [] })))
             let temp = [
                {
                   id: 0,
@@ -61,7 +103,7 @@ const Learn = () => {
                tempActivities[idx].categories.push(category)
             })
             setActivities(tempActivities)
-            setFilteredActivities(tempActivities)
+            // setFilteredActivities(tempActivities)
 
          }).catch(err => {
             console.log(err.response);
@@ -69,16 +111,26 @@ const Learn = () => {
    }, [activities.length])
 
    useEffect(() => {
-      if (loggedIn === false) return
-      getMyActivitiesProgress()
+      getPrograms()
          .then(res => {
-            console.log('my acts', res.data.data);
-            if (res.data.data === null) return
-            setMyActivities(res.data.data)
+            if (res.data.data === null) return setAllPrograms([])
+            // console.log('programs', res.data.data);
+            setAllPrograms(res.data.data)
          }).catch(err => {
             console.log(err.response);
          })
-   }, [loggedIn])
+   }, [])
+
+   useEffect(() => {
+      getAllUserPrograms()
+         .then(res => {
+            console.log('user programs', res.data.data);
+            if (res.data.data === null) return setUserPrograms([])
+            setUserPrograms(res.data.data)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
 
    const onChange = (item) => {
       // console.log('item', item);
@@ -111,7 +163,7 @@ const Learn = () => {
       let activeIds = activeItems.map(item => item.id)
 
       let filteredArr = activities.filter(activity => activeIds.includes(activity.id))
-      setFilteredActivities(filteredArr)
+      // setFilteredActivities(filteredArr)
 
    }, [filterItems, activities])
 
@@ -134,84 +186,67 @@ const Learn = () => {
       }
    }
 
-   useEffect(() => {
-      getPrograms()
-         .then(res => {
-            console.log(res);
-         }).catch(err => {
-            console.log(err.response);
-         })
-   }, [])
-   const [card, setcard] = useState([
-      {
-         Content: "Learn to CANVA",
-         name: "Ankit dua",
-         lesson: "16 lessons",
-         price: "FREE"
-      },
-      {
-         Content: "Publish your short story",
-         name: "Ankit dua",
-         lesson: "16 lessons",
-         price: "RS 399"
-      },
-      {
-         Content: "Learn to use acrylic paints",
-         name: "Ankit dua",
-         lesson: "16 lessons",
-         price: "FREE"
-      },
-      {
-         Content: "Learn to use acrylic paints",
-         name: "Ankit dua",
-         lesson: "16 lessons",
-         price: "FREE"
-      },
-      {
-         Content: "Learn to CANVA",
-         name: "Ankit dua",
-         lesson: "16 lessons",
-         price: "FREE"
-      }
-   ])
-   //  const navigate = useNavigate()
 
    return (
-      <div className='lg:mt-[65px]'>
-         <div className="h-20 w-full flex justify-around bg-sky-100" >
-            <button className="h-12 w-28 font-bold text-lg rounded-3xl bg-cyan-200 mt-5" >Programs</button>
-            <button className="h-12 w-32 font-bold text-lg rounded-3xl bg-cyan-200 mt-5" onClick={() => navigate('/progress')}>My Program</button>
+      <div className='lg:mx-20 lg: mt-[70px]'>
+         <div className="bg-sky-50 p-5">
+            <h1 className='text-xl font-semibold lg:hidden block'>Welcome Sahil ji! <span className='text-sm font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+            <div className=" w-full flex justify-around lg:bg-white my-5" >
+               <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
+               <button className={`font-bold text-lg rounded-full border px-4  ${myPrograms && ' bg-cyan-200'}`} onClick={() => setMyPrograms(true)}>My Program</button>
+            </div>
          </div>
-         <div className='h-32  mt-4 mx-4 bg-LightSky rounded-3xl'></div>
+         <h1 className='text-2xl font-semibold hidden lg:block'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+         {/* <div className='h-32  mt-4 mx-4 bg-LightSky rounded-3xl'></div> */}
+         <div className="px-5">
+            <AcivityContent>
+            </AcivityContent>
+         </div>
+         {
+            myPrograms &&
+            <div className='flex justify-center my-7'>
+               <button className={`rounded-l-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold border-r-0 text-sm lg:border-[#79747E] ${completedTabActive === false ? 'bg-secondary' : ''} `}
+                  onClick={() => setCompletedTabActive(false)} >
+                  {
+                     completedTabActive === false &&
+                     <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+                  }
+                  On going
+               </button>
+               <button className={`rounded-r-full lg:w-[170px] lg:h-[62px] lg:text-xl border flex justify-center items-center py-2.5 px-4 font-semibold text-sm  lg:border-[#79747E] ${completedTabActive === true ? 'bg-secondary' : ''} `}
+                  onClick={() => setCompletedTabActive(true)}  >
+                  {
+                     completedTabActive === true &&
+                     <img src={CheckedIcon} alt='checked' className='mr-[8.25px]' />
+                  }
+                  completed
+               </button>
+            </div>
+         }
+
          <div className='flex h-10 mx-4 mt-4'>
             <span className='mx-4 text-xl'>only free</span>
-            {/* <Switch/> */}
-            <div className={style.toggle} onClick={handleClick}>
-               {toggleButton ? <div className={style.toggle_left}></div> :
-                  <div className={style.toggle_right}></div>}
-            </div>
+
+            <Toggle active={onlyFreeActive} handleClick={() => setOnlyFreeActive(!onlyFreeActive)} />
             <span className='mx-4 text-xl'>only live</span>
-            <div className={style.toggle1} onClick={handleOnclick}>
-               {toggleButton1 ? <div className={style.toggle_left}></div> :
-                  <div className={style.toggle_right}></div>}
-            </div>
-            {/* <Switch/> */}
-            {/* <ToggleSwitch label="Notifications" />
-    <ToggleSwitch label="Subscribe" /> */}
+            <Toggle active={onlyLiveActive} handleClick={() => setOnlyLiveActive(!onlyLiveActive)} />
+
          </div>
-         <Filterbar items={filterItems} onChange={onChange} />
-         <div className='h-full w-full'>
-            {
-               card.map((ele, index) => (
-                  <div className='h-36 flex py-2 mt-4 mx-4 shadow-md rounded-3xl border-gray-300'>
-                     <img src={Logo} className='h-32 mx-2 w-32 rounded-3xl ' />
-                     <div className='h-32 w-72 '>
-                        <h1 className='text-xl font-bold'>{ele.Content}</h1>
-                        <p>{ele.name}</p>
-                        <p className='text-lg font-normal'>{ele.lesson}</p>
-                        <p className='text-2xl text-sky-700 mt-3 font-bold '>{ele.price}</p>
-                     </div>
-                  </div>
+         <div className="px-5">
+            <Filterbar items={filterItems} onChange={onChange} />
+         </div>
+         <div className="lg:grid lg:grid-cols-3 mt-10">
+            {myPrograms ?
+               userPrograms.map((item, index) => (
+                  <ProgramCard key={item.id} {...item.program}
+                     isUserProgram={true}
+                     userProgramId={item.id}
+                     is_completed={item.is_completed}
+                     percentage_completed={item.percentage_completed}
+                  />
+               )) :
+               allPrograms.map((item, index) => (
+                  <ProgramCard key={item.id} {...item} />
                ))
             }
          </div>

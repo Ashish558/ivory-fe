@@ -1,7 +1,7 @@
-import React,{ useEffect,useState } from 'react';
-import { BrowserRouter,Navigate,Route,Routes } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
-import { useDispatch,useSelector } from 'react-redux';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
 import Profile from './pages/Createprofile/Profile';
@@ -14,33 +14,32 @@ import Navbar from './pages/Navbar/Navbar';
 import Congrates from './pages/SignUp/Congrates';
 import SignUp from './pages/SignUp/SignUp';
 import StartActivity from './pages/StartActivity/StartActivity';
-import { updateLoggedIn,updateProfileData } from './redux/slices/user';
+import { updateLoggedIn, updateProfileData } from './redux/slices/user';
 import { refreshToken } from './services/auth';
 import { getUserDetail } from './services/user';
 
+import Assignment from './pages/Home/Assignment';
+import Assignment1 from './pages/Home/Assignment1';
+import Learn from './pages/Home/Learn';
+import Four from './pages/splash/Four';
 import Landing from './pages/splash/Landing';
 import LogoLanding from './pages/splash/LogoLanding';
 import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
-import Four from './pages/splash/Four';
-import Learn from './pages/Home/Learn'
-import Progress  from './pages/Home/Progress';
-import Assignment  from './pages/Home/Assignment';
-import Assignment1  from './pages/Home/Assignment1';
 // import Enroll from './pages/Home'
 // import LogoLanding from './pages/splash/LogoLanding';
 import Enroll from './pages/Learn/Enroll/Enroll';
 import LiveSession from './pages/Learn/LiveSessionNew/LiveSession';
-import Dob from './pages/SignUp/Dob';
 import LiveEvents from './pages/LiveEvents/LiveEvents';
+import Dob from './pages/SignUp/Dob';
 import SingleSession from './pages/SingleSession/SingleSession';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 function App() {
   //true for now will change later
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { loggedIn,profileData } = useSelector(state => state.user)
+  const { loggedIn, profileData } = useSelector(state => state.user)
 
   useEffect(() => {
     if (localStorage.getItem('refresh')) {
@@ -51,7 +50,7 @@ function App() {
       refreshToken(body)
         .then(res => {
           // console.log('ref res', res.data.data.access);
-          localStorage.setItem('access',res.data.data.access)
+          localStorage.setItem('access', res.data.data.access)
           dispatch(updateLoggedIn({ loggedIn: true }))
           fetchUserDetails(true)
 
@@ -59,12 +58,12 @@ function App() {
         }).catch(err => {
           setLoading(false)
           dispatch(updateLoggedIn({ loggedIn: false }))
-          console.log('ref err',err.response);
+          console.log('ref err', err.response);
         })
     } else {
       setLoading(false)
     }
-  },[])
+  }, [])
 
   const fetchUserDetails = (isInitial) => {
     getUserDetail()
@@ -76,7 +75,7 @@ function App() {
         }
       })
       .catch(err => {
-        console.log('profile err',err);
+        console.log('profile err', err);
         if (isInitial) {
           dispatch(updateLoggedIn({ loggedIn: false }))
           setLoading(false)
@@ -86,7 +85,7 @@ function App() {
 
   useEffect(() => {
     fetchUserDetails()
-  },[loggedIn])
+  }, [loggedIn])
 
   if (loading === true) return <></>
 
@@ -96,10 +95,11 @@ function App() {
       <NavbarDesktop />
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/enroll" element={<Enroll />} />
         <Route path="/live-events" element={<LiveEvents />} />
         <Route path="/live-events/:id" element={<SingleSession />} />
-        <Route path="/live" element={<LiveSession />} />
+
+        <Route path="/program/:id" element={<LiveSession />} />
+        
         <Route path="/otp" element={<Otp />} />
         <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
@@ -132,27 +132,20 @@ function App() {
           }
         />
         <Route
-          path="/learn"
-          element={
-            <Learn />
-          }
+          path="/learn" element={<Learn />}
         />
-        <Route
-          path="/progress"
-          element={
-            <Progress />
-          }
-        />
+        <Route path="/learn/:id" element={<Enroll />} />
+
         <Route
           path="/Assignment"
           element={
-            <Assignment/>
+            <Assignment />
           }
         />
         <Route
           path="/Assignment1"
           element={
-            <Assignment1/>
+            <Assignment1 />
           }
         />
         <Route
@@ -175,7 +168,7 @@ function App() {
   );
 }
 
-function RequireAuth({ children,loggedIn }) {
+function RequireAuth({ children, loggedIn }) {
   return loggedIn ? children : <Navigate to="/" />;
 }
 

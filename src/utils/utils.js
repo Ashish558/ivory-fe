@@ -44,3 +44,19 @@ export const getFormattedDateWeek = (argDate) => {
    return `${date.getDate()} ${month}, ${week}`
 
 }
+export const getPricingMainText = (isFree, price, discounted_price, discount) => {
+   if (isFree) {
+      return "Free"
+   } else if (discount === 0) {
+      return <> &#8377; {price} </>
+   } else if (discount > 0) {
+      return <> &#8377; {discounted_price} </>
+   }
+}
+export const getPricingDiscountedText = (isFree, price, discounted_price, discount) => {
+   if (isFree === false && discount > 0) {
+      return price
+   } else {
+      return <></>
+   }
+}

@@ -181,7 +181,7 @@ const LiveSession = () => {
           </div>
         </div>
         <div
-          className={`py-4 mt-3 mx-5 border-t border-gray-200 flex &#8377;{
+          className={`py-4 mt-3 mx-5 border-t border-gray-200 flex &#8377; ${
             moduleStatus === "running" && "bg-sky-200 rounded-md"
           }`}
         >
