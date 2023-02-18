@@ -1,4 +1,10 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import styles from './style.module.css'
+
+import { useNavigate, useParams } from "react-router-dom";
 import batch from "../../../assets/images/enroll/batch.svg";
 import doc from "../../../assets/images/enroll/doc.svg";
 import doc2 from "../../../assets/images/enroll/doc2.svg";
@@ -14,104 +20,230 @@ import canva from "../../../assets/images/learn/canva.png";
 import greenTik from "../../../assets/images/learn/greenTik.png";
 import shareImg from "../../../assets/images/learn/share.svg";
 import shortStory from "../../../assets/images/learn/shortStory.png";
-
-
+import { createUserProgram, enrollProgram, getSingleProgram, getUserPrograms } from '../../../services/program'
+import { getPricingDiscountedText, getPricingMainText } from "../../../utils/utils";
+import useRazorpay from "react-razorpay";
+import PrimaryButton from "../../../components/Buttons/PrimaryButton";
+import SecondaryButton from "../../../components/Buttons/SecondaryButton";
 
 
 const Enroll = () => {
-    //enrollType "", "reg", "free"
-  const [enrollType,setEnrollType] = React.useState("reg");
-  const [enrollStatus,setEnrollStatus] = React.useState("enrolled");
+  //enrollType "", "reg", "free"
+  const [enrollType, setEnrollType] = useState("reg");
+  const [enrollStatus, setEnrollStatus] = useState("");
+  const [programData, setProgramData] = useState({})
+  const { id } = useParams()
+  const { loggedIn, profileData } = useSelector(state => state.user)
+  const [programExist, setProgramExist] = useState(false)
+  const [isEnrolled, setIsEnrolled] = useState(false)
+  const [userProgramId, setUserProgramId] = useState(null)
+  const Razorpay = useRazorpay();
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    getSingleProgram(id, loggedIn)
+      .then(res => {
+        console.log('resp', res);
+        if (!res.data.data) return
+        setProgramData(res.data.data)
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }, [id, loggedIn])
+
+  const handleEnroll = () => {
+    if(!loggedIn){
+      navigate('/login')
+    }
+    const body = {
+      state: 'na',
+      payment_status: 'na',
+      program: id,
+    }
+    if (programExist === true) {
+      enrollforProgram(userProgramId)
+      return
+    }
+    createUserProgram(body)
+      .then(programResp => {
+        console.log('program resp', programResp.data);
+        enrollforProgram(programResp.data.data.id)
+      })
+      .catch(err => {
+        console.log(err.response);
+        if (err.response.status === 406) {
+          enrollforProgram()
+        }
+      })
+  }
+
+  const enrollforProgram = (userProgramId) => {
+    enrollProgram(userProgramId)
+      .then(res => {
+        fetchUserPrograms()
+        console.log('enroll resp', res.data.data);
+        const { state, payment_status, order_id } = res.data.data
+        if (order_id === null) {
+
+        } else {
+          handlePayment(order_id)
+        }
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+
+  const getPrefillData = () => {
+    if (profileData.name) {
+      return {
+        name: profileData.name,
+        email: profileData.email,
+        contact: profileData.mobile_no,
+      }
+    } else {
+      return {}
+    }
+  }
+
+  const handlePayment = async (order_id) => {
+
+    const options = {
+      key: "rzp_test_npF0jgKQZLUW02", // Enter the Key ID generated from the Dashboard
+      name: "Ivory",
+      description: "Test Transaction",
+      image: "https://example.com/your_logo",
+      order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+      handler: function (response) {
+        console.log(response);
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+        fetchUserPrograms()
+      },
+      prefill: getPrefillData(),
+      notes: {
+        address: "Razorpay address",
+      },
+      theme: {
+        color: "#1B72C0",
+      },
+    };
+
+    const rzp1 = new Razorpay(options);
+
+    rzp1.on("payment.failed", function (response) {
+      console.log(response);
+      fetchUserPrograms()
+      // alert(response.error.code);
+      // alert(response.error.description);
+      // alert(response.error.source);
+      // alert(response.error.step);
+      // alert(response.error.reason);
+      // alert(response.error.metadata.order_id);
+      // alert(response.error.metadata.payment_id);
+    });
+
+    rzp1.open();
+  };
+
+  const fetchUserPrograms = () => {
+    getUserPrograms()
+      .then(res => {
+        if (res.data.data === null) return
+        console.log('all programs', res.data.data);
+        res.data.data.forEach(item => {
+          if (item.program.id === parseInt(id)) {
+            setProgramExist(true)
+            setUserProgramId(item.id)
+            if (item.state === "enrolled") {
+              setIsEnrolled(true)
+            }
+          }
+        })
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+  useEffect(() => {
+    fetchUserPrograms()
+  }, [])
+  console.log('programData', programData);
+  console.log('programExist', programExist);
+  console.log('isEnrolled', isEnrolled);
+  // console.log('user', profileData);
+  const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, contents, discount, is_free } = programData
+
   return (
     <div className=" lg:flex sm:mx-20 mb-20">
       <div className="lg:w-[calc(100%-400px)]">
         <div className="flex flex-col gap-5 mb-20 sm:mb-0">
           <div className="text-gray-500 text-lg ml-6 lg:ml-0 mt-2">
-            Programs > Publish your story
+            Programs {'>'} {name}
           </div>
           <div className="text-2xl font-bold text-black ml-6 lg:ml-0 mt-3">
-            Publish your own story
+            {name}
           </div>
           <div className="video flex justify-center items-center relative">
             <img
-              src={videoBg}
+              src={image}
               alt="video"
               className="w-full sm:rounded-[48px]"
             />
-            <img src={playIcon} alt="" className="absolute" />
+            {/* <img src={playIcon} alt="" className="absolute" /> */}
           </div>
           <div className="text-2xl font-bold text-black ml-6 lg:ml-0">
             About this Program
           </div>
           <div className="text-gray-500 text-lg ml-6 lg:ml-0">
-            For this exercise, you will need a canvas, paint (acrylic or tempera
-            works well), and something to splatter the paint with (such as a
-            paintbrush with stiff bristles or a toothbrush)....{" "}
-            <span className="text-blue-500"> See more</span>
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+
+            {/* <span className="text-blue-500"> See more</span> */}
           </div>
           <div className="">
             <div className="text-2xl font-bold text-black ml-6 lg:ml-0">Benifits</div>
             <div className="">
               <div className="flex flex-col gap-6 mb-5 sm:mb-0 mt-10 ml-6 lg:ml-0">
                 <ul className=" flex  flex-col gap-4 leading-none text-sm">
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={zoom} alt="" />
-                    14 hours on demand video
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={live} alt="" />
-                    10 live sessions
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={doc} alt="" />
-                    100% free documents
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={batch} alt="" />
-                    Completion Certificate
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={tik} alt="" />
-                    Life time access
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={tik} alt="" />
-                    24/7 support
-                  </li>
+                  {benefits?.map(item => {
+                    return <li key={item.id} className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
+                      <img src={item.icon} alt="" />
+                      {item.name}
+                    </li>
+                  })}
                 </ul>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <div className="text-2xl font-bold text-black ml-6 lg:ml-0">Pricing</div>
+            <div className="text-2xl font-bold text-black ml-6 lg:ml-0"> Pricing </div>
             {/* conditionally renders on free, reg ,  */}
-            {enrollType === "free" ? (
-              ""
-            ) : (
-              <div>
-                <div className="text-lightGray text-lg ml-6 lg:ml-0 py-2">
-                  Next Batch starts on
-                  <span className="text-blue-600"> 20-Feb-2023</span>
-                </div>
-                <div className="text-2xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1">
-                  &#8377;1200{" "}
-                  <span className="text-gray-400 line-through font-normal text-base">
-                    &#8377;3499
-                  </span>{" "}
-                  <span className="text-blue-500 text-lg ml-2">80% OFF</span>
-                </div>
-              </div>
-            )}
-            {enrollType === "free" && (
+
+            <div>
+              <div className="text-lightGray text-lg ml-6 lg:ml-0 py-2">
+                Next Batch starts on
+                <span className="text-blue-600">
+                  {next_batch_start_date ? next_batch_start_date : 'Yet to be scheduled'}
+                </span>
+              </div>{" "}
               <div className="text-2xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1">
-                &#8377;0{" "}
+                {getPricingMainText(is_free, price, discounted_price, discount)}
                 <span className="text-gray-400 line-through font-normal text-base">
-                  &#8377;3499
+                  {getPricingDiscountedText(is_free, price, discounted_price, discount)}
                 </span>{" "}
-                <span className="text-blue-500 text-lg ml-2">100% OFF</span>
+                {
+                  discount > 0 && !is_free &&
+                  <span className="text-blue-500 text-lg ml-2"> {discounted_price * 100 / price}% OFF
+                  </span>
+                }
               </div>
-            )}
-            {enrollType === "reg" && (
+            </div>
+
+
+            {next_batch_start_date === null && (
               <div className="text-yellow-600 text-md mx-6">
                 To participate in the program, simply register for free. Once
                 batches are scheduled, you will be notified. If the timings
@@ -121,47 +253,22 @@ const Enroll = () => {
             )}
           </div>
           <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
-            {/* conditionally renders enroll button  */}
-            {enrollType === "" && (
-              <>
-                {" "}
-                <button className="bg-sky-200 sm:w-[40%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5">
-                  {" "}
-                  Enroll
-                </button>
-                <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
-                  {" "}
-                  <img src={shareImg} alt="" />
-                  <span> Share</span>
-                </button>
-              </>
-            )}
-            {enrollType === "reg" && (
-              <>
-                <button className="bg-sky-200 sm:w-[40%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5">
-                  {" "}
-                  Register for free
-                </button>
-                <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
-                  {" "}
-                  <img src={shareImg} alt="" />
-                  <span> Share</span>
-                </button>
-              </>
-            )}
-            {enrollType === "free" && (
-              <>
-                <button className="bg-sky-200 sm:w-[40%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5">
-                  {" "}
-                  Enroll for free
-                </button>
-                <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
-                  {" "}
-                  <img src={shareImg} alt="" />
-                  <span> Share</span>
-                </button>
-              </>
-            )}
+
+            <button className="bg-sky-200 sm:w-[40%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5" onClick={handleEnroll} >
+              {
+                next_batch_start_date === null ?
+                  "Register for free" :
+                  is_free ?
+                    "Enroll for free" :
+                    "Enroll"
+              }
+            </button>
+            <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
+              {" "}
+              <img src={shareImg} alt="" />
+              <span> Share</span>
+            </button>
+
           </div>
           <div className=" mx-4 shadow-md rounded-md  border-t border-gray-100 w-[336px] pb-5">
             <div className="text-2xl font-bold text-black ml-6 mt-3">
@@ -170,35 +277,12 @@ const Enroll = () => {
             <div className="">
               <div className="flex flex-col gap-6 mb-5 sm:mb-0 mt-6 ml-6">
                 <ul className=" flex  flex-col gap-5 leading-none text-sm">
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={zoom2} alt="" />
-                    How to meditate.
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={zoom2} alt="" />
-                    How to meditate video.
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={redLive} alt="" />
-                    Live Control anger
-                  </li>
-
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={zoom2} alt="" />
-                    Brainstrom ideas
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={redLive} alt="" />
-                    Live Control anger
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={redLive} alt="" />
-                    Live Control anger
-                  </li>
-                  <li className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                    <img src={doc2} alt="" />
-                    Think fast and correct
-                  </li>
+                  {contents?.map(item => {
+                    return <li key={item.id} className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
+                      <img src={item.icon} alt="" />
+                      {item.name}
+                    </li>
+                  })}
                 </ul>
               </div>
             </div>
@@ -210,93 +294,7 @@ const Enroll = () => {
           </div>
         </div>
         <div className="lg:grid lg:grid-cols-2 ">
-          <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
-            <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
-              <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
-                Ivory Exclusive
-              </span>
-              <img
-                src={canva}
-                alt=""
-                className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
-              />
-            </div>
-            <div className="flex flex-col justify-between ml-3 w-[60vw] lg:w-full lg:gap-2">
-              <span className="text-sm text-gray-500 hidden lg:block">
-                2 hrs 30 mins
-              </span>
-              <h1 className="text-normal font-bold lg:text-xl">
-                Learn to CANVA
-              </h1>
-              <span className="text-sm text-gray-400">Ankit dua</span>
-              <div className="flex justify-between">
-                <button className="bg-red-100 text-red-500 px-1 rounded-full">
-                  4 live sessions
-                </button>
-              </div>
-              <h1 className="ml-auto mr-10 lg:mt-5 lg:p-3">
-                <span className="text-sky-600 font-bold text-lg"> Free</span>
-              </h1>
-            </div>
-          </div>
-          <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
-            <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
-              <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
-                Ivory Exclusive
-              </span>
-              <img
-                src={acrilyc}
-                alt=""
-                className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
-              />
-            </div>
-            <div className="flex flex-col justify-between ml-3 w-[60vw] lg:w-full lg:gap-2">
-              <span className="text-sm text-gray-500 hidden lg:block">
-                2 hrs 30 mins
-              </span>
-              <h1 className="text-normal font-bold lg:text-xl">
-                Learn to CANVA
-              </h1>
-              <span className="text-sm text-gray-400">Ankit dua</span>
-              <div className="flex justify-between">
-                <button className="bg-red-100 text-red-500 px-1 rounded-full">
-                  6 live sessions
-                </button>
-              </div>
-              <h1 className="ml-auto mr-10 lg:mt-5 lg:p-3">
-                <span className="text-sky-600 font-bold text-lg"> Free</span>
-              </h1>
-            </div>
-          </div>
-          <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2">
-            <div className="h-[110px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
-              <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
-                Ivory Exclusive
-              </span>
-              <img
-                src={shortStory}
-                alt=""
-                className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
-              />
-            </div>
-            <div className="flex flex-col justify-between ml-3 w-[60vw] lg:w-full lg:gap-2">
-              <span className="text-sm text-gray-500 hidden lg:block">
-                2 hrs 30 mins
-              </span>
-              <h1 className="text-normal font-bold lg:text-xl">
-                Learn to CANVA
-              </h1>
-              <span className="text-sm text-gray-400">Ankit dua</span>
-              <div className="flex justify-between">
-                <button className="bg-red-100 text-red-500 px-1 rounded-full">
-                  6 live sessions
-                </button>
-              </div>
-              <h1 className="ml-auto mr-10 lg:mt-5 lg:p-3">
-                <span className="text-sky-600 font-bold text-lg"> Free</span>
-              </h1>
-            </div>
-          </div>
+
         </div>
         <div className="lg:flex justify-end w-full hidden ">
           <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
@@ -315,12 +313,20 @@ const Enroll = () => {
               {enrollType === "" && (
                 <span>
                   Batch starts
-                  <span className="text-blue-500"> 20-Feb-2023</span>
+                  <span className="text-blue-500">
+                    20-Feb-2023
+                  </span>
                 </span>
               )}
-              <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center">
+              <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center"    onClick={handleEnroll}>
                 {" "}
-                Pay &#8377; 1200 to Enroll
+                {
+                  next_batch_start_date === null ?
+                    "Register for free" :
+                    is_free ?
+                      "Enroll for free" :
+                      "Enroll"
+                }
               </button>
             </div>
           </div>
@@ -329,23 +335,37 @@ const Enroll = () => {
       <div className="w-[400px] mt-28 ml-5 hidden lg:block">
         <div className="enrollFooter bg-sky-100  flex flex-col py-10 mb-20 rounded-[48px] p-3">
           <div className="text-2xl font-bold text-black ml-6  mb-5">
-            Publish your own story
+            {name}
           </div>
           <div className="text-lightGray text-lg ml-6  mb-2 mt-10">
             <span>
               Batch starts
-              <span className="text-blue-500"> 20-Feb-2023</span>
+              <span className="text-blue-500">
+                {next_batch_start_date ? next_batch_start_date : 'Yet to be scheduled'}
+              </span>
             </span>
             <div className="text-4xl font-bold text-black flex items-center gap-1 mt-3">
-              &#8377; 1200{" "}
+              {getPricingMainText(is_free, price, discounted_price, discount)}
               <span className="text-lightGray line-through font-normal text-sm">
-                &#8377; 3499
+                {getPricingDiscountedText(is_free, price, discounted_price, discount)}
               </span>{" "}
-              <span className="text-blue-500 text-lg ml-2">100% OFF</span>
+              {
+                discount > 0 && !is_free &&
+                <span className="text-blue-500 text-lg ml-2">
+                  {discounted_price * 100 / price}% OFF
+                </span>
+              }
+
             </div>
-            <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3">
+            <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3"    onClick={handleEnroll} >
               {" "}
-              Pay &#8377; 1200 to Enroll
+              {
+                next_batch_start_date === null ?
+                  "Register for free" :
+                  is_free ?
+                    "Enroll for free" :
+                    "Enroll"
+              }
             </button>
             <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[90%] rounded-full border mt-3 border-[#1B72C0]  self-center flex justify-center items-center gap-3">
               {" "}
@@ -353,6 +373,30 @@ const Enroll = () => {
               <span> Share</span>
             </button>
           </div>
+        </div>
+      </div>
+      <div className={styles.startActivityFooter}>
+        <div className='max-w-[328px] mx-auto'>
+          {
+            isEnrolled ?
+              <SecondaryButton children=
+                {
+                 "Already Enrolled"
+                }
+                // onClick={handleEnroll}
+                className='w-full pt-2.5 pb-2.5' />
+              :
+              <PrimaryButton children=
+                {
+                  next_batch_start_date === null ?
+                    "Register for free" :
+                    is_free ?
+                      "Enroll for free" :
+                      "Enroll"
+                }
+                onClick={handleEnroll}
+                className='w-full pt-2.5 pb-2.5' />
+          }
         </div>
       </div>
     </div>

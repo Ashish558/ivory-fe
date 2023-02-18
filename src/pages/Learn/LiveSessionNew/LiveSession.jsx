@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import styles from './styles.module.css'
+import { useNavigate, useParams } from "react-router-dom";
 
 // import liveSession from './assets/images/learn/liveSession.png';
 import playIcon from "../../../assets/images/enroll/play.png";
@@ -12,79 +13,276 @@ import module3 from "../../../assets/images/learn/module3.png";
 import module4 from "../../../assets/images/learn/module4.png";
 import { tempData } from './data';
 import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
+import { createUserAssignment, createUserModule, getUserAssignments, getUserModules, getUserProgram, updateUserModule } from '../../../services/program';
+import { getFormattedDuration, getFormattedDate } from '../../../utils/utils';
+import ReactPlayer from 'react-player';
+import Assignment from '../Assignment/Assignment';
+import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 
 const LiveSession = () => {
 
   const [sesstionStatus, setSesstionStatus] = useState("");
   const [moduleStatus, setModuleStatus] = useState('running');
-  const [tab, setTab] = useState("liveSession");
+  const [tab, setTab] = useState(0);
   const [tabIndex, setTabIndex] = useState(0)
+  const { id } = useParams()
+  const videoRef = useRef()
+
+  const [selectedModule, setSelectedModule] = useState({})
+  const [allModules, setAllModules] = useState([])
+  const [programData, setProgramData] = useState({})
+  const [userModules, setUserModules] = useState([])
+  const [filteredModules, setFilteredModules] = useState([])
+  const [assignmentPageActive, setAssignmentPageActive] = useState(false)
+
+  const [selectedAssignment, setSelectedAssignment] = useState({})
+  const [allUserAssignments, setAllUserAssignments] = useState([])
+
+  useEffect(() => {
+    if(tab === 0 || tab === 1){
+      setSelectedAssignment({})
+    }
+  }, [tab])
+  const handleModulechange = (id) => {
+    const module = allModules.find(module => module.id === id)
+    // console.log('module', module);
+    setSelectedModule(module)
+    if (checkIfModuleExists(id)) {
+      return
+    }
+    console.log(id)
+    const body = {
+      module: id
+    }
+    createUserModule(body)
+      .then(res => {
+        console.log('module creation res', res.data.data);
+        fetchUserModules()
+      }).catch(err => {
+        console.log(err.response);
+      })
+  }
+  const checkIfModuleExists = (moduleId) => {
+    let exists = false
+    userModules.forEach(item => {
+      if (item.module.id === moduleId) {
+        exists = true
+      }
+    })
+    return exists
+  }
+
+  useEffect(() => {
+    getUserProgram(id)
+      .then(res => {
+        console.log('program res', res.data.data);
+        if (res.data.data === null) return setProgramData({})
+        setProgramData(res.data.data)
+        setAllModules(res.data.data.program.modules)
+      }).catch(err => {
+        console.log(err.response);
+      })
+  }, [id])
+
+
+  const fetchUserModules = () => {
+    getUserModules()
+      .then(res => {
+        console.log('module res', res.data.data);
+        if (res.data.data === null) return
+        setUserModules(res.data.data)
+      }).catch(err => {
+        console.log(err.response);
+      })
+  }
+  useEffect(() => {
+    fetchUserModules()
+  }, [id])
+
+  const getUserModule = () => {
+    const module = userModules.find(userModule => userModule.module.id === selectedModule.id)
+    return module
+  }
+
+  const handleOnVideoEnd = () => {
+    const module = getUserModule()
+    if (!module) return alert('user module bot created')
+    const body = {
+      is_completed: true
+    }
+    updateUserModule(module.id, body)
+      .then(res => {
+        console.log('module update', res.data);
+        fetchUserModules()
+      }).catch(err => {
+        console.log(err.response);
+      })
+    // console.log('video ended', module);
+
+  }
+  //filter tab items
+  useEffect(() => {
+    if (allModules.length === 0) return
+    if (tab === 0) {
+      setFilteredModules(allModules)
+    } else if (tab === 1) {
+      setFilteredModules(allModules.filter(item => item.type === "live_session"))
+    }
+  }, [tab, allModules])
+
+  //get all user assignments
+  const fetchUserAssignments = () => {
+    getUserAssignments()
+      .then(res => {
+        console.log('user assignments - all', res.data);
+        if (res.data.data === null) return
+        setAllUserAssignments(res.data.data)
+      }).catch(err => {
+        console.log(err.response);
+      })
+  }
+  useEffect(() => {
+    fetchUserAssignments()
+  }, [])
+
+  const onClickAssignment = assignmentId => {
+    console.log(assignmentId);
+    if (checkIfAssignmentExists(assignmentId)) {
+      // alert('exist')
+      const userAssignment = allUserAssignments.find(item => item.assignment.id === assignmentId)
+      setSelectedAssignment(userAssignment)
+      return
+    }
+    const body = {
+      assignment: assignmentId
+    }
+    createUserAssignment(body)
+      .then(res => {
+        console.log('assignment creation res', res.data.data);
+        setSelectedAssignment(res.data.data)
+        fetchUserAssignments()
+      }).catch(err => {
+        console.log(err.response);
+      })
+
+  }
+  const checkIfAssignmentExists = (assignmentId) => {
+    let exists = false
+    allUserAssignments.forEach(item => {
+      if (item.assignment.id === assignmentId) {
+        exists = true
+      }
+    })
+    return exists
+  }
+
+  // console.log('allUserAssignments', allUserAssignments)
+  // console.log('selectedAssignment', selectedAssignment)
+  // console.log('userModules', userModules)
+  // console.log('selectedModule', selectedModule)
+  // console.log('filteredModules', filteredModules)
+  // console.log('allModules', allModules)
+  if (!programData) return <></>
+  const { program } = programData
+  if (!program) return <></>
+  const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, assignments, contents, discount, is_free, instructor } = program
+  // console.log('program', program)
+  // console.log('assignments', assignments)
 
   return (
     <div className="mb-28 mt-[0px] lg:px-10 lg:mt-[70px]">
       <div>
-        {tab === "liveSession" && (
+        {tab === 1 && (
           <img src={liveSession} alt="" className="w-full lg:hidden" />
         )}
-        {tab === "allModules" && (
+        {tab === 0 && (
           <div className="video flex justify-center items-center relative lg:hidden">
-            <img src={videoBg} alt="video" className="w-full" />
-            <img src={playIcon} alt="" className="absolute" />
+            {/* <img src={videoBg} alt="video" className="w-full" />
+            <img src={playIcon} alt="" className="absolute" /> */}
+            {
+              selectedModule !== undefined && selectedModule.video ?
+                <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" onEnded={handleOnVideoEnd} >
+                  <source src={selectedModule.video} type="video/mp4" />
+                </video> : <></>
+            }
           </div>
         )}
-        <p className='text-[40px] mb-8 px-10 hidden lg:block font-medium  pt-7'> Publish your own story </p>
+        {/* desktop */}
+        <p className='text-[40px] mb-8 px-10 hidden lg:block font-medium  pt-7'>
+          {name}
+        </p>
+
+        {/* desktop */}
         <div className='flex items-center  hidden lg:flex lg:px-10 gap-x-7 mb-7'>
           <div className=" w-[800px] flex-1 ">
             <div className='video flex h-[451px] justify-center overflow-hidden object-cover items-center relative rounded-[24px]'>
-              <img src={videoBg} alt="video" className="w-full " />
-              <img src={playIcon} alt="" className="absolute" />
+              {
+                selectedModule !== undefined && selectedModule.video ?
+                  <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" onEnded={handleOnVideoEnd} >
+                    <source src={selectedModule.video} type="video/mp4" />
+                  </video> : <></>
+              }
             </div>
             <div className='mt-7'>
               <h4 className='font-semibold text-2xl mb-3'> About this Program </h4>
               <p>
-                For this exercise, you will need a canvas, paint (acrylic or tempera works well), and something to splatter the paint with (such as a paintbrush with stiff bristles or a toothbrush). For this exercise, you will need a canvas, paint (acrylic or tempera works well), and something to splatter the paint with (such as a paintbrush with stiff bristles or a toothbrush).For this exercise, you will need a canvas, paint (acrylic or tempera works well), and something to
+                <div dangerouslySetInnerHTML={{ __html: description }} />
               </p>
             </div>
           </div>
           <div className='max-w-[400px] self-stretch overflow-auto max-h-[700px]'>
-            {[...tempData,].map(item => {
-              return <SingleLiveSession key={item.id} {...item} />
+            {allModules.map(item => {
+              let isCompleted = false
+              userModules.map(userMod => {
+                if (userMod.module.id === item.id) {
+                  if (userMod.is_completed === true) {
+                    isCompleted = true
+                  }
+                }
+              })
+              return <SingleLiveSession key={item.id}
+                {...item}
+                selectedModule={selectedModule}
+                handleModulechange={handleModulechange}
+                isCompleted={isCompleted}
+              />
             })}
           </div>
         </div>
 
         <div className="py-3 px-5 mt-2">
           <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300">
-            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10">
+            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+              onClick={() => setTab(0)} >
               <span className="px-2  lg:px-5">all Modules</span>
-              {tab === "allModules" && (
+              {tab === 0 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
-            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10">
+            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+              onClick={() => setTab(1)}>
               <span className="px-2">Live Sessions</span>
-              {tab === "liveSession" && (
+              {tab === 1 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
-            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10">
+            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+              onClick={() => setTab(2)}>
               Assignments
-              {tab === "assignments" && (
+              {tab === 2 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full " />
               )}
             </li>
           </ul>
         </div>
-        {tab === "allModules" && (
+        {tab === 0 && (
           <div className='block lg:hidden'>
             <div className="text-2xl font-bold text-black ml-6">
-              Learn to paint like a PRO
+              {name}
             </div>
             <div className="text-gray-500 text-lg ml-6">
-              For this exercise, you will need a canvas, paint (acrylic or
-              tempera works well), and something to splatter the paint with
-              (such as a paintbrush with stiff bristles or a toothbrush)....{" "}
-              <span className="text-blue-500"> See more</span>
+              <div dangerouslySetInnerHTML={{ __html: description }} />
+              {/* <span className="text-blue-500"> See more</span> */}
             </div>
           </div>
         )}
@@ -103,7 +301,9 @@ const LiveSession = () => {
             </div>
             <div className="flex flex-col justify-between ml-3 w-[60vw]">
               <div className="flex justify-between">
-                <span className="text-sm text-gray-400">1 hr 25 min</span>
+                <span className="text-sm text-gray-400">
+                  {getFormattedDuration(modules_duration)}
+                </span>
               </div>
               <h1>
                 <span className="text-gray-400">held on</span>
@@ -113,70 +313,77 @@ const LiveSession = () => {
           </div>
         )}
       </div>
-      {sesstionStatus === "upcomming" && (
-        <div>
-          <div className="sessionDetails flex flex-col gap-3 ml-5">
+      {tab === 1 && selectedModule && selectedModule.type === "live_session" && (
+        <div className='px-5'>
+          <div className="sessionDetails flex flex-col gap-3">
             <button className="bg-red-100 text-red-500 p-1 w-[200px] rounded-full mt-5">
               upcomming session
             </button>
             <h1 className="font-bold text-lg">
-              Getting Started with Arcrylics
+              {selectedModule.name}
             </h1>
             <div className="flex flex-col gap-3">
               <ul>
                 <li className="list-none">
                   <span className="text-gray-400 font-semibold">Date: </span>{" "}
-                  <span className="font-bold text-normal">25 Feb 2023</span>
+                  <span className="font-bold text-normal">
+                    {getFormattedDate(selectedModule.scheduled_on_date)}
+                  </span>
                 </li>
                 <li className="list-none">
                   <span className="text-gray-400 font-semibold">Time: </span>{" "}
                   <span className="font-bold text-normal">
-                    02:00 PM to 03:30 PM{" "}
+                    {getFormattedDuration(selectedModule.scheduled_on_start_time)}
+                    {" "}
                   </span>
                 </li>
                 <li className="list-none">
                   <span className="text-gray-400 font-semibold">
                     Duration:{" "}
                   </span>{" "}
-                  <span className="font-bold text-normal">1 hr 30 min</span>
+                  <span className="font-bold text-normal">
+                    {getFormattedDuration(selectedModule.scheduled_on_end_time)}
+                  </span>
                 </li>
                 <li className="list-none">
                   <span className="text-gray-400 font-semibold">Host: </span>{" "}
                   <span className="font-bold text-normal text-blue-500">
-                    Mike Winkelmann
+                    {instructor?.name}
                   </span>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="flex flex-col ml-5 justify-start gap-3">
-            <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-[89%] mt-5">
+          <div className="flex flex-col  justify-start gap-3">
+            <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-full mt-5">
               <ul className="ml-2 mt-2">
                 <li className="list-none text-lg text-gray-400 font-semibold">
                   Zoom Meeting ID:{" "}
-                  <span className="font-bold text-black">340012</span>
+                  <span className="font-bold text-black">
+                    {selectedModule.zoom_meeting_id}
+                  </span>
                 </li>
                 <li className="list-none text-lg text-gray-400 font-semibold">
                   Zoom meeting link:{" "}
                 </li>
-                <li className="list-none text-lg font-semibold text-blue-400">
-                  https://zoom.us/j/1234567890
+                <li className="list-none text-lg font-semibold text-blue-400 break-all">
+                  {selectedModule.zoom_meeting_link}
                 </li>
               </ul>
             </div>
-            <button className="bg-sky-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center">
+            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center">
               {" "}
-              Join Joom Session
+              Join Zoom Session
             </button>
           </div>
         </div>
       )}
-      {tab === "liveSession" && (
+      {tab === 1 && (
         <h1 className="font-bold text-lg ml-5 mt-5">
           upcoming live sessions
         </h1>
       )}
-      {tab === "allModules" && (
+      {tab === 0 && (
         <div className="text-black text-lg ml-6 font-bold mt-5">
           8 Videos
           <span className="text-gray-500 text-normal font-normal">
@@ -186,11 +393,40 @@ const LiveSession = () => {
           | 4 live sessions
         </div>
       )}
-      <div className='lg:max-w-[350px]'>
-      {tempData.map(item => {
-        return <SingleLiveSession key={item.id} {...item} />
-      })}
-      </div>
+      {
+        tab === 0 || tab === 1 ?
+          <div className='lg:max-w-[350px]'>
+            {filteredModules.map(item => {
+              let isCompleted = false
+              userModules.map(userMod => {
+                if (userMod.module.id === item.id) {
+                  if (userMod.is_completed === true) {
+                    isCompleted = true
+                  }
+                }
+              })
+              return <SingleLiveSession key={item.id}
+                {...item}
+                selectedModule={selectedModule}
+                handleModulechange={handleModulechange}
+                isCompleted={isCompleted}
+              />
+            })}
+          </div> : Object.keys(selectedAssignment).length > 2 ?
+            <Assignment selectedAssignment={selectedAssignment}
+             fetchUserAssignments={fetchUserAssignments}
+              assignments={assignments}
+              onClickAssignment={onClickAssignment}
+               /> :
+            <div className='lg:max-w-[350px]'>
+              {assignments.map(assignment => {
+                return <SingleAssignment key={assignment.id} {...assignment}
+                  onClickAssignment={onClickAssignment} />
+              })}
+            </div>
+
+        // <Assignment />
+      }
     </div>
   );
 };

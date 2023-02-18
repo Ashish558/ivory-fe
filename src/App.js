@@ -1,6 +1,6 @@
-import React,{ useEffect,useState } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import { BrowserRouter,Navigate,Route,Routes } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
@@ -14,7 +14,7 @@ import Navbar from './pages/Navbar/Navbar';
 import Congrates from './pages/SignUp/Congrates';
 import SignUp from './pages/SignUp/SignUp';
 import StartActivity from './pages/StartActivity/StartActivity';
-import { updateLoggedIn,updateProfileData } from './redux/slices/user';
+import { updateLoggedIn, updateProfileData } from './redux/slices/user';
 import { refreshToken } from './services/auth';
 import { getUserDetail } from './services/user';
 
@@ -39,9 +39,9 @@ import Confirmation from './pages/Learn/Confirmation/Confirmation';
 import Community from './pages/Learn/Community/Community';
 function App() {
   //true for now will change later
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { loggedIn,profileData } = useSelector(state => state.user)
+  const { loggedIn, profileData } = useSelector(state => state.user)
 
   useEffect(() => {
     if (localStorage.getItem('refresh')) {
@@ -52,7 +52,7 @@ function App() {
       refreshToken(body)
         .then(res => {
           // console.log('ref res', res.data.data.access);
-          localStorage.setItem('access',res.data.data.access)
+          localStorage.setItem('access', res.data.data.access)
           dispatch(updateLoggedIn({ loggedIn: true }))
           fetchUserDetails(true)
 
@@ -60,12 +60,12 @@ function App() {
         }).catch(err => {
           setLoading(false)
           dispatch(updateLoggedIn({ loggedIn: false }))
-          console.log('ref err',err.response);
+          console.log('ref err', err.response);
         })
     } else {
       setLoading(false)
     }
-  },[])
+  }, [])
 
   const fetchUserDetails = (isInitial) => {
     getUserDetail()
@@ -77,7 +77,7 @@ function App() {
         }
       })
       .catch(err => {
-        console.log('profile err',err);
+        console.log('profile err', err);
         if (isInitial) {
           dispatch(updateLoggedIn({ loggedIn: false }))
           setLoading(false)
@@ -87,7 +87,7 @@ function App() {
 
   useEffect(() => {
     fetchUserDetails()
-  },[loggedIn])
+  }, [loggedIn])
 
   if (loading === true) return <></>
 
@@ -97,10 +97,11 @@ function App() {
       <NavbarDesktop />
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/enroll" element={<Enroll />} />
         <Route path="/live-events" element={<LiveEvents />} />
         <Route path="/live-events/:id" element={<SingleSession />} />
-        <Route path="/live" element={<LiveSession />} />
+
+        <Route path="/program/:id" element={<LiveSession />} />
+        
         <Route path="/otp" element={<Otp />} />
         <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
@@ -112,6 +113,7 @@ function App() {
         <Route exact path='/second' element={<Second />}></Route>
         <Route exact path='/third' element={<Third />}></Route>
         <Route exact path='/four' element={<Four />}></Route>
+        <Route exact path="/learn" element={<Learn />}></Route>
 
         <Route
           path="/CreateProfile"
@@ -133,6 +135,7 @@ function App() {
           }
         />
         <Route
+     
           path="/confirmation"
           element={
             <Confirmation />
@@ -150,6 +153,8 @@ function App() {
             <Learn />
           }
         />
+        <Route path="/learn/:id" element={<Enroll />} />
+
         <Route
           path="/Assignment"
           element={
@@ -182,7 +187,7 @@ function App() {
   );
 }
 
-function RequireAuth({ children,loggedIn }) {
+function RequireAuth({ children, loggedIn }) {
   return loggedIn ? children : <Navigate to="/" />;
 }
 
