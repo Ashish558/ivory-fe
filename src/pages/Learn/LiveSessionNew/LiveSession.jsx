@@ -13,9 +13,11 @@ import module3 from "../../../assets/images/learn/module3.png";
 import module4 from "../../../assets/images/learn/module4.png";
 import { tempData } from './data';
 import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
-import { createUserModule, getUserModules, getUserProgram, updateUserModule } from '../../../services/program';
+import { createUserAssignment, createUserModule, getUserAssignments, getUserModules, getUserProgram, updateUserModule } from '../../../services/program';
 import { getFormattedDuration, getFormattedDate } from '../../../utils/utils';
 import ReactPlayer from 'react-player';
+import Assignment from '../Assignment/Assignment';
+import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 
 const LiveSession = () => {
 
@@ -31,10 +33,19 @@ const LiveSession = () => {
   const [programData, setProgramData] = useState({})
   const [userModules, setUserModules] = useState([])
   const [filteredModules, setFilteredModules] = useState([])
+  const [assignmentPageActive, setAssignmentPageActive] = useState(false)
 
+  const [selectedAssignment, setSelectedAssignment] = useState({})
+  const [allUserAssignments, setAllUserAssignments] = useState([])
+
+  useEffect(() => {
+    if(tab === 0 || tab === 1){
+      setSelectedAssignment({})
+    }
+  }, [tab])
   const handleModulechange = (id) => {
     const module = allModules.find(module => module.id === id)
-    console.log('module', module);
+    // console.log('module', module);
     setSelectedModule(module)
     if (checkIfModuleExists(id)) {
       return
@@ -119,14 +130,64 @@ const LiveSession = () => {
     }
   }, [tab, allModules])
 
+  //get all user assignments
+  const fetchUserAssignments = () => {
+    getUserAssignments()
+      .then(res => {
+        console.log('user assignments - all', res.data);
+        if (res.data.data === null) return
+        setAllUserAssignments(res.data.data)
+      }).catch(err => {
+        console.log(err.response);
+      })
+  }
+  useEffect(() => {
+    fetchUserAssignments()
+  }, [])
+
+  const onClickAssignment = assignmentId => {
+    console.log(assignmentId);
+    if (checkIfAssignmentExists(assignmentId)) {
+      // alert('exist')
+      const userAssignment = allUserAssignments.find(item => item.assignment.id === assignmentId)
+      setSelectedAssignment(userAssignment)
+      return
+    }
+    const body = {
+      assignment: assignmentId
+    }
+    createUserAssignment(body)
+      .then(res => {
+        console.log('assignment creation res', res.data.data);
+        setSelectedAssignment(res.data.data)
+        fetchUserAssignments()
+      }).catch(err => {
+        console.log(err.response);
+      })
+
+  }
+  const checkIfAssignmentExists = (assignmentId) => {
+    let exists = false
+    allUserAssignments.forEach(item => {
+      if (item.assignment.id === assignmentId) {
+        exists = true
+      }
+    })
+    return exists
+  }
+
+  // console.log('allUserAssignments', allUserAssignments)
+  // console.log('selectedAssignment', selectedAssignment)
   // console.log('userModules', userModules)
-  console.log('selectedModule', selectedModule)
+  // console.log('selectedModule', selectedModule)
+  // console.log('filteredModules', filteredModules)
   // console.log('allModules', allModules)
   if (!programData) return <></>
   const { program } = programData
   if (!program) return <></>
-  const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, contents, discount, is_free, instructor } = program
-  console.log('program', program)
+  const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, assignments, contents, discount, is_free, instructor } = program
+  // console.log('program', program)
+  // console.log('assignments', assignments)
 
   return (
     <div className="mb-28 mt-[0px] lg:px-10 lg:mt-[70px]">
@@ -155,19 +216,36 @@ const LiveSession = () => {
         <div className='flex items-center  hidden lg:flex lg:px-10 gap-x-7 mb-7'>
           <div className=" w-[800px] flex-1 ">
             <div className='video flex h-[451px] justify-center overflow-hidden object-cover items-center relative rounded-[24px]'>
-              <img src={videoBg} alt="video" className="w-full " />
-              <img src={playIcon} alt="" className="absolute" />
+              {
+                selectedModule !== undefined && selectedModule.video ?
+                  <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" onEnded={handleOnVideoEnd} >
+                    <source src={selectedModule.video} type="video/mp4" />
+                  </video> : <></>
+              }
             </div>
             <div className='mt-7'>
               <h4 className='font-semibold text-2xl mb-3'> About this Program </h4>
               <p>
-                {description}
+                <div dangerouslySetInnerHTML={{ __html: description }} />
               </p>
             </div>
           </div>
           <div className='max-w-[400px] self-stretch overflow-auto max-h-[700px]'>
-            {[...tempData,].map(item => {
-              return <SingleLiveSession key={item.id} {...item} />
+            {allModules.map(item => {
+              let isCompleted = false
+              userModules.map(userMod => {
+                if (userMod.module.id === item.id) {
+                  if (userMod.is_completed === true) {
+                    isCompleted = true
+                  }
+                }
+              })
+              return <SingleLiveSession key={item.id}
+                {...item}
+                selectedModule={selectedModule}
+                handleModulechange={handleModulechange}
+                isCompleted={isCompleted}
+              />
             })}
           </div>
         </div>
@@ -235,7 +313,7 @@ const LiveSession = () => {
           </div>
         )}
       </div>
-      {tab === 1 && selectedModule && (
+      {tab === 1 && selectedModule && selectedModule.type === "live_session" && (
         <div className='px-5'>
           <div className="sessionDetails flex flex-col gap-3">
             <button className="bg-red-100 text-red-500 p-1 w-[200px] rounded-full mt-5">
@@ -289,7 +367,7 @@ const LiveSession = () => {
                   Zoom meeting link:{" "}
                 </li>
                 <li className="list-none text-lg font-semibold text-blue-400 break-all">
-                {selectedModule.zoom_meeting_link}
+                  {selectedModule.zoom_meeting_link}
                 </li>
               </ul>
             </div>
@@ -315,14 +393,40 @@ const LiveSession = () => {
           | 4 live sessions
         </div>
       )}
-      <div className='lg:max-w-[350px]'>
-        {filteredModules.map(item => {
-          return <SingleLiveSession key={item.id}
-            {...item}
-            selectedModule={selectedModule}
-            handleModulechange={handleModulechange} />
-        })}
-      </div>
+      {
+        tab === 0 || tab === 1 ?
+          <div className='lg:max-w-[350px]'>
+            {filteredModules.map(item => {
+              let isCompleted = false
+              userModules.map(userMod => {
+                if (userMod.module.id === item.id) {
+                  if (userMod.is_completed === true) {
+                    isCompleted = true
+                  }
+                }
+              })
+              return <SingleLiveSession key={item.id}
+                {...item}
+                selectedModule={selectedModule}
+                handleModulechange={handleModulechange}
+                isCompleted={isCompleted}
+              />
+            })}
+          </div> : Object.keys(selectedAssignment).length > 2 ?
+            <Assignment selectedAssignment={selectedAssignment}
+             fetchUserAssignments={fetchUserAssignments}
+              assignments={assignments}
+              onClickAssignment={onClickAssignment}
+               /> :
+            <div className='lg:max-w-[350px]'>
+              {assignments.map(assignment => {
+                return <SingleAssignment key={assignment.id} {...assignment}
+                  onClickAssignment={onClickAssignment} />
+              })}
+            </div>
+
+        // <Assignment />
+      }
     </div>
   );
 };

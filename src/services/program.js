@@ -43,3 +43,24 @@ export const getUserModules = () => {
 export const updateUserModule = (id, body) => {
    return axios.patch(`${BASE_URL}/program/user-modules/${id}/`, body, getAuthHeaders())
 };
+
+
+//assignments
+export const getUserAssignments = (id) => {
+   return axios.get(`${BASE_URL}/program/user-assignments/`, getAuthHeaders())
+};
+export const getUserAssignmentSubmissions = () => {
+   return axios.get(`${BASE_URL}/program/user-assignment-submissions/`, getAuthHeaders())
+};
+
+export const createUserAssignment = (body) => {
+   return axios.post(`${BASE_URL}/program/user-assignments/`, body, getAuthHeaders())
+};
+
+export const updateUserAssignment = (id, body) => {
+   return axios.patch(`${BASE_URL}/program/user-assignments/${id}/`, body, getAuthHeaders())
+};
+
+export const deleteUserSubmission = (id) => {
+   return axios.delete(`${BASE_URL}/program/user-assignment-submissions/${id}/`, getAuthHeaders())
+};
