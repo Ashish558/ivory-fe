@@ -242,7 +242,7 @@ const Profile = () => {
             </p>
           </div>
           <div className={`${styles.formimg} `}>
-            <div className={styles.form}>
+            <div className={`${styles.form} w-[45vw]`}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
                 <input type="text" placeholder='Sahil Wadhwa' value={name}
@@ -300,7 +300,7 @@ const Profile = () => {
                 {
                   interest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
-                      className={`${styles.chooseinput} sm:w-[50%]`}>
+                      className={`${styles.chooseinput} sm:w-[58%]`}>
                       <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>
                     </div>
                     :
@@ -326,7 +326,10 @@ const Profile = () => {
               </div>
 
             </div>
+            <div className='w-[55vw]'>
+
             <img src={ivoryforming} className={styles.ivoryForm} alt="" />
+            </div>
           </div>
 
           <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
@@ -360,7 +363,7 @@ const Profile = () => {
                 </div>
                 <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                   {
-                    interest.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button> : <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={crossbox}>Add</button>
+                    interest.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={crossbox}>Add</button>
                   }
                 </div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />

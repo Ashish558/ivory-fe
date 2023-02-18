@@ -25,19 +25,14 @@ const settings = {
 };
 
 const sliderData = [
+
   {
-    textPrimary: 'Accomplish',
-    textSec: 'your creative goals',
-    img: loginMan,
-    imgClassName: ''
-  },
-  {
-    textPrimary: 'Accomplish',
-    textSec: 'your creative goals',
+    textPrimary: "Accomplish",
+    textSec: "your creative goals",
     img: SignupTree,
-    imgClassName: 'max-w-[270px]'
+    imgClassName: "max-w-[270px]",
   },
-]
+];
 const Login = () => {
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState(null);
@@ -155,7 +150,7 @@ const Login = () => {
                 name="countryCode"
                 id=""
                 style={{ appearance: "none" }}
-                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-lg"
+                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-[16px]"
               >
                 <option value="+91" selected>
                   +91

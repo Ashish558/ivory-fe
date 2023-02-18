@@ -315,7 +315,7 @@ export default function StartActivity({ fetchUserDetails }) {
             <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
 
                <p className='text-xl sm:text-2xl lg:mt-3 lg:mb-4 font-semibold mb-1.5'> Description </p>
-               <p className='text-sm sm:text-xl lg:max-w-[748px]'>
+               <p className='text-sm sm:text-[16px] lg:max-w-[748px]'>
                   {description}
                </p>
                {
@@ -334,7 +334,7 @@ export default function StartActivity({ fetchUserDetails }) {
                                  </p>
                                  {step.image &&
                                     <div className={styles.stepImageContainer}>
-                                       <img src={step.image} alt='step-image' />
+                                       <img src={step.image} className='w-full object-contain'  alt='step-image' />
                                     </div>
                                  }
                                  <div className='font-normal text-sm md:text-base '>

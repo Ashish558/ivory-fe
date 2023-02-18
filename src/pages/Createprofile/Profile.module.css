@@ -1,3 +1,4 @@
+
 @media screen and (min-width: 767px) {
  
 
@@ -370,6 +371,7 @@
 }
 
 @media screen and (max-width: 767px) {
+
   .ivoryForm {
     display: none;
   }
@@ -919,9 +921,7 @@
     background-color: #bdf4ff;
     margin-right: 3px;
   }
-  .divaddinput > p {
-  }
-
+  
 }
 .interestSelected.butt1 {
   border: 0;

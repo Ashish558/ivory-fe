@@ -126,7 +126,7 @@
 
 @media only screen and (min-width: 976px) {
   .stepImageContainer {
-    width: 748px;
+    width: 100%;
     max-width: 748px;
     height: 396px;
     margin-bottom: 1rem;
@@ -136,7 +136,7 @@
 
   .stepImageContainer img {
     border-radius: 48px;
-    object-fit: cover;
+    object-fit: fill;
     width: 748px;
     height: 100%;
     object-position: center;

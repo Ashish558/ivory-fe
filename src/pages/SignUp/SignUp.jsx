@@ -26,18 +26,18 @@ const settings = {
 };
 const sliderData = [
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: "Engage",
+    textSec: "in interests that sharpen your mind",
     img: loginMan,
-    imgClassName: ''
+    imgClassName: "",
   },
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: "Accomplish",
+    textSec: "your creative goals",
     img: SignupTree,
-    imgClassName: 'max-w-[270px]'
+    imgClassName: "max-w-[270px]",
   },
-]
+];
 const SignUp = () => {
   const locaion = useLocation ();
   const from = locaion.state?.from || "/";
@@ -99,27 +99,32 @@ const SignUp = () => {
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className='flex-1 w-full'>
-            <Slider {...settings} className='w-full flex-1 h-auto' >
-              {
-                sliderData.map((item, idx) => {
-                  return (
-                    <div>
-                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
-                        <h1
-                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
-                        >
-                          <span className="text-[#59E3FF]"> {item.textPrimary} </span>
-                          {item.textSec}
-                        </h1>
-                      </div>
-                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
-                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
-                      </div>
+          <div className="flex-1 w-full">
+            <Slider {...settings} className="w-full flex-1 h-auto">
+              {sliderData.map((item, idx) => {
+                return (
+                  <div>
+                    <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                      <h1
+                        className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                      >
+                        <span className="text-[#59E3FF]">
+                          {" "}
+                          {item.textPrimary}{" "}
+                        </span>
+                        {item.textSec}
+                      </h1>
                     </div>
-                  )
-                })
-              }
+                    <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                      <img
+                        src={item.img}
+                        alt=""
+                        className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </Slider>
           </div>
         </div>
@@ -128,12 +133,12 @@ const SignUp = () => {
             onSubmit={(e) => handleSubmit(e)}
             className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
           >
-            <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
+            <h1 className="text-[22px] font-bold ml-8 sm:ml-0 sm:text-left">
               &#128075; Hi, <br /> Welcome to Ivory!
             </h1>
             <div class="w-full sm:w-[300px] mx-auto mt-4 relative">
               <input
-                class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
+                class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-[16px]"
                 // type="tel"
                 type={JSON.stringify(phone)?.length < 11 ? "number" : "text"}
                 maxLength="11"
@@ -147,7 +152,7 @@ const SignUp = () => {
                 name="countryCode"
                 id=""
                 style={{ appearance: "none" }}
-                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-lg"
+                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-base"
               >
                 <option value="+91" selected>
                   +91
