@@ -285,12 +285,12 @@ const Profile = () => {
                   <div className={`w-full border border-gray-600 flex justify-between items-center px-2 sm:px-5 rounded-md ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
-                      <span className='text-blue-600 font-bold text-xl absolute top-3 right-6'> &#10003; </span> : ''}
+                      <span className='text-black font-bold text-xl absolute top-3 right-6'> &#10003; </span> : ''}
                   </div>
-                  <div className={`w-full border border-gray-500 flex justify-between items-center px-2 sm:px-5 rounded-md  items-center ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
+                  <div className={`w-full border border-gray-500 flex justify-between items-center px-2 sm:px-5 rounded-md   ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Female</label>
                     {gender === 'female' ?
-                      <span className='text-blue-600 font-bold text-xl absolute top-3 right-6'> &#10003; </span> : ''}
+                      <span className='text-black font-bold text-xl absolute top-3 right-6'> &#10003; </span> : ''}
                   </div>
                 </div>
               </div>
@@ -364,7 +364,7 @@ const Profile = () => {
                   }
                 </div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />
-                <p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
+                <p className='text-left py-2 text-lg sm:text-md text-blue-800 underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
               </>
             } />
 
@@ -389,7 +389,7 @@ const Profile = () => {
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-2 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-lg lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
+                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-3 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-md lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                     {

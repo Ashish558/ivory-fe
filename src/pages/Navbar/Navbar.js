@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
 
-const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing']
+const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing','/confirmation','/live','/enroll','/community','/learn']
 const basePaths = ['/home', '/activities']
 
 const Navbar = () => {

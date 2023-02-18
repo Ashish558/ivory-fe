@@ -30,11 +30,13 @@ import Third from './pages/splash/Third';
 // import LogoLanding from './pages/splash/LogoLanding';
 import Enroll from './pages/Learn/Enroll/Enroll';
 import LiveSession from './pages/Learn/LiveSessionNew/LiveSession';
-import LiveEvents from './pages/LiveEvents/LiveEvents';
 import Dob from './pages/SignUp/Dob';
+import LiveEvents from './pages/LiveEvents/LiveEvents';
 import SingleSession from './pages/SingleSession/SingleSession';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
+import Confirmation from './pages/Learn/Confirmation/Confirmation';
+import Community from './pages/Learn/Community/Community';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -111,6 +113,7 @@ function App() {
         <Route exact path='/second' element={<Second />}></Route>
         <Route exact path='/third' element={<Third />}></Route>
         <Route exact path='/four' element={<Four />}></Route>
+        <Route exact path="/learn" element={<Learn />}></Route>
 
         <Route
           path="/CreateProfile"
@@ -132,7 +135,23 @@ function App() {
           }
         />
         <Route
-          path="/learn" element={<Learn />}
+     
+          path="/confirmation"
+          element={
+            <Confirmation />
+          }
+        />
+        <Route
+          path="/community"
+          element={
+            <Community />
+          }
+        />
+        <Route
+          path="/learn"
+          element={
+            <Learn />
+          }
         />
         <Route path="/learn/:id" element={<Enroll />} />
 

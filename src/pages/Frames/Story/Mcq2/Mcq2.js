@@ -146,7 +146,7 @@ export default function Mcq2({ image, choices, url, updateStory, type, question}
                ?
                mcqResponse.isCorrect === true ?
                   <div className={`${styles.mcqResponseCorrect} lg:row-span-4`}>
-                     <img src={McqCorrectImg} className={styles.storyImage} />
+                     <img src={McqCorrectImg} className={styles.storyImage} alt='' />
                      <div className='px-4'>
                         <h2>
                            Genius

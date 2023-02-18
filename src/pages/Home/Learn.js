@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import AcivityContent from '../../components/ActivityContent/ActivityContent'
 import Filterbar from '../../components/Filterbar/filterbar'

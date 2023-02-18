@@ -45,15 +45,6 @@ const sliderData = [
 
 const Dob = () => {
   const locaion = useLocation();
-  const [date, setDate] = React.useState(16);
-  const [date2, setDate2] = React.useState(17);
-  const [date3, setDate3] = React.useState(18);
-  const [year, setYear] = React.useState(1966);
-  const [year2, setYear2] = React.useState(1967);
-  const [year3, setYear3] = React.useState(1968);
-  const [monthPosition, setMonthPosition] = React.useState(8);
-  const [monthPosition2, setMonthPosition2] = React.useState(9);
-  const [monthPosition3, setMonthPosition3] = React.useState(10);
   const [name, setName] = React.useState("");
 
   const dateSliderRef = useRef();
@@ -131,7 +122,7 @@ const Dob = () => {
   const stateData = locaion?.state;
   const { otp, otp_token, phone, countryCode } = stateData;
   const dispatch = useDispatch()
-
+    console.log(stateData);
   const navigate = useNavigate();
   const goBack = () => {
     navigate(from, {
@@ -208,10 +199,6 @@ const Dob = () => {
 
   }
 
-  // console.log('dates', totalDates);
-  // console.log('years', totalYears);
-  // console.log('dateData', dateData);
-
   return (
     <div className="h-screen overflow-x-hidden   bg-[#EEFDFC]">
       <div className="topAppBar mt-10 ml-8 sm:hidden">
@@ -223,7 +210,7 @@ const Dob = () => {
       </div>
       <div className="sm:flex min-h-[100px] lg:min-h-[600px] overflow-y-auto  justify-around w-screen mt-0 sm:m-0">
         <div
-          className="hidden sm:flex flex flex-col items-center min-h-screen self-stretch sm:w-[40vw]"
+          className="hidden sm:flex flex-col items-center min-h-screen self-stretch sm:w-[40vw]"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
@@ -232,37 +219,41 @@ const Dob = () => {
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
             <img src={logo} alt="" />
           </div>
-          <div className='flex-1 w-full'>
-            <Slider {...settings} className='w-full flex-1 h-auto' >
-              {
-                sliderData.map((item, idx) => {
-                  return (
-                    <div>
-                      <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
-                        <h1
-                          className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
-                        >
-                          <span className="text-[#59E3FF] font-black	"> {item.textPrimary} </span>
-                          {item.textSec}
-                        </h1>
-                      </div>
-                      <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
-                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
-                      </div>
+          <div className="flex-1 w-full">
+            <Slider {...settings} className="w-full flex-1 h-auto">
+              {sliderData.map((item, idx) => {
+                return (
+                  <div>
+                    <div className="flex flex-col items-left justify-center gap-2 h-[200px] xl:pl-20 md:pl-10 pl-0 sm:w-[500px]">
+                      <h1
+                        className={`text-4xl font-bold text-sky-50 mt-10 ${styles.cusStyle}`}
+                      >
+                        <span className="text-[#59E3FF] font-black	">
+                          {" "}
+                          {item.textPrimary}{" "}
+                        </span>
+                        {item.textSec}
+                      </h1>
                     </div>
-                  )
-                })
-              }
-
+                    <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
+                      <img
+                        src={item.img}
+                        alt=""
+                        className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </Slider>
           </div>
         </div>
         <div className="mt-10 h-scren lg:h-auto sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center">
           <form
             onSubmit={handleReg}
-            className="sm:w-[328px] mx-auto sm:flex sm:flex-col sm:justify-start"
+            className="sm:w-[330px] mx-auto sm:flex sm:flex-col sm:justify-start"
           >
-            <div className=" w-[300px] mx-auto relative lg:w-full">
+            <div className=" w-[330px] mx-auto relative lg:w-full">
               <h1 className="text-2xl font-bold  sm:ml-0 mb-6 lg:text-[22px]">
                 &#128588; Create an account
               </h1>
@@ -270,7 +261,7 @@ const Dob = () => {
                 Name
               </label>
               <input
-                className=" w-full sm:w-[300px]  px-4 py-4 sm:py-4 text-gray-700 bg-white border  border-gray-400 shadow-sm placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-md sm:rounded-md sm:ml-0 mt-5 sm:text-lg"
+                className=" w-full sm:w-[330px]  px-4 py-4 sm:py-4 text-gray-700 bg-white border  border-gray-400 shadow-sm placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-md sm:rounded-md sm:ml-0 mt-5 sm:text-lg"
                 type="text"
                 placeholder="Name"
                 onChange={(e) => handleName(e)}
@@ -278,18 +269,30 @@ const Dob = () => {
               />
               <p className="text-red-500 text-sm">{nameError}</p>
             </div>
-            <p className='font-semibold lg:w-full mx-auto lg:mt-6'> Date Of Birth </p>
+            <p className="font-semibold lg:w-full mx-auto lg:mt-6 w-[330px] mt-6">
+              {" "}
+              Date Of Birth{" "}
+            </p>
 
-
-            <div className='flex items-center relative h-[174px] gap-x-3 px-[33px] w-[328px] mx-auto z-10 mt-8 lg:mt-0'>
-              <Slider {...dateSettings} className={` h-[174px] w-[48px] dateSlider`} ref={dateSliderRef} >
-                {totalDates.map(str => {
-                  return <div className='px-2 py-4 flex justify-center items-center text-center'>
-                    <p> {str} </p>
-                  </div>
+            <div className="flex items-center relative h-[174px] gap-x-3 px-[33px] w-[328px] mx-auto z-10 mt-0 lg:mt-0">
+              <Slider
+                {...dateSettings}
+                className={` h-[174px] w-[48px] dateSlider`}
+                ref={dateSliderRef}
+              >
+                {totalDates.map((str) => {
+                  return (
+                    <div className="px-2 py-4 flex justify-center items-center text-center">
+                      <p> {str} </p>
+                    </div>
+                  );
                 })}
               </Slider>
-              <Slider {...monthsSettings} className=' h-[174px] w-[130px] dateSlider' ref={monthSliderRef} >
+              <Slider
+                {...monthsSettings}
+                className=" h-[174px] w-[130px] dateSlider"
+                ref={monthSliderRef}
+              >
                 {months.map((str, i) => {
                   return (
                     <div className="px-2 py-4 flex justify-center items-center text-center">
@@ -298,11 +301,17 @@ const Dob = () => {
                   );
                 })}
               </Slider>
-              <Slider {...yearsSettings} className=' h-[174px] w-[72px] dateSlider' ref={yearSliderRef} >
-                {totalYears.map(str => {
-                  return <div className='px-2 py-4 flex justify-center items-center text-center'>
-                    <p> {str} </p>
-                  </div>
+              <Slider
+                {...yearsSettings}
+                className=" h-[174px] w-[72px] dateSlider"
+                ref={yearSliderRef}
+              >
+                {totalYears.map((str) => {
+                  return (
+                    <div className="px-2 py-4 flex justify-center items-center text-center">
+                      <p> {str} </p>
+                    </div>
+                  );
                 })}
               </Slider>
               <div className={styles.sliderMiddleBg}> </div>
@@ -324,7 +333,7 @@ const Dob = () => {
               ) : (
                 <button
                   type="submit"
-                  className="bg-[#1B72C0]  lg:h-[43px] flex items-center font-semibold lg:text-sm  text-xl py-2 px-20 rounded-full text-white w-[80vw] sm:w-[328px] text-center justify-center flex mx-auto mt-2 lg:mx-0"
+                  className="bg-[#1B72C0]  lg:h-[43px]  items-center font-semibold lg:text-sm  text-xl py-2 px-20 rounded-full text-white w-[80vw] sm:w-[328px] text-center justify-center flex mx-auto mt-2 lg:mx-0"
                 >
                   Continue
                 </button>

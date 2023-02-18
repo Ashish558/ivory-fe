@@ -54,6 +54,9 @@ const Enroll = () => {
   }, [id, loggedIn])
 
   const handleEnroll = () => {
+    if(!loggedIn){
+      navigate('/login')
+    }
     const body = {
       state: 'na',
       payment_status: 'na',

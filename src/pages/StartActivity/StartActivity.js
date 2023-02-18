@@ -304,9 +304,9 @@ export default function StartActivity({ fetchUserDetails }) {
                         </video> */}
                      </div>
                      :
-                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
+                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%] '>
                         <img src={image === null ? ActivityIcon : image}
-                           className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
+                           className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto h-[200px] sm:h-[auto]`} alt='Profile' />
                      </div>
                }
 
