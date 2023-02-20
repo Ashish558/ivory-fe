@@ -30,7 +30,7 @@ const Profile = () => {
   const dispatch = useDispatch()
   const [error,setError] = useState('')
   const [empty,setEmpty] = useState(true)
-
+  const [addModal,setModal] = useState(false)
 
   const { loggedIn,profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
@@ -54,7 +54,7 @@ const Profile = () => {
   const fetchInterests = () => {
     getInterests()
       .then(res => {
-        console.log('All Interests', res.data.data);
+        console.log('All Interests',res.data.data);
 
         let intData = res.data.data
         intData = intData.filter(item => {
@@ -146,7 +146,7 @@ const Profile = () => {
           id: res.data.data.id,
           name: res.data.data.name,
         }
-        
+
       })
       .catch(err => {
         console.log(err);
@@ -169,11 +169,13 @@ const Profile = () => {
   const addnew = () => {
 
     setaddnewtextdiv(true)
+    crossbox ()
     setbackcolor('rgb(145 165 186)')
   }
   const addcrossbox = () => {
-
+    
     setaddnewtextdiv(false);
+    openinterest()
     // setbackcolor('#001C38')
   }
 
@@ -231,7 +233,7 @@ const Profile = () => {
             <div className={styles.ssmmillee}>
               <img src={profileData.profile_picture ? profileData.profile_picture : photo}
                 className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt=""
-    
+
                 onClick={() => photoRef.current.click()} />
               <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
                 onChange={(e) => handlePhotoUpload(e)} />
@@ -285,12 +287,12 @@ const Profile = () => {
                   <div className={`w-full border border-gray-600 flex justify-between items-center px-2 sm:px-5 rounded-md ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
-                      <span className='text-black font-bold text-xl absolute top-3 right-6'> &#10003; </span> : ''}
+                      <span className='text-black  text-xl absolute top-4 right-6'> &#x2714; </span> : ''}
                   </div>
                   <div className={`w-full border border-gray-500 flex justify-between items-center px-2 sm:px-5 rounded-md   ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
                     <label className='py-4 text-lg' htmlFor="">Female</label>
                     {gender === 'female' ?
-                      <span className='text-black font-bold text-xl absolute top-3 right-6'> &#10003; </span> : ''}
+                      <span className='text-black font-bold text-xl absolute top-4 right-6'> &#10003; </span> : ''}
                   </div>
                 </div>
               </div>
@@ -328,7 +330,7 @@ const Profile = () => {
             </div>
             <div className='w-[55vw]'>
 
-            <img src={ivoryforming} className={styles.ivoryForm} alt="" />
+              <img src={ivoryforming} className={styles.ivoryForm} alt="" />
             </div>
           </div>
 
@@ -337,25 +339,25 @@ const Profile = () => {
 
         </div>
 
-        {showdiv == true ?
-          <Modal classname='max-w-[370px] pt-0 md:pt-6 rounded-[20px] sm:max-w-[740px] overflow-hidden'
+        {showdiv === true ?
+          <Modal classname='max-w-[355px] pt-0 md:pt-6 rounded-[20px] sm:max-w-[740px] overflow-hidden'
             body={
               <>
-                <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
+                <div className={`${styles.int} py-3 flex justify-center items-center ml-5`}>
                   <img src={cross} onClick={crossbox} alt="" className={styles.closeinterest} />{/*-------------Cross the open interest page selecting---------------*/}
-                  <p className={`${styles.intp} font-semibold`}>Interests</p>
+                  <p className={`${styles.intp} font-semibold `}>Interests</p>
                 </div>
                 <hr className={styles.brk} />
                 <p className={`py-4 font-semibold sm:ml-6 ml-3`}>Choose one or more:</p>
-                <div className='flex flex-wrap gap-3 sm:ml-6 ml-3'>
+                <div className='flex flex-wrap gap-2 sm:ml-6 ml-3'>
 
                   {
                     allInterests.map((int,i) => {
-                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer  rounded-md px-3 py-1 font-semibold ${filterIndexIds.includes(int.id) ? 'bg-secondary' : 'border border-[#79747E] '}`} 
-                      // style={{ border: '2px solid #939CA3' }}
+                      return <div className={`text-lg flex justify-center flex-row items-center gap-1 cursor-pointer  rounded-md px-3 py-1 text-black ${filterIndexIds.includes(int.id) ? 'bg-secondary' : 'border border-[#79747E] '}`}
+                        // style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int)}>
-                        <img src={int.icon} alt="" />
+                        <img src={int.icon} className='w-5' alt="" />
                         <h3> {int.name} </h3>
                       </div>
                     })
@@ -363,11 +365,11 @@ const Profile = () => {
                 </div>
                 <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                   {
-                    interest.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={crossbox}>Add</button>
+                    interest.length === 0 ? <button className='py-2 bg-[#9EBEE7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={crossbox}>Add</button>
                   }
                 </div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />
-                <p className='text-left py-2 text-lg sm:text-md text-blue-800 underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
+                <p className='text-left py-2 text-lg sm:text-md text-[#1B72C0] underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
               </>
             } />
 
@@ -377,7 +379,7 @@ const Profile = () => {
         {/* -----------------------------------Add your interest div------------------------------------------------ */}
         {
           addnewtextdiv == true ?
-            <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
+            <Modal classname='max-w-[355px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
               body={
                 <>
                   <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
@@ -386,13 +388,13 @@ const Profile = () => {
                   </div>
                   <hr className={styles.head1} />
                   <div className={styles.para}>
-                    <p className='text-lg font-semibold'>Didn't find your top interests?No worries! Let us know and we will
+                    <p className='text-base font-semibold'>Didn't find your top interests?No worries! Let us know and we will
                       try our best to add more relavent
                       categories:
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-3 border-gray-600 mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-md lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
+                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-4 border-black mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-md lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
                   </div>
                   <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
                     {
