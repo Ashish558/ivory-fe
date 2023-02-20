@@ -14,18 +14,7 @@ const Landing = () => {
   return (
     <>
       <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75,ease: easeOut }} className={styles.fullscreen}>
-        <div className="topAppBar ml-8 z-[9999] absolute top-16 right-0">
-          <div className="flex justify-between items-center">
-            <div className="flex items-end justify-end content-end w-full">
-              <Link
-                to="/home"
-                className=" bg-[#00000027] px-3 py-1 text-center mr-10 text-white rounded-full absolute text-lg"
-              >
-                skip
-              </Link>
-            </div>
-          </div>
-        </div>
+       
       <img className={styles.imgup} src={slideimage1} alt="" />
       <div className={styles.down}>
         <span className={styles.head}>
