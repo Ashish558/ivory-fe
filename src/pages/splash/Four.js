@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./Four.module.css"
-import slideimage4 from "../../assets/slideimage4.png"
+import four from "../../assets/images/login/four.png"
 import {delay, easeIn, easeOut, motion as m} from "framer-motion"
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -20,7 +20,7 @@ const Second = () => {
           </div>
         </div>
       </div>
-      <img className={styles.imgup} src={slideimage4} alt="" />
+      <img className={styles.imgup} src={four} alt="" />
       <div className={styles.down}>
         <span className={styles.head}>
           <p className='text-2xl tracking-[2px] font-bold'><span style={{color:"#60FFDE"}}>Belong</span> to a community that matters </p>

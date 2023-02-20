@@ -4,11 +4,10 @@
   /* background-color: aqua; */
 }
 .imgup {
-  height: 530px;
   width: 100%;
 }
 .down {
-  height: 360px;
+  height: 320px;
   width: 100%;
   background: linear-gradient(
       180deg,
