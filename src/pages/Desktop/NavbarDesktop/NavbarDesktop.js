@@ -30,7 +30,6 @@ const NavbarDesktop = () => {
 
    const handleLogout = () => {
       if (loggedIn) {
-
          localStorage.clear()
          dispatch(updateLoggedIn({ loggedIn: false }))
          dispatch(updateProfileData({ profileData: {} }))

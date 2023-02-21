@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
 
-const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing','/confirmation','/live','/enroll','/community','/learn']
+const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing', '/confirmation', '/live', '/enroll', '/community', '/learn']
 const basePaths = ['/home', '/activities']
 
 const Navbar = () => {
@@ -67,11 +67,11 @@ const Navbar = () => {
          <div class="flex-none gap-2">
             {
                loggedIn &&
-            <button className='flex'>
-               <div onClick={toggleDrawer} class="w-11 h-11 rounded-full flex">
-                  <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full object-cover' />
-               </div>
-            </button>
+               <button className='flex'>
+                  <div onClick={toggleDrawer} class="w-11 h-11 rounded-full flex">
+                     <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full object-cover' />
+                  </div>
+               </button>
             }
          </div>
          <Drawer open={isOpen} onClose={toggleDrawer} size="85vw" direction='right'>
