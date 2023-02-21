@@ -1,35 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React,{ useEffect,useState } from 'react';
 import styles from "./story.module.css";
 
-import BackIcon from '../../../assets/icons/back.svg'
-import LikeIcon from '../../../assets/icons/like.svg'
-import LikedIcon from '../../../assets/icons/liked.svg'
-import ShareIcon from '../../../assets/icons/share.svg'
-import LeftIcon from '../../../assets/icons/left.svg'
-import RightIcon from '../../../assets/icons/right.svg'
+import BackIcon from '../../../assets/icons/back.svg';
+import LeftIcon from '../../../assets/icons/left.svg';
+import LikeIcon from '../../../assets/icons/like.svg';
+import LikedIcon from '../../../assets/icons/liked.svg';
+import RightIcon from '../../../assets/icons/right.svg';
+import ShareIcon from '../../../assets/icons/share.svg';
 
-import StoryImg from '../../../assets/images/story-1.png'
-import McqStoryImg from '../../../assets/images/story-mcq.png'
-import Logo from '../../../assets/images/logo.png'
+import Logo from '../../../assets/images/logo.png';
 
-import ReactPlayer from 'react-player'
+import axios from 'axios';
+import ShareModal from '../../../components/ShareModal/ShareModal';
+import { getAuthHeaders } from '../../../services/constants';
 import Mcq from './Mcq/Mcq';
 import Mcq2 from './Mcq2/Mcq2';
-import Sudoku from './Sudoku/Sudoku';
 import QnA from './QnA/QnA';
-import axios from 'axios';
-import { getAuthHeaders } from '../../../services/constants';
-import ShareModal from '../../../components/ShareModal/ShareModal';
+import Sudoku from './Sudoku/Sudoku';
 
-const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
+const types = ['image','video','mcq','mcq2','sudoku','qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
 export default function Story(props) {
-   const { handleClose, updateStory, selectNextStory, selectPrevStory, selectedIndex, isSingle } = props
+   const { handleClose,updateStory,selectNextStory,selectPrevStory,selectedIndex,isSingle } = props
    let story = props.story
-   let { id, image, type, liked, share_message, title, url, views, video } = story
-   const [storyType, setStoryType] = useState(type)
-   const [shareModalOpen, setShareModalOpen] = useState(false)
+   let { id,image,type,liked,share_message,title,url,views,video } = story
+   const [storyType,setStoryType] = useState(type)
+   const [shareModalOpen,setShareModalOpen] = useState(false)
 
    const hideHtmlOverflow = () => {
       document.body.style.overflow = "hidden";
@@ -52,11 +49,11 @@ export default function Story(props) {
       } else {
          setStoryType(type)
       }
-   }, [type, image])
+   },[type,image])
 
    useEffect(() => {
       hideHtmlOverflow()
-   }, [shareModalOpen])
+   },[shareModalOpen])
 
    useEffect(() => {
       hideHtmlOverflow()
@@ -64,44 +61,44 @@ export default function Story(props) {
          document.body.style.overflow = "unset";
          document.documentElement.style.overflow = "unset";
       };
-   }, []);
+   },[]);
 
    //view story
    useEffect(() => {
-      axios.get(`${url}view/`, getAuthHeaders())
+      axios.get(`${url}view/`,getAuthHeaders())
          .then(res => {
             // console.log('view res', res.data);
-            updateStory({ ...res.data.data, type })
+            updateStory({ ...res.data.data,type })
          })
          .catch(err => {
-            console.log('view err', err.data);
+            console.log('view err',err.data);
          })
-   }, [selectedIndex])
+   },[selectedIndex])
 
    const handleLike = () => {
-      axios.get(`${url}like/`, getAuthHeaders())
+      axios.get(`${url}like/`,getAuthHeaders())
          .then(res => {
             // console.log('like res', res.data.data);
-            updateStory({ ...res.data.data, type })
+            updateStory({ ...res.data.data,type })
          }).catch(err => {
-            console.log('like err', err.data);
+            console.log('like err',err.data);
          })
    }
 
    const handleDislike = () => {
-      axios.get(`${url}dislike/`, getAuthHeaders())
+      axios.get(`${url}dislike/`,getAuthHeaders())
          .then(res => {
             // console.log('dislike res', res.data);
-            updateStory({ ...res.data.data, type })
+            updateStory({ ...res.data.data,type })
          }).catch(err => {
-            console.log('dislike err', err.data);
+            console.log('dislike err',err.data);
          })
    }
 
    // console.log('story', storyType)
    // console.log('story', story)
    // console.log('video', video)
-   let storyProps = { url, updateStory, type }
+   let storyProps = { url,updateStory,type }
    return (
       <>
 
@@ -168,7 +165,7 @@ export default function Story(props) {
                      {
                         isSingle !== true &&
                         <>
-                           <img src={LeftIcon} alt='left' className={styles.leftIcon}
+                           <img src={LeftIcon} alt='left' className={`${styles.leftIcon} `}
                               onClick={selectPrevStory} />
                            <img src={RightIcon} alt='right' className={styles.RightIcon}
                               onClick={selectNextStory} />
@@ -181,7 +178,7 @@ export default function Story(props) {
             </div>
          </div>
          <ShareModal open={shareModalOpen}
-            url={ `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`}
+            url={`https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`}
             close={() => {
                setShareModalOpen(false);
             }} />

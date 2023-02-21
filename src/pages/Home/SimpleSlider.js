@@ -39,7 +39,7 @@ const SimpleSlider = () => {
    // console.log('banners', banners);
 
    return (
-      <div className="mt-6">
+      <div className="mt-6 lg:mb-[90px] mb-14">
          <Slider {...settings}>
             {
                banners.map(banner => {

@@ -151,7 +151,7 @@ const Otp = () => {
     }
   };
   return (
-    <div className="overflow-x-hidden bg-[#EEFDFC] ">
+    <div className="overflow-hidden bg-[#EEFDFC] h-screen">
       <div className="topAppBar pt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">

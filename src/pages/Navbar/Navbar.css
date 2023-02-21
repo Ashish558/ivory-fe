@@ -1,6 +1,7 @@
 .drawer-content {
     background: linear-gradient(188.34deg, rgba(0, 85, 191, 0.48) -7.07%, rgba(205, 247, 255, 0.48) 43.92%, rgba(89, 227, 255, 0.48) 95.82%), #FFFFFF;
     height: 100vh;
+    overflow-y: scroll;
 }
 
 

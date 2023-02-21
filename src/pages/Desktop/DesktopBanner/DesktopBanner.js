@@ -41,7 +41,7 @@ const DesktopBanner = () => {
    // console.log('banners', banners);
 
    return (
-      <div className='container-banner pt-20'>
+      <div className='container-banner pt-20  lg:mb-[90px] mb-14'>
 
          <Slider {...settings}>
             {

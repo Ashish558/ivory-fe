@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const Second = () => {
   const navigate = useNavigate()
   return (
-    <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75,ease: easeIn,ease:easeOut }} className={styles.fullscreen}>
+    <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75,ease: easeIn,ease:easeOut }} className={`${styles.fullscreen} overflow-hidden`}>
       <div className="topAppBar ml-8 z-[9999] absolute top-16 right-0">
         <div className="flex justify-between items-center">
           <div className="flex items-end justify-end content-end w-full">
