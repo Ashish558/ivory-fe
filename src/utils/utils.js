@@ -60,3 +60,17 @@ export const getPricingDiscountedText = (isFree, price, discounted_price, discou
       return <></>
    }
 }
+
+export const getStoryUrl = type => {
+   if(type === 'mcq'){
+      return 'mcq-stories'
+   }else if(type === 'image'){
+      return 'image-stories'
+   }else if(type === 'sudoku'){
+      return 'puzzle-stories'
+   }else if(type === 'qna'){
+      return 'qna-stories'
+   }else if(type === 'video'){
+      return 'video-stories'
+   }
+}

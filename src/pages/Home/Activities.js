@@ -102,9 +102,12 @@ const Activities = () => {
                         <p><img src={activity.icon} alt="" /></p>
                         {
                            activity?.name.length <= '17' ?
-
-                              <p className='text-center pt-2 font-semibold text-sm' style={{ color: activity?.color }}>{activity?.name}</p>
-                              : <p className='text-center pt-2 font-semibold text-xs' style={{ color: activity?.color }}>{activity?.name}</p>
+                              <p className='text-center pt-2 font-semibold text-sm' 
+                              // style={{ color: activity?.color }}
+                              >{activity?.name}</p>
+                              : <p className='text-center pt-2 font-semibold text-xs' 
+                              // style={{ color: activity?.color }}
+                              >{activity?.name}</p>
                         }
                      </div>
                   )

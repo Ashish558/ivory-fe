@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import styles from './styles.module.css'
 import ReactPlayer from 'react-player/youtube'
 
@@ -22,6 +22,7 @@ import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import Slider from "react-slick";
 import { getColors } from '../../utils/utils'
+import ShareModal from '../../components/ShareModal/ShareModal'
 
 const settings = {
    infinite: false,
@@ -55,7 +56,6 @@ export default function StartActivity({ fetchUserDetails }) {
    const [submissions, setSubmissions] = useState([])
    const [isAlreadyStarted, setIsAlreadyStarted] = useState(false)
    const [isCompleted, setIsCompleted] = useState(false)
-   const { categoryId, activityId } = useParams()
    const [category, setCategory] = useState({})
    const [viewSubModal, setViewSubModal] = useState(false)
    const [sourceToView, setSourceToView] = useState('')
@@ -63,8 +63,11 @@ export default function StartActivity({ fetchUserDetails }) {
    const [isLastFeedbacked, setIsLastFeedbacked] = useState(false)
    const inputRef = useRef(null)
    const videoRef = useRef(null)
+   const [shareModalOpen, setShareModalOpen] = useState(false)
 
+   const { categoryId, activityId } = useParams()
    const navigate = useNavigate()
+   const location = useLocation()
 
    const [currentIndex, setCurrentIndex] = useState(0)
    const { loggedIn, profileData } = useSelector(state => state.user)
@@ -100,9 +103,10 @@ export default function StartActivity({ fetchUserDetails }) {
       getMyActivities()
          .then(res => {
             if (res.data.data === null) return
+            let started = false
             res.data.data.forEach(myActivity => {
                if (myActivity.activity.id === parseInt(activityId)) {
-                  setIsAlreadyStarted(true)
+                  started = true
                   console.log('my act', myActivity);
                   if (myActivity.is_completed === true) {
                      setIsCompleted(true)
@@ -112,6 +116,7 @@ export default function StartActivity({ fetchUserDetails }) {
                   setUserActivityId(myActivity.id)
                }
             })
+            setIsAlreadyStarted(started)
          }).catch(err => {
             console.log('err', err);
          })
@@ -125,7 +130,7 @@ export default function StartActivity({ fetchUserDetails }) {
    useEffect(() => {
       if (loggedIn === false) return
       getSubmissions()
-   }, [userActivityId, loggedIn])
+   }, [userActivityId, loggedIn, activityId])
 
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
@@ -254,13 +259,24 @@ export default function StartActivity({ fetchUserDetails }) {
       startActivity(activityId)
          .then(res => {
             console.log('start resp', res);
-            alert('Activity started!')
+            // alert('Activity started!')
+            alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
+
             setIsAlreadyStarted(true)
             fetchUserActivities()
             fetchUserDetails()
          }).catch(err => {
-            console.log('start err', err);
+            console.log('start err', err.response.data);
+            if (err.response.data.status_code === 406) {
+               alert('You have reached free activity limit')
+            }
+
          })
+   }
+
+   const shareActivity = () => {
+      console.log(location.pathname);
+      setShareModalOpen(true);
    }
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
@@ -334,7 +350,7 @@ export default function StartActivity({ fetchUserDetails }) {
                                  </p>
                                  {step.image &&
                                     <div className={styles.stepImageContainer}>
-                                       <img src={step.image} className='w-full object-contain'  alt='step-image' />
+                                       <img src={step.image} className='w-full object-contain' alt='step-image' />
                                     </div>
                                  }
                                  <div className='font-normal text-sm md:text-base '>
@@ -371,7 +387,8 @@ export default function StartActivity({ fetchUserDetails }) {
                            }
                         />
                   }
-                  <SecondaryButton className='flex items-center pl-5 pr-5' disabled={true}
+                  <SecondaryButton className='flex items-center pl-5 pr-5' disabled={false}
+                     onClick={shareActivity}
                      children={
                         <>
                            <img src={ShareIcon} className='mr-2.5' alt='mark' />
@@ -473,10 +490,10 @@ export default function StartActivity({ fetchUserDetails }) {
             </div>
          </div>
          {
-            isAlreadyStarted === false && startModalActive === false &&
+            isAlreadyStarted === false && startModalActive === false && shareModalOpen === false &&
             <div className={styles.startActivityFooter}>
                <div className='max-w-[328px] mx-auto'>
-                  <PrimaryButton children={'START for free'} onClick={handleStartActivity} className='w-full pt-2.5 pb-2.5' />
+                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'} onClick={handleStartActivity} className='w-full pt-2.5 pb-2.5' />
                </div>
             </div>
          }
@@ -494,6 +511,11 @@ export default function StartActivity({ fetchUserDetails }) {
             <ViewSubmission handleClose={() => setViewSubModal(false)}
                source={sourceToView} />
          }
+         <ShareModal open={shareModalOpen}
+            url={`https://ivory-test.netlify.app${location.pathname}`}
+            close={() => {
+               setShareModalOpen(false);
+            }} />
       </>
    )
 }
