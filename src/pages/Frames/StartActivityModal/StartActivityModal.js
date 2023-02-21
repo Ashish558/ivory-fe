@@ -19,6 +19,7 @@ export default function StartActivityModal({ handleClose, activityId, setIsAlrea
       startActivity(activityId)
       .then(res => {
          console.log('start resp', res);
+         alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
          setIsAlreadyStarted(true)
          fetchUserActivities()
          handleClose()

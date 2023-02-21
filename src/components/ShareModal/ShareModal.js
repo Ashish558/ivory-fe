@@ -7,13 +7,19 @@ import Instagram from '../../assets/icons/instagram.svg'
 
 import { FacebookShareButton, FacebookIcon, WhatsappShareButton, TwitterShareButton, InstapaperShareButton } from 'react-share';
 
-export default function ShareModal({ open, close, data }) {
-   const [shareUrl, setShareUrl] = useState('')
+export default function ShareModal({ open, close, url }) {
+   
+   const [shareUrl, setShareUrl] = useState(url)
    
    useEffect(() => {
-      const url = `https://ivory-test.netlify.app/home?type=${data.type}&id=${data.id}`
       setShareUrl(url)
-   }, [data])
+   }, [url])
+   
+   useEffect(() => {
+      if(open === true){
+         navigator.clipboard.writeText(url)
+      }
+   }, [url, open])
 
    const handleWhatsAppShare = () => window.open(shareUrl)
    // console.log('url', data.url);

@@ -70,19 +70,15 @@ const Stories = () => {
          );
       }
    };
-
-
-
    useEffect(() => {
       const storyType = searchParams.get('type')
       const storyId = searchParams.get('id')
-      console.log(storyType, storyId);
+      // console.log(storyType, storyId);
       if (storyType === null) return
       if (storyId === null) return
       const url = getStoryUrl(storyType)
       getSingleStory(url, storyId, loggedIn)
          .then(res => {
-            console.log('singlestory', res.data.data);
             if (!res.data.data) return
             setSingleStory({ ...res.data.data, type: storyType })
             setSingleStoryActive(true)
@@ -106,7 +102,7 @@ const Stories = () => {
       getStories(loggedIn)
          .then(res => {
             let resdata = res.data.data[0]
-            console.log('Stories', res.data.data)
+            // console.log('Stories', res.data.data)
             let allStories = []
             allStories = [...allStories,
             ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
@@ -115,7 +111,9 @@ const Stories = () => {
             ...resdata.qna_stories.map(story => ({ ...story, type: 'qna' })),
             ...resdata.video_stories.map(story => ({ ...story, type: 'video' }))
             ]
-            setStories(allStories)
+            let viewed = allStories.filter(item => item.viewed === true)
+            let notViewed = allStories.filter(item => item.viewed === false)
+            setStories([...notViewed, ...viewed])
          })
          .catch(err => {
             console.log(err.response);
@@ -151,11 +149,23 @@ const Stories = () => {
    }
 
    const updateSingleStory = (data) => {
-      console.log(data);
       setSingleStory(data)
    }
+
+   useEffect(() => {
+      if (storyActive === false) {
+         let sorted = [...stories]
+         let viewed = sorted.filter(item => item.viewed === true)
+         let notViewed = sorted.filter(item => item.viewed === false)
+         // sorted.sort((x, y) => {
+         //    console.log(x.viewed, y.viewed);
+         //    return Number(y.viewed) - Number(x.viewed)
+         // })
+         setStories([...notViewed, ...viewed])
+      }
+   }, [storyActive])
    // console.log('selectedIndex', selectedIndex)
-   // console.log('stories', stories)
+   // console.log('stories', stories.map(it => it.viewed))
    // console.log('selectedStory', selectedStory)
 
    return (
@@ -187,7 +197,7 @@ const Stories = () => {
                               }
 
                               <div className="" >
-                                 <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : Logo} alt="" /></p>
+                                 <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : story.thumbnail ? story.thumbnail : Logo} alt="" /></p>
                                  <div className="pl-3 details lg:pl-6">
                                     <p className="text-sm lg:text-xl text-white">
                                        {story.title ? story.title : ''}

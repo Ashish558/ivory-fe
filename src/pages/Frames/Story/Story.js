@@ -181,7 +181,7 @@ export default function Story(props) {
             </div>
          </div>
          <ShareModal open={shareModalOpen}
-            data={story}
+            url={ `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`}
             close={() => {
                setShareModalOpen(false);
             }} />
