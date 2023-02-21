@@ -55,7 +55,7 @@ const Navbar = () => {
 
                   <div className="flex items-center normal-case text-lg  welcome-color">
                      <p className='pr-1 pl-2'>   <img src={Logo} alt="" /></p>
-                     <p className=' font-bold text-sm'>Welcome,</p>
+                     <p className=' font-bold text-sm'>Welcome {loggedIn && ","} </p>
                      <p className='pl-2  name text-sm'>   {profileData.name ? profileData.name : ''}</p>
                   </div> :
                   <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
@@ -65,12 +65,14 @@ const Navbar = () => {
          </div>
 
          <div class="flex-none gap-2">
+            {
+               loggedIn &&
             <button className='flex'>
                <div onClick={toggleDrawer} class="w-11 h-11 rounded-full flex">
                   <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full object-cover' />
                </div>
             </button>
-
+            }
          </div>
          <Drawer open={isOpen} onClose={toggleDrawer} size="85vw" direction='right'>
             <div className='drawer-content pt-8 px-5'>

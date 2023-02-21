@@ -125,7 +125,7 @@ export default function StartActivity({ fetchUserDetails }) {
    useEffect(() => {
       if (loggedIn === false) return
       getSubmissions()
-   }, [userActivityId, loggedIn])
+   }, [userActivityId, loggedIn, activityId])
 
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
@@ -259,7 +259,11 @@ export default function StartActivity({ fetchUserDetails }) {
             fetchUserActivities()
             fetchUserDetails()
          }).catch(err => {
-            console.log('start err', err);
+            console.log('start err', err.response.data);
+            if(err.response.data.status_code === 406){
+               alert('You have reached free activity limit')
+            }
+
          })
    }
    // console.log('loggedIn', loggedIn);

@@ -5,22 +5,28 @@ import '../Home/Stories.css'
 import Logo from '../../Images/Vector.png'
 import Logo1 from '../../Images/Vector (1).png'
 import Story from "../Frames/Story/Story";
-import { getStories } from "../../services/stories";
-import { useNavigate } from "react-router-dom";
+import { getSingleStory, getStories } from "../../services/stories";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Arrow from '../../Images/Icon.png';
 import CheckedIcon from '../../assets/icons/circle-checked.svg'
 import LogoDesktop from '../../Images/Vector(6).png';
+import { getStoryUrl } from "../../utils/utils";
 
 const Stories = () => {
    const [storyActive, setStoryActive] = useState(false)
    const [selectedStory, setSelectedStory] = useState({})
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [stories, setStories] = useState([])
+
+   const [singleStory, setSingleStory] = useState({})
+   const [singleStoryActive, setSingleStoryActive] = useState(false)
+
    const { loggedIn, profileData } = useSelector(state => state.user)
    const { width } = useWindowDimensions()
    const navigate = useNavigate()
+   const [searchParams, setSearchParams] = useSearchParams();
 
    const settings = {
       infinite: false,
@@ -64,6 +70,24 @@ const Stories = () => {
          );
       }
    };
+
+
+
+   useEffect(() => {
+      const storyType = searchParams.get('type')
+      const storyId = searchParams.get('id')
+      console.log(storyType, storyId);
+      if (storyType === null) return
+      if (storyId === null) return
+      const url = getStoryUrl(storyType)
+      getSingleStory(url, storyId, loggedIn)
+         .then(res => {
+            console.log('singlestory', res.data.data);
+            if (!res.data.data) return
+            setSingleStory({ ...res.data.data, type: storyType })
+            setSingleStoryActive(true)
+         })
+   }, [searchParams, loggedIn])
 
    const updateStory = story => {
       // console.log('updating', story);
@@ -125,6 +149,11 @@ const Stories = () => {
 
       }
    }
+
+   const updateSingleStory = (data) => {
+      console.log(data);
+      setSingleStory(data)
+   }
    // console.log('selectedIndex', selectedIndex)
    // console.log('stories', stories)
    // console.log('selectedStory', selectedStory)
@@ -175,43 +204,6 @@ const Stories = () => {
                         </div>
                      )
                   })}
-                  {/* <div className="p-3 " onClick={() => handleClick()} >
-                  <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
-   
-                     <div className="pl-3 details">
-                        <p className="text-sm text-white">Good morning</p>
-                        <div className="flex items-center">
-                           <p className="text-white"> <img src={Logo} alt="" /></p>
-                           <p className="text-sm text-white pl-1">130k views</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div className="p-3 " >
-                  <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
-                     <div className="topcorner"><img src={Logo1} alt="" /></div>
-                     <div className="pl-3 details">
-                        <p className="text-sm text-white">Puzzle of the day</p>
-                        <div className="flex items-center">
-                           <p className="text-white"> <img src={Logo} alt="" /></p>
-                           <p className="text-sm text-white pl-1">2m views</p>
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-               <div className="p-3 " >
-                  <div className="background-story-1" style={{ width: '148px', height: '229px' }}>
-                     <div className="topcorner"><img src={Logo1} alt="" /></div>
-                     <div className="pl-3 details">
-                        <p className="text-sm text-white">Puzzle of the day</p>
-                        <div className="flex items-center">
-                           <p className="text-white"> <img src={Logo} alt="" /></p>
-                           <p className="text-sm text-white pl-1">2m views</p>
-                        </div>
-                     </div>
-                  </div>
-               </div> */}
                   <div></div>
                </Slider>
             </div>
@@ -225,6 +217,17 @@ const Stories = () => {
                selectPrevStory={selectPrevStory}
                selectNextStory={selectNextStory}
                updateStory={updateStory} />
+         }
+         {
+            singleStoryActive &&
+            <Story handleClose={() => {
+               setSingleStoryActive(false);
+               navigate('/home')
+            }}
+               story={singleStory}
+               isSingle={true}
+               updateStory={updateSingleStory}
+            />
          }
       </div>
    );

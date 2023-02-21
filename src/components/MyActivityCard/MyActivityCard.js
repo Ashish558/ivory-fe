@@ -2,7 +2,7 @@ import { motion as m } from "framer-motion"
 import React from 'react'
 import styles from './style.module.css'
 
-export default function MyActivityCard({ icon,name,percentage_completed,new_activities,thumbnail,idx,variants }) {
+export default function MyActivityCard({ icon, name, percentage_completed, new_activities, thumbnail, idx, variants }) {
 
 
    return (
@@ -24,9 +24,11 @@ export default function MyActivityCard({ icon,name,percentage_completed,new_acti
                <div className={`${styles.progressContainer} bg-${variants[idx]}-400`}>
                   <div className={styles.progress} style={{ width: `${percentage_completed}%` }} ></div>
                </div>
-               <p className='text-sm text-lightGray font-semibold whitespace-nowrap'>
-                  {new_activities}{' '}new activities added
-               </p>
+               {
+                  <p className={`text-sm text-lightGray font-semibold whitespace-nowrap ${new_activities === 0 ? 'opacity-0' : ""}`}>
+                     {new_activities}{' '}new activities added
+                  </p>
+               }
             </div>
          </div>
       </div>

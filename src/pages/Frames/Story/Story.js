@@ -25,7 +25,7 @@ const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
 export default function Story(props) {
-   const { handleClose, updateStory, selectNextStory, selectPrevStory, selectedIndex } = props
+   const { handleClose, updateStory, selectNextStory, selectPrevStory, selectedIndex, isSingle } = props
    let story = props.story
    let { id, image, type, liked, share_message, title, url, views, video } = story
    const [storyType, setStoryType] = useState(type)
@@ -37,19 +37,19 @@ export default function Story(props) {
    }
 
    useEffect(() => {
-      if(type === 'mcq'){
+      if (type === 'mcq') {
          let isSngleLetteredAnswer = true
          story.choices.forEach(choice => {
-            if(choice.choice.length > 3){
+            if (choice.choice.length > 3) {
                isSngleLetteredAnswer = false
             }
          })
-         if(isSngleLetteredAnswer === true){
+         if (isSngleLetteredAnswer === true) {
             setStoryType(type)
-         }else{
+         } else {
             setStoryType('mcq2')
          }
-      }else{
+      } else {
          setStoryType(type)
       }
    }, [type, image])
@@ -165,20 +165,26 @@ export default function Story(props) {
                            Share
                         </div>
                      </div>
-
-                     <img src={LeftIcon} alt='left' className={styles.leftIcon}
-                        onClick={selectPrevStory} />
-                     <img src={RightIcon} alt='right' className={styles.RightIcon}
-                        onClick={selectNextStory} />
+                     {
+                        isSingle !== true &&
+                        <>
+                           <img src={LeftIcon} alt='left' className={styles.leftIcon}
+                              onClick={selectPrevStory} />
+                           <img src={RightIcon} alt='right' className={styles.RightIcon}
+                              onClick={selectNextStory} />
+                        </>
+                     }
                   </div>
                </div>
 
                <div className={styles.modalOverlay}></div>
             </div>
          </div>
-         <ShareModal open={shareModalOpen} close={() => {
-            setShareModalOpen(false);
-         }} />
+         <ShareModal open={shareModalOpen}
+            data={story}
+            close={() => {
+               setShareModalOpen(false);
+            }} />
       </>
    )
 }

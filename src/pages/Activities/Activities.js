@@ -247,6 +247,7 @@ export default function Activities() {
 
                   {filteredActivities.map((activity, indx) => {
                      return (
+                        activity.categories?.length > 0 ?
                         <div key={indx} className='mb-8 lg:mb-[60px]' >
                            <div className='flex items-center mb-3  lg:mb-[48px]'>
                               <img src={activity.icon} alt='activity' />
@@ -262,7 +263,8 @@ export default function Activities() {
                                  </div>
                               })}
                            </div>
-                        </div>
+                        </div> :
+                        <></>
                      )
                   })}
                </div>

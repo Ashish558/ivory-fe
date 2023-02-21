@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BottomSheet from "react-draggable-bottom-sheet";
 import Twitter from '../../assets/icons/twitter.svg'
 import Whatsapp from '../../assets/icons/whatsapp.svg'
@@ -7,11 +7,19 @@ import Instagram from '../../assets/icons/instagram.svg'
 
 import { FacebookShareButton, FacebookIcon, WhatsappShareButton, TwitterShareButton, InstapaperShareButton } from 'react-share';
 
-export default function ShareModal({ open, close }) {
-   const shareUrl = "https://ivory-test.netlify.app/home"
+export default function ShareModal({ open, close, data }) {
+   const [shareUrl, setShareUrl] = useState('')
+   
+   useEffect(() => {
+      const url = `https://ivory-test.netlify.app/home?type=${data.type}&id=${data.id}`
+      setShareUrl(url)
+   }, [data])
 
    const handleWhatsAppShare = () => window.open(shareUrl)
+   // console.log('url', data.url);
+   // console.log('shareUrl', shareUrl);
 
+   // console.log(data.url, 'unknown')
    return (
       <BottomSheet isOpen={open} close={close}>
          <div className='px-4 py-6'>

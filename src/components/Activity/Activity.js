@@ -9,11 +9,17 @@ import { getFormattedDuration } from '../../utils/utils'
 export default function Activity({ image, name, duration, category, id, is_completed }) {
 
    const navigate = useNavigate()
-
+   const handleScrollToTop = () => {
+      window.scrollTo({
+         top: 0,
+         behavior: "smooth",
+       });
+   }
    return (
       <div className={`${styles.activity} sm:mx-3 sm:flex-col sm:gap-0 sm:flex-1 p-2 sm:p-0`} onClick={() => {
          navigate(`/activities/${category}/${id}/start`);
-         window.location.reload()
+         // window.location.reload()
+         handleScrollToTop()
       }}>
          <div className='max-w-[135px] md:max-w-[100%]'>
             <img src={image === null ? ActivityIcon : image} className={`${styles.image}  h-[90px] mx-auto sm:rounded-b-none rounded-3xl sm:h-[125px] w-full object-cover`} alt='Profile' />

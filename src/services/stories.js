@@ -9,3 +9,11 @@ export const getStories = (loggedIn) => {
       return axios.get(`${BASE_URL}/story/story-groups/`)
    }
 };
+
+export const getSingleStory = (url, id, loggedIn) => {
+   if (loggedIn === true) {
+      return axios.get(`${BASE_URL}/story/${url}/${id}/`, getAuthHeaders())
+   } else {
+      return axios.get(`${BASE_URL}/story/${url}/${id}/`)
+   }
+};
