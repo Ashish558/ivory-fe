@@ -1,11 +1,8 @@
-import { Component, useRef, useState } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import '../Home/Banner.css'
-import video from '../../Images/SampleVideo_1280x720_1mb.mp4'
 import React from 'react';
-import play from '../../Images/play-button.webp'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import '../Home/Banner.css';
 import Video from "./Video";
 
 

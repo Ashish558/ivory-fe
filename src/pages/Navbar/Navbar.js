@@ -75,7 +75,7 @@ const Navbar = () => {
             }
          </div>
          <Drawer open={isOpen} onClose={toggleDrawer} size="85vw" direction='right'>
-            <div className='drawer-content pt-8 px-5'>
+            <div className='drawer-content pt-8 px-5 h-screen'>
 
 
                <div className='flex justify-between'>

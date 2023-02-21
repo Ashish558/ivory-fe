@@ -79,7 +79,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="h-screen overflow-hidden overflow-y-auto bg-[#EEFDFC]">
+    <div className="h-screen overflow-hidden bg-[#EEFDFC]">
       {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">

@@ -69,7 +69,7 @@ const Login = () => {
     }
   }
   return (
-    <div className="overflow-x-hidden bg-[#EEFDFC]">
+    <div className="overflow-x-hidden bg-[#EEFDFC] overflow-hidden h-screen">
       {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -78,7 +78,7 @@ const Login = () => {
           </div>
         </div> */}
 
-      <div className="sm:flex h-screen  min-h-[667px] overflow-y-auto  justify-around  w-screen mt-16 sm:m-0">
+      <div className="sm:flex  min-h-[667px] overflow-hidden  justify-around  w-screen mt-16 sm:m-0">
         <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-end justify-end content-end w-full">
@@ -92,7 +92,7 @@ const Login = () => {
           </div>
         </div>
         <div
-          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw]"
+          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw] overflow-hidden"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
