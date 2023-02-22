@@ -70,10 +70,12 @@ const Stories = () => {
          );
       }
    };
+
    useEffect(() => {
       const storyType = searchParams.get('type')
       const storyId = searchParams.get('id')
       // console.log(storyType, storyId);
+      console.log(storyType, storyId);
       if (storyType === null) return
       if (storyId === null) return
       const url = getStoryUrl(storyType)
@@ -82,6 +84,9 @@ const Stories = () => {
             if (!res.data.data) return
             setSingleStory({ ...res.data.data, type: storyType })
             setSingleStoryActive(true)
+         })
+         .catch(err => {
+           console.log(err.response);
          })
    }, [searchParams, loggedIn])
 

@@ -21,7 +21,7 @@ export default function ShareModal({ open, close, url }) {
       }
    }, [url, open])
 
-   const handleWhatsAppShare = () => window.open(shareUrl)
+   // const handleWhatsAppShare = () => window.open(shareUrl)
    // console.log('url', data.url);
    // console.log('shareUrl', shareUrl);
 
@@ -35,7 +35,7 @@ export default function ShareModal({ open, close, url }) {
             <div className='flex items-center justify-around'>
                <WhatsappShareButton url={shareUrl}>
                   <img className='cursor-pointer'
-                     src={Whatsapp} alt='Whatsapp' onClick={handleWhatsAppShare} />
+                     src={Whatsapp} alt='Whatsapp' />
                </WhatsappShareButton>
 
                <FacebookShareButton url={shareUrl}  >
