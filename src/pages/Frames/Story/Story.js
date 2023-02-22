@@ -94,7 +94,19 @@ export default function Story(props) {
             console.log('dislike err',err.data);
          })
    }
-
+   const shareStory = () => {
+      if (navigator.share) {
+         navigator.share({
+            title: 'Ivory Activity',
+            text: "Ivory Activity",
+            url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`
+         })
+            .then(() => console.log('Successful share'))
+            .catch(error => console.log('Error sharing:', error));
+      }
+      // console.log(location.pathname);
+      // setShareModalOpen(true);
+   }
    // console.log('story', storyType)
    // console.log('story', story)
    // console.log('video', video)
@@ -156,7 +168,7 @@ export default function Story(props) {
                         </div>
                         <div className='flex flex-col items-center md:flex-row'>
                            <div className={styles.iconContainer}
-                              onClick={() => setShareModalOpen(true)} >
+                              onClick={() => shareStory()} >
                               <img src={ShareIcon} alt='share' />
                            </div>
                            Share

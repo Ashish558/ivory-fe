@@ -1,14 +1,16 @@
 import { motion as m } from "framer-motion"
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 import styles from './style.module.css'
 
-export default function MyActivityCard({ icon, name, percentage_completed, new_activities, thumbnail, idx, variants }) {
+export default function MyActivityCard({ icon, name, percentage_completed, new_activities, thumbnail, idx, variants, color, intrest }) {
 
-
+   const navigate = useNavigate()
+   const handleRedirect = () => navigate(`/activities/${intrest}`)
    return (
-      <div className='flex items-end'>
+      <div className='flex items-end' onClick={handleRedirect} >
          <p className='text-[36px] text-lightGray mr-8 hidden lg:block'> {idx + 1}. </p>
-         <div className={`${styles.container} bg-${variants[idx]}-100`} >
+         <div className={`${styles.container}`} style={{ backgroundColor: `${color}11` }} >
             <m.div transition={{ delay: 5 }} className={styles.hover_activity} >
                <img src={thumbnail} alt="" />
             </m.div>
@@ -21,7 +23,7 @@ export default function MyActivityCard({ icon, name, percentage_completed, new_a
                <p className='text-[44474E] text-xl font-semibold'>
                   {percentage_completed}% <span className='text-sm text-lightGray font-semibold' > completed </span>
                </p>
-               <div className={`${styles.progressContainer} bg-${variants[idx]}-400`}>
+               <div className={`${styles.progressContainer}`} style={{ backgroundColor: color }} >
                   <div className={styles.progress} style={{ width: `${percentage_completed}%` }} ></div>
                </div>
                {
@@ -31,6 +33,6 @@ export default function MyActivityCard({ icon, name, percentage_completed, new_a
                }
             </div>
          </div>
-      </div>
+      </div >
    )
 }

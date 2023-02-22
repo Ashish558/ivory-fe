@@ -276,8 +276,17 @@ export default function StartActivity({ fetchUserDetails }) {
    }
 
    const shareActivity = () => {
-      console.log(location.pathname);
-      setShareModalOpen(true);
+      if (navigator.share) {
+         navigator.share({
+            title: 'Ivory Activity',
+            text: "Ivory Activity",
+            url: `https://ivory-test.netlify.app${location.pathname}`
+         })
+            .then(() => console.log('Successful share'))
+            .catch(error => console.log('Error sharing:', error));
+      }
+      // console.log(location.pathname);
+      // setShareModalOpen(true);
    }
    // console.log('loggedIn', loggedIn);
    // console.log('userActivityId', userActivityId);
