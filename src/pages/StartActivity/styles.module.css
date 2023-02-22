@@ -88,6 +88,11 @@
   height: 200px !important;
 }
 
+.uploadButton{
+  color: #1B7B1A;
+  border: 0;
+  background-color: #85FFB2;
+}
 @media only screen and (max-width: 769px) {
   .stepImageContainer {
     width: calc(100% + 32px);

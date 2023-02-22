@@ -39,7 +39,7 @@ const DesktopBanner = () => {
       window.open(banner.redirect_link)
 
    }
-   console.log('banners', banners);
+   // console.log('banners', banners);
 
    return (
       <div className='container-banner pt-20  lg:mb-[90px] mb-14'>
