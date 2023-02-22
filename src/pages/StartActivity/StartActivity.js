@@ -401,21 +401,21 @@ export default function StartActivity({ fetchUserDetails }) {
 
                {
                   submissions.length === 0 ?
-                  <>
-                     <div className='mb-12'>
-                        <p className='font-medium sm:text-lg sm:font-semibold' >
-                           Submit your work to get feedback from our <br></br>expert:
-                        </p>
-                        <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 px-3 h-[51px] max-w-[360px]`}
-                           onClick={handleUploadClick}
-                           children={
-                              <> <img src={WhatsappIcon} className='mr-3'
-                              /> Upload
-                                 <input type='file' className='hidden' ref={inputRef}
-                                    onChange={e => handleUpload(e)} />
-                              </>
-                           } />
-                        {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
+                     <>
+                        <div className='mb-12'>
+                           <p className='font-medium sm:text-lg sm:font-semibold' >
+                              Submit your work to get feedback from our <br></br>expert:
+                           </p>
+                           <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 px-3 h-[51px] max-w-[360px]`}
+                              onClick={handleUploadClick}
+                              children={
+                                 <> <img src={WhatsappIcon} className='mr-3'
+                                 /> Upload
+                                    <input type='file' className='hidden' ref={inputRef}
+                                       onChange={e => handleUpload(e)} />
+                                 </>
+                              } />
+                           {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                            <img src={UploadIcon}
                               className='mr-3 cursor-pointer'
                               alt='UploadIcon'
@@ -425,7 +425,7 @@ export default function StartActivity({ fetchUserDetails }) {
                               onChange={e => handleUpload(e)} />
                         </div> */}
 
-                     </div>
+                        </div>
                      </> :
                      <div className='mb-12'>
                         <p className='font-medium sm:text-lg sm:font-semibold mb-4' >
