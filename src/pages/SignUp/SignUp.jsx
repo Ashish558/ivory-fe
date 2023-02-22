@@ -42,7 +42,7 @@ const SignUp = () => {
   const locaion = useLocation ();
   const from = locaion.state?.from || "/";
   const navigate = useNavigate();
-  const [phone, setPhone] = React.useState(null);
+  const [phone, setPhone] = React.useState('');
   const [error, setError] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+880");
   const goBack = () => {
@@ -52,14 +52,16 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(JSON.stringify(phone).length);
-    if (JSON.stringify(phone).length < 10) {
-      setError("Phone number must be 11 digits");
+    if (phone.length < 10) {
+      setError("Phone number must be of 10 digits");
     } else if (phone.length > 10) {
       setError("Phone number cannot be more than 11 digits");
-    } else if (typeof phone !== "number") {
-      console.log(typeof phone);
-      setError("Phone number must be a number");
-    } else {
+    } 
+    // else if (typeof phone !== "number") {
+    //   console.log(typeof phone);
+    //   setError("Phone number must be a number");
+    // } 
+    else {
       setCountryCode(e.target.countryCode.value);
       const body = {
         country_code: countryCode,
@@ -78,6 +80,8 @@ const SignUp = () => {
       });
     }
   };
+
+  console.log('phone', phone);
   return (
     <div className="h-screen overflow-hidden bg-[#EEFDFC]">
       {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
@@ -140,10 +144,10 @@ const SignUp = () => {
               <input
                 class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-[16px]"
                 // type="tel"
-                type={JSON.stringify(phone)?.length < 11 ? "number" : "text"}
+                type={phone?.length < 11 ? "text" : "text"}
                 maxLength="11"
                 // pattern='[0-9]{11}'
-                onChange={(e) => setPhone(parseInt(e.target.value))}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="Phone Number"
                 required
               />
