@@ -8,7 +8,7 @@ import EventImg from '../../assets/images/event.png'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import Session from '../../components/Session/Session'
 import { getLiveSessions, getSingleLiveSessions, registerLiveSession } from '../../services/liveSession'
-import { getFormattedDate } from '../../utils/utils'
+import { getFormattedDate, getFormattedDuration } from '../../utils/utils'
 import { tempSessionData } from '../LiveEvents/LiveEvents'
 import { settings } from '../LiveEvents/settings'
 import styles from './style.module.css'
@@ -23,6 +23,7 @@ export default function SingleSession({ }) {
    const { id } = useParams()
    const { loggedIn } = useSelector(state => state.user)
    const navigate = useNavigate()
+
    useEffect(() => {
       getSingleLiveSessions(id, loggedIn)
          .then((res) => {
@@ -68,7 +69,8 @@ export default function SingleSession({ }) {
       }
    }
    console.log('session', session)
-   const { name, description, image, scheduled_on, scheduled_on_start_time, scheduled_on_end_time, host, is_completed } = session
+   const { name, description, image, scheduled_on,duration, scheduled_on_start_time, scheduled_on_end_time, host, is_completed } = session
+
 
    return (
       <div className='pb-12 mb-10 lg:mt-[84px]'>
@@ -91,7 +93,7 @@ export default function SingleSession({ }) {
                //    </div>
                //    :
                <div className='md:flex md:items-start md:justify-start lg:max-w-[800px] md:w-[100%]'>
-                  <img src={EventImg}
+                  <img src={image}
                      className={`${styles.image} md:rounded-3xl md:w-[100%] lg:h-[420px] object-cover md:mx-0 mx-auto`} alt='Profile' />
                </div>
             }
@@ -114,7 +116,7 @@ export default function SingleSession({ }) {
             </div>
             <div className='mb-2 flex items-center text-sm'>
                <p className='font-semibold text-lightGray mr-1 pr-0.5'> Duration: </p>
-               <p className='font-bold'> 1 hr 30 min  </p>
+               <p className='font-bold'> {getFormattedDuration(duration)}  </p>
             </div>
             <div className='flex items-center text-sm mb-6'>
                <p className='font-semibold text-lightGray mr-1 pr-0.5'> Host: </p>
