@@ -254,7 +254,7 @@ const Enroll = () => {
           </div>
           <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
 
-            <button className="bg-sky-200 sm:w-[40%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5" onClick={handleEnroll} >
+            <button className="bg-sky-200 lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5" onClick={handleEnroll} >
               {
                 next_batch_start_date === null ?
                   "Register for free" :
@@ -270,7 +270,7 @@ const Enroll = () => {
             </button>
 
           </div>
-          <div className=" mx-4 shadow-md rounded-md  border-t border-gray-100 w-[336px] pb-5">
+          <div className=" sm:mx-4 shadow-md rounded-xl  border-t border-gray-100 lg:w-[336px] pb-8 w-[90%] mx-auto p-5">
             <div className="text-2xl font-bold text-black ml-6 mt-3">
               Program content
             </div>
@@ -300,7 +300,7 @@ const Enroll = () => {
           <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
         </div>
         {/* conditionally render on register successfully */}
-        {enrollStatus === "enrolled" ? (
+        {/* {enrollStatus === "enrolled" ? (
           <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5 mb-20 lg:hidden">
             <button className="bg-sky-100 text-black font-semibold py-2 w-[90%] rounded-full mx-auto  self-center flex justify-center">
               <img src={greenTik} className="h-[30px] pb-1 px-3" alt="" />{" "}
@@ -327,10 +327,10 @@ const Enroll = () => {
                       "Enroll for free" :
                       "Enroll"
                 }
-              </button>
-            </div>
-          </div>
-        )}
+              </button> */}
+            {/* </div> */}
+          {/* </div>
+        )} */}
       </div>
       <div className="w-[400px] mt-28 ml-5 hidden lg:block">
         <div className="enrollFooter bg-sky-100  flex flex-col py-10 mb-20 rounded-[48px] p-3">
@@ -376,7 +376,7 @@ const Enroll = () => {
         </div>
       </div>
       <div className={styles.startActivityFooter}>
-        <div className='max-w-[328px] mx-auto'>
+        <div className='max-w-[328px] mx-auto lg:hidden'>
           {
             isEnrolled ?
               <SecondaryButton children=

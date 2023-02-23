@@ -185,17 +185,17 @@ const Learn = () => {
 
 
    return (
-      <div className='lg:mx-28 lg: lg:mt-[70px]'>
+      <div className='lg:mx-28 lg: lg:my-[70px] mb-24 '>
          <div className="bg-sky-50 lg:bg-white p-5">
             <h1 className='text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
-            <span className='text-sm ml-1 mt-3 text-gray-400'> what would you like to learn today?</span>
+            <span className='text-sm ml-1 mt-3 text-gray-400 lg:hidden block'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:bg-white my-5" >
                <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
                <button className={`font-bold text-lg rounded-full border px-4  ${myPrograms && ' bg-cyan-200'}`} onClick={() => setMyPrograms(true)}>My Program</button>
             </div>
          </div>
          <h1 className='text-2xl font-semibold hidden lg:block ml-4'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
-         {/* <div className='h-32  mt-4 mx-4 bg-LightSky rounded-3xl'></div> */}
+         
          <div className="px-5">
             <AcivityContent>
             </AcivityContent>
@@ -233,7 +233,7 @@ const Learn = () => {
          <div className="px-5">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3 mt-10 overflow-x-scroll" >
+         <div className="lg:grid lg:grid-cols-3  mt-10 overflow-x-scroll" >
             {myPrograms ?
                userPrograms.map((item,index) => (
                   <ProgramCard key={item.id} {...item.program}
