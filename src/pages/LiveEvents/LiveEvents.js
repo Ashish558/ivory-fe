@@ -69,7 +69,10 @@ export default function LiveEvents() {
    const [filteredPrograms, setFilteredPrograms] = useState([])
 
    const [todaySessions, setTodaySessions] = useState([])
+   const [todaySessionsFiiltered, setTodaySessionsFiiltered] = useState([])
+
    const [upcoming, setUpcoming] = useState([])
+   const [upcomingFiiltered, setUpcomingFiiltered] = useState([])
 
    const navigate = useNavigate()
 
@@ -157,7 +160,14 @@ export default function LiveEvents() {
          setFilterItems(temp)
       }
    }
-   // console.log('filterItems', filterItems);
+
+   useEffect(() => {
+      const selectedCatIds = filterItems.filter(item => item.selected === true).map(item => item.id)
+      let upcFiltered = upcoming.filter(item => selectedCatIds.includes(item.category))
+      let todayFiltered = todaySessions.filter(item => selectedCatIds.includes(item.category))
+      setUpcomingFiiltered(upcFiltered)
+      setTodaySessionsFiiltered(todayFiltered)
+   }, [todaySessions, upcoming, filterItems])
    // console.log('allPrograms', allPrograms);
 
    return (
@@ -172,11 +182,11 @@ export default function LiveEvents() {
                <p className='p '><img src={Arrow} alt="" /></p>
             </div>
             {
-               todaySessions.length > 0 &&
+               todaySessionsFiiltered.length > 0 &&
                <div className='mb-[30px] hidden lg:block'>
                   <h4 className='text-2xl font-semibold mb-5 lg:mb-8 '> Today </h4>
                   <Slider {...settings} >
-                     {todaySessions.map((session, idx) => {
+                     {todaySessionsFiiltered.map((session, idx) => {
                         return <Session key={idx} {...session} />
                      })}
                   </Slider>
@@ -193,22 +203,22 @@ export default function LiveEvents() {
          </div>
 
          {
-            todaySessions.length > 0 &&
+            todaySessionsFiiltered.length > 0 &&
             <div className='mb-[30px] lg:hidden'>
                <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Today </h4>
                <Slider {...settings} >
-                  {todaySessions.map((session, idx) => {
+                  {todaySessionsFiiltered.map((session, idx) => {
                      return <Session key={idx} {...session} />
                   })}
                </Slider>
             </div>
          }
          {
-            todaySessions.length > 0 &&
+            upcomingFiiltered.length > 0 &&
             <div className='mb-[30px]'>
                <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
                <Slider {...settings} >
-                  {upcoming.map((session, idx) => {
+                  {upcomingFiiltered.map((session, idx) => {
                      return <Session key={idx} {...session} />
                   })}
                </Slider>

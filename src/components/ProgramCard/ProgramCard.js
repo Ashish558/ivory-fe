@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getFormattedDuration } from '../../utils/utils'
 
-export default function ProgramCard({ id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed }) {
+export default function ProgramCard({ id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live }) {
 
    const navigate = useNavigate()
 
@@ -36,9 +36,12 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
                Ankit dua
             </span>
             <div className="flex justify-between">
+               {
+                  is_live === true &&
                <button className="bg-red-100 text-red-500 px-1 rounded-full">
                   {live_sessions_count} live sessions
                </button>
+               }
             </div>
 
             {
