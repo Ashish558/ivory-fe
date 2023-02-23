@@ -107,7 +107,7 @@ const Stories = () => {
       getStories(loggedIn)
          .then(res => {
             let resdata = res.data.data[0]
-            // console.log('Stories', res.data.data)
+            console.log('Stories', res.data.data)
             let allStories = []
             allStories = [...allStories,
             ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),

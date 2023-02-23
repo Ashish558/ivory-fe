@@ -27,7 +27,7 @@ const DesktopBanner = () => {
    useEffect(() => {
       getBanners()
          .then(res => {
-            console.log( res.data.data);
+            console.log('banners resp', res.data.data);
             if (res.data.data === null) return
             let homeBanners = res.data.data.filter(item => item.location_link === location.pathname)
             setBanners(homeBanners)
