@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import loginMan from "../../assets/images/login/loginMan.png";
-import SignupTree from "../../assets/images/login/signupTree.png";
+import { Link,useNavigate } from 'react-router-dom';
+import Slider from "react-slick";
 import logo from "../../assets/images/login/logolight.png";
+import SignupTree from "../../assets/images/login/signupTree.png";
 import { sendOtp } from '../../services/auth';
 import styles from "./Login.module.css";
-import Slider from "react-slick";
 
 const settings = {
   infinite: true,
@@ -16,7 +15,6 @@ const settings = {
   swipeToSlide: true,
   autoplay: true,
   autoplaySpeed: 2000,
-  // dots: true,
   afterChange: function (index) {
     console.log(
       `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -47,10 +45,6 @@ const Login = () => {
     } else if (phone.length > 10) {
       setError("Phone number cannot be more than 11 digits");
     } 
-    // else if (typeof phone !== "number") {
-    //   console.log(typeof phone);
-    //   setError("Phone number must be a number");
-    // } 
     else {
       setCountryCode(e.target.countryCode.value);
       const body = {
@@ -72,13 +66,7 @@ const Login = () => {
   }
   return (
     <div className="overflow-x-hidden bg-[#EEFDFC] overflow-hidden h-screen">
-      {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <img src={back} alt="" onClick={goBack} />
-            </div>
-          </div>
-        </div> */}
+      
 
       <div className="sm:flex  min-h-[667px] overflow-hidden  justify-around  w-screen mt-16 sm:m-0">
         <div className="topAppBar mt-10 ml-8 sm:hidden">

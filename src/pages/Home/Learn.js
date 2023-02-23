@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React,{ useEffect,useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import AcivityContent from '../../components/ActivityContent/ActivityContent'
 import Filterbar from '../../components/Filterbar/filterbar'
 import ProgramCard from '../../components/ProgramCard/ProgramCard'
 import Toggle from '../../components/Toggle/Toggle'
-import Logo from '../../Images/Canva.png'
-import { getCategories, getInterests } from '../../services/activities'
-import { getAllUserPrograms, getPrograms } from '../../services/program'
-import { getMyActivitiesProgress } from '../../services/user'
-import style from './Learn.module.css'
+import { getCategories,getInterests } from '../../services/activities'
+import { getAllUserPrograms,getPrograms } from '../../services/program'
 
 const card = [
    {
@@ -46,12 +43,12 @@ const card = [
 ]
 
 const Learn = () => {
-   const [activities, setActivities] = useState([])
+   const [activities,setActivities] = useState([])
    // const [filteredActivities,setFilteredActivities] = useState([])
-   const [filterItems, setFilterItems] = useState([])
-   const [completedTabActive, setCompletedTabActive] = useState(false)
+   const [filterItems,setFilterItems] = useState([])
+   const [completedTabActive,setCompletedTabActive] = useState(false)
    // design changes if my programs is active
-   const [myPrograms, setMyPrograms] = useState(false)
+   const [myPrograms,setMyPrograms] = useState(false)
 
    const [allPrograms, setAllPrograms] = useState([])
    const [allProgramsFiltered, setAllProgramsFiltered] = useState([])
@@ -70,7 +67,7 @@ const Learn = () => {
       getInterests(true)
          .then(res => {
             // console.log(res.data.data);
-            setActivities(res.data.data.map(item => ({ ...item, categories: [] })))
+            setActivities(res.data.data.map(item => ({ ...item,categories: [] })))
             let temp = [
                {
                   id: 0,
@@ -78,7 +75,7 @@ const Learn = () => {
                   selected: true
                }
             ]
-            res.data.data.map((activity, idx) => {
+            res.data.data.map((activity,idx) => {
                temp.push({
                   id: activity.id,
                   children: <div className='flex items-center gap-x-1'>
@@ -93,7 +90,7 @@ const Learn = () => {
             console.log(err.response);
          })
 
-   }, [])
+   },[])
 
    useEffect(() => {
       if (activities.length === 0) return
@@ -111,7 +108,7 @@ const Learn = () => {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [activities.length])
+   },[activities.length])
 
    useEffect(() => {
       getPrograms()
@@ -122,18 +119,18 @@ const Learn = () => {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   },[])
 
    useEffect(() => {
       getAllUserPrograms()
          .then(res => {
-            console.log('user programs', res.data.data);
+            console.log('user programs',res.data.data);
             if (res.data.data === null) return setUserPrograms([])
             setUserPrograms(res.data.data)
          }).catch(err => {
             console.log(err.response);
          })
-   }, [])
+   },[])
 
    const onChange = (item) => {
       // console.log('item', item);
@@ -145,16 +142,16 @@ const Learn = () => {
             } else {
                sel = false
             }
-            return { ...filterItem, selected: sel }
+            return { ...filterItem,selected: sel }
          })
          setFilterItems(temp)
       } else {
 
          let temp = filterItems.map(filterItem => {
             if (filterItem.id === item.id) {
-               return { ...filterItem, selected: true }
+               return { ...filterItem,selected: true }
             } else {
-               return { ...filterItem, selected: false }
+               return { ...filterItem,selected: false }
             }
          })
          setFilterItems(temp)
@@ -194,8 +191,8 @@ const Learn = () => {
       setUserProgramsFiltered(userProgsFiltered)
    }, [filterItems, userPrograms, myPrograms, completedTabActive])
 
-   const [toggleButton, settoggleButton] = useState(true);
-   const [toggleButton1, settoggleButton1] = useState(true);
+   const [toggleButton,settoggleButton] = useState(true);
+   const [toggleButton1,settoggleButton1] = useState(true);
    const handleClick = () => {
       settoggleButton(!toggleButton);
       const toggle = document.querySelector(".Learn_toggle__yXQQe");
@@ -215,16 +212,17 @@ const Learn = () => {
 
 
    return (
-      <div className='lg:mx-20 lg: mt-[70px]'>
-         <div className="bg-sky-50 p-5">
-            <h1 className='text-xl font-semibold lg:hidden block'>Welcome Sahil ji! <span className='text-sm font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+      <div className='lg:mx-28 lg: lg:my-[70px] mb-24 '>
+         <div className="bg-sky-50 lg:bg-white p-5">
+            <h1 className='text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
+            <span className='text-sm ml-1 mt-3 text-gray-400 lg:hidden block'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:bg-white my-5" >
                <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
                <button className={`font-bold text-lg rounded-full border px-4  ${myPrograms && ' bg-cyan-200'}`} onClick={() => setMyPrograms(true)}>My Program</button>
             </div>
          </div>
-         <h1 className='text-2xl font-semibold hidden lg:block'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
-         {/* <div className='h-32  mt-4 mx-4 bg-LightSky rounded-3xl'></div> */}
+         <h1 className='text-2xl font-semibold hidden lg:block ml-4'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+         
          <div className="px-5">
             <AcivityContent>
             </AcivityContent>
@@ -264,7 +262,7 @@ const Learn = () => {
          <div className="px-5">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3 mt-10">
+         <div className="lg:grid lg:grid-cols-3  mt-10 overflow-x-scroll" >
             {myPrograms ?
                userProgramsFiltered.map((item, index) => (
                   <ProgramCard key={item.id} {...item.program}
