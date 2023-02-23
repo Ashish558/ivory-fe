@@ -22,7 +22,7 @@ import { getActivities, getCategories, getSingleActivity } from '../../services/
 import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import Slider from "react-slick";
-import { getColors } from '../../utils/utils'
+import { getColors, isValidYoutubeLink } from '../../utils/utils'
 import ShareModal from '../../components/ShareModal/ShareModal'
 
 const settings = {
@@ -297,8 +297,8 @@ export default function StartActivity({ fetchUserDetails }) {
    // console.log('nextActivities', nextActivities);
    // console.log('isLastFeedbacked', isLastFeedbacked);
    if (Object.keys(activity).length === 0) return <></>
-   const { name, description, image, steps, video, video_link } = activity
-   console.log('steps', steps);
+   let { name, description, image, steps, video, video_link } = activity
+   // video_link = 'https://console.liveivory.com/media/story/videos/video_stories/Untitled_design.mp4'
 
    return (
       <>
@@ -317,17 +317,20 @@ export default function StartActivity({ fetchUserDetails }) {
                            isAlreadyStarted === false &&
                            <div className={styles.overlay} onClick={() => setStartModalActive(true)} > </div>
                         }
-                        <ReactPlayer ref={videoRef}
-                           width='100%'
-                           // height='400px'
-                           className={styles.video}
-                           url={video_link}
-                           controls={true}
-                           disabled={true}
-                        />
-                        {/* <video width='100%' height='400px' className='max-h-[400px]' controls  >
-                           <source src={video_link}  />
-                        </video> */}
+                        {
+                           isValidYoutubeLink(video_link)
+                              ?
+                              <ReactPlayer ref={videoRef}
+                                 width='100%'
+                                 className={styles.video}
+                                 url={video_link}
+                                 controls={true}
+                                 disabled={true}
+                              /> :
+                              <video width='100%' height='400px' className={styles.video} controls  >
+                                 <source src={video_link} />
+                              </video>
+                        }
                      </div>
                      :
                      <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%] '>
