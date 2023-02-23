@@ -5,6 +5,13 @@ export const getFormattedDate = argDate => {
    return `${date.getDate()} ${month}, ${date.getFullYear()}`
 }
 
+export const getFormattedDateShort = argDate => {
+   let date = new Date(argDate)
+   const month = date.toLocaleString('default', { month: 'short' });
+
+   return `${month}, ${date.getFullYear()}`
+}
+
 export const genNumbers = (start, end) => {
    const diff = end - start
    let numArray = []

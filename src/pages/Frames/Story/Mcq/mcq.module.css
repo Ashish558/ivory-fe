@@ -27,12 +27,15 @@
    border-radius: 24px;
    background: #D3E4FF;
    padding: 16px 16px;
+   max-width: max-content;
 }
 
 .mcqResponseCorrect {
    align-self: stretch;
    height: 342px;
    width: 100%;
+   max-width: 328px;
+   margin: 0 auto;
    background-color: #00B879;
    border-radius: 24px;
    display: flex;
@@ -54,6 +57,8 @@
    align-self: stretch;
    height: 60vh;
    width: 100%;
+   margin: 0 auto;
+   max-width: 328px;
    background-color: #FF6273;
    border-radius: 24px;
    display: flex;
@@ -78,6 +83,10 @@
 .correctOption {
    color: white;
    background-color: #169462;
+}
+.incorrectOption {
+   color: white;
+   background: #DD1D43;
 }
 
 .mcqResponseInCorrect h2 {
@@ -105,6 +114,7 @@
       height: 100%;
       width: auto;
       padding: 1rem;
+      min-height: 287px;
       background-color: #00B879;
       border-radius: 24px;
       display: flex;
@@ -123,6 +133,7 @@
       height: 100%;
       width: auto;
       padding: 1rem;
+      min-height: 287px;
       background-color: #FF6273;
       border-radius: 24px;
       display: flex;

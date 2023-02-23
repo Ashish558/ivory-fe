@@ -98,7 +98,7 @@ export default function Activities() {
       window.scrollTo({
          top: 0,
          behavior: "smooth",
-       });
+      });
    }
    useEffect(() => {
       if (filterItems.length > 0) return
@@ -200,11 +200,12 @@ export default function Activities() {
       let filteredArr = activities.filter(activity => activeIds.includes(activity.id))
       setFilteredActivities(filteredArr)
 
-   },[filterItems,activities])
-   const variants = ['red','purple','orange','blue','yellow',]
+   }, [filterItems, activities])
+   const variants = ['red', 'purple', 'orange', 'blue', 'yellow',]
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
    // console.log('my Activity', myActivities);
+   // console.log('filteredActivities', filteredActivities);
    return (
       <div className=' lg:mt-[64px]'>
          {/* <Header /> */}
@@ -215,7 +216,7 @@ export default function Activities() {
                <div className={`lg:flex mt-10 flex-col lg:self-start lg:mt-12 ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
                   <div className=' flex items-center mb-2'>
                      <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-4xl lg:font-semibold'>
-                         My activities
+                        My activities
                      </h3>
                      <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
@@ -248,25 +249,34 @@ export default function Activities() {
                   {filteredActivities.map((activity, indx) => {
                      return (
                         activity.categories?.length > 0 ?
-                        <div key={indx} className='mb-8 lg:mb-[60px]' >
-                           <div className='flex items-center mb-3  lg:mb-[48px]'>
-                              <img src={activity.icon} alt='activity' />
-                              <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
-                           </div>
-                           <div className='grid grid-cols-3 lg:grid-cols-6 lg:gap-x-[17px] lg:gap-y-6 gap-x-4 gap-y-2'>
-                              {activity.categories.map((category, idx) => {
-                                 return <div key={idx} className={`grid grid-rows-2 ${styles.activity}`}
-                                    onClick={() => navigate(`/activities/${category.id}`)} >
-                                    <img src={category.icon} alt='activity-type' className='row-span-1 mx-auto' />
-                                    <p className='mt-2  font-semibold text-center  row-span-1 leading-5'>
-                                       {category.name} </p>
-                                 </div>
-                              })}
-                           </div>
-                        </div> :
-                        <></>
+                           <div key={indx} className='mb-8 lg:mb-[60px]' >
+                              <div className='flex items-center mb-3  lg:mb-[48px]'>
+                                 <img src={activity.icon} alt='activity' />
+                                 <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
+                              </div>
+                              <div className='grid grid-cols-3 lg:grid-cols-6 lg:gap-x-[17px] lg:gap-y-6 gap-x-4 gap-y-2'>
+                                 {activity.categories.map((category, idx) => {
+                                    return <div key={idx} className={`grid grid-rows-2 ${styles.activity}`}
+                                       onClick={() => navigate(`/activities/${category.id}`)} >
+                                       <img src={category.icon} alt='activity-type' className='row-span-1 mx-auto' />
+                                       <p className='mt-2  font-semibold text-center  row-span-1 leading-5'>
+                                          {category.name} </p>
+                                    </div>
+                                 })}
+                              </div>
+                           </div> :
+                           <>
+                           </>
                      )
                   })}
+                  {
+                     filteredActivities.length === 1 && filteredActivities[0]?.categories?.length === 0 &&
+                     <div className='min-h-[100px] flex items-center justify-center'>
+                        <p className='text-lightGray font-medium lg:text-end lg:text-[24px]'>
+                           No activities added yet
+                        </p>
+                     </div>
+                  }
                </div>
 
             </div>
@@ -277,7 +287,6 @@ export default function Activities() {
                </div>
             </div>
          </div>
-
       </div>
    )
 }

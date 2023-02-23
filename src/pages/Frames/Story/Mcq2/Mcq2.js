@@ -176,7 +176,7 @@ export default function Mcq2({ image, choices, url, updateStory, type, question}
             <div className='flex flex-col gap-y-2 justify-around items-center' >
                {options.map(option => {
                   return <div key={option.id}
-                     className={`w-full bg-white py-1 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true && option.is_correct === true ? `${styles.correctOption}` : ''}`}
+                     className={`w-full bg-white py-1 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true && option.is_correct === true ? `${styles.correctOption}` : ''}  ${mcqResponse.selected === true && option.is_correct === false && option.selected ? `${styles.incorrectOption}` : ``}`}
                      onClick={() => optionDisabled === false && selectAns(option)} >
                      <p> {option.choice} </p>
                   </div>

@@ -24,6 +24,7 @@ import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import Slider from "react-slick";
 import { getColors, isValidYoutubeLink } from '../../utils/utils'
 import ShareModal from '../../components/ShareModal/ShareModal'
+import Modal from '../../components/Modal/modal'
 
 const settings = {
    infinite: false,
@@ -65,6 +66,7 @@ export default function StartActivity({ fetchUserDetails }) {
    const inputRef = useRef(null)
    const videoRef = useRef(null)
    const [shareModalOpen, setShareModalOpen] = useState(false)
+   const [startActivityModalActive, setStartActivityModalActive] = useState(false)
 
    const { categoryId, activityId } = useParams()
    const navigate = useNavigate()
@@ -261,8 +263,8 @@ export default function StartActivity({ fetchUserDetails }) {
          .then(res => {
             console.log('start resp', res);
             // alert('Activity started!')
-            alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
-
+            // alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
+            setStartActivityModalActive(true)
             setIsAlreadyStarted(true)
             fetchUserActivities()
             fetchUserDetails()
@@ -541,6 +543,24 @@ export default function StartActivity({ fetchUserDetails }) {
             close={() => {
                setShareModalOpen(false);
             }} />
+         {
+            startActivityModalActive &&
+            <Modal handleClose={() => setStartActivityModalActive(false)}
+               title='Free Activity unlocked!'
+               classname='max-w-[343px] sm:max-w-[500px] sm:h-[250px] rounded-3xl pt-0 pl-0 pr-0'
+               body={
+                  <div>
+                     <div className='px-4 text-center font-normal	mt-6 sm:text-xl sm:px-8 sm:flex sm:flex-col sm:justify-between'>
+                        You have {profileData.remaining_activities} free activities.<br /> Start one today
+                     </div>
+                     <div className='flex justify-center mt-8'>
+                     <PrimaryButton className='px-4 text-sm' children='Continue' 
+                     onClick={() => setStartActivityModalActive(false)} />
+                     </div>
+                  </div>
+               }
+            />
+         }
       </>
    )
 }

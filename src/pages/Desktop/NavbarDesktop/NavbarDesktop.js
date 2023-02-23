@@ -16,6 +16,7 @@ import cross from '../../../Images/cross.png'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateLoggedIn, updateProfileData } from '../../../redux/slices/user';
+import { getFormattedDateShort } from '../../../utils/utils';
 
 
 const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob', '/', '/logolanding', '/four', '/third', '/second', '/landing']
@@ -103,7 +104,7 @@ const NavbarDesktop = () => {
                         </div>
                         <p className='font-semibold text-sm pl-6 pt-2'>
                            {profileData.name ? profileData.name : ''}
-                           <span className='text-xs font-normal'>, user created  JUL 22</span></p>
+                           <span className='text-xs font-normal'>, user created {getFormattedDateShort(profileData.date_joined)}</span></p>
                            <div className='border mt-5 p-0'></div>
                      </div>
                      

@@ -135,7 +135,7 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
    useEffect(() => {
       return () => clearTimeout(timeOutId)
    },[])
-
+// console.log(mcqResponse);
    return (
       <div className={`${styles.storyMcq} lg:grid-rows-6`}>
          {
@@ -173,7 +173,9 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
             <div className='flex justify-around items-center' >
                {options.map(option => {
                   return <div key={option.id}
-                     className={`w-12 bg-white h-12 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true && option.is_correct === true ? `${styles.correctOption}` : ''}`}
+                     className={`w-12 bg-white h-12 flex justify-center items-center font-bold rounded-full cursor-pointer ${option.selected ? `${styles.selectedOption}` : ''} ${mcqResponse.selected === true && option.is_correct === true ? `${styles.correctOption}` : ``}
+                     ${mcqResponse.selected === true && option.is_correct === false && option.selected ? `${styles.incorrectOption}` : ``}
+                     `}
                      onClick={() => optionDisabled === false && selectAns(option)} >
                      <p> {option.choice} </p>
                   </div>

@@ -19,6 +19,7 @@ import './Navbar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
+import { getFormattedDateShort } from '../../utils/utils'
 
 const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing', '/confirmation', '/live', '/enroll', '/community', '/learn']
 const basePaths = ['/home', '/activities']
@@ -87,7 +88,7 @@ const Navbar = () => {
                <p className='text-sm font-semibold pt-2'>
                   {profileData.name ? profileData.name : ''}
                </p>
-               <p className='text-xs'>user created  JUL 22</p>
+               <p className='text-xs'>user created  {getFormattedDateShort(profileData.date_joined)} </p>
                <div className='line mt-6' height="1px"></div>
                <div className='mt-7'>
 
