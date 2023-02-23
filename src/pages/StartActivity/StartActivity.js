@@ -366,7 +366,7 @@ export default function StartActivity({ fetchUserDetails }) {
                                        <img src={step.image} className='w-full object-contain' alt='step-image' />
                                     </div>
                                  }
-                                 <div className='font-normal text-sm md:text-base '>
+                                 <div className='font-normal text-sm md:text-base mt-[13px] lg:mt-1'>
                                     {step.description}
                                  </div>
                               </div>
@@ -418,11 +418,11 @@ export default function StartActivity({ fetchUserDetails }) {
                            <p className='font-medium sm:text-lg sm:font-semibold' >
                               Submit your work to get feedback from our <br></br>expert:
                            </p>
-                           <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 px-3 h-[51px] max-w-[360px]`}
+                           <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 text-sm px-3 h-[51px] max-w-[360px]`}
                               onClick={handleUploadClick}
                               children={
                                  <> <img src={WhatsappIcon} className='mr-3'
-                                 /> Upload
+                                 /> Submit on Whatsapp
                                     <input type='file' className='hidden' ref={inputRef}
                                        onChange={e => handleUpload(e)} />
                                  </>
@@ -443,11 +443,11 @@ export default function StartActivity({ fetchUserDetails }) {
                         <p className='font-medium sm:text-lg sm:font-semibold mb-4' >
                            Want to submit more?
                         </p>
-                        <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 px-3 h-[51px] max-w-[360px]`}
+                        <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 text-sm px-3 h-[51px] max-w-[360px]`}
                            onClick={handleUploadClick}
                            children={
                               <> <img src={WhatsappIcon} className='mr-3'
-                              /> Upload
+                              /> Submit on Whatsapp
                                  <input type='file' className='hidden' ref={inputRef}
                                     onChange={e => handleUpload(e)} />
                               </>
