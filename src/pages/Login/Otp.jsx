@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Link,useLocation,useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import back from "../../assets/Back.svg";
-import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
 import { updateLoggedIn } from '../../redux/slices/user';
@@ -30,23 +29,16 @@ const settings = {
 
 const sliderData = [
   {
-    textPrimary: 'Accomplish',
-    textSec: 'your creative goals',
-    img: loginMan,
-    imgClassName: ''
-  },
-  {
-    textPrimary: 'Accomplish',
-    textSec: 'your creative goals',
+    textPrimary: "Accomplish",
+    textSec: "your creative goals",
     img: SignupTree,
-    imgClassName: 'max-w-[270px]'
+    imgClassName: "max-w-[270px]",
   },
-]
+];
 const Otp = () => {
   const [otp, setOtp] = useState([]);
   const [otpStatus, setOtpStatus] = useState('');
   const locaion = useLocation();
-  const NewLocation = useLocation();
   const from = locaion?.state?.from || "/login";
   const stateData = locaion?.state;
   const { otp: otpData, otp_token, phone, countryCode } = stateData;
