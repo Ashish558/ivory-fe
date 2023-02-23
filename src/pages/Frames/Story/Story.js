@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./story.module.css";
 
 import BackIcon from '../../../assets/icons/back.svg';
@@ -17,16 +17,18 @@ import Mcq from './Mcq/Mcq';
 import Mcq2 from './Mcq2/Mcq2';
 import QnA from './QnA/QnA';
 import Sudoku from './Sudoku/Sudoku';
+import ReactPlayer from 'react-player';
+import { isValidYoutubeLink } from '../../../utils/utils';
 
-const types = ['image','video','mcq','mcq2','sudoku','qna']
+const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
 export default function Story(props) {
-   const { handleClose,updateStory,selectNextStory,selectPrevStory,selectedIndex,isSingle } = props
+   const { handleClose, updateStory, selectNextStory, selectPrevStory, selectedIndex, isSingle } = props
    let story = props.story
-   let { id,image,type,liked,share_message,title,url,views,video } = story
-   const [storyType,setStoryType] = useState(type)
-   const [shareModalOpen,setShareModalOpen] = useState(false)
+   let { id, image, type, liked, share_message, title, url, views, video } = story
+   const [storyType, setStoryType] = useState(type)
+   const [shareModalOpen, setShareModalOpen] = useState(false)
 
    const hideHtmlOverflow = () => {
       document.body.style.overflow = "hidden";
@@ -49,11 +51,11 @@ export default function Story(props) {
       } else {
          setStoryType(type)
       }
-   },[type,image])
+   }, [type, image])
 
    useEffect(() => {
       hideHtmlOverflow()
-   },[shareModalOpen])
+   }, [shareModalOpen])
 
    useEffect(() => {
       hideHtmlOverflow()
@@ -61,37 +63,37 @@ export default function Story(props) {
          document.body.style.overflow = "unset";
          document.documentElement.style.overflow = "unset";
       };
-   },[]);
+   }, []);
 
    //view story
    useEffect(() => {
-      axios.get(`${url}view/`,getAuthHeaders())
+      axios.get(`${url}view/`, getAuthHeaders())
          .then(res => {
             // console.log('view res', res.data);
-            updateStory({ ...res.data.data,type })
+            updateStory({ ...res.data.data, type })
          })
          .catch(err => {
-            console.log('view err',err.data);
+            console.log('view err', err.data);
          })
-   },[selectedIndex])
+   }, [selectedIndex])
 
    const handleLike = () => {
-      axios.get(`${url}like/`,getAuthHeaders())
+      axios.get(`${url}like/`, getAuthHeaders())
          .then(res => {
             // console.log('like res', res.data.data);
-            updateStory({ ...res.data.data,type })
+            updateStory({ ...res.data.data, type })
          }).catch(err => {
-            console.log('like err',err.data);
+            console.log('like err', err.data);
          })
    }
 
    const handleDislike = () => {
-      axios.get(`${url}dislike/`,getAuthHeaders())
+      axios.get(`${url}dislike/`, getAuthHeaders())
          .then(res => {
             // console.log('dislike res', res.data);
-            updateStory({ ...res.data.data,type })
+            updateStory({ ...res.data.data, type })
          }).catch(err => {
-            console.log('dislike err',err.data);
+            console.log('dislike err', err.data);
          })
    }
    const shareStory = () => {
@@ -110,7 +112,8 @@ export default function Story(props) {
    // console.log('story', storyType)
    // console.log('story', story)
    // console.log('video', video)
-   let storyProps = { url,updateStory,type }
+   let storyProps = { url, updateStory, type }
+   // let video = 'https://www.youtube.com/watch?v=GGo3MVBFr1A'
    return (
       <>
 
@@ -125,25 +128,26 @@ export default function Story(props) {
                         </div>
 
                         : storyType === 'video' ?
-                           <div className={styles.storyVideo}>
-                              {/* <ReactPlayer
-                                 width='300px'
-                                 height='500px'
-                                 url={video}
-                                 src={video}
-                                 controls={true}
-                                 // file={video}
-                                 config={{
-                                    file: {
-                                       forceVideo: true,
-                                    }
-                                 
-                                 }}
-                              /> */}
-                              <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" >
-                                 <source src={video} type="video/mp4" />
-                              </video>
-                           </div>
+                           <>
+                              {
+                                 isValidYoutubeLink(video)
+                                    ?
+                                    <div className={`${styles.storyVideo} ${styles.storyVideoYoutube}`}>
+                                       <ReactPlayer
+                                          width='300px'
+                                          height='500px'
+                                          url={video}
+                                          controls={true}
+                                       />
+                                    </div>
+                                    :
+                                    <div className={styles.storyVideo}>
+                                       <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" >
+                                          <source src={video} type="video/mp4" />
+                                       </video>
+                                    </div>
+                              }
+                           </>
                            : storyType === 'mcq' && story.choices !== undefined ?
                               <Mcq {...story} {...storyProps} />
                               : storyType === 'mcq2' ?

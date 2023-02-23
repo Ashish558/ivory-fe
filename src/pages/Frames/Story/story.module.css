@@ -128,7 +128,10 @@
 .logo {
    display: none;
 }
-
+.storyVideoYoutube{
+   display: flex;
+   justify-content: center;
+}
 @media only screen and (max-width: 768px) {
    .storyImg {
       max-height: 70vh;
@@ -136,15 +139,15 @@
       transform: translateY(-50%);
    }
 
-   
-
    .storyVideo {
       position: static;
       margin-top: 2rem;
       min-height: 400px;
-      height: calc(100vh - 4rem);
+      height: calc(100vh - 8rem);
    }
-
+   .storyVideoYoutube{
+      height: calc(100vh - 8rem);
+   }
    .leftIcon,
    .RightIcon {
       position: fixed;

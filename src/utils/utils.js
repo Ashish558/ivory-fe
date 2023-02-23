@@ -74,3 +74,12 @@ export const getStoryUrl = type => {
       return 'video-stories'
    }
 }
+
+export function isValidYoutubeLink(val) {
+   let regex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
+   if (!regex.test(val)) {
+      return false
+   }else{
+      return true
+   }
+}
