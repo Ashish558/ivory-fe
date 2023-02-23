@@ -48,7 +48,7 @@ const SimpleSlider = () => {
                         <div className="slider-bg mx-4">
                            <div style={{ height: '140px', margin: "0 auto" }}
                               className="flex justify-between items-center mx px-4 py-2 overflow-hidden">
-                              <div className="flex flex-1 items-center self-stretch overflow-hidden">
+                              <div className="flex flex-1 items-center self-stretch relative overflow-hidden">
                                  <img className="rounded-2xl w-full h-full object-cover"
                                   src={banner.image} alt="" />
                                  <p className="play bg-black rounded-full"></p>
