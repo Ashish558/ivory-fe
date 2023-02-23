@@ -7,13 +7,26 @@ import Photo from '../../Images/profile-pic.jfif'
 import { useNavigate } from 'react-router-dom'
 import { getFormattedDateWeek } from '../../utils/utils'
 
-export default function Session({ id, name, image, scheduled_on, host }) {
+export default function Session({ id, name, image, scheduled_on, host, scrollToTop }) {
 
    const navigate = useNavigate()
 
+   const handleScrollToTop = () => {
+      window.scrollTo({
+         top: 0,
+         behavior: "smooth",
+       });
+   }
+
+   const handleClick = ()=>{
+      navigate(`/live-events/${id}`)
+      if(scrollToTop){
+         handleScrollToTop()
+      }
+   }
    return (
       <div className='rounded-3xl overflow-hidden bg-secondary max-w-[240px]'
-         onClick={() => navigate(`/live-events/${id}`)}>
+         onClick={handleClick}>
          <div className={styles.imgContainer}>
             <img src={image} className='object-contain' alt='session' />
 

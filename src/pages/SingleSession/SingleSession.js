@@ -7,7 +7,7 @@ import Slider from 'react-slick'
 import EventImg from '../../assets/images/event.png'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import Session from '../../components/Session/Session'
-import { getLiveSessions, getSingleLiveSessions, registerLiveSession } from '../../services/liveSession'
+import { getLiveSessions, getSingleLiveSessions, getUserLiveSessions, registerLiveSession } from '../../services/liveSession'
 import { getFormattedDate, getFormattedDuration } from '../../utils/utils'
 import { tempSessionData } from '../LiveEvents/LiveEvents'
 import { settings } from '../LiveEvents/settings'
@@ -22,6 +22,7 @@ export default function SingleSession({ }) {
    const [allPrograms, setAllPrograms] = useState([])
    const { id } = useParams()
    const { loggedIn } = useSelector(state => state.user)
+   const [isEnrolled, setIsEnrolled] = useState(false)
    const navigate = useNavigate()
 
    useEffect(() => {
@@ -33,7 +34,7 @@ export default function SingleSession({ }) {
          }).catch((err) => {
             console.log(err.repsonse)
          });
-   }, [])
+   }, [id, loggedIn])
 
    const fetchSession = () => {
       getLiveSessions()
@@ -48,6 +49,27 @@ export default function SingleSession({ }) {
    useEffect(() => {
       fetchSession()
    }, [])
+   const fetchUserSessions = () => {
+      if (!loggedIn) return
+      getUserLiveSessions()
+         .then((res) => {
+            console.log('user-sessions', res.data.data);
+            if (res.data.data === null) return
+            let enrolled = false
+            res.data.data.map(item => {
+               if(item.livesession.id === parseInt(id)){   
+                  enrolled = true
+               }
+            })
+            setIsEnrolled(enrolled)
+         }).catch((err) => {
+            console.log(err.repsonse)
+         });
+   }
+
+   useEffect(() => {
+      fetchUserSessions()
+   }, [loggedIn])
 
    const handleRegisterClick = () => {
       if (!loggedIn) {
@@ -63,13 +85,14 @@ export default function SingleSession({ }) {
             .then((res) => {
                console.log(res);
                fetchSession()
+               fetchUserSessions()
             }).catch((err) => {
                console.log(err.repsonse)
             });
       }
    }
-   console.log('session', session)
-   const { name, description, image, scheduled_on,duration, scheduled_on_start_time, scheduled_on_end_time, host, is_completed } = session
+   console.log('isEnrolled', isEnrolled)
+   const { name, description, image, scheduled_on, duration, scheduled_on_start_time, scheduled_on_end_time, host, is_completed } = session
 
 
    return (
@@ -140,9 +163,9 @@ export default function SingleSession({ }) {
                </p>
             </div> */}
             <div className='flex flex-col'>
-               <SecondaryButton children={is_completed ? 'Registered' : `Register for free`}
+               <SecondaryButton children={isEnrolled ? 'Registered' : `Register for free`}
                   className='bg-secondaryLight w-full max-w-[328px] mb-5'
-                  onClick={is_completed !== true && handleRegisterClick} />
+                  onClick={isEnrolled !== true && handleRegisterClick} />
 
                <SecondaryButton children={<> <img src={ShareIcon} alt='share' className='mr-2.5' /> Share </>}
                   className='bg-secondaryLigt w-full flex justify-center items-center max-w-[328px] mb-12' />
@@ -151,7 +174,7 @@ export default function SingleSession({ }) {
             <h4 className='font-semibold mb-6'> upcoming live sessions </h4>
             <Slider {...settings} >
                {allPrograms.map((session, idx) => {
-                  return <Session key={idx} {...session} />
+                  return <Session key={idx} {...session} scrollToTop={true} />
                })}
             </Slider>
          </div>
