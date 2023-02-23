@@ -152,14 +152,14 @@ const Otp = () => {
   };
   return (
     <div className="overflow-hidden bg-[#EEFDFC] h-screen">
-      <div className="topAppBar pt-10 ml-8 sm:hidden">
+      <div className="topAppBar pt-10 ml-6 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img src={back} alt="" onClick={goBack} />
           </div>
         </div>
       </div>
-      <div className="sm:flex  min-h-[667px] overflow-y-auto  justify-around   w-screen ml-8 sm:ml-0">
+      <div className="sm:flex  min-h-[667px] overflow-y-auto  justify-around   w-screen mx-auto sm:ml-0">
         <div
           className="hidden sm:flex flex flex-col items-center min-h-screen h-ful sm:w-[40vw]"
           style={{
@@ -200,7 +200,7 @@ const Otp = () => {
           </div>
         </div>
         <div className=" h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center mt-20 sm:mt-0">
-          <div className="flex flex-col max-w-[328px] justify-between mt-8">
+          <div className="flex flex-col sm:max-w-[328px] justify-between mt-8">
             <form className="flex flex-col" onSubmit={handleOpt}>
               <h1 className=" text-[22px] font-bold mx- lg:ml-0 max-w-[328px] mx-auto">
                 Verify with OTP sent to {phone ? phone : "9863727272"}
@@ -270,7 +270,7 @@ const Otp = () => {
               )}
               {otpValuesArray.length === 6 ? (
                <button type='submit'
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w2 lg:w-full text-center justify-center  flex  lg:mx-0 mt-5 mb-1"
+                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white lg:w-full text-center justify-center  flex  lg:mx-0 mt-5 mb-1 w-11/12 mx-auto"
                 >
                   Continue
                 </button>
@@ -284,22 +284,24 @@ const Otp = () => {
               )}
             </form>
             <br />
-            {otpStatus === "failed" && (
-              <div>
-                <Link to="/resend" className=" ">
-                  {" "}
-                  Didn't receive OTP? Try again in 00:30
-                </Link>
-              </div>
-            )}
-            <Link
-              to="/resend"
-              className="text-blue-500 lg:ml-0"
-              onClick={handleResend}
-            >
-              {" "}
-              Resend OTP
-            </Link>
+            <div className="w-11/12 mx-auto">
+              {otpStatus === "failed" && (
+                <div>
+                  <Link to="/resend" className=" ">
+                    {" "}
+                    Didn't receive OTP? Try again in 00:30
+                  </Link>
+                </div>
+              )}
+              <Link
+                to="/resend"
+                className="text-blue-500 lg:ml-0"
+                onClick={handleResend}
+              >
+                {" "}
+                Resend OTP
+              </Link>
+            </div>
           </div>
         </div>
       </div>
