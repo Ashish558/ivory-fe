@@ -25,14 +25,14 @@ export default function Session({ id, name, image, scheduled_on, host, scrollToT
       }
    }
    return (
-      <div className='rounded-3xl overflow-hidden bg-secondary max-w-[240px]'
+      <div className='rounded-3xl rounded-[48px] overflow-hidden bg-secondary max-w-[240px] lg:max-w-[348px]'
          onClick={handleClick}>
          <div className={styles.imgContainer}>
             <img src={image} className='object-contain' alt='session' />
 
          </div>
-         <div className='px-3 pr-2 py-2 pb-5'>
-            <div className='mb-7'>
+         <div className='px-3 pr-2 py-2 pb-5 lg:px-4 lg:py-4'>
+            <div className='mb-7 lg:mb-[60px]'>
                <p className='font-semibold mb-2'> {name} </p>
                <p className='font-medium font-sm text-[#6C7277] mb-2 ml-[3px]'>
                   {getFormattedDateWeek(scheduled_on)}

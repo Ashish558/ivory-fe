@@ -1,7 +1,8 @@
 export const settings = {
+
    infinite: false,
-   centerPadding: "10px",
-   slidesToShow: 4,
+   centerPadding: "60px",
+   slidesToShow: 3,
    initialSlide: 0,
    arrows: false,
    swipeToSlide: true,
@@ -10,43 +11,43 @@ export const settings = {
       {
          breakpoint: 1300,
          settings: {
-            slidesToShow: 4,
+            slidesToShow: 3,
          }
       },
       {
          breakpoint: 1204,
          settings: {
-            slidesToShow: 2.9,
+            slidesToShow: 2.5,
          },
 
       },
       {
          breakpoint: 768,
          settings: {
-            slidesToShow: 2,
+            slidesToShow: 1.5,
          },
       },
       {
          breakpoint: 600,
          settings: {
-            slidesToShow: 1.8,
-         },
-      },
-      {
-         breakpoint: 500,
-         settings: {
-            slidesToShow: 1.7,
+            slidesToShow: 1.5,
          },
       },
       {
          breakpoint: 480,
          settings: {
-            slidesToShow: 1.1,
+            slidesToShow: 1.2,
          },
+         // state: {
+         //    display: true,
+         //    height: 600
+         // }
       }
    ],
 
    afterChange: function (index) {
-  
+      console.log(
+         `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
    }
 };

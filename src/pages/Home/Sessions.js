@@ -16,7 +16,6 @@ import { settings } from '../LiveEvents/settings';
 
 const Sessions = () => {
 
-
    const [allSessions, setAllSessions] = useState([])
    const navigate = useNavigate()
 
@@ -45,12 +44,13 @@ const Sessions = () => {
                onClick={() => navigate('/live-events')}>Events</h1>
             <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
          </div>
-
-         <Slider {...settings} >
-            {allSessions.map((session, idx) => {
-               return <Session key={idx} {...session} scrollToTop={true} />
-            })}
-         </Slider>
+         <div className='px-4'>
+            <Slider {...settings} >
+               {allSessions.map((session, idx) => {
+                  return <Session key={idx} {...session} scrollToTop={true} />
+               })}
+            </Slider>
+         </div>
       </div>
    );
 };
