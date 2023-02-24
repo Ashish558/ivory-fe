@@ -89,7 +89,7 @@ const NavbarDesktop = () => {
                      <p ><img width="34px" height="34px" src={profileData.profile_picture ? profileData.profile_picture : User} alt="" className='rounded-full w-[40px] h-[40px] object-cover' /></p>
                   }
                </label>
-               <ul style={{ width: '616px', height: '520px' }} tabindex="0" class="sidebar menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 flex flex-col" >
+               <ul style={{ width: '616px', height: '520px', top:'calc(100% - 4px)' }} tabindex="0" class="sidebar menu dropdown-content p-2 shadow bg-base-100 rounded-box mt-4 flex flex-col" >
                   <div class="flex flex-col">
                      <div className='pt-6'>
                         <div className='flex justify-between'>
