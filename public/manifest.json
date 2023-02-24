@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Ivory",
+  "name": "Ivory App",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,22 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://ivory-test.netlify.app/home",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#7eabc9",
+  "description": "Ivory app description",
+  "dir": "auto",
+  "lang": "en",
+  "orientation": "any",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=io.ionic.ivoryapp&amp;hl=en-US&amp;ah=oZ8nR0yAxnh9MZJ8mK76K67bD5Q",
+      "id": "oZ8nR0yAxnh9MZJ8mK76K67bD5Q"
+    }
+  ],
+  "categories": [
+    "entertainment"
+  ]
 }
