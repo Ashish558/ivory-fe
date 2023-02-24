@@ -1,4 +1,4 @@
-import { easeOut,motion as m } from "framer-motion"
+import { easeIn, easeInOut, easeOut,motion as m } from "framer-motion"
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import slideimage2 from "../../assets/slideimage2.png"
@@ -8,12 +8,12 @@ const Second = () => {
   const navigate = useNavigate();
   const nextpage = () => {
   }
-  setTimeout(() => {
-    navigate("/third");
-    // navigate("/second")
-  },3000);
+  // setTimeout(() => {
+  //   navigate("/third");
+  //   // navigate("/second")
+  // },3000);
   return (
-    <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75,ease: easeOut }} className={styles.fullscreen}>
+    <m.div initial={{ opacity: 0.7 }} animate={{ opacity: 1 }} transition={{ duration: 0.7,ease: easeIn,ease: easeOut }} className={`${styles.fullscreen} h-screen overflow-hidden`}>
       <div className="topAppBar ml-8 z-[9999] absolute top-16 right-0">
         <div className="flex justify-between items-center">
           <div className="flex items-end justify-end content-end w-full">
