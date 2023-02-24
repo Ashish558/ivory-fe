@@ -11,10 +11,12 @@ import RedirectIcon from '../../assets/icons/redirect.svg'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getActivities, getCategories } from '../../services/activities'
 import { getMyActivities } from '../../services/user'
 import { useSelector } from 'react-redux'
+import { getBanners } from '../../services/banners'
+import SimpleSlider from '../Home/SimpleSlider'
 
 export const tempActivities = [
    {
@@ -58,6 +60,21 @@ export default function ActivityType() {
    const [completedTabActive, setCompletedTabActive] = useState(false)
    const { loggedIn } = useSelector(state => state.user)
    const [isActivitiesFetched, setIsActivitiesFetched] = useState(false)
+
+
+   const location = useLocation()
+   const navigate = useNavigate()
+   const [banners, setBanners] = useState([])
+
+   useEffect(() => {
+      getBanners()
+         .then(res => {
+            console.log('activities banners', res.data.data);
+            if (res.data.data === null) return
+            let bannersData = res.data.data.filter(item => item.location_link === location.pathname)
+            setBanners(bannersData)
+         })
+   }, [location.pathname])
 
    useEffect(() => {
       getMyActivities()
@@ -125,17 +142,19 @@ export default function ActivityType() {
    // console.log('category', category);
    // console.log('userActivities', userActivities);
    // console.log('activities', activities);
+   // console.log('banners', banners);
 
    return (
-      <div className='lg:mt-[64px]'>
+      <div className='lg:mt-[64px] lg:px-[80px]'>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
-               <p className='text-lightGray font-medium sm:mx-20'> Activities {'>'} {category.name} </p>
+               <p className='text-lightGray font-medium'> Activities {'>'} {category.name} </p>
             </div>
             <div className='mt-4'>
-               <h3 className='text-4xl font-medium mb-2.5 sm:mx-20'>  {category.name} </h3>
-               <ActivityContent />
+               <h3 className='text-4xl font-medium mb-2.5 '>  {category.name} </h3>
+               {/* <ActivityContent banners={banners} /> */}
+               <SimpleSlider banners={banners} isActivityBanner={true} />
             </div>
             {
                userActivities.length > 0 &&
@@ -158,7 +177,7 @@ export default function ActivityType() {
                   </button>
                </div>
             }
-            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 sm:mx-20 
+            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4
             [&>div]:max-w[280px]'>
                {userActivities.length > 0 ?
                   filteredUserActivities.map(activity => {

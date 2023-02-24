@@ -4,13 +4,13 @@ import ProfileImg from '../../assets/images/profile.png'
 import Thumbnail from '../../assets/images/thumbnail.png'
 import styles from './styles.module.css'
 
-export default function ActivityContent() {
+export default function ActivityContent({ banners }) {
    return (
       <div className={`${styles.activityContent} my-8`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
             <div className='relative flex-1 sm:flex  sm:w-[4/12]'>
                <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-full object-cover' />
-               <img src={PauseIcon} alt='play' className='absolute w-[60px]' style={{ top: '50%',left: '50%',transform: 'translate(-50%,-50%)' }} />
+               <img src={PauseIcon} alt='play' className='absolute w-[60px]' style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
             </div>
             <p className='font-bold text-xl flex-1 sm:hidden'>
                Learn Acrylic
