@@ -36,7 +36,7 @@ const Footer = () => {
 
 
                </p>
-               <p className='text-base'>Home</p>
+               <p className={`text-base pt-0 ${currentPath === '/home' ? 'font-bold' : ''} `}>Home</p>
             </div>
 
             <div className='flex flex-col cursor-pointer justify-between items-center'
@@ -48,7 +48,7 @@ const Footer = () => {
                   }
 
                </p>
-               <p className='text-base pt-0'>Activities</p>
+               <p className={`text-base pt-0 ${currentPath === '/activities' ? 'font-bold' : ''} `}>Activities</p>
             </div>
             <div className='flex flex-col cursor-pointer justify-between items-center'
                onClick={() => navigate('/learn')}>
@@ -58,7 +58,7 @@ const Footer = () => {
                         src={learn} alt="" />
                   }
                </p>
-               <p className='text-base pt-0'>Learn</p>
+               <p className={`text-base pt-0 ${currentPath === '/learn' ? 'font-bold' : ''} `}>Learn</p>
             </div>
             <div className='flex flex-col cursor-pointer justify-between items-center relative'>
 
@@ -72,7 +72,7 @@ const Footer = () => {
                <div className='count flex items-center justify-center'>
                   <p> 3</p>
                </div>
-               <p className='text-base pt-0'>Community</p>
+               <p className={`text-base pt-0 ${currentPath === '/community' ? 'font-bold' : ''} `}>Community</p>
             </div>
          </div>
       </div>

@@ -253,15 +253,22 @@ export default function Activities() {
                               <img src={activity.icon} alt='activity' />
                               <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
-                           <div className='grid grid-cols-3 lg:grid-cols-6 lg:gap-x-[17px] lg:gap-y-6 gap-x-4 gap-y-2'>
-                              {activity.categories.map((category, idx) => {
-                                 return <div key={idx} className={`grid grid-rows-2 ${styles.activity}`}
-                                    onClick={() => navigate(`/activities/${category.id}`)} >
-                                    <img src={category.icon} alt='activity-type' className='row-span-1 mx-auto' />
-                                    <p className='mt-2  font-semibold text-center  row-span-1 leading-5'>
-                                       {category.name} </p>
+                              <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
+                              {activity.categories.map((category, idx) => (
+                                 <div key={category.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
+                                    onClick={() => navigate(`/activities/${category.id}`)}>
+                                    <p><img src={category.icon} alt="" /></p>
+                                    {
+                                       category?.name.length <= '17' ?
+                                          <p className='text-center pt-2 font-semibold text-sm'
+                                          // style={{ color: activity?.color }}
+                                          >{category?.name}</p>
+                                          : <p className='text-center pt-2 font-semibold text-xs'
+                                          // style={{ color: activity?.color }}
+                                          >{category?.name}</p>
+                                    }
                                  </div>
-                              })}
+                  ))}
                            </div>
                         </div> :
                         <></>

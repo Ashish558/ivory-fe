@@ -11,7 +11,7 @@ import RedirectIcon from '../../assets/icons/redirect.svg'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getActivities, getCategories } from '../../services/activities'
 import { getMyActivities } from '../../services/user'
 import { useSelector } from 'react-redux'
@@ -58,7 +58,7 @@ export default function ActivityType() {
    const [completedTabActive, setCompletedTabActive] = useState(false)
    const { loggedIn } = useSelector(state => state.user)
    const [isActivitiesFetched, setIsActivitiesFetched] = useState(false)
-
+   const navigate = useNavigate()
    useEffect(() => {
       getMyActivities()
          .then(res => {
@@ -125,13 +125,15 @@ export default function ActivityType() {
    // console.log('category', category);
    // console.log('userActivities', userActivities);
    // console.log('activities', activities);
-
+ const navToActivities = (categoryId) => {
+      navigate(`/activities`)
+   }
    return (
       <div className='lg:mt-[64px]'>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2'>
-               <p className='text-lightGray font-medium sm:mx-20'> Activities {'>'} {category.name} </p>
+               <p className='text-lightGray font-medium sm:mx-20'> <span onClick={()=>navToActivities(category.id)} className='cursor-pointer'>Activities</span> {'>'} {category.name} </p>
             </div>
             <div className='mt-4'>
                <h3 className='text-4xl font-medium mb-2.5 sm:mx-20'>  {category.name} </h3>

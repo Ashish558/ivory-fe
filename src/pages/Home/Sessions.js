@@ -86,7 +86,7 @@ const Sessions = () => {
                })}
             </Slider>
          </div>
-         <div className='px-4 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6'>
+         <div className='px-4 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6 gap-y-6'>
 
             {allSessions.map((session,idx) => {
                return <Session key={idx} {...session} scrollToTop={true} />

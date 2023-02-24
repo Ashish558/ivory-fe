@@ -300,12 +300,15 @@ export default function StartActivity({ fetchUserDetails }) {
    let { name, description, image, steps, video, video_link } = activity
    // video_link = 'https://console.liveivory.com/media/story/videos/video_stories/Untitled_design.mp4'
 
+   const navToActivities = (categoryId) => {
+      navigate(`/activities/${categoryId}`)
+   }
    return (
       <>
          <div className='pb-12 mb-10 lg:mt-[64px]'>
             {/* <Header /> */}
             <div className='pt-2 px-4 sm:mx-20'>
-               <p className='text-lightGray font-medium sm:py-2'> Activities {'>'} {category.name}  </p>
+               <p className='text-lightGray font-medium sm:py-2'> <span onClick={()=>navToActivities(category.id)}>Activities</span> {'>'} {category.name}  </p>
             </div>
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
