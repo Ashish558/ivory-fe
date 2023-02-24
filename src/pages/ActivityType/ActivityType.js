@@ -132,7 +132,7 @@ export default function ActivityType() {
       <div className='lg:mt-[64px]'>
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
-            <div className='pt-2'>
+            <div className='pt-2 hidden md:block'>
                <p className='text-lightGray font-medium sm:mx-20'> <span onClick={()=>navToActivities(category.id)} className='cursor-pointer'>Activities</span> {'>'} {category.name} </p>
             </div>
             <div className='mt-4'>

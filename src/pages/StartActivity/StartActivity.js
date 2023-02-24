@@ -1,29 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import styles from './styles.module.css'
+import React,{ useEffect,useRef,useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
+import { useLocation,useNavigate,useParams } from 'react-router-dom'
+import styles from './styles.module.css'
 
 import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 
 import { useSelector } from 'react-redux'
+import Slider from "react-slick"
 import MarkIcon from '../../assets/icons/mark.svg'
 import NextIcon from '../../assets/icons/next.svg'
-import UploadOutlineIcon from '../../assets/icons/upload-outline.svg'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
-import UploadIcon from '../../assets/icons/upload.svg'
 import WhatsappIcon from '../../assets/icons/whatsapp-outline.svg'
 import ActivityIcon from '../../assets/images/activity.png'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
-import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
-import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
-import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
-import Slider from "react-slick";
-import { getColors, isValidYoutubeLink } from '../../utils/utils'
 import ShareModal from '../../components/ShareModal/ShareModal'
+import { getActivities,getCategories,getSingleActivity } from '../../services/activities'
+import { completeActivity,deleteSubmission,getMyActivities,getUserSubmissions,inCompleteActivity,startActivity,uploadActivity } from '../../services/user'
+import { getColors,isValidYoutubeLink } from '../../utils/utils'
+import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 
 const settings = {
    infinite: false,
@@ -51,40 +49,40 @@ const settings = {
 
 export default function StartActivity({ fetchUserDetails }) {
 
-   const [startModalActive, setStartModalActive] = useState(false)
-   const [activity, setActivity] = useState({})
-   const [activities, setActivities] = useState([])
-   const [submissions, setSubmissions] = useState([])
-   const [isAlreadyStarted, setIsAlreadyStarted] = useState(false)
-   const [isCompleted, setIsCompleted] = useState(false)
-   const [category, setCategory] = useState({})
-   const [viewSubModal, setViewSubModal] = useState(false)
-   const [sourceToView, setSourceToView] = useState('')
-   const [nextActivities, setNextActivities] = useState([])
-   const [isLastFeedbacked, setIsLastFeedbacked] = useState(false)
+   const [startModalActive,setStartModalActive] = useState(false)
+   const [activity,setActivity] = useState({})
+   const [activities,setActivities] = useState([])
+   const [submissions,setSubmissions] = useState([])
+   const [isAlreadyStarted,setIsAlreadyStarted] = useState(false)
+   const [isCompleted,setIsCompleted] = useState(false)
+   const [category,setCategory] = useState({})
+   const [viewSubModal,setViewSubModal] = useState(false)
+   const [sourceToView,setSourceToView] = useState('')
+   const [nextActivities,setNextActivities] = useState([])
+   const [isLastFeedbacked,setIsLastFeedbacked] = useState(false)
    const inputRef = useRef(null)
    const videoRef = useRef(null)
-   const [shareModalOpen, setShareModalOpen] = useState(false)
+   const [shareModalOpen,setShareModalOpen] = useState(false)
 
-   const { categoryId, activityId } = useParams()
+   const { categoryId,activityId } = useParams()
    const navigate = useNavigate()
    const location = useLocation()
 
-   const [currentIndex, setCurrentIndex] = useState(0)
-   const { loggedIn, profileData } = useSelector(state => state.user)
-   const [userActivityId, setUserActivityId] = useState(activityId)
+   const [currentIndex,setCurrentIndex] = useState(0)
+   const { loggedIn,profileData } = useSelector(state => state.user)
+   const [userActivityId,setUserActivityId] = useState(activityId)
 
    useEffect(() => {
       getSingleActivity(activityId)
          .then(res => {
-            console.log('activity data', res.data.data);
+            console.log('activity data',res.data.data);
             if (res.data.data === null) return
             // setActivities(res.data.data)
             setActivity(res.data.data)
          }).catch(err => {
-            console.log('err', err);
+            console.log('err',err);
          })
-   }, [activityId])
+   },[activityId])
 
    //fetch category details
    useEffect(() => {
@@ -97,7 +95,7 @@ export default function StartActivity({ fetchUserDetails }) {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [categoryId])
+   },[categoryId])
 
    //fetch users activities
    const fetchUserActivities = () => {
@@ -108,7 +106,7 @@ export default function StartActivity({ fetchUserDetails }) {
             res.data.data.forEach(myActivity => {
                if (myActivity.activity.id === parseInt(activityId)) {
                   started = true
-                  console.log('my act', myActivity);
+                  console.log('my act',myActivity);
                   if (myActivity.is_completed === true) {
                      setIsCompleted(true)
                   } else {
@@ -119,28 +117,28 @@ export default function StartActivity({ fetchUserDetails }) {
             })
             setIsAlreadyStarted(started)
          }).catch(err => {
-            console.log('err', err);
+            console.log('err',err);
          })
    }
 
    useEffect(() => {
       if (loggedIn === false) return
       fetchUserActivities()
-   }, [loggedIn, activityId])
+   },[loggedIn,activityId])
 
    useEffect(() => {
       if (loggedIn === false) return
       getSubmissions()
-   }, [userActivityId, loggedIn, activityId])
+   },[userActivityId,loggedIn,activityId])
 
    const getSubmissions = () => {
       getUserSubmissions(userActivityId)
          .then(res => {
-            console.log('submission res', res.data.data);
+            console.log('submission res',res.data.data);
             if (res.data.data === null) return setSubmissions([])
             setSubmissions(res.data.data)
          }).catch(err => {
-            console.log('submission err', err);
+            console.log('submission err',err);
             // setSubmissions([])
          })
    }
@@ -149,7 +147,7 @@ export default function StartActivity({ fetchUserDetails }) {
       if (!submissions) return
       if (submissions.length === 0) return
       setIsLastFeedbacked(submissions[submissions.length - 1].is_feedbacked)
-   }, [submissions])
+   },[submissions])
 
    const handleUploadClick = () => {
       if (isAlreadyStarted === false) {
@@ -174,16 +172,16 @@ export default function StartActivity({ fetchUserDetails }) {
       const file = e.target.files[0]
       if (file === undefined) return
       let formData = new FormData();
-      formData.append('submission', file);
-      formData.append('activity', userActivityId);
+      formData.append('submission',file);
+      formData.append('activity',userActivityId);
 
       uploadActivity(formData)
          .then(res => {
-            console.log('upload res', res.data);
+            console.log('upload res',res.data);
             alert('uploaded successfully')
             getSubmissions()
          }).catch(err => {
-            console.log('upload err', err);
+            console.log('upload err',err);
          })
    }
    const increaseIndex = () => {
@@ -197,20 +195,20 @@ export default function StartActivity({ fetchUserDetails }) {
    const handleComplete = () => {
       completeActivity(userActivityId)
          .then(res => {
-            console.log('compl res', res.data);
+            console.log('compl res',res.data);
             fetchUserActivities()
          }).catch(err => {
-            console.log('compl err', err);
+            console.log('compl err',err);
          })
    }
 
    const handleInComplete = () => {
       inCompleteActivity(userActivityId)
          .then(res => {
-            console.log('compl res', res.data);
+            console.log('compl res',res.data);
             fetchUserActivities()
          }).catch(err => {
-            console.log('compl err', err);
+            console.log('compl err',err);
          })
    }
 
@@ -227,12 +225,12 @@ export default function StartActivity({ fetchUserDetails }) {
          }).catch(err => {
             console.log(err.response);
          })
-   }, [categoryId, activityId])
+   },[categoryId,activityId])
 
    const onDelete = (id) => {
       deleteSubmission(id)
          .then(res => {
-            console.log('delete res', res.data);
+            console.log('delete res',res.data);
             alert('deleted successfully')
             if (submissions.length === 1) {
                handleInComplete()
@@ -242,7 +240,7 @@ export default function StartActivity({ fetchUserDetails }) {
                getSubmissions()
             }
          }).catch(err => {
-            console.log('delete err', err.response);
+            console.log('delete err',err.response);
             getSubmissions()
          })
    }
@@ -259,7 +257,7 @@ export default function StartActivity({ fetchUserDetails }) {
       }
       startActivity(activityId)
          .then(res => {
-            console.log('start resp', res);
+            console.log('start resp',res);
             // alert('Activity started!')
             alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
 
@@ -267,7 +265,7 @@ export default function StartActivity({ fetchUserDetails }) {
             fetchUserActivities()
             fetchUserDetails()
          }).catch(err => {
-            console.log('start err', err.response.data);
+            console.log('start err',err.response.data);
             if (err.response.data.status_code === 406) {
                alert('You have reached free activity limit')
             }
@@ -283,7 +281,7 @@ export default function StartActivity({ fetchUserDetails }) {
             url: `https://ivory-test.netlify.app${location.pathname}`
          })
             .then(() => console.log('Successful share'))
-            .catch(error => console.log('Error sharing:', error));
+            .catch(error => console.log('Error sharing:',error));
       }
       // console.log(location.pathname);
       // setShareModalOpen(true);
@@ -297,7 +295,7 @@ export default function StartActivity({ fetchUserDetails }) {
    // console.log('nextActivities', nextActivities);
    // console.log('isLastFeedbacked', isLastFeedbacked);
    if (Object.keys(activity).length === 0) return <></>
-   let { name, description, image, steps, video, video_link } = activity
+   let { name,description,image,steps,video,video_link } = activity
    // video_link = 'https://console.liveivory.com/media/story/videos/video_stories/Untitled_design.mp4'
 
    const navToActivities = (categoryId) => {
@@ -307,8 +305,8 @@ export default function StartActivity({ fetchUserDetails }) {
       <>
          <div className='pb-12 mb-10 lg:mt-[64px]'>
             {/* <Header /> */}
-            <div className='pt-2 px-4 sm:mx-20'>
-               <p className='text-lightGray font-medium sm:py-2'> <span onClick={()=>navToActivities(category.id)}>Activities</span> {'>'} {category.name}  </p>
+            <div className='pt-2 px-4 sm:mx-20 hidden md:block'>
+               <p className='text-lightGray font-medium sm:py-2 cursor-pointer'> <span onClick={() => navToActivities(category.id)}>Activities</span> {'>'} {category.name}  </p>
             </div>
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
@@ -357,8 +355,8 @@ export default function StartActivity({ fetchUserDetails }) {
                         See More
                      </span> :
                      <div>
-                        {steps.map((step, idx) => {
-                           let color = getColors(steps.length, idx)
+                        {steps.map((step,idx) => {
+                           let color = getColors(steps.length,idx)
                            return (
                               <div className='mb-6 mt-6 max-w-[650px]'>
                                  <p className={`font-semibold text-[${color}] mb-3`} style={{ color }} >
@@ -467,7 +465,7 @@ export default function StartActivity({ fetchUserDetails }) {
 
                   <div className='relative sm:grid sm:grid-cols-1  sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto md:hidden'>
                      <div className={`${styles.slider} sm:shadow-xl mb-0 overflow-hidden sm:w-[322px] mx-auto`}>
-                        {submissions.map((sub, idx) => {
+                        {submissions.map((sub,idx) => {
                            return <Feedback key={sub.id} {...sub}
                               currentIndex={currentIndex}
                               idx={idx}
@@ -482,7 +480,7 @@ export default function StartActivity({ fetchUserDetails }) {
                      <Slider {...settings} className='w-full h-[480px] max-w-[800px] mx-auto' >
 
 
-                        {submissions.map((sub, idx) => {
+                        {submissions.map((sub,idx) => {
                            return <div className='px-10'>
                               <Feedback key={sub.id} {...sub}
                                  notAbsolute={true}
