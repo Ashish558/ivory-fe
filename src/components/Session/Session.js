@@ -25,7 +25,7 @@ export default function Session({ id, name, image, scheduled_on, host, scrollToT
       }
    }
    return (
-      <div className='rounded-3xl rounded-[48px] overflow-hidden bg-secondary max-w-[240px] lg:max-w-[348px]'
+      <div className=' rounded-[48px] overflow-hidden bg-secondary max-w-[240px] lg:max-w-[348px]'
          onClick={handleClick}>
          <div className={styles.imgContainer}>
             <img src={image} className='object-contain' alt='session' />
