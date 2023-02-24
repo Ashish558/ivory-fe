@@ -102,3 +102,20 @@
     }
 
 }
+
+@media only screen and (max-width: 768px) {
+  .slick-current>div>.northArrow::after {
+    
+    position: absolute;
+    content: url(../../assets/icons/northArrow.svg);
+    padding: 0 15px;
+    padding-top:15px ;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: #D3E6FE;
+    bottom: 170px;
+    right: 10px;
+    cursor: pointer;
+}
+}

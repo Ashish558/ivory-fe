@@ -1,8 +1,13 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
+import activity2 from '../../assets/icons/activeActivities.svg';
+import community2 from '../../assets/icons/community.svg';
+import home2 from '../../assets/icons/home2.svg';
+import videoIcon from '../../assets/icons/videoIcon.svg';
 import activity from '../../Images/Activities.png';
 import community from '../../Images/Community.png';
 import home from '../../Images/Home.png';
+
 import learn from '../../Images/Learn.png';
 import '../Home/Footer.css';
 
@@ -24,32 +29,45 @@ const Footer = () => {
             <div className='flex flex-col cursor-pointer justify-around items-center'
                onClick={() => navigate('/home')}>
                <p>
-                  <img className={`${currentPath === '/home' ? 'icon-bg' : 'icon-bg-2'}`}
-                     src={home} alt="" />
+                  {currentPath === '/home' ? <img className='icon-bg '
+                     src={home} alt="" /> : <img className={`icon-bg-2`}
+                        src={home2} alt="" />
+                  }
+
+
                </p>
-               <p className='text-base pt-0'>Home</p>
+               <p className='text-base'>Home</p>
             </div>
 
             <div className='flex flex-col cursor-pointer justify-between items-center'
                onClick={() => navigate('/activities')} >
                <p>
-                  <img className={`${currentPath === '/activities' ? 'icon-bg' : 'icon-bg-2'}`}
-                     src={activity} alt="" />
+                  {currentPath === '/activities' ? <img className='icon-bg '
+                     src={activity2} alt="" /> : <img className={`icon-bg-2`}
+                        src={activity} alt="" />
+                  }
+
                </p>
                <p className='text-base pt-0'>Activities</p>
             </div>
             <div className='flex flex-col cursor-pointer justify-between items-center'
-            onClick={() => navigate('/learn')}>
+               onClick={() => navigate('/learn')}>
                <p>
-                  <img className={`${currentPath === '/learn' ? 'icon-bg' : 'icon-bg-2'}`}
-                     src={learn} alt="" /></p>
+                  {currentPath === '/learn' ? <img className='icon-bg '
+                     src={videoIcon} alt="" /> : <img className={`icon-bg-2`}
+                        src={learn} alt="" />
+                  }
+               </p>
                <p className='text-base pt-0'>Learn</p>
             </div>
             <div className='flex flex-col cursor-pointer justify-between items-center relative'>
 
                <p>
-                  <img className={`${currentPath === '/community' ? 'icon-bg' : 'icon-bg-2'}`}
-                     src={community} alt="" />
+                  {currentPath === '/community' ? <img className='icon-bg '
+                     src={community2} alt="" /> : <img className={`icon-bg-2`}
+                        src={community} alt="" />
+                  }
+
                </p>
                <div className='count flex items-center justify-center'>
                   <p> 3</p>

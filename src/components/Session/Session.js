@@ -1,13 +1,10 @@
 import React from 'react'
-import styles from './session.module.css'
-import ComingSoon from '../../assets/icons/coming-soon.svg'
-import LiveIcon from '../../assets/icons/live.svg'
-import OpenSession from '../../assets/icons/open-session.svg'
-import Photo from '../../Images/profile-pic.jfif'
 import { useNavigate } from 'react-router-dom'
+import Photo from '../../Images/profile-pic.jfif'
 import { getFormattedDateWeek } from '../../utils/utils'
+import styles from './session.module.css'
 
-export default function Session({ id, name, image, scheduled_on, host, scrollToTop }) {
+export default function Session({ id,name,image,scheduled_on,host,scrollToTop }) {
 
    const navigate = useNavigate()
 
@@ -15,17 +12,17 @@ export default function Session({ id, name, image, scheduled_on, host, scrollToT
       window.scrollTo({
          top: 0,
          behavior: "smooth",
-       });
+      });
    }
 
-   const handleClick = ()=>{
+   const handleClick = () => {
       navigate(`/live-events/${id}`)
-      if(scrollToTop){
+      if (scrollToTop) {
          handleScrollToTop()
       }
    }
    return (
-      <div className=' rounded-[48px] overflow-hidden bg-secondary max-w-[240px] lg:max-w-[348px]'
+      <div className=' rounded-[48px] overflow-hidden bg-secondary max-w-[240px] lg:max-w-[348px] northArrow relative'
          onClick={handleClick}>
          <div className={styles.imgContainer}>
             <img src={image} className='object-contain' alt='session' />
