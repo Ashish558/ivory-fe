@@ -104,7 +104,7 @@ export default function Story(props) {
       if (navigator.share) {
          navigator.share({
             title: 'Ivory Story',
-            text: share_message ? share_message : 'Ivory Activity',
+            text: share_message !== null ? share_message : 'Ivory Story',
             url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
             // files: [image]
          })
