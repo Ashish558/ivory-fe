@@ -18,7 +18,7 @@ import Mcq2 from './Mcq2/Mcq2';
 import QnA from './QnA/QnA';
 import Sudoku from './Sudoku/Sudoku';
 import ReactPlayer from 'react-player';
-import { isValidYoutubeLink } from '../../../utils/utils';
+import { convertLinkToDataUrl, isValidYoutubeLink, toDataURL } from '../../../utils/utils';
 
 const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
@@ -97,11 +97,16 @@ export default function Story(props) {
          })
    }
    const shareStory = () => {
+      console.log('image', image);
+      convertLinkToDataUrl(image, (res)=>{
+         console.log('res', res);
+      })
       if (navigator.share) {
          navigator.share({
-            title: 'Ivory Activity',
-            text: "Ivory Activity",
-            url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`
+            title: 'Ivory Story',
+            text: share_message ? share_message : 'Ivory Activity',
+            url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
+            // files: [image]
          })
             .then(() => console.log('Successful share'))
             .catch(error => console.log('Error sharing:', error));
@@ -112,6 +117,7 @@ export default function Story(props) {
    // console.log('story', storyType)
    // console.log('story', story)
    // console.log('video', video)
+   // console.log('share_message', share_message)
    let storyProps = { url, updateStory, type }
    // let video = 'https://www.youtube.com/watch?v=GGo3MVBFr1A'
    return (
@@ -194,6 +200,7 @@ export default function Story(props) {
             </div>
          </div>
          <ShareModal open={shareModalOpen}
+            shareMessage={share_message}
             url={`https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`}
             close={() => {
                setShareModalOpen(false);

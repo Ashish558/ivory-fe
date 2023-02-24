@@ -9,15 +9,15 @@ const LogoLanding = () => {
   const navigate = useNavigate();
   const { width } = useWindowDimensions()
 
-  useEffect(() => {
-    if (width > 990) {
-      navigate("/home")
-    } else {
-      setTimeout(() => {
-        navigate("/second")
-      }, 2500)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (width > 990) {
+  //     navigate("/home")
+  //   } else {
+  //     setTimeout(() => {
+  //       navigate("/second")
+  //     }, 2500)
+  //   }
+  // }, [])
 
   return (
     <>

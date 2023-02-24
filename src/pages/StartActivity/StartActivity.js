@@ -1,30 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react'
+import ReactPlayer from 'react-player/youtube'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import styles from './styles.module.css'
-import ReactPlayer from 'react-player/youtube'
 
 import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 
 import { useSelector } from 'react-redux'
+import Slider from "react-slick"
 import MarkIcon from '../../assets/icons/mark.svg'
 import NextIcon from '../../assets/icons/next.svg'
-import UploadOutlineIcon from '../../assets/icons/upload-outline.svg'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
-import UploadIcon from '../../assets/icons/upload.svg'
 import WhatsappIcon from '../../assets/icons/whatsapp-outline.svg'
 import ActivityIcon from '../../assets/images/activity.png'
 import Activity from '../../components/Activity/Activity'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Feedback from '../../components/Feedback/Feedback'
-import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
-import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
-import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
-import Slider from "react-slick";
-import { getColors, isValidYoutubeLink } from '../../utils/utils'
 import ShareModal from '../../components/ShareModal/ShareModal'
 import Modal from '../../components/Modal/modal'
+import { getActivities, getCategories, getSingleActivity } from '../../services/activities'
+import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
+import { getColors, isValidYoutubeLink } from '../../utils/utils'
+import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 
 const settings = {
    infinite: false,
@@ -302,12 +300,15 @@ export default function StartActivity({ fetchUserDetails }) {
    let { name, description, image, steps, video, video_link } = activity
    // video_link = 'https://console.liveivory.com/media/story/videos/video_stories/Untitled_design.mp4'
 
+   const navToActivities = (categoryId) => {
+      navigate(`/activities/${categoryId}`)
+   }
    return (
       <>
          <div className='pb-12 mb-10 lg:mt-[64px]'>
             {/* <Header /> */}
-            <div className='pt-2 px-4 sm:mx-20'>
-               <p className='text-lightGray font-medium sm:py-2'> Activities {'>'} {category.name}  </p>
+            <div className='pt-2 px-4 sm:mx-20 hidden md:block'>
+               <p className='text-lightGray font-medium sm:py-2 cursor-pointer'> <span onClick={() => navToActivities(category.id)}>Activities</span> {'>'} {category.name}  </p>
             </div>
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
@@ -517,10 +518,10 @@ export default function StartActivity({ fetchUserDetails }) {
             </div>
          </div>
          {
-            isAlreadyStarted === false && startModalActive === false && shareModalOpen === false &&
+            isAlreadyStarted === false && startModalActive === false && shareModalOpen === false && startActivityModalActive === false &&
             <div className={styles.startActivityFooter}>
                <div className='max-w-[328px] mx-auto'>
-                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'} onClick={handleStartActivity} className='w-full pt-2.5 pb-2.5' />
+                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'} onClick={() => setStartActivityModalActive(true)} className='w-full pt-2.5 pb-2.5' />
                </div>
             </div>
          }
@@ -547,15 +548,20 @@ export default function StartActivity({ fetchUserDetails }) {
             startActivityModalActive &&
             <Modal handleClose={() => setStartActivityModalActive(false)}
                title='Free Activity unlocked!'
-               classname='max-w-[343px] sm:max-w-[500px] sm:h-[250px] rounded-3xl pt-0 pl-0 pr-0'
+               classname='max-w-[343px] sm:max-w-[500px] sm:h-[300px] rounded-3xl pt-0 pl-0 pr-0'
                body={
                   <div>
-                     <div className='px-4 text-center font-normal	mt-6 sm:text-xl sm:px-8 sm:flex sm:flex-col sm:justify-between'>
-                        You have {profileData.remaining_activities} free activities.<br /> Start one today
-                     </div>
-                     <div className='flex justify-center mt-8'>
-                     <PrimaryButton className='px-4 text-sm' children='Continue' 
-                     onClick={() => setStartActivityModalActive(false)} />
+                     <div className='px-4 font-normal	mt-6 sm:text-xl sm:px-8 sm:flex sm:flex-col sm:justify-between'>
+                        <p>You have unlocked {profileData.remaining_activities ? profileData.remaining_activities : '(x)'} free activities. Start one day</p>
+                        <div className='flex justify-end mt-12 sm:absolute sm:bottom-5 sm:right-5'>
+                           <button className='text-primary px-8 py-2.5 font-semibold mr-1'
+                              onClick={() => setStartActivityModalActive(false)}>
+                              Later
+                           </button>
+                           <PrimaryButton children='Start now'
+                              onClick={() => { handleStartActivity(); }}
+                           />
+                        </div>
                      </div>
                   </div>
                }

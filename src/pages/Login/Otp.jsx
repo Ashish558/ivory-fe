@@ -192,14 +192,14 @@ const Otp = () => {
           </div>
         </div>
         <div className=" h-screen sm:w-[60vw] sm:flex sm:flex-col sm:items-center sm:justify-center mt-20 sm:mt-0">
-          <div className="flex flex-col sm:max-w-[328px] justify-between mt-8">
+          <div className="flex flex-col sm:max-w-[310px] justify-between mt-8">
             <form className="flex flex-col" onSubmit={handleOpt}>
-              <h1 className=" text-[22px] font-bold mx- lg:ml-0 max-w-[328px] mx-auto">
+              <h1 className=" text-[22px] font-bold mx- lg:ml-0 sm:max-w-[310px] w-10/12  mx-auto">
                 Verify with OTP sent to {phone ? phone : "9863727272"}
               </h1>
               <div className="flex flex-row mx-auto lg:mx-0  mt-5">
                 <input
-                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-12 w-12 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   value={otp.field1}
                   name="field1"
@@ -207,7 +207,7 @@ const Otp = () => {
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
-                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-12 w-12 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   value={otp.field2}
                   name="field2"
@@ -215,7 +215,7 @@ const Otp = () => {
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
-                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-12 w-12 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field3"
                   value={otp.field3}
@@ -223,7 +223,7 @@ const Otp = () => {
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
-                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-12 w-12 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field4"
                   value={otp.field4}
@@ -231,7 +231,7 @@ const Otp = () => {
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
-                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-12 w-12 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field5"
                   value={otp.field5}
@@ -239,7 +239,7 @@ const Otp = () => {
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
                 <input
-                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-12 w-12 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
+                  className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field6"
                   value={otp.field6}
@@ -261,22 +261,20 @@ const Otp = () => {
                 </div>
               )}
               {otpValuesArray.length === 6 ? (
-               <button type='submit'
-                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white lg:w-full text-center justify-center  flex  lg:mx-0 mt-5 mb-1 w-11/12 mx-auto"
+                <button
+                  type="submit"
+                  className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white lg:w-full text-center justify-center  flex  lg:mx-0 mt-5 mb-1 w-10/12 mx-auto"
                 >
                   Continue
                 </button>
               ) : (
-                <button
-                  
-                  className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white 2 lg:w-full text-center justify-center flex  lg:mx-0 mt-5 mb-5"
-                >
+                <button className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white 2 lg:w-full text-center justify-center flex  lg:mx-0 mt-5 mb-5">
                   Continue
                 </button>
               )}
             </form>
             <br />
-            <div className="w-11/12 mx-auto">
+            <div className="w-10/12 mx-auto">
               {otpStatus === "failed" && (
                 <div>
                   <Link to="/resend" className=" ">

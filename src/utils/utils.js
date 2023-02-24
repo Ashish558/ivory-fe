@@ -69,15 +69,15 @@ export const getPricingDiscountedText = (isFree, price, discounted_price, discou
 }
 
 export const getStoryUrl = type => {
-   if(type === 'mcq'){
+   if (type === 'mcq') {
       return 'mcq-stories'
-   }else if(type === 'image'){
+   } else if (type === 'image') {
       return 'image-stories'
-   }else if(type === 'sudoku'){
+   } else if (type === 'sudoku') {
       return 'puzzle-stories'
-   }else if(type === 'qna'){
+   } else if (type === 'qna') {
       return 'qna-stories'
-   }else if(type === 'video'){
+   } else if (type === 'video') {
       return 'video-stories'
    }
 }
@@ -86,7 +86,32 @@ export function isValidYoutubeLink(val) {
    let regex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
    if (!regex.test(val)) {
       return false
-   }else{
+   } else {
       return true
    }
+}
+
+export const toDataURL = url => fetch(url)
+   .then(response => response.blob())
+   .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+      console.log('blob', blob);
+   }))
+
+
+export function convertLinkToDataUrl(url, cb) {
+   var xhr = new XMLHttpRequest();
+   xhr.onload = function () {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+         cb(reader.result);
+      };
+      reader.readAsDataURL(xhr.response);
+   };
+   xhr.open("GET", url);
+   xhr.responseType = "blob";
+   xhr.send();
 }
