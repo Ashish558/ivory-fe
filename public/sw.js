@@ -39,31 +39,36 @@ self.addEventListener("activate", (event) => {
 });
 
 
-const status = navigator.permissions.query({
-   name: 'periodic-background-sync',
-});
-if (status.state === 'granted') {
-   // Periodic background sync can be used.
-} else {
-   // Periodic background sync cannot be used.
-}
-const registration =  navigator.serviceWorker.ready;
-if ('periodicSync' in registration) {
-   try {
-       registration.periodicSync.register('content-sync', {
-         // An interval of one day.
-         minInterval: 24 * 60 * 60 * 1000,
-      });
-      const tags =  registration.periodicSync.getTags();
-      if (!tags.includes('content-sync')) {
+const func = async () => {
+
+   const status = await navigator.permissions.query({
+      name: 'periodic-background-sync',
+   });
+   if (status.state === 'granted') {
+      // Periodic background sync can be used.
+      console.log('GRANTED');
+   } else {
+      // Periodic background sync cannot be used.
+      console.log('REJECTED');
+   }
+   const registration = await navigator.serviceWorker.ready;
+   if ('periodicSync' in registration) {
+      try {
+         registration.periodicSync.register('content-sync', {
+            // An interval of one day.
+            minInterval: 24 * 60 * 60 * 1000,
+         });
+         const tags = registration.periodicSync.getTags();
+         if (!tags.includes('content-sync')) {
+            // updateContentOnPageLoad();
+         }
+      } catch (error) {
+         // Periodic background sync cannot be used.
          // updateContentOnPageLoad();
       }
-   } catch (error) {
-      // Periodic background sync cannot be used.
-      // updateContentOnPageLoad();
    }
 }
-
+func()
 // if ('periodicSync' in registration) {
 //   await registration.periodicSync.unregister('content-sync');
 // }
