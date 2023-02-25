@@ -182,66 +182,83 @@ const Enroll = () => {
       <div className="lg:w-[calc(100%-400px)]">
         <div className="flex flex-col gap-5 mb-20 sm:mb-0">
           <div className="text-gray-500 text-lg ml-6 lg:ml-0 mt-2">
-            Programs {'>'} {name}
+            Programs {">"} {name}
           </div>
           <div className="text-2xl font-bold text-black ml-6 lg:ml-0 mt-3">
             {name}
           </div>
           <div className="video flex justify-center items-center relative">
-            <img
-              src={image}
-              alt="video"
-              className="w-full sm:rounded-[48px]"
-            />
+            <img src={image} alt="video" className="w-full sm:rounded-[48px]" />
             {/* <img src={playIcon} alt="" className="absolute" /> */}
           </div>
           <div className="text-2xl font-bold text-black ml-6 lg:ml-0">
             About this Program
           </div>
           <div className="text-gray-500 text-lg ml-6 lg:ml-0">
-            <div dangerouslySetInnerHTML={{ __html: description }} />
-
+            <div
+              dangerouslySetInnerHTML={{ __html: description.slice(0 - 150) }}
+            />
+            {description.length > 150 && (
+              <span className="text-blue-500"> See more</span>
+            )}
             {/* <span className="text-blue-500"> See more</span> */}
           </div>
           <div className="">
-            <div className="text-2xl font-bold text-black ml-6 lg:ml-0">Benifits</div>
+            <div className="text-2xl font-bold text-black ml-6 lg:ml-0">
+              Benefits
+            </div>
             <div className="">
               <div className="flex flex-col gap-6 mb-5 sm:mb-0 mt-10 ml-6 lg:ml-0">
                 <ul className=" flex  flex-col gap-4 leading-none text-sm">
-                  {benefits?.map(item => {
-                    return <li key={item.id} className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                      <img src={item.icon} alt="" />
-                      {item.name}
-                    </li>
+                  {benefits?.map((item) => {
+                    return (
+                      <li
+                        key={item.id}
+                        className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold"
+                      >
+                        <img src={item.icon} alt="" />
+                        {item.name}
+                      </li>
+                    );
                   })}
                 </ul>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <div className="text-2xl font-bold text-black ml-6 lg:ml-0"> Pricing </div>
+            <div className="text-2xl font-bold text-black ml-6 lg:ml-0">
+              {" "}
+              Pricing{" "}
+            </div>
             {/* conditionally renders on free, reg ,  */}
 
             <div>
               <div className="text-lightGray text-lg ml-6 lg:ml-0 py-2">
-                Next Batch starts on
+                Next Batch starts
                 <span className="text-blue-600">
-                  {next_batch_start_date ? next_batch_start_date : 'Yet to be scheduled'}
+                  {next_batch_start_date
+                    ? next_batch_start_date
+                    : "Yet to be scheduled"}
                 </span>
               </div>{" "}
               <div className="text-2xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1">
                 {getPricingMainText(is_free, price, discounted_price, discount)}
                 <span className="text-gray-400 line-through font-normal text-base">
-                  {getPricingDiscountedText(is_free, price, discounted_price, discount)}
+                  {getPricingDiscountedText(
+                    is_free,
+                    price,
+                    discounted_price,
+                    discount
+                  )}
                 </span>{" "}
-                {
-                  discount > 0 && !is_free &&
-                  <span className="text-blue-500 text-lg ml-2"> {discounted_price * 100 / price}% OFF
+                {discount > 0 && !is_free && (
+                  <span className="text-blue-500 text-lg ml-2">
+                    {" "}
+                    {(discounted_price * 100) / price}% OFF
                   </span>
-                }
+                )}
               </div>
             </div>
-
 
             {next_batch_start_date === null && (
               <div className="text-yellow-600 text-md mx-6">
@@ -253,22 +270,21 @@ const Enroll = () => {
             )}
           </div>
           <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
-
-            <button className="bg-sky-200 lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5" onClick={handleEnroll} >
-              {
-                next_batch_start_date === null ?
-                  "Register for free" :
-                  is_free ?
-                    "Enroll for free" :
-                    "Enroll"
-              }
+            <button
+              className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5"
+              onClick={handleEnroll}
+            >
+              {next_batch_start_date === null
+                ? "Register for free"
+                : is_free
+                ? "Enroll for free"
+                : "Enroll"}
             </button>
             <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
               {" "}
               <img src={shareImg} alt="" />
               <span> Share</span>
             </button>
-
           </div>
           <div className=" sm:mx-4 shadow-md rounded-xl  border-t border-gray-100 lg:w-[336px] pb-8 w-[90%] mx-auto p-5">
             <div className="text-2xl font-bold text-black ml-6 mt-3">
@@ -277,11 +293,16 @@ const Enroll = () => {
             <div className="">
               <div className="flex flex-col gap-6 mb-5 sm:mb-0 mt-6 ml-6">
                 <ul className=" flex  flex-col gap-5 leading-none text-sm">
-                  {contents?.map(item => {
-                    return <li key={item.id} className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold">
-                      <img src={item.icon} alt="" />
-                      {item.name}
-                    </li>
+                  {contents?.map((item) => {
+                    return (
+                      <li
+                        key={item.id}
+                        className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold"
+                      >
+                        <img src={item.icon} alt="" />
+                        {item.name}
+                      </li>
+                    );
                   })}
                 </ul>
               </div>
@@ -293,9 +314,7 @@ const Enroll = () => {
             Similar Programs
           </div>
         </div>
-        <div className="lg:grid lg:grid-cols-2 ">
-
-        </div>
+        <div className="lg:grid lg:grid-cols-2 "></div>
         <div className="lg:flex justify-end w-full hidden ">
           <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
         </div>
@@ -328,44 +347,49 @@ const Enroll = () => {
                       "Enroll"
                 }
               </button> */}
-            {/* </div> */}
-          {/* </div>
+        {/* </div> */}
+        {/* </div>
         )} */}
       </div>
       <div className="w-[400px] mt-28 ml-5 hidden lg:block">
         <div className="enrollFooter bg-sky-100  flex flex-col py-10 mb-20 rounded-[48px] p-3">
-          <div className="text-2xl font-bold text-black ml-6  mb-5">
-            {name}
-          </div>
+          <div className="text-2xl font-bold text-black ml-6  mb-5">{name}</div>
           <div className="text-lightGray text-lg ml-6  mb-2 mt-10">
+            
             <span>
               Batch starts
               <span className="text-blue-500">
-                {next_batch_start_date ? next_batch_start_date : 'Yet to be scheduled'}
+                {next_batch_start_date
+                  ? next_batch_start_date
+                  : "Yet to be scheduled"}
               </span>
             </span>
             <div className="text-4xl font-bold text-black flex items-center gap-1 mt-3">
               {getPricingMainText(is_free, price, discounted_price, discount)}
               <span className="text-lightGray line-through font-normal text-sm">
-                {getPricingDiscountedText(is_free, price, discounted_price, discount)}
+                {getPricingDiscountedText(
+                  is_free,
+                  price,
+                  discounted_price,
+                  discount
+                )}
               </span>{" "}
-              {
-                discount > 0 && !is_free &&
+              {discount > 0 && !is_free && (
                 <span className="text-blue-500 text-lg ml-2">
-                  {discounted_price * 100 / price}% OFF
+                  {(discounted_price * 100) / price}% OFF
                 </span>
-              }
-
+              )}
             </div>
-            <button className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3"    onClick={handleEnroll} >
+            <button
+              className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3"
+              onClick={handleEnroll}
+            >
               {" "}
-              {
-                next_batch_start_date === null ?
-                  "Register for free" :
-                  is_free ?
-                    "Enroll for free" :
-                    "Enroll"
-              }
+              {next_batch_start_date === null
+                ? "Register for free"
+                : is_free
+                ? "Enroll for free"
+                : "Enroll"}
             </button>
             <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[90%] rounded-full border mt-3 border-[#1B72C0]  self-center flex justify-center items-center gap-3">
               {" "}
@@ -376,27 +400,26 @@ const Enroll = () => {
         </div>
       </div>
       <div className={styles.startActivityFooter}>
-        <div className='max-w-[328px] mx-auto lg:hidden'>
-          {
-            isEnrolled ?
-              <SecondaryButton children=
-                {
-                 "Already Enrolled"
-                }
-                // onClick={handleEnroll}
-                className='w-full pt-2.5 pb-2.5' />
-              :
-              <PrimaryButton children=
-                {
-                  next_batch_start_date === null ?
-                    "Register for free" :
-                    is_free ?
-                      "Enroll for free" :
-                      "Enroll"
-                }
-                onClick={handleEnroll}
-                className='w-full pt-2.5 pb-2.5' />
-          }
+        <div className="max-w-[328px] mx-auto lg:hidden">
+          {isEnrolled ? (
+            <SecondaryButton
+              children={"Already Enrolled"}
+              // onClick={handleEnroll}
+              className="w-full pt-2.5 pb-2.5"
+            />
+          ) : (
+            <PrimaryButton
+              children={
+                next_batch_start_date === null
+                  ? "Register for free"
+                  : is_free
+                  ? "Enroll for free"
+                  : "Enroll"
+              }
+              onClick={handleEnroll}
+              className="w-full pt-2.5 pb-2.5"
+            />
+          )}
         </div>
       </div>
     </div>

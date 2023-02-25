@@ -6,13 +6,13 @@ import styles from './styles.module.css'
 
 export default function ActivityContent({ banners }) {
    return (
-      <div className={`${styles.activityContent} my-8`} >
+      <div className={`${styles.activityContent} my-5`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
             <div className='relative flex-1 sm:flex  sm:w-[4/12]'>
                <img src={Thumbnail} alt='Thumbnail' className='rounded-2xl	w-full object-cover' />
                <img src={PauseIcon} alt='play' className='absolute w-[60px]' style={{ top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
             </div>
-            <p className='font-bold text-xl flex-1 sm:hidden'>
+            <p className='font-bold text-md sm:text-lg flex-1 sm:hidden'>
                Learn Acrylic
                painting basics in 8 hrs
             </p>
@@ -33,7 +33,7 @@ export default function ActivityContent({ banners }) {
                      </div>
                   </div>
                   <div className='sm:flex text-center justify-center items-center text-white  w-[70px] md:w-[90px] h-[35px] md:h-[45px] md:text-xl md:font-bold bg-[#0055BF] rounded-full overflow-hidden cursor-pointer hidden mr-10'>
-                     <h1>Join</h1>
+                     <h1 className=''>Join</h1>
                   </div>
                </div>
             </div>
@@ -50,8 +50,8 @@ export default function ActivityContent({ banners }) {
                   <p className='text-xxs font-semild'> International Artist </p>
                </div>
             </div>
-            <div className='flex  items-center justify-center w-1/5 h-10 bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer'>
-               <h1 className='text-slate-100'>Join</h1>
+            <div className='flex  items-center justify-center w-1/5 h-8 bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer'>
+               <h1 className='text-white'>Join</h1>
                {/* <img src={RedirectIcon} alt='redirect' className='rounded-full' /> */}
             </div>
          </div>

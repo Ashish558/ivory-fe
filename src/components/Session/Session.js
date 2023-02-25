@@ -24,8 +24,9 @@ export default function Session({ id,name,image,scheduled_on,host,scrollToTop })
    return (
       <div className=' rounded-[48px] overflow-hidden bg-secondary max-w-[240px] lg:max-w-[348px] northArrow relative'
          onClick={handleClick}>
-         <div className={styles.imgContainer}>
+         <div className={`${styles.imgContainer} relative`}>
             <img src={image} className='object-contain' alt='session' />
+            <span className='bg-[#DD1D43] p-1 rounded-full text-white px-3 absolute top-5 right-5 z-30 '>o Live</span>
 
          </div>
          <div className='px-3 pr-2 py-2 pb-5 lg:px-4 lg:py-4'>
