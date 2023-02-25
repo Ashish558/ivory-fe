@@ -42,7 +42,7 @@
   "dir": "auto",
   "lang": "en",
   "orientation": "any",
-  "scope": "/",
+  "scope": ".",
   "prefer_related_applications": true,
   "display_override": [
     "standalone"

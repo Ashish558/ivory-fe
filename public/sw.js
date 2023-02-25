@@ -56,11 +56,11 @@ if ('periodicSync' in registration) {
       });
       const tags = await registration.periodicSync.getTags();
       if (!tags.includes('content-sync')) {
-         updateContentOnPageLoad();
+         // updateContentOnPageLoad();
       }
    } catch (error) {
       // Periodic background sync cannot be used.
-      updateContentOnPageLoad();
+      // updateContentOnPageLoad();
    }
 }
 
