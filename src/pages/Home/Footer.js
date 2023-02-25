@@ -26,21 +26,20 @@ const Footer = () => {
    return (
       <div className='pt-3 mt-6 footer-bg px-3 pb-3 lg:hidden'>
          <div className='flex justify-around'>
-            <div className='flex flex-col cursor-pointer justify-around items-center'
-               onClick={() => navigate('/home')}>
+
+            <a className='flex flex-col cursor-pointer justify-around items-center'
+               // onClick={() => navigate('/home')}
+               href='/home'>
                <p>
                   {currentPath === '/home' ? <img className='icon-bg '
                      src={home} alt="" /> : <img className={`icon-bg-2`}
                         src={home2} alt="" />
                   }
-
-
                </p>
                <p className={`text-base pt-0 ${currentPath === '/home' ? 'font-bold' : ''} `}>Home</p>
-            </div>
+            </a>
 
-            <div className='flex flex-col cursor-pointer justify-between items-center'
-               onClick={() => navigate('/activities')} >
+            <a href='/activities' className='flex flex-col cursor-pointer justify-between items-center' >
                <p>
                   {currentPath === '/activities' ? <img className='icon-bg '
                      src={activity2} alt="" /> : <img className={`icon-bg-2`}
@@ -49,9 +48,8 @@ const Footer = () => {
 
                </p>
                <p className={`text-base pt-0 ${currentPath === '/activities' ? 'font-bold' : ''} `}>Activities</p>
-            </div>
-            <div className='flex flex-col cursor-pointer justify-between items-center'
-               onClick={() => navigate('/learn')}>
+            </a>
+            <a href='/learn' className='flex flex-col cursor-pointer justify-between items-center'>
                <p>
                   {currentPath === '/learn' ? <img className='icon-bg '
                      src={videoIcon} alt="" /> : <img className={`icon-bg-2`}
@@ -59,15 +57,13 @@ const Footer = () => {
                   }
                </p>
                <p className={`text-base pt-0 ${currentPath === '/learn' ? 'font-bold' : ''} `}>Learn</p>
-            </div>
+            </a>
             <div className='flex flex-col cursor-pointer justify-between items-center relative'>
-
                <p>
                   {currentPath === '/community' ? <img className='icon-bg '
                      src={community2} alt="" /> : <img className={`icon-bg-2`}
                         src={community} alt="" />
                   }
-
                </p>
                <div className='count flex items-center justify-center'>
                   <p> 3</p>

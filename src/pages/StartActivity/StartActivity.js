@@ -159,7 +159,8 @@ export default function StartActivity({ fetchUserDetails }) {
             // inputRef.current.click()
             window.open(`https://wa.me/8142137455?text=IvoryUser%3A%20Name-${profileData.mobile_no}%0A%0AActivity%3A%20${activity.name}%0A%0A_Attach%20your%20file%20and%20press%20SEND_%0A%0A`)
          } else if (submissions.length >= 1 && isCompleted === false) {
-            alert('Please delete your submission to reupload')
+            window.open(`https://wa.me/8142137455?text=IvoryUser%3A%20Name-${profileData.mobile_no}%0A%0AActivity%3A%20${activity.name}%0A%0A_Attach%20your%20file%20and%20press%20SEND_%0A%0A`)
+            // alert('Please delete your submission to reupload')
          } else if (isLastFeedbacked === false) {
             alert('Please wait for the feedback')
          } else {

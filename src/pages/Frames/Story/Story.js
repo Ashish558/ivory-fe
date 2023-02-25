@@ -98,17 +98,25 @@ export default function Story(props) {
    }
    const shareStory = () => {
       console.log('image', image);
-      convertLinkToDataUrl(image, (res)=>{
+      convertLinkToDataUrl(image, (res) => {
          console.log('res', res);
       })
+      fetch(image)
+         .then(async response => {
+            const contentType = response.headers.get('content-type')
+            const blob = await response.blob()
+            const file = new File([blob], 'fileName', { contentType })
+            console.log('file', file);
+         }).catch(err => {
+            console.log(err);
+         })
       if (navigator.share) {
          navigator.share({
             title: 'Ivory Story',
             text: share_message !== null ? share_message : 'Ivory Story',
             url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
             // files: [image]
-         })
-            .then(() => console.log('Successful share'))
+         }).then(() => console.log('Successful share'))
             .catch(error => console.log('Error sharing:', error));
       }
       // console.log(location.pathname);
@@ -117,7 +125,7 @@ export default function Story(props) {
    // console.log('story', storyType)
    // console.log('story', story)
    // console.log('video', video)
-   // console.log('share_message', share_message)
+   // console.log('share_message',  share_message)
    let storyProps = { url, updateStory, type }
    // let video = 'https://www.youtube.com/watch?v=GGo3MVBFr1A'
    return (

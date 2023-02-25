@@ -25,9 +25,9 @@ const SimpleSlider = ({ banners, isActivityBanner }) => {
 
    const handleNavigate = banner => {
       console.log('banner', banner);
-      if(banner.is_external === false){
+      if (banner.is_external === false) {
          navigate(banner.redirect_link)
-      }else{
+      } else {
          window.open(banner.redirect_link)
       }
    }
@@ -42,15 +42,15 @@ const SimpleSlider = ({ banners, isActivityBanner }) => {
                      <div onClick={() => handleNavigate(banner)}>
                         <div className={`slider-bg ${!isActivityBanner ? 'mx-4' : ''}`}>
                            <div style={{ height: '140px', margin: "0 auto" }}
-                              className="flex justify-between items-center mx px-4 py-2 overflow-hidden">
-                              <div className="flex flex-1 items-center self-stretch relative overflow-hidden">
-                                 <img className="rounded-2xl w-full h-full object-cover"
-                                    src={banner.image} alt="" />
-                                 <p className="play bg-black rounded-full"></p>
-                              </div>
-                              <div className="flex flex-1 items-center pl-2">
-                                 <div style={{ fontWeight: '700' }} className=" text-xl ">
-                                    <p>
+                              className="flex rounded-3xl justify-between items-end mx px-4 py-2 overflow-hidden relative z-10 banner-container">
+                              {/* <div className="flex flex-1 items-center self-stretch relative overflow-hidden"> */}
+                              <img className="rounded-2xl w-full slider-bg-image h-full object-cover"
+                                 src={banner.image} alt="" />
+                              {/* </div> */}
+                              <div className="flex flex-1 items-start text-white pl-2 relative z-20">
+                                 <p className="play bg-black rounded-full mr-2 mt-1"></p>
+                                 <div className=" text-xl font-bold">
+                                    <p className="leading-normal">
                                        {banner.title}
                                     </p>
                                  </div>
