@@ -205,9 +205,9 @@ self.addEventListener('install', e => {
       return cache.addAll([
         '/',
         '/?utm_source=homescreen',
-        '/Home/About',
-        '/Home/Index',
-        '/Home/Contact'
+        '/home',
+        '/home/learn',
+        '/home/activities',
       ])
         .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
     })
