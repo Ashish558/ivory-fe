@@ -50,11 +50,11 @@ if (status.state === 'granted') {
 const registration =  navigator.serviceWorker.ready;
 if ('periodicSync' in registration) {
    try {
-      await registration.periodicSync.register('content-sync', {
+       registration.periodicSync.register('content-sync', {
          // An interval of one day.
          minInterval: 24 * 60 * 60 * 1000,
       });
-      const tags = await registration.periodicSync.getTags();
+      const tags =  registration.periodicSync.getTags();
       if (!tags.includes('content-sync')) {
          // updateContentOnPageLoad();
       }
