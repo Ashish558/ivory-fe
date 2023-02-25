@@ -1,5 +1,5 @@
 // if ('function' === typeof importScripts) {
-//   importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+/* eslint-disable no-restricted-globals */
 //   addEventListener('message', onMessage);
 
 //   function onMessage(e) {
@@ -18,7 +18,31 @@
 // code you'd like.
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
+// if ('function' === typeof importScripts) {
+//   importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
+//   const CACHE = "pwabuilder-page";
+
+//   // TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
+//   const offlineFallbackPage = "ToDo-replace-this-name.html";
+
+//   self.addEventListener("message", (event) => {
+//     if (event.data && event.data.type === "SKIP_WAITING") {
+//       self.skipWaiting();
+//     }
+//   });
+
+//   self.addEventListener('install', async (event) => {
+//     event.waitUntil(
+//       caches.open(CACHE)
+//         .then((cache) => cache.add(offlineFallbackPage))
+//     );
+//   });
+
+//   if (workbox.navigationPreload.isSupported()) {
+//     workbox.navigationPreload.enable();
+//   }
+// }
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
   // [::1] is the IPv6 localhost address.
@@ -177,16 +201,16 @@ self.addEventListener('install', async (event) => {
 /* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('install', e => {
   e.waitUntil(
-     caches.open('airhorner').then(cache => {
-        return cache.addAll([
-           '/',
-           '/?utm_source=homescreen',
-           '/Home/About',
-           '/Home/Index',
-           '/Home/Contact'
-        ])
-           .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
-     })
+    caches.open('airhorner').then(cache => {
+      return cache.addAll([
+        '/',
+        '/?utm_source=homescreen',
+        '/Home/About',
+        '/Home/Index',
+        '/Home/Contact'
+      ])
+        .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
+    })
   )
 });
 /* eslint-disable-next-line no-restricted-globals */
@@ -196,8 +220,8 @@ self.addEventListener('activate', event => {
 /* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('fetch', event => {
   event.respondWith(
-     caches.match(event.request).then(response => {
-        return response || fetch(event.request);
-     })
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
   );
 });
