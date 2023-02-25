@@ -67,6 +67,30 @@ const func = async () => {
          // updateContentOnPageLoad();
       }
    }
+   function registerBackgroundSync() {
+      if (!navigator.serviceWorker) {
+         return console.error("Service Worker not supported")
+      }
+
+      navigator.serviceWorker.ready
+         .then(registration => registration.sync.register('syncAttendees'))
+         .then(() => console.log("Registered background sync"))
+         .catch(err => console.error("Error registering background sync", err))
+   }
+
+   self.addEventListener('sync', function (event) {
+      console.log("sync event", event);
+      if (event.tag === 'syncAttendees') {
+         event.waitUntil(syncAttendees()); // sending sync request
+      }
+   });
+   function syncAttendees(){
+      return update({ url: `https://console.liveivory.com/api/story/story-groups/` })
+          .then(refresh)
+          .then((attendees) => self.registration.showNotification(
+             `bg synced`
+          ))
+   }
 }
 func()
 // if ('periodicSync' in registration) {
