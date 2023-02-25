@@ -121,3 +121,30 @@ export function unregister() {
     });
   }
 }
+/* eslint-disable-next-line no-restricted-globals */
+self.addEventListener('install', e => {
+  e.waitUntil(
+     caches.open('airhorner').then(cache => {
+        return cache.addAll([
+           '/',
+           '/?utm_source=homescreen',
+           '/home',
+           '/home/learn',
+           '/home/activities'
+        ])
+           .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
+     })
+  )
+});
+/* eslint-disable-next-line no-restricted-globals */
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim()); /* eslint-disable-line no-restricted-globals */
+});
+/* eslint-disable-next-line no-restricted-globals */
+self.addEventListener('fetch', event => {
+  event.respondWith(
+     caches.match(event.request).then(response => {
+        return response || fetch(event.request);
+     })
+  );
+});
