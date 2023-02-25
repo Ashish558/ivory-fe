@@ -1,4 +1,15 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+// if ('function' === typeof importScripts) {
+//   importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+//   addEventListener('message', onMessage);
+
+//   function onMessage(e) {
+
+//     if (workbox.navigationPreload.isSupported()) {
+//       workbox.navigationPreload.enable();
+//     }
+
+//   }
+// }
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -126,16 +137,16 @@ export function unregister() {
 /* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('install', e => {
   e.waitUntil(
-     caches.open('airhorner').then(cache => {
-        return cache.addAll([
-           '/',
-           '/?utm_source=homescreen',
-           '/home',
-           '/home/learn',
-           '/home/activities'
-        ])
-           .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
-     })
+    caches.open('airhorner').then(cache => {
+      return cache.addAll([
+        '/',
+        '/?utm_source=homescreen',
+        '/home',
+        '/home/learn',
+        '/home/activities'
+      ])
+        .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
+    })
   )
 });
 /* eslint-disable-next-line no-restricted-globals */
@@ -145,9 +156,9 @@ self.addEventListener('activate', event => {
 /* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('fetch', event => {
   event.respondWith(
-     caches.match(event.request).then(response => {
-        return response || fetch(event.request);
-     })
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
   );
 });
 
@@ -171,7 +182,3 @@ self.addEventListener('install', async (event) => {
       .then((cache) => cache.add(offlineFallbackPage))
   );
 });
-
-if (workbox.navigationPreload.isSupported()) {
-  workbox.navigationPreload.enable();
-}
