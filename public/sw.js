@@ -39,7 +39,7 @@ self.addEventListener("activate", (event) => {
 });
 
 
-const status = await navigator.permissions.query({
+const status = navigator.permissions.query({
    name: 'periodic-background-sync',
 });
 if (status.state === 'granted') {
@@ -47,7 +47,7 @@ if (status.state === 'granted') {
 } else {
    // Periodic background sync cannot be used.
 }
-const registration = await navigator.serviceWorker.ready;
+const registration =  navigator.serviceWorker.ready;
 if ('periodicSync' in registration) {
    try {
       await registration.periodicSync.register('content-sync', {
