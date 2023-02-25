@@ -56,7 +56,7 @@ const Navbar = () => {
 
                   <div className="flex items-center normal-case text-lg  welcome-color">
                      <p className='pr-1 pl-2'>   <img src={Logo} alt="" /></p>
-                     <p className=' font-bold text-sm'>Welcome.. {loggedIn && ","} </p>
+                     <p className=' font-bold text-sm'>Welcome {loggedIn && ","} </p>
                      <p className='pl-2  name text-sm'>   {profileData.name ? profileData.name : ''}</p>
                   </div> :
                   <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
