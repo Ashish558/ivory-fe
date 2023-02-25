@@ -50,18 +50,18 @@ const Learn = () => {
    // design changes if my programs is active
    const [myPrograms,setMyPrograms] = useState(false)
 
-   const [allPrograms, setAllPrograms] = useState([])
-   const [allProgramsFiltered, setAllProgramsFiltered] = useState([])
+   const [allPrograms,setAllPrograms] = useState([])
+   const [allProgramsFiltered,setAllProgramsFiltered] = useState([])
 
-   const [userPrograms, setUserPrograms] = useState([])
-   const [userProgramsFiltered, setUserProgramsFiltered] = useState([])
+   const [userPrograms,setUserPrograms] = useState([])
+   const [userProgramsFiltered,setUserProgramsFiltered] = useState([])
 
 
    const navigate = useNavigate();
    const { loggedIn } = useSelector(state => state.user)
 
-   const [onlyFreeActive, setOnlyFreeActive] = useState(false)
-   const [onlyLiveActive, setOnlyLiveActive] = useState(true)
+   const [onlyFreeActive,setOnlyFreeActive] = useState(false)
+   const [onlyLiveActive,setOnlyLiveActive] = useState(true)
 
    useEffect(() => {
       getInterests(true)
@@ -164,32 +164,32 @@ const Learn = () => {
       // console.log('activeIds', activeIds);
       // console.log('allPrograms', allPrograms);
       let allProgsFiltered = allPrograms.filter(item => activeIds.includes(item.category))
-      if(!onlyFreeActive){
-         allProgsFiltered =  allProgsFiltered.filter(item => item.is_free === true)
-      }else{
-         allProgsFiltered =  allProgsFiltered.filter(item => item.is_free === true ||  item.is_free === false)
+      if (!onlyFreeActive) {
+         allProgsFiltered = allProgsFiltered.filter(item => item.is_free === true)
+      } else {
+         allProgsFiltered = allProgsFiltered.filter(item => item.is_free === true || item.is_free === false)
       }
-      if(!onlyLiveActive){
-         allProgsFiltered =  allProgsFiltered.filter(item => item.is_live === true)
-      }else{
-         allProgsFiltered =  allProgsFiltered.filter(item => item.is_live === true ||  item.is_live === false)
+      if (!onlyLiveActive) {
+         allProgsFiltered = allProgsFiltered.filter(item => item.is_live === true)
+      } else {
+         allProgsFiltered = allProgsFiltered.filter(item => item.is_live === true || item.is_live === false)
       }
       setAllProgramsFiltered(allProgsFiltered)
-   }, [filterItems, allPrograms, myPrograms, onlyFreeActive, onlyLiveActive])
- 
+   },[filterItems,allPrograms,myPrograms,onlyFreeActive,onlyLiveActive])
+
    useEffect(() => {
       const activeItems = filterItems.filter(item => item.selected === true)
       let activeIds = activeItems.map(item => item.id)
       // console.log('activeIds', activeIds);
       // console.log('userPrograms', userPrograms);
       let userProgsFiltered = userPrograms.filter(item => activeIds.includes(item.program.category))
-      if(completedTabActive === true){
+      if (completedTabActive === true) {
          userProgsFiltered = userProgsFiltered.filter(item => item.is_completed === true)
-      }else{
+      } else {
          userProgsFiltered = userProgsFiltered.filter(item => item.is_completed === false)
       }
       setUserProgramsFiltered(userProgsFiltered)
-   }, [filterItems, userPrograms, myPrograms, completedTabActive])
+   },[filterItems,userPrograms,myPrograms,completedTabActive])
 
    const [toggleButton,settoggleButton] = useState(true);
    const [toggleButton1,settoggleButton1] = useState(true);
@@ -216,14 +216,14 @@ const Learn = () => {
          <div className="bg-sky-50 lg:bg-white p-5">
             <h1 className='text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-3 text-gray-400 lg:hidden block'> what would you like to learn today?</span>
-            <div className=" w-full flex justify-around lg:bg-white my-5" >
-               <button className={`font-bold text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
-               <button className={`font-bold text-lg rounded-full border px-4  ${myPrograms && ' bg-cyan-200'}`} onClick={() => setMyPrograms(true)}>My Program</button>
+            <div className=" w-full flex justify-around lg:bg-white mt-5" >
+               <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-2  ${myPrograms === false && ' bg-cyan-200'}`} onClick={() => setMyPrograms(false)} >Programs</button>
+               <button className={`font-bold text-sm sm:text-lg rounded-full border px-4  ${myPrograms && ' bg-cyan-200'}`} onClick={() => setMyPrograms(true)}>My Program</button>
             </div>
          </div>
          <h1 className='text-2xl font-semibold hidden lg:block ml-4'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
-         
-         <div className="px-5">
+
+         <div className="mx-3">
             <AcivityContent>
             </AcivityContent>
          </div>
@@ -252,9 +252,9 @@ const Learn = () => {
          {
             !myPrograms &&
             <div className='flex h-10 mx-4 mt-4'>
-               <span className='mx-4 text-xl'>only free</span>
-               <Toggle active={onlyFreeActive} handleClick={() => {setOnlyFreeActive(!onlyFreeActive)}} />
-               <span className='mx-4 text-xl'>only live</span>
+               <span className='mx-4 md:text-xl '>only free</span>
+               <Toggle active={onlyFreeActive} handleClick={() => { setOnlyFreeActive(!onlyFreeActive) }} />
+               <span className='mx-4 md:text-xl '>only live</span>
                <Toggle active={onlyLiveActive} handleClick={() => setOnlyLiveActive(!onlyLiveActive)} />
             </div>
          }
@@ -264,7 +264,7 @@ const Learn = () => {
          </div>
          <div className="lg:grid lg:grid-cols-3  mt-10 overflow-x-scroll" >
             {myPrograms ?
-               userProgramsFiltered.map((item, index) => (
+               userProgramsFiltered.map((item,index) => (
                   <ProgramCard key={item.id} {...item.program}
                      isUserProgram={true}
                      userProgramId={item.id}
@@ -272,7 +272,7 @@ const Learn = () => {
                      percentage_completed={item.percentage_completed}
                   />
                )) :
-               allProgramsFiltered.map((item, index) => (
+               allProgramsFiltered.map((item,index) => (
                   <ProgramCard key={item.id} {...item} />
                ))
             }
