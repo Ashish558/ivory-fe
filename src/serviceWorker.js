@@ -18,31 +18,31 @@
 // code you'd like.
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
-// if ('function' === typeof importScripts) {
-//   importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-//   const CACHE = "pwabuilder-page";
+// importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-//   // TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
-//   const offlineFallbackPage = "ToDo-replace-this-name.html";
+// const CACHE = "pwabuilder-page";
 
-//   self.addEventListener("message", (event) => {
-//     if (event.data && event.data.type === "SKIP_WAITING") {
-//       self.skipWaiting();
-//     }
-//   });
+// // TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
+// const offlineFallbackPage = "ToDo-replace-this-name.html";
 
-//   self.addEventListener('install', async (event) => {
-//     event.waitUntil(
-//       caches.open(CACHE)
-//         .then((cache) => cache.add(offlineFallbackPage))
-//     );
-//   });
-
-//   if (workbox.navigationPreload.isSupported()) {
-//     workbox.navigationPreload.enable();
+// self.addEventListener("message", (event) => {
+//   if (event.data && event.data.type === "SKIP_WAITING") {
+//     self.skipWaiting();
 //   }
+// });
+
+// self.addEventListener('install', async (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE)
+//       .then((cache) => cache.add(offlineFallbackPage))
+//   );
+// });
+
+// if (workbox.navigationPreload.isSupported()) {
+//   workbox.navigationPreload.enable();
 // }
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
   // [::1] is the IPv6 localhost address.
@@ -170,11 +170,11 @@ export function unregister() {
 }
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
+// self.addEventListener('message', (event) => {
+//   if (event.data && event.data.type === 'SKIP_WAITING') {
+//     self.skipWaiting();
+//   }
+// });
 
 // Any other custom service worker logic can go here.
 
@@ -184,44 +184,62 @@ const CACHE = "pwabuilder-page";
 const offlineFallbackPage = "offline.html";
 
 /* eslint-disable-next-line no-restricted-globals */
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting(); /* eslint-disable-line no-restricted-globals */
-  }
-});
+// self.addEventListener("message", (event) => {
+//   if (event.data && event.data.type === "SKIP_WAITING") {
+//     self.skipWaiting(); /* eslint-disable-line no-restricted-globals */
+//   }
+// });
 
 /* eslint-disable-next-line no-restricted-globals */
-self.addEventListener('install', async (event) => {
-  event.waitUntil(
-    caches.open(CACHE)
-      .then((cache) => cache.add(offlineFallbackPage))
-  );
-});
+// self.addEventListener('install', async (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE)
+//       .then((cache) => cache.add(offlineFallbackPage))
+//   );
+// });
+
+// const CACHE_NAME = 'ver1'
+// this.addEventListener('install', async (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE_NAME)
+//       .then((cache) => cache.add(offlineFallbackPage))
+//   );
+// });
+// const workbox =new WorkboxSW({
+//   skipWaiting: true,
+//   clientsClaim: true,
+//   // etc.
+// });
+
+// if (workbox.navigationPreload.isSupported()) {
+//   workbox.navigationPreload.enable();
+// }
+/* eslint-disable-next-line no-restricted-globals */
+// self.addEventListener('install', e => {
+//   e.waitUntil(
+//     caches.open('airhorner').then(cache => {
+//       return cache.addAll([
+//         '/',
+//         '/?utm_source=homescreen',
+//         '/home',
+//         '/home/learn',
+//         '/home/activities',
+//       ])
+//         .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
+//     })
+//   )
+// });
 
 /* eslint-disable-next-line no-restricted-globals */
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open('airhorner').then(cache => {
-      return cache.addAll([
-        '/',
-        '/?utm_source=homescreen',
-        '/home',
-        '/home/learn',
-        '/home/activities',
-      ])
-        .then(() => self.skipWaiting()); /* eslint-disable-line no-restricted-globals */
-    })
-  )
-});
-/* eslint-disable-next-line no-restricted-globals */
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim()); /* eslint-disable-line no-restricted-globals */
-});
-/* eslint-disable-next-line no-restricted-globals */
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
-});
+// self.addEventListener('activate', event => {
+//   event.waitUntil(self.clients.claim()); /* eslint-disable-line no-restricted-globals */
+// });
+
+// /* eslint-disable-next-line no-restricted-globals */
+// self.addEventListener('fetch', event => {
+//   event.respondWith(
+//     caches.match(event.request).then(response => {
+//       return response || fetch(event.request).catch(() => caches.match('offline.html'));
+//     })
+//   );
+// });
