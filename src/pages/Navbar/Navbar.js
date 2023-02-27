@@ -40,7 +40,7 @@ const Navbar = () => {
    useEffect(() => {
       let hours = new Date().getHours()
       // console.log(date.getHours());
-      if (hours > 5) {
+      if (hours > 17) {
          setIsMorning(false)
       } else {
          setIsMorning(true)
