@@ -72,7 +72,7 @@ const DesktopLearn = () => {
       getPrograms()
          .then(res => {
             if (res.data.data === null) return setAllPrograms([])
-            console.log('programs', res.data.data);
+            // console.log('programs', res.data.data);
             setAllPrograms(res.data.data)
          }).catch(err => {
             console.log(err.response);

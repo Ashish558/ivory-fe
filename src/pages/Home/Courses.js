@@ -36,7 +36,7 @@ const Courses = () => {
       getPrograms()
          .then(res => {
             if (res.data.data === null) return setAllPrograms([])
-            console.log('programs', res.data.data);
+            // console.log('programs', res.data.data);
             setAllPrograms(res.data.data)
          }).catch(err => {
             console.log(err.response);
@@ -54,7 +54,7 @@ const Courses = () => {
             allPrograms.map(program => {
                const { id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount } = program
                return (
-                  <div className="m-4 box">
+                  <div className="m-4 box"  onClick={() => handleNavigate(id)}>
                      <div className='flex align-items '>
                         <div className='p-1.5 self-stretch'>
                            <img className='rounded-3xl w-[129px] object-cover h-full' src={image} alt="Program" />
@@ -64,7 +64,7 @@ const Courses = () => {
                               {name}
                            </h2>
                            <p className='text-xs small-text'>
-                              {'Name'}
+                              {'Author name'}
                            </p>
 
                            <div className='flex'>
