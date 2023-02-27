@@ -35,6 +35,18 @@ export default function Story(props) {
       document.documentElement.style.overflow = "hidden";
    }
 
+   const onBack = () => {
+      handleClose()
+      console.log('back');
+   }
+   useEffect(() => {
+      window.addEventListener('popstate', onBack, false);
+      window.history.pushState(null, null, window.location.pathname);
+      return () => {
+         window.removeEventListener('popstate', onBack)
+      }
+   }, [])
+
    useEffect(() => {
       if (type === 'mcq') {
          let isSngleLetteredAnswer = true

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getFormattedDuration } from '../../utils/utils'
+import { getFormattedDuration, getPricingDiscountedText, getPricingMainText } from '../../utils/utils'
 
-export default function ProgramCard({ id,myPrograms,image,name,live_sessions_count,modules_duration,price,discounted_price,isUserProgram,userProgramId,is_completed,percentage_completed,is_live }) {
+export default function ProgramCard({ id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount }) {
 
    const navigate = useNavigate()
 
@@ -31,16 +31,16 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
                {getFormattedDuration(modules_duration)}
             </span>
             <h1 className="text-[16px] font-bold lg:text-xl">
-               {name.length > 18? <>
-                 { name} <span className="text-sm text-gray-400">
-                    | Ankit dua
+               {name.length > 18 ? <>
+                  {name} <span className="text-sm text-gray-400">
+                     | Ankit dua
                   </span>
                </> : name}
             </h1>
             {name.length < 18 &&
-            <span className="text-sm text-gray-400">
-               Ankit dua
-            </span>}
+               <span className="text-sm text-gray-400">
+                  Ankit dua
+               </span>}
             <div className="flex justify-between">
                {
                   is_live === true &&
@@ -49,7 +49,6 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
                   </button>
                }
             </div>
-
             {
                myPrograms ? <div>
                   <p className='mt-2'>
@@ -60,10 +59,21 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
                   price >= 1 ?
                      <div className=" mr-10 lg:mt-5 lg:p-3">
                         <div className="text-2xl font-bold text-sky-600  lg:ml-0 flex items-center gap-1">
-                           &#8377;{price} {"  "}
+                           {getPricingMainText(is_free, price, discounted_price, discount)}
                            <span className="text-gray-400 line-through font-normal text-base">
-                              &#8377;{discounted_price}
+                              {getPricingDiscountedText(
+                                 is_free,
+                                 price,
+                                 discounted_price,
+                                 discount
+                              )}
                            </span>{" "}
+                           {discount > 0 && !is_free && (
+                              <span className="text-blue-500 text-lg ml-2">
+                                 {" "}
+                                 {(discounted_price * 100) / price}% OFF
+                              </span>
+                           )}
                         </div>
                      </div> :
                      <div className=" mr-10 lg:mt-5 lg:p-3">

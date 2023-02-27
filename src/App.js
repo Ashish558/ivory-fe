@@ -96,24 +96,36 @@ function App() {
       <Navbar />
       <NavbarDesktop />
       <Routes>
+
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/live-events" element={<LiveEvents />} />
-        <Route path="/live-events/:id" element={<SingleSession />} />
-
-        <Route path="/program/:id" element={<LiveSession />} />
-        
-        <Route path="/otp" element={<Otp />} />
-        <Route path="/dob" element={<Dob />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/Congrates" element={<Congrates />} />
-        <Route path="/home" element={<LoggedInHome />} />
-
         <Route exact path='/logolanding' element={<LogoLanding />}></Route>
         <Route exact path='/landing' element={<Landing />}></Route>
         <Route exact path='/second' element={<Second />}></Route>
         <Route exact path='/third' element={<Third />}></Route>
         <Route exact path='/four' element={<Four />}></Route>
         <Route exact path="/learn" element={<Learn />}></Route>
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/dob" element={<Dob />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/Congrates" element={<Congrates />} />
+
+        <Route path="/home" element={<LoggedInHome />} />
+
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/activities/:categoryId"  element={<ActivityType />} />
+        <Route path="/activities/:categoryId/:activityId/start"
+          element={
+            <StartActivity fetchUserDetails={fetchUserDetails} />
+          } />
+
+
+        <Route path="/live-events" element={<LiveEvents />} />
+        <Route path="/live-events/:id" element={<SingleSession />} />
+        <Route path="/program/:id" element={<LiveSession />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/learn" element={<Learn />} />
+        <Route path="/learn/:id" element={<Enroll />} />
 
         <Route
           path="/CreateProfile"
@@ -123,63 +135,12 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/"
-          element={
-            <Home />
-          }
-        />
-        <Route
-          path="/activities"
-          element={
-            <Activities />
-          }
-        />
-        <Route
-     
-          path="/confirmation"
-          element={
-            <Confirmation />
-          }
-        />
-        <Route
-          path="/community"
-          element={
-            <Community />
-          }
-        />
-        <Route
-          path="/learn"
-          element={
-            <Learn />
-          }
-        />
-        <Route path="/learn/:id" element={<Enroll />} />
 
-        <Route
-          path="/Assignment"
-          element={
-            <Assignment />
-          }
-        />
-        <Route
-          path="/Assignment1"
-          element={
-            <Assignment1 />
-          }
-        />
-        <Route
-          path="/activities/:categoryId"
-          element={
-            <ActivityType />
-          }
-        />
-        <Route
-          path="/activities/:categoryId/:activityId/start"
-          element={
-            <StartActivity fetchUserDetails={fetchUserDetails} />
-          }
-        />
+        <Route path="/confirmation" element={<Confirmation />} />
 
+        <Route path="/Assignment"  element={<Assignment />} />
+        <Route path="/Assignment1" element={<Assignment1 />} />
+       
       </Routes >
       <Footer />
     </BrowserRouter >

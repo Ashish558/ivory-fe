@@ -196,7 +196,7 @@ const Enroll = () => {
           </div>
           <div className="text-gray-500 text-lg ml-6 lg:ml-0">
             <div
-              dangerouslySetInnerHTML={{ __html: description.slice(0 - 150) }}
+              dangerouslySetInnerHTML={{ __html: description?.slice(0 - 150) }}
             />
             {description.length > 150 && (
               <span className="text-blue-500"> See more</span>
