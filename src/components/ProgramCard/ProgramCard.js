@@ -15,15 +15,15 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
    }
 
    return (
-      <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-lg border-t px-3 rounded-2xl flex lg:flex-col lg:gap-2" onClick={handleNavigate} >
-         <div className="h-[125px] lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
+      <div className="py-3 my-3 lg:px-0 lg:pt-0 lg:rounded-[48px] mx-5 border-gray-200 shadow-md border-t px-3 rounded-3xl flex lg:flex-col lg:gap-2" onClick={handleNavigate} >
+         <div className=" lg:h-auto flex justify-start items-center w-[40vw] lg:w-auto relative">
             <span className="text-normal text-white absolute top-6 left-6 hidden lg:block">
                {/* {name} */}
             </span>
             <img
                src={image}
                alt=""
-               className="h-full lg:h-[228px] lg:w-full object-cover rounded-xl lg:rounded-none lg:rounded-t-[48px]"
+               className="h-[124px] w-[112px] lg:h-[228px] lg:w-full object-cover rounded-[20px] lg:rounded-none lg:rounded-t-[48px]"
             />
          </div>
          <div className="flex flex-col justify-between ml-4 w-[60vw] lg:w-full lg:gap-2">
@@ -31,20 +31,20 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
                {getFormattedDuration(modules_duration)}
             </span>
             <h1 className="text-[16px] font-bold lg:text-xl">
-               {name.length > 18? <>
-                 { name} <span className="text-sm text-gray-400">
-                    | Ankit dua
+               {name.length > 18 ? <>
+                  {name} <span className="text-sm text-gray-400 font-normal">
+                     | Ankit dua
                   </span>
                </> : name}
             </h1>
             {name.length < 18 &&
-            <span className="text-sm text-gray-400">
-               Ankit dua
-            </span>}
+               <span className="text-sm text-gray-400">
+                  Ankit dua
+               </span>}
             <div className="flex justify-between">
                {
                   is_live === true &&
-                  <button className="bg-red-100 text-red-500 px-1 rounded-full">
+                  <button className="bg-red-100 text-red-500 p-1 px-2 rounded-full font-semibold">
                      {live_sessions_count} live sessions
                   </button>
                }

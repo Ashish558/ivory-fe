@@ -7,4 +7,4 @@ export const getAuthHeaders = () => {
    };
    return header;
  };
- 
+

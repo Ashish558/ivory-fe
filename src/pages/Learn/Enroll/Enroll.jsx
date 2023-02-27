@@ -1,30 +1,14 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React,{ useEffect,useState } from "react";
 import { useSelector } from "react-redux";
-import styles from './style.module.css'
+import styles from './style.module.css';
 
-import { useNavigate, useParams } from "react-router-dom";
-import batch from "../../../assets/images/enroll/batch.svg";
-import doc from "../../../assets/images/enroll/doc.svg";
-import doc2 from "../../../assets/images/enroll/doc2.svg";
-import live from "../../../assets/images/enroll/live.svg";
-import playIcon from "../../../assets/images/enroll/play.png";
-import redLive from "../../../assets/images/enroll/redLive.svg";
-import tik from "../../../assets/images/enroll/tik.svg";
-import videoBg from "../../../assets/images/enroll/videoBg.png";
-import zoom from "../../../assets/images/enroll/zoom.svg";
-import zoom2 from "../../../assets/images/enroll/zoom2.svg";
-import acrilyc from "../../../assets/images/learn/acrylic.png";
-import canva from "../../../assets/images/learn/canva.png";
-import greenTik from "../../../assets/images/learn/greenTik.png";
-import shareImg from "../../../assets/images/learn/share.svg";
-import shortStory from "../../../assets/images/learn/shortStory.png";
-import { createUserProgram, enrollProgram, getSingleProgram, getUserPrograms } from '../../../services/program'
-import { getPricingDiscountedText, getPricingMainText } from "../../../utils/utils";
 import useRazorpay from "react-razorpay";
+import { useNavigate,useParams } from "react-router-dom";
+import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
+import { createUserProgram,enrollProgram,getSingleProgram,getUserPrograms } from '../../../services/program';
+import { getPricingDiscountedText,getPricingMainText } from "../../../utils/utils";
 
 
 const Enroll = () => {
@@ -195,12 +179,10 @@ const Enroll = () => {
             About this Program
           </div>
           <div className="text-gray-500 text-lg ml-6 lg:ml-0">
-            <div
-              dangerouslySetInnerHTML={{ __html: description.slice(0 - 150) }}
-            />
-            {description.length > 150 && (
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+            {/* {description.length > 150 && (
               <span className="text-blue-500"> See more</span>
-            )}
+            )} */}
             {/* <span className="text-blue-500"> See more</span> */}
           </div>
           <div className="">
@@ -238,7 +220,7 @@ const Enroll = () => {
                 <span className="text-blue-600">
                   {next_batch_start_date
                     ? next_batch_start_date
-                    : "Yet to be scheduled"}
+                    : " Yet to be scheduled"}
                 </span>
               </div>{" "}
               <div className="text-2xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1">
@@ -261,7 +243,7 @@ const Enroll = () => {
             </div>
 
             {next_batch_start_date === null && (
-              <div className="text-yellow-600 text-md mx-6">
+              <div className="text-[#C16901] text-sm font-medium mx-6">
                 To participate in the program, simply register for free. Once
                 batches are scheduled, you will be notified. If the timings
                 align with your schedule, you can choose to enroll in one of the
@@ -286,7 +268,7 @@ const Enroll = () => {
               <span> Share</span>
             </button>
           </div>
-          <div className=" sm:mx-4 shadow-md rounded-xl  border-t border-gray-100 lg:w-[336px] pb-8 w-[90%] mx-auto p-5">
+          <div className=" sm:mx-4 shadow-sm rounded-xl  border-t border-gray-100 lg:w-[336px] pb-8 w-[90%] mx-auto p-5">
             <div className="text-2xl font-bold text-black ml-6 mt-3">
               Program content
             </div>
@@ -299,7 +281,11 @@ const Enroll = () => {
                         key={item.id}
                         className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold"
                       >
-                        <img src={item.icon} alt="" />
+                        <img
+                          src={item.icon}
+                          alt=""
+                          className="bg-[#EEFCFF] p-3 rounded-md"
+                        />
                         {item.name}
                       </li>
                     );
@@ -352,11 +338,10 @@ const Enroll = () => {
         )} */}
       </div>
       <div className="w-[400px] mt-28 ml-5 hidden lg:block">
-        <div className="enrollFooter bg-sky-100  flex flex-col py-10 mb-20 rounded-[48px] p-3">
+        <div className="enrollFooter bg-sky-100   flex flex-col py-10 mb-20 rounded-[48px] p-3">
           <div className="text-2xl font-bold text-black ml-6  mb-5">{name}</div>
           <div className="text-lightGray text-lg ml-6  mb-2 mt-10">
-            
-            <span>
+            <span className="text-sm">
               Batch starts
               <span className="text-blue-500">
                 {next_batch_start_date
@@ -364,9 +349,9 @@ const Enroll = () => {
                   : "Yet to be scheduled"}
               </span>
             </span>
-            <div className="text-4xl font-bold text-black flex items-center gap-1 mt-3">
+            <div className="text-4xl font-medium text-black flex items-center gap-1 mt-3">
               {getPricingMainText(is_free, price, discounted_price, discount)}
-              <span className="text-lightGray line-through font-normal text-sm">
+              <span className="text-lightGray line-through font-normal text-[16px]">
                 {getPricingDiscountedText(
                   is_free,
                   price,
@@ -375,13 +360,13 @@ const Enroll = () => {
                 )}
               </span>{" "}
               {discount > 0 && !is_free && (
-                <span className="text-blue-500 text-lg ml-2">
+                <span className="text-blue-500 text-[16px] ml-2">
                   {(discounted_price * 100) / price}% OFF
                 </span>
               )}
             </div>
             <button
-              className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3"
+              className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3 "
               onClick={handleEnroll}
             >
               {" "}
