@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from "./story.module.css";
+import html2canvas from "html2canvas";
 
 import BackIcon from '../../../assets/icons/back.svg';
 import LeftIcon from '../../../assets/icons/left.svg';
@@ -29,6 +30,8 @@ export default function Story(props) {
    let { id, image, type, liked, share_message, title, url, views, video } = story
    const [storyType, setStoryType] = useState(type)
    const [shareModalOpen, setShareModalOpen] = useState(false)
+
+   const imageRef = useRef()
 
    const hideHtmlOverflow = () => {
       document.body.style.overflow = "hidden";
@@ -109,19 +112,28 @@ export default function Story(props) {
          })
    }
    const shareStory = () => {
-      // console.log('image', image);
-      const options = {
-         method: 'GET',
-         headers: new Headers({ 'content-type': '*' }),
-         mode: 'no-cors'
-      }
-      fetch(image, options)
-         .then(async response => {
-            const contentType = response.headers.get('content-type')
-            const blob = await response.blob()
-            const file = new File([blob], 'filname.jpg', { contentType })
-            console.log('file', file);
-         })
+      console.log('image', image);
+
+      html2canvas(imageRef.current, {
+         allowTaint: true,
+         useCORS: true,
+      }).then(function (canvas) {
+         canvas.getContext("2d");
+         var imgData = canvas.toDataURL("image/jpeg", 1.0);
+         console.log('imgData', imgData);
+      });
+      // const options = {
+      //    method: 'GET',
+      //    headers: new Headers({ 'content-type': 'text/html' }),
+      //    mode: 'no-cors'
+      // }
+      // fetch(image, options)
+      //    .then(async response => {
+      //       const contentType = response.headers.get('content-type')
+      //       const blob = await response.blob()
+      //       const file = new File([blob], 'filname.jpg', { contentType })
+      //       console.log('file', file);
+      //    })
       if (image !== null) {
          convertLinkToDataUrl(image, (res) => {
             console.log('base64', res);

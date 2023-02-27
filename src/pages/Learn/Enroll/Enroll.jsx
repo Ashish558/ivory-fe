@@ -1,14 +1,14 @@
-import React,{ useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from './style.module.css';
 
 import useRazorpay from "react-razorpay";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
-import { createUserProgram,enrollProgram,getSingleProgram,getUserPrograms } from '../../../services/program';
-import { getPricingDiscountedText,getPricingMainText } from "../../../utils/utils";
+import { createUserProgram, enrollProgram, getSingleProgram, getUserPrograms } from '../../../services/program';
+import { getPricingDiscountedText, getPricingMainText } from "../../../utils/utils";
 
 
 const Enroll = () => {
@@ -38,7 +38,8 @@ const Enroll = () => {
   }, [id, loggedIn])
 
   const handleEnroll = () => {
-    if(!loggedIn){
+    // console.log('asda');
+    if (!loggedIn) {
       navigate('/login')
     }
     const body = {
@@ -154,11 +155,12 @@ const Enroll = () => {
   }
   useEffect(() => {
     fetchUserPrograms()
-  }, [])
+  }, [id])
   // console.log('programData', programData);
   // console.log('programExist', programExist);
-  // console.log('isEnrolled', isEnrolled);
+  console.log('isEnrolled', isEnrolled);
   // console.log('user', profileData);
+  // console.log('id', id);
   const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, contents, discount, is_free } = programData
 
   return (
@@ -251,17 +253,26 @@ const Enroll = () => {
               </div>
             )}
           </div>
-          <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
-            <button
-              className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5"
-              onClick={handleEnroll}
-            >
-              {next_batch_start_date === null
-                ? "Register for free"
-                : is_free
-                ? "Enroll for free"
-                : "Enroll"}
-            </button>
+          <div className="sm:flex sm:mb-10  flex-col sm:flex-row flex">
+            {isEnrolled ? (
+              <SecondaryButton
+                children={"Already Enrolled"}
+                // onClick={handleEnroll}
+                className="w-full pt-2 lg:w-[40%] pb-2  w-[90%] mr-3"
+              />
+            ) :
+              <button
+                className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5"
+                onClick={handleEnroll}
+              >
+                {next_batch_start_date === null
+                  ? "Register for free"
+                  : is_free
+                    ? "Enroll for free"
+                    : "Enroll"}
+              </button>
+            }
+
             <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 ">
               {" "}
               <img src={shareImg} alt="" />
@@ -370,11 +381,11 @@ const Enroll = () => {
               onClick={handleEnroll}
             >
               {" "}
-              {next_batch_start_date === null
+              {isEnrolled ? 'Already Enrolled' : next_batch_start_date === null
                 ? "Register for free"
                 : is_free
-                ? "Enroll for free"
-                : "Enroll"}
+                  ? "Enroll for free"
+                  : "Enroll"}
             </button>
             <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[90%] rounded-full border mt-3 border-[#1B72C0]  self-center flex justify-center items-center gap-3">
               {" "}
@@ -385,7 +396,7 @@ const Enroll = () => {
         </div>
       </div>
       <div className={styles.startActivityFooter}>
-        <div className="max-w-[328px] mx-auto lg:hidden">
+        <div className="max-w-[328px] mx-auto lg:hiden">
           {isEnrolled ? (
             <SecondaryButton
               children={"Already Enrolled"}
@@ -398,8 +409,8 @@ const Enroll = () => {
                 next_batch_start_date === null
                   ? "Register for free"
                   : is_free
-                  ? "Enroll for free"
-                  : "Enroll"
+                    ? "Enroll for free"
+                    : "Enroll"
               }
               onClick={handleEnroll}
               className="w-full pt-2.5 pb-2.5"

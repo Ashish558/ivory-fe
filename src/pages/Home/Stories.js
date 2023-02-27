@@ -75,7 +75,7 @@ const Stories = () => {
       const storyType = searchParams.get('type')
       const storyId = searchParams.get('id')
       // console.log(storyType, storyId);
-      console.log(storyType, storyId);
+      // console.log(storyType, storyId);
       if (storyType === null) return
       if (storyId === null) return
       const url = getStoryUrl(storyType)
@@ -86,7 +86,7 @@ const Stories = () => {
             setSingleStoryActive(true)
          })
          .catch(err => {
-           console.log(err.response);
+            console.log(err.response);
          })
    }, [searchParams, loggedIn])
 
@@ -103,19 +103,46 @@ const Stories = () => {
       setStories(temp)
    }
 
+   const getType = (url) => {
+      console.log('url', url);
+      if (url === 'image-stories') {
+         return 'image'
+      } else if (url === 'video-stories') {
+         return 'video'
+      } else if (url === 'mcq-stories') {
+         return 'mcq'
+      } else if (url === 'qna-stories') {
+         return 'qna'
+      } else if (url === 'puzzle-stories') {
+         return 'sudoku'
+      } else {
+         return 'image'
+      }
+   }
    const fetchStories = () => {
       getStories(loggedIn)
          .then(res => {
             let resdata = res.data.data[0]
-            console.log('Stories', res.data.data)
+            console.log('Stories response', res.data.data)
+            // console.log('resdata', resdata)
             let allStories = []
-            allStories = [...allStories,
-            ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
-            ...resdata.mcq_stories.map(story => ({ ...story, type: 'mcq' })),
-            ...resdata.puzzle_stories.map(story => ({ ...story, type: 'sudoku' })),
-            ...resdata.qna_stories.map(story => ({ ...story, type: 'qna' })),
-            ...resdata.video_stories.map(story => ({ ...story, type: 'video' }))
-            ]
+
+            resdata.stories.map(story => {
+               // console.log('url', story.url.split('/')[5]);
+               allStories.push({
+                  ...story,
+                  type: getType(story.url.split('/')[5])
+               })
+            })
+            console.log('allStories', allStories)
+
+            // allStories = [...allStories,
+            // ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
+            // ...resdata.mcq_stories.map(story => ({ ...story, type: 'mcq' })),
+            // ...resdata.puzzle_stories.map(story => ({ ...story, type: 'sudoku' })),
+            // ...resdata.qna_stories.map(story => ({ ...story, type: 'qna' })),
+            // ...resdata.video_stories.map(story => ({ ...story, type: 'video' }))
+            // ]
             let viewed = allStories.filter(item => item.viewed === true)
             let notViewed = allStories.filter(item => item.viewed === false)
             setStories([...notViewed, ...viewed])
