@@ -155,9 +155,9 @@ const Enroll = () => {
   useEffect(() => {
     fetchUserPrograms()
   }, [])
-  console.log('programData', programData);
-  console.log('programExist', programExist);
-  console.log('isEnrolled', isEnrolled);
+  // console.log('programData', programData);
+  // console.log('programExist', programExist);
+  // console.log('isEnrolled', isEnrolled);
   // console.log('user', profileData);
   const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, contents, discount, is_free } = programData
 

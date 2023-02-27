@@ -110,7 +110,12 @@ export default function Story(props) {
    }
    const shareStory = () => {
       // console.log('image', image);
-      fetch(image, {mode: 'cors'})
+      const options = {
+         method: 'GET',
+         headers: new Headers({ 'content-type': '*' }),
+         mode: 'no-cors'
+      }
+      fetch(image, options)
          .then(async response => {
             const contentType = response.headers.get('content-type')
             const blob = await response.blob()
