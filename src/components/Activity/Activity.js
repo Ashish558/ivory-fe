@@ -21,7 +21,7 @@ export default function Activity({ image, name, duration, category, id, is_compl
          // window.location.reload()
          handleScrollToTop()
       }}>
-         <div className='max-w-[135px] md:max-w-[100%]'>
+         <div className='w-[135px] md:w-full md:max-w-[100%]'>
             <img src={image === null ? ActivityIcon : image} className={`${styles.image}  h-[90px] mx-auto sm:rounded-b-none rounded-3xl sm:h-[125px] w-full object-cover`} alt='Profile' />
          </div>
          <div className='sm:p-3 sm:flex flex-col sm:justify-start md:h-[150px]'>

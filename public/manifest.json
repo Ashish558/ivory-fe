@@ -35,7 +35,7 @@
     }
   ],
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#7eabc9",
   "description": "Ivory app description",
