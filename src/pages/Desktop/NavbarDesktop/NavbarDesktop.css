@@ -5,8 +5,15 @@
     height: 520px;
 }
 
+.navbar-desktop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 500;
+}
 
-.border {
+.border1 {
     border: 0.5px solid #8BB3E5;
 }
 

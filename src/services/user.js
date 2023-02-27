@@ -7,7 +7,7 @@ export const startActivity = (activityId) => {
       is_completed: false,
       activity: activityId
    }
-   return axios.post(`${BASE_URL}/accounts/user-activities/`, body, getAuthHeaders())
+   return axios.post(`${BASE_URL}/activity/user-activities/`, body, getAuthHeaders())
 };
 
 export const completeActivity = (activityId) => {
@@ -15,26 +15,26 @@ export const completeActivity = (activityId) => {
       is_completed: true,
       // activity: activityId
    }
-   return axios.patch(`${BASE_URL}/accounts/user-activities/${activityId}/`, body, getAuthHeaders())
+   return axios.patch(`${BASE_URL}/activity/user-activities/${activityId}/`, body, getAuthHeaders())
 };
 export const inCompleteActivity = (activityId) => {
    let body = {
       is_completed: false,
       // activity: activityId
    }
-   return axios.patch(`${BASE_URL}/accounts/user-activities/${activityId}/`, body, getAuthHeaders())
+   return axios.patch(`${BASE_URL}/activity/user-activities/${activityId}/`, body, getAuthHeaders())
 };
 
 export const getMyActivitiesProgress = () => {
-   return axios.get(`${BASE_URL}/accounts/user-activities/progress/`, getAuthHeaders())
+   return axios.get(`${BASE_URL}/activity/user-activities/progress/`, getAuthHeaders())
 };
 
 export const getMyActivities = () => {
-   return axios.get(`${BASE_URL}/accounts/user-activities/`, getAuthHeaders())
+   return axios.get(`${BASE_URL}/activity/user-activities/`, getAuthHeaders())
 };
 
 export const getUserSubmissions = (activityId) => {
-   return axios.get(`${BASE_URL}/accounts/user-activity-submissions/`,
+   return axios.get(`${BASE_URL}/activity/user-activity-submissions/`,
       {
          params: {
             activity: activityId,
@@ -45,11 +45,11 @@ export const getUserSubmissions = (activityId) => {
 };
 
 export const uploadActivity = (body) => {
-   return axios.post(`${BASE_URL}/accounts/user-activity-submissions/`, body, getAuthHeaders())
+   return axios.post(`${BASE_URL}/activity/user-activity-submissions/`, body, getAuthHeaders())
 };
 
 export const deleteSubmission = (id) => {
-   return axios.delete(`${BASE_URL}/accounts/user-activity-submissions/${id}/`, getAuthHeaders())
+   return axios.delete(`${BASE_URL}/activity/user-activity-submissions/${id}/`, getAuthHeaders())
 };
 
 export const getUserDetail = (phone) => {

@@ -1,0 +1,17 @@
+.tab {
+   background-color: transparent;
+   color: #0055BF;
+   border: 1px solid #0055BF;
+}
+
+.video {
+   height: 200px !important;
+}
+
+@media only screen and (min-width: 769px) {
+
+   .video {
+      height: 400px !important;
+   }
+
+}

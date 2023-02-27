@@ -1,0 +1,7 @@
+.cusBg {
+  background: url("../../../assets/images/learn/communityBg.png") no-repeat top
+    center fixed;
+  background-size: cover;
+
+  /* background: #000; */
+}

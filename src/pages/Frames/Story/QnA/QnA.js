@@ -10,7 +10,7 @@ import { getAuthHeaders } from '../../../../services/constants';
 
 
 
-export default function QnA({ image, answer_image, type, url, updateStory }) {
+export default function QnA({ image, answer, answer_image, type, url, updateStory }) {
 
    const [answerActive, setAnswerActive] = useState(false)
    const [answers, setAnswers] = useState('')
@@ -18,26 +18,45 @@ export default function QnA({ image, answer_image, type, url, updateStory }) {
    const handleSubmit = () => {
       setAnswerActive(!answerActive)
    }
+
    useEffect(() => {
-      if (answerActive === true) {
-         axios.get(`${url}submit/`, getAuthHeaders())
+      if (answer !== null) {
+         setAnswerActive(true)
+         setAnswers(answer)
+      }
+   }, [answer])
+   const subAnswer = async () => {
+      if (answer === null) {
+         await axios.get(`${url}submit/`, getAuthHeaders())
             .then(res => {
                console.log('submit res', res.data.data);
                updateStory({ ...res.data.data, type })
             }).catch(err => {
                console.log('submit err', err.data);
             })
+         await axios.post(`${url}answer/`, { answer: answers }, getAuthHeaders())
+            .then(res => {
+               console.log('answer res', res.data.data);
+               updateStory({ ...res.data.data, type })
+            }).catch(err => {
+               console.log('answer err', err.data);
+            })
       }
-   }, [answerActive])
+   }
+   useEffect(() => {
+      if (answerActive === true) {
+         subAnswer()
+      }
+   }, [answerActive, answer])
    // console.log(answerActive)
    return (
       <div className={`${styles.storySudoku} lg:grid-rows-6 lg:grid-cols-4`}>
          <div className='flx items-center self-streth flex- lg:row-span-4  lg:col-span-4 lg:h-full '>
             {
                answerActive ?
-                  <img src={image} className={styles.storyImage} alt='unsolved' />
+                  <img src={answer_image} className={styles.storyImage} alt='unsolved' />
                   :
-                  <img src={answer_image} className={styles.storyImage} alt='solved' />
+                  <img src={image} className={styles.storyImage} alt='solved' />
             }
          </div>
 

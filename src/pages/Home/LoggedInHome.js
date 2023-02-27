@@ -19,17 +19,33 @@ import DesktopStories from '../Desktop/DesktopStories/DesktopStories';
 import DesktopActivities from '../Desktop/DesktopActivities/DesktopActivities';
 import DesktopEvents from '../Desktop/DesktopEvents/DesktopEvents';
 import DesktopLearn from '../Desktop/Learn/DesktopLearn';
+import { getBanners } from '../../services/banners';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const LoggedInHome = () => {
 
     const user = useSelector(state => state.user)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const [banners, setBanners] = useState([])
+ 
+    useEffect(() => {
+       getBanners()
+          .then(res => {
+             if (res.data.data === null) return
+             let homeBanners = res.data.data.filter(item => item.location_link === location.pathname)
+             setBanners(homeBanners)
+          })
+    }, [location.pathname])
+ 
     // console.log('user', user);
     return (
 
         <div className='container mx-auto'>
 
 
-            <div className='desktop'>
+            <div className='desktop lg:mt-[64px]'>
                 {/* <NavbarDesktop></NavbarDesktop> */}
                 <DesktopBanner></DesktopBanner>
                 {/* <DesktopStories></DesktopStories> */}
@@ -45,7 +61,7 @@ const LoggedInHome = () => {
 
             <div className='mobile pb-12 mb-12'>
                 {/* <Navbar></Navbar> */}
-                <SimpleSlider></SimpleSlider>
+                <SimpleSlider banners={banners}></SimpleSlider>
                 {/* <Video></Video>
             <Banner></Banner> */}
 

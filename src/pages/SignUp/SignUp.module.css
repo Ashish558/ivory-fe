@@ -1,3 +1,7 @@
+
+:root {
+  --backgroundHeight: 62px;
+}
 .cusStyle {
   letter-spacing: 1px !important;
   line-height: 38px;
@@ -5,20 +9,82 @@
   width: 240px;
   margin-left: 20px;
 }
+
+.sliderMiddleBg {
+  background: #BDF4FF;
+  border-radius: 4px;
+  position: absolute;
+  top: calc(50% + 2px);
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  height: var(--backgroundHeight);
+  z-index: -1;
+}
+
+.topLeftBorder,
+.topRightBorder,
+.bottomLeftBorder,
+.bottomRightBorder,
+.midTopBorder,
+.midBottomBorder
+{
+  position: absolute;
+  height: 1px;
+  background-color: #939CA3;
+}
+.topLeftBorder{
+  left: 33px;
+  width: 48px;
+  z-index: 1000;
+  transform: translateY(calc(var(--backgroundHeight)/-2 + 2px));
+}
+.bottomLeftBorder{
+  left: 33px;
+  width: 48px;
+  z-index: 1000;
+  transform: translateY(calc(var(--backgroundHeight)/2 + 2px));
+}
+.topRightBorder{
+  right: 33px;
+  width: 72px;
+  z-index: 1000;
+  transform: translateY(calc(var(--backgroundHeight)/-2  + 2px));
+}
+.bottomRightBorder{
+  right: 33px;
+  width: 72px;
+  z-index: 1000;
+  transform: translateY(calc(var(--backgroundHeight)/2 + 2px));
+}
+.midTopBorder{
+  left: 94px;
+  width: 115px;
+  z-index: 1000;
+  transform: translateY(calc(var(--backgroundHeight)/-2  + 2px));
+}
+.midBottomBorder{
+  left: 94px;
+  width: 115px;
+  z-index: 1000;
+  transform: translateY(calc(var(--backgroundHeight)/2 + 2px));
+}
 @media (min-width: 992px) {
   .cusStyle {
     letter-spacing: 2px !important;
     line-height: 50px;
-    font-size: 42px;
-  width:500px;
-  margin-left: 20px !important;
+    font-size: 32px;
+    width: 100%;
+    font-weight: bolder;
+    margin-left: 0px;
   }
 }
+
 .footer-bg {
-    background-color: #F0F5FF;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: none;
+  background-color: #F0F5FF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: none;
 }

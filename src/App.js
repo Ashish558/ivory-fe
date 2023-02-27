@@ -1,32 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
-import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
-
-import Home from './pages/Home/Home.jsx';
 import Activities from './pages/Activities/Activities';
 import ActivityType from './pages/ActivityType/ActivityType';
-import StartActivity from './pages/StartActivity/StartActivity';
+import Profile from './pages/Createprofile/Profile';
+import Footer from './pages/Home/Footer';
+import Home from './pages/Home/Home.jsx';
+import LoggedInHome from './pages/Home/LoggedInHome';
 import Login from './pages/Login/Login';
 import Otp from './pages/Login/Otp';
-import SignUp from './pages/SignUp/SignUp';
-import Congrates from './pages/SignUp/Congrates';
-import LoggedInHome from './pages/Home/LoggedInHome'
-import Profile from './pages/Createprofile/Profile'
-import Footer from './pages/Home/Footer';
 import Navbar from './pages/Navbar/Navbar';
-import { refreshToken } from './services/auth';
+import Congrates from './pages/SignUp/Congrates';
+import SignUp from './pages/SignUp/SignUp';
+import StartActivity from './pages/StartActivity/StartActivity';
 import { updateLoggedIn, updateProfileData } from './redux/slices/user';
-import { useDispatch, useSelector } from 'react-redux';
+import { refreshToken } from './services/auth';
 import { getUserDetail } from './services/user';
 
+import Assignment from './pages/Home/Assignment';
+import Assignment1 from './pages/Home/Assignment1';
+import Learn from './pages/Home/Learn';
+import Four from './pages/splash/Four';
 import Landing from './pages/splash/Landing';
+import LogoLanding from './pages/splash/LogoLanding';
 import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
-import Four from './pages/splash/Four';
-import LogoLanding from './pages/splash/LogoLanding';
-
+// import Enroll from './pages/Home'
+// import LogoLanding from './pages/splash/LogoLanding';
+import Enroll from './pages/Learn/Enroll/Enroll';
+import LiveSession from './pages/Learn/LiveSessionNew/LiveSession';
 import Dob from './pages/SignUp/Dob';
+import LiveEvents from './pages/LiveEvents/LiveEvents';
+import SingleSession from './pages/SingleSession/SingleSession';
+
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
+import Confirmation from './pages/Learn/Confirmation/Confirmation';
+import Community from './pages/Learn/Community/Community';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -62,13 +72,13 @@ function App() {
       .then(res => {
         // console.log('profile', res.data.data[0]);
         dispatch(updateProfileData({ profileData: res.data.data[0] }))
-        if(isInitial){
+        if (isInitial) {
           setLoading(false)
         }
       })
       .catch(err => {
         console.log('profile err', err);
-        if(isInitial){
+        if (isInitial) {
           dispatch(updateLoggedIn({ loggedIn: false }))
           setLoading(false)
         }
@@ -86,18 +96,36 @@ function App() {
       <Navbar />
       <NavbarDesktop />
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/otp" element={<Otp />} />
-        <Route path="/dob" element={<Dob />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/Congrates" element={<Congrates />} />
-        <Route path="/home" element={<LoggedInHome />} />
 
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route exact path='/logolanding' element={<LogoLanding />}></Route>
         <Route exact path='/landing' element={<Landing />}></Route>
         <Route exact path='/second' element={<Second />}></Route>
         <Route exact path='/third' element={<Third />}></Route>
         <Route exact path='/four' element={<Four />}></Route>
+        <Route exact path="/learn" element={<Learn />}></Route>
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/dob" element={<Dob />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/Congrates" element={<Congrates />} />
+
+        <Route path="/home" element={<LoggedInHome />} />
+
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/activities/:categoryId"  element={<ActivityType />} />
+        <Route path="/activities/:categoryId/:activityId/start"
+          element={
+            <StartActivity fetchUserDetails={fetchUserDetails} />
+          } />
+
+
+        <Route path="/live-events" element={<LiveEvents />} />
+        <Route path="/live-events/:id" element={<SingleSession />} />
+        <Route path="/program/:id" element={<LiveSession />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/learn" element={<Learn />} />
+        <Route path="/learn/:id" element={<Enroll />} />
 
         <Route
           path="/CreateProfile"
@@ -107,30 +135,12 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/"
-          element={
-            <Home />
-          }
-        />
-        <Route
-          path="/activities"
-          element={
-            <Activities />
-          }
-        />
-        <Route
-          path="/activities/:categoryId"
-          element={
-            <ActivityType />
-          }
-        />
-        <Route
-          path="/activities/:categoryId/:activityId/start"
-          element={
-            <StartActivity fetchUserDetails={fetchUserDetails} />
-          }
-        />
 
+        <Route path="/confirmation" element={<Confirmation />} />
+
+        <Route path="/Assignment"  element={<Assignment />} />
+        <Route path="/Assignment1" element={<Assignment1 />} />
+       
       </Routes >
       <Footer />
     </BrowserRouter >

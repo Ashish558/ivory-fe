@@ -1,10 +1,9 @@
 import React,{ useEffect,useRef,useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { Link,useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import arrow from "../../assets/arrow_back.png"
 import cross from "../../assets/cross.png"
 import CancelIcon from '../../assets/icons/x-icon.svg'
-import img from "../../assets/iphoto.png"
 import ivoryforming from "../../assets/ivoryforming.png"
 import photo from "../../assets/smile.png"
 import Modal from '../../components/Modal/modal'
@@ -17,10 +16,8 @@ const Profile = () => {
   const [name,setName] = useState('')
   const [mobile_no,setMobile_no] = useState(null)
   const [email,setemail] = useState("");
-  const [text,settext] = useState("");
   const [showdiv,setshowdiv] = useState(false);
   const [addnewtextdiv,setaddnewtextdiv] = useState(false);
-  const [textColor,setTextColor] = useState('white');
   const [backcolor,setbackcolor] = useState('#FFFFFF');
   const [blur,setblur] = useState("");
 
@@ -28,31 +25,24 @@ const Profile = () => {
   const [allInterests,setAllInterests] = useState([])
   const [userInterests,setUserInterests] = useState([])
   const [interestInput,setInterestInput] = useState('')
+  const [selectedInterest,setSelectedInterest] = useState([])
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [error,setError] = useState('')
   const [empty,setEmpty] = useState(true)
-
-
+  const [addModal,setModal] = useState(false)
 
   const { loggedIn,profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
 
-  // let arr = addtext.split(' '); 
-  // console.log(arr);
   const [gender,setgender] = useState("");
-  const colorchange = () => {
-    setTextColor('Blue')
-  }
-
   useEffect(() => {
     if (loggedIn === true) {
-
       setemail(profileData.email !== null ? profileData.email : '')
       setgender(profileData.gender !== null ? profileData.gender : '')
       setName(profileData.name !== null ? profileData.name : '')
       setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
-      setUserInterests(profileData.intrests)
+      setinterest(profileData.intrests)
     }
   },[profileData,loggedIn])
 
@@ -64,7 +54,7 @@ const Profile = () => {
   const fetchInterests = () => {
     getInterests()
       .then(res => {
-        // console.log('allInterests', res.data.data);
+        console.log('All Interests',res.data.data);
 
         let intData = res.data.data
         intData = intData.filter(item => {
@@ -96,45 +86,36 @@ const Profile = () => {
     setUserInterests(tempInt)
   },[allInterests])
 
-  let intIds = userInterests.map(item => item.id)
+  let intIds = interest.map(item => item.id)
+
+
+
   const body = {
-    gender,email,intrests: intIds,name,mobile_no
+    gender: gender ? gender : '',
+    name: name ? name : '',
+    email: email ? email : null,
+    intrests: intIds ? intIds : [],
+    mobile_no: mobile_no ? mobile_no : ''
   }
-
-  useEffect(() => {
-
-    if (gender === "" || email === "" || intIds.length === 0 || name === "") {
-      setEmpty(true)
-    } else {
-      setError('')
-      setEmpty(false)
-    }
-  },[email,gender,intIds.length,mobile_no,name])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    parseInt(mobile_no)
 
-    if (!empty) {
-      setError('')
-      editProfile(body,profileData.mobile_no)
-        .then(res => {
-          console.log(res.data);
-          dispatch(updateProfileData({ profileData: res.data.data }))
-          alert('profile data saved')
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    } else {
-      setError('please fill all the fields')
-    }
-
-
+    editProfile(body,profileData.mobile_no)
+      .then(res => {
+        dispatch(updateProfileData({ profileData: res.data.data }))
+        alert('profile data saved')
+        navigate('/home')
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
-  const [intIndex,setIntIndex] = useState([])
-  const toggleInt = id => {
 
+
+  //toogle interest
+  const toggleInt = int => {
+    const id = int.id;
     let tempint = allInterests.map(int => {
       if (int.id === id) {
         return { ...int,selected: !int.selected }
@@ -143,35 +124,35 @@ const Profile = () => {
       }
     })
     const filteredInt = tempint.filter(item => item.selected === true)
-    setIntIndex(filteredInt)
+    const notInclueds = filteredInt.filter(item => !interest.includes(item))
+    setinterest(notInclueds)
 
     setAllInterests(tempint)
-    // console.log('clickec');
   }
   // console.log(intIndex)
-  const filterIndexIds = intIndex.map(item => item.id)
-  // console.log(filterIndexIds);
+  const filterIndexIds = interest.map(item => item.id)
 
 
+  const handleAddInterest = (e) => {
+    e.stopPropagation()
 
-
-
-  const handleAddInterest = () => {
+    setInterestInput('')
     addInterest({ name: interestInput,icon: null })
       .then(res => {
-        console.log(res.data);
+
         addcrossbox()
-        fetchInterests()
+        setAllInterests([...allInterests,{ ...res.data.data,selected: true }])
+        const newInterest = {
+          id: res.data.data.id,
+          name: res.data.data.name,
+        }
+
       })
       .catch(err => {
         console.log(err);
         addcrossbox()
-        fetchInterests()
-
       })
   }
-
-  const [selec,setselec] = useState("true");
 
   //------call to next page hide and show div----------
   const openinterest = () => {
@@ -180,16 +161,21 @@ const Profile = () => {
     document.querySelector(".Profile_datainput__ZG9n4").classList.add("Profile_blur__z7wX8");
   }
   const crossbox = () => {
+    setSelectedInterest(interest)
     setshowdiv(false)
     setbackcolor('#FFFFFF')
     document.querySelector(".Profile_datainput__ZG9n4").classList.remove("Profile_blur__z7wX8");
   }
   const addnew = () => {
+
     setaddnewtextdiv(true)
+    crossbox ()
     setbackcolor('rgb(145 165 186)')
   }
   const addcrossbox = () => {
+    
     setaddnewtextdiv(false);
+    openinterest()
     // setbackcolor('#001C38')
   }
 
@@ -203,7 +189,6 @@ const Profile = () => {
 
     uploadProfile(formData,profileData.mobile_no)
       .then(res => {
-        console.log(res.data);
         dispatch(updateProfileData({ profileData: res.data.data }))
         alert('profile data saved')
       })
@@ -219,17 +204,23 @@ const Profile = () => {
     let filteredAll = allInterests.map(item => {
       return item.id === id ? { ...item,selected: false } : { ...item }
     })
+    const deselectInterest = interest.filter(item => item.id !== id)
+    setinterest(deselectInterest)
     setUserInterests(filtered)
     setAllInterests(filteredAll)
+    setSelectedInterest(deselectInterest)
   }
 
-  // console.log('interest', interest);
+  // console.log('interest',interest);
   // console.log('allInterests', allInterests);
   // console.log('userInterests', userInterests);
-
+  // if (interest.length < 0) {
+  //   console.log('interest',interest);
+  // }
+  // console.log('selected',selectedInterest);
   return (
     <>
-      <div className='mb-20 sm:mb-0  bg-[#EEFDFC] sm:bg-white overflow-hidden'>
+      <div className='pb-32 overflow-x-hidden sm:mb-0 lg:mt-[64px]  bg-[#EEFDFC] sm:bg-white'>
         <div className={styles.datainput} >
           <div className={styles.navbar}>
 
@@ -241,19 +232,19 @@ const Profile = () => {
           <div className={styles.image}>
             <div className={styles.ssmmillee}>
               <img src={profileData.profile_picture ? profileData.profile_picture : photo}
-                className={styles.img2} alt=""
+                className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt=""
+
                 onClick={() => photoRef.current.click()} />
               <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
                 onChange={(e) => handlePhotoUpload(e)} />
             </div>
             <p className={`cursor-pointer ${styles.addpit}`}
               onClick={() => photoRef.current.click()}
-
             >Add Profile picture
             </p>
           </div>
-          <div className={`${styles.formimg} sm:mt-3 `}>
-            <div className={styles.form}>
+          <div className={`${styles.formimg} `}>
+            <div className={`${styles.form} w-[45vw]`}>
               <div className={styles.input1}>
                 <label htmlFor="" className={styles.emaillabel} >Name</label>
                 <input type="text" placeholder='Sahil Wadhwa' value={name}
@@ -267,7 +258,7 @@ const Profile = () => {
                   // type="Number"
                   placeholder='9777766665' className={`${styles.emailinput} text-gray-400`}
                   value={mobile_no} name="mobile_no"
-                  disabled style={{ border: '1px solid #ccc' }}
+                  disabled style={{ border: '1px solid #68656c' }}
 
                   type={JSON.stringify(mobile_no)?.length < 10 ? "number" : "text"}
                   maxLength="10"
@@ -284,6 +275,7 @@ const Profile = () => {
                   placeholder='xyz@gmail.com'
                   onChange={(e) => setemail(e.target.value)}
                   value={email ? email : profileData.email ? profileData.email : ''}
+                  required
                 />
 
 
@@ -291,16 +283,16 @@ const Profile = () => {
               </div>
               <div className={styles.input2}>
                 <label htmlFor="" className={styles.emaillabel} >Gender</label>
-                <div className={styles.genderinput}>
-                  <div className={`${styles.checkboxdiv1} ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')}>
-                    <label className={styles.gendermale} htmlFor="">Male</label>
+                <div className={`sm:w-[59%] flex justify-between gap-4`}>
+                  <div className={`w-full border border-gray-600 flex justify-between items-center px-2 sm:px-5 rounded-md ${gender === 'male' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('male')} style={{ border: '1px solid gray' }}>
+                    <label className='py-4 text-lg' htmlFor="">Male</label>
                     {gender === 'male' ?
-                      <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
+                      <span className='text-black  text-xl absolute top-4 right-6'> &#x2714; </span> : ''}
                   </div>
-                  <div className={`${styles.checkboxdiv2} ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')}>
-                    <label className={styles.genderFemale} htmlFor="">Female</label>
+                  <div className={`w-full border border-gray-500 flex justify-between items-center px-2 sm:px-5 rounded-md   ${gender === 'female' ? 'bg-[#BDF4FF] relative' : ''}`} onClick={() => setgender('female')} style={{ border: '1px solid gray' }}>
+                    <label className='py-4 text-lg' htmlFor="">Female</label>
                     {gender === 'female' ?
-                      <span className='text-blue-600 font-bold text-xl absolute top-2 right-5'> &#10003; </span> : ''}
+                      <span className='text-black font-bold text-xl absolute top-4 right-6'> &#10003; </span> : ''}
                   </div>
                 </div>
               </div>
@@ -308,15 +300,15 @@ const Profile = () => {
                 <label htmlFor="" className={styles.emaillabel} onClick={openinterest} >Interests</label>
 
                 {
-                  userInterests.length === 0 ?
+                  interest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
-                      className={styles.chooseinput}>
-                      <p className=' pl-3 pt-2 sm:pt-0'> Click to choose</p>
+                      className={`${styles.chooseinput} sm:w-[58%]`}>
+                      <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>
                     </div>
                     :
-                    <div className='h-[85px] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
+                    <div className='h-[58px]  sm:w-[58%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
                       {
-                        userInterests.map(int => {
+                        selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
                             {int.name}
                             <img src={CancelIcon}
@@ -334,54 +326,50 @@ const Profile = () => {
               </div> */}
                 {/*-------------Open interest page selecting---------------*/}
               </div>
-              <p className="ml-8 sm:ml-20 sm:mt-3 text-red-300 capitalize">{error}</p>
+
             </div>
-            <img src={ivoryforming} className={styles.ivoryForm} alt="" />
+            <div className='w-[55vw]'>
+
+              <img src={ivoryforming} className={styles.ivoryForm} alt="" />
+            </div>
           </div>
 
-          {empty ? <button type='submit' className={styles.btnUpdate2} onClick={handleSubmit}>Save Profile</button> : <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>}
+          <button type='submit' className={styles.btnUpdate} onClick={handleSubmit}>Save Profile</button>
           {/*-------------Go to next page---------------*/}
 
         </div>
-        {/* ------------------------------------------------------------------------------ */}
-        {/* ---------------------------The interest selecting div------------------------------------ */}
-        {showdiv == true ?
-          <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
+
+        {showdiv === true ?
+          <Modal classname='max-w-[355px] pt-0 md:pt-6 rounded-[20px] sm:max-w-[740px] overflow-hidden'
             body={
               <>
-                <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
+                <div className={`${styles.int} py-3 flex justify-center items-center ml-5`}>
                   <img src={cross} onClick={crossbox} alt="" className={styles.closeinterest} />{/*-------------Cross the open interest page selecting---------------*/}
-                  <p className={`${styles.intp} font-semibold`}>Interests</p>
+                  <p className={`${styles.intp} font-semibold `}>Interests</p>
                 </div>
                 <hr className={styles.brk} />
                 <p className={`py-4 font-semibold sm:ml-6 ml-3`}>Choose one or more:</p>
-                <div className='flex flex-wrap gap-3 sm:ml-6 '>
-                  {
-                    interest?.map((ele,index) => {
-                      return (
-                        // <div className={styles.inttopic}>
-                        <div className='flex justify-center flex-row items-center sm:gap-2 cursor-pointer border-gray-400 rounded-md sm:px-2 sm:py-1 text-sm border-2'
-                          onClick={colorchange}>
-                          <img src={img} alt="" />
-                          <h3>{ele.name}</h3>
-                        </div>
-                      )
-                    })
-                  }
+                <div className='flex flex-wrap gap-2 sm:ml-6 ml-3'>
+
                   {
                     allInterests.map((int,i) => {
-                      return <div className={`text-lg flex justify-center flex-row items-center gap-2 cursor-pointer border border-gray-600 rounded-md px-3 py-1 font-semibold ${int.selected === true ? `${styles.interestSelected}` : ''}`} style={{ border: '2px solid #939CA3' }}
+                      return <div className={`text-lg flex justify-center flex-row items-center gap-1 cursor-pointer  rounded-md px-3 py-1 text-black ${filterIndexIds.includes(int.id) ? 'bg-secondary' : 'border border-[#79747E] '}`}
+                        // style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
-                        key={int.id} onClick={() => toggleInt(int.id)}>
-                        <img src={int.icon} alt="" />
+                        key={int.id} onClick={() => toggleInt(int)}>
+                        <img src={int.icon} className='w-5' alt="" />
                         <h3> {int.name} </h3>
                       </div>
                     })
                   }
                 </div>
-                <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-500 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={addnew}>Add</button></div>{/*-------------Add Your interest page open---------------*/}
+                <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
+                  {
+                    interest.length === 0 ? <button className='py-2 bg-[#9EBEE7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5'>Add</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-10 sm:mt-20 sm:mb-10 mr-5' onClick={crossbox}>Add</button>
+                  }
+                </div>{/*-------------Add Your interest page open---------------*/}
                 <hr className={styles.hend} />
-                <Link to="/"><p className='text-left py-2 text-lg sm:text-md text-blue-600 underline mt-1 sm:ml-6'>Suggest more interest categories.</p></Link>
+                <p className='text-left py-2 text-lg sm:text-md text-[#1B72C0] underline mt-1 sm:ml-6 cursor-pointer' onClick={addnew}>Suggest more interest categories.</p>
               </>
             } />
 
@@ -391,7 +379,7 @@ const Profile = () => {
         {/* -----------------------------------Add your interest div------------------------------------------------ */}
         {
           addnewtextdiv == true ?
-            <Modal classname='max-w-[370px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
+            <Modal classname='max-w-[355px] rounded-[20px] sm:max-w-[740px] overflow-hidden'
               body={
                 <>
                   <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
@@ -400,18 +388,23 @@ const Profile = () => {
                   </div>
                   <hr className={styles.head1} />
                   <div className={styles.para}>
-                    <p className='text-lg'>Didn't find your top interests?No worries! Let us know and we will
+                    <p className='text-base font-semibold'>Didn't find your top interests?No worries! Let us know and we will
                       try our best to add more relavent
                       categories:
                     </p>
                     <input type="text" name='addtext'
                       value={interestInput}
-                      onChange={(e) => setInterestInput(e.target.value)} className='border my-2 pl-4 py-2 border-gray-600 mt-3' placeholder='Type here..' style={{ border: '1px solid #939CA3',borderRadius: '8px' }} />
-
+                      onChange={(e) => setInterestInput(e.target.value)} className={`border my-2 pl-4 py-4 border-black mt-3 lg:w-[470px] outline-none bg-transparent lg:h-[56px] w-full rounded-md lg:rounded `} placeholder='Type here..' style={{ border: '1px solid #939CA3' }} />
                   </div>
-                  <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'> <button className='py-2 bg-blue-600 w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button></div>
+                  <div className='w-[100%] flex flex-row sm:justify-center justify-end items-center'>
+                    {
+                      interestInput.length === 0 ? <button className='py-2 bg-[#94D1F7] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10'>Send</button> : <button className='py-2 bg-[#0055BF] w-[90px] sm:mx-auto  mb-3 text-white rounded-full mt-28 sm:mb-10' onClick={handleAddInterest}>Send</button>
+                    }
+                  </div>
 
 
+
+                  {/* onClick={handleAddInterest} */}
                 </>
               } />
             : <></>

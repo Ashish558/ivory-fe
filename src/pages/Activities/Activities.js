@@ -5,6 +5,7 @@ import PaintingIcon from '../../assets/icons/painting-icon.svg'
 import PhotographyIcon from '../../assets/icons/photography-icon.svg'
 import TechnologyIcon from '../../assets/icons/technology-icon.svg'
 import PaintingTypeIcon from '../../assets/icons/painting.svg'
+import ScrollToTop from '../../assets/icons/scroll-to-top.svg'
 import GuitarImg from '../../assets/images/guitar.png'
 
 import Filterbar from '../../components/Filterbar/filterbar'
@@ -93,6 +94,12 @@ export default function Activities() {
    const navigate = useNavigate()
    const { loggedIn } = useSelector(state => state.user)
 
+   const handleScrollToTop = () => {
+      window.scrollTo({
+         top: 0,
+         behavior: "smooth",
+      });
+   }
    useEffect(() => {
       if (filterItems.length > 0) return
       if (activities.length === 0) return
@@ -116,8 +123,8 @@ export default function Activities() {
             res.data.data.map((activity, idx) => {
                temp.push({
                   id: activity.id,
-                  children: <div className='flex items-center gap-x-1'>
-                     <img src={activity.icon} alt='activity' />
+                  children: <div className='flex items-center gap-x-1 lg:gap-x-3'>
+                     <img src={activity.icon} alt='activity' className='max-h-[18px]' />
                      {activity.name}
                   </div>,
                   selected: true
@@ -194,42 +201,45 @@ export default function Activities() {
       setFilteredActivities(filteredArr)
 
    }, [filterItems, activities])
+   const variants = ['red', 'purple', 'orange', 'blue', 'yellow',]
    // console.log('activities', activities);
    // console.log('filterItems', filterItems);
-
+   // console.log('my Activity', myActivities);
+   // console.log('filteredActivities', filteredActivities);
    return (
-      <div>
+      <div className=' lg:mt-[64px]'>
          {/* <Header /> */}
 
          <div className='px-4 lg:px-0'>
 
-            <div className='pt-6 mb-8 lg:grid lg:grid-cols-2 lg:px-[80px] lg:bg-sky-50'>
-               <div className='lg:flex mt-10 flex-col'>
-               <div className=' flex items-center mb-2'>
-                  <h3 className='text-xl font-bold mb-2.5 lg:mb-4 lg:text-4xl lg:font-medium'> My activities
-                  </h3>
-                  <p className='pl-7'><img src={Arrow} alt="" /></p>
+            <div className='pt-0 lg:pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
+               <div className={`lg:flex mt-10 flex-col lg:self-start lg:mt-12 ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
+                  <div className=' flex items-center mb-2'>
+                     <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-4xl lg:font-semibold'>
+                        My activities
+                     </h3>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   {myActivities.length > 0 ?
-                     myActivities.map(activity => {
-                        return <MyActivityCard key={activity.id} {...activity} />
+                     myActivities.map((activity, idx) => {
+                        return <MyActivityCard key={activity.id} {...activity} idx={idx} variants={variants} />
                      }) :
-                     <p className='text-lightGray font-medium'>
+                     <p className='text-lightGray font-medium lg:text-end lg:text-[24px]'>
                         No activities started yet
                      </p>
                   }
                </div>
-               <div className='hidden lg:block px-[60px]'>
-                  <img src={GuitarImg} alt='guitar' className={styles.guitar} />
+               <div className={`hidden lg:block ${myActivities.length === 0 ? 'px-[20px]' : 'px-[60px]'} `}>
+                  <img src={GuitarImg} alt='guitar' className={myActivities.length === 0 ? styles.guitarSmall : styles.guitar} />
                </div>
 
             </div>
 
-            <div className='lg:px-[80px] lg:max-w-[1000px] lg:pb-[150px]'>
+            <div className='lg:px-[80px] lg:max-w-[1200px] lg:pb-[10px]'>
                <div className=''>
-               <div className=' flex items-center mb-2'>
-                  <h3 className='text-4xl font-semibold mb-2.5'> All Activities </h3>
-                  <p className='pl-7'><img src={Arrow} alt="" /></p>
+                  <div className=' flex items-center mb-2'>
+                     <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   <Filterbar items={filterItems} onChange={onChange} />
                </div>
@@ -238,26 +248,49 @@ export default function Activities() {
 
                   {filteredActivities.map((activity, indx) => {
                      return (
-                        <div key={indx} className='mb-8' >
-                           <div className='flex items-center mb-3'>
+                        activity.categories?.length > 0 ?
+                        <div key={indx} className='mb-8 lg:mb-[60px]' >
+                           <div className='flex items-center mb-3  lg:mb-[48px]'>
                               <img src={activity.icon} alt='activity' />
-                              <p className='ml-2 text-2xl font-semibold'> {activity.name} </p>
+                              <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
                            </div>
-                           <div className='grid grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-3'>
-                              {activity.categories.map((category, idx) => {
-                                 return <div key={idx} className={styles.activity}
-                                    onClick={() => navigate(`/activities/${category.id}`)} >
-                                    <img src={category.icon} alt='activity-type' />
-                                    <p className='mt-2  font-semibold text-center'>
-                                       {category.name} </p>
+                              <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
+                              {activity.categories.map((category, idx) => (
+                                 <div key={category.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
+                                    onClick={() => navigate(`/activities/${category.id}`)}>
+                                    <p><img src={category.icon} alt="" /></p>
+                                    {
+                                       category?.name.length <= '17' ?
+                                          <p className='text-center pt-2 font-semibold text-sm'
+                                          // style={{ color: activity?.color }}
+                                          >{category?.name}</p>
+                                          : <p className='text-center pt-2 font-semibold text-xs'
+                                          // style={{ color: activity?.color }}
+                                          >{category?.name}</p>
+                                    }
                                  </div>
-                              })}
+                  ))}
                            </div>
-                        </div>
+                        </div> :
+                        <></>
                      )
                   })}
+                  {
+                     filteredActivities.length === 1 && filteredActivities[0]?.categories?.length === 0 &&
+                     <div className='min-h-[100px] flex items-center justify-center'>
+                        <p className='text-lightGray font-medium lg:text-end lg:text-[24px]'>
+                           No activities added yet
+                        </p>
+                     </div>
+                  }
                </div>
 
+            </div>
+            <div className='flex justify-end px-4 lg:px-[80px] pb-[60px] lg:pb-100px'>
+               <div className='flex flex-col items-center'>
+                  <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
+                  <p> scroll to top </p>
+               </div>
             </div>
          </div>
       </div>

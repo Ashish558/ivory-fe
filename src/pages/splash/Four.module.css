@@ -1,82 +1,88 @@
-.fullscreen{
-    height: 865px;
-    width: 100%;
-    /* background-color: aqua; */
+.fullscreen {
+  /* height: 799px; */
+  width: 100%;
+  /* background-color: aqua; */
 }
-.imgup{
-    height: 494px;
-    width: 100%;
+.imgup {
+  width: 100%;
 }
-.down{
-    height: 367px;
-    width: 100%;
-    background: linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%),
-linear-gradient(0deg, #D9D9D9, #D9D9D9);
-box-shadow: 2px 4px 45px 0px #00000099;
-border-radius: 48px 48px 0px 0px;
-position: absolute;
-top: 434px;
-}   
-.head{
-    position: absolute;
-    top: 20%;
-    left:22%;
-    font-weight: 500;
-    width: 56%;
-    text-align: center;
-    font-size: 30px;
+.down {
+  height: 320px;
+  width: 100%;
+  background: linear-gradient(
+      180deg,
+      rgba(0, 85, 191, 0.8) 1.84%,
+      rgba(89, 227, 255, 0.8) 130.78%
+    ),
+    linear-gradient(0deg, #d9d9d9, #d9d9d9);
+  box-shadow: 2px 4px 45px 0px #00000099;
+  border-radius: 48px 48px 0px 0px;
+  position: absolute;
+  /* top: 461px;
+   */
+   bottom: 0;
 }
-.head>p{
-    color: #D7FFFD;
+.head {
+  position: absolute;
+  top: 20%;
+  left: 22%;
+  font-weight: 900;
+  width: 56%;
+  text-align: center;
+  font-size: 26px;
 }
-.circles{ 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* background-color: aqua; */
-    align-Items: 'center';
-    width: 20%;
-    position: relative;
-    top: 65%;
-    left: 38%;
+.head > p {
+  color: #d7fffd;
+}
+.circles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* background-color: aqua; */
+  align-items: "center";
+  width: 20%;
+  position: relative;
+  top: 65%;
+  left: 38%;
 }
 .CircleShape1 {
-    width: 13px;
-    height: 13px;
-    border-radius: 30px;
-    background-color:  #A2C3EC;
-    margin-bottom:24%;
-  }
-.CircleShape2{
-    width: 13px;
-    height: 13px;
-    border-radius: 30px;
-    background-color: #A2C3EC;
-    margin-bottom:24%;
-  }
-.CircleShape3{
-    width: 13px;
-    height: 13px;
-    border-radius: 30px;
-    background-color: #A2C3EC;
-    margin-bottom:24%;
-  }
-.CircleShape4{
-    width: 13px;
-    height: 13px;
-    border-radius: 30px;
-    background-color: #004499;
-    margin-bottom:24%;
-  }
-  .button{
-    height: 46px;
-    width: 90%;
-    position: relative;
-    top: 72%;
-    left: 6%;
-    background: linear-gradient(0deg, #0969DA, #0969DA), linear-gradient(0deg, #47A8FF, #47A8FF);
-    box-shadow: 0px 0px 10px 0px #86f8ff2e;
-    border: 1px solid #47A8FF;
-    border-radius: 31px;
-    cursor: pointer;
-  }
+  width: 13px;
+  height: 13px;
+  border-radius: 30px;
+  background-color: #a2c3ec;
+  margin-bottom: 24%;
+}
+.CircleShape2 {
+  width: 13px;
+  height: 13px;
+  border-radius: 30px;
+  background-color: #a2c3ec;
+  margin-bottom: 24%;
+}
+.CircleShape3 {
+  width: 13px;
+  height: 13px;
+  border-radius: 30px;
+  background-color: #a2c3ec;
+  margin-bottom: 24%;
+}
+.CircleShape4 {
+  width: 13px;
+  height: 13px;
+  border-radius: 30px;
+  background-color: #004499;
+  margin-bottom: 24%;
+}
+.button {
+  height: 46px;
+  width: 90%;
+  position: relative;
+  top: 72%;
+  left: 6%;
+  background: linear-gradient(0deg, #0969da, #0969da),
+    linear-gradient(0deg, #47a8ff, #47a8ff);
+  box-shadow: 0px 0px 10px 0px #86f8ff2e;
+  border: 1px solid #47a8ff;
+  border-radius: 31px;
+  cursor: pointer;
+}

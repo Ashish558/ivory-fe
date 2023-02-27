@@ -1,0 +1,17 @@
+/* .container{
+   background: linear-gradient(308.27deg, rgba(89, 227, 255, 0.5) -18.07%, rgba(0, 85, 191, 0.5) 156.33%);
+} */
+
+.backgroundImage {
+   position: absolute;
+   top: 64px;
+   left: 0;
+   width: 100%;
+   height: 600px;
+   z-index: -1;
+}
+@media only screen and (max-width: 982px) {
+   .backgroundImage {
+      display: none;
+   }
+}

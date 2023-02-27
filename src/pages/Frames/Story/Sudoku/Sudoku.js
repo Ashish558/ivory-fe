@@ -12,7 +12,7 @@ import { getAuthHeaders } from '../../../../services/constants';
 
 
 
-export default function Sudoku({ image, answer_image, answer_viewed, type, url, updateStory }) {
+export default function Sudoku({ image, answer_image, answer_viewed, type, url, updateStory, help_link, help_text }) {
 
 
    const [answerActive, setAnswerActive] = useState(false)
@@ -45,14 +45,17 @@ export default function Sudoku({ image, answer_image, answer_viewed, type, url, 
          </div>
 
          <div className={`${styles.sudokuBottom}  lg:row-span-2`}>
-            <div className={styles.helpContainer}>
-               <p className='text-[#001C38] font-semibold pr-3 flex-1'>
-                  Need help? <br></br> Check how to play Sudoku
-               </p>
-               <div className='flex'>
-                  <img src={PlayIcon} alt='play' />
+            {
+               help_link !== null &&
+               <div className={styles.helpContainer}>
+                  <p className='text-[#001C38] font-semibold pr-3 flex-1'>
+                     {help_text} <br></br>
+                  </p>
+                  <div className='flex' onClick={() => window.open(help_link)} >
+                     <img src={PlayIcon} alt='play' />
+                  </div>
                </div>
-            </div>
+            }
             <button className='flex justify-around items-center w-full'
                onClick={() => setAnswerActive(!answerActive)} >
                {

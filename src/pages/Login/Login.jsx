@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import loginMan from "../../assets/images/login/loginMan.png";
-import SignupTree from "../../assets/images/login/signupTree.png";
+import { Link,useNavigate } from 'react-router-dom';
+import Slider from "react-slick";
 import logo from "../../assets/images/login/logolight.png";
+import SignupTree from "../../assets/images/login/signupTree.png";
 import { sendOtp } from '../../services/auth';
 import styles from "./Login.module.css";
-import Slider from "react-slick";
 
 const settings = {
   infinite: true,
@@ -16,7 +15,6 @@ const settings = {
   swipeToSlide: true,
   autoplay: true,
   autoplaySpeed: 2000,
-  // dots: true,
   afterChange: function (index) {
     console.log(
       `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -25,22 +23,17 @@ const settings = {
 };
 
 const sliderData = [
+
   {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
-    img: loginMan,
-    imgClassName: ''
-  },
-  {
-    textPrimary: 'Engage',
-    textSec: 'in interests that sharpen your mind',
+    textPrimary: "Accomplish",
+    textSec: "your creative goals",
     img: SignupTree,
-    imgClassName: 'max-w-[270px]'
+    imgClassName: "max-w-[270px]",
   },
-]
+];
 const Login = () => {
   const navigate = useNavigate();
-  const [phone, setPhone] = React.useState(null);
+  const [phone, setPhone] = React.useState('');
   const [error, setError] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+880");
 
@@ -51,10 +44,8 @@ const Login = () => {
       setError("Phone number must be 11 digits");
     } else if (phone.length > 10) {
       setError("Phone number cannot be more than 11 digits");
-    } else if (typeof phone !== "number") {
-      console.log(typeof phone);
-      setError("Phone number must be a number");
-    } else {
+    } 
+    else {
       setCountryCode(e.target.countryCode.value);
       const body = {
         country_code: countryCode,
@@ -74,16 +65,10 @@ const Login = () => {
     }
   }
   return (
-    <div className="overflow-x-hidden bg-[#EEFDFC]">
-      {/* <div className="topAppBar mt-10 ml-8 sm:hidden">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <img src={back} alt="" onClick={goBack} />
-            </div>
-          </div>
-        </div> */}
+    <div className="overflow-x-hidden bg-[#EEFDFC] overflow-hidden h-screen">
+      
 
-      <div className="sm:flex h-screen  min-h-[667px] overflow-y-auto  justify-around  w-screen mt-16 sm:m-0">
+      <div className="sm:flex  min-h-[667px] overflow-hidden  justify-around  w-screen mt-16 sm:m-0">
         <div className="topAppBar mt-10 ml-8 sm:hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-end justify-end content-end w-full">
@@ -97,7 +82,7 @@ const Login = () => {
           </div>
         </div>
         <div
-          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw]"
+          className="hidden sm:flex flex flex-col items-center min-h-screen h-full sm:w-[40vw] overflow-hidden"
           style={{
             background:
               "linear-gradient(180deg, rgba(0, 85, 191, 0.8) 1.84%, rgba(89, 227, 255, 0.8) 130.78%)",
@@ -134,19 +119,19 @@ const Login = () => {
         <div className="  h-screen sm:w-[60vw] mt-10 sm:mt-0 sm:flex sm:flex-col sm:items-center sm:justify-center">
           <form
             onSubmit={(e) => handleSubmit(e)}
-            className="sm:w-[300px] mx-auto sm:flex sm:flex-col sm:justify-start"
+            className="sm:w-[328px] mx-auto sm:flex sm:flex-col sm:justify-start"
           >
             <h1 className="text-3xl font-bold ml-8 sm:ml-0 sm:text-left">
               &#128075; Hi, <br /> Welcome to Ivory!
             </h1>
-            <div class="w-full sm:w-[300px] mx-auto mt-10 relative">
+            <div class="w-full sm:w-[328px] mx-auto lg:mt-6 mt-10 relative">
               <input
-                class=" w-10/12 sm:w-[300px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
+                class=" w-10/12 sm:w-[328px]  px-4 py-4 sm:py-3 mt-2 text-gray-700 bg-white border-2  border-blue-500 placeholder-gray-400  focus:ring-opacity-40 focus:outline-none   justify-center flex mx-auto  rounded-xl pl-16 text-lg"
                 // type="tel"
-                type={JSON.stringify(phone)?.length < 10 ? "number" : "text"}
+                type={JSON.stringify(phone)?.length < 10 ? "number" : "number"}
                 maxLength="10"
                 // pattern='[0-9]{11}'
-                onChange={(e) => setPhone(parseInt(e.target.value))}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="Phone Number"
                 required
               />
@@ -155,7 +140,7 @@ const Login = () => {
                 name="countryCode"
                 id=""
                 style={{ appearance: "none" }}
-                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-lg"
+                className=" border-r-2 border-blue-500 px-1 absolute top-5 sm:top-6 left-[10%] sm:left-4 pl-1 text-blue-600 text-[16px]"
               >
                 <option value="+91" selected>
                   +91
@@ -164,36 +149,34 @@ const Login = () => {
               </select>
             </div>
             <div class="flex items-center justify-between mt-4">
-              {JSON.stringify(phone).length === 10 ?
+              {phone.length === 10 ?
                 (
                   <button
                     type="submit"
-                    className="bg-[#1B72C0] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5"
+                    className="bg-[#1B72C0] flex items-center lg:h-[43px] text-xl py-2 lg:text-sm font-semibold px-20 rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 lg:w-full"
                   >
                     Continue
                   </button>
                 ) : (
-                  <button
-
-
-                    className="bg-[#B5CFEC] text-xl py-2 px-20 rounded-full text-white w-10/12 sm:w-auto text-center justify-center flex mx-auto mt-5 mb-5" disabled
-                  >
-                    Continue
-                  </button>
-                )}
-            </div>
-            <div className=" text-center w-[300px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
-              By clicking continue, I accept the{" "}
-              <Link to="/" className="text-black font-bold underline">
-                terms of service
-              </Link>{" "}
-              and{" "}
-              <Link to="/" className="text-black font-bold underline">
-                {" "}
-                privacy policy
-              </Link>
-            </div>
-          </form>
+                <button       
+                  className="bg-[#B5CFEC] flex items-center lg:h-[43px]  text-xl py-2 px-20 lg:text-sm font-semibold rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 mb-5" disabled
+                >
+                  Continue
+                </button>
+              )}
+              </div>
+              <div className="lg:text-xs lg:text-left text-center w-[328px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
+                By clicking continue, I accept the{" "}
+                <Link to="/" className="text-black font-bold underline">
+                  terms of service
+                </Link>{" "}
+                and{" "}
+                <Link to="/" className="text-black font-bold underline">
+                  {" "}
+                  privacy policy
+                </Link>
+              </div>
+            </form>
           <div
             className=" text-[11px] text-center w-[400px] text-gray-500 px-1 mt-5 mb-5 sm:hidden"
             style={{

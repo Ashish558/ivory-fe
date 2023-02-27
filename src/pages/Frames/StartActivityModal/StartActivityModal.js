@@ -19,6 +19,7 @@ export default function StartActivityModal({ handleClose, activityId, setIsAlrea
       startActivity(activityId)
       .then(res => {
          console.log('start resp', res);
+         alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
          setIsAlreadyStarted(true)
          fetchUserActivities()
          handleClose()
@@ -30,18 +31,13 @@ export default function StartActivityModal({ handleClose, activityId, setIsAlrea
    }
 
    return (
-      <Modal
-         classname='max-w-[343px] sm:max-w-[500px] sm:h-[350px] rounded-3xl pt-0 pl-0 pr-0'
+      <Modal handleClose={handleClose}
+         title='Free Activity unlocked!'
+         classname='max-w-[343px] sm:max-w-[500px] sm:h-[300px] rounded-3xl pt-0 pl-0 pr-0'
          body={
             <div>
-               <div className='flex items-center py-4 px-4 bordr border-b border-[#CED4DA]'>
-                  <img src={BackIcon} alt='back' onClick={handleClose} />
-                  <p className='font-bold flex-1 text-center sm:text-2xl'>
-                     🎉 Congratulations!
-                  </p>
-               </div>
                <div className='px-4 font-normal	mt-6 sm:text-xl sm:px-8 sm:flex sm:flex-col sm:justify-between'>
-                  <p>You have unlocked {profileData.remaining_activities ? profileData.remaining_activities : '(x)'} free activities. Take advantage of this opportunity and start one for free today. Don't miss out!</p> 
+                  <p>You have unlocked {profileData.remaining_activities ? profileData.remaining_activities : '(x)'} free activities. Start one day</p> 
                   <div className='flex justify-end mt-12 sm:absolute sm:bottom-5 sm:right-5'>
                      <button className='text-primary px-8 py-2.5 font-semibold mr-1'
                         onClick={handleClose}>

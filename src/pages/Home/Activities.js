@@ -74,7 +74,7 @@ const Activities = () => {
    useEffect(() => {
       getCategories()
          .then(res => {
-            console.log('categories', res.data.data);
+            // console.log('categories', res.data.data);
             if (res.data.data === null) return
             let data = res.data.data.filter(item => item.is_recommended === true)
             setActivities(data)
@@ -102,9 +102,12 @@ const Activities = () => {
                         <p><img src={activity.icon} alt="" /></p>
                         {
                            activity?.name.length <= '17' ?
-
-                              <p className='text-center pt-2 font-semibold text-sm' style={{ color: activity?.color }}>{activity?.name}</p>
-                              : <p className='text-center pt-2 font-semibold text-xs' style={{ color: activity?.color }}>{activity?.name}</p>
+                              <p className='text-center pt-2 font-semibold text-sm' 
+                              // style={{ color: activity?.color }}
+                              >{activity?.name}</p>
+                              : <p className='text-center pt-2 font-semibold text-xs' 
+                              // style={{ color: activity?.color }}
+                              >{activity?.name}</p>
                         }
                      </div>
                   )
