@@ -110,18 +110,26 @@ export default function Story(props) {
    }
    const shareStory = () => {
       // console.log('image', image);
+      fetch(image, {mode: 'cors'})
+         .then(async response => {
+            const contentType = response.headers.get('content-type')
+            const blob = await response.blob()
+            const file = new File([blob], 'filname.jpg', { contentType })
+            console.log('file', file);
+         })
       if (image !== null) {
          convertLinkToDataUrl(image, (res) => {
             console.log('base64', res);
             if (!res) return share(false)
             var fileData = dataURLtoFile(res, "ivory-story.jpg");
             console.log("Here is JavaScript File Object", fileData)
-            share(true, fileData)
+            // share(true, fileData)
+            share(true, res)
          })
       } else {
          if (navigator.share) {
             navigator.share({
-               title: 'Ivory Story',
+               title: share_message !== null ? share_message : 'Ivory Story',
                text: share_message !== null ? share_message : 'Ivory Story',
                url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
             }).then(() => console.log('Successful share'))
@@ -133,7 +141,7 @@ export default function Story(props) {
    const share = (isFile, image) => {
       if (navigator.share) {
          navigator.share({
-            title: 'Ivory Story',
+            title: share_message !== null ? share_message : 'Ivory Story',
             text: share_message !== null ? share_message : 'Ivory Story',
             url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
             ...(isFile && { files: [image] })

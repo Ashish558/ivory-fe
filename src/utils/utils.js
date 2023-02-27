@@ -91,13 +91,14 @@ export function isValidYoutubeLink(val) {
    }
 }
 
-export const toDataURL = url => fetch(url)
+export const toDataURL = (url, cb) => fetch(url)
    .then(response => response.blob())
    .then(blob => new Promise((resolve, reject) => {
       const reader = new FileReader()
       reader.onloadend = () => resolve(reader.result)
       reader.onerror = reject
       reader.readAsDataURL(blob)
+      cb(blob)
       console.log('blob', blob);
    }))
 
