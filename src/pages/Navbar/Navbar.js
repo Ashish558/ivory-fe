@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import BackIcon from '../../assets/icons/go-back.svg';
@@ -14,6 +14,7 @@ import User from '../../Images/profile-pic.jfif';
 import programs from '../../Images/programs.png';
 import sessions from '../../Images/sessions.png';
 import Logo from '../../Images/形状.png';
+import Evening from '../../Images/evening.svg';
 import './Navbar.css';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,11 +32,20 @@ const Navbar = () => {
    const dispatch = useDispatch()
    const location = useLocation()
    const { loggedIn, profileData } = useSelector(state => state.user)
-
+   const [isMorning, setIsMorning] = useState(true)
    const toggleDrawer = () => {
       setIsOpen((prevState) => !prevState)
    }
 
+   useEffect(() => {
+      let hours = new Date().getHours()
+      // console.log(date.getHours());
+      if (hours > 5) {
+         setIsMorning(false)
+      } else {
+         setIsMorning(true)
+      }
+   }, [])
    const handleLogout = () => {
       if (loggedIn) {
          localStorage.clear()
@@ -55,8 +65,16 @@ const Navbar = () => {
                basePaths.includes(location.pathname) ?
 
                   <div className="flex items-center normal-case text-lg  welcome-color">
-                     <p className='pr-1 pl-2'>   <img src={Logo} alt="" /></p>
-                     <p className=' font-bold text-sm'>Welcome {loggedIn && ","} </p>
+                     <p className='pr-1 pl-2'>
+                        <img src={isMorning ? Logo : Evening} alt="" />
+                     </p>
+                     {
+                        loggedIn && isMorning === false ?
+                           <div  className=' font-bold text-sm ml-1'>
+                              Good Evening,
+                           </div> :
+                           <p className=' font-bold text-sm'>Welcome {loggedIn && ","} </p>
+                     }
                      <p className='pl-2  name text-sm'>   {profileData.name ? profileData.name : ''}</p>
                   </div> :
                   <img src={BackIcon} alt='back' className='p-2 cursor-pointer'

@@ -113,17 +113,16 @@ export default function Story(props) {
    }
    const shareStory = () => {
       console.log('image', image);
-
-      html2canvas(imageRef.current, {
-         allowTaint: true,
-         useCORS: true,
-      }).then(function (canvas) {
-         canvas.getContext("2d");
-         var imgData = canvas.toDataURL("image/jpeg", 1.0);
-         console.log('imgData', imgData);
-         const file = new File([imgData], 'filname.jpg',)
-         console.log('file', file);
-      });
+      // html2canvas(imageRef.current, {
+      //    allowTaint: true,
+      //    useCORS: true,
+      // }).then(function (canvas) {
+      //    canvas.getContext("2d");
+      //    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+      //    console.log('imgData', imgData);
+      //    const file = new File([imgData], 'filname.jpg',)
+      //    console.log('file', file);
+      // });
       // const options = {
       //    method: 'GET',
       //    headers: new Headers({ 'content-type': 'text/html' }),
@@ -136,7 +135,7 @@ export default function Story(props) {
       //       const file = new File([blob], 'filname.jpg', { contentType })
       //       console.log('file', file);
       //    })
-      if (image !== null) {
+      if (image !== null && image === null) {
          convertLinkToDataUrl(image, (res) => {
             console.log('base64', res);
             if (!res) return share(false)
