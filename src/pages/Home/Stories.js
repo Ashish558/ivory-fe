@@ -104,7 +104,6 @@ const Stories = () => {
    }
 
    const getType = (url) => {
-      console.log('url', url);
       if (url === 'image-stories') {
          return 'image'
       } else if (url === 'video-stories') {
@@ -134,8 +133,6 @@ const Stories = () => {
                   type: getType(story.url.split('/')[5])
                })
             })
-            console.log('allStories', allStories)
-
             // allStories = [...allStories,
             // ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
             // ...resdata.mcq_stories.map(story => ({ ...story, type: 'mcq' })),

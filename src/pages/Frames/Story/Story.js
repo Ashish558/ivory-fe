@@ -121,6 +121,8 @@ export default function Story(props) {
          canvas.getContext("2d");
          var imgData = canvas.toDataURL("image/jpeg", 1.0);
          console.log('imgData', imgData);
+         const file = new File([imgData], 'filname.jpg',)
+         console.log('file', file);
       });
       // const options = {
       //    method: 'GET',
