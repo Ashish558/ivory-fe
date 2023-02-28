@@ -123,20 +123,20 @@ export default function Story(props) {
       //    const file = new File([imgData], 'filname.jpg',)
       //    console.log('file', file);
       // });
-      const options = {
-         mode: 'no-cors'
-      }
-      const fetch = async () => {
-         let response = await fetch(image);
-         let data = await response.blob();
-         let metadata = {
-            type: 'image/jpeg'
-         };
-         let file = new File([data], "test.jpg", metadata);
-         console.log('fetchres', file);
-      }
-      fetch()
-      if (image !== null) {
+      // const options = {
+      //    mode: 'no-cors'
+      // }
+      // const fetch = async () => {
+      //    let response = await fetch(image);
+      //    let data = await response.blob();
+      //    let metadata = {
+      //       type: 'image/jpeg'
+      //    };
+      //    let file = new File([data], "test.jpg", metadata);
+      //    console.log('fetchres', file);
+      // }
+      // fetch()
+      if (image !== null && image === null) {
          convertLinkToDataUrl(image, (res) => {
             console.log('base64', res);
             if (!res) return share(false)
