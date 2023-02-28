@@ -34,29 +34,49 @@ export default function Story(props) {
    const imageRef = useRef()
 
    const [touchStart, setTouchStart] = useState(null)
+   const [touchStartY, setTouchStartY] = useState(null)
+
    const [touchEnd, setTouchEnd] = useState(null)
+   const [touchEndY, setTouchEndY] = useState(null)
 
    // the required distance between touchStart and touchEnd to be detected as a swipe
-   const minSwipeDistance = 50
+   const minSwipeDistance = 100
 
    const onTouchStart = (e) => {
+      // console.log(e);
       setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
       setTouchStart(e.targetTouches[0].clientX)
+      setTouchStartY(e.targetTouches[0].clientY)
    }
 
-   const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
-
+   const onTouchMove = (e) => {
+      setTouchEnd(e.targetTouches[0].clientX)
+      setTouchEndY(e.targetTouches[0].clientY)
+   }
    const onTouchEnd = () => {
       if (!touchStart || !touchEnd) return
       const distance = touchStart - touchEnd
       const isLeftSwipe = distance > minSwipeDistance
       const isRightSwipe = distance < -minSwipeDistance
+
+      const distanceX = touchStart - touchEnd
+      const distanceY = touchStartY - touchEndY
+      // console.log(distanceX);
+      // console.log(distanceY);
+      // const isLeftSwipe = distanceX > minSwipeDistance
+      // const isRightSwipe = distanceX < -minSwipeDistan
       if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
-      if (isLeftSwipe) {
+      if (isRightSwipe && Math.abs(distanceX) > distanceY) {
          selectNextStory()
-      } else {
+      }
+      if (isLeftSwipe && distanceX > distanceY) {
          selectPrevStory()
       }
+      // if (isLeftSwipe) {
+      //    selectNextStory()
+      // } else {
+      //    selectPrevStory()
+      // }
       // add your conditional logic here
    }
 
