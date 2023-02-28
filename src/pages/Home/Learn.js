@@ -216,12 +216,12 @@ const Learn = () => {
          <div className="bg-sky-50 lg:bg-white p-5">
             <h1 className='text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-1 text-gray-400 lg:hidden block font-medium'> what would you like to learn today?</span>
-            <div className=" w-full flex justify-around lg:bg-white mt-5" >
+            <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
                <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px] ${myPrograms === false && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(false)} >Programs</button>
                <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px]  ${myPrograms && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(true)}>My Program</button>
             </div>
          </div>
-         <h1 className='text-2xl font-semibold hidden lg:block ml-4'>Welcome Sahil ji! <span className='text-lg font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+         <h1 className='text-[32px] font-semibold hidden lg:block ml-4'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
 
          <div className="mx-3">
             <AcivityContent>
@@ -259,10 +259,10 @@ const Learn = () => {
             </div>
          }
 
-         <div className="px-5">
+         <div className="px-5 sm:w-full sm:overflow-hidden">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3  mt-50 overflow-x-scroll" >
+         <div className="lg:grid lg:grid-cols-3  mt-50 overflow-x-scroll lg:overflow-hidden" >
             {myPrograms ?
                userProgramsFiltered.map((item,index) => (
                   <ProgramCard key={item.id} {...item.program}

@@ -1,10 +1,11 @@
-.activityContent {
-   padding: 12px 12px;
+/* .activityContent {
+
    background:#BDF4FF;
-border: 2px solid #b8e2ec;
+border: 2px solid #b8e2ec; */
 /* border-image-source: linear-gradient(180deg, rgba(0, 85, 191, 0.5) 1.84%, rgba(89, 227, 255, 0.5) 130.78%); */
-   border-radius: 24px;
-}
+   /* border-radius: 24px;
+   height: 164px;
+} */
 
 .playIcon {
    position: absolute;

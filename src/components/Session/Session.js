@@ -23,10 +23,10 @@ export default function Session({ id,name,image,scheduled_on,host,scrollToTop })
       }
    }
    return (
-      <div className=' rounded-3xl overflow-hidden bg-secondary max-w-[220px] lg:max-w-[348px] northArrow relative'
+      <div className=' rounded-3xl lg:rounded-[48px] overflow-hidden bg-secondary max-w-[220px] lg:max-w-[348px] northArrow relative'
          onClick={handleClick}>
          <div className={`${styles.imgContainer} relative`}>
-            <img src={liveSessionCard} className='object-cover  w-[100%] h-[180px]' alt='session' />
+            <img src={liveSessionCard} className='object-cover  w-[100%] h-[180px] lg:h-[228px]' alt='session' />
             <span className='bg-[#DD1D43] p-1 rounded-full text-white px-3 absolute top-5 right-5 z-30 '>o Live</span>
 
          </div>
