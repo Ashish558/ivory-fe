@@ -6,7 +6,7 @@ import { startActivity } from '../../../services/user'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export default function StartActivityModal({ handleClose, activityId, setIsAlreadyStarted, fetchUserActivities, profileData, fetchUserDetails }) {
+export default function StartActivityModal({ handleClose, activityId, setIsAlreadyStarted, fetchUserActivities, profileData, fetchUserDetails, startBtnLoading }) {
 
    const { loggedIn } = useSelector(state => state.user)
    const navigate = useNavigate()
@@ -45,6 +45,7 @@ export default function StartActivityModal({ handleClose, activityId, setIsAlrea
                      </button>
                      <PrimaryButton children='Start now'
                         onClick={handleStartActivity}
+                        loading={startBtnLoading} 
                      />
 
                   </div>

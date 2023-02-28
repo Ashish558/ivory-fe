@@ -65,6 +65,7 @@ export default function StartActivity({ fetchUserDetails }) {
    const videoRef = useRef(null)
    const [shareModalOpen, setShareModalOpen] = useState(false)
    const [startActivityModalActive, setStartActivityModalActive] = useState(false)
+   const [startBtnLoading, setStartBtnLoading] = useState(false)
 
    const { categoryId, activityId } = useParams()
    const navigate = useNavigate()
@@ -258,16 +259,19 @@ export default function StartActivity({ fetchUserDetails }) {
          navigate('/login')
          return
       }
+      setStartBtnLoading(true)
       startActivity(activityId)
          .then(res => {
+            setStartBtnLoading(false)
             console.log('start resp', res);
             // alert('Activity started!')
             // alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
-            setStartActivityModalActive(true)
+            setStartActivityModalActive(false)
             setIsAlreadyStarted(true)
             fetchUserActivities()
             fetchUserDetails()
          }).catch(err => {
+            setStartBtnLoading(false)
             console.log('start err', err.response.data);
             if (err.response.data.status_code === 406) {
                alert('You have reached free activity limit')
@@ -522,7 +526,11 @@ export default function StartActivity({ fetchUserDetails }) {
             isAlreadyStarted === false && startModalActive === false && shareModalOpen === false && startActivityModalActive === false &&
             <div className={styles.startActivityFooter}>
                <div className='max-w-[328px] mx-auto'>
-                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'} onClick={() => setStartActivityModalActive(true)} className='w-full pt-2.5 pb-2.5' />
+                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'} 
+                  onClick={() => setStartActivityModalActive(true)} 
+                  className='w-full pt-2.5 pb-2.5'
+                 
+                  />
                </div>
             </div>
          }
@@ -533,7 +541,8 @@ export default function StartActivity({ fetchUserDetails }) {
                setIsAlreadyStarted={setIsAlreadyStarted}
                fetchUserActivities={fetchUserActivities}
                profileData={profileData}
-               fetchUserDetails={fetchUserDetails} />
+               fetchUserDetails={fetchUserDetails}
+               startBtnLoading={startBtnLoading} />
          }
          {
             viewSubModal &&
@@ -561,6 +570,7 @@ export default function StartActivity({ fetchUserDetails }) {
                            </button>
                            <PrimaryButton children='Start now'
                               onClick={() => { handleStartActivity(); }}
+                              loading={startBtnLoading}
                            />
                         </div>
                      </div>
