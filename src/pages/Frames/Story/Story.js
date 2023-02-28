@@ -33,6 +33,33 @@ export default function Story(props) {
 
    const imageRef = useRef()
 
+   const [touchStart, setTouchStart] = useState(null)
+   const [touchEnd, setTouchEnd] = useState(null)
+
+   // the required distance between touchStart and touchEnd to be detected as a swipe
+   const minSwipeDistance = 50
+
+   const onTouchStart = (e) => {
+      setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+      setTouchStart(e.targetTouches[0].clientX)
+   }
+
+   const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+   const onTouchEnd = () => {
+      if (!touchStart || !touchEnd) return
+      const distance = touchStart - touchEnd
+      const isLeftSwipe = distance > minSwipeDistance
+      const isRightSwipe = distance < -minSwipeDistance
+      if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
+      if (isLeftSwipe) {
+         selectNextStory()
+      } else {
+         selectPrevStory()
+      }
+      // add your conditional logic here
+   }
+
    const hideHtmlOverflow = () => {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
@@ -111,6 +138,7 @@ export default function Story(props) {
             console.log('dislike err', err.data);
          })
    }
+
    const shareStory = () => {
       console.log('image', image);
       // html2canvas(imageRef.current, {
@@ -178,7 +206,10 @@ export default function Story(props) {
       <>
 
          <div className={styles.modalContainer}>
-            <div className="w-full p-0  self-stretch overflow-aut">
+            <div className="w-full p-0  self-stretch overflow-aut"
+               onTouchStart={onTouchStart}
+               onTouchMove={onTouchMove}
+               onTouchEnd={onTouchEnd}>
                <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
                   <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full ' : ''} `}>
 
