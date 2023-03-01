@@ -26,20 +26,29 @@ import SliderCards from '../../components/SliderCards/SliderCards';
 
 const LoggedInHome = () => {
 
-    const user = useSelector(state => state.user)
+    const { profileData } = useSelector(state => state.user)
     const location = useLocation()
     const navigate = useNavigate()
     const [banners, setBanners] = useState([])
+
+    // console.log('profileData', profileData);
 
     useEffect(() => {
         getHomeBanners()
             .then(res => {
                 if (res.data.data === null) return
                 let tempbanners = res.data.data
-                //  let homeBanners = res.data.data.filter(item => item.location_link === location.pathname)
-                setBanners(res.data.data)
+                tempbanners = tempbanners.map(banner => {
+                    if(banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0 ){
+                        return 
+                    }else{
+                        return banner
+                    }
+                }).filter(item => item !== undefined)
+                // console.log('tempbanners', tempbanners);
+                setBanners(tempbanners)
             })
-    }, [location.pathname])
+    }, [location.pathname, profileData])
 
     // console.log('banners', banners);
     return (

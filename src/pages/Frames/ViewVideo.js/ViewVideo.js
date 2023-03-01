@@ -19,6 +19,14 @@ export function ViewVideo({ handleClose, source }) {
       };
    }, [source])
 
+   const onBack = () => handleClose()
+   useEffect(() => {
+      window.addEventListener('popstate', onBack, false);
+      window.history.pushState(null, null, window.location.pathname);
+      return () => {
+         window.removeEventListener('popstate', onBack)
+      }
+   }, [])
 
    return (
       <div className={styles.modalContainer}>
