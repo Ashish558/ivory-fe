@@ -47,6 +47,7 @@
       justify-content: center;
       overflow: auto;
       padding: 0 4px;
+      align-items: center;
    }
 
    .storyVideo video {
@@ -77,5 +78,8 @@
    .storyVideo video {
       /* height: 500px; */
       flex-shrink: 0;
+   }
+   .storyVideoYoutube{
+      width: 600px;
    }
 }

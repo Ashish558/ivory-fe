@@ -29,8 +29,6 @@ export function ViewVideo({ handleClose, source }) {
                ?
                <div className={`${styles.storyVideo} ${styles.storyVideoYoutube}`}>
                   <ReactPlayer
-                     width='300px'
-                     height='500px'
                      url={source}
                      controls={true}
                   />
