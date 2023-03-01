@@ -21,7 +21,7 @@ import Sudoku from './Sudoku/Sudoku';
 import ReactPlayer from 'react-player';
 import { convertLinkToDataUrl, dataURLtoFile, isValidYoutubeLink, toDataURL } from '../../../utils/utils';
 
-const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
+const types = ['image', 'video', 'mcq', 'mcq2', 'puzzle', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
 export default function Story(props) {
@@ -263,7 +263,7 @@ export default function Story(props) {
                               <Mcq {...story} {...storyProps} />
                               : storyType === 'mcq2' ?
                                  <Mcq2  {...story} {...storyProps} />
-                                 : storyType === 'sudoku' ?
+                                 : storyType === 'puzzle' ?
                                     <Sudoku {...story} updateStory={updateStory} />
                                     : storyType === 'qna' ?
                                        <QnA {...story} updateStory={updateStory} {...storyProps} />

@@ -113,7 +113,7 @@ const Stories = () => {
       } else if (url === 'qna-stories') {
          return 'qna'
       } else if (url === 'puzzle-stories') {
-         return 'sudoku'
+         return 'puzzle'
       } else {
          return 'image'
       }
@@ -136,7 +136,7 @@ const Stories = () => {
             // allStories = [...allStories,
             // ...resdata.image_stories.map(story => ({ ...story, type: 'image' })),
             // ...resdata.mcq_stories.map(story => ({ ...story, type: 'mcq' })),
-            // ...resdata.puzzle_stories.map(story => ({ ...story, type: 'sudoku' })),
+            // ...resdata.puzzle_stories.map(story => ({ ...story, type: 'puzzle' })),
             // ...resdata.qna_stories.map(story => ({ ...story, type: 'qna' })),
             // ...resdata.video_stories.map(story => ({ ...story, type: 'video' }))
             // ]

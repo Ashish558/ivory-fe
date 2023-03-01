@@ -73,7 +73,7 @@ export const getStoryUrl = type => {
       return 'mcq-stories'
    } else if (type === 'image') {
       return 'image-stories'
-   } else if (type === 'sudoku') {
+   } else if (type === 'puzzle') {
       return 'puzzle-stories'
    } else if (type === 'qna') {
       return 'qna-stories'
