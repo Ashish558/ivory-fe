@@ -85,7 +85,7 @@ const Profile = () => {
     let tempInt = allInterests.filter(item => item.selected === true)
     setUserInterests(tempInt)
   },[allInterests])
-
+console.log('userInterests',userInterests);
   let intIds = interest.map(item => item.id)
 
 
@@ -307,7 +307,16 @@ const Profile = () => {
                     </div>
                     :
                     <div className='h-[58px]  sm:w-[58%] py-3 flex flex-wrap items-center gap-x-3 gap-y-3 border border-[#939CA3] overflow-auto px-4' onClick={openinterest}>
-                      {
+                      {userInterests ? userInterests.map(int => {
+                        return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
+                          {int.name}
+                          <img src={CancelIcon}
+                            className='ml-1.5 cursor-pointer'
+                            alt='cancel'
+                            onClick={(e) => deselectInterest(e,int.id)} />
+                        </div>
+                      }):
+                      
                         selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
                             {int.name}
