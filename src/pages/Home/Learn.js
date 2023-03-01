@@ -213,15 +213,15 @@ const Learn = () => {
 
    return (
       <div className='lg:mx-28 lg: lg:my-[70px] mb-24 '>
-         <div className="bg-sky-50 lg:bg-white p-5">
-            <h1 className='text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
-            <span className='text-sm ml-1 mt-1 text-gray-400 lg:hidden block font-medium'> what would you like to learn today?</span>
+         <div className="bg-[#EEFCFF] lg:bg-white p-5">
+            <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
+            <span className='text-sm ml-1 mt-1 text-[#74777F] lg:hidden block font-medium'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
                <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px] ${myPrograms === false && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(false)} >Programs</button>
                <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px]  ${myPrograms && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(true)}>My Program</button>
             </div>
          </div>
-         <h1 className='text-[32px] font-semibold hidden lg:block ml-4'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
+         <h1 className='text-[32px] font-semibold hidden lg:block ml-4 font-Poppins'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
 
          <div className="mx-3">
             <AcivityContent>
@@ -251,15 +251,15 @@ const Learn = () => {
 
          {
             !myPrograms &&
-            <div className='flex h-10 mx-4 mt-4'>
-               <span className='mx-4 md:text-xl font-normal'>only free</span>
+            <div className='flex h-10 mx-4 mt-4 text-black'>
+               <span className='mx-4 md:text-xl font-normal text-sm'>only free</span>
                <Toggle active={onlyFreeActive} handleClick={() => { setOnlyFreeActive(!onlyFreeActive) }} />
-               <span className='mx-4 md:text-xl font-normal'>only live</span>
+               <span className='mx-4 md:text-xl text-sm font-normal'>only live</span>
                <Toggle active={onlyLiveActive} handleClick={() => setOnlyLiveActive(!onlyLiveActive)} />
             </div>
          }
 
-         <div className="px-5 sm:w-full sm:overflow-hidden">
+         <div className="px-5 sm:w-full sm:overflow-hidden ">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
          <div className="lg:grid lg:grid-cols-3  mt-50 overflow-x-scroll lg:overflow-hidden" >

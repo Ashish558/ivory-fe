@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 
 export default function ActivityContent({ banners }) {
    return (
-      <div className={`${styles.activityContent} my-5 bg-[#EEFCFF] rounded-[30px] pl-5 sm:h-[164px] border border-sky-400`} >
+      <div className={`${styles.activityContent} my-5 bg-[#DEF9FF] rounded-[30px] pl-5 sm:h-[164px] lg:border border-sky-400`} >
          <div className='flex items-center gap-x-2 sm:gap-16'>
             <div className='relative sm:flex  sm:w-[300px] sm:items-center sm:h-[164px] mt-2 sm:mt-0'>
                <img src={Thumbnail} alt='Thumbnail' className='object-cover md:h-[130px] rounded-[30px] md:w-[275px]' />

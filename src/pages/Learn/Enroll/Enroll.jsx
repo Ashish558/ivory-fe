@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React,{ useEffect,useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
+import module3 from "../../../assets/images/learn/module3.png";
 import useRazorpay from "react-razorpay";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
@@ -11,11 +12,11 @@ import {
   createUserProgram,
   enrollProgram,
   getSingleProgram,
-  getUserPrograms,
+  getUserPrograms
 } from "../../../services/program";
 import {
   getPricingDiscountedText,
-  getPricingMainText,
+  getPricingMainText
 } from "../../../utils/utils";
 
 const Enroll = () => {
@@ -183,14 +184,14 @@ const Enroll = () => {
   };
   return (
     <div className=" sm:mx-20 mb-20">
-      <div className="text-gray-500 text-lg ml-6 lg:ml-0 mt-20 cursor-pointer mb-10">
+      <div className="text-gray-500 text-base ml-6 lg:ml-0 lg:mt-20 cursor-pointer lg:mb-10 mt-2 font-poppins">
         <span onClick={() => navToLearn()}>Programs </span>
         {">"} {name}
       </div>
       <div className=" lg:flex">
         <div className="lg:w-[calc(100%-400px)]">
-          <div className="flex flex-col gap-5 mb-20 sm:mb-0">
-            <div className="text-2xl font-bold text-black ml-6 lg:ml-0 mt-3 mb-2">
+          <div className="flex flex-col gap-5 sm:mb-0">
+            <div className=" text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 mt-3 mb-2">
               {name}
             </div>
             <div className="video flex justify-center items-center relative">
@@ -201,10 +202,10 @@ const Enroll = () => {
               />
               {/* <img src={playIcon} alt="" className="absolute" /> */}
             </div>
-            <div className="text-2xl font-bold text-black ml-6 lg:ml-0 mt-4">
+            <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 mt-4">
               About this Program
             </div>
-            <div className="text-gray-500 text-lg ml-6 lg:ml-0">
+            <div className="text-[#44474E] text-lg ml-6 lg:ml-0">
               <div dangerouslySetInnerHTML={{ __html: description }} />
               {/* {description.length > 150 && (
                 <span className="text-blue-500"> See more</span>
@@ -212,7 +213,7 @@ const Enroll = () => {
               {/* <span className="text-blue-500"> See more</span> */}
             </div>
             <div className="">
-              <div className="text-2xl font-bold text-black ml-6 lg:ml-0">
+              <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0">
                 Benefits
               </div>
               <div className="">
@@ -222,9 +223,11 @@ const Enroll = () => {
                       return (
                         <li
                           key={item.id}
-                          className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold"
+                          className="mr-8 flex justify-start items-center gap-2 text-[13px] font-semibold"
                         >
-                          <img src={item.icon} alt="" />
+                          <span className="w-[32px] h-[32px] bg-[#EEFCFF] rounded-md flex justify-center items-center">
+                            <img src={item.icon} alt="" />
+                          </span>
                           {item.name}
                         </li>
                       );
@@ -234,28 +237,28 @@ const Enroll = () => {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="text-2xl font-bold text-black ml-6 lg:ml-0">
+              <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0">
                 {" "}
                 Pricing{" "}
               </div>
               {/* conditionally renders on free, reg ,  */}
               <div>
                 <div className="text-lightGray text-lg ml-6 lg:ml-0 py-2 my-3">
-                  Next Batch starts
-                  <span className="text-blue-600">
+                  Next Batch starts{" "}
+                  <span className="text-[#0055BF]">
                     {next_batch_start_date
                       ? next_batch_start_date
                       : " Yet to be scheduled"}
                   </span>
                 </div>{" "}
-                <div className="text-2xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1 mb-3">
+                <div className="text-4xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1 mb-3">
                   {getPricingMainText(
                     is_free,
                     price,
                     discounted_price,
                     discount
                   )}
-                  <span className="text-gray-400 line-through font-normal text-base">
+                  <span className="text-[#939CA3] line-through font-normal text-base">
                     {getPricingDiscountedText(
                       is_free,
                       price,
@@ -264,7 +267,7 @@ const Enroll = () => {
                     )}
                   </span>{" "}
                   {discount > 0 && !is_free && (
-                    <span className="text-blue-500 text-lg ml-2">
+                    <span className="text-[#0055BF] text-base lg:text-lg ml-2">
                       {" "}
                       {(discounted_price * 100) / price}% OFF
                     </span>
@@ -282,7 +285,7 @@ const Enroll = () => {
             </div>
             <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
               <button
-                className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5 sm:mx-0"
+                className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-[#0055BF] mb-3 sm:mb-0 mx-5 sm:mx-0"
                 onClick={handleEnroll}
               >
                 {next_batch_start_date === null
@@ -297,24 +300,20 @@ const Enroll = () => {
                 <span> Share</span>
               </button>
             </div>
-            <div className=" sm:mx-0 shadow-sm rounded-xl  border-t border-gray-100 lg:w-[336px] pb-8 w-[90%] mx-auto p-5">
-              <div className="text-2xl font-bold text-black ml-6 mt-3">
+            <div className=" sm:mx-0 shadow-sm rounded-xl  border border-[#EBEDF0] lg:w-[336px] pb-7 w-[90%] mx-auto pt-6 pl-4">
+              <div className="text-xl lg:text-2xl font-bold text-black">
                 Program content
               </div>
               <div className="">
-                <div className="flex flex-col gap-6 mb-5 sm:mb-0 mt-6 ml-6">
+                <div className="flex flex-col gap-6sm:mb-0 mt-5 ">
                   <ul className=" flex  flex-col gap-5 leading-none text-sm">
                     {contents?.map((item) => {
                       return (
                         <li
                           key={item.id}
-                          className="mr-8 flex justify-start items-center gap-2 text-normal font-semibold"
+                          className="mr-8 flex justify-start items-center gap-2 text-normal font-normal text-[#6D747A]"
                         >
-                          <img
-                            src={item.icon}
-                            alt=""
-                            className="bg-[#EEFCFF] p-3 rounded-md"
-                          />
+                          <img src={item.icon} alt="" />
                           {item.name}
                         </li>
                       );
@@ -324,12 +323,14 @@ const Enroll = () => {
               </div>
             </div>
           </div>
-          <div className="">
-            <div className="text-2xl font-bold text-black ml-6 lg:ml-0 my-3 mt-5">
+          <div className="mb-28 mt-20">
+            <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 mb-3 ">
               Similar Programs
             </div>
+            <div className="lg:grid lg:grid-cols-2 ">
+            
+            </div>
           </div>
-          <div className="lg:grid lg:grid-cols-2 "></div>
           <div className="lg:flex justify-end w-full hidden ">
             <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
           </div>
@@ -372,9 +373,9 @@ const Enroll = () => {
               {name}
             </div>
             <div className="text-lightGray text-lg ml-6  mb-2 mt-10">
-              <span className="text-sm">
+              <span className="text-sm text-lightGray">
                 Batch starts
-                <span className="text-blue-500">
+                <span className="text-[#0055BF]">
                   {next_batch_start_date
                     ? next_batch_start_date
                     : "Yet to be scheduled"}
@@ -391,13 +392,13 @@ const Enroll = () => {
                   )}
                 </span>{" "}
                 {discount > 0 && !is_free && (
-                  <span className="text-blue-500 text-[16px] ml-2">
+                  <span className="text-[#0055BF] text-[16px] ml-2">
                     {(discounted_price * 100) / price}% OFF
                   </span>
                 )}
               </div>
               <button
-                className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3 "
+                className="bg-[#1B72C0] text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3 "
                 onClick={handleEnroll}
               >
                 {" "}
@@ -416,12 +417,12 @@ const Enroll = () => {
           </div>
         </div>
         <div className={styles.startActivityFooter}>
-          <div className="max-w-[328px] mx-auto lg:hidden">
+          <div className="max-w-[328px] mx-auto lg:hidden h-[64px] flex items-center">
             {isEnrolled ? (
               <SecondaryButton
-                children={"Already Enrolled"}
+                children={"Registered already"}
                 // onClick={handleEnroll}
-                className="w-full pt-2.5 pb-2.5"
+                className="w-full  "
               />
             ) : (
               <PrimaryButton
@@ -433,7 +434,7 @@ const Enroll = () => {
                     : "Enroll"
                 }
                 onClick={handleEnroll}
-                className="w-full pt-2.5 pb-2.5"
+                className="w-full  h-[40px]"
               />
             )}
           </div>

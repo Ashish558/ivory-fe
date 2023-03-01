@@ -4,7 +4,7 @@
   bottom: 0;
   width: 100%;
   background: #eefcff;
-  z-index: 20000;
+  z-index: 20;
   padding: 19px 16px;
 }
 @media only screen and (min-width: 769px) {
