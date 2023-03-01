@@ -43,12 +43,12 @@ const DesktopBanner = () => {
    const handleNavigate = banner => {
       setVideoLink(banner.video_link)
       if (banner.title === "Complete your Profile!") {
-         if(!loggedIn){
+         if (!loggedIn) {
             return navigate('/login')
-         }else{
+         } else {
             return navigate('/CreateProfile')
          }
-       }
+      }
       if (banner.video_link) {
          setVideoActive(true)
       }
@@ -59,14 +59,20 @@ const DesktopBanner = () => {
          <div className='container-banner min-h-[700px] pt-20  lg:mb-[90px] mb-14'>
             <Slider {...settings}>
                {
-                  banners.map(banner => {
+                  banners.map((banner, idx) => {
                      return (
                         <div onClick={() => handleNavigate(banner)} >
                            <div className='flex items-center justify-around'>
                               <div>
-                                 <p><img src={Download} alt="" /></p>
+                                 {
+                                    idx === 0 &&
+                                    <div onClick={(e) => { e.stopPropagation(); window.open('https://play.google.com/store/apps/details?id=io.ionic.ivoryapp&hl=en-US&ah=oZ8nR0yAxnh9MZJ8mK76K67bD5Q') }}
+                                       className='cursor-pointer'>
+                                       <img src={Download} alt="" />
+                                    </div>
+                                 }
                                  <h1 className='big-text'> {banner.title}  </h1>
-                                 <h1 className='big-text'>to unlock free activities</h1>
+                                 {/* <h1 className='big-text'>to unlock free activities</h1> */}
                                  <div className='pt-9'>
                                     <p> {banner.sub_title} </p>
                                     {/* <p>  Become a master at painting and writing with our fun and engaging app!</p> */}

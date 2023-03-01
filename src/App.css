@@ -12,6 +12,10 @@
     font-family: NotoSans;
     src: url(./assets/fonts/NotoSans-Regular.ttf);
 }
+@font-face {
+    font-family: Inter;
+    src: url(./assets/fonts/Inter.ttf);
+}
 body{
    font-family: "NotoSans", sans-seif;
 }
