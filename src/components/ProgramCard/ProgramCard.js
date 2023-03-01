@@ -2,15 +2,24 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getFormattedDuration, getPricingDiscountedText, getPricingMainText } from '../../utils/utils'
 import './program.css'
-export default function ProgramCard({ id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount }) {
+export default function ProgramCard({ id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount, scrollToTop }) {
 
    const navigate = useNavigate()
 
+   const handleScrollToTop = () => {
+      window.scrollTo({
+         top: 0,
+         behavior: "smooth",
+      });
+   }
    const handleNavigate = () => {
       if (isUserProgram) {
          navigate(`/program/${userProgramId}`)
       } else {
          navigate(`/learn/${id}`)
+         if(scrollToTop){
+           window.location.reload()
+         }
       }
    }
 

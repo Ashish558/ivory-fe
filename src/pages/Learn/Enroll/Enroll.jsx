@@ -10,6 +10,7 @@ import SecondaryButton from "../../../components/Buttons/SecondaryButton";
 import {
   createUserProgram,
   enrollProgram,
+  getPrograms,
   getSingleProgram,
   getUserPrograms,
 } from "../../../services/program";
@@ -17,6 +18,7 @@ import {
   getPricingDiscountedText,
   getPricingMainText,
 } from "../../../utils/utils";
+import ProgramCard from "../../../components/ProgramCard/ProgramCard";
 
 const Enroll = () => {
   //enrollType "", "reg", "free"
@@ -29,6 +31,7 @@ const Enroll = () => {
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [userProgramId, setUserProgramId] = useState(null);
   const Razorpay = useRazorpay();
+  const [allPrograms, setAllPrograms] = useState([])
 
   const navigate = useNavigate();
 
@@ -44,31 +47,43 @@ const Enroll = () => {
       });
   }, [id, loggedIn]);
 
+  useEffect(() => {
+    getPrograms()
+      .then(res => {
+        if (res.data.data === null) return setAllPrograms([])
+        // console.log('programs', res.data.data);
+        setAllPrograms(res.data.data)
+      }).catch(err => {
+        console.log(err.response);
+      })
+  }, [])
+
   const handleEnroll = () => {
+    // console.log('asda');
     if (!loggedIn) {
-      navigate("/login");
+      navigate('/login')
     }
     const body = {
-      state: "na",
-      payment_status: "na",
+      state: 'na',
+      payment_status: 'na',
       program: id,
-    };
+    }
     if (programExist === true) {
-      enrollforProgram(userProgramId);
-      return;
+      enrollforProgram(userProgramId)
+      return
     }
     createUserProgram(body)
-      .then((programResp) => {
-        console.log("program resp", programResp.data);
-        enrollforProgram(programResp.data.data.id);
+      .then(programResp => {
+        console.log('program resp', programResp.data);
+        enrollforProgram(programResp.data.data.id)
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err.response);
         if (err.response.status === 406) {
-          enrollforProgram();
+          enrollforProgram()
         }
-      });
-  };
+      })
+  }
 
   const enrollforProgram = (userProgramId) => {
     enrollProgram(userProgramId)
@@ -160,10 +175,12 @@ const Enroll = () => {
   useEffect(() => {
     fetchUserPrograms();
   }, []);
-  console.log("programData", programData);
-  console.log("programExist", programExist);
-  console.log("isEnrolled", isEnrolled);
+  // console.log("programData", programData);
+  // console.log("programExist", programExist);
+  // console.log("isEnrolled", isEnrolled);
   // console.log('user', profileData);
+  // console.log('allPrograms', allPrograms);
+  
   const {
     image,
     name,
@@ -331,7 +348,7 @@ const Enroll = () => {
               </div>
             </div>
           </div>
-          <div className="">
+          {/* <div className="">
             <div className="text-2xl font-bold text-black ml-6 lg:ml-0 my-3 mt-5">
               Similar Programs
             </div>
@@ -340,6 +357,11 @@ const Enroll = () => {
           <div className="lg:flex justify-end w-full hidden ">
             <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
           </div>
+          <div className="lg:grid lg:grid-cols-3  mt-50 overflow-x-scroll lg:overflow-hidden" >
+            {allPrograms.map((item, index) => (
+              <ProgramCard key={item.id} {...item} />
+            ))}
+          </div> */}
           {/* conditionally render on register successfully */}
           {/* {enrollStatus === "enrolled" ? (
             <div className="enrollFooter bg-sky-100 border-2 border-blue-400 flex flex-col py-5 mb-20 lg:hidden">
@@ -430,8 +452,8 @@ const Enroll = () => {
             </div>
           </div>
         </div>
-        <div className={styles.startActivityFooter}>
-          <div className="max-w-[328px] mx-auto lg:hidden">
+        <div className={`${styles.startActivityFooter} lg:hidden`}>
+          <div className="max-w-[328px] mx-auto ">
             {isEnrolled ? (
               <SecondaryButton
                 children={"Already Enrolled"}
@@ -453,6 +475,20 @@ const Enroll = () => {
             )}
           </div>
         </div>
+      </div>
+      <div className="">
+        <div className="text-2xl font-bold text-black ml-6 lg:ml-0 my-3 mt-5">
+          Similar Programs
+        </div>
+      </div>
+      <div className="lg:grid lg:grid-cols-2 "></div>
+      <div className="lg:flex justify-end w-full hidden ">
+        <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
+      </div>
+      <div className="lg:grid lg:grid-cols-3  mt-50 overflow-x-scroll lg:overflow-hidden" >
+        {allPrograms.map((item, index) => (
+          <ProgramCard key={item.id} {...item} scrollToTop={true} />
+        ))}
       </div>
     </div>
   );
