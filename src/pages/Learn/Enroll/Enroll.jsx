@@ -281,16 +281,23 @@ const Enroll = () => {
               )}
             </div>
             <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
-              <button
-                className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5 sm:mx-0"
-                onClick={handleEnroll}
-              >
-                {next_batch_start_date === null
-                  ? "Register for free"
-                  : is_free
-                  ? "Enroll for free"
-                  : "Enroll"}
-              </button>
+              {isEnrolled ?
+                <SecondaryButton
+                  children={"Already Enrolled"}
+                  // onClick={handleEnroll}
+                  className="w-full pt-2 lg:w-[40%] pb-2  w-[90%] mr-3"
+                /> :
+                <button
+                  className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5 sm:mx-0"
+                  onClick={handleEnroll}
+                >
+                  {next_batch_start_date === null
+                    ? "Register for free"
+                    : is_free
+                      ? "Enroll for free"
+                      : "Enroll"}
+                </button>
+              }
               <button className="bg-white text-[#1B72C0] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3">
                 {" "}
                 <img src={shareImg} alt="" />
@@ -396,17 +403,25 @@ const Enroll = () => {
                   </span>
                 )}
               </div>
-              <button
-                className="bg-blue-800 text-white font-semibold py-2 w-[90%] rounded-full border mx-auto  self-center my-2 mt-3 "
-                onClick={handleEnroll}
-              >
-                {" "}
-                {next_batch_start_date === null
-                  ? "Register for free"
-                  : is_free
-                  ? "Enroll for free"
-                  : "Enroll"}
-              </button>
+              {isEnrolled ? (
+                <SecondaryButton
+                  children={"Already Enrolled"}
+                  // onClick={handleEnroll}
+                  className="w-ful mt-2 pt-2.5 pb-2.5  w-[90%]"
+                />
+              ) : (
+                <PrimaryButton
+                  children={
+                    next_batch_start_date === null
+                      ? "Register for free"
+                      : is_free
+                        ? "Enroll for free"
+                        : "Enroll"
+                  }
+                  onClick={handleEnroll}
+                  className="pt-2.5 mt-2 pb-2.5 w-[90%]"
+                />
+              )}
               <button className="bg-white text-[#1B72C0] font-semibold py-2 w-[90%] rounded-full border mt-3 border-[#1B72C0]  self-center flex justify-center items-center gap-3">
                 {" "}
                 <img src={shareImg} alt="" />
@@ -429,8 +444,8 @@ const Enroll = () => {
                   next_batch_start_date === null
                     ? "Register for free"
                     : is_free
-                    ? "Enroll for free"
-                    : "Enroll"
+                      ? "Enroll for free"
+                      : "Enroll"
                 }
                 onClick={handleEnroll}
                 className="w-full pt-2.5 pb-2.5"
