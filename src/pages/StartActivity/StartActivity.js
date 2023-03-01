@@ -266,12 +266,15 @@ export default function StartActivity({ fetchUserDetails }) {
             console.log('start resp', res);
             // alert('Activity started!')
             // alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
-            setStartActivityModalActive(false)
             setIsAlreadyStarted(true)
             fetchUserActivities()
             fetchUserDetails()
+            setStartModalActive(false)
+            setStartActivityModalActive(false)
          }).catch(err => {
             setStartBtnLoading(false)
+            setStartModalActive(false)
+            setStartActivityModalActive(false)
             console.log('start err', err.response.data);
             if (err.response.data.status_code === 406) {
                alert('You have reached free activity limit')
@@ -542,6 +545,7 @@ export default function StartActivity({ fetchUserDetails }) {
                fetchUserActivities={fetchUserActivities}
                profileData={profileData}
                fetchUserDetails={fetchUserDetails}
+               handleStartActivity={handleStartActivity}
                startBtnLoading={startBtnLoading} />
          }
          {
