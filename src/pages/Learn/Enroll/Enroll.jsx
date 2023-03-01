@@ -52,7 +52,8 @@ const Enroll = () => {
       .then(res => {
         if (res.data.data === null) return setAllPrograms([])
         // console.log('programs', res.data.data);
-        setAllPrograms(res.data.data)
+        let data = res.data.data.filter(program => program.id !== parseInt(id))
+        setAllPrograms(data)
       }).catch(err => {
         console.log(err.response);
       })
@@ -180,7 +181,7 @@ const Enroll = () => {
   // console.log("isEnrolled", isEnrolled);
   // console.log('user', profileData);
   // console.log('allPrograms', allPrograms);
-  
+
   const {
     image,
     name,
