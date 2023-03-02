@@ -467,12 +467,12 @@ const Enroll = () => {
           </div>
         </div>
         <div className={`${styles.startActivityFooter}  lg:hidden flex`}>
-          <div className="max-w-[328px] mx-auto lg:hidden h-[64px] flex items-center">
+          <div className=" w-full lg:hidden h-[64px] flex items-center">
             {isEnrolled ? (
               <SecondaryButton
                 children={"Registered already"}
                 // onClick={handleEnroll}
-                className="w-full  "
+                className="w-full "
               />
             ) : (
               <PrimaryButton
