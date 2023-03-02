@@ -15,9 +15,9 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
    }
 
    return (
-      <div className="py-3 my-3 sm:px-0 sm:pt-0 sm:rounded-[48px] mx-5 border-gray-200 shadow-sm border px-3 rounded-3xl flex sm:flex-col sm:gap-2 hover:bg-LightSky" onClick={handleNavigate} >
+      <div className="py-3 my-3 sm:px-0 sm:pt-0 sm:rounded-[48px] mx-5 border-gray-200 shadow-sm border px-3 rounded-3xl flex sm:flex-col sm:gap-2 hover:bg-LightSky sm:justify-between" onClick={handleNavigate} >
          <div className=" sm:h-auto flex justify-start items-center w-[40vw] sm:w-auto relative PimgContainer">
-            <span className="text-normal text-white absolute top-6 left-6 hidden sm:block z-20">
+            <span className="text-normal sm:text-base sm:font-roboto text-white absolute top-6 left-6 hidden sm:block z-20">
                {/* {name} */} Ivory Exclusive
             </span>
             <img
@@ -27,12 +27,12 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
             />
          </div>
          <div className="flex flex-col justify-between ml-4 w-[60vw] sm:w-full sm:gap-2">
-            <span className="text-sm text-gray-500 hidden sm:block">
+            <span className="text-sm sm:text-base text-gray-500 hidden sm:block sm:font-inter">
                {getFormattedDuration(modules_duration)}
             </span>
             <h1 className="text-[16px] font-bold sm:text-xl">
                {name.length > 18 ? <>
-                  {name} <span className="text-sm text-[#6D747A] font-[13px]">
+                  {name} <span className="sm:text-base text-[#6D747A] text-[13px]">
                      | Ankit dua
                   </span>
                </> : name}
@@ -57,8 +57,8 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
                   <progress className="progress progress-primary w-56" value="40" max="100"></progress>
                </div> :
                   price >= 1 ?
-                     <div className=" mr-10 lg:mt-5 lg:p-3">
-                        <div className="text-2xl font-bold text-[#1B72C0]  lg:ml-0 flex items-center gap-1 sm:justify-end">
+                     <div className=" mr-10 lg:mt-5 lg:p-3 relative">
+                        <div className="text-2xl font-bold text-[#1B72C0]  lg:ml-0 flex items-end gap-1 sm:justify-end">
                            {getPricingMainText(is_free, price, discounted_price, discount)}
                            <span className="text-gray-400 line-through font-normal text-base">
                               {getPricingDiscountedText(
@@ -76,8 +76,8 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
                            )}
                         </div>
                      </div> :
-                     <div className=" mr-10 sm:mt-5 sm:p-3">
-                        <div className="text-2xl font-bold text-sky-600 sm:ml-0 flex items-center gap-1 sm:justify-end sm:items-end">
+                     <div className=" mr-10 sm:mt-5 sm:p-3 relative">
+                        <div className="text-2xl font-bold text-sky-600 sm:ml-0 flex items-center gap-1 sm:justify-end sm:items-end ">
                            Free
 
                         </div>
