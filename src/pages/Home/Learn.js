@@ -214,11 +214,11 @@ const Learn = () => {
    return (
       <div className='lg:mx-28 lg: lg:my-[70px] mb-24 '>
          <div className="bg-[#EEFCFF] lg:bg-white p-5">
-            <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block'>Hello Sahil ji! </h1>
+            <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block text-black'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-1 text-[#74777F] lg:hidden block font-medium'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
-               <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px] ${myPrograms === false && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(false)} >Programs</button>
-               <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px]  ${myPrograms && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(true)}>My Program</button>
+               <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px] font-roboto ${myPrograms === false && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(false)} >Programs</button>
+               <button className={`font-bold text-sm sm:text-lg rounded-full border px-4 py-[10px] font-roboto ${myPrograms && ' bg-[#BDF4FF]'}`} onClick={() => setMyPrograms(true)}>My Program</button>
             </div>
          </div>
          <h1 className='text-[32px] font-semibold hidden lg:block ml-4 font-Poppins'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>

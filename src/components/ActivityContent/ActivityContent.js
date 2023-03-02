@@ -50,7 +50,7 @@ export default function ActivityContent({ banners }) {
                   <p className='text-xxs font-semild'> International Artist </p>
                </div>
             </div>
-            <div className='flex  items-center justify-center w-1/5 h-8 bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer'>
+            <div className='flex  items-center justify-center w-1/5 h-7 bg-[#1B72C0] rounded-full overflow-hidden cursor-pointer mr-2'>
                <h1 className='text-white'>Join</h1>
                {/* <img src={RedirectIcon} alt='redirect' className='rounded-full' /> */}
             </div>

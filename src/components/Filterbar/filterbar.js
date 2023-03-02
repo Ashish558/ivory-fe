@@ -13,7 +13,7 @@ export default function Filterbar({ items, onChange }) {
 
    return (
       <div className='overflow-auto mt-4 '>
-         <div className='flex items-center gap-y-1 lg:gap-y-1 flex-nowrap lg:flex-wrap'>
+         <div className='flex items-center gap-y-1 lg:gap-y-1 flex-nowrap lg:flex-wrap font-roboto'>
             {
                items.map(item => {
                   return (

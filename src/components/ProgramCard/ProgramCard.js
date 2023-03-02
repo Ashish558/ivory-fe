@@ -15,7 +15,7 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
    }
 
    return (
-      <div className="py-3 my-3 sm:px-0 sm:pt-0 sm:rounded-[48px] mx-5 border-gray-200 shadow-md border-t px-3 rounded-3xl flex sm:flex-col sm:gap-2 hover:bg-LightSky" onClick={handleNavigate} >
+      <div className="py-3 my-3 sm:px-0 sm:pt-0 sm:rounded-[48px] mx-5 border-gray-200 shadow-sm border px-3 rounded-3xl flex sm:flex-col sm:gap-2 hover:bg-LightSky" onClick={handleNavigate} >
          <div className=" sm:h-auto flex justify-start items-center w-[40vw] sm:w-auto relative PimgContainer">
             <span className="text-normal text-white absolute top-6 left-6 hidden sm:block z-20">
                {/* {name} */} Ivory Exclusive
@@ -32,13 +32,13 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
             </span>
             <h1 className="text-[16px] font-bold sm:text-xl">
                {name.length > 18 ? <>
-                  {name} <span className="text-sm text-black font-normal">
+                  {name} <span className="text-sm text-[#6D747A] font-[13px]">
                      | Ankit dua
                   </span>
                </> : name}
             </h1>
             {name.length < 18 &&
-               <span className="text-sm text-black">
+               <span className="text-[13px] text-[#6D747A]">
                   Ankit dua
                </span>}
             <div className="flex justify-between">
@@ -58,7 +58,7 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
                </div> :
                   price >= 1 ?
                      <div className=" mr-10 lg:mt-5 lg:p-3">
-                        <div className="text-2xl font-bold text-sky-600  lg:ml-0 flex items-center gap-1 sm:justify-end">
+                        <div className="text-2xl font-bold text-[#1B72C0]  lg:ml-0 flex items-center gap-1 sm:justify-end">
                            {getPricingMainText(is_free, price, discounted_price, discount)}
                            <span className="text-gray-400 line-through font-normal text-base">
                               {getPricingDiscountedText(
@@ -69,7 +69,7 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
                               )}
                            </span>{" "}
                            {discount > 0 && !is_free && (
-                              <span className="text-blue-500 text-lg ml-2">
+                              <span className="text-[#1B72C0] text-lg ml-2">
                                  {" "}
                                  {(discounted_price * 100) / price}% OFF
                               </span>
