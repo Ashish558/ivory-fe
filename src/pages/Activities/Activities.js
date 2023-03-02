@@ -215,7 +215,7 @@ export default function Activities() {
             <div className='pt-0 lg:pt-6 mb-8 lg:grid lg:grid-cols-2 items-center lg:px-[80px] lg:bg-sky-50 lg:min-h-[90vh]'>
                <div className={`lg:flex mt-10 flex-col lg:self-start lg:mt-12 ${myActivities.length === 0 ? 'lg:min-h-[40%] lg:justify-between' : ''} `}>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-4xl lg:font-semibold'>
+                     <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-[48px] lg:font-semibold font-[Inter] leading-none '>
                         My activities
                      </h3>
                      <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
@@ -238,7 +238,7 @@ export default function Activities() {
             <div className='lg:px-[80px] lg:max-w-[1200px] lg:pb-[10px]'>
                <div className=''>
                   <div className=' flex items-center mb-2'>
-                     <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
+                     <h3 className='font-bold lg:font-semibold leading-none lg:text-[48px] text-xl mb-2.5 font-[Inter]'> All Activities </h3>
                      <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
                   </div>
                   <Filterbar items={filterItems} onChange={onChange} />

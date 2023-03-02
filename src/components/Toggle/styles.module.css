@@ -1,30 +1,31 @@
 .toggle{
    
-   height: 30px;
-   width: 60px;
+   height: 32px;
+   width: 52px;
    border-radius: 30px;
    /* margin-top: 30px; */
    display: flex;
+   border:2px solid gray
 }
 .toggle1{
  
-   height: 30px;
-   width: 60px;
+   height: 32px;
+   width: 54px;
    border-radius: 30px;
    /* margin-top: 30px; */
    display: flex;
 }
 .toggle_left{
-   height: 20px;
-   width: 20px;
-   background-color: antiquewhite;
+   height: 16px;
+   width: 16px;
+   background-color: #79747E;
    border-radius: 20px;
-   margin: 5px;
+   margin: 6px;
 }
 .toggle_right{
-   height: 20px;
-   width: 20px;
+   height: 22px;
+   width: 22px;
    background-color: antiquewhite;
    border-radius: 20px;
-   margin: 5px 2px 5px 33px;
+   margin: 3px 4px 5px 23px;
 }

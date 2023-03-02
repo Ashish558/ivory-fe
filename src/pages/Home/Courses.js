@@ -1,105 +1,90 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner1 from '../../Images/Canva.png'
 import Banner2 from '../../Images/Laptop.png'
 import './Courses.css'
 import Star from '../../Images/star.png'
+import { useNavigate } from 'react-router-dom';
+import { getPrograms } from '../../services/program';
+import { getPricingDiscountedText, getPricingMainText } from '../../utils/utils';
 
 const Courses = () => {
 
-    const courses = [
-        {
-            name: 'Learn to CANVA',
-            author: 'Ankit dua',
-            banner: Banner1,
-            stars: '3',
-            price: '399',
+   const courses = [
+      {
+         name: 'Learn to CANVA',
+         author: 'Ankit dua',
+         banner: Banner1,
+         stars: '3',
+         price: '399',
 
-        },
-        {
-            name: 'Learn using a laptop',
-            author: 'Ritu Shreshtha',
-            banner: Banner2,
-            stars: '4',
-            price: '199',
-            discount: '499'
-        }
-    ]
+      },
+      {
+         name: 'Learn using a laptop',
+         author: 'Ritu Shreshtha',
+         banner: Banner2,
+         stars: '4',
+         price: '199',
+         discount: '499'
+      }
+   ]
 
-    return (
-        <div className='pt-8'>
-            <h1 className='text-xl font-black pl-4 '>Learn with Ivory</h1>
-            {
-                courses.map(course =>
-                    <div className="m-4 box">
-                        <div className='flex align-items '>
-                            <div className='p-1.5'>
-                                <figure><img className='rounded-3xl' src={course.banner} alt="Movie" /></figure>
-                            </div>
-                            <div className="pt-4 pl-2">
-                                <h2 className="text-base font-semibold">{course.name}</h2>
-                                <p className='text-xs small-text'>{course.author}</p>
-                                <div>
+   const [allPrograms, setAllPrograms] = useState([])
 
-                                    {
-                                        course?.stars == '4' &&
-                                        <div className="flex pt-1">
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                        </div>
-                                    }
-                                    {
-                                        course?.stars == '5' &&
-                                        <div className="flex pt-1">
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                        </div>
-                                    }
-                                    {
-                                        course?.stars == '3' &&
-                                        <div className="flex pt-1">
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
+   const navigate = useNavigate()
 
-                                        </div>
-                                    }
-                                    {
-                                        course?.stars == '2' &&
-                                        <div className="flex pt-1">
-                                            <p><img src={Star} alt="" /></p>
-                                            <p><img src={Star} alt="" /></p>
-                                        </div>
+   useEffect(() => {
+      getPrograms()
+         .then(res => {
+            if (res.data.data === null) return setAllPrograms([])
+            // console.log('programs', res.data.data);
+            setAllPrograms(res.data.data)
+         }).catch(err => {
+            console.log(err.response);
+         })
+   }, [])
 
-                                    }
-                                    {
-                                        course?.stars == '1' &&
-                                        <div className="flex pt-1">
-                                            <p><img src={Star} alt="" /></p>
-                                        </div>
+   const handleNavigate = (id) => {
+      navigate(`/learn/${id}`)
+   }
 
-                                    }
-
-
-                                </div>
-                                <div className='flex'>
-                                    <h2 className='price pt-6'>₹ {course.price}</h2>
-                                    {
-                                        course?.discount && <h2 className='discount pt-6 pl-3'>₹ {course.discount}</h2>
-                                    }
-                                </div>
-                            </div>
+   return (
+      <div className='pt-8'>
+         <h1 className='text-xl font-black pl-4 '>Learn with Ivory</h1>
+         {
+            allPrograms.map(program => {
+               const { id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount } = program
+               return (
+                  <div className="m-4 box"  onClick={() => handleNavigate(id)}>
+                     <div className='flex align-items '>
+                        <div className='p-1.5 self-stretch'>
+                           <img className='rounded-3xl w-[129px] object-cover h-full' src={image} alt="Program" />
                         </div>
-                    </div>
-                )
-            }
+                        <div className="pt-4 pl-2">
+                           <h2 className="text-base font-semibold">
+                              {name}
+                           </h2>
+                           <p className='text-xs small-text'>
+                              {'Author name'}
+                           </p>
 
-        </div>
-    );
+                           <div className='flex'>
+                              <h2 className='price pt-6'>
+                                 {getPricingMainText(is_free, price, discounted_price, discount)}
+                              </h2>
+                              {
+                                 getPricingDiscountedText(is_free, price, discounted_price, discount)
+                              }
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               )
+            }
+            )
+         }
+
+      </div>
+   );
 };
 
 export default Courses;

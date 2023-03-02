@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from "./story.module.css";
+import html2canvas from "html2canvas";
 
 import BackIcon from '../../../assets/icons/back.svg';
 import LeftIcon from '../../../assets/icons/left.svg';
@@ -18,9 +19,9 @@ import Mcq2 from './Mcq2/Mcq2';
 import QnA from './QnA/QnA';
 import Sudoku from './Sudoku/Sudoku';
 import ReactPlayer from 'react-player';
-import { convertLinkToDataUrl, isValidYoutubeLink, toDataURL } from '../../../utils/utils';
+import { convertLinkToDataUrl, dataURLtoFile, isValidYoutubeLink, toDataURL } from '../../../utils/utils';
 
-const types = ['image', 'video', 'mcq', 'mcq2', 'sudoku', 'qna']
+const types = ['image', 'video', 'mcq', 'mcq2', 'puzzle', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
 
 export default function Story(props) {
@@ -29,6 +30,55 @@ export default function Story(props) {
    let { id, image, type, liked, share_message, title, url, views, video } = story
    const [storyType, setStoryType] = useState(type)
    const [shareModalOpen, setShareModalOpen] = useState(false)
+
+   const imageRef = useRef()
+
+   const [touchStart, setTouchStart] = useState(null)
+   const [touchStartY, setTouchStartY] = useState(null)
+
+   const [touchEnd, setTouchEnd] = useState(null)
+   const [touchEndY, setTouchEndY] = useState(null)
+
+   // the required distance between touchStart and touchEnd to be detected as a swipe
+   const minSwipeDistance = 100
+
+   const onTouchStart = (e) => {
+      // console.log(e);
+      setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+      setTouchStart(e.targetTouches[0].clientX)
+      setTouchStartY(e.targetTouches[0].clientY)
+   }
+
+   const onTouchMove = (e) => {
+      setTouchEnd(e.targetTouches[0].clientX)
+      setTouchEndY(e.targetTouches[0].clientY)
+   }
+   const onTouchEnd = () => {
+      if (!touchStart || !touchEnd) return
+      const distance = touchStart - touchEnd
+      const isLeftSwipe = distance > minSwipeDistance
+      const isRightSwipe = distance < -minSwipeDistance
+
+      const distanceX = touchStart - touchEnd
+      const distanceY = touchStartY - touchEndY
+      // console.log(distanceX);
+      // console.log(distanceY);
+      // const isLeftSwipe = distanceX > minSwipeDistance
+      // const isRightSwipe = distanceX < -minSwipeDistan
+      if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
+      if (isRightSwipe && Math.abs(distanceX) > distanceY) {
+         selectNextStory()
+      }
+      if (isLeftSwipe && distanceX > distanceY) {
+         selectPrevStory()
+      }
+      // if (isLeftSwipe) {
+      //    selectNextStory()
+      // } else {
+      //    selectPrevStory()
+      // }
+      // add your conditional logic here
+   }
 
    const hideHtmlOverflow = () => {
       document.body.style.overflow = "hidden";
@@ -108,31 +158,63 @@ export default function Story(props) {
             console.log('dislike err', err.data);
          })
    }
+
    const shareStory = () => {
       console.log('image', image);
-      convertLinkToDataUrl(image, (res) => {
-         console.log('res', res);
-      })
-      fetch(image)
-         .then(async response => {
-            const contentType = response.headers.get('content-type')
-            const blob = await response.blob()
-            const file = new File([blob], 'fileName', { contentType })
-            console.log('file', file);
-         }).catch(err => {
-            console.log(err);
+      // html2canvas(imageRef.current, {
+      //    allowTaint: true,
+      //    useCORS: true,
+      // }).then(function (canvas) {
+      //    canvas.getContext("2d");
+      //    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+      //    console.log('imgData', imgData);
+      //    const file = new File([imgData], 'filname.jpg',)
+      //    console.log('file', file);
+      // });
+      // const options = {
+      //    mode: 'no-cors'
+      // }
+      // const fetch = async () => {
+      //    let response = await fetch(image);
+      //    let data = await response.blob();
+      //    let metadata = {
+      //       type: 'image/jpeg'
+      //    };
+      //    let file = new File([data], "test.jpg", metadata);
+      //    console.log('fetchres', file);
+      // }
+      // fetch()
+      if (image !== null && image === null) {
+         convertLinkToDataUrl(image, (res) => {
+            console.log('base64', res);
+            if (!res) return share(false)
+            var fileData = dataURLtoFile(res, "ivory-story.jpg");
+            console.log("Here is JavaScript File Object", fileData)
+            // share(true, fileData)
+            share(true, res)
          })
+      } else {
+         if (navigator.share) {
+            navigator.share({
+               title: share_message !== null ? share_message : 'Ivory Story',
+               text: share_message !== null ? share_message : 'Ivory Story',
+               url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
+            }).then(() => console.log('Successful share'))
+               .catch(error => console.log('Error sharing:', error));
+         }
+      }
+   }
+
+   const share = (isFile, image) => {
       if (navigator.share) {
          navigator.share({
-            title: 'Ivory Story',
+            title: share_message !== null ? share_message : 'Ivory Story',
             text: share_message !== null ? share_message : 'Ivory Story',
             url: `https://ivory-test.netlify.app/home?type=${story.type}&id=${story.id}`,
-            // files: [image]
+            ...(isFile && { files: [image] })
          }).then(() => console.log('Successful share'))
             .catch(error => console.log('Error sharing:', error));
       }
-      // console.log(location.pathname);
-      // setShareModalOpen(true);
    }
    // console.log('story', storyType)
    // console.log('story', story)
@@ -144,7 +226,10 @@ export default function Story(props) {
       <>
 
          <div className={styles.modalContainer}>
-            <div className="w-full p-0  self-stretch overflow-aut">
+            <div className="w-full p-0  self-stretch overflow-aut"
+               onTouchStart={onTouchStart}
+               onTouchMove={onTouchMove}
+               onTouchEnd={onTouchEnd}>
                <div className={`w-full bg-primaryDark px-0 pt-2 md:py-9.5 md:px-9.5 flex-cl rounded-20 relative h-full overflow-auto fle z-10`}>
                   <div className={`flex flex-col self-stretch flex-1 overflow-auto relative pb-[80px] ${styles.storyContainer} ${storyType === 'image' ? 'h-full ' : ''} `}>
 
@@ -178,7 +263,7 @@ export default function Story(props) {
                               <Mcq {...story} {...storyProps} />
                               : storyType === 'mcq2' ?
                                  <Mcq2  {...story} {...storyProps} />
-                                 : storyType === 'sudoku' ?
+                                 : storyType === 'puzzle' ?
                                     <Sudoku {...story} updateStory={updateStory} />
                                     : storyType === 'qna' ?
                                        <QnA {...story} updateStory={updateStory} {...storyProps} />

@@ -91,8 +91,13 @@ const Activities = () => {
       <div>
          <div className='pt-4 lg:ml-24 lg:mt-24'>
             <div className='lg:flex lg:items-center lg:mb-20'>
-               <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold pb-4 lg:pb-0'>Recommended activities</h1>
-               <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+               <h1 className='text-xl font-black pl-4 cursor-pointer lg:text-5xl lg:font-semibold pb-4 lg:pb-0'
+                  onClick={() => navigate(`/activities`)}>
+                  Recommended activities
+               </h1>
+               <p className='pl-7 hidden lg:block cursor-pointer' onClick={() => navigate(`/activities`)}>
+                  <img src={Arrow} alt="" />
+               </p>
             </div>
             <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
                {
@@ -102,10 +107,10 @@ const Activities = () => {
                         <p><img src={activity.icon} alt="" /></p>
                         {
                            activity?.name.length <= '17' ?
-                              <p className='text-center pt-2 font-semibold text-sm' 
+                              <p className='text-center pt-2 font-semibold text-sm'
                               // style={{ color: activity?.color }}
                               >{activity?.name}</p>
-                              : <p className='text-center pt-2 font-semibold text-xs' 
+                              : <p className='text-center pt-2 font-semibold text-xs'
                               // style={{ color: activity?.color }}
                               >{activity?.name}</p>
                         }

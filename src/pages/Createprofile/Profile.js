@@ -72,8 +72,8 @@ const Profile = () => {
             return { ...item,selected: false }
           }
         })
-
         setAllInterests(intData)
+        setSelectedInterest(intData.filter(item => item.selected))
       })
       .catch(err => {
         console.log(err);
@@ -87,7 +87,6 @@ const Profile = () => {
   },[allInterests])
 
   let intIds = interest.map(item => item.id)
-
 
 
   const body = {
@@ -104,7 +103,7 @@ const Profile = () => {
     editProfile(body,profileData.mobile_no)
       .then(res => {
         dispatch(updateProfileData({ profileData: res.data.data }))
-        alert('profile data saved')
+        alert('Profile Data Saved!')
         navigate('/home')
       })
       .catch(err => {
@@ -300,7 +299,7 @@ const Profile = () => {
                 <label htmlFor="" className={styles.emaillabel} onClick={openinterest} >Interests</label>
 
                 {
-                  interest.length === 0 ?
+                  selectedInterest.length === 0 ?
                     <div type="text" placeholder='Click to choose' onClick={openinterest}
                       className={`${styles.chooseinput} sm:w-[58%]`}>
                       <p className=' pl-3  pt- sm:pt-0'> Click to choose</p>

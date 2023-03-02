@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Slider from 'react-slick';
 import Session from '../../components/Session/Session';
@@ -10,7 +10,7 @@ import './Sessions.css';
 
 const Sessions = () => {
 
-   const [allSessions,setAllSessions] = useState([])
+   const [allSessions, setAllSessions] = useState([])
    const navigate = useNavigate()
 
    const fetchSession = () => {
@@ -25,7 +25,7 @@ const Sessions = () => {
    }
    useEffect(() => {
       fetchSession()
-   },[])
+   }, [])
    const settings = {
       infinite: false,
       // centerPadding: "60px",
@@ -76,19 +76,23 @@ const Sessions = () => {
                Live sessions
             </h1>
             <h1 className='text-xl font-black pl-4 cursor-pointer lg:text-5xl lg:font-semibold show-events'
-               onClick={() => navigate('/live-events')}>Events</h1>
-            <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+               onClick={() => navigate('/live-events')}>
+               Events
+            </h1>
+            <p className='pl-7 hidden lg:block cursor-pointer'>
+               <img src={Arrow} onClick={() => navigate('/live-events')} alt="" />
+            </p>
          </div>
          <div className='px-4 md:hidden'>
             <Slider {...settings} >
-               {allSessions.map((session,idx) => {
+               {allSessions.map((session, idx) => {
                   return <Session key={idx} {...session} scrollToTop={true} />
                })}
             </Slider>
          </div>
          <div className='px-4 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6 gap-y-6'>
 
-            {allSessions.map((session,idx) => {
+            {allSessions.map((session, idx) => {
                return <Session key={idx} {...session} scrollToTop={true} />
             })}
 

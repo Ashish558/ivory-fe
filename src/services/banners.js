@@ -4,3 +4,6 @@ import { BASE_URL, getAuthHeaders } from "./constants";
 export const getBanners = (body) => {
    return axios.get(`${BASE_URL}/activity/banners/`)
 };
+export const getHomeBanners = (body) => {
+   return axios.get(`${BASE_URL}/activity/cards/`)
+};

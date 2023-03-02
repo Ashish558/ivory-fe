@@ -1,13 +1,14 @@
 import React from 'react'
 import styles from "./Four.module.css"
 import four from "../../assets/images/login/four.png"
-import {delay, easeIn, easeInOut, easeOut, motion as m} from "framer-motion"
+import { delay, easeIn, easeInOut, easeOut, motion as m } from "framer-motion"
 import { Link, useNavigate } from 'react-router-dom'
 
-const Four = () => {
+const Four = ({ clearTimeouts }) => {
   const navigate = useNavigate()
+
   return (
-    <m.div initial={{ opacity: 0.7 }} animate={{ opacity: 1 }} transition={{ duration: 0.7,ease: easeIn,ease:easeOut }} className={`${styles.fullscreen} overflow-hidden h-screen`}>
+    <m.div initial={{ opacity: 0.7 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, ease: easeIn, ease: easeOut }} className={`${styles.fullscreen} overflow-hidden h-screen`}>
       <div className="topAppBar ml-8 z-[9999] absolute top-16 right-0">
         <div className="flex justify-between items-center">
           <div className="flex items-end justify-end content-end w-full">
@@ -23,31 +24,34 @@ const Four = () => {
       <img className={styles.imgup} src={four} alt="" />
       <div className={styles.down}>
         <span className={styles.head}>
-          <p className='text-2xl tracking-[2px] font-bold'><span style={{color:"#60FFDE"}}>Belong</span> to a community that matters </p>
+          <p className='text-2xl tracking-[2px] font-bold'><span style={{ color: "#60FFDE" }}>Belong</span> to a community that matters </p>
         </span>
         <div className={styles.circles}>
-            <div className={styles.CircleShape1} >
-                
-            </div>
-            <div className={styles.CircleShape2} >
-                
-            </div>
-            <div className={styles.CircleShape3} >
-                
-            </div>
-            <div className={styles.CircleShape4} >
-                
-            </div>
+          <div className={styles.CircleShape1} >
+
+          </div>
+          <div className={styles.CircleShape2} >
+
+          </div>
+          <div className={styles.CircleShape3} >
+
+          </div>
+          <div className={styles.CircleShape4} >
+
+          </div>
         </div>
         <div className={styles.button}>
-            <p style={{
-            "textAlign":"center",
-            "color":"white",
+          <p style={{
+            "textAlign": "center",
+            "color": "white",
             "font-size": "18px",
             "marginTop": "6px"
+          }}
+            onClick={() => {
+              clearTimeouts()
+              navigate('/login')
             }}
-            onClick={()=>navigate('/login')}
-            >Let's go</p>
+          >Let's go</p>
         </div>
       </div>
     </m.div>

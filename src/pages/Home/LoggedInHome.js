@@ -19,27 +19,38 @@ import DesktopStories from '../Desktop/DesktopStories/DesktopStories';
 import DesktopActivities from '../Desktop/DesktopActivities/DesktopActivities';
 import DesktopEvents from '../Desktop/DesktopEvents/DesktopEvents';
 import DesktopLearn from '../Desktop/Learn/DesktopLearn';
-import { getBanners } from '../../services/banners';
+import { getHomeBanners } from '../../services/banners';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import SliderCards from '../../components/SliderCards/SliderCards';
 
 const LoggedInHome = () => {
 
-    const user = useSelector(state => state.user)
+    const { profileData } = useSelector(state => state.user)
     const location = useLocation()
     const navigate = useNavigate()
     const [banners, setBanners] = useState([])
- 
+
+    // console.log('profileData', profileData);
+
     useEffect(() => {
-       getBanners()
-          .then(res => {
-             if (res.data.data === null) return
-             let homeBanners = res.data.data.filter(item => item.location_link === location.pathname)
-             setBanners(homeBanners)
-          })
-    }, [location.pathname])
- 
-    // console.log('user', user);
+        getHomeBanners()
+            .then(res => {
+                if (res.data.data === null) return
+                let tempbanners = res.data.data
+                tempbanners = tempbanners.map(banner => {
+                    if(banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0 ){
+                        return 
+                    }else{
+                        return banner
+                    }
+                }).filter(item => item !== undefined)
+                // console.log('tempbanners', tempbanners);
+                setBanners(tempbanners)
+            })
+    }, [location.pathname, profileData])
+
+    // console.log('banners', banners);
     return (
 
         <div className='container mx-auto'>
@@ -61,7 +72,7 @@ const LoggedInHome = () => {
 
             <div className='mobile pb-12 mb-12'>
                 {/* <Navbar></Navbar> */}
-                <SimpleSlider banners={banners}></SimpleSlider>
+                <SliderCards banners={banners} />
                 {/* <Video></Video>
             <Banner></Banner> */}
 

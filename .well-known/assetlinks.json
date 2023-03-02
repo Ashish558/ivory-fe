@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.netlify.ivory_test.twa",
+                     "sha256_cert_fingerprints": ["34:E0:A1:AF:4B:9F:14:B6:1D:EE:F7:CA:F5:73:54:08:D2:1B:26:35:62:08:97:7F:EF:CC:7D:63:D3:85:43:2F"] }
+      }
+]
