@@ -23,6 +23,7 @@ import { getHomeBanners } from '../../services/banners';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import SliderCards from '../../components/SliderCards/SliderCards';
+import ScrollToTop from '../../assets/icons/scroll-to-top.svg'
 
 const LoggedInHome = () => {
 
@@ -39,9 +40,9 @@ const LoggedInHome = () => {
                 if (res.data.data === null) return
                 let tempbanners = res.data.data
                 tempbanners = tempbanners.map(banner => {
-                    if(banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0 ){
-                        return 
-                    }else{
+                    if (banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0) {
+                        return
+                    } else {
                         return banner
                     }
                 }).filter(item => item !== undefined)
@@ -50,6 +51,13 @@ const LoggedInHome = () => {
             })
     }, [location.pathname, profileData])
 
+
+    const handleScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
     // console.log('banners', banners);
     return (
 
@@ -84,16 +92,27 @@ const LoggedInHome = () => {
                 <Sessions></Sessions>
                 <Courses></Courses>
                 <Footer></Footer>
+                <div className='flex justify-end px-4 lg:px-[80px] pb-[60px] lg:pb-100px'>
+                <div className='flex flex-col items-center'>
+                    <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
+                    <p> scroll to top </p>
+                </div>
+            </div>
             </div>
             {/* <div className='mt-7 mx-5 rounded-lg background grid grid-rows-2'>
                 <div className='w-1/2'>
                     <iframe src="https://www.youtube.com/embed/0-LBbcMMruQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
+                home - scroltotop
+                enroll box fix
+                story borderradius
+                add data backend
                 <div className=''>
                     Learn how to use  Ivory app
                 </div>
 
             </div> */}
+          
         </div>
     );
 };
