@@ -1,25 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { useState } from 'react';
-import styles from './styles.module.css'
-import { useNavigate, useParams } from "react-router-dom";
+import React,{ useEffect,useRef,useState } from 'react';
+import { useParams } from "react-router-dom";
+import styles from './styles.module.css';
 
 // import liveSession from './assets/images/learn/liveSession.png';
-import playIcon from "../../../assets/images/enroll/play.png";
-import videoBg from "../../../assets/images/enroll/videoBg.png";
 import greenTik from "../../../assets/images/learn/greenTik.png";
 import liveSession from "../../../assets/images/learn/liveSession.png";
-import module2 from "../../../assets/images/learn/module2.png";
-import module3 from "../../../assets/images/learn/module3.png";
-import module4 from "../../../assets/images/learn/module4.png";
-import { tempData } from './data';
-import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
-import { createUserAssignment, createUserModule, getUserAssignments, getUserModules, getUserProgram, updateUserModule } from '../../../services/program';
-import { getFormattedDuration, getFormattedDate } from '../../../utils/utils';
-import ReactPlayer from 'react-player';
-import Assignment from '../Assignment/Assignment';
 import SingleAssignment from '../../../components/Assignment/SingleAssignment';
+import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
+import { createUserAssignment,createUserModule,getUserAssignments,getUserModules,getUserProgram,updateUserModule } from '../../../services/program';
+import { getFormattedDate,getFormattedDuration } from '../../../utils/utils';
+import Assignment from '../Assignment/Assignment';
 
-const LiveSession = () => {
+const Program = () => {
 
   const [sesstionStatus, setSesstionStatus] = useState("");
   const [moduleStatus, setModuleStatus] = useState('running');
@@ -431,4 +423,4 @@ const LiveSession = () => {
   );
 };
 
-export default LiveSession;
+export default Program;
