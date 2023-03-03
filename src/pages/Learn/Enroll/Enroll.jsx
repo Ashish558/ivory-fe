@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 import useRazorpay from "react-razorpay";
-import { useLocation, useNavigate,useParams } from "react-router-dom";
+import { useLocation,useNavigate,useParams } from "react-router-dom";
+import greenTik from "../../../assets/images/learn/greenTik.png";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
@@ -20,7 +21,6 @@ import {
   getPricingMainText,
   shareLink
 } from "../../../utils/utils";
-
 const Enroll = () => {
   //enrollType "", "reg", "free"
   const [enrollType, setEnrollType] = useState("reg");
@@ -362,7 +362,7 @@ const Enroll = () => {
             </div>
           </div>
 
-          <div className="lg:grid lg:grid-cols-2  mt-50 overflow-x-scroll lg:overflow-hidden">
+          <div className="lg:grid lg:grid-cols-2 gap-12 mt-50 overflow-x-scroll lg:overflow-hidden">
             {allPrograms.map((item, index) => (
               <ProgramCard key={item.id} {...item} />
             ))}
@@ -479,8 +479,8 @@ const Enroll = () => {
               <SecondaryButton
                 children={"Registered already"}
                 // onClick={handleEnroll}
-                className="w-full "
-              />
+                className="w-full "  img={`${greenTik}`} /> 
+             
             ) : (
               <PrimaryButton
                 children={
