@@ -8,7 +8,7 @@ import liveSession from "../../../assets/images/learn/liveSession.png";
 import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
 import { createUserAssignment,createUserModule,getUserAssignments,getUserModules,getUserProgram,updateUserModule } from '../../../services/program';
-import { getFormattedDate,getFormattedDuration } from '../../../utils/utils';
+import { getFormattedDate,getFormattedDuration, handleScrollToTop } from '../../../utils/utils';
 import Assignment from '../Assignment/Assignment';
 
 const Program = () => {
@@ -138,7 +138,7 @@ const Program = () => {
   }, [])
 
   const onClickAssignment = assignmentId => {
-    console.log(assignmentId);
+    // console.log(assignmentId);
     if (checkIfAssignmentExists(assignmentId)) {
       // alert('exist')
       const userAssignment = allUserAssignments.find(item => item.assignment.id === assignmentId)
@@ -156,7 +156,7 @@ const Program = () => {
       }).catch(err => {
         console.log(err.response);
       })
-
+      handleScrollToTop()
   }
   const checkIfAssignmentExists = (assignmentId) => {
     let exists = false
