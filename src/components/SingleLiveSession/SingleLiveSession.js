@@ -4,7 +4,7 @@ import playIcon from "../../assets/images/enroll/play.png";
 import videoBg from "../../assets/images/enroll/videoBg.png";
 import greenTik from "../../assets/images/learn/greenTik.png";
 import { getFormattedDuration } from '../../utils/utils';
-import './SingleLiveSession.css'
+import './styles.module.css'
 
 
 export default function SingleLiveSession({ id, duration, name, image, is_completed, handleModulechange, selectedModule, type, isCompleted }) {
