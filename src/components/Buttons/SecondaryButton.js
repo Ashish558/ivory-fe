@@ -10,8 +10,7 @@ export default function SecondaryButton({ className,children,onClick,disabled })
          onClick={onClick}
          disabled={disabled !== undefined ? disabled : false}
       >
-         <img src={greenTik} className="h-[22px] pb-1 px-3" alt="" />
-
+         {/* <img src={greenTik} className="h-[22px] pb-1 px-3" alt="" /> */}
          {children}
       </button>
    )

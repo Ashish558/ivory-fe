@@ -168,6 +168,11 @@ const Program = () => {
     return exists
   }
 
+  const handleZoomMeeting = (url)=>{
+    // window.open(`https://zoom.us/j/${url}`)
+    window.open(url)
+    
+ }
   // console.log('allUserAssignments', allUserAssignments)
   // console.log('selectedAssignment', selectedAssignment)
   // console.log('userModules', userModules)
@@ -363,7 +368,7 @@ const Program = () => {
                 </li>
               </ul>
             </div>
-            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center">
+            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center" onClick={()=>handleZoomMeeting(selectedModule.zoom_meeting_link)} >
               {" "}
               Join Zoom Session
             </button>

@@ -10,7 +10,7 @@ import Star from '../../../Images/Learn/Star.png'
 import { getPrograms } from '../../../services/program';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { getFormattedDuration, getPricingDiscountedText, getPricingMainText } from '../../../utils/utils';
+import { getFormattedDuration, getPricingDiscountedText, getPricingMainText, handleScrollToTop } from '../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -81,6 +81,7 @@ const DesktopLearn = () => {
 
    const handleNavigate = (id) => {
       navigate(`/learn/${id}`)
+      handleScrollToTop()
    }
 
    return (

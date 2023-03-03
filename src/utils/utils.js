@@ -119,9 +119,31 @@ export function convertLinkToDataUrl(url, cb) {
 
 export function dataURLtoFile(dataurl, filename) {
    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-   bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-   while(n--){
-   u8arr[n] = bstr.charCodeAt(n);
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+   while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
    }
- return new File([u8arr], filename, {type:mime});
+   return new File([u8arr], filename, { type: mime });
+}
+
+export const handleScrollToTop = () => {
+   window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+   });
+}
+
+
+export const shareLink = (title, text, url) => {
+   if (navigator.share) {
+      navigator.share({
+         title: title ? title : 'Ivory',
+         text: text ? text : 'Ivory',
+         url: url
+      })
+         .then(() => console.log('Successful share'))
+         .catch(error => console.log('Error sharing:', error));
+   }
+   // console.log(location.pathname);
+   // setShareModalOpen(true);
 }
