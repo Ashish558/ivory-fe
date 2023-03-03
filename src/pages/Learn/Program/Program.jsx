@@ -19,7 +19,7 @@ import ReactPlayer from 'react-player';
 import Assignment from '../Assignment/Assignment';
 import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 
-const LiveSession = () => {
+const Program = () => {
 
   const [sesstionStatus, setSesstionStatus] = useState("");
   const [moduleStatus, setModuleStatus] = useState('running');
@@ -39,7 +39,7 @@ const LiveSession = () => {
   const [allUserAssignments, setAllUserAssignments] = useState([])
 
   useEffect(() => {
-    if(tab === 0 || tab === 1){
+    if (tab === 0 || tab === 1) {
       setSelectedAssignment({})
     }
   }, [tab])
@@ -197,8 +197,8 @@ const LiveSession = () => {
         )}
         {tab === 0 && (
           <div className="video flex justify-center items-center relative lg:hidden">
-            {/* <img src={videoBg} alt="video" className="w-full" />
-            <img src={playIcon} alt="" className="absolute" /> */}
+            <img src={videoBg} alt="video" className="w-full" />
+            <img src={playIcon} alt="" className="absolute" />
             {
               selectedModule !== undefined && selectedModule.video ?
                 <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" onEnded={handleOnVideoEnd} >
@@ -254,21 +254,23 @@ const LiveSession = () => {
           <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300">
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => setTab(0)} >
-              <span className="px-2  lg:px-5">all Modules</span>
+              <span className="px-2  lg:px-5 lg:text-base text-sm ">all Modules</span>
               {tab === 0 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => setTab(1)}>
-              <span className="px-2">Live Sessions</span>
+              <span className="px-2 lg:text-base text-sm">Live Sessions</span>
               {tab === 1 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => setTab(2)}>
-              Assignments
+              <span className='lg:text-base text-sm'>
+                Assignments
+              </span>
               {tab === 2 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full " />
               )}
@@ -277,10 +279,10 @@ const LiveSession = () => {
         </div>
         {tab === 0 && (
           <div className='block lg:hidden'>
-            <div className="text-2xl font-bold text-black ml-6">
+            <div className="text-xl font-bold text-black ml-6">
               {name}
             </div>
-            <div className="text-gray-500 text-lg ml-6">
+            <div className="text-gray-500 text-sm ml-6">
               <div dangerouslySetInnerHTML={{ __html: description }} />
               {/* <span className="text-blue-500"> See more</span> */}
             </div>
@@ -313,11 +315,12 @@ const LiveSession = () => {
           </div>
         )}
       </div>
+      {/* && selectedModule && selectedModule.type === "live_session" */}
       {tab === 1 && selectedModule && selectedModule.type === "live_session" && (
         <div className='px-5'>
           <div className="sessionDetails flex flex-col gap-3">
-            <button className="bg-red-100 text-red-500 p-1 w-[200px] rounded-full mt-5">
-              upcomming session
+            <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
+              next live session
             </button>
             <h1 className="font-bold text-lg">
               {selectedModule.name}
@@ -325,29 +328,29 @@ const LiveSession = () => {
             <div className="flex flex-col gap-3">
               <ul>
                 <li className="list-none">
-                  <span className="text-gray-400 font-semibold">Date: </span>{" "}
-                  <span className="font-bold text-normal">
+                  <span className="text-gray-400 font-semibold  text-sm" >Date: </span>{" "}
+                  <span className="font-bold text-normal  text-sm">
                     {getFormattedDate(selectedModule.scheduled_on_date)}
                   </span>
                 </li>
                 <li className="list-none">
-                  <span className="text-gray-400 font-semibold">Time: </span>{" "}
-                  <span className="font-bold text-normal">
+                  <span className="text-gray-400 font-semibold  text-sm">Time: </span>{" "}
+                  <span className="font-bold text-normal  text-sm">
                     {getFormattedDuration(selectedModule.scheduled_on_start_time)}
                     {" "}
                   </span>
                 </li>
                 <li className="list-none">
-                  <span className="text-gray-400 font-semibold">
+                  <span className="text-gray-400 font-semibold  text-sm">
                     Duration:{" "}
                   </span>{" "}
-                  <span className="font-bold text-normal">
+                  <span className="font-bold text-normal  text-sm">
                     {getFormattedDuration(selectedModule.scheduled_on_end_time)}
                   </span>
                 </li>
                 <li className="list-none">
-                  <span className="text-gray-400 font-semibold">Host: </span>{" "}
-                  <span className="font-bold text-normal text-blue-500">
+                  <span className="text-gray-400 font-semibold  text-sm">Host: </span>{" "}
+                  <span className="font-bold text-normal text-blue-500  text-sm">
                     {instructor?.name}
                   </span>
                 </li>
@@ -357,21 +360,28 @@ const LiveSession = () => {
           <div className="flex flex-col  justify-start gap-3">
             <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-full mt-5">
               <ul className="ml-2 mt-2">
-                <li className="list-none text-lg text-gray-400 font-semibold">
-                  Zoom Meeting ID:{" "}
-                  <span className="font-bold text-black">
+                <li className="list-none  text-sm text-gray-400 font-semibold">
+                  Zoom Conference ID:{" "}
+                  <span className="font-bold text-black  text-sm">
                     {selectedModule.zoom_meeting_id}
                   </span>
                 </li>
-                <li className="list-none text-lg text-gray-400 font-semibold">
+                {/* <li className="list-none lg:text-lg text-gray-400 font-semibold text-sm">
                   Zoom meeting link:{" "}
                 </li>
-                <li className="list-none text-lg font-semibold text-blue-400 break-all">
+                <li className="list-none lg:text-lg text-sm font-semibold text-blue-400 break-all">
                   {selectedModule.zoom_meeting_link}
+                </li> */}
+                <li className="list-none  text-gray-400 font-semibold text-sm">
+                  Zoom Passcode:{" "}
+                  <span className="font-bold text-black  text-sm">
+                    ******
+                  </span>
                 </li>
+
               </ul>
             </div>
-            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center">
+            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center mt-3">
               {" "}
               Join Zoom Session
             </button>
@@ -379,12 +389,13 @@ const LiveSession = () => {
         </div>
       )}
       {tab === 1 && (
-        <h1 className="font-bold text-lg ml-5 mt-5">
+        <h1 className="font-bold text-base ml-5 mt-7">
           upcoming live sessions
         </h1>
+
       )}
       {tab === 0 && (
-        <div className="text-black text-lg ml-6 font-bold mt-5">
+        <div className="text-black text-base ml-6 font-bold mt-5">
           8 Videos
           <span className="text-gray-500 text-normal font-normal">
             {" "}
@@ -414,10 +425,10 @@ const LiveSession = () => {
             })}
           </div> : Object.keys(selectedAssignment).length > 2 ?
             <Assignment selectedAssignment={selectedAssignment}
-             fetchUserAssignments={fetchUserAssignments}
+              fetchUserAssignments={fetchUserAssignments}
               assignments={assignments}
               onClickAssignment={onClickAssignment}
-               /> :
+            /> :
             <div className='lg:max-w-[350px]'>
               {assignments.map(assignment => {
                 return <SingleAssignment key={assignment.id} {...assignment}
@@ -431,4 +442,4 @@ const LiveSession = () => {
   );
 };
 
-export default LiveSession;
+export default Program;

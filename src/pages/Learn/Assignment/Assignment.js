@@ -242,7 +242,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
 
             <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
                <p className='text-xl sm:text-4xl font-medium mb-2.5 px-4 sm:py-4'>
-                 {name} 
+                  {name}
                </p>
                {
                   video_link !== null ?
@@ -326,7 +326,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                               <>
                                  <img src={MarkIcon} className='mr-2.5' alt='mark'
                                  />
-                                 Mark Completed
+                                 <span className='text-sm'>Mark Completed</span>
                               </>
                            }
                         />
@@ -335,7 +335,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                      children={
                         <>
                            <img src={ShareIcon} className='mr-2.5' alt='mark' />
-                           Share
+                           <span className='text-sm'>Share</span>
                         </>
                      }
                   />
@@ -349,7 +349,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                         </p>
                         <div className='h-[51px] bg-[#85FFB2] flex justify-center items-center rounded-full mt-3'
                            onClick={handleUploadClick}>
-                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> submit via WhatsApp
+                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> <span className='text-sm'>submit via WhatsApp</span>
                         </div>
                         {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                            <img src={UploadIcon}
@@ -428,13 +428,13 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                </h4>
 
                <div className='mt-5 lg:grid lg:grid-cols-3 2xl:grid-cols-4 sm:mx-[60px] '>
-               <div className='lg:max-w-[350px]'>
-              {assignments.map(assignment => {
-                return <SingleAssignment key={assignment.id} {...assignment}
-                  onClickAssignment={onClickAssignment}
-                   />
-              })}
-            </div>
+                  <div className='lg:max-w-[350px]'>
+                     {assignments.map(assignment => {
+                        return <SingleAssignment key={assignment.id} {...assignment}
+                           onClickAssignment={onClickAssignment}
+                        />
+                     })}
+                  </div>
                </div>
             </div>
          </div>

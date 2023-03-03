@@ -29,7 +29,7 @@ import Third from './pages/splash/Third';
 // import Enroll from './pages/Home'
 // import LogoLanding from './pages/splash/LogoLanding';
 import Enroll from './pages/Learn/Enroll/Enroll';
-import LiveSession from './pages/Learn/LiveSessionNew/LiveSession';
+
 import Dob from './pages/SignUp/Dob';
 import LiveEvents from './pages/LiveEvents/LiveEvents';
 import SingleSession from './pages/SingleSession/SingleSession';
@@ -37,6 +37,7 @@ import SingleSession from './pages/SingleSession/SingleSession';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 import Confirmation from './pages/Learn/Confirmation/Confirmation';
 import Community from './pages/Learn/Community/Community';
+import Program from './pages/Learn/Program/Program';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -113,7 +114,7 @@ function App() {
         <Route path="/home" element={<LoggedInHome />} />
 
         <Route path="/activities" element={<Activities />} />
-        <Route path="/activities/:categoryId"  element={<ActivityType />} />
+        <Route path="/activities/:categoryId" element={<ActivityType />} />
         <Route path="/activities/:categoryId/:activityId/start"
           element={
             <StartActivity fetchUserDetails={fetchUserDetails} />
@@ -122,7 +123,7 @@ function App() {
 
         <Route path="/live-events" element={<LiveEvents />} />
         <Route path="/live-events/:id" element={<SingleSession />} />
-        <Route path="/program/:id" element={<LiveSession />} />
+        <Route path="/program/:id" element={<Program />} />
         <Route path="/community" element={<Community />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/learn/:id" element={<Enroll />} />
@@ -138,9 +139,9 @@ function App() {
 
         <Route path="/confirmation" element={<Confirmation />} />
 
-        <Route path="/Assignment"  element={<Assignment />} />
+        <Route path="/Assignment" element={<Assignment />} />
         <Route path="/Assignment1" element={<Assignment1 />} />
-       
+
       </Routes >
       <Footer />
     </BrowserRouter >
