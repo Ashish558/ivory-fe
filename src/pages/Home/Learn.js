@@ -209,11 +209,11 @@ const Learn = () => {
          toggle.style.backgroundColor = "gray";
       }
    }
-
-
+   
+   console.log('myPrograms', myPrograms);
    return (
-      <div className='lg:mx-28 lg: lg:my-[70px] mb-24 '>
-         <div className="bg-[#EEFCFF] lg:bg-white p-5">
+      <div className='lg:mx-28 lg: lg:my-[70px] mb-24  lg:mt-40'>
+         <div className="bg-[#EEFCFF] lg:bg-white p-5 lg:fixed lg:w-full lg:z-10 lg:top-10">
             <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block text-black'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-1 text-[#74777F] lg:hidden block font-medium'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
@@ -261,7 +261,7 @@ const Learn = () => {
          <div className="px-5 sm:w-full sm:overflow-hidden ">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden" >
+         <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden mt-3 md:gap-12" >
             {myPrograms ?
                userProgramsFiltered.map((item,index) => (
                   <ProgramCard key={item.id} {...item.program}
@@ -269,6 +269,7 @@ const Learn = () => {
                      userProgramId={item.id}
                      is_completed={item.is_completed}
                      percentage_completed={item.percentage_completed}
+                     myPrograms={myPrograms}
                   />
                )) :
                allProgramsFiltered.map((item,index) => (
