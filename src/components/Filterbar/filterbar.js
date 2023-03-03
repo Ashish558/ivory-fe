@@ -12,14 +12,14 @@ import styles from './filterbar.module.css'
 export default function Filterbar({ items, onChange }) {
 
    return (
-      <div className='overflow-auto mt-4'>
-         <div className='flex items-center gap-y-1 lg:gap-y-1 flex-nowrap lg:flex-wrap'>
+      <div className='overflow-auto mt-4 '>
+         <div className='flex items-center gap-y-1 lg:gap-y-1 flex-nowrap lg:flex-wrap font-roboto sm:font-inter'>
             {
                items.map(item => {
                   return (
                      <div key={item.id}
                         onClick={() => onChange(item)}
-                        className={`text-base h-[36px] font-medium cursor-pointer border border-[#79747E] flex justify-center items-center mr-2 rounded-lg px-2.5 lg:px-3 py-1 shrink-0 lg:text-[18px] ${item.selected ? 'bg-primary text-white' : 'text-lightBlack'} ${!item.selected ? styles.ite : ''} `}>
+                        className={` h-[36px] font-medium cursor-pointer border border-[#79747E] flex justify-center items-center mr-2 rounded-lg px-2.5 lg:px-3 py-1 shrink-0 lg:text-[18px] text-sm ${item.selected ? 'bg-primary text-white' : 'text-lightBlack'} ${!item.selected ? styles.ite : ''} `}>
                         {item.children}
                      </div>
                   )

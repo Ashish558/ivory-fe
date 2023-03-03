@@ -1,23 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import { useState } from 'react';
-import styles from './styles.module.css'
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from "react-router-dom";
+import styles from './styles.module.css';
 
 // import liveSession from './assets/images/learn/liveSession.png';
-import playIcon from "../../../assets/images/enroll/play.png";
-import videoBg from "../../../assets/images/enroll/videoBg.png";
 import greenTik from "../../../assets/images/learn/greenTik.png";
 import liveSession from "../../../assets/images/learn/liveSession.png";
-import module2 from "../../../assets/images/learn/module2.png";
-import module3 from "../../../assets/images/learn/module3.png";
-import module4 from "../../../assets/images/learn/module4.png";
-import { tempData } from './data';
+import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
 import { createUserAssignment, createUserModule, getUserAssignments, getUserModules, getUserProgram, updateUserModule } from '../../../services/program';
-import { getFormattedDuration, getFormattedDate } from '../../../utils/utils';
-import ReactPlayer from 'react-player';
+import { getFormattedDate, getFormattedDuration, handleScrollToTop } from '../../../utils/utils';
 import Assignment from '../Assignment/Assignment';
-import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 
 const Program = () => {
 
@@ -146,7 +138,7 @@ const Program = () => {
   }, [])
 
   const onClickAssignment = assignmentId => {
-    console.log(assignmentId);
+    // console.log(assignmentId);
     if (checkIfAssignmentExists(assignmentId)) {
       // alert('exist')
       const userAssignment = allUserAssignments.find(item => item.assignment.id === assignmentId)
@@ -164,7 +156,7 @@ const Program = () => {
       }).catch(err => {
         console.log(err.response);
       })
-
+    handleScrollToTop()
   }
   const checkIfAssignmentExists = (assignmentId) => {
     let exists = false
@@ -176,6 +168,11 @@ const Program = () => {
     return exists
   }
 
+  const handleZoomMeeting = (url) => {
+    // window.open(`https://zoom.us/j/${url}`)
+    window.open(url)
+
+  }
   // console.log('allUserAssignments', allUserAssignments)
   // console.log('selectedAssignment', selectedAssignment)
   // console.log('userModules', userModules)
@@ -197,8 +194,8 @@ const Program = () => {
         )}
         {tab === 0 && (
           <div className="video flex justify-center items-center relative lg:hidden">
-            <img src={videoBg} alt="video" className="w-full" />
-            <img src={playIcon} alt="" className="absolute" />
+            {/* <img src={videoBg} alt="video" className="w-full" />
+            <img src={playIcon} alt="" className="absolute" /> */}
             {
               selectedModule !== undefined && selectedModule.video ?
                 <video width='100%' height='100%' className={`max-h-[688px] ${styles.video}`} controls controlsList="nodownload" onEnded={handleOnVideoEnd} >
@@ -381,29 +378,33 @@ const Program = () => {
 
               </ul>
             </div>
-            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center mt-3">
+            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)} >
               {" "}
               Join Zoom Session
             </button>
           </div>
-        </div>
+        </div >
       )}
-      {tab === 1 && (
-        <h1 className="font-bold text-base ml-5 mt-7">
-          upcoming live sessions
-        </h1>
+      {
+        tab === 1 && (
+          <h1 className="font-bold text-base ml-5 mt-7">
+            upcoming live sessions
+          </h1>
 
-      )}
-      {tab === 0 && (
-        <div className="text-black text-base ml-6 font-bold mt-5">
-          8 Videos
-          <span className="text-gray-500 text-normal font-normal">
-            {" "}
-            ( 3 hrs 15 min )
-          </span>{" "}
-          | 4 live sessions
-        </div>
-      )}
+        )
+      }
+      {
+        tab === 0 && (
+          <div className="text-black text-base ml-6 font-bold mt-5">
+            8 Videos
+            <span className="text-gray-500 text-normal font-normal">
+              {" "}
+              ( 3 hrs 15 min )
+            </span>{" "}
+            | 4 live sessions
+          </div>
+        )
+      }
       {
         tab === 0 || tab === 1 ?
           <div className='lg:max-w-[350px]'>
@@ -438,7 +439,7 @@ const Program = () => {
 
         // <Assignment />
       }
-    </div>
+    </div >
   );
 };
 

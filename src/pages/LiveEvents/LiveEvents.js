@@ -14,6 +14,7 @@ import { getLiveSessions } from '../../services/liveSession';
 import Filterbar from '../../components/Filterbar/filterbar';
 import { getInterests } from '../../services/activities';
 import Background from '../../assets/images/background.svg'
+import UpcomingSession from '../../components/Session/UpcomingSession';
 
 
 export const tempSessionData = [
@@ -219,7 +220,7 @@ export default function LiveEvents() {
                <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
                <Slider {...settings} >
                   {upcomingFiiltered.map((session, idx) => {
-                     return <Session key={idx} {...session} />
+                     return <UpcomingSession key={idx} {...session} />
                   })}
                </Slider>
             </div>

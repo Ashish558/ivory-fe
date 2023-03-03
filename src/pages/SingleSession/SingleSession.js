@@ -2,13 +2,13 @@ import React, { useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import ReactPlayer from 'react-player/youtube'
-import { useNavigate, useParams } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import Slider from 'react-slick'
 import EventImg from '../../assets/images/event.png'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import Session from '../../components/Session/Session'
 import { getLiveSessions, getSingleLiveSessions, getUserLiveSessions, registerLiveSession } from '../../services/liveSession'
-import { getFormattedDate, getFormattedDuration } from '../../utils/utils'
+import { getFormattedDate, getFormattedDuration, shareLink } from '../../utils/utils'
 import { tempSessionData } from '../LiveEvents/LiveEvents'
 import { settings } from '../LiveEvents/settings'
 import styles from './style.module.css'
@@ -23,7 +23,9 @@ export default function SingleSession({ }) {
    const { id } = useParams()
    const { loggedIn } = useSelector(state => state.user)
    const [isEnrolled, setIsEnrolled] = useState(false)
+
    const navigate = useNavigate()
+   const location = useLocation()
 
    useEffect(() => {
       getSingleLiveSessions(id, loggedIn)
@@ -46,9 +48,11 @@ export default function SingleSession({ }) {
             console.log(err.repsonse)
          });
    }
+  
    useEffect(() => {
       fetchSession()
    }, [])
+
    const fetchUserSessions = () => {
       if (!loggedIn) return
       getUserLiveSessions()
@@ -91,9 +95,13 @@ export default function SingleSession({ }) {
             });
       }
    }
-   console.log('isEnrolled', isEnrolled)
+  
+   // console.log('isEnrolled', isEnrolled)
    const { name, description, image, scheduled_on, duration, scheduled_on_start_time, scheduled_on_end_time, host, is_completed } = session
-
+   
+   const onShare = ()=>{
+      shareLink(name, 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
+   }
 
    return (
       <div className='pb-12 mb-10 lg:mt-[84px]'>
@@ -168,7 +176,9 @@ export default function SingleSession({ }) {
                   onClick={isEnrolled !== true && handleRegisterClick} />
 
                <SecondaryButton children={<> <img src={ShareIcon} alt='share' className='mr-2.5' /> Share </>}
-                  className='bg-secondaryLigt w-full flex justify-center items-center max-w-[328px] mb-12' />
+                  className='bg-secondaryLigt w-full flex justify-center items-center max-w-[328px] mb-12'
+                  onClick={onShare}
+                  />
             </div>
 
             <h4 className='font-semibold mb-6'> upcoming live sessions </h4>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import styles from './styles.module.css'
 import ReactPlayer from 'react-player/youtube'
 
@@ -25,6 +25,7 @@ import Slider from "react-slick";
 import { getColors } from '../../../utils/utils'
 import { deleteUserSubmission, getUserAssignmentSubmissions, updateUserAssignment } from '../../../services/program'
 import SingleAssignment from '../../../components/Assignment/SingleAssignment'
+import { shareLink } from '../../../utils/utils'
 
 const settings = {
    infinite: false,
@@ -68,6 +69,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
    const videoRef = useRef(null)
 
    const navigate = useNavigate()
+   const location = useLocation()
 
    useEffect(() => {
       setUserAssignment(selectedAssignment)
@@ -202,8 +204,8 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
          .then(res => {
             console.log('all submissions -', res.data);
             // fetchUserActivities()
-            if (res.data.data === null) return
-            const currentAssignmentSub = res.data.data.filter(item => item.id === userAssignment.assignment.id)
+            if (res.data.data === null) return setSubmissions([])
+            const currentAssignmentSub = res.data.data.filter(item => item.assignment === userAssignment.id)
             setSubmissions(currentAssignmentSub)
          }).catch(err => {
             console.log('get submissions err', err.response);
@@ -306,7 +308,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                      </div>
 
                }
-               <div className='flex items-center gap-x-3 mt-8 mb-8'>
+               <div className='flex items-center gap-x-3 mt-8 mb-8 max-w-[350px]'>
                   {
                      is_completed === true ?
                         <PrimaryButton className={`flex items-center pl-4 pr-4 bg-primaryGreen`}
@@ -319,7 +321,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                               </>
                            }
                         /> :
-                        <PrimaryButton className={`flex items-center pl-4 pr-4`}
+                        <PrimaryButton className={`flex items-center justify-center pl-4 pr-4 w-auto`}
                            disabled={submissions.length === 0 ? true : false}
                            onClick={handleComplete}
                            children={
@@ -331,13 +333,15 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                            }
                         />
                   }
-                  <SecondaryButton className='flex items-center pl-5 pr-5' disabled={true}
+                  <SecondaryButton className='flex items-center border border-primary pl-5 pr-5'
+                     disabled={false}
                      children={
                         <>
                            <img src={ShareIcon} className='mr-2.5' alt='mark' />
                            <span className='text-sm'>Share</span>
                         </>
                      }
+                     onClick={() => shareLink(name, name, `https://ivory-test.netlify.app${location.pathname}`)}
                   />
                </div>
 
@@ -429,11 +433,19 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
 
                <div className='mt-5 lg:grid lg:grid-cols-3 2xl:grid-cols-4 sm:mx-[60px] '>
                   <div className='lg:max-w-[350px]'>
-                     {assignments.map(assignment => {
-                        return <SingleAssignment key={assignment.id} {...assignment}
-                           onClickAssignment={onClickAssignment}
-                        />
-                     })}
+                     {assignments.filter(assignment => assignment.id !== userAssignment.assignment.id)
+                        .map(assignment => {
+                           console.log(assignment);
+                           return <SingleAssignment key={assignment.id} {...assignment}
+                              onClickAssignment={onClickAssignment}
+                           />
+                        })}
+                     {
+                        assignments.filter(assignment => assignment.id !== userAssignment.assignment.id).length === 0 &&
+                        <div className='sm:mx-5 opacity-70 font-medium'>
+                           No next assignments
+                        </div>
+                     }
                   </div>
                </div>
             </div>

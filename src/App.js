@@ -29,15 +29,14 @@ import Third from './pages/splash/Third';
 // import Enroll from './pages/Home'
 // import LogoLanding from './pages/splash/LogoLanding';
 import Enroll from './pages/Learn/Enroll/Enroll';
-
-import Dob from './pages/SignUp/Dob';
+import Program from './pages/Learn/Program/Program';
 import LiveEvents from './pages/LiveEvents/LiveEvents';
+import Dob from './pages/SignUp/Dob';
 import SingleSession from './pages/SingleSession/SingleSession';
 
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
-import Confirmation from './pages/Learn/Confirmation/Confirmation';
 import Community from './pages/Learn/Community/Community';
-import Program from './pages/Learn/Program/Program';
+import Confirmation from './pages/Learn/Confirmation/Confirmation';
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
