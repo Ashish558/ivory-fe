@@ -480,7 +480,7 @@ const Enroll = () => {
                 children={"Registered already"}
                 // onClick={handleEnroll}
                 className="w-full "  img={`${greenTik}`} /> 
-             
+            
             ) : (
               <PrimaryButton
                 children={
@@ -491,7 +491,7 @@ const Enroll = () => {
                     : "Enroll"
                 }
                 onClick={handleEnroll}
-                className="w-full  h-[40px]"
+                className="w-full  h-[64px]"
               />
             )}
           </div>
