@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 import useRazorpay from "react-razorpay";
-import { useNavigate,useParams } from "react-router-dom";
+import { useLocation, useNavigate,useParams } from "react-router-dom";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
@@ -17,7 +17,8 @@ import {
 } from "../../../services/program";
 import {
   getPricingDiscountedText,
-  getPricingMainText
+  getPricingMainText,
+  shareLink
 } from "../../../utils/utils";
 
 const Enroll = () => {
@@ -33,6 +34,7 @@ const Enroll = () => {
   const Razorpay = useRazorpay();
   const [allPrograms, setAllPrograms] = useState([])
 
+  const location = useLocation()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -176,6 +178,11 @@ const Enroll = () => {
   useEffect(() => {
     fetchUserPrograms();
   }, []);
+
+  const onShare = ()=>{
+    shareLink('ivory Program', 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
+ }
+ 
   // console.log("programData", programData);
   // console.log("programExist", programExist);
   // console.log("isEnrolled", isEnrolled);
@@ -320,7 +327,7 @@ const Enroll = () => {
                 </button>
               )}
 
-              <button className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3">
+              <button className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3" onClick={onShare} >
                 {" "}
                 <img src={shareImg} alt="" />
                 <span> Share</span>
@@ -361,9 +368,9 @@ const Enroll = () => {
             ))}
           </div>
           <div className="lg:flex justify-end w-full hidden ">
-            <span className="ml-auto mr-3 text-blue-600 text-lg mt-6">
+            {/* <span className="ml-auto mr-3 text-blue-600 text-lg mt-6">
               See all
-            </span>
+            </span> */}
           </div>
           {/* conditionally render on register successfully */}
           {/* {enrollStatus === "enrolled" ? (
@@ -458,7 +465,7 @@ const Enroll = () => {
                     ? "Enroll for free"
                     : "Enroll"}
               </button> */}
-              <button className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]">
+              <button className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]" onClick={onShare}>
                 {" "}
                 <img src={shareImg} alt="" />
                 <span> Share</span>
