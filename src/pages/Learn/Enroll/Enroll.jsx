@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React,{ useEffect,useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 import useRazorpay from "react-razorpay";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
+import ProgramCard from "../../../components/ProgramCard/ProgramCard";
 import {
   createUserProgram,
   enrollProgram,
@@ -18,7 +19,6 @@ import {
   getPricingDiscountedText,
   getPricingMainText
 } from "../../../utils/utils";
-import ProgramCard from "../../../components/ProgramCard/ProgramCard";
 
 const Enroll = () => {
   //enrollType "", "reg", "free"
@@ -207,7 +207,7 @@ const Enroll = () => {
       </div>
       <div className=" lg:flex">
         <div className="lg:w-[800px] lg:mr-16">
-          <div className="flex flex-col sm:mb-0">
+          <div className="flex flex-col sm:mb-0  gap-5 lg:gap-0">
             <div className=" text-xl lg:text-[40px] font-medium text-black ml-6 lg:ml-0 mt-3 lg:mb-10">
               {name}
             </div>
@@ -301,12 +301,13 @@ const Enroll = () => {
               )}
             </div>
             <div className="sm:flex sm:mb-10 flex-col sm:flex-row flex">
-              {isEnrolled ?
+              {isEnrolled ? (
                 <SecondaryButton
                   children={"Already Enrolled"}
                   // onClick={handleEnroll}
                   className="w-full pt-2 lg:w-[40%] pb-2  w-[90%] mr-3"
-                /> :
+                />
+              ) : (
                 <button
                   className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5 sm:mx-0"
                   onClick={handleEnroll}
@@ -314,10 +315,10 @@ const Enroll = () => {
                   {next_batch_start_date === null
                     ? "Register for free"
                     : is_free
-                      ? "Enroll for free"
-                      : "Enroll"}
+                    ? "Enroll for free"
+                    : "Enroll"}
                 </button>
-              }
+              )}
 
               <button className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3">
                 {" "}
@@ -352,15 +353,17 @@ const Enroll = () => {
             <div className="text-xl lg:text-2xl font-semibold text-black ml-6 lg:ml-0 mb-3 ">
               Similar Programs
             </div>
-            <div className="lg:grid lg:grid-cols-4 "></div>
           </div>
-          <div className="lg:flex justify-end w-full hidden ">
-            <span className="ml-auto mr-3 text-blue-600 text-lg">See all</span>
-          </div>
-          <div className="lg:grid lg:grid-cols-2  mt-50 overflow-x-scroll lg:overflow-hidden" >
+
+          <div className="lg:grid lg:grid-cols-2  mt-50 overflow-x-scroll lg:overflow-hidden">
             {allPrograms.map((item, index) => (
               <ProgramCard key={item.id} {...item} />
             ))}
+          </div>
+          <div className="lg:flex justify-end w-full hidden ">
+            <span className="ml-auto mr-3 text-blue-600 text-lg mt-6">
+              See all
+            </span>
           </div>
           {/* conditionally render on register successfully */}
           {/* {enrollStatus === "enrolled" ? (
@@ -395,14 +398,14 @@ const Enroll = () => {
           {/* </div>
           )} */}
         </div>
-        <div className="w-[416px] mt-16 pt-3 ml-5 hidden lg:block">
-          <div className="enrollFooter bg-[#EEFCFF]   flex flex-col py-8 mb-20 rounded-[48px] px-3 fixed top-50">
+        <div className="w-[416px] mt-16  ml-5 hidden lg:block">
+          <div className="enrollFooter bg-[#EEFCFF] w-[416px]  flex flex-col py-8 mb-20 rounded-[48px] px-3 fixed top-50">
             <div className="text-2xl font-semibold text-black ml-6 mb-16">
               {name}
             </div>
             <div className="text-[#74777F] text-lg ml-6  mb-2 ">
-              <span className="text-xl text-lightGray font-normal">
-                Batch starts{" "}
+              <span className="text-xl text-lightGray font-medium">
+                Next Batch starts{" "}
                 <span className="text-[#0055BF] text-2xl font-medium">
                   {next_batch_start_date
                     ? next_batch_start_date
@@ -437,8 +440,8 @@ const Enroll = () => {
                     next_batch_start_date === null
                       ? "Register for free"
                       : is_free
-                        ? "Enroll for free"
-                        : "Enroll"
+                      ? "Enroll for free"
+                      : "Enroll"
                   }
                   onClick={handleEnroll}
                   className="pt-2.5 mt-2 pb-2.5 w-[90%]"
@@ -455,7 +458,7 @@ const Enroll = () => {
                     ? "Enroll for free"
                     : "Enroll"}
               </button> */}
-              <button className="bg-white text-[#1B72C0] font-medium py-[12px] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3">
+              <button className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]">
                 {" "}
                 <img src={shareImg} alt="" />
                 <span> Share</span>
@@ -464,12 +467,12 @@ const Enroll = () => {
           </div>
         </div>
         <div className={`${styles.startActivityFooter}  lg:hidden flex`}>
-          <div className="max-w-[328px] mx-auto lg:hidden h-[64px] flex items-center">
+          <div className=" w-full lg:hidden h-[64px] flex items-center">
             {isEnrolled ? (
               <SecondaryButton
                 children={"Registered already"}
                 // onClick={handleEnroll}
-                className="w-full  "
+                className="w-full "
               />
             ) : (
               <PrimaryButton
@@ -477,8 +480,8 @@ const Enroll = () => {
                   next_batch_start_date === null
                     ? "Register for free"
                     : is_free
-                      ? "Enroll for free"
-                      : "Enroll"
+                    ? "Enroll for free"
+                    : "Enroll"
                 }
                 onClick={handleEnroll}
                 className="w-full  h-[40px]"
