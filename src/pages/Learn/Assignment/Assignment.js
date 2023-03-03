@@ -321,15 +321,19 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                               </>
                            }
                         /> :
-                        <PrimaryButton className={`flex items-center justify-center pl-4 pr-4 w-auto`}
+                        <PrimaryButton className={`flex items-center justify-center px-3 `}
                            disabled={submissions.length === 0 ? true : false}
                            onClick={handleComplete}
                            children={
-                              <>
-                                 <img src={MarkIcon} className='mr-2.5' alt='mark'
-                                 />
-                                 <span className='text-sm'>Mark Completed</span>
-                              </>
+                              <div className='flex items-center'>
+                                 <div >
+                                    <img src={MarkIcon} alt='mark'
+                                    />
+                                 </div>
+                                 <div>
+                                    <span className='text-sm pl-2 pr-1'>Mark Completed</span>
+                                 </div>
+                              </div>
                            }
                         />
                   }

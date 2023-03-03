@@ -4,7 +4,7 @@ import playIcon from "../../assets/images/enroll/play.png";
 import videoBg from "../../assets/images/enroll/videoBg.png";
 import greenTik from "../../assets/images/learn/greenTik.png";
 import { getFormattedDuration } from '../../utils/utils';
-import './styles.module.css'
+import styles from './SingleLiveSession.module.css'
 
 
 export default function SingleLiveSession({ id, duration, name, image, is_completed, handleModulechange, selectedModule, type, isCompleted }) {
@@ -29,7 +29,7 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
          <div className="flex flex-col justify-between text-sm ml-3 w-[60vw] relative">
             <div>
                <div className="fle justify-between">
-                  <p className='font-bold mb-1'>
+                  <p className='font-bold mb-1 '>
                      {name}
                   </p>
                   <span className="text-sm text-gray-400">
@@ -37,7 +37,7 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
                   </span>
                </div>
             </div>
-            <p>  <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[105px] rounded-full mt-5 font-bold text-sm position-btn">
+            <p>  <button style={{ color: '#CB1537' }} className={`bg-red-100  p-1 w-[105px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
                live session
             </button></p>
             <h1>
@@ -52,6 +52,6 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
                </span>
             </h1>
          </div>
-      </div>
+      </div >
    )
 }
