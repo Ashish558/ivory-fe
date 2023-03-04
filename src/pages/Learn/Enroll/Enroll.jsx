@@ -215,7 +215,7 @@ const Enroll = () => {
       <div className=" lg:flex">
         <div className="lg:w-[800px] lg:mr-16">
           <div className="flex flex-col sm:mb-0  gap-5 lg:gap-0">
-            <div className=" text-xl lg:text-[40px] font-medium text-black ml-6 lg:ml-0 mt-3 lg:mb-10">
+            <div className=" text-xl lg:text-[40px] font-bold lg:font-medium text-black ml-6 lg:ml-0 mt-3 lg:mb-10">
               {name}
             </div>
             <div className="video flex justify-start items-center relative">
@@ -229,7 +229,7 @@ const Enroll = () => {
             <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 lg:mt-8 lg:mb-[17px]">
               About this Program
             </div>
-            <div className="text-[#44474E] text-lg ml-6 lg:ml-0 lg:mb-10">
+            <div className="text-[#44474E] text-sm lg:text-lg ml-6 lg:ml-0 lg:mb-10">
               <div dangerouslySetInnerHTML={{ __html: description }} />
               {/* {description.length > 150 && (
                 <span className="text-blue-500"> See more</span>
@@ -249,7 +249,7 @@ const Enroll = () => {
                           key={item.id}
                           className="mr-8 flex justify-start items-center gap-2 text-[13px] font-semibold"
                         >
-                          <span className="w-[32px] h-[32px] bg-[#EEFCFF] rounded-md flex justify-center items-center">
+                          <span className="w-[32px] h-[32px] bg-[#EEFCFF] rounded-md flex justify-center items-center font-inter text-black">
                             <img src={item.icon} alt="" />
                           </span>
                           {item.name}
@@ -267,7 +267,7 @@ const Enroll = () => {
               </div>
               {/* conditionally renders on free, reg ,  */}
               <div>
-                <div className="text-lightGray text-lg ml-6 lg:ml-0 py-2 mb-3 lg:mb-5 lg:p-0">
+                <div className="text-lightGray text-sm lg:text-lg ml-6 lg:ml-0 py-2 mb-3 lg:mb-5 lg:p-0">
                   Next Batch starts{" "}
                   <span className="text-[#0055BF]">
                     {next_batch_start_date
@@ -312,11 +312,11 @@ const Enroll = () => {
                 <SecondaryButton
                   children={"Already Enrolled"}
                   // onClick={handleEnroll}
-                  className="w-full pt-2 lg:w-[40%] pb-2  w-[90%] mr-3"
+                  className=" pt-2 lg:w-[40%] pb-2  w-[90%]  mx-auto mb-3 bg-[#EEFCFF] text-[#9EBEE7] border border-[#9EBEE7]"
                 />
               ) : (
                 <button
-                  className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5 sm:mx-0"
+                  className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-[#0055BF] font-semibold py-2 px-4 rounded-full border border-primary mb-3 sm:mb-0 mx-5 sm:mx-0"
                   onClick={handleEnroll}
                 >
                   {next_batch_start_date === null
@@ -327,7 +327,10 @@ const Enroll = () => {
                 </button>
               )}
 
-              <button className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3" onClick={onShare} >
+              <button
+                className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3"
+                onClick={onShare}
+              >
                 {" "}
                 <img src={shareImg} alt="" />
                 <span> Share</span>
@@ -439,7 +442,7 @@ const Enroll = () => {
                 <SecondaryButton
                   children={"Already Enrolled"}
                   // onClick={handleEnroll}
-                  className="w-ful mt-2 pt-2.5 pb-2.5  w-[90%]"
+                  className=" mt-2 pt-2.5 pb-2.5 w-[90%]  mb-3 bg-[#EEFCFF] text-[#9EBEE7] border border-[#9EBEE7]"
                 />
               ) : (
                 <PrimaryButton
@@ -451,7 +454,7 @@ const Enroll = () => {
                       : "Enroll"
                   }
                   onClick={handleEnroll}
-                  className="pt-2.5 mt-2 pb-2.5 w-[90%]"
+                  className="pt-2.5  pb-2.5 w-[90%]"
                 />
               )}
               {/* <button
@@ -465,7 +468,10 @@ const Enroll = () => {
                     ? "Enroll for free"
                     : "Enroll"}
               </button> */}
-              <button className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]" onClick={onShare}>
+              <button
+                className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]"
+                onClick={onShare}
+              >
                 {" "}
                 <img src={shareImg} alt="" />
                 <span> Share</span>
@@ -477,10 +483,11 @@ const Enroll = () => {
           <div className=" w-full lg:hidden h-[64px] flex items-center">
             {isEnrolled ? (
               <SecondaryButton
-                children={"Registered already"}
+                children={"Already enrolled"}
                 // onClick={handleEnroll}
-                className="w-full "  img={`${greenTik}`} /> 
-            
+                className="w-full h-[64px]"
+                img={`${greenTik}`}
+              />
             ) : (
               <PrimaryButton
                 children={
@@ -491,7 +498,7 @@ const Enroll = () => {
                     : "Enroll"
                 }
                 onClick={handleEnroll}
-                className="w-full  h-[64px]"
+                className="w-full  h-[40px]"
               />
             )}
           </div>
