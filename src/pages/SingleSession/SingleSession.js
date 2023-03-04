@@ -48,7 +48,7 @@ export default function SingleSession({ }) {
             console.log(err.repsonse)
          });
    }
-  
+
    useEffect(() => {
       fetchSession()
    }, [])
@@ -61,7 +61,7 @@ export default function SingleSession({ }) {
             if (res.data.data === null) return
             let enrolled = false
             res.data.data.map(item => {
-               if(item.livesession.id === parseInt(id)){   
+               if (item.livesession.id === parseInt(id)) {
                   enrolled = true
                }
             })
@@ -95,11 +95,11 @@ export default function SingleSession({ }) {
             });
       }
    }
-  
+
    // console.log('isEnrolled', isEnrolled)
    const { name, description, image, scheduled_on, duration, scheduled_on_start_time, scheduled_on_end_time, host, is_completed } = session
-   
-   const onShare = ()=>{
+
+   const onShare = () => {
       shareLink(name, 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
    }
 
@@ -172,13 +172,13 @@ export default function SingleSession({ }) {
             </div> */}
             <div className='flex flex-col'>
                <SecondaryButton children={isEnrolled ? 'Registered' : `Register for free`}
-                  className='bg-secondaryLight w-full max-w-[328px] mb-5'
+                  className='bg-secondaryLight w-full max-w-[328px] mb-5 border-2 border-[#0055BF] text-[#0055BF]'
                   onClick={isEnrolled !== true && handleRegisterClick} />
 
-               <SecondaryButton children={<> <img src={ShareIcon} alt='share' className='mr-2.5' /> Share </>}
-                  className='bg-secondaryLigt w-full flex justify-center items-center max-w-[328px] mb-12'
+               <SecondaryButton children={<> <img src={ShareIcon} alt='share' className='mr-2.5 ' /> <span className='text-[#1B72C0]'>Share</span> </>}
+                  className='bg-secondaryLigt w-full flex justify-center items-center max-w-[328px] mb-12 border-2 border-[#1B72C0]'
                   onClick={onShare}
-                  />
+               />
             </div>
 
             <h4 className='font-semibold mb-6'> upcoming live sessions </h4>

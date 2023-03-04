@@ -321,15 +321,19 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                               </>
                            }
                         /> :
-                        <PrimaryButton className={`flex items-center justify-center pl-4 pr-4 w-auto`}
+                        <PrimaryButton className={`flex items-center justify-center px-3 `}
                            disabled={submissions.length === 0 ? true : false}
                            onClick={handleComplete}
                            children={
-                              <>
-                                 <img src={MarkIcon} className='mr-2.5' alt='mark'
-                                 />
-                                 Mark Completed
-                              </>
+                              <div className='flex items-center'>
+                                 <div >
+                                    <img src={MarkIcon} alt='mark'
+                                    />
+                                 </div>
+                                 <div>
+                                    <span className='text-sm pl-2 pr-1'>Mark Completed</span>
+                                 </div>
+                              </div>
                            }
                         />
                   }
@@ -338,7 +342,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                      children={
                         <>
                            <img src={ShareIcon} className='mr-2.5' alt='mark' />
-                           Share
+                           <span className='text-sm'>Share</span>
                         </>
                      }
                      onClick={() => shareLink(name, name, `https://ivory-test.netlify.app${location.pathname}`)}
@@ -353,7 +357,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                         </p>
                         <div className='h-[51px] bg-[#85FFB2] flex justify-center items-center rounded-full mt-3'
                            onClick={handleUploadClick}>
-                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> submit via WhatsApp
+                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> <span className='text-sm'>submit via WhatsApp</span>
                         </div>
                         {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                            <img src={UploadIcon}
@@ -434,12 +438,12 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                <div className='mt-5 lg:grid lg:grid-cols-3 2xl:grid-cols-4 sm:mx-[60px] '>
                   <div className='lg:max-w-[350px]'>
                      {assignments.filter(assignment => assignment.id !== userAssignment.assignment.id)
-                     .map(assignment => {
-                        console.log(assignment);
-                        return <SingleAssignment key={assignment.id} {...assignment}
-                           onClickAssignment={onClickAssignment}
-                        />
-                     })}
+                        .map(assignment => {
+                           console.log(assignment);
+                           return <SingleAssignment key={assignment.id} {...assignment}
+                              onClickAssignment={onClickAssignment}
+                           />
+                        })}
                      {
                         assignments.filter(assignment => assignment.id !== userAssignment.assignment.id).length === 0 &&
                         <div className='sm:mx-5 opacity-70 font-medium'>

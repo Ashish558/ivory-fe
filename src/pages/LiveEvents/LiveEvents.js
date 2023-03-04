@@ -14,6 +14,7 @@ import { getLiveSessions } from '../../services/liveSession';
 import Filterbar from '../../components/Filterbar/filterbar';
 import { getInterests } from '../../services/activities';
 import Background from '../../assets/images/background.svg'
+import UpcomingSession from '../../components/Session/UpcomingSession';
 
 
 export const tempSessionData = [
@@ -174,7 +175,7 @@ export default function LiveEvents() {
       <div className='px-4 py-4 overflow-x-hidden pb-[70px] lg:mt-[70px] lg:px-[70px] z-10'>
          <img src={Background} className={styles.backgroundImage} />
          <div className={styles.container}>
-            <h4 className='text-lg font-semibold mb-5 lg:mb-4 hidden'> Upcoming live sessions </h4>
+            <h4 className='text-xl font-semibold mb-5 lg:mb-4 hidden'> Upcoming live sessions </h4>
 
             <div className='hidden lg:flex items-center gap-x-7 mb-5 mt-4'>
                <h1 className='text-xl font-black cursor-pointer lg:text-5xl lg:font-semibold show-events'
@@ -184,7 +185,7 @@ export default function LiveEvents() {
             {
                todaySessionsFiiltered.length > 0 &&
                <div className='mb-[30px] hidden lg:block'>
-                  <h4 className='text-2xl font-semibold mb-5 lg:mb-8 '> Today </h4>
+                  <h4 className='text-xl font-semibold mb-5 lg:mb-8 '> Today </h4>
                   <Slider {...settings} >
                      {todaySessionsFiiltered.map((session, idx) => {
                         return <Session key={idx} {...session} />
@@ -205,7 +206,7 @@ export default function LiveEvents() {
          {
             todaySessionsFiiltered.length > 0 &&
             <div className='mb-[30px] lg:hidden'>
-               <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Today </h4>
+               <h4 className='text-xl font-semibold mb-5 lg:mb-4 '> Today </h4>
                <Slider {...settings} >
                   {todaySessionsFiiltered.map((session, idx) => {
                      return <Session key={idx} {...session} />
@@ -216,10 +217,10 @@ export default function LiveEvents() {
          {
             upcomingFiiltered.length > 0 &&
             <div className='mb-[30px]'>
-               <h4 className='text-lg font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
+               <h4 className='text-xl font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
                <Slider {...settings} >
                   {upcomingFiiltered.map((session, idx) => {
-                     return <Session key={idx} {...session} />
+                     return <UpcomingSession key={idx} {...session} />
                   })}
                </Slider>
             </div>
