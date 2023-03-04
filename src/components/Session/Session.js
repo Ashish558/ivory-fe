@@ -6,7 +6,7 @@ import Photo from '../../Images/profile-pic.jfif'
 import { getFormattedDateWeek } from '../../utils/utils'
 import styles from './session.module.css'
 
-export default function Session({ id,name,image,scheduled_on,host,scrollToTop }) {
+export default function Session({ id, name, image, scheduled_on, host, scrollToTop }) {
 
    const navigate = useNavigate()
 
@@ -35,7 +35,7 @@ export default function Session({ id,name,image,scheduled_on,host,scrollToTop })
          <div className='px-3 pr-2 py-2 pb-5 lg:px-4 lg:py-4'>
             <div className='mb-6 lg:mb-[60px]'>
                <p className='font-semibold mb-0 text-[16px]'> {name} </p>
-               <p className='font-medium font-sm text-[#6C7277] mb-2 ml-[3px]'>
+               <p className='font-medium font-sm text-[#6C7277] mb-2 ml-[3px] text-sm'>
                   {getFormattedDateWeek(scheduled_on)}
                </p>
             </div>
