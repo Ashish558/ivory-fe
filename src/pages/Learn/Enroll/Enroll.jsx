@@ -313,7 +313,7 @@ const Enroll = () => {
                 <SecondaryButton
                   children={"Already Enrolled"}
                   // onClick={handleEnroll}
-                  className=" pt-2 lg:w-[40%] pb-2  w-[90%]  mx-auto lg:mx-0  mb-3 lg:mb-0 bg-[#EEFCFF] text-[#9EBEE7] border border-[#9EBEE7] lg:h-[46px]"
+                  className=" pt-2 lg:w-[40%] pb-2  w-[90%]  mx-auto lg:mx-0  mb-3 lg:mb-0 bg-[#EEFCFF] text-[#9EBEE7] border border-[#9EBEE7] lg:h-[46px] text-sm"
                 />
               ) : (
                 <button
