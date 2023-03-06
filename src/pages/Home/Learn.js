@@ -1,78 +1,46 @@
-import React,{ useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useLocation,useNavigate,useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Filterbar from '../../components/Filterbar/filterbar'
 import ProgramCard from '../../components/ProgramCard/ProgramCard'
 import Toggle from '../../components/Toggle/Toggle'
-import { getCategories,getInterests } from '../../services/activities'
+import { getCategories, getInterests } from '../../services/activities'
 import { getBanners } from '../../services/banners'
-import { getAllUserPrograms,getPrograms } from '../../services/program'
+import { getAllUserPrograms, getPrograms } from '../../services/program'
 import SimpleSlider from './SimpleSlider'
 
-const card = [
-   {
-      Content: "Learn to CANVA",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   },
-   {
-      Content: "Publish your short story",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "RS 399"
-   },
-   {
-      Content: "Learn to use acrylic paints",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   },
-   {
-      Content: "Learn to use acrylic paints",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   },
-   {
-      Content: "Learn to CANVA",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   }
-]
 
 const Learn = () => {
-   const [activities,setActivities] = useState([])
+   const [activities, setActivities] = useState([])
    // const [filteredActivities,setFilteredActivities] = useState([])
-   const [filterItems,setFilterItems] = useState([])
-   const [completedTabActive,setCompletedTabActive] = useState(false)
+   const [filterItems, setFilterItems] = useState([])
+   const [completedTabActive, setCompletedTabActive] = useState(false)
    // design changes if my programs is active
-   const [myPrograms,setMyPrograms] = useState(false)
-   const [searchParams,setSearchParams] = useSearchParams();
+   const [myPrograms, setMyPrograms] = useState(false)
+   const [searchParams, setSearchParams] = useSearchParams();
 
-   const [allPrograms,setAllPrograms] = useState([])
-   const [allProgramsFiltered,setAllProgramsFiltered] = useState([])
+   const [allPrograms, setAllPrograms] = useState([])
+   const [allProgramsFiltered, setAllProgramsFiltered] = useState([])
 
-   const [userPrograms,setUserPrograms] = useState([])
-   const [userProgramsFiltered,setUserProgramsFiltered] = useState([])
+   const [userPrograms, setUserPrograms] = useState([])
+   const [userProgramsFiltered, setUserProgramsFiltered] = useState([])
 
 
    const navigate = useNavigate();
    const location = useLocation()
-   const [banners,setBanners] = useState([])
+   const [banners, setBanners] = useState([])
 
    const { loggedIn } = useSelector(state => state.user)
-   const [onlyFreeActive,setOnlyFreeActive] = useState(false)
-   const [onlyLiveActive,setOnlyLiveActive] = useState(true)
+   const [onlyFreeActive, setOnlyFreeActive] = useState(false)
+   const [onlyLiveActive, setOnlyLiveActive] = useState(true)
 
    useEffect(() => {
       getInterests(true)
          .then(res => {
             // console.log(res.data.data);
-            setActivities(res.data.data.map(item => ({ ...item,categories: [] })))
+            setActivities(res.data.data.map(item => ({ ...item, categories: [] })))
             let temp = [
                {
                   id: 0,
@@ -80,7 +48,7 @@ const Learn = () => {
                   selected: true
                }
             ]
-            res.data.data.map((activity,idx) => {
+            res.data.data.map((activity, idx) => {
                temp.push({
                   id: activity.id,
                   children: <div className='flex items-center gap-x-1'>
@@ -95,7 +63,7 @@ const Learn = () => {
             console.log(err.response);
          })
 
-   },[])
+   }, [])
 
    useEffect(() => {
       if (activities.length === 0) return
@@ -113,7 +81,7 @@ const Learn = () => {
          }).catch(err => {
             console.log(err.response);
          })
-   },[activities.length])
+   }, [activities.length])
 
    useEffect(() => {
       getPrograms()
@@ -124,18 +92,18 @@ const Learn = () => {
          }).catch(err => {
             console.log(err.response);
          })
-   },[])
+   }, [])
 
    useEffect(() => {
       getAllUserPrograms()
          .then(res => {
-            console.log('user programs',res.data.data);
+            console.log('user programs', res.data.data);
             if (res.data.data === null) return setUserPrograms([])
             setUserPrograms(res.data.data)
          }).catch(err => {
             console.log(err.response);
          })
-   },[])
+   }, [])
 
    const onChange = (item) => {
       // console.log('item', item);
@@ -147,16 +115,16 @@ const Learn = () => {
             } else {
                sel = false
             }
-            return { ...filterItem,selected: sel }
+            return { ...filterItem, selected: sel }
          })
          setFilterItems(temp)
       } else {
 
          let temp = filterItems.map(filterItem => {
             if (filterItem.id === item.id) {
-               return { ...filterItem,selected: true }
+               return { ...filterItem, selected: true }
             } else {
-               return { ...filterItem,selected: false }
+               return { ...filterItem, selected: false }
             }
          })
          setFilterItems(temp)
@@ -180,7 +148,7 @@ const Learn = () => {
          allProgsFiltered = allProgsFiltered.filter(item => item.is_live === true || item.is_live === false)
       }
       setAllProgramsFiltered(allProgsFiltered)
-   },[filterItems,allPrograms,myPrograms,onlyFreeActive,onlyLiveActive])
+   }, [filterItems, allPrograms, myPrograms, onlyFreeActive, onlyLiveActive])
 
    useEffect(() => {
       const activeItems = filterItems.filter(item => item.selected === true)
@@ -194,21 +162,27 @@ const Learn = () => {
          userProgsFiltered = userProgsFiltered.filter(item => item.is_completed === false)
       }
       setUserProgramsFiltered(userProgsFiltered)
-   },[filterItems,userPrograms,myPrograms,completedTabActive])
+   }, [filterItems, userPrograms, myPrograms, completedTabActive])
 
 
    useEffect(() => {
       getBanners()
          .then(res => {
-            console.log('programs banners',res.data.data);
+            console.log('programs banners', res.data.data);
             if (res.data.data === null) return
             let bannersData = res.data.data.filter(item => item.location_link === location.pathname)
             setBanners(bannersData)
          })
-   },[location.pathname])
+   }, [location.pathname])
 
    const togglePrograms = bool => {
-      navigate(`?myPrograms=${bool}`)
+      navigate(`?myPrograms=${bool}&onlyFree=${onlyFreeActive}&onlyLive=${onlyLiveActive}`)
+   }
+   const toggleOnlyFree = bool => {
+      navigate(`?myPrograms=${myPrograms}&onlyFree=${bool}&onlyLive=${onlyLiveActive}`)
+   }
+   const toggleOnlyLive = bool => {
+      navigate(`?myPrograms=${myPrograms}&onlyFree=${onlyFreeActive}&onlyLive=${bool}`)
    }
 
    useEffect(() => {
@@ -216,7 +190,21 @@ const Learn = () => {
       if (bool === null) return
       if (bool === 'true') return setMyPrograms(true)
       setMyPrograms(false)
-   },[searchParams.get('myPrograms')])
+   }, [searchParams.get('myPrograms')])
+
+   useEffect(() => {
+      const bool = searchParams.get('onlyFree')
+      if (bool === null) return
+      if (bool === 'true') return setOnlyFreeActive(true)
+      setOnlyFreeActive(false)
+   }, [searchParams.get('onlyFree')])
+
+   useEffect(() => {
+      const bool = searchParams.get('onlyLive')
+      if (bool === null) return
+      if (bool === 'true') return setOnlyLiveActive(true)
+      setOnlyLiveActive(false)
+   }, [searchParams.get('onlyLive')])
 
    return (
       <div className='lg:mx-28 lg: lg:my-[70px] mb-24  lg:mt-40'>
@@ -236,12 +224,12 @@ const Learn = () => {
          </div>
          <h1 className='text-[32px] font-semibold hidden lg:block ml-4 font-Poppins'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
 
-         <div className="mx-3 max-w-[500px] lg:w-full lg:hidden">
+         <div className="mx-3 max-w-[500px] lg:w-full lg:idden">
             <SimpleSlider banners={banners} isActivityBanner={true} />
          </div>
-         <div className="hidden lg:block">
+         {/* <div className="hidden lg:block">
             <ActivityContent></ActivityContent>
-         </div>
+         </div> */}
          {
             myPrograms &&
             <div className='flex justify-center my-7 font-roboto'>
@@ -267,9 +255,9 @@ const Learn = () => {
 
          <div className='flex h-10 mx-4 mt-4 text-black'>
             <span className='mx-4 md:text-xl font-normal text-sm'>only free</span>
-            <Toggle active={onlyFreeActive} handleClick={() => { setOnlyFreeActive(!onlyFreeActive) }} />
+            <Toggle active={onlyFreeActive} handleClick={() => toggleOnlyFree(!onlyFreeActive)} />
             <span className='mx-4 md:text-xl text-sm font-normal'>only live</span>
-            <Toggle active={onlyLiveActive} handleClick={() => setOnlyLiveActive(!onlyLiveActive)} />
+            <Toggle active={onlyLiveActive} handleClick={() => toggleOnlyLive(!onlyLiveActive)} />
          </div>
 
 
@@ -278,7 +266,7 @@ const Learn = () => {
          </div>
          <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden mt-3 md:gap-12" >
             {myPrograms ?
-               userProgramsFiltered.map((item,index) => (
+               userProgramsFiltered.map((item, index) => (
                   <ProgramCard key={item.id} {...item.program}
                      isUserProgram={true}
                      userProgramId={item.id}
@@ -287,7 +275,7 @@ const Learn = () => {
                      myPrograms={myPrograms}
                   />
                )) :
-               allProgramsFiltered.map((item,index) => (
+               allProgramsFiltered.map((item, index) => (
                   <ProgramCard key={item.id} {...item} />
                ))
             }

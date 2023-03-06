@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styles from './styles.module.css';
 
 // import liveSession from './assets/images/learn/liveSession.png';
@@ -30,12 +30,16 @@ const Program = () => {
   const [selectedAssignment, setSelectedAssignment] = useState({})
   const [allUserAssignments, setAllUserAssignments] = useState([])
   const [completedSessions, setCompletedSessions] = useState([])
+  const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (tab === 0 || tab === 1) {
       setSelectedAssignment({})
     }
   }, [tab])
+
   const handleModulechange = (id) => {
     const module = allModules.find(module => module.id === id)
     // console.log('module', module);
@@ -233,13 +237,24 @@ const Program = () => {
     window.open(url)
 
   }
+
   // console.log('allUserAssignments', allUserAssignments)
   // console.log('selectedAssignment', selectedAssignment)
   // console.log('userModules', userModules)
   // console.log('selectedModule', selectedModule)
-  useEffect(() => {
+  const toggleFilters = idx => {
+    navigate(`?tab=${idx}`)
+  }
 
-  }, [tab])
+  useEffect(() => {
+    const paramTab = searchParams.get('tab')
+    if (paramTab === null) return
+    let currTab = parseInt(paramTab)
+    if (tab === 0 || tab === 1 || tab === 2) {
+      setTab(currTab)
+    }
+  }, [searchParams.get('tab')])
+
   // console.log('allModules', allModules)
   if (!programData) return <></>
   const { program } = programData
@@ -312,21 +327,21 @@ const Program = () => {
         <div className="py-3 px-5 mt-2">
           <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300">
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
-              onClick={() => setTab(0)} >
+              onClick={() => toggleFilters(0)} >
               <span className="px-2  lg:px-5 lg:text-base text-sm lg:hidden">all Modules</span>
               {tab === 0 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
-              onClick={() => setTab(1)}>
+              onClick={() => toggleFilters(1)}>
               <span className="px-2 lg:text-base text-sm">Live Sessions</span>
               {tab === 1 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
-              onClick={() => setTab(2)}>
+              onClick={() => toggleFilters(2)}>
               <span className='lg:text-base text-sm'>
                 Assignments
               </span>
@@ -384,7 +399,7 @@ const Program = () => {
             <div className="sessionDetails flex flex-col gap-3">
               {
                 selectedModule.live_session_type === "completed" ?
-                 <></> :
+                  <></> :
                   <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
                     next live session
                   </button>
@@ -499,7 +514,7 @@ const Program = () => {
       }
       {
         tab === 0 || tab === 1 ?
-          <div className={`lg:max-w-[350px] ${tab === 0 ? 'lg:hidden'  : ''} `}>
+          <div className={`lg:max-w-[350px] ${tab === 0 ? 'lg:hidden' : ''} `}>
             {filteredModules.map(item => {
               let isCompleted = false
               userModules.map(userMod => {
