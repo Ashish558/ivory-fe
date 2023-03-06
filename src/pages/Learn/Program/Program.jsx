@@ -449,7 +449,7 @@ const Program = () => {
 
                 </ul>
               </div>
-              <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto disabled:opacity-70 disabled:pointer-events-none  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)}
+              <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto disabled:opacity-60 disabled:pointer-events-none  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)}
                 disabled={
                   selectedModule.live_session_type === "completed" ? true :
                     selectedModule.live_session_type === "upcoming" ? true :
@@ -499,7 +499,7 @@ const Program = () => {
       }
       {
         tab === 0 || tab === 1 ?
-          <div className='lg:max-w-[350px]'>
+          <div className={`lg:max-w-[350px] ${tab === 0 ? 'lg:hidden'  : ''} `}>
             {filteredModules.map(item => {
               let isCompleted = false
               userModules.map(userMod => {
