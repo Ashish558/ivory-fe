@@ -377,8 +377,8 @@ const Program = () => {
       {/* && selectedModule && selectedModule.type === "live_session" */}
       {tab === 1 && selectedModule && selectedModule.type === "live_session" && (
         <div className='max-w-[900px] flex'>
-          <div className='w-[440px] hidden lg:block'>
-            <img src={selectedModule.image} alt="" className="w-full h-full object-cover hidden lg:block" />
+          <div className='w-[445px] hidden lg:block'>
+            <img src={selectedModule.image} alt="" className="w-full rounded-xl h-full object-cover hidden lg:block" />
           </div>
           <div className='px-5 flex-1 lg:ml-10'>
             <div className="sessionDetails flex flex-col gap-3">
