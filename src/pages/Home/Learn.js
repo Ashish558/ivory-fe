@@ -224,12 +224,12 @@ const Learn = () => {
             <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block text-black'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-1 text-[#74777F] lg:hidden block font-medium'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
-               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-roboto ${myPrograms === false && ' bg-[#BDF4FF]'}`}
+               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-inter lg:font-roboto ${myPrograms === false && ' bg-[#BDF4FF] text-black'}`}
                   //  onClick={() => setMyPrograms(false)}
                   onClick={() => togglePrograms(false)}
                >
                   Programs</button>
-               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-roboto ${myPrograms && ' bg-[#BDF4FF]'}`}
+               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-inter lg:font-roboto ${myPrograms && ' bg-[#BDF4FF]'} text-black`}
                   onClick={() => togglePrograms(true)}
                >My Program</button>
             </div>
@@ -266,9 +266,9 @@ const Learn = () => {
 
 
          <div className='flex h-10 mx-4 mt-4 text-black'>
-            <span className='mx-4 md:text-xl font-normal text-sm'>only free</span>
+            <span className='mx-4 font-normal text-sm'>only free</span>
             <Toggle active={onlyFreeActive} handleClick={() => { setOnlyFreeActive(!onlyFreeActive) }} />
-            <span className='mx-4 md:text-xl text-sm font-normal'>only live</span>
+            <span className='mx-4 text-sm font-normal'>only live</span>
             <Toggle active={onlyLiveActive} handleClick={() => setOnlyLiveActive(!onlyLiveActive)} />
          </div>
 
