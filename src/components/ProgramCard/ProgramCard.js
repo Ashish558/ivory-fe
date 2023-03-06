@@ -66,9 +66,9 @@ export default function ProgramCard({ id, myPrograms, image, name, live_sessions
             {
                myPrograms ? <div>
                   <p className='mt-2 text-base text-lightGray font-medium lg:mt-5'>
-                     <span className="text-[#0055BF]">20% </span>completed
+                     <span className="text-[#0055BF]"> {percentage_completed}% </span>completed
                   </p>
-                  <progress className="progress bg-[#D1E2F9] progress-primary lg:w-[183px] h-[12px]" value="40" max="100"></progress>
+                  <progress className="progress bg-[#D1E2F9] progress-primary lg:w-[183px] h-[12px]" value={percentage_completed} max="100"></progress>
                </div> :
                   price >= 1 ?
                      <div className=" mr-10 lg:mt-5 lg:p-3 relative">
