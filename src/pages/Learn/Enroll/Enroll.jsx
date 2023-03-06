@@ -93,6 +93,7 @@ const Enroll = () => {
       .then((res) => {
         fetchUserPrograms();
         console.log("enroll resp", res.data.data);
+        navigate(`/program/${res.data.data.id}`)
         const { state, payment_status, order_id } = res.data.data;
         if (order_id === null) {
         } else {

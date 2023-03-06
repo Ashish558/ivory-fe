@@ -3,13 +3,12 @@ import React from 'react'
 import playIcon from "../../assets/images/enroll/play.png";
 import videoBg from "../../assets/images/enroll/videoBg.png";
 import greenTik from "../../assets/images/learn/greenTik.png";
-import { getFormattedDuration } from '../../utils/utils';
+import { getFormattedDate, getFormattedDuration } from '../../utils/utils';
 import styles from './SingleLiveSession.module.css'
 
 
-export default function SingleLiveSession({ id, duration, name, image, is_completed, handleModulechange, selectedModule, type, isCompleted }) {
+export default function SingleLiveSession({ id, duration, name, image, is_completed, handleModulechange, selectedModule, type, isCompleted, scheduled_on, scheduled_on_end_time, live_session_type }) {
 
-   // console.log(isCompleted);
    return (
       <div className={`py-3 mt-3 mx-5 border-t border-gray-200 flex ${selectedModule !== undefined ? id === selectedModule.id ? 'bg-secondary' : '' : ''}`}
          onClick={() => handleModulechange(id)} >
@@ -37,18 +36,32 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
                   </span>
                </div>
             </div>
-            <p>  <button style={{ color: '#CB1537' }} className={`bg-red-100  p-1 w-[105px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
-               live session
-            </button></p>
+            {
+               type === 'live_session' && live_session_type === 'completed' ?
+                  <button style={{ color: '#44474E' }} className={`bg-[#E3E3E3]  p-1 w-[86px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
+                     live ended
+                  </button> : type === 'live_session' ?
+                     <button style={{ color: '#CB1537' }} className={`bg-red-100  p-1 w-[105px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
+                        live session
+                     </button> : <></>
+            }
+            {
+               type === 'video' &&
+               <button className={`bg-[#DEF9FF] text-[#22B8CF] leading-normal p-1 w-[55px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
+                  Video
+               </button>
+            }
             <h1>
                {/* <span className="text-gray-400">held on</span>
                <span className="text-green-500 font-bold">
                   25 Feb 2023
                </span> */}
-
-               <span className="text-gray-400">scheduled</span>
-               <span style={{ color: '#0055BF' }} className="pl-2 font-bold">
-                  25 Feb 2023
+               {
+                  scheduled_on !== null &&
+                  <span className="text-gray-400">scheduled</span>
+               }
+               <span style={{ color: isCompleted || live_session_type === 'completed' ? 'rgba(38, 169, 37, 1)' : '#0055BF' }} className="pl-2 font-bold">
+                  {scheduled_on === null ? 'Yet to be scheduled' : getFormattedDate(scheduled_on)}
                </span>
             </h1>
          </div>

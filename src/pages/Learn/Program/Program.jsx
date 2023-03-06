@@ -29,6 +29,7 @@ const Program = () => {
 
   const [selectedAssignment, setSelectedAssignment] = useState({})
   const [allUserAssignments, setAllUserAssignments] = useState([])
+  const [completedSessions, setCompletedSessions] = useState([])
 
   useEffect(() => {
     if (tab === 0 || tab === 1) {
@@ -38,11 +39,17 @@ const Program = () => {
   const handleModulechange = (id) => {
     const module = allModules.find(module => module.id === id)
     // console.log('module', module);
+    if (module.type === "live_session") {
+      setTab(1)
+    } else if (module.type === "video") {
+      setTab(0)
+      handleScrollToTop()
+    }
     setSelectedModule(module)
     if (checkIfModuleExists(id)) {
       return
     }
-    console.log(id)
+    // console.log(id)
     const body = {
       module: id
     }
@@ -69,8 +76,44 @@ const Program = () => {
       .then(res => {
         console.log('program res', res.data.data);
         if (res.data.data === null) return setProgramData({})
+
+        let defaultSelected = res.data.data.program.modules[0]
+        let data = res.data.data.program.modules.map(session => {
+          if (session.type === "live_session") {
+            if (new Date(session.scheduled_on) > new Date() || session.scheduled_on === null) {
+              return { ...session, live_session_type: 'upcoming' }
+            } else {
+              let hrs = session.scheduled_on_end_time.split(':')[0]
+              let mins = session.scheduled_on_end_time.split(':')[1]
+              let endDate = new Date(session.scheduled_on)
+              endDate.setHours(hrs)
+              endDate.setMinutes(mins)
+              // console.log('scheduled_on', session.scheduled_on);
+              // console.log('endDate', endDate);
+              // console.log('test--', new Date(session.scheduled_on_end_time));
+
+              if (new Date(session.scheduled_on) < new Date() && endDate > new Date()) {
+                return { ...session, live_session_type: 'ongoing' }
+              }
+              if (endDate < new Date()) {
+                return { ...session, live_session_type: 'completed' }
+              }
+              return { ...session }
+            }
+          } else {
+            return session
+          }
+        })
         setProgramData(res.data.data)
-        setAllModules(res.data.data.program.modules)
+        // setAllModules(res.data.data.program.modules)
+        setAllModules(data)
+        // console.log('data', data.map(item => ({id : item.id,live_session_type: item.live_session_type, name: item.name })));
+        console.log('data', data);
+
+        if (defaultSelected !== undefined && data[0] !== undefined) {
+          // setSelectedModule(defaultSelected)
+          setSelectedModule(data[0])
+        }
       }).catch(err => {
         console.log(err.response);
       })
@@ -118,7 +161,24 @@ const Program = () => {
     if (tab === 0) {
       setFilteredModules(allModules)
     } else if (tab === 1) {
-      setFilteredModules(allModules.filter(item => item.type === "live_session"))
+      // setFilteredModules(allModules.filter(item => item.type === "live_session"))
+      let filtered = allModules.filter(item => item.type === "live_session")
+      console.log('filtered', filtered);
+
+      filtered = [...filtered].sort(function (a, b) {
+        if (new Date(a.scheduled_on) < new Date()) { return -1 }
+        if (new Date(b.scheduled_on) < new Date()) { return -1 }
+        return 0;
+      });
+
+      let upcoming = filtered.filter(session => new Date(session.scheduled_on) > new Date())
+      let completed = filtered.filter(session => session.live_session_type === 'completed')
+      // console.log('filtered', filtered);
+      // console.log('upcoming', upcoming);
+      console.log('completed', completed);
+      setCompletedSessions(completed)
+      // setFilteredModules(filtered)
+      setFilteredModules(upcoming)
     }
   }, [tab, allModules])
 
@@ -177,7 +237,9 @@ const Program = () => {
   // console.log('selectedAssignment', selectedAssignment)
   // console.log('userModules', userModules)
   // console.log('selectedModule', selectedModule)
-  // console.log('filteredModules', filteredModules)
+  useEffect(() => {
+
+  }, [tab])
   // console.log('allModules', allModules)
   if (!programData) return <></>
   const { program } = programData
@@ -187,10 +249,10 @@ const Program = () => {
   // console.log('assignments', assignments)
 
   return (
-    <div className="mb-28 mt-[0px] lg:px-10 lg:mt-[70px]">
+    <div className="mb-28 mt-[0px] lg:px-[80px] lg:mt-[70px]">
       <div>
-        {tab === 1 && (
-          <img src={liveSession} alt="" className="w-full lg:hidden" />
+        {tab === 1 && selectedModule.image && (
+          <img src={selectedModule.image} alt="" className="w-full lg:hidden" />
         )}
         {tab === 0 && (
           <div className="video flex justify-center items-center relative lg:hidden">
@@ -251,7 +313,7 @@ const Program = () => {
           <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300">
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => setTab(0)} >
-              <span className="px-2  lg:px-5 lg:text-base text-sm ">all Modules</span>
+              <span className="px-2  lg:px-5 lg:text-base text-sm lg:hidden">all Modules</span>
               {tab === 0 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
@@ -314,77 +376,106 @@ const Program = () => {
       </div>
       {/* && selectedModule && selectedModule.type === "live_session" */}
       {tab === 1 && selectedModule && selectedModule.type === "live_session" && (
-        <div className='px-5'>
-          <div className="sessionDetails flex flex-col gap-3">
-            <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
-              next live session
-            </button>
-            <h1 className="font-bold text-lg">
-              {selectedModule.name}
-            </h1>
-            <div className="flex flex-col gap-3">
-              <ul>
-                <li className="list-none">
-                  <span className="text-gray-400 font-semibold  text-sm" >Date: </span>{" "}
-                  <span className="font-bold text-normal  text-sm">
-                    {getFormattedDate(selectedModule.scheduled_on_date)}
-                  </span>
-                </li>
-                <li className="list-none">
-                  <span className="text-gray-400 font-semibold  text-sm">Time: </span>{" "}
-                  <span className="font-bold text-normal  text-sm">
-                    {getFormattedDuration(selectedModule.scheduled_on_start_time)}
-                    {" "}
-                  </span>
-                </li>
-                <li className="list-none">
-                  <span className="text-gray-400 font-semibold  text-sm">
-                    Duration:{" "}
-                  </span>{" "}
-                  <span className="font-bold text-normal  text-sm">
-                    {getFormattedDuration(selectedModule.scheduled_on_end_time)}
-                  </span>
-                </li>
-                <li className="list-none">
-                  <span className="text-gray-400 font-semibold  text-sm">Host: </span>{" "}
-                  <span className="font-bold text-normal text-blue-500  text-sm">
-                    {instructor?.name}
-                  </span>
-                </li>
-              </ul>
-            </div>
+        <div className='max-w-[900px] flex'>
+          <div className='w-[445px] hidden lg:block'>
+            <img src={selectedModule.image} alt="" className="w-full rounded-xl h-full object-cover hidden lg:block" />
           </div>
-          <div className="flex flex-col  justify-start gap-3">
-            <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-full mt-5">
-              <ul className="ml-2 mt-2">
-                <li className="list-none  text-sm text-gray-400 font-semibold">
-                  Zoom Conference ID:{" "}
-                  <span className="font-bold text-black  text-sm">
-                    {selectedModule.zoom_meeting_id}
-                  </span>
-                </li>
-                {/* <li className="list-none lg:text-lg text-gray-400 font-semibold text-sm">
+          <div className='px-5 flex-1 lg:ml-10'>
+            <div className="sessionDetails flex flex-col gap-3">
+              {
+                selectedModule.live_session_type === "completed" ?
+                 <></> :
+                  <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
+                    next live session
+                  </button>
+              }
+              <h1 className="font-bold text-lg">
+                {selectedModule.name}
+              </h1>
+              <div className="flex flex-col gap-3">
+                <ul>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm" >Date: </span>{" "}
+                    <span className="font-bold text-normal  text-sm">
+                      {getFormattedDate(selectedModule.scheduled_on_date)}
+                    </span>
+                  </li>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm">Time: </span>{" "}
+                    <span className="font-bold text-normal  text-sm">
+                      {/* {getFormattedDuration(selectedModule.scheduled_on_start_time)} */}
+                      {selectedModule.scheduled_on_start_time} to {selectedModule.scheduled_on_end_time}
+                      {" "}
+                    </span>
+                  </li>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm">
+                      Duration:{" "}
+                    </span>{" "}
+                    <span className="font-bold text-normal  text-sm">
+                      {getFormattedDuration(selectedModule.scheduled_on_end_time)}
+                    </span>
+                  </li>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm">Host: </span>{" "}
+                    <span className="font-bold text-normal text-blue-500  text-sm">
+                      {instructor?.name}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="flex flex-col  justify-start gap-3">
+              <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-full mt-5">
+                <ul className="ml-2 mt-2">
+                  <li className="list-none  text-sm text-gray-400 font-semibold">
+                    Zoom Conference ID:{" "}
+                    <span className="font-bold text-black  text-sm">
+                      {selectedModule.zoom_meeting_id}
+                    </span>
+                  </li>
+                  {/* <li className="list-none lg:text-lg text-gray-400 font-semibold text-sm">
                   Zoom meeting link:{" "}
                 </li>
                 <li className="list-none lg:text-lg text-sm font-semibold text-blue-400 break-all">
                   {selectedModule.zoom_meeting_link}
                 </li> */}
-                <li className="list-none  text-gray-400 font-semibold text-sm">
-                  Zoom Passcode:{" "}
-                  <span className="font-bold text-black  text-sm">
-                    ******
-                  </span>
-                </li>
+                  <li className="list-none  text-gray-400 font-semibold text-sm">
+                    Zoom Passcode:{" "}
+                    <span className="font-bold text-black  text-sm">
+                      ******
+                    </span>
+                  </li>
 
-              </ul>
+                </ul>
+              </div>
+              <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto disabled:opacity-60 disabled:pointer-events-none  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)}
+                disabled={
+                  selectedModule.live_session_type === "completed" ? true :
+                    selectedModule.live_session_type === "upcoming" ? true :
+                      selectedModule.live_session_type === "ongoing" ? false : false
+                } >
+                {" "}
+                Join Zoom Session
+              </button>
             </div>
-            <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)} >
-              {" "}
-              Join Zoom Session
-            </button>
-          </div>
+          </div >
         </div >
       )}
+      {
+        tab === 1 && (
+          <div className='lg:max-w-[350px] mb-3'>
+            {completedSessions.map(userMod => {
+              return <SingleLiveSession key={userMod.id}
+                {...userMod}
+                selectedModule={selectedModule}
+                handleModulechange={handleModulechange}
+                isCompleted={true}
+              />
+            })}
+          </div>
+        )
+      }
       {
         tab === 1 && (
           <h1 className="font-bold text-base ml-5 mt-7">
@@ -393,6 +484,7 @@ const Program = () => {
 
         )
       }
+
       {
         tab === 0 && (
           <div className="text-black text-base ml-6 font-bold mt-5">
@@ -407,7 +499,7 @@ const Program = () => {
       }
       {
         tab === 0 || tab === 1 ?
-          <div className='lg:max-w-[350px]'>
+          <div className={`lg:max-w-[350px] ${tab === 0 ? 'lg:hidden'  : ''} `}>
             {filteredModules.map(item => {
               let isCompleted = false
               userModules.map(userMod => {
