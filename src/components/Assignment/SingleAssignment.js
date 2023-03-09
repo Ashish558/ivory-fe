@@ -8,7 +8,7 @@ import { getFormattedDuration } from '../../utils/utils';
 
 export default function SingleAssignment({ id, duration, name, image, is_completed, onClickAssignment, selectedModule, type, isCompleted }) {
 
-// console.log(isCompleted);
+   // console.log(isCompleted);
    return (
       <div className={`py-3 mt-3 mx-5 border-t border-gray-200 flex ${selectedModule !== undefined ? id === selectedModule.id ? 'bg-secondary' : '' : ''}`}
          onClick={() => onClickAssignment(id)} >
@@ -28,7 +28,7 @@ export default function SingleAssignment({ id, duration, name, image, is_complet
          <div className="flex flex-col justify-between text-sm ml-3 w-[60vw]">
             <div>
                <div className="fle justify-between">
-                  <p className='text-semibold'>
+                  <p className='font-semibold '>
                      {name}
                   </p>
                   <span className="text-sm text-gray-400">

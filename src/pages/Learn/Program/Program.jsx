@@ -228,6 +228,14 @@ const Program = () => {
             </div>
           </div>
           <div className='max-w-[400px] self-stretch overflow-auto max-h-[700px]'>
+            <div className="text-black text-lg ml-6 font-bold mt-5 ">
+              8 Videos
+              <span className="text-gray-500 text-normal font-normal">
+                {" "}
+                ( 3 hrs 15 min )
+              </span>{" "}
+              | 4 live sessions
+            </div>
             {allModules.map(item => {
               let isCompleted = false
               userModules.map(userMod => {
@@ -247,32 +255,114 @@ const Program = () => {
           </div>
         </div>
 
+        <div className='border-b  border-gray-300 mx-5 hidden lg:block'>
+
+        </div>
+
         <div className="py-3 px-5 mt-2">
-          <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300">
-            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
-              onClick={() => setTab(0)} >
-              <span className="px-2  lg:px-5 lg:text-base text-sm ">all Modules</span>
-              {tab === 0 && (
-                <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
-              )}
-            </li>
-            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
-              onClick={() => setTab(1)}>
-              <span className="px-2 lg:text-base text-sm">Live Sessions</span>
-              {tab === 1 && (
-                <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
-              )}
-            </li>
-            <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
-              onClick={() => setTab(2)}>
-              <span className='lg:text-base text-sm'>
-                Assignments
-              </span>
-              {tab === 2 && (
-                <hr className=" border-b-4  w-full border-blue-600 rounded-full " />
-              )}
-            </li>
-          </ul>
+          <div className='hidden lg:block'>
+            <ul className="flex  justify-around lg:justify-start lg:gap-x-8  ">
+              <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+                onClick={() => setTab(0)} >
+
+
+                {/* Desktop */}
+                <div className='hidden lg:block font-inter'>
+                  {
+                    tab === 0 && <span className="px-2  lg:px-5 lg:text-base text-sm text-blue-600">all Modules</span>
+                  }
+
+                  {tab === 0 ||
+                    <span className="px-2  lg:px-5 lg:text-base text-sm ">all Modules</span>
+                  }
+                </div>
+                {/* Desktop */}
+
+
+
+                <span className="px-2  lg:px-5 lg:text-base text-sm lg:hidden">all Modules</span>
+
+                {tab === 0 && (
+                  <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
+                )}
+              </li>
+              <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+                onClick={() => setTab(1)}>
+
+                {/* Desktop */}
+                <div className='hidden lg:block font-inter'>
+                  {
+                    tab === 1 && <span className="px-2  lg:px-5 lg:text-base text-sm text-blue-600">Live Sessions</span>
+                  }
+
+                  {tab === 1 ||
+                    <span className="px-2  lg:px-5 lg:text-base text-sm ">Live Sessions</span>
+                  }
+                </div>
+                {/* Desktop */}
+
+
+                <span className="px-2 lg:text-base text-sm lg:hidden">Live Sessions</span>
+                {tab === 1 && (
+                  <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
+                )}
+              </li>
+              <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+                onClick={() => setTab(2)}>
+
+                {/* Desktop */}
+                <div className='hidden lg:block font-inter'>
+                  {
+                    tab === 2 && <span className="px-2  lg:px-5 lg:text-base text-sm text-blue-600">Assignments</span>
+                  }
+
+                  {tab === 2 ||
+                    <span className="px-2  lg:px-5 lg:text-base text-sm ">Assignments</span>
+                  }
+                </div>
+                {/* Desktop */}
+
+
+                <span className='lg:text-base text-sm lg:hidden'>
+                  Assignments
+                </span>
+                {tab === 2 && (
+                  <hr className=" border-b-4  w-full border-blue-600 rounded-full " />
+                )}
+              </li>
+            </ul>
+          </div>
+
+
+          <div className='lg:hidden'>
+            <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300 ">
+              <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+                onClick={() => setTab(0)} >
+                <span className="px-2  lg:px-5 lg:text-base text-sm ">all Modules</span>
+                {tab === 0 && (
+                  <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
+                )}
+              </li>
+              <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+                onClick={() => setTab(1)}>
+                <span className="px-2 lg:text-base text-sm">Live Sessions</span>
+                {tab === 1 && (
+                  <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
+                )}
+              </li>
+              <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
+                onClick={() => setTab(2)}>
+                <span className='lg:text-base text-sm'>
+                  Assignments
+                </span>
+                {tab === 2 && (
+                  <hr className=" border-b-4  w-full border-blue-600 rounded-full " />
+                )}
+              </li>
+            </ul>
+          </div>
+
+
         </div>
         {tab === 0 && (
           <div className='block lg:hidden'>
@@ -395,7 +485,7 @@ const Program = () => {
       }
       {
         tab === 0 && (
-          <div className="text-black text-base ml-6 font-bold mt-5">
+          <div className="text-black text-base ml-6 font-bold mt-5 lg:hidden">
             8 Videos
             <span className="text-gray-500 text-normal font-normal">
               {" "}

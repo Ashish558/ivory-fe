@@ -276,13 +276,13 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
 
             <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
 
-               <p className='text-xl sm:text-2xl lg:mt-3 lg:mb-4 font-semibold mb-1.5'> Description </p>
-               <p className='text-sm sm:text-xl lg:max-w-[748px]'>
+               <p className='text-xl  lg:mt-3 lg:mb-4 font-semibold mb-1.5'> Description </p>
+               <p className='text-sm  lg:max-w-[748px]'>
                   {description}
                </p>
                {
                   startModalActive === false ?
-                     <span className={`${styles.seeMoreBtn} text-sm sm:text-lg`}
+                     <span className={`${styles.seeMoreBtn} text-sm `}
                         onClick={() => setStartModalActive(true)} >
                         See More
                      </span> :
@@ -352,12 +352,12 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                {
                   submissions.length === 0 ?
                      <div className='mb-12'>
-                        <p className='font-medium sm:text-lg sm:font-semibold' >
+                        <p className='font-medium text-base font-roboto' >
                            Submit your work to get feedback from our <br></br>expert:
                         </p>
                         <div className='h-[51px] bg-[#85FFB2] flex justify-center items-center rounded-full mt-3'
                            onClick={handleUploadClick}>
-                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> <span className='text-sm'>submit via WhatsApp</span>
+                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> <span className='text-sm font-roboto'>submit via WhatsApp</span>
                         </div>
                         {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
                            <img src={UploadIcon}
@@ -370,10 +370,10 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                         </div> */}
                      </div> :
                      <div className='mb-12'>
-                        <p className='font-medium sm:text-lg sm:font-semibold mb-4' >
-                           Want to submit more?
+                        <p className='font-medium text-base  mb-4' >
+                           Want to submit again?
                         </p>
-                        <SecondaryButton className='w-full pt-2.5 flex items-center justify-center pb-2.5 px-3 h-[40px] max-w-[320px]'
+                        {/* <SecondaryButton className='w-full pt-2.5 flex items-center justify-center pb-2.5 px-3 h-[40px] max-w-[320px]'
                            onClick={handleUploadClick}
                            children={
                               <> <img src={UploadOutlineIcon} className='mr-3'
@@ -381,7 +381,11 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                                  <input type='file' className='hidden' ref={inputRef}
                                     onChange={e => handleUpload(e)} />
                               </>
-                           } />
+                           } /> */}
+
+                        <button className='h-12 flex w-11/12 rounded-3xl mx-4 mt-3 bg-green text-lime-700'><i class="fa fa-whatsapp text-3xl ml-20 mt-1 mx-2"></i>
+                           <p className='mt-3 text-base mx-1'>submit via WhatsApp</p></button>
+
                      </div>
                }
 
