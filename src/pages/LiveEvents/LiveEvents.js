@@ -175,11 +175,11 @@ export default function LiveEvents() {
       <div className='px-4 py-4 overflow-x-hidden pb-[70px] lg:mt-[70px] lg:px-[70px] z-10'>
          <img src={Background} className={styles.backgroundImage} />
          <div className={styles.container}>
-            <h4 className='text-xl font-semibold mb-5 lg:mb-4 hidden'> Upcoming live sessions </h4>
+            <h4 className='lg:text-2xl text-xl font-semibold mb-5 lg:mb-4 hidden'> Upcoming live sessions </h4>
 
             <div className='hidden lg:flex items-center gap-x-7 mb-5 mt-4'>
-               <h1 className='text-xl font-black cursor-pointer lg:text-5xl lg:font-semibold show-events'
-                  onClick={() => navigate('/live-events')}>Events</h1>
+               <h1 className='text-xl font-black cursor-pointer lg:text-5xl lg:font-semibold show-events font-inter'
+                  onClick={() => navigate('/live-events')}>Live Events</h1>
                <p className='p '><img src={Arrow} alt="" /></p>
             </div>
             {
@@ -195,7 +195,7 @@ export default function LiveEvents() {
             }
          </div>
 
-         <div className='mb-4 max-w-[900px] lg:mb-8'>
+         <div className='mb-4 max-w-[900px] lg:mb-8 lg:hidden'>
             <div className=' flex items-center mb-2 '>
                {/* <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
                <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p> */}
@@ -217,7 +217,14 @@ export default function LiveEvents() {
          {
             upcomingFiiltered.length > 0 &&
             <div className='mb-[30px]'>
-               <h4 className='text-xl font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
+               <h4 className='lg:text-2xl text-xl font-semibold mb-5 lg:mb-4 '> Upcoming live sessions </h4>
+               <div className='mb-4 max-w-[900px] lg:mb-8 hidden lg:block'>
+                  <div className=' flex items-center mb-2 '>
+                     {/* <h3 className='lg:text-4xl font-bold lg:font-semibold text-xl mb-2.5'> All Activities </h3>
+               <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p> */}
+                  </div>
+                  <Filterbar items={filterItems} onChange={onChange} />
+               </div>
                <Slider {...settings} >
                   {upcomingFiiltered.map((session, idx) => {
                      return <UpcomingSession key={idx} {...session} />

@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
@@ -180,10 +180,10 @@ const Enroll = () => {
     fetchUserPrograms();
   }, []);
 
-  const onShare = ()=>{
+  const onShare = () => {
     shareLink('ivory Program', 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
- }
- 
+  }
+
   // console.log("programData", programData);
   // console.log("programExist", programExist);
   // console.log("isEnrolled", isEnrolled);
@@ -216,7 +216,7 @@ const Enroll = () => {
       <div className=" lg:flex">
         <div className="lg:w-[800px] lg:mr-16">
           <div className="flex flex-col sm:mb-0  gap-5 lg:gap-0">
-            <div className=" text-xl lg:text-[40px] font-bold lg:font-medium text-black ml-6 lg:ml-0 mt-3 lg:mb-10">
+            <div className=" text-xl lg:text-[40px] font-medium text-black ml-6 lg:ml-0 mt-3 lg:mb-10 font-inter">
               {name}
             </div>
             <div className="video flex justify-start items-center relative">
@@ -323,8 +323,8 @@ const Enroll = () => {
                   {next_batch_start_date === null
                     ? "Register for free"
                     : is_free
-                    ? "Enroll for free"
-                    : "Enroll"}
+                      ? "Enroll for free"
+                      : "Enroll"}
                 </button>
               )}
 
@@ -451,8 +451,8 @@ const Enroll = () => {
                     next_batch_start_date === null
                       ? "Register for free"
                       : is_free
-                      ? "Enroll for free"
-                      : "Enroll"
+                        ? "Enroll for free"
+                        : "Enroll"
                   }
                   onClick={handleEnroll}
                   className="pt-2.5  pb-2.5 w-[90%] lg:h-[46px]"
@@ -495,8 +495,8 @@ const Enroll = () => {
                   next_batch_start_date === null
                     ? "Register for free"
                     : is_free
-                    ? "Enroll for free"
-                    : "Enroll"
+                      ? "Enroll for free"
+                      : "Enroll"
                 }
                 onClick={handleEnroll}
                 className="w-full  h-[40px]"

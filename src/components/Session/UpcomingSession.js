@@ -29,11 +29,11 @@ export default function UpcomingSession({ id, name, image, scheduled_on, host, s
             <div className={`${styles.imgContainer} relative`}>
                 <img src={liveSessionCard} className='object-cover  w-[100%] h-[180px] lg:h-[228px]' alt='session' />
                 <div className='bg-[#FF922B] p-1 rounded-full text-white px-3 absolute top-5 right-5 z-30 text-xs flex items-center'>
-                    <div>
+                    <div className='lg:w-[17px]'>
                         <img src={Clock} alt="" />
                     </div>
                     <div className='pl-1'>
-                        <span>Coming Soon</span>
+                        <span className='lg:text-xl'>Coming Soon</span>
                     </div>
 
 
@@ -42,14 +42,14 @@ export default function UpcomingSession({ id, name, image, scheduled_on, host, s
             </div>
             <div className='px-3 pr-2 py-2 pb-5 lg:px-4 lg:py-4'>
                 <div className='mb-6 lg:mb-[60px]'>
-                    <p className='font-semibold mb-0 text-[16px]'> {name} </p>
-                    <p className='text-sm font-medium font-sm text-[#6C7277] mb-2 ml-[3px]'>
+                    <p className='font-semibold mb-0 lg:text-2xl text-[16px]'> {name} </p>
+                    <p className='lg:text-base text-sm font-medium font-sm text-[#6C7277] mb-2 ml-[3px]'>
                         {getFormattedDateWeek(scheduled_on)}
                     </p>
                 </div>
                 <div className='flex items-center'>
                     <img src={host?.profile_picture ? host.profile_picture : Photo} className='w-8 h-8 object-contain border border-white rounded-full' alt='session' />
-                    <p className='text-sm font-semibold ml-1.5'> {host?.name} </p>
+                    <p className='text-sm font-semibold ml-1.5 lg:text-xl'> {host?.name} </p>
                 </div>
             </div>
         </div>

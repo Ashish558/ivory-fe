@@ -14,6 +14,7 @@ import { settings } from '../LiveEvents/settings'
 import styles from './style.module.css'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
 import { useSelector } from 'react-redux'
+import backIcon from '../../Images/back-button.png'
 
 export default function SingleSession({ }) {
 
@@ -105,9 +106,18 @@ export default function SingleSession({ }) {
 
    return (
       <div className='pb-12 mb-10 lg:mt-[84px]'>
+         <div className='hidden lg:block'>
+            <div className='  flex items-center  mb-11'>
+               <div><img src={backIcon} alt='back' className='p-2 cursor-pointer'
+                  onClick={() => navigate(-1)} /></div>
+               <div>
+                  <h3 className='hidden lg:block text-[40px] font-medium  font-inter '> {name} </h3>
+               </div>
+            </div>
+         </div>
 
          <div className='mt-0 md:flex md:flex-col md:justify-start md:items-start md:mx-20 '>
-            <h3 className='hidden lg:block text-[40px] font-medium mb-11'> {name} </h3>
+
             {
                // video_link !== null ?
                //    <div className='md:flex md:items-start md:justify-start relative md:w-[100%]'>
@@ -133,8 +143,8 @@ export default function SingleSession({ }) {
 
          <div className='px-4 md:px-0 mt-4 md:mx-20'>
             <p className='md:text-3xl font-semibold mb-2.5 md:py-4 lg:hidden'> {name} </p>
-
-            <p className='text-sm md:text-xl lg:max-w-[748px]'>
+            <p className='text-2xl font-semibold mb-3 mt-14 hidden lg:block'>About this Event</p>
+            <p className='text-sm lg:text-base lg:max-w-[748px]'>
                {description}
             </p>
             <div className='mb-2 flex items-center text-sm mt-5'>
@@ -181,7 +191,7 @@ export default function SingleSession({ }) {
                />
             </div>
 
-            <h4 className='font-semibold mb-6'> upcoming live sessions </h4>
+            <h4 className='font-semibold mb-6 lg:text-2xl'> upcoming live sessions </h4>
             <Slider {...settings} >
                {allPrograms.map((session, idx) => {
                   return <Session key={idx} {...session} scrollToTop={true} />

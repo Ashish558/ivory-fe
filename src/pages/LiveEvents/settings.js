@@ -36,7 +36,7 @@ export const settings = {
       {
          breakpoint: 480,
          settings: {
-            slidesToShow: 1.2,
+            slidesToShow: 1.3,
          },
          // state: {
          //    display: true,

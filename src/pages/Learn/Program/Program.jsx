@@ -485,7 +485,7 @@ const Program = () => {
                 {...userMod}
                 selectedModule={selectedModule}
                 handleModulechange={handleModulechange}
-                isCompleted={true}
+                // isCompleted={true}
               />
             })}
           </div>
