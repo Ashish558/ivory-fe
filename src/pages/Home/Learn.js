@@ -224,7 +224,7 @@ const Learn = () => {
             <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block text-black'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-1 text-[#74777F] lg:hidden block font-medium'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
-               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-inter lg:font-roboto ${myPrograms === false && ' bg-[#BDF4FF] text-black'}`}
+               <button className={` font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-inter lg:font-roboto ${myPrograms === false && ' bg-[#BDF4FF] text-black'}`}
                   //  onClick={() => setMyPrograms(false)}
                   onClick={() => togglePrograms(false)}
                >
@@ -276,7 +276,7 @@ const Learn = () => {
          <div className="px-5 sm:w-full sm:overflow-hidden ">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden mt-3 md:gap-12" >
+         <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden mt-3 md:gap-12 z-0" >
             {myPrograms ?
                userProgramsFiltered.map((item,index) => (
                   <ProgramCard key={item.id} {...item.program}
