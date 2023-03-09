@@ -27,8 +27,32 @@ export const GA_login = () => {
     })
 }
 
-export const GA_share = (text, item_id) => {
+export const GA_liveSessionRegister= () => {
     ReactGA.event({
+        category: 'liveevent_register ',
+        action: 'liveevent_register ',
+        label: 'Registered for live session',
+    })
+}
+
+export const GA_startActivity= () => {
+    ReactGA.event({
+        category: 'start_activity',
+        action: 'start_activity',
+        label: 'Started Activity',
+    })
+}
+
+export const GA_submitActivity = () => {
+    ReactGA.event({
+        category: 'activity_submit',
+        action: 'activity_submit',
+        label: 'Submitted Activity',
+    })
+}
+
+export const GA_share = (text, item_id) => {
+    ReactGA.event('share', {
         category: 'share',
         action: `Shared ${text}`,
         content_type: text,

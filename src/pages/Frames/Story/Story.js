@@ -162,7 +162,7 @@ export default function Story(props) {
 
    const shareStory = () => {
       // console.log('image', image);
-      // GA_share('Story', story.id)
+      GA_share('story', story.id)
       // gtag("event", "share", {
       //    method: "Whatsapp",
       //    content_type: "image",

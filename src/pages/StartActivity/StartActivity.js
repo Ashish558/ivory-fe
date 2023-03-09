@@ -23,6 +23,7 @@ import { getActivities, getCategories, getSingleActivity } from '../../services/
 import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions, inCompleteActivity, startActivity, uploadActivity } from '../../services/user'
 import { getColors, isValidYoutubeLink } from '../../utils/utils'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
+import { GA_share, GA_startActivity, GA_submitActivity } from '../../services/analytics'
 
 const settings = {
    infinite: false,
@@ -156,6 +157,7 @@ export default function StartActivity({ fetchUserDetails }) {
       if (isAlreadyStarted === false) {
          setStartModalActive(true)
       } else {
+         GA_submitActivity()
          if (submissions.length === 0 && isCompleted === false) {
             // inputRef.current.click()
             window.open(`https://wa.me/8142137455?text=IvoryUser%3A%20Name-${profileData.mobile_no}%0A%0AActivity%3A%20${activity.name}%0A%0A_Attach%20your%20file%20and%20press%20SEND_%0A%0A`)
@@ -264,6 +266,7 @@ export default function StartActivity({ fetchUserDetails }) {
          .then(res => {
             setStartBtnLoading(false)
             console.log('start resp', res);
+            GA_startActivity()
             // alert('Activity started!')
             // alert(`Free Activity unlocked. You have ${profileData.remaining_activities} free activities. Start one today`)
             setIsAlreadyStarted(true)
@@ -284,6 +287,7 @@ export default function StartActivity({ fetchUserDetails }) {
    }
 
    const shareActivity = () => {
+      GA_share('activity', activity.id)
       if (navigator.share) {
          navigator.share({
             title: 'Ivory Activity',
