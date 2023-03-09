@@ -122,7 +122,7 @@ const Stories = () => {
       getStories(loggedIn)
          .then(res => {
             let resdata = res.data.data[0]
-            console.log('Stories response', res.data.data)
+            // console.log('Stories response', res.data.data)
             // console.log('resdata', resdata)
             let allStories = []
 

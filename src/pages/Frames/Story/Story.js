@@ -20,6 +20,7 @@ import QnA from './QnA/QnA';
 import Sudoku from './Sudoku/Sudoku';
 import ReactPlayer from 'react-player';
 import { convertLinkToDataUrl, dataURLtoFile, isValidYoutubeLink, toDataURL } from '../../../utils/utils';
+import { GA_share } from '../../../services/analytics';
 
 const types = ['image', 'video', 'mcq', 'mcq2', 'puzzle', 'qna']
 const url = 'https://www.youtube.com/watch?v=ysz5S6PUM-U'
@@ -160,7 +161,18 @@ export default function Story(props) {
    }
 
    const shareStory = () => {
-      console.log('image', image);
+      // console.log('image', image);
+      // GA_share('Story', story.id)
+      // gtag("event", "share", {
+      //    method: "Whatsapp",
+      //    content_type: "image",
+      //    item_id: id,
+      //  });
+      window.dataLayer.push({
+         event: 'share',
+         content_type: "story",
+         item_id: id,
+      });
       // html2canvas(imageRef.current, {
       //    allowTaint: true,
       //    useCORS: true,

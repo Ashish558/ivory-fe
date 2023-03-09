@@ -1,14 +1,15 @@
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link,useLocation,useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import back from "../../assets/Back.svg";
 import logo from "../../assets/images/login/logolight.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
 import { updateLoggedIn } from '../../redux/slices/user';
-import { sendOtp,verifyOtp } from '../../services/auth';
+import { sendOtp, verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
+import { GA_login } from '../../services/analytics';
 
 const settings = {
   infinite: true,
@@ -91,6 +92,10 @@ const Otp = () => {
             },
           });
         } else {
+          GA_login()
+          // window.dataLayer.push({
+          //   event: 'login',
+          // });
           console.log('verify', res.data.data);
           const { refresh_token, access_token } = res.data.data
           dispatch(updateLoggedIn({ loggedIn: true }))

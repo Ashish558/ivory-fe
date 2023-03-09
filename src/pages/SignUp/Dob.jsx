@@ -11,6 +11,8 @@ import { registerUser, verifyOtp } from '../../services/auth';
 import { genNumbers } from '../../utils/utils';
 import styles from "./SignUp.module.css";
 import './slider.css';
+import { gapi } from "gapi-script";
+import { GA_signup } from '../../services/analytics';
 
 const settings = {
   infinite: true,
@@ -70,6 +72,7 @@ const Dob = () => {
     speed: 100,
     touchThreshold: 10
   }
+  
   const dateSettings = {
     ...common,
     afterChange: function (currentSlide) {
@@ -122,7 +125,7 @@ const Dob = () => {
   const stateData = locaion?.state;
   const { otp, otp_token, phone, countryCode } = stateData;
   const dispatch = useDispatch()
-    console.log(stateData);
+    // console.log(stateData);
   const navigate = useNavigate();
   const goBack = () => {
     navigate(from, {
@@ -168,6 +171,10 @@ const Dob = () => {
         verifyOtp(verifyBody)
           .then((res) => {
             navigate("/congrates");
+            GA_signup()
+          //   window.dataLayer.push({
+          //     event: 'sign_up',
+          //  });
             const { refresh_token, access_token } = res.data.data
             dispatch(updateLoggedIn({ loggedIn: true }))
             localStorage.setItem('access', access_token)
@@ -189,7 +196,7 @@ const Dob = () => {
     // name should not be any number
     if (value.match(/^[a-zA-Z ]*$/)) {
       setNameError("")
-      console.log(value);
+      // console.log(value);
       setName(value);
     } else {
       setNameError("Name should not contain any number");
