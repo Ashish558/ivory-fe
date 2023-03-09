@@ -47,17 +47,19 @@ const Otp = () => {
   // console.log(stateData.otpToken);
   const navigate = useNavigate();
   useEffect(() => {
-
-    const otpArray = stateData?.otp.split("");;
-    const otpValues = {
-      field1: otpArray[0],
-      field2: otpArray[1],
-      field3: otpArray[2],
-      field4: otpArray[3],
-      field5: otpArray[4],
-      field6: otpArray[5],
-    };
-    setOtp(otpValues);
+    if (stateData.otp !== undefined && stateData.otp.length === 6) {
+    
+      const otpArray = stateData?.otp.split("");;
+      const otpValues = {
+        field1: otpArray[0],
+        field2: otpArray[1],
+        field3: otpArray[2],
+        field4: otpArray[3],
+        field5: otpArray[4],
+        field6: otpArray[5],
+      };
+      setOtp(otpValues);
+    }
   }, [stateData]);
 
   const otpValuesArray = Object.values(otp);
