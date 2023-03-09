@@ -15,7 +15,9 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
    const handleNavigate = () => {
       if (isUserProgram) {
          navigate(`/program/${userProgramId}`)
+         handleScrollToTop()
       } else {
+         handleScrollToTop()
          navigate(`/learn/${id}`)
          if (scrollToTop) {
             window.location.reload()
