@@ -319,7 +319,7 @@ const Program = () => {
             <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
               next live session
             </button>
-            <h1 className="font-bold text-lg">
+            <h1 className="font-bold text-base">
               {selectedModule.name}
             </h1>
             <div className="flex flex-col gap-3">

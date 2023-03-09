@@ -25,6 +25,8 @@ import { getFormattedDateShort } from '../../utils/utils'
 const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing', '/confirmation', '/live', '/enroll', '/community', '/learn']
 const basePaths = ['/home', '/activities']
 
+const singlePath = ['/live-events']
+
 const Navbar = () => {
 
    const [isOpen, setIsOpen] = React.useState(false)
@@ -70,15 +72,27 @@ const Navbar = () => {
                      </p>
                      {
                         loggedIn && isMorning === false ?
-                           <div  className=' font-bold text-sm ml-1'>
+                           <div className=' font-bold text-sm ml-1'>
                               Good Evening,
                            </div> :
                            <p className=' font-bold text-sm'>Welcome {loggedIn && ","} </p>
                      }
                      <p className='pl-2  name text-sm'>   {profileData.name ? profileData.name : ''}</p>
                   </div> :
-                  <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
-                     onClick={() => navigate(-1)} />
+
+                  singlePath.includes(location.pathname) ?
+
+                     <div className='flex items-center  w-full'>
+                        <p> <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
+                           onClick={() => navigate(-1)} /></p>
+                        <div className='mx-auto'>
+                           <p className='font-bold'>Live Events</p>
+                        </div>
+                     </div>
+                     :
+
+                     <img src={BackIcon} alt='back' className='p-2 cursor-pointer'
+                        onClick={() => navigate(-1)} />
             }
 
          </div>
