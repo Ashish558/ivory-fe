@@ -51,11 +51,28 @@ export const GA_submitActivity = () => {
     })
 }
 
+export const GA_beginCheckout = () => {
+    ReactGA.event({
+        category: 'begin_checkout',
+        action: 'begin_checkout',
+        label: 'Began checkout',
+    })
+}
+
 export const GA_share = (text, item_id) => {
     ReactGA.event('share', {
         category: 'share',
         action: `Shared ${text}`,
         content_type: text,
+        item_id
+    })
+}
+
+export const GA_bannerClick = (content_type, item_id) => {
+    ReactGA.event('banner_click', {
+        category: 'banner_click',
+        action: `banner_click`,
+        content_type,
         item_id
     })
 }

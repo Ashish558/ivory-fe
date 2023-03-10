@@ -157,7 +157,7 @@ export default function ActivityType() {
             <div className='mt-4'>
                <h3 className='text-4xl font-medium mb-2.5 '>  {category.name} </h3>
                {/* <ActivityContent banners={banners} /> */}
-               <SimpleSlider banners={banners} isActivityBanner={true} />
+               <SimpleSlider banners={banners} isActivityBanner={true} page='activities_page' />
             </div>
             {
                userActivities.length > 0 &&

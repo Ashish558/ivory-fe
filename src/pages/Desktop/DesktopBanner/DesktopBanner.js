@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import BannerDesktop from '../../../Images/bannerPic.jpg';
 import Download from '../../../Images/Group 5.png'
+import { GA_bannerClick } from '../../../services/analytics';
 import { getHomeBanners } from '../../../services/banners';
 import { ViewVideo } from '../../Frames/ViewVideo.js/ViewVideo';
 import './DesktopBanner.css'
@@ -42,6 +43,7 @@ const DesktopBanner = () => {
 
    const handleNavigate = banner => {
       setVideoLink(banner.video_link)
+      GA_bannerClick('home_page', banner.title)
       if (banner.title === "Complete your Profile!") {
          if (!loggedIn) {
             return navigate('/login')

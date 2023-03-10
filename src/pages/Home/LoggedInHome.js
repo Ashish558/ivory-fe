@@ -85,7 +85,7 @@ const LoggedInHome = () => {
 
             <div className='mobile pb-12 mb-12'>
                 {/* <Navbar></Navbar> */}
-                <SliderCards banners={banners} />
+                <SliderCards banners={banners} page='home_page' />
                 {/* <Video></Video>
             <Banner></Banner> */}
 

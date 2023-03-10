@@ -225,7 +225,7 @@ const Learn = () => {
          <h1 className='text-[32px] font-semibold hidden lg:block ml-4 font-Poppins'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
 
          <div className="mx-3 max-w-[500px] lg:w-full lg:idden">
-            <SimpleSlider banners={banners} isActivityBanner={true} />
+            <SimpleSlider banners={banners} isActivityBanner={true} page='learn_page' />
          </div>
          {/* <div className="hidden lg:block">
             <ActivityContent></ActivityContent>
