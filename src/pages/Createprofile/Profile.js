@@ -11,6 +11,7 @@ import { updateProfileData } from '../../redux/slices/user'
 import { addInterest,getInterests } from '../../services/activities'
 import { editProfile,uploadProfile } from '../../services/user'
 import styles from "./Profile.module.css"
+import { GA_updateProfile } from '../../services/analytics'
 
 const Profile = () => {
   const [name,setName] = useState('')
@@ -102,6 +103,7 @@ console.log('userInterests',userInterests);
 
     editProfile(body,profileData.mobile_no)
       .then(res => {
+        GA_updateProfile()     
         dispatch(updateProfileData({ profileData: res.data.data }))
         alert('Profile Data Saved!')
         navigate('/home')

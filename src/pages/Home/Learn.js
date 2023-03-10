@@ -2,48 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
-import AcivityContent from '../../components/ActivityContent/ActivityContent'
+import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Filterbar from '../../components/Filterbar/filterbar'
 import ProgramCard from '../../components/ProgramCard/ProgramCard'
 import Toggle from '../../components/Toggle/Toggle'
 import { getCategories, getInterests } from '../../services/activities'
 import { getBanners } from '../../services/banners'
 import { getAllUserPrograms, getPrograms } from '../../services/program'
-import { shareLink } from '../../utils/utils'
 import SimpleSlider from './SimpleSlider'
 
-const card = [
-   {
-      Content: "Learn to CANVA",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   },
-   {
-      Content: "Publish your short story",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "RS 399"
-   },
-   {
-      Content: "Learn to use acrylic paints",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   },
-   {
-      Content: "Learn to use acrylic paints",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   },
-   {
-      Content: "Learn to CANVA",
-      name: "Ankit dua",
-      lesson: "16 lessons",
-      price: "FREE"
-   }
-]
 
 const Learn = () => {
    const [activities, setActivities] = useState([])
@@ -209,37 +176,60 @@ const Learn = () => {
    }, [location.pathname])
 
    const togglePrograms = bool => {
-      navigate(`?myPrograms=${bool}`)
+      navigate(`?myPrograms=${bool}&onlyFree=${onlyFreeActive}&onlyLive=${onlyLiveActive}`)
+   }
+   const toggleOnlyFree = bool => {
+      navigate(`?myPrograms=${myPrograms}&onlyFree=${bool}&onlyLive=${onlyLiveActive}`)
+   }
+   const toggleOnlyLive = bool => {
+      navigate(`?myPrograms=${myPrograms}&onlyFree=${onlyFreeActive}&onlyLive=${bool}`)
    }
 
    useEffect(() => {
       const bool = searchParams.get('myPrograms')
-      if(bool === null) return
-      if(bool === 'true') return setMyPrograms(true)
+      if (bool === null) return
+      if (bool === 'true') return setMyPrograms(true)
       setMyPrograms(false)
    }, [searchParams.get('myPrograms')])
 
+   useEffect(() => {
+      const bool = searchParams.get('onlyFree')
+      if (bool === null) return
+      if (bool === 'true') return setOnlyFreeActive(true)
+      setOnlyFreeActive(false)
+   }, [searchParams.get('onlyFree')])
+
+   useEffect(() => {
+      const bool = searchParams.get('onlyLive')
+      if (bool === null) return
+      if (bool === 'true') return setOnlyLiveActive(true)
+      setOnlyLiveActive(false)
+   }, [searchParams.get('onlyLive')])
+
    return (
-      <div className='lg:mx-28 lg: lg:my-[70px] mb-24 '>
-         <div className="bg-[#EEFCFF] lg:bg-white p-5">
+      <div className='lg:mx-28 lg: lg:my-[70px] mb-24  lg:mt-40'>
+         <div className="bg-[#EEFCFF] lg:bg-white p-5 lg:fixed lg:w-full lg:z-10 lg:top-10">
             <h1 className='text-[16px] lg:text-xl font-semibold lg:hidden block text-black'>Hello Sahil ji! </h1>
             <span className='text-sm ml-1 mt-1 text-[#74777F] lg:hidden block font-medium'> what would you like to learn today?</span>
             <div className=" w-full flex justify-around lg:justify-start lg:gap-5 lg:bg-white mt-5" >
-               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-roboto ${myPrograms === false && ' bg-[#BDF4FF]'}`}
-               //  onClick={() => setMyPrograms(false)}
-                onClick={() => togglePrograms(false)}
-                 >
+               <button className={` font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-inter lg:font-roboto ${myPrograms === false && ' bg-[#BDF4FF] text-black'}`}
+                  //  onClick={() => setMyPrograms(false)}
+                  onClick={() => togglePrograms(false)}
+               >
                   Programs</button>
-               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-roboto ${myPrograms && ' bg-[#BDF4FF]'}`}
-                onClick={() => togglePrograms(true)}
-                >My Program</button>
+               <button className={`font-medium text-sm sm:text-xl rounded-full border px-4 py-[10px] font-inter lg:font-roboto ${myPrograms && ' bg-[#BDF4FF]'} text-black`}
+                  onClick={() => togglePrograms(true)}
+               >My Program</button>
             </div>
          </div>
          <h1 className='text-[32px] font-semibold hidden lg:block ml-4 font-Poppins'>Welcome Sahil ji! <span className='text-2xl font-semibold ml-1 mt-3'> what would you like to learn today?</span></h1>
 
-         <div className="mx-3 max-w-[500px]">
-            <SimpleSlider banners={banners} isActivityBanner={true} />
+         <div className="mx-3 max-w-[500px] lg:w-full lg:idden">
+            <SimpleSlider banners={banners} isActivityBanner={true} page='learn_page' />
          </div>
+         {/* <div className="hidden lg:block">
+            <ActivityContent></ActivityContent>
+         </div> */}
          {
             myPrograms &&
             <div className='flex justify-center my-7 font-roboto'>
@@ -264,17 +254,17 @@ const Learn = () => {
 
 
          <div className='flex h-10 mx-4 mt-4 text-black'>
-            <span className='mx-4 md:text-xl font-normal text-sm'>only free</span>
-            <Toggle active={onlyFreeActive} handleClick={() => { setOnlyFreeActive(!onlyFreeActive) }} />
-            <span className='mx-4 md:text-xl text-sm font-normal'>only live</span>
-            <Toggle active={onlyLiveActive} handleClick={() => setOnlyLiveActive(!onlyLiveActive)} />
+            <span className='mx-4 font-normal text-sm'>only free</span>
+            <Toggle active={onlyFreeActive} handleClick={() => toggleOnlyFree(!onlyFreeActive)} />
+            <span className='mx-4 text-sm font-normal'>only live</span>
+            <Toggle active={onlyLiveActive} handleClick={() => toggleOnlyLive(!onlyLiveActive)} />
          </div>
 
 
          <div className="px-5 sm:w-full sm:overflow-hidden ">
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
-         <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden" >
+         <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden mt-3 md:gap-12 z-0" >
             {myPrograms ?
                userProgramsFiltered.map((item, index) => (
                   <ProgramCard key={item.id} {...item.program}
@@ -282,6 +272,7 @@ const Learn = () => {
                      userProgramId={item.id}
                      is_completed={item.is_completed}
                      percentage_completed={item.percentage_completed}
+                     myPrograms={myPrograms}
                   />
                )) :
                allProgramsFiltered.map((item, index) => (

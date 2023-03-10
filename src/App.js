@@ -37,6 +37,10 @@ import SingleSession from './pages/SingleSession/SingleSession';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 import Community from './pages/Learn/Community/Community';
 import Confirmation from './pages/Learn/Confirmation/Confirmation';
+import { gapi } from "gapi-script";
+import { authenticate } from './services/analytics';
+import ReactGA from 'react-ga4'
+
 function App() {
   //true for now will change later
   const [loading, setLoading] = useState(true)
@@ -84,6 +88,23 @@ function App() {
         }
       })
   }
+
+  useEffect(() => {
+    //my acc
+    // ReactGA.initialize('GTM-PQWLJCR')
+
+    //client acc
+    ReactGA.initialize('GTM-PKH9VTQ')
+  }, [])
+  // console.log(gapi);
+  // console.log(profileData);
+
+  // useEffect(() => {
+  //   if(profileData.id === undefined) return
+  //   window.dataLayer.push({
+  //     'user_id': profileData.id
+  //   });  
+  // }, [profileData.id])
 
   useEffect(() => {
     fetchUserDetails()

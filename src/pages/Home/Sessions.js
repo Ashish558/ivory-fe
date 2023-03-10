@@ -16,7 +16,7 @@ const Sessions = () => {
    const fetchSession = () => {
       getLiveSessions()
          .then((res) => {
-            console.log(res.data.data);
+            // console.log(res.data.data);
             if (res.data.data === null) return
             setAllSessions(res.data.data)
          }).catch((err) => {

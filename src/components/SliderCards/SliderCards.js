@@ -9,9 +9,10 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ViewVideo } from "../../pages/Frames/ViewVideo.js/ViewVideo";
 import { useSelector } from "react-redux";
+import { GA_bannerClick } from "../../services/analytics";
 
 
-const SliderCards = ({ banners, isActivityBanner }) => {
+const SliderCards = ({ banners, isActivityBanner, page }) => {
 
    const settings = {
       dots: true,
@@ -30,6 +31,7 @@ const SliderCards = ({ banners, isActivityBanner }) => {
 
    const handleNavigate = banner => {
       setVideoLink(banner.video_link)
+      GA_bannerClick( page ? page :'home_page', banner.title)
       if (banner.title === "Complete your Profile!") {
          if(!loggedIn){
             return navigate('/login')

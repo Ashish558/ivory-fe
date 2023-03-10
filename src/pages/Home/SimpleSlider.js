@@ -7,9 +7,10 @@ import { getBanners } from "../../services/banners";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ViewVideo } from "../Frames/ViewVideo.js/ViewVideo";
+import { GA_bannerClick } from "../../services/analytics";
 
 
-const SimpleSlider = ({ banners, isActivityBanner }) => {
+const SimpleSlider = ({ banners, isActivityBanner, page }) => {
 
    const settings = {
       dots: true,
@@ -25,7 +26,8 @@ const SimpleSlider = ({ banners, isActivityBanner }) => {
    const [videoActive, setVideoActive] = useState(false)
 
    const handleNavigate = banner => {
-      console.log('banner', banner);
+      // console.log('banner', banner);
+      GA_bannerClick(page ? page : 'home_page', banner.title)
       if (banner.is_external === false) {
          navigate(banner.redirect_link)
       } else {

@@ -75,12 +75,17 @@ const LoggedInHome = () => {
                 <Sessions></Sessions>
                 {/* <DesktopEvents></DesktopEvents> */}
                 <DesktopLearn></DesktopLearn>
-
+                <div className='flex justify-end px-4 lg:px-[80px] pb-[60px] lg:pb-100px'>
+                    <div className='flex flex-col items-center'>
+                        <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
+                        <p> scroll to top </p>
+                    </div>
+                </div>
             </div>
 
             <div className='mobile pb-12 mb-12'>
                 {/* <Navbar></Navbar> */}
-                <SliderCards banners={banners} />
+                <SliderCards banners={banners} page='home_page' />
                 {/* <Video></Video>
             <Banner></Banner> */}
 
@@ -93,11 +98,11 @@ const LoggedInHome = () => {
                 <Courses></Courses>
                 <Footer></Footer>
                 <div className='flex justify-end px-4 lg:px-[80px] pb-[60px] lg:pb-100px'>
-                <div className='flex flex-col items-center'>
-                    <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
-                    <p> scroll to top </p>
+                    <div className='flex flex-col items-center'>
+                        <img src={ScrollToTop} alt='scroll-to-top' className='cursor-pointer' onClick={handleScrollToTop} />
+                        <p> scroll to top </p>
+                    </div>
                 </div>
-            </div>
             </div>
             {/* <div className='mt-7 mx-5 rounded-lg background grid grid-rows-2'>
                 <div className='w-1/2'>
@@ -112,7 +117,7 @@ const LoggedInHome = () => {
                 </div>
 
             </div> */}
-          
+
         </div>
     );
 };

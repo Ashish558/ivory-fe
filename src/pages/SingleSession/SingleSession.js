@@ -15,6 +15,7 @@ import styles from './style.module.css'
 import ShareIcon from '../../assets/icons/share-outlined.svg'
 import { useSelector } from 'react-redux'
 import backIcon from '../../Images/back-button.png'
+import { GA_liveSessionRegister } from '../../services/analytics'
 
 export default function SingleSession({ }) {
 
@@ -88,9 +89,10 @@ export default function SingleSession({ }) {
          }
          registerLiveSession(body)
             .then((res) => {
-               console.log(res);
+               console.log('res', res);
                fetchSession()
                fetchUserSessions()
+               GA_liveSessionRegister()
             }).catch((err) => {
                console.log(err.repsonse)
             });

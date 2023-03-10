@@ -1,7 +1,6 @@
 import React from 'react';
 // import greenTik from "../../../../.assets/images/learn/greenTik.png";
-import greenTik from "../../assets/images/learn/greenTik.png";
-export default function SecondaryButton({ className,children,onClick,disabled }) {
+export default function SecondaryButton({ className, children, onClick, disabled, img }) {
 
 
    return (
@@ -10,7 +9,10 @@ export default function SecondaryButton({ className,children,onClick,disabled })
          onClick={onClick}
          disabled={disabled !== undefined ? disabled : false}
       >
-         {/* <img src={greenTik} className="h-[22px] pb-1 px-3" alt="" /> */}
+         {
+            img &&
+            <img src={img} className="h-[22px] mr-2" alt="" />
+         }
          {children}
       </button>
    )

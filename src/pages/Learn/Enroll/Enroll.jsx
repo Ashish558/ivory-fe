@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 import useRazorpay from "react-razorpay";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation,useNavigate,useParams } from "react-router-dom";
+import greenTik from "../../../assets/images/learn/greenTik.png";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import SecondaryButton from "../../../components/Buttons/SecondaryButton";
@@ -20,7 +21,7 @@ import {
   getPricingMainText,
   shareLink
 } from "../../../utils/utils";
-
+import { GA_programRegister, GA_share } from "../../../services/analytics";
 const Enroll = () => {
   //enrollType "", "reg", "free"
   const [enrollType, setEnrollType] = useState("reg");
@@ -79,6 +80,8 @@ const Enroll = () => {
       .then(programResp => {
         console.log('program resp', programResp.data);
         enrollforProgram(programResp.data.data.id)
+        GA_programRegister()
+        // GA_share('program', programResp.data.data.program.id )
       })
       .catch(err => {
         console.log(err.response);
@@ -93,6 +96,7 @@ const Enroll = () => {
       .then((res) => {
         fetchUserPrograms();
         console.log("enroll resp", res.data.data);
+        navigate(`/program/${res.data.data.id}`)
         const { state, payment_status, order_id } = res.data.data;
         if (order_id === null) {
         } else {
@@ -180,8 +184,10 @@ const Enroll = () => {
   }, []);
 
   const onShare = () => {
+    GA_share('program', programData.id )
     shareLink('ivory Program', 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
   }
+
 
   // console.log("programData", programData);
   // console.log("programExist", programExist);
@@ -229,7 +235,7 @@ const Enroll = () => {
             <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 lg:mt-8 lg:mb-[17px]">
               About this Program
             </div>
-            <div className="text-[#44474E] text-lg ml-6 lg:ml-0 lg:mb-10">
+            <div className="text-[#44474E] text-sm lg:text-lg ml-6 lg:ml-0 lg:mb-10">
               <div dangerouslySetInnerHTML={{ __html: description }} />
               {/* {description.length > 150 && (
                 <span className="text-blue-500"> See more</span>
@@ -247,9 +253,9 @@ const Enroll = () => {
                       return (
                         <li
                           key={item.id}
-                          className="mr-8 flex justify-start items-center gap-2 text-[13px] font-semibold"
+                          className="mr-8 flex justify-start items-center gap-2 text-[13px] lg:text-base font-semibold"
                         >
-                          <span className="w-[32px] h-[32px] bg-[#EEFCFF] rounded-md flex justify-center items-center">
+                          <span className="w-[32px] h-[32px] bg-[#EEFCFF] rounded-md flex justify-center items-center font-inter text-black">
                             <img src={item.icon} alt="" />
                           </span>
                           {item.name}
@@ -261,21 +267,21 @@ const Enroll = () => {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 lg:mb-6">
+              <div className="text-xl lg:text-2xl font-bold text-black ml-6 lg:ml-0 lg:mb-6 lg:mt-10">
                 {" "}
                 Pricing{" "}
               </div>
               {/* conditionally renders on free, reg ,  */}
               <div>
-                <div className="text-lightGray text-lg ml-6 lg:ml-0 py-2 mb-3 lg:mb-5 lg:p-0">
+                <div className="text-lightGray text-sm lg:text-xl ml-6 lg:ml-0 py-2 mb-3 lg:mb-5 lg:p-0">
                   Next Batch starts{" "}
-                  <span className="text-[#0055BF]">
+                  <span className="text-[#0055BF] font-semibold text-base">
                     {next_batch_start_date
                       ? next_batch_start_date
                       : " Yet to be scheduled"}
                   </span>
                 </div>{" "}
-                <div className="text-4xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1 mb-3 lg:mb-11">
+                <div className="text-4xl font-bold text-black ml-6 lg:ml-0 flex items-center gap-1 mb-3 lg:mb-11 lg:font-inter">
                   {getPricingMainText(
                     is_free,
                     price,
@@ -312,11 +318,11 @@ const Enroll = () => {
                 <SecondaryButton
                   children={"Already Enrolled"}
                   // onClick={handleEnroll}
-                  className="w-full pt-2 lg:w-[40%] pb-2  w-[90%] mr-3"
+                  className=" pt-2 lg:w-[40%] pb-2  w-[90%]  mx-auto lg:mx-0  mb-3 lg:mb-0 bg-[#EEFCFF] text-[#9EBEE7] border border-[#9EBEE7] lg:h-[46px] text-sm"
                 />
               ) : (
                 <button
-                  className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-sky-900 font-semibold py-2 px-4 rounded-full border border-blue-400 mb-3 sm:mb-0 mx-5 sm:mx-0"
+                  className="bg-[#EEFCFF] lg:w-[40%] w-[90%] text-[#0055BF] font-semibold py-2 px-4 rounded-full border border-primary mb-3 sm:mb-0 mx-5 sm:mx-0 lg:h-[46px] text-sm"
                   onClick={handleEnroll}
                 >
                   {next_batch_start_date === null
@@ -327,10 +333,13 @@ const Enroll = () => {
                 </button>
               )}
 
-              <button className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3" onClick={onShare} >
+              <button
+                className="bg-white text-[#0055BF] font-semibold py-2 lg:w-[40%] w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3 md:ml-3  lg:h-[46px]"
+                onClick={onShare}
+              >
                 {" "}
                 <img src={shareImg} alt="" />
-                <span> Share</span>
+                <span className="text-sm"> Share</span>
               </button>
             </div>
             <div className=" sm:mx-0 shadow-sm rounded-xl  border border-[#EBEDF0] lg:w-[336px] pb-7 w-[90%] mx-auto pt-6 pl-4">
@@ -339,12 +348,12 @@ const Enroll = () => {
               </div>
               <div className="">
                 <div className="flex flex-col gap-6sm:mb-0 mt-5 ">
-                  <ul className=" flex  flex-col gap-5 leading-none text-sm">
+                  <ul className=" flex  flex-col gap-5 leading-none text-sm lg:text-base">
                     {contents?.map((item) => {
                       return (
                         <li
                           key={item.id}
-                          className="mr-8 flex justify-start items-center gap-2 text-normal font-normal text-[#6D747A]"
+                          className="mr-8 flex justify-start items-center gap-2 text-normal lg:text-base font-normal text-[#6D747A]"
                         >
                           <img src={item.icon} alt="" />
                           {item.name}
@@ -362,7 +371,7 @@ const Enroll = () => {
             </div>
           </div>
 
-          <div className="lg:grid lg:grid-cols-2  mt-50 overflow-x-scroll lg:overflow-hidden">
+          <div className="lg:grid lg:grid-cols-2 gap-12 mt-50 overflow-x-scroll lg:overflow-hidden">
             {allPrograms.map((item, index) => (
               <ProgramCard key={item.id} {...item} />
             ))}
@@ -439,7 +448,7 @@ const Enroll = () => {
                 <SecondaryButton
                   children={"Already Enrolled"}
                   // onClick={handleEnroll}
-                  className="w-ful mt-2 pt-2.5 pb-2.5  w-[90%]"
+                  className=" mt-2 pt-2.5 pb-2.5 w-[90%]  mb-3 bg-[#EEFCFF] text-[#9EBEE7] border border-[#9EBEE7] lg:h-[46px]"
                 />
               ) : (
                 <PrimaryButton
@@ -451,7 +460,7 @@ const Enroll = () => {
                         : "Enroll"
                   }
                   onClick={handleEnroll}
-                  className="pt-2.5 mt-2 pb-2.5 w-[90%]"
+                  className="pt-2.5  pb-2.5 w-[90%] lg:h-[46px]"
                 />
               )}
               {/* <button
@@ -465,7 +474,10 @@ const Enroll = () => {
                     ? "Enroll for free"
                     : "Enroll"}
               </button> */}
-              <button className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]" onClick={onShare}>
+              <button
+                className="bg-white text-[#1B72C0] font-medium w-[90%] rounded-full border border-[#1B72C0]  self-center flex justify-center items-center gap-3  h-[46px]"
+                onClick={onShare}
+              >
                 {" "}
                 <img src={shareImg} alt="" />
                 <span> Share</span>
@@ -477,9 +489,10 @@ const Enroll = () => {
           <div className=" w-full lg:hidden h-[64px] flex items-center">
             {isEnrolled ? (
               <SecondaryButton
-                children={"Registered already"}
+                children={"Already enrolled"}
                 // onClick={handleEnroll}
-                className="w-full "
+                className="w-full h-[64px]"
+                img={`${greenTik}`}
               />
             ) : (
               <PrimaryButton
@@ -491,7 +504,7 @@ const Enroll = () => {
                       : "Enroll"
                 }
                 onClick={handleEnroll}
-                className="w-full  h-[40px]"
+                className="w-[90%] mx-auto  h-[40px]"
               />
             )}
           </div>
