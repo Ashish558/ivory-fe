@@ -80,7 +80,7 @@ const Enroll = () => {
       .then(programResp => {
         console.log('program resp', programResp.data);
         enrollforProgram(programResp.data.data.id)
-        GA_share('program', programResp.data.data.program.id )
+        // GA_share('program', programResp.data.data.program.id )
       })
       .catch(err => {
         console.log(err.response);
@@ -183,8 +183,10 @@ const Enroll = () => {
   }, []);
 
   const onShare = () => {
+    GA_share('program', programData.id )
     shareLink('ivory Program', 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
   }
+
 
   // console.log("programData", programData);
   // console.log("programExist", programExist);
@@ -272,7 +274,7 @@ const Enroll = () => {
               <div>
                 <div className="text-lightGray text-sm lg:text-xl ml-6 lg:ml-0 py-2 mb-3 lg:mb-5 lg:p-0">
                   Next Batch starts{" "}
-                  <span className="text-[#0055BF]">
+                  <span className="text-[#0055BF] font-semibold text-base">
                     {next_batch_start_date
                       ? next_batch_start_date
                       : " Yet to be scheduled"}
@@ -501,7 +503,7 @@ const Enroll = () => {
                       : "Enroll"
                 }
                 onClick={handleEnroll}
-                className="w-full  h-[40px]"
+                className="w-[90%] mx-auto  h-[40px]"
               />
             )}
           </div>

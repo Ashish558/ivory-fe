@@ -27,8 +27,8 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
 
    return (
       <div className="py-3 my-3 sm:px-0 sm:pt-0 sm:rounded-[48px] mx-5 md:mx-0 border-gray-200 shadow-sm lg:shadow-md border px-3 rounded-3xl flex sm:flex-col sm:gap-2 hover:bg-LightSky" onClick={handleNavigate} >
-         <div className=" sm:h-auto flex justify-start items-center sm:w-auto relative PimgContainer">
-            <span className="text-normal sm:text-base sm:font-roboto text-white absolute top-6 left-6 hidden sm:block z-20">
+         <div className=" sm:h-auto flex justify-start items-center sm:w-auto relative PimgContainer z-0">
+            <span className="text-normal sm:text-base sm:font-roboto text-white absolute top-6 left-6 hidden sm:block z-10">
                {/* {name} */} Ivory Exclusive
             </span>
             <img
@@ -60,7 +60,7 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
             <div className="flex justify-between">
                {
                   is_live === true &&
-                  <button className="bg-[#FFE3E3] text-[#CB1537] p-1 px-2 rounded-full font-semibold hidden lg:inline-block ml-2 lg:hidden">
+                  <button className="bg-[#FFE3E3] text-[#CB1537] p-1 px-2 rounded-full font-semibold hidden lg:inline-block ml-2 lg:hidden text-sm">
                      {live_sessions_count} live sessions
                   </button>
                }
