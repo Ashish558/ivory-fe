@@ -90,7 +90,11 @@ function App() {
   }
 
   useEffect(() => {
-    ReactGA.initialize('GTM-PQWLJCR')
+    //my acc
+    // ReactGA.initialize('GTM-PQWLJCR')
+
+    //client acc
+    ReactGA.initialize('GTM-PKH9VTQ')
   }, [])
   // console.log(gapi);
   // console.log(profileData);
