@@ -21,7 +21,7 @@ import {
   getPricingMainText,
   shareLink
 } from "../../../utils/utils";
-import { GA_share } from "../../../services/analytics";
+import { GA_programRegister, GA_share } from "../../../services/analytics";
 const Enroll = () => {
   //enrollType "", "reg", "free"
   const [enrollType, setEnrollType] = useState("reg");
@@ -80,6 +80,7 @@ const Enroll = () => {
       .then(programResp => {
         console.log('program resp', programResp.data);
         enrollforProgram(programResp.data.data.id)
+        GA_programRegister()
         // GA_share('program', programResp.data.data.program.id )
       })
       .catch(err => {

@@ -34,6 +34,13 @@ export const GA_liveSessionRegister= () => {
         label: 'Registered for live session',
     })
 }
+export const GA_programRegister = () => {
+    ReactGA.event({
+        category: 'program_register',
+        action: 'program_register ',
+        label: 'Registered for Program',
+    })
+}
 
 export const GA_startActivity= () => {
     ReactGA.event({
