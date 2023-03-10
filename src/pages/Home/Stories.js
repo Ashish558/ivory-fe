@@ -198,7 +198,7 @@ const Stories = () => {
    // console.log('selectedStory', selectedStory)
 
    return (
-      <div>
+      <div className="overflow-x-hidden">
          {
             stories.length >= 1 &&
             <div className=" lg:ml-24 ">

@@ -29,7 +29,7 @@ const Sessions = () => {
    const settings = {
       infinite: false,
       // centerPadding: "60px",
-      slidesToShow: 1.2,
+      slidesToShow: 1.35,
       initialSlide: 0,
       arrows: false,
       swipeToSlide: true,
@@ -53,7 +53,7 @@ const Sessions = () => {
          {
             breakpoint: 480,
             settings: {
-               slidesToShow: 1.2,
+               slidesToShow: 1.35,
                initialSlide: 0,
             },
             // state: {
