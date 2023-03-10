@@ -34,9 +34,16 @@ const DesktopBanner = () => {
       getHomeBanners()
          .then(res => {
             console.log('banners resp', res.data.data);
-            if (res.data.data === null) return
+            let tempbanners = res.data.data
+                tempbanners = tempbanners.map(banner => {
+                    if (banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0) {
+                        return
+                    } else {
+                        return banner
+                    }
+                }).filter(item => item !== undefined)
             // let homeBanners = res.data.data.filter(item => item.location_link === location.pathname)
-            setBanners(res.data.data)
+            setBanners(tempbanners)
          })
    }, [location.pathname])
 
