@@ -7,7 +7,7 @@ import { getFormattedDate, getFormattedDuration } from '../../utils/utils';
 import styles from './SingleLiveSession.module.css'
 
 
-export default function SingleLiveSession({ id, duration, name, image, is_completed, handleModulechange, selectedModule, type, isCompleted, scheduled_on, scheduled_on_end_time, live_session_type }) {
+export default function SingleLiveSession({ id, duration, name, image, is_completed, handleModulechange, selectedModule, type, isCompleted, start_date, scheduled_on_end_time, live_session_type }) {
 
    return (
       <div className={`py-3 mt-3 mx-5 border-t border-gray-200 flex ${selectedModule !== undefined ? id === selectedModule.id ? 'bg-secondary' : '' : ''}`}
@@ -57,11 +57,11 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
                   25 Feb 2023
                </span> */}
                {
-                  scheduled_on !== null &&
+                  start_date !== null &&
                   <span className="text-gray-400">scheduled</span>
                }
                <span style={{ color: isCompleted || live_session_type === 'completed' ? 'rgba(38, 169, 37, 1)' : '#0055BF' }} className="pl-2 font-bold">
-                  {scheduled_on === null ? 'Yet to be scheduled' : getFormattedDate(scheduled_on)}
+                  {start_date === null ? 'Yet to be scheduled' : getFormattedDate(start_date)}
                </span>
             </h1>
          </div>

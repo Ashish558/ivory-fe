@@ -84,22 +84,13 @@ const Program = () => {
         let defaultSelected = res.data.data.program.modules[0]
         let data = res.data.data.program.modules.map(session => {
           if (session.type === "live_session") {
-            if (new Date(session.scheduled_on) > new Date() || session.scheduled_on === null) {
+            if (new Date(session.start_date) > new Date() || session.start_date === null) {
               return { ...session, live_session_type: 'upcoming' }
             } else {
-              let hrs = session.scheduled_on_end_time.split(':')[0]
-              let mins = session.scheduled_on_end_time.split(':')[1]
-              let endDate = new Date(session.scheduled_on)
-              endDate.setHours(hrs)
-              endDate.setMinutes(mins)
-              // console.log('scheduled_on', session.scheduled_on);
-              // console.log('endDate', endDate);
-              // console.log('test--', new Date(session.scheduled_on_end_time));
-
-              if (new Date(session.scheduled_on) < new Date() && endDate > new Date()) {
+              if (new Date(session.start_date) < new Date() && session.end_date > new Date()) {
                 return { ...session, live_session_type: 'ongoing' }
               }
-              if (endDate < new Date()) {
+              if (new Date(session.end_date) < new Date()) {
                 return { ...session, live_session_type: 'completed' }
               }
               return { ...session }
@@ -159,6 +150,7 @@ const Program = () => {
     // console.log('video ended', module);
 
   }
+
   //filter tab items
   useEffect(() => {
     if (allModules.length === 0) return
@@ -167,19 +159,19 @@ const Program = () => {
     } else if (tab === 1) {
       // setFilteredModules(allModules.filter(item => item.type === "live_session"))
       let filtered = allModules.filter(item => item.type === "live_session")
-      console.log('filtered', filtered);
-
+      
       filtered = [...filtered].sort(function (a, b) {
-        if (new Date(a.scheduled_on) < new Date()) { return -1 }
-        if (new Date(b.scheduled_on) < new Date()) { return -1 }
+        if (new Date(a.start_date) < new Date()) { return -1 }
+        if (new Date(b.start_date) < new Date()) { return -1 }
         return 0;
       });
+      // console.log('filtered', filtered);
 
-      let upcoming = filtered.filter(session => new Date(session.scheduled_on) > new Date())
+      let upcoming = filtered.filter(session => new Date(session.start_date) > new Date())
       let completed = filtered.filter(session => session.live_session_type === 'completed')
       // console.log('filtered', filtered);
       // console.log('upcoming', upcoming);
-      console.log('completed', completed);
+      // console.log('completed', completed);
       setCompletedSessions(completed)
       // setFilteredModules(filtered)
       setFilteredModules(upcoming)
@@ -197,6 +189,7 @@ const Program = () => {
         console.log(err.response);
       })
   }
+
   useEffect(() => {
     fetchUserAssignments()
   }, [])
