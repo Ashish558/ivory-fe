@@ -60,7 +60,7 @@ const Enroll = () => {
       }).catch(err => {
         console.log(err.response);
       })
-  }, [])
+  }, [id])
 
   const handleEnroll = () => {
     // console.log('asda');
@@ -165,15 +165,17 @@ const Enroll = () => {
       .then((res) => {
         if (res.data.data === null) return;
         console.log("all programs", res.data.data);
+        let enrolled = false
         res.data.data.forEach((item) => {
           if (item.program.id === parseInt(id)) {
             setProgramExist(true);
             setUserProgramId(item.id);
             if (item.state === "enrolled") {
-              setIsEnrolled(true);
+              enrolled = true
             }
           }
         });
+        setIsEnrolled(enrolled);
       })
       .catch((err) => {
         console.log(err.response);
@@ -181,7 +183,7 @@ const Enroll = () => {
   };
   useEffect(() => {
     fetchUserPrograms();
-  }, []);
+  }, [id]);
 
   const onShare = () => {
     GA_share('program', programData.id )

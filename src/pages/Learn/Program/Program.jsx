@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 // import liveSession from './assets/images/learn/liveSession.png';
 import greenTik from "../../../assets/images/learn/greenTik.png";
+import LiveIcon from "../../../assets/icons/live.svg";
 import liveSession from "../../../assets/images/learn/liveSession.png";
 import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
@@ -84,10 +85,14 @@ const Program = () => {
         let defaultSelected = res.data.data.program.modules[0]
         let data = res.data.data.program.modules.map(session => {
           if (session.type === "live_session") {
+            if (session.id === 13) {
+              // console.log('start date', new Date(session.start_date))
+              // console.log('end date', selectedModule)
+            }
             if (new Date(session.start_date) > new Date() || session.start_date === null) {
               return { ...session, live_session_type: 'upcoming' }
             } else {
-              if (new Date(session.start_date) < new Date() && session.end_date > new Date()) {
+              if (new Date(session.start_date) < new Date() && new Date(session.end_date) > new Date()) {
                 return { ...session, live_session_type: 'ongoing' }
               }
               if (new Date(session.end_date) < new Date()) {
@@ -159,7 +164,7 @@ const Program = () => {
     } else if (tab === 1) {
       // setFilteredModules(allModules.filter(item => item.type === "live_session"))
       let filtered = allModules.filter(item => item.type === "live_session")
-      
+
       filtered = [...filtered].sort(function (a, b) {
         if (new Date(a.start_date) < new Date()) { return -1 }
         if (new Date(b.start_date) < new Date()) { return -1 }
@@ -231,10 +236,6 @@ const Program = () => {
 
   }
 
-  // console.log('allUserAssignments', allUserAssignments)
-  // console.log('selectedAssignment', selectedAssignment)
-  // console.log('userModules', userModules)
-  // console.log('selectedModule', selectedModule)
   const toggleFilters = idx => {
     navigate(`?tab=${idx}`)
   }
@@ -255,6 +256,11 @@ const Program = () => {
   const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, assignments, contents, discount, is_free, instructor } = program
   // console.log('program', program)
   // console.log('assignments', assignments)
+  // console.log('allUserAssignments', allUserAssignments)
+  // console.log('selectedAssignment', selectedAssignment)
+  // console.log('userModules', userModules)
+  // console.log('selectedModule', selectedModule)
+  console.log('selectedModule', selectedModule)
 
   return (
     <div className="mb-28 mt-[0px] lg:px-[80px] lg:mt-[70px]">
@@ -392,10 +398,14 @@ const Program = () => {
             <div className="sessionDetails flex flex-col gap-3">
               {
                 selectedModule.live_session_type === "completed" ?
-                  <></> :
-                  <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
-                    next live session
-                  </button>
+                  <></> : selectedModule.live_session_type === "ongoing" ?
+                    <div className='w-[50px] py-1 rounded-2xl px-2 font-semibold text-white text-sm bg-[#DD1D43] flex items-center justify-center'>
+                      <img src={LiveIcon} alt='live' className='mr-[3px]' /> Live
+                    </div>
+                    :
+                    <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
+                      next live session
+                    </button>
               }
               <h1 className="font-bold text-lg">
                 {selectedModule.name}
@@ -478,7 +488,7 @@ const Program = () => {
                 {...userMod}
                 selectedModule={selectedModule}
                 handleModulechange={handleModulechange}
-                // isCompleted={true}
+              // isCompleted={true}
               />
             })}
           </div>
