@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
@@ -60,6 +60,10 @@ const Dob = () => {
     date: '2',
     year: '1951',
   })
+
+  useEffect(() => {
+    document.title = `Ivory | Signup Details`;
+  }, []);
 
   const common = {
     infinite: true,

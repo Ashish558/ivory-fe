@@ -22,6 +22,7 @@ import {
   shareLink
 } from "../../../utils/utils";
 import { GA_programRegister, GA_share } from "../../../services/analytics";
+
 const Enroll = () => {
   //enrollType "", "reg", "free"
   const [enrollType, setEnrollType] = useState("reg");
@@ -37,6 +38,10 @@ const Enroll = () => {
 
   const location = useLocation()
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `Ivory | Program | ${programData?.name ? programData?.name : ''}`;
+  }, [programData?.name]);
 
   useEffect(() => {
     getSingleProgram(id, loggedIn)

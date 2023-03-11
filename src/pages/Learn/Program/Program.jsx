@@ -36,6 +36,10 @@ const Program = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    document.title = `Ivory | Program | ${programData?.program?.name ? programData?.program?.name : ''}`;
+  }, [programData?.program?.name]);
+
+  useEffect(() => {
     if (tab === 0 || tab === 1) {
       setSelectedAssignment({})
     }
@@ -260,7 +264,7 @@ const Program = () => {
   // console.log('selectedAssignment', selectedAssignment)
   // console.log('userModules', userModules)
   // console.log('selectedModule', selectedModule)
-  console.log('selectedModule', selectedModule)
+  // console.log('selectedModule', selectedModule)
 
   return (
     <div className="mb-28 mt-[0px] lg:px-[80px] lg:mt-[70px]">

@@ -88,6 +88,11 @@ export default function StartActivity({ fetchUserDetails }) {
          })
    }, [activityId])
 
+   
+   useEffect(() => {
+      document.title = 'Ivory | Activities';
+  }, []);
+  
    //fetch category details
    useEffect(() => {
       getCategories()

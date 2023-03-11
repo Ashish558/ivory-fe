@@ -36,6 +36,11 @@ const Profile = () => {
   const { loggedIn,profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
 
+  
+  useEffect(() => {
+    document.title = `Ivory | Edit Profile`;
+  }, []);
+
   const [gender,setgender] = useState("");
   useEffect(() => {
     if (loggedIn === true) {

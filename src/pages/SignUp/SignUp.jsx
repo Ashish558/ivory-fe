@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link,useLocation,useNavigate } from "react-router-dom";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from "../../services/auth";
@@ -48,6 +48,11 @@ const SignUp = () => {
   const goBack = () => {
     navigate(from, { replace: true });
   };
+
+   
+  useEffect(() => {
+    document.title = `Ivory | Signup`;
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

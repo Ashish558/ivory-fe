@@ -94,6 +94,10 @@ export default function Activities() {
    const navigate = useNavigate()
    const { loggedIn } = useSelector(state => state.user)
 
+   useEffect(() => {
+      document.title = 'Ivory | Activities';
+  }, []);
+
    const handleScrollToTop = () => {
       window.scrollTo({
          top: 0,
