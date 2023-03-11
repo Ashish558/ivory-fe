@@ -78,6 +78,10 @@ export default function LiveEvents() {
    const navigate = useNavigate()
 
    useEffect(() => {
+      document.title = 'Ivory | Live Events';
+  }, []);
+
+   useEffect(() => {
       getLiveSessions()
          .then((res) => {
             console.log(res.data.data);

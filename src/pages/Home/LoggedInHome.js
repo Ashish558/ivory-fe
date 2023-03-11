@@ -35,6 +35,10 @@ const LoggedInHome = () => {
     // console.log('profileData', profileData);
 
     useEffect(() => {
+        document.title = 'Ivory | Home';
+    }, []);
+
+    useEffect(() => {
         getHomeBanners()
             .then(res => {
                 if (res.data.data === null) return

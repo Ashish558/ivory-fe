@@ -37,6 +37,10 @@ const Learn = () => {
    const [onlyLiveActive, setOnlyLiveActive] = useState(true)
 
    useEffect(() => {
+      document.title = `Ivory | Program`;
+    }, []);
+
+   useEffect(() => {
       getInterests(true)
          .then(res => {
             // console.log(res.data.data);

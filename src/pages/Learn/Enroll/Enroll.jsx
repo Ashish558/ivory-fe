@@ -22,6 +22,7 @@ import {
   shareLink
 } from "../../../utils/utils";
 import { GA_programRegister, GA_share } from "../../../services/analytics";
+
 const Enroll = () => {
   //enrollType "", "reg", "free"
   const [enrollType, setEnrollType] = useState("reg");
@@ -37,6 +38,10 @@ const Enroll = () => {
 
   const location = useLocation()
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `Ivory | Program | ${programData?.name ? programData?.name : ''}`;
+  }, [programData?.name]);
 
   useEffect(() => {
     getSingleProgram(id, loggedIn)
@@ -60,7 +65,7 @@ const Enroll = () => {
       }).catch(err => {
         console.log(err.response);
       })
-  }, [])
+  }, [id])
 
   const handleEnroll = () => {
     // console.log('asda');
@@ -165,15 +170,17 @@ const Enroll = () => {
       .then((res) => {
         if (res.data.data === null) return;
         console.log("all programs", res.data.data);
+        let enrolled = false
         res.data.data.forEach((item) => {
           if (item.program.id === parseInt(id)) {
             setProgramExist(true);
             setUserProgramId(item.id);
             if (item.state === "enrolled") {
-              setIsEnrolled(true);
+              enrolled = true
             }
           }
         });
+        setIsEnrolled(enrolled);
       })
       .catch((err) => {
         console.log(err.response);
@@ -181,7 +188,7 @@ const Enroll = () => {
   };
   useEffect(() => {
     fetchUserPrograms();
-  }, []);
+  }, [id]);
 
   const onShare = () => {
     GA_share('program', programData.id)

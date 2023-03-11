@@ -67,6 +67,10 @@ export default function ActivityType() {
    const [banners, setBanners] = useState([])
 
    useEffect(() => {
+      document.title = `Ivory | Activities | ${category.name ? category.name : ''} `;
+  }, [category]);
+
+   useEffect(() => {
       getBanners()
          .then(res => {
             console.log('activities banners', res.data.data);

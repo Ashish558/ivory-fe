@@ -30,6 +30,10 @@ export default function SingleSession({ }) {
    const location = useLocation()
 
    useEffect(() => {
+      document.title = `Ivory | Live Events ${session.name ? `| ${session.name}` : ''}`;
+  }, [session]);
+
+   useEffect(() => {
       getSingleLiveSessions(id, loggedIn)
          .then((res) => {
             console.log('res', res.data.data);

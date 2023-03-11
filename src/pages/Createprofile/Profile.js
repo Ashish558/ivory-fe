@@ -233,7 +233,7 @@ const Profile = () => {
           <div className={styles.image}>
             <div className={styles.ssmmillee}>
               <img src={profileData.profile_picture ? profileData.profile_picture : photo}
-                className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt="profile_picture"
+                className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt="profile_picture "
 
                 onClick={() => photoRef.current.click()} />
               <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
@@ -340,7 +340,7 @@ const Profile = () => {
             </div>
             <div className='w-[55vw]'>
 
-              <img src={ivoryforming} className={styles.ivoryForm} alt="ivoryForm" />
+              <img src={ivoryforming} className={styles.ivoryForm} alt="ivoryforming" />
             </div>
           </div>
 
@@ -367,7 +367,7 @@ const Profile = () => {
                         // style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int)}>
-                        <img src={int.icon} className='w-5' alt="icon" />
+                        <img src={int.icon} className='w-5' alt="int_icon" />
                         <h3> {int.name} </h3>
                       </div>
                     })
