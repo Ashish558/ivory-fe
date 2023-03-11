@@ -25,7 +25,7 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
                </div>
             }
          </div>
-         <div className="flex flex-col justify-between text-sm ml-3 w-[60vw] relative">
+         <div className="flex flex-col  justify-between text-sm ml-3 w-[60vw] relative">
             <div>
                <div className="fle justify-between">
                   <p className='font-bold mb-1 '>
@@ -38,20 +38,20 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
             </div>
             {
                type === 'live_session' && live_session_type === 'completed' ?
-                  <button style={{ color: '#44474E' }} className={`bg-[#E3E3E3]  p-1 w-[86px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
+                  <button style={{ color: '#44474E' }} className={`bg-[#E3E3E3]  px-1 w-[86px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
                      live ended
                   </button> : type === 'live_session' ?
-                     <button style={{ color: '#CB1537' }} className={`bg-red-100  p-1 w-[105px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
+                     <button style={{ color: '#CB1537' }} className={`bg-red-100  px-1 w-[105px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
                         live session
                      </button> : <></>
             }
             {
                type === 'video' &&
-               <button className={`bg-[#DEF9FF] text-[#22B8CF] leading-normal p-1 w-[55px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
+               <button className={`bg-[#DEF9FF] text-[#22B8CF] leading-normal px-1 w-[55px] rounded-full mt-5 font-bold text-sm ${styles.positionbtn}`}>
                   Video
                </button>
             }
-            <h1>
+            <h1 className={`${styles.scheduled}`}>
                {/* <span className="text-gray-400">held on</span>
                <span className="text-green-500 font-bold">
                   25 Feb 2023

@@ -1,5 +1,12 @@
 .positionbtn {
     position: absolute;
-    top: 13%;
+    top: 7%;
     right: 0;
+}
+
+.scheduled {
+
+    position: absolute;
+    top: 71%;
+
 }

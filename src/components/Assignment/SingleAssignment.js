@@ -10,7 +10,7 @@ export default function SingleAssignment({ id, duration, name, image, is_complet
 
    // console.log(isCompleted);
    return (
-      <div className={`py-3 mt-3 mx-5 border-t border-gray-200 flex ${selectedModule !== undefined ? id === selectedModule.id ? 'bg-secondary' : '' : ''}`}
+      <div className={`py-3 mt-3 mx-5  flex ${selectedModule !== undefined ? id === selectedModule.id ? 'bg-secondary' : '' : ''}`}
          onClick={() => onClickAssignment(id)} >
          <div className="flex justify-start items-center w-[40vw] relative">
             <img
