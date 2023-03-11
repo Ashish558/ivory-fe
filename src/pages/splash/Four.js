@@ -21,7 +21,7 @@ const Four = ({ clearTimeouts }) => {
           </div>
         </div>
       </div>
-      <img className={styles.imgup} src={four} alt="" />
+      <img className={styles.imgup} src={four} alt="four" />
       <div className={styles.down}>
         <span className={styles.head}>
           <p className='text-2xl tracking-[2px] font-bold'><span style={{ color: "#60FFDE" }}>Belong</span> to a community that matters </p>

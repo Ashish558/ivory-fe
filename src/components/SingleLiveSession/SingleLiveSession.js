@@ -15,13 +15,13 @@ export default function SingleLiveSession({ id, duration, name, image, is_comple
          <div className="flex justify-start items-center w-[40vw] relative">
             <img
                src={image}
-               alt=""
+               alt="session"
                className="h-[90px] object-cover rounded-xl"
             />
             {
                isCompleted &&
                <div className="flex flex-col justify-center items center h-full bg-[#30313026] absolute rounded-l-xl">
-                  <img src={greenTik} className="h-[30px] px-3" alt="" />
+                  <img src={greenTik} className="h-[30px] px-3" alt="greenTik" />
                </div>
             }
          </div>

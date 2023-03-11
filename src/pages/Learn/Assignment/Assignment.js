@@ -296,7 +296,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                                  </p>
                                  {step.image &&
                                     <div className={styles.stepImageContainer}>
-                                       <img src={step.image} alt='step-image' />
+                                       <img src={step.image} alt='step_image' />
                                     </div>
                                  }
                                  <div className='font-normal text-sm md:text-base '>
@@ -406,7 +406,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                               onDelete={onDelete} />
                         })}
                      </div>
-                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='' onClick={increaseIndex} />
+                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='NextIcon' onClick={increaseIndex} />
                   </div>
 
                   <div className='relative sm:grid sm:grid-cols-1 sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto hidden md:block'>

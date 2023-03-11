@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./mcq.module.css";
 
 import axios from 'axios';
@@ -32,26 +32,26 @@ const tempOptions = [
    },
 ]
 
-export default function Mcq({ image,choices,url,updateStory,type,question }) {
-   const [options,setOptions] = useState([])
+export default function Mcq({ image, choices, url, updateStory, type, question }) {
+   const [options, setOptions] = useState([])
 
-   const [mcqResponse,setMcqResponse] = useState({
+   const [mcqResponse, setMcqResponse] = useState({
       selected: false,
       isCorrect: false
    })
 
    useEffect(() => {
-      setOptions(choices.map(choice => ({ ...choice,selected: false })))
-   },[choices])
+      setOptions(choices.map(choice => ({ ...choice, selected: false })))
+   }, [choices])
 
    useEffect(() => {
       setMcqResponse({
          selected: false,
          isCorrect: false
       })
-   },[choices])
+   }, [choices])
 
-   const [optionDisabled,setOptionDisabled] = useState(false)
+   const [optionDisabled, setOptionDisabled] = useState(false)
    let timeOutId = null
 
    // console.log(mcqResponse);
@@ -67,12 +67,12 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
                   isCorrect: true
                })
                let tempOptions = options.map(item => {
-                  return item.id === choice.id ? { ...item,selected: true } : { ...item,selected: false }
+                  return item.id === choice.id ? { ...item, selected: true } : { ...item, selected: false }
                })
                setOptions(tempOptions)
             } else {
                let tempOptions = options.map(item => {
-                  return item.id === choice.id ? { ...item,selected: true } : { ...item,selected: false }
+                  return item.id === choice.id ? { ...item, selected: true } : { ...item, selected: false }
                })
                setOptions(tempOptions)
                setMcqResponse({
@@ -83,7 +83,7 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
          }
 
       })
-   },[options])
+   }, [options])
 
    useEffect(() => {
       return () => {
@@ -93,24 +93,24 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
             isCorrect: false
          })
       }
-   },[])
+   }, [])
    const selectAns = option => {
       console.log(option);
 
-      axios.post(`${url}answer/`,{ answer: option.id },getAuthHeaders())
+      axios.post(`${url}answer/`, { answer: option.id }, getAuthHeaders())
          .then(res => {
-            console.log('answer res',res.data.data);
-            updateStory({ ...res.data.data,type })
+            console.log('answer res', res.data.data);
+            updateStory({ ...res.data.data, type })
          }).catch(err => {
-            console.log('answer err',err.data);
+            console.log('answer err', err.data);
          })
 
       // return
       let updated = options.map(opt => {
          if (opt.id === option.id) {
-            return { ...opt,selected: true }
+            return { ...opt, selected: true }
          } else {
-            return { ...opt,selected: false }
+            return { ...opt, selected: false }
          }
       })
       setOptionDisabled(true)
@@ -121,21 +121,21 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
                selected: true,
                isCorrect: true
             })
-         },2000);
+         }, 2000);
       } else {
          timeOutId = setTimeout(() => {
             setMcqResponse({
                selected: true,
                isCorrect: false
             })
-         },2000);
+         }, 2000);
       }
    }
 
    useEffect(() => {
       return () => clearTimeout(timeOutId)
-   },[])
-// console.log(mcqResponse);
+   }, [])
+   // console.log(mcqResponse);
    return (
       <div className={`${styles.storyMcq} lg:grid-rows-6`}>
          {
@@ -143,7 +143,7 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
                ?
                mcqResponse.isCorrect === true ?
                   <div className={`${styles.mcqResponseCorrect} lg:row-span-3`}>
-                     <img src={McqCorrectImg} className={styles.storyImage} />
+                     <img src={McqCorrectImg} className={styles.storyImage} alt='McqCorrectImg' />
                      <div className='px-4'>
                         <h2>
                            Genius
@@ -163,7 +163,7 @@ export default function Mcq({ image,choices,url,updateStory,type,question }) {
                      </div>
                      : <></> :
                <div className='flx lg:row-span-4 items-center self-streth flex-1 overflow-aut lg:h-full'>
-                  <img src={image} className={styles.storyImage} />
+                  <img src={image} className={styles.storyImage} alt='McqImg' />
                </div>
          }
          <div className={`${styles.mcqOptions} lg:row-span-2`}>

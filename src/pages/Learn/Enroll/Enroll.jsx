@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 import useRazorpay from "react-razorpay";
-import { useLocation,useNavigate,useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import greenTik from "../../../assets/images/learn/greenTik.png";
 import shareImg from "../../../assets/images/learn/share.svg";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
@@ -184,7 +184,7 @@ const Enroll = () => {
   }, []);
 
   const onShare = () => {
-    GA_share('program', programData.id )
+    GA_share('program', programData.id)
     shareLink('ivory Program', 'ivory Program', `https://ivory-test.netlify.app${location.pathname}`)
   }
 
@@ -256,7 +256,7 @@ const Enroll = () => {
                           className="mr-8 flex justify-start items-center gap-2 text-[13px] lg:text-base font-semibold"
                         >
                           <span className="w-[32px] h-[32px] bg-[#EEFCFF] rounded-md flex justify-center items-center font-inter text-black">
-                            <img src={item.icon} alt="" />
+                            <img src={item.icon} alt="item_icon" />
                           </span>
                           {item.name}
                         </li>
@@ -338,7 +338,7 @@ const Enroll = () => {
                 onClick={onShare}
               >
                 {" "}
-                <img src={shareImg} alt="" />
+                <img src={shareImg} alt="shareImg" />
                 <span className="text-sm"> Share</span>
               </button>
             </div>
@@ -355,7 +355,7 @@ const Enroll = () => {
                           key={item.id}
                           className="mr-8 flex justify-start items-center gap-2 text-normal lg:text-base font-normal text-[#6D747A]"
                         >
-                          <img src={item.icon} alt="" />
+                          <img src={item.icon} alt="item_icon" />
                           {item.name}
                         </li>
                       );
@@ -479,7 +479,7 @@ const Enroll = () => {
                 onClick={onShare}
               >
                 {" "}
-                <img src={shareImg} alt="" />
+                <img src={shareImg} alt="shareImg" />
                 <span> Share</span>
               </button>
             </div>

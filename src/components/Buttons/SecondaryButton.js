@@ -11,7 +11,7 @@ export default function SecondaryButton({ className, children, onClick, disabled
       >
          {
             img &&
-            <img src={img} className="h-[22px] mr-2" alt="" />
+            <img src={img} className="h-[22px] mr-2" alt="button" />
          }
          {children}
       </button>

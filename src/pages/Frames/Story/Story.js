@@ -247,7 +247,7 @@ export default function Story(props) {
 
                      {storyType === 'image' ?
                         <div className={styles.storyImg}>
-                           <img src={image} />
+                           <img src={image} alt='Story_Image' />
                         </div>
 
                         : storyType === 'video' ?

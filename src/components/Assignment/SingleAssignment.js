@@ -15,7 +15,7 @@ export default function SingleAssignment({ id, duration, name, image, is_complet
          <div className="flex justify-start items-center w-[40vw] relative">
             <img
                src={image}
-               alt=""
+               alt="Assignment"
                className="h-[90px] object-cover rounded-xl"
             />
             {/* {

@@ -63,7 +63,7 @@ const Congrates = () => {
           }}
         >
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
           </div>
           <div className='flex-1 w-full'>
             <Slider {...settings} className='w-full flex-1 h-auto' >
@@ -80,7 +80,7 @@ const Congrates = () => {
                         </h1>
                       </div>
                       <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
-                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
+                        <img src={item.img} alt="item_image" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
                       </div>
                     </div>
                   )
@@ -101,47 +101,47 @@ const Congrates = () => {
           <div className="">
             <img
               src={mobileSignupTree}
-              alt=""
+              alt="mobileSignupTree"
               className="sm:hidden absolute bottom-0 w-[250px]"
             />
             <img
               src={vector}
-              alt=""
+              alt="vector"
               className={`sm:hidden ${styles.vector}`}
             />
             <img
               src={vector1}
-              alt=""
+              alt="vector1"
               className={`sm:hidden ${styles.vector1}`}
             />
             <img
               src={vector2}
-              alt=""
+              alt="vector2"
               className={`sm:hidden ${styles.vector2}`}
             />
             <img
               src={vector3}
-              alt=""
+              alt="vector3"
               className={`sm:hidden ${styles.vector3}`}
             />
             <img
               src={vector3}
-              alt=""
+              alt="vector3"
               className={`sm:hidden ${styles.vector7}`}
             />
             <img
               src={vector4}
-              alt=""
+              alt="vector4"
               className={`sm:hidden ${styles.vector4}`}
             />
             <img
               src={vector4}
-              alt=""
+              alt="vector4"
               className={`sm:hidden ${styles.vector6}`}
             />
             <img
               src={vector5}
-              alt=""
+              alt="vector5"
               className={`sm:hidden ${styles.vector5}`}
             />
           </div>

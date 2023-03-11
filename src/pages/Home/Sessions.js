@@ -80,7 +80,7 @@ const Sessions = () => {
                Events
             </h1>
             <p className='pl-7 hidden lg:block cursor-pointer'>
-               <img src={Arrow} onClick={() => navigate('/live-events')} alt="" />
+               <img src={Arrow} onClick={() => navigate('/live-events')} alt="Arrow" />
             </p>
          </div>
          <div className='px-4 md:hidden'>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation,useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import activity2 from '../../assets/icons/activeActivities.svg';
 import community2 from '../../assets/icons/community.svg';
 import home2 from '../../assets/icons/home2.svg';
@@ -12,7 +12,7 @@ import learn from '../../Images/Learn.png';
 import '../Home/Footer.css';
 
 
-const toExclude = ['/login','/otp','/signup','/congrates','/dob','/','/logolanding','/four','/third','/second','/landing','/confirmation','/live','/enroll','/community','/']
+const toExclude = ['/login', '/otp', '/signup', '/congrates', '/dob', '/', '/logolanding', '/four', '/third', '/second', '/landing', '/confirmation', '/live', '/enroll', '/community', '/']
 
 const Footer = () => {
 
@@ -32,8 +32,8 @@ const Footer = () => {
                to='/home'>
                <p>
                   {currentPath === '/home' ? <img className='icon-bg '
-                     src={home} alt="" /> : <img className={`icon-bg-2`}
-                        src={home2} alt="" />
+                     src={home} alt="home" /> : <img className={`icon-bg-2`}
+                        src={home2} alt="home" />
                   }
                </p>
                <p className={`text-base pt-0 ${currentPath === '/home' ? 'font-bold' : ''} `}>Home</p>
@@ -42,8 +42,8 @@ const Footer = () => {
             <Link to='/activities' className='flex flex-col cursor-pointer justify-between items-center' >
                <p>
                   {currentPath === '/activities' ? <img className='icon-bg '
-                     src={activity2} alt="" /> : <img className={`icon-bg-2`}
-                        src={activity} alt="" />
+                     src={activity2} alt="activity2" /> : <img className={`icon-bg-2`}
+                        src={activity} alt="activity" />
                   }
 
                </p>
@@ -52,8 +52,8 @@ const Footer = () => {
             <Link to='/learn' className='flex flex-col cursor-pointer justify-between items-center'>
                <p>
                   {currentPath === '/learn' ? <img className='icon-bg '
-                     src={videoIcon} alt="" /> : <img className={`icon-bg-2`}
-                        src={learn} alt="" />
+                     src={videoIcon} alt="videoIcon" /> : <img className={`icon-bg-2`}
+                        src={learn} alt="learn" />
                   }
                </p>
                <p className={`text-base pt-0 ${currentPath === '/learn' ? 'font-bold' : ''} `}>Learn</p>
@@ -61,8 +61,8 @@ const Footer = () => {
             <div className='flex flex-col cursor-pointer justify-between items-center relative'>
                <p>
                   {currentPath === '/community' ? <img className='icon-bg '
-                     src={community2} alt="" /> : <img className={`icon-bg-2`}
-                        src={community} alt="" />
+                     src={community2} alt="community2" /> : <img className={`icon-bg-2`}
+                        src={community} alt="community" />
                   }
                </p>
                <div className='count flex items-center justify-center'>

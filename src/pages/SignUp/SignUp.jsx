@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,useLocation,useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/login/logolight.png";
 import { sendOtp } from "../../services/auth";
 import styles from "./SignUp.module.css";
@@ -39,7 +39,7 @@ const sliderData = [
   },
 ];
 const SignUp = () => {
-  const locaion = useLocation ();
+  const locaion = useLocation();
   const from = locaion.state?.from || "/";
   const navigate = useNavigate();
   const [phone, setPhone] = React.useState('');
@@ -56,7 +56,7 @@ const SignUp = () => {
       setError("Phone number must be of 10 digits");
     } else if (phone.length > 10) {
       setError("Phone number cannot be more than 11 digits");
-    } 
+    }
     // else if (typeof phone !== "number") {
     //   console.log(typeof phone);
     //   setError("Phone number must be a number");
@@ -101,7 +101,7 @@ const SignUp = () => {
           }}
         >
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
           </div>
           <div className="flex-1 w-full">
             <Slider {...settings} className="w-full flex-1 h-auto">
@@ -122,7 +122,7 @@ const SignUp = () => {
                     <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
                       <img
                         src={item.img}
-                        alt=""
+                        alt="item_img"
                         className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`}
                       />
                     </div>

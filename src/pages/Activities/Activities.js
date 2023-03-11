@@ -218,7 +218,7 @@ export default function Activities() {
                      <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-[48px] lg:font-semibold font-[Inter] leading-none '>
                         My activities
                      </h3>
-                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="Arrow" /></p>
                   </div>
                   {myActivities.length > 0 ?
                      myActivities.map((activity, idx) => {
@@ -239,7 +239,7 @@ export default function Activities() {
                <div className=''>
                   <div className=' flex items-center mb-2'>
                      <h3 className='font-bold lg:font-semibold leading-none lg:text-[48px] text-xl mb-2.5 font-[Inter]'> All Activities </h3>
-                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="Arrow" /></p>
                   </div>
                   <Filterbar items={filterItems} onChange={onChange} />
                </div>
@@ -249,30 +249,30 @@ export default function Activities() {
                   {filteredActivities.map((activity, indx) => {
                      return (
                         activity.categories?.length > 0 ?
-                        <div key={indx} className='mb-8 lg:mb-[60px]' >
-                           <div className='flex items-center mb-3  lg:mb-[48px]'>
-                              <img src={activity.icon} alt='activity' />
-                              <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
-                           </div>
+                           <div key={indx} className='mb-8 lg:mb-[60px]' >
+                              <div className='flex items-center mb-3  lg:mb-[48px]'>
+                                 <img src={activity.icon} alt='activity' />
+                                 <p className='ml-2 text-2xl font-semibold lg:text-[32px]'> {activity.name} </p>
+                              </div>
                               <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
-                              {activity.categories.map((category, idx) => (
-                                 <div key={category.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
-                                    onClick={() => navigate(`/activities/${category.id}`)}>
-                                    <p><img src={category.icon} alt="" /></p>
-                                    {
-                                       category?.name.length <= '17' ?
-                                          <p className='text-center pt-2 font-semibold text-sm'
-                                          // style={{ color: activity?.color }}
-                                          >{category?.name}</p>
-                                          : <p className='text-center pt-2 font-semibold text-xs'
-                                          // style={{ color: activity?.color }}
-                                          >{category?.name}</p>
-                                    }
-                                 </div>
-                  ))}
-                           </div>
-                        </div> :
-                        <></>
+                                 {activity.categories.map((category, idx) => (
+                                    <div key={category.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
+                                       onClick={() => navigate(`/activities/${category.id}`)}>
+                                       <p><img src={category.icon} alt="category" /></p>
+                                       {
+                                          category?.name.length <= '17' ?
+                                             <p className='text-center pt-2 font-semibold text-sm'
+                                             // style={{ color: activity?.color }}
+                                             >{category?.name}</p>
+                                             : <p className='text-center pt-2 font-semibold text-xs'
+                                             // style={{ color: activity?.color }}
+                                             >{category?.name}</p>
+                                       }
+                                    </div>
+                                 ))}
+                              </div>
+                           </div> :
+                           <></>
                      )
                   })}
                   {

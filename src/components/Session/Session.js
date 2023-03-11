@@ -18,7 +18,7 @@ export default function Session({ id, name, image, scheduled_on, host, scrollToT
    }
 
    const handleClick = () => {
-      
+
       navigate(`/live-events/${id}`)
       if (scrollToTop) {
          handleScrollToTop()
@@ -29,7 +29,7 @@ export default function Session({ id, name, image, scheduled_on, host, scrollToT
          onClick={handleClick}>
          <div className={`${styles.imgContainer} relative`}>
             <img src={liveSessionCard} className='object-cover  w-[100%] h-[180px] lg:h-[228px]' alt='session' />
-            <div className='bg-[#DD1D43] p-1 rounded-full text-white px-2 absolute top-5 right-5 z-30 flex items-center gap-1'><img src={livepng} alt="" className='w-[10px] h-[10px] object-cover' /> <span>Live</span> </div>
+            <div className='bg-[#DD1D43] p-1 rounded-full text-white px-2 absolute top-5 right-5 z-30 flex items-center gap-1'><img src={livepng} alt="live" className='w-[10px] h-[10px] object-cover' /> <span>Live</span> </div>
 
          </div>
          <div className='px-3 pr-2 py-2 pb-5 lg:px-4 lg:py-4'>

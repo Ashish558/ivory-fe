@@ -92,7 +92,7 @@ const DesktopLearn = () => {
                   Learn with Ivory
                </h1>
                <p className='pl-7 cursor-pointer' onClick={() => navigate('/learn')}  >
-                  <img src={Arrow} alt="" />
+                  <img src={Arrow} alt="Arrow" />
                </p>
             </div>
 

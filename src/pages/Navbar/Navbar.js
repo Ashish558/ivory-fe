@@ -68,7 +68,7 @@ const Navbar = () => {
 
                   <div className="flex items-center normal-case text-lg  welcome-color">
                      <p className='pr-1 pl-2'>
-                        <img src={isMorning ? Logo : Evening} alt="" />
+                        <img src={isMorning ? Logo : Evening} alt="Logo" />
                      </p>
                      {
                         loggedIn && isMorning === false ?
@@ -102,7 +102,7 @@ const Navbar = () => {
                loggedIn &&
                <button className='flex'>
                   <div onClick={toggleDrawer} class="w-11 h-11 rounded-full flex">
-                     <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='' className='w-full rounded-full object-cover' />
+                     <img src={profileData.profile_picture ? profileData.profile_picture : User} alt='profile_picture' className='w-full rounded-full object-cover' />
                   </div>
                </button>
             }
@@ -113,9 +113,9 @@ const Navbar = () => {
 
                <div className='flex justify-between'>
                   <p className=''>
-                     <img src={profileData.profile_picture ? profileData.profile_picture : User} alt="" className='w-12 h-12 object-cover rounded-full' />
+                     <img src={profileData.profile_picture ? profileData.profile_picture : User} alt="profile_picture" className='w-12 h-12 object-cover rounded-full' />
                   </p>
-                  <button onClick={toggleDrawer} className='mb-6 p-0'><img src={cross} alt="" /></button>
+                  <button onClick={toggleDrawer} className='mb-6 p-0'><img src={cross} alt="cross" /></button>
                </div>
                <p className='text-sm font-semibold pt-2'>
                   {profileData.name ? profileData.name : ''}
@@ -126,40 +126,40 @@ const Navbar = () => {
 
                   <div className='flex items-center cursor-pointer'
                      onClick={() => { navigate('/CreateProfile'); toggleDrawer() }} >
-                     <p><img src={edit} alt="" /></p>
+                     <p><img src={edit} alt="edit" /></p>
                      <p className='text-sm font-semibold pl-4'>Edit Profile</p>
                   </div>
                   <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
-                     <p><img src={play} alt="" /></p>
+                     <p><img src={play} alt="play" /></p>
                      <p className='text-sm font-semibold pl-4'>How to use app</p>
                   </div>
                   <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
-                     <p><img src={programs} alt="" /></p>
+                     <p><img src={programs} alt="programs" /></p>
                      <p className='text-sm font-semibold pl-4'>My Programs</p>
                   </div>
                   <div className='flex items-center cursor-pointer mt-7'
                      onClick={() => { navigate('/activities'); toggleDrawer() }}>
-                     <p><img src={activities} alt="" /></p>
+                     <p><img src={activities} alt="activities" /></p>
                      <p className='text-sm font-semibold pl-4' >
                         Activities
                      </p>
                   </div>
                   <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
-                     <p><img src={sessions} alt="" /></p>
+                     <p><img src={sessions} alt="sessions" /></p>
                      <p className='text-sm font-semibold pl-4'>Live Sessions</p>
                   </div>
 
                   <div className='boundary-margin-top'>
                      <div className='flex items-center cursor-pointer' onClick={toggleDrawer} >
-                        <p><img src={exit} alt="" /></p>
+                        <p><img src={exit} alt="exit" /></p>
                         <p className='text-sm font-semibold pl-4' onClick={handleLogout} >Sign out</p>
                      </div>
                      <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
-                        <p><img src={faq} alt="" /></p>
+                        <p><img src={faq} alt="faq" /></p>
                         <p className='text-sm font-semibold pl-4 contact-color'>FAQ</p>
                      </div>
                      <div className='flex items-center cursor-pointer mt-7' onClick={toggleDrawer} >
-                        <p><img src={contact} alt="" /></p>
+                        <p><img src={contact} alt="contact" /></p>
                         <p className='text-sm font-semibold pl-4 contact-color'>Contact us</p>
                      </div>
                      <p className='text-xs text-center pb-5 pt-8'>IVORY V1.01 </p>

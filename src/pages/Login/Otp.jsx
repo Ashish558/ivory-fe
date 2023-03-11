@@ -49,7 +49,7 @@ const Otp = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (stateData.otp !== undefined && stateData.otp.length === 6) {
-    
+
       const otpArray = stateData?.otp.split("");;
       const otpValues = {
         field1: otpArray[0],
@@ -154,7 +154,7 @@ const Otp = () => {
       <div className="topAppBar pt-10 ml-6 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img src={back} alt="" onClick={goBack} />
+            <img src={back} alt="back" onClick={goBack} />
           </div>
         </div>
       </div>
@@ -167,7 +167,7 @@ const Otp = () => {
           }}
         >
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
           </div>
           <div className="flex-1 w-full">
             <Slider {...settings} className="w-full flex-1 h-auto">
@@ -208,7 +208,7 @@ const Otp = () => {
                 <input
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
-                  value={otp.field1?otp.field1:''}
+                  value={otp.field1 ? otp.field1 : ''}
                   name="field1"
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
@@ -216,7 +216,7 @@ const Otp = () => {
                 <input
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
-                  value={otp.field2?otp.field2:''}
+                  value={otp.field2 ? otp.field2 : ''}
                   name="field2"
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
@@ -225,7 +225,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field3"
-                  value={otp.field3?otp.field3:''}
+                  value={otp.field3 ? otp.field3 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
@@ -233,7 +233,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field4"
-                  value={otp.field4?otp.field4:''}
+                  value={otp.field4 ? otp.field4 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
@@ -241,7 +241,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field5"
-                  value={otp.field5?otp.field5:''}
+                  value={otp.field5 ? otp.field5 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
@@ -249,7 +249,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field6"
-                  value={otp.field6?otp.field6:''}
+                  value={otp.field6 ? otp.field6 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />

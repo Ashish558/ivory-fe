@@ -60,7 +60,7 @@ const Home = () => {
         <img
           className=""
           src={flashImg}
-          alt=""
+          alt="flashImg"
           style={{
             position: "absolute",
             top: "50%",

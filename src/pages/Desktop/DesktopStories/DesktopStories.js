@@ -32,7 +32,7 @@ const DesktopStories = () => {
         <div style={{ marginTop: '88px' }} className='ml-24'>
             <div className=' flex items-center mb-20'>
                 <h1 className='text-5xl font-medium  '>Start your day <span></span></h1>
-                <p className='pl-7'><img src={Arrow} alt="" /></p>
+                <p className='pl-7'><img src={Arrow} alt="Arrow" /></p>
             </div>
             <Slider {...settings}>
                 <div>
@@ -41,7 +41,7 @@ const DesktopStories = () => {
                         <div className=" detailsDesktop ">
                             <p className="text-sm text-white">Good morning</p>
                             <div className="flex items-center">
-                                <p className="text-white"> <img src={Play} alt="" /></p>
+                                <p className="text-white"> <img src={Play} alt="Play" /></p>
                                 <p className="text-sm text-white pl-1">130k views</p>
                             </div>
                         </div>
@@ -53,7 +53,7 @@ const DesktopStories = () => {
                         <div className=" detailsDesktop ">
                             <p className="text-sm text-white">Good morning</p>
                             <div className="flex items-center">
-                                <p className="text-white"> <img src={Play} alt="" /></p>
+                                <p className="text-white"> <img src={Play} alt="Play" /></p>
                                 <p className="text-sm text-white pl-1">130k views</p>
                             </div>
                         </div>
@@ -65,7 +65,7 @@ const DesktopStories = () => {
                         <div className=" detailsDesktop ">
                             <p className="text-sm text-white">Good morning</p>
                             <div className="flex items-center">
-                                <p className="text-white"> <img src={Play} alt="" /></p>
+                                <p className="text-white"> <img src={Play} alt="Play" /></p>
                                 <p className="text-sm text-white pl-1">130k views</p>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ const DesktopStories = () => {
                         <div className=" detailsDesktop ">
                             <p className="text-sm text-white">Good morning</p>
                             <div className="flex items-center">
-                                <p className="text-white"> <img src={Play} alt="" /></p>
+                                <p className="text-white"> <img src={Play} alt="Play" /></p>
                                 <p className="text-sm text-white pl-1">130k views</p>
                             </div>
                         </div>
@@ -89,7 +89,7 @@ const DesktopStories = () => {
                         <div className=" detailsDesktop ">
                             <p className="text-sm text-white">Good morning</p>
                             <div className="flex items-center">
-                                <p className="text-white"> <img src={Play} alt="" /></p>
+                                <p className="text-white"> <img src={Play} alt="Play" /></p>
                                 <p className="text-sm text-white pl-1">130k views</p>
                             </div>
                         </div>
@@ -101,7 +101,7 @@ const DesktopStories = () => {
                         <div className=" detailsDesktop ">
                             <p className="text-sm text-white">Good morning</p>
                             <div className="flex items-center">
-                                <p className="text-white"> <img src={Play} alt="" /></p>
+                                <p className="text-white"> <img src={Play} alt="Play" /></p>
                                 <p className="text-sm text-white pl-1">130k views</p>
                             </div>
                         </div>

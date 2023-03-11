@@ -267,7 +267,7 @@ const Program = () => {
     <div className="mb-28 mt-[0px] lg:px-[80px] lg:mt-[70px]">
       <div>
         {tab === 1 && selectedModule.image && (
-          <img src={selectedModule.image} alt="" className="w-full lg:hidden" />
+          <img src={selectedModule.image} alt="selectedModule_Image" className="w-full lg:hidden" />
         )}
         {tab === 0 && (
           <div className="video flex justify-center items-center relative lg:hidden">
@@ -381,11 +381,11 @@ const Program = () => {
               <div className="flex justify-start items-center w-[40vw] relative">
                 <img
                   src={liveSession}
-                  alt=""
+                  alt="liveSession"
                   className="h-[90px] object-cover rounded-xl"
                 />
                 <div className="flex flex-col justify-center items center h-full bg-[#30313026] absolute rounded-l-xl">
-                  <img src={greenTik} className="h-[30px] px-3" alt="" />
+                  <img src={greenTik} className="h-[30px] px-3" alt="greenTik" />
                 </div>
               </div>
               <div className="flex flex-col justify-between ml-3 w-[60vw]">
@@ -408,7 +408,7 @@ const Program = () => {
         tab === 1 && selectedModule && selectedModule.type === "live_session" && (
           <div className='max-w-[900px] flex'>
             <div className='w-[445px] hidden lg:block'>
-              <img src={selectedModule.image} alt="" className="w-full rounded-xl h-full object-cover hidden lg:block" />
+              <img src={selectedModule.image} alt="selectedModuleImage" className="w-full rounded-xl h-full object-cover hidden lg:block" />
             </div>
             <div className='px-5 flex-1 lg:ml-10'>
               <div className="sessionDetails flex flex-col gap-3">

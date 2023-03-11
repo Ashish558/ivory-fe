@@ -33,11 +33,11 @@ const LogoLanding = () => {
           </div>
         </div>
       </div>
-      <img src={slideimage1} className={styles.imgg} alt="" />
+      <img src={slideimage1} className={styles.imgg} alt="slideimage1" />
       <div className={styles.logoland}>
-        <img src={logo} alt="" />
+        <img src={logo} alt="logo" />
       </div>
-      
+
     </>
   )
 }
