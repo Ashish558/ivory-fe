@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 // import liveSession from './assets/images/learn/liveSession.png';
 import greenTik from "../../../assets/images/learn/greenTik.png";
+import LiveIcon from "../../../assets/icons/live.svg";
 import liveSession from "../../../assets/images/learn/liveSession.png";
 import SingleAssignment from '../../../components/Assignment/SingleAssignment';
 import SingleLiveSession from '../../../components/SingleLiveSession/SingleLiveSession';
@@ -33,6 +34,10 @@ const Program = () => {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    document.title = `Ivory | Program | ${programData?.program?.name ? programData?.program?.name : ''}`;
+  }, [programData?.program?.name]);
 
   useEffect(() => {
     if (tab === 0 || tab === 1) {
@@ -84,22 +89,17 @@ const Program = () => {
         let defaultSelected = res.data.data.program.modules[0]
         let data = res.data.data.program.modules.map(session => {
           if (session.type === "live_session") {
-            if (new Date(session.scheduled_on) > new Date() || session.scheduled_on === null) {
+            if (session.id === 13) {
+              // console.log('start date', new Date(session.start_date))
+              // console.log('end date', selectedModule)
+            }
+            if (new Date(session.start_date) > new Date() || session.start_date === null) {
               return { ...session, live_session_type: 'upcoming' }
             } else {
-              let hrs = session.scheduled_on_end_time.split(':')[0]
-              let mins = session.scheduled_on_end_time.split(':')[1]
-              let endDate = new Date(session.scheduled_on)
-              endDate.setHours(hrs)
-              endDate.setMinutes(mins)
-              // console.log('scheduled_on', session.scheduled_on);
-              // console.log('endDate', endDate);
-              // console.log('test--', new Date(session.scheduled_on_end_time));
-
-              if (new Date(session.scheduled_on) < new Date() && endDate > new Date()) {
+              if (new Date(session.start_date) < new Date() && new Date(session.end_date) > new Date()) {
                 return { ...session, live_session_type: 'ongoing' }
               }
-              if (endDate < new Date()) {
+              if (new Date(session.end_date) < new Date()) {
                 return { ...session, live_session_type: 'completed' }
               }
               return { ...session }
@@ -159,6 +159,7 @@ const Program = () => {
     // console.log('video ended', module);
 
   }
+
   //filter tab items
   useEffect(() => {
     if (allModules.length === 0) return
@@ -167,19 +168,19 @@ const Program = () => {
     } else if (tab === 1) {
       // setFilteredModules(allModules.filter(item => item.type === "live_session"))
       let filtered = allModules.filter(item => item.type === "live_session")
-      console.log('filtered', filtered);
 
       filtered = [...filtered].sort(function (a, b) {
-        if (new Date(a.scheduled_on) < new Date()) { return -1 }
-        if (new Date(b.scheduled_on) < new Date()) { return -1 }
+        if (new Date(a.start_date) < new Date()) { return -1 }
+        if (new Date(b.start_date) < new Date()) { return -1 }
         return 0;
       });
+      // console.log('filtered', filtered);
 
-      let upcoming = filtered.filter(session => new Date(session.scheduled_on) > new Date())
+      let upcoming = filtered.filter(session => new Date(session.start_date) > new Date())
       let completed = filtered.filter(session => session.live_session_type === 'completed')
       // console.log('filtered', filtered);
       // console.log('upcoming', upcoming);
-      console.log('completed', completed);
+      // console.log('completed', completed);
       setCompletedSessions(completed)
       // setFilteredModules(filtered)
       setFilteredModules(upcoming)
@@ -197,6 +198,7 @@ const Program = () => {
         console.log(err.response);
       })
   }
+
   useEffect(() => {
     fetchUserAssignments()
   }, [])
@@ -238,10 +240,6 @@ const Program = () => {
 
   }
 
-  // console.log('allUserAssignments', allUserAssignments)
-  // console.log('selectedAssignment', selectedAssignment)
-  // console.log('userModules', userModules)
-  // console.log('selectedModule', selectedModule)
   const toggleFilters = idx => {
     navigate(`?tab=${idx}`)
   }
@@ -262,6 +260,11 @@ const Program = () => {
   const { image, name, description, live_sessions_count, modules_duration, price, discounted_price, benefits, next_batch_start_date, assignments, contents, discount, is_free, instructor } = program
   // console.log('program', program)
   // console.log('assignments', assignments)
+  // console.log('allUserAssignments', allUserAssignments)
+  // console.log('selectedAssignment', selectedAssignment)
+  // console.log('userModules', userModules)
+  // console.log('selectedModule', selectedModule)
+  // console.log('selectedModule', selectedModule)
 
   return (
     <div className="mb-28 mt-[0px] lg:px-[80px] lg:mt-[70px]">
@@ -305,14 +308,6 @@ const Program = () => {
             </div>
           </div>
           <div className='max-w-[400px] self-stretch overflow-auto max-h-[700px]'>
-            <div className="text-black text-lg ml-6 font-bold mt-5 ">
-              8 Videos
-              <span className="text-gray-500 text-normal font-normal">
-                {" "}
-                ( 3 hrs 15 min )
-              </span>{" "}
-              | 4 live sessions
-            </div>
             {allModules.map(item => {
               let isCompleted = false
               userModules.map(userMod => {
@@ -330,10 +325,6 @@ const Program = () => {
               />
             })}
           </div>
-        </div>
-
-        <div className='border-b  border-gray-300 mx-5 hidden lg:block'>
-
         </div>
 
         <div className="py-3 px-5 mt-2">
@@ -362,7 +353,7 @@ const Program = () => {
               )}
             </li>
           </ul>
-        </div >
+        </div>
         {tab === 0 && (
           <div className='block lg:hidden'>
             <div className="text-xl font-bold text-black ml-6">
@@ -375,124 +366,124 @@ const Program = () => {
           </div>
         )}
 
-        {
-          sesstionStatus === "finished" && (
-            <div className="py-3 mt-3 mx-5 border-t border-gray-200 flex">
-              <div className="flex justify-start items-center w-[40vw] relative">
-                <img
-                  src={liveSession}
-                  alt=""
-                  className="h-[90px] object-cover rounded-xl"
-                />
-                <div className="flex flex-col justify-center items center h-full bg-[#30313026] absolute rounded-l-xl">
-                  <img src={greenTik} className="h-[30px] px-3" alt="" />
-                </div>
-              </div>
-              <div className="flex flex-col justify-between ml-3 w-[60vw]">
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-400">
-                    {getFormattedDuration(modules_duration)}
-                  </span>
-                </div>
-                <h1>
-                  <span className="text-gray-400">held on</span>
-                  <span className="text-green-500 font-bold">25 Feb 2023</span>
-                </h1>
+        {sesstionStatus === "finished" && (
+          <div className="py-3 mt-3 mx-5 border-t border-gray-200 flex">
+            <div className="flex justify-start items-center w-[40vw] relative">
+              <img
+                src={liveSession}
+                alt=""
+                className="h-[90px] object-cover rounded-xl"
+              />
+              <div className="flex flex-col justify-center items center h-full bg-[#30313026] absolute rounded-l-xl">
+                <img src={greenTik} className="h-[30px] px-3" alt="" />
               </div>
             </div>
-          )
-        }
-      </div >
+            <div className="flex flex-col justify-between ml-3 w-[60vw]">
+              <div className="flex justify-between">
+                <span className="text-sm text-gray-400">
+                  {getFormattedDuration(modules_duration)}
+                </span>
+              </div>
+              <h1>
+                <span className="text-gray-400">held on</span>
+                <span className="text-green-500 font-bold">25 Feb 2023</span>
+              </h1>
+            </div>
+          </div>
+        )}
+      </div>
       {/* && selectedModule && selectedModule.type === "live_session" */}
-      {
-        tab === 1 && selectedModule && selectedModule.type === "live_session" && (
-          <div className='max-w-[900px] flex'>
-            <div className='w-[445px] hidden lg:block'>
-              <img src={selectedModule.image} alt="" className="w-full rounded-xl h-full object-cover hidden lg:block" />
-            </div>
-            <div className='px-5 flex-1 lg:ml-10'>
-              <div className="sessionDetails flex flex-col gap-3">
-                {
-                  selectedModule.live_session_type === "completed" ?
-                    <></> :
+      {tab === 1 && selectedModule && selectedModule.type === "live_session" && (
+        <div className='max-w-[900px] flex'>
+          <div className='w-[445px] hidden lg:block'>
+            <img src={selectedModule.image} alt="" className="w-full rounded-xl h-full object-cover hidden lg:block" />
+          </div>
+          <div className='px-5 flex-1 lg:ml-10'>
+            <div className="sessionDetails flex flex-col gap-3">
+              {
+                selectedModule.live_session_type === "completed" ?
+                  <></> : selectedModule.live_session_type === "ongoing" ?
+                    <div className='w-[50px] py-1 rounded-2xl px-2 font-semibold text-white text-sm bg-[#DD1D43] flex items-center justify-center'>
+                      <img src={LiveIcon} alt='live' className='mr-[3px]' /> Live
+                    </div>
+                    :
                     <button style={{ color: '#CB1537' }} className="bg-red-100  p-1 w-[130px] rounded-full mt-5 font-bold text-sm">
                       next live session
                     </button>
-                }
-                <h1 className="font-bold text-lg">
-                  {selectedModule.name}
-                </h1>
-                <div className="flex flex-col gap-3">
-                  <ul>
-                    <li className="list-none">
-                      <span className="text-gray-400 font-semibold  text-sm" >Date: </span>{" "}
-                      <span className="font-bold text-normal  text-sm">
-                        {getFormattedDate(selectedModule.scheduled_on_date)}
-                      </span>
-                    </li>
-                    <li className="list-none">
-                      <span className="text-gray-400 font-semibold  text-sm">Time: </span>{" "}
-                      <span className="font-bold text-normal  text-sm">
-                        {/* {getFormattedDuration(selectedModule.scheduled_on_start_time)} */}
-                        {selectedModule.scheduled_on_start_time} to {selectedModule.scheduled_on_end_time}
-                        {" "}
-                      </span>
-                    </li>
-                    <li className="list-none">
-                      <span className="text-gray-400 font-semibold  text-sm">
-                        Duration:{" "}
-                      </span>{" "}
-                      <span className="font-bold text-normal  text-sm">
-                        {getFormattedDuration(selectedModule.scheduled_on_end_time)}
-                      </span>
-                    </li>
-                    <li className="list-none">
-                      <span className="text-gray-400 font-semibold  text-sm">Host: </span>{" "}
-                      <span className="font-bold text-normal text-blue-500  text-sm">
-                        {instructor?.name}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
+              }
+              <h1 className="font-bold text-lg">
+                {selectedModule.name}
+              </h1>
+              <div className="flex flex-col gap-3">
+                <ul>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm" >Date: </span>{" "}
+                    <span className="font-bold text-normal  text-sm">
+                      {getFormattedDate(selectedModule.scheduled_on_date)}
+                    </span>
+                  </li>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm">Time: </span>{" "}
+                    <span className="font-bold text-normal  text-sm">
+                      {/* {getFormattedDuration(selectedModule.scheduled_on_start_time)} */}
+                      {selectedModule.scheduled_on_start_time} to {selectedModule.scheduled_on_end_time}
+                      {" "}
+                    </span>
+                  </li>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm">
+                      Duration:{" "}
+                    </span>{" "}
+                    <span className="font-bold text-normal  text-sm">
+                      {getFormattedDuration(selectedModule.scheduled_on_end_time)}
+                    </span>
+                  </li>
+                  <li className="list-none">
+                    <span className="text-gray-400 font-semibold  text-sm">Host: </span>{" "}
+                    <span className="font-bold text-normal text-blue-500  text-sm">
+                      {instructor?.name}
+                    </span>
+                  </li>
+                </ul>
               </div>
-              <div className="flex flex-col  justify-start gap-3">
-                <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-full mt-5">
-                  <ul className="ml-2 mt-2">
-                    <li className="list-none  text-sm text-gray-400 font-semibold">
-                      Zoom Conference ID:{" "}
-                      <span className="font-bold text-black  text-sm">
-                        {selectedModule.zoom_meeting_id}
-                      </span>
-                    </li>
-                    {/* <li className="list-none lg:text-lg text-gray-400 font-semibold text-sm">
+            </div>
+            <div className="flex flex-col  justify-start gap-3">
+              <div className="bg-sky-50 shadow-xl p-3 flex flex-col gap-3 rounded-lg w-full mt-5">
+                <ul className="ml-2 mt-2">
+                  <li className="list-none  text-sm text-gray-400 font-semibold">
+                    Zoom Conference ID:{" "}
+                    <span className="font-bold text-black  text-sm">
+                      {selectedModule.zoom_meeting_id}
+                    </span>
+                  </li>
+                  {/* <li className="list-none lg:text-lg text-gray-400 font-semibold text-sm">
                   Zoom meeting link:{" "}
                 </li>
                 <li className="list-none lg:text-lg text-sm font-semibold text-blue-400 break-all">
                   {selectedModule.zoom_meeting_link}
                 </li> */}
-                    <li className="list-none  text-gray-400 font-semibold text-sm">
-                      Zoom Passcode:{" "}
-                      <span className="font-bold text-black  text-sm">
-                        ******
-                      </span>
-                    </li>
+                  <li className="list-none  text-gray-400 font-semibold text-sm">
+                    Zoom Passcode:{" "}
+                    <span className="font-bold text-black  text-sm">
+                      ******
+                    </span>
+                  </li>
 
-                  </ul>
-                </div>
-                <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto disabled:opacity-60 disabled:pointer-events-none  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)}
-                  disabled={
-                    selectedModule.live_session_type === "completed" ? true :
-                      selectedModule.live_session_type === "upcoming" ? true :
-                        selectedModule.live_session_type === "ongoing" ? false : false
-                  } >
-                  {" "}
-                  Join Zoom Session
-                </button>
+                </ul>
               </div>
-            </div >
+              <button className="bg-sky-800 text-white font-semibold py-2 w-full rounded-full border mx-auto disabled:opacity-60 disabled:pointer-events-none  self-center" onClick={() => handleZoomMeeting(selectedModule.zoom_meeting_link)}
+                disabled={
+                  selectedModule.live_session_type === "completed" ? true :
+                    selectedModule.live_session_type === "upcoming" ? true :
+                      selectedModule.live_session_type === "ongoing" ? false : false
+                } >
+                {" "}
+                Join Zoom Session
+              </button>
+            </div>
           </div >
-        )
-      }
+        </div >
+      )}
       {
         tab === 1 && (
           <div className='lg:max-w-[350px] mb-3'>
@@ -518,7 +509,7 @@ const Program = () => {
 
       {
         tab === 0 && (
-          <div className="text-black text-base ml-6 font-bold mt-5 lg:hidden">
+          <div className="text-black text-base ml-6 font-bold mt-5">
             8 Videos
             <span className="text-gray-500 text-normal font-normal">
               {" "}
