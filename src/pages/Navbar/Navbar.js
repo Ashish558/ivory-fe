@@ -22,7 +22,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { updateLoggedIn, updateProfileData } from '../../redux/slices/user';
 import { getFormattedDateShort } from '../../utils/utils'
 
-const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing', '/confirmation', '/live', '/enroll', '/community', '/learn']
+const toExclude = ['/login', '/otp', '/dob', '/signup', '/congrates', '/', '/CreateProfile', '/logolanding', '/four', '/third', '/second', '/landing', '/confirmation', '/live', '/enroll', '/community', '/learn','/package']
 const basePaths = ['/home', '/activities']
 
 const Navbar = () => {
