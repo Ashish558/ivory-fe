@@ -8,7 +8,7 @@ const DesktopPackage = ({item ,className}) => {
         </td>
 
         {item?.free ? (
-          <td className="text-xl font-medium text-[#26A925]">{item.free}</td>
+          <td className="text-xl font-semibold text-[#26A925]">{item.free}</td>
         ) : (
           <td className="">
             <img src={item.freeIcon} className="mx-auto" alt="" />
