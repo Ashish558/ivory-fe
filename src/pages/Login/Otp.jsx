@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import back from "../../assets/Back.svg";
@@ -42,6 +42,8 @@ const Otp = () => {
   const locaion = useLocation();
   const from = locaion?.state?.from || "/login";
   const stateData = locaion?.state;
+  const { redirectAfterLogin } = useSelector(state => state.user)
+
   const { otp: otpData, otp_token, phone, countryCode } = stateData;
   const dispatch = useDispatch()
 
@@ -49,7 +51,6 @@ const Otp = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (stateData.otp !== undefined && stateData.otp.length === 6) {
-    
       const otpArray = stateData?.otp.split("");;
       const otpValues = {
         field1: otpArray[0],
@@ -98,6 +99,9 @@ const Otp = () => {
           // window.dataLayer.push({
           //   event: 'login',
           // });
+          if (redirectAfterLogin !== null) {
+            return navigate(redirectAfterLogin)
+          }
           console.log('verify', res.data.data);
           const { refresh_token, access_token } = res.data.data
           dispatch(updateLoggedIn({ loggedIn: true }))
@@ -208,7 +212,7 @@ const Otp = () => {
                 <input
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
-                  value={otp.field1?otp.field1:''}
+                  value={otp.field1 ? otp.field1 : ''}
                   name="field1"
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
@@ -216,7 +220,7 @@ const Otp = () => {
                 <input
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
-                  value={otp.field2?otp.field2:''}
+                  value={otp.field2 ? otp.field2 : ''}
                   name="field2"
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
@@ -225,7 +229,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field3"
-                  value={otp.field3?otp.field3:''}
+                  value={otp.field3 ? otp.field3 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
@@ -233,7 +237,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field4"
-                  value={otp.field4?otp.field4:''}
+                  value={otp.field4 ? otp.field4 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
@@ -241,7 +245,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field5"
-                  value={otp.field5?otp.field5:''}
+                  value={otp.field5 ? otp.field5 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />
@@ -249,7 +253,7 @@ const Otp = () => {
                   className="lg:w-[48px] lg:h-[48px] lg:shadow-none m-1 border border-gray-400 shadow h-10 w-10 text-center form-control rounded   focus:ring-blue-500 focus:outline-none focus:ring text-lg font-semibold text-gray-500 caret-blue-500"
                   type="text"
                   name="field6"
-                  value={otp.field6?otp.field6:''}
+                  value={otp.field6 ? otp.field6 : ''}
                   maxLength="1"
                   onKeyUp={(e) => handleOptCursor(e)}
                 />

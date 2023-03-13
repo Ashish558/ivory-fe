@@ -7,7 +7,7 @@ import PrimaryButton from '../../components/Buttons/PrimaryButton'
 import SecondaryButton from '../../components/Buttons/SecondaryButton'
 import StartActivityModal from '../Frames/StartActivityModal/StartActivityModal'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Slider from "react-slick"
 import MarkIcon from '../../assets/icons/mark.svg'
 import NextIcon from '../../assets/icons/next.svg'
@@ -24,6 +24,7 @@ import { completeActivity, deleteSubmission, getMyActivities, getUserSubmissions
 import { getColors, isValidYoutubeLink } from '../../utils/utils'
 import { ViewSubmission } from '../Frames/ViewSubmission/ViewSubmission'
 import { GA_share, GA_startActivity, GA_submitActivity } from '../../services/analytics'
+import { updateRedirectAfterLogin } from '../../redux/slices/user'
 
 const settings = {
    infinite: false,
@@ -71,6 +72,7 @@ export default function StartActivity({ fetchUserDetails }) {
    const { categoryId, activityId } = useParams()
    const navigate = useNavigate()
    const location = useLocation()
+   const dispatch = useDispatch()
 
    const [currentIndex, setCurrentIndex] = useState(0)
    const { loggedIn, profileData } = useSelector(state => state.user)
@@ -88,11 +90,11 @@ export default function StartActivity({ fetchUserDetails }) {
          })
    }, [activityId])
 
-   
+
    useEffect(() => {
       document.title = 'Ivory | Activities';
-  }, []);
-  
+   }, []);
+
    //fetch category details
    useEffect(() => {
       getCategories()
@@ -263,6 +265,7 @@ export default function StartActivity({ fetchUserDetails }) {
    }
    const handleStartActivity = () => {
       if (loggedIn === false) {
+         dispatch(updateRedirectAfterLogin(location.pathname))
          navigate('/login')
          return
       }
@@ -538,10 +541,10 @@ export default function StartActivity({ fetchUserDetails }) {
             isAlreadyStarted === false && startModalActive === false && shareModalOpen === false && startActivityModalActive === false &&
             <div className={styles.startActivityFooter}>
                <div className='max-w-[328px] mx-auto'>
-                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'} 
-                  onClick={() => setStartActivityModalActive(true)} 
-                  className='w-full pt-2.5 pb-2.5'
-                 
+                  <PrimaryButton children={profileData?.remaining_activities === 0 ? 'Start' : 'START for free'}
+                     onClick={() => setStartActivityModalActive(true)}
+                     className='w-full pt-2.5 pb-2.5'
+
                   />
                </div>
             </div>

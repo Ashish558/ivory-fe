@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import back from "../../assets/Back.svg";
@@ -124,6 +124,7 @@ const Dob = () => {
     "November",
     "December",
   ];
+  const { redirectAfterLogin } = useSelector(state => state.user)
 
   const from = locaion.state?.from || "/otp";
   const stateData = locaion?.state;
@@ -174,6 +175,9 @@ const Dob = () => {
       .then((res) => {
         verifyOtp(verifyBody)
           .then((res) => {
+            if (redirectAfterLogin !== null) {
+              return navigate(redirectAfterLogin)
+            }
             navigate("/congrates");
             GA_signup()
           //   window.dataLayer.push({

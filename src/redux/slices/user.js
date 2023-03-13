@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
    loggedIn: false,
-   profileData:{}
+   profileData:{},
+   redirectAfterLogin: null
 };
 
 const user = createSlice({
@@ -15,9 +16,12 @@ const user = createSlice({
       updateProfileData: (state, { payload }) => {
          state.profileData = payload.profileData;
       },
+      updateRedirectAfterLogin: (state, { payload }) => {
+         state.redirectAfterLogin = payload;
+      },
    
    },
 });
 
-export const { updateLoggedIn, updateProfileData } = user.actions;
+export const { updateLoggedIn, updateProfileData, updateRedirectAfterLogin } = user.actions;
 export default user.reducer;

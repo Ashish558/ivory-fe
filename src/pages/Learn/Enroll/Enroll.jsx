@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.css";
 
 import useRazorpay from "react-razorpay";
@@ -22,6 +22,7 @@ import {
   shareLink
 } from "../../../utils/utils";
 import { GA_programRegister, GA_share } from "../../../services/analytics";
+import { updateRedirectAfterLogin } from "../../../redux/slices/user";
 
 const Enroll = () => {
   //enrollType "", "reg", "free"
@@ -38,6 +39,7 @@ const Enroll = () => {
 
   const location = useLocation()
   const navigate = useNavigate();
+const dispatch = useDispatch()
 
   useEffect(() => {
     document.title = `Ivory | Program | ${programData?.name ? programData?.name : ''}`;
@@ -66,10 +68,11 @@ const Enroll = () => {
         console.log(err.response);
       })
   }, [id])
-
+  
   const handleEnroll = () => {
     // console.log('asda');
     if (!loggedIn) {
+      dispatch(updateRedirectAfterLogin(location.pathname))
       navigate('/login')
     }
     const body = {
