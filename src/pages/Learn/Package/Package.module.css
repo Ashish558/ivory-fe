@@ -1,4 +1,4 @@
-.startActivityFooter {
+.packageFooter {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -16,8 +16,13 @@
 .cusRes{
     display: none;
   }
+  @media only screen and (max-width: 768px) {
+  .tabelResponsive{
+    display:none;
+      }
+    }
 @media only screen and (min-width: 769px) {
-  .startActivityFooter {
+  .packageFooter {
     padding-bottom: 12px;
     padding: 10px 16px;
     background: #ffffff;
@@ -27,6 +32,7 @@
   .cusRes{
     display: none;
   }
+  
    /* .cusBg { */
 
     /* display: none; */
