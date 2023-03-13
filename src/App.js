@@ -2,44 +2,55 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
-import Activities from './pages/Activities/Activities';
-import ActivityType from './pages/ActivityType/ActivityType';
-import Profile from './pages/Createprofile/Profile';
-import Footer from './pages/Home/Footer';
-import Home from './pages/Home/Home.jsx';
-import LoggedInHome from './pages/Home/LoggedInHome';
-import Login from './pages/Login/Login';
-import Otp from './pages/Login/Otp';
-import Navbar from './pages/Navbar/Navbar';
-import Congrates from './pages/SignUp/Congrates';
-import SignUp from './pages/SignUp/SignUp';
-import StartActivity from './pages/StartActivity/StartActivity';
-import { updateLoggedIn, updateProfileData } from './redux/slices/user';
-import { refreshToken } from './services/auth';
-import { getUserDetail } from './services/user';
+import ReactGA from 'react-ga4'
 
-import Assignment from './pages/Home/Assignment';
-import Assignment1 from './pages/Home/Assignment1';
-import Learn from './pages/Home/Learn';
+//splash screens
 import Four from './pages/splash/Four';
 import Landing from './pages/splash/Landing';
 import LogoLanding from './pages/splash/LogoLanding';
 import Second from './pages/splash/Second';
 import Third from './pages/splash/Third';
-// import Enroll from './pages/Home'
-// import LogoLanding from './pages/splash/LogoLanding';
-import Enroll from './pages/Learn/Enroll/Enroll';
-import Program from './pages/Learn/Program/Program';
-import LiveEvents from './pages/LiveEvents/LiveEvents';
-import Dob from './pages/SignUp/Dob';
-import SingleSession from './pages/SingleSession/SingleSession';
 
+//auth screens
+import Login from './pages/Login/Login';
+import Otp from './pages/Login/Otp';
+import SignUp from './pages/SignUp/SignUp';
+import Congrates from './pages/SignUp/Congrates';
+import Dob from './pages/SignUp/Dob';
+
+//home
+// import Profile from './pages/Createprofile/Profile';
+// import LoggedInHome from './pages/Home/LoggedInHome';
+// import Home from './pages/Home/Home.jsx';
+// const LoggedInHome = React.lazy(() => import('./pages/Home/LoggedInHome'))
+
+
+//comps
+import Navbar from './pages/Navbar/Navbar';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
-import Community from './pages/Learn/Community/Community';
-import Confirmation from './pages/Learn/Confirmation/Confirmation';
-import { gapi } from "gapi-script";
-import { authenticate } from './services/analytics';
-import ReactGA from 'react-ga4'
+import Footer from './pages/Home/Footer';
+
+import { updateLoggedIn, updateProfileData } from './redux/slices/user';
+import { refreshToken } from './services/auth';
+import { getUserDetail } from './services/user';
+
+const Home = React.lazy(() => import('./pages/Home/Home.jsx'))
+const LoggedInHome = React.lazy(() => import('./pages/Home/LoggedInHome'))
+const Profile = React.lazy(() => import('./pages/Createprofile/Profile'))
+
+const Activities = React.lazy(() => import('./pages/Activities/Activities'))
+const ActivityType = React.lazy(() => import('./pages/ActivityType/ActivityType'))
+const StartActivity = React.lazy(() => import('./pages/StartActivity/StartActivity'))
+const Assignment = React.lazy(() => import('./pages/Home/Assignment'))
+const Assignment1 = React.lazy(() => import('./pages/Home/Assignment1'))
+
+const Learn = React.lazy(() => import('./pages/Home/Learn'))
+const LiveEvents = React.lazy(() => import('./pages/LiveEvents/LiveEvents'))
+const SingleSession = React.lazy(() => import('./pages/SingleSession/SingleSession'))
+const Enroll = React.lazy(() => import('./pages/Learn/Enroll/Enroll'))
+const Program = React.lazy(() => import('./pages/Learn/Program/Program'))
+const Community = React.lazy(() => import('./pages/Learn/Community/Community'))
+const Confirmation = React.lazy(() => import('./pages/Learn/Confirmation/Confirmation'))
 
 function App() {
   //true for now will change later
@@ -117,8 +128,11 @@ function App() {
       <Navbar />
       <NavbarDesktop />
       <Routes>
-
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          <React.Suspense fallback={<>...</>}>
+            <Home />
+          </React.Suspense>
+        } />
         <Route path="/login" element={<Login />} />
         <Route exact path='/logolanding' element={<LogoLanding />}></Route>
         <Route exact path='/landing' element={<Landing />}></Route>
@@ -131,22 +145,58 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
 
-        <Route path="/home" element={<LoggedInHome />} />
+        <Route path="/home" element={
+          <React.Suspense fallback={<>...</>}>
+            <LoggedInHome />
+          </React.Suspense>
+        } />
 
-        <Route path="/activities" element={<Activities />} />
-        <Route path="/activities/:categoryId" element={<ActivityType />} />
+        <Route path="/activities" element={
+          <React.Suspense fallback={<>...</>}>
+            <Activities />
+          </React.Suspense>
+        } />
+        <Route path="/activities/:categoryId" element={
+          <React.Suspense fallback={<>...</>}>
+            <ActivityType />
+          </React.Suspense>
+        } />
         <Route path="/activities/:categoryId/:activityId/start"
           element={
-            <StartActivity fetchUserDetails={fetchUserDetails} />
+            <React.Suspense fallback={<>...</>}>
+              <StartActivity fetchUserDetails={fetchUserDetails} />
+            </React.Suspense>
           } />
-
-
-        <Route path="/live-events" element={<LiveEvents />} />
-        <Route path="/live-events/:id" element={<SingleSession />} />
-        <Route path="/program/:id" element={<Program />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/learn" element={<Learn />} />
-        <Route path="/learn/:id" element={<Enroll />} />
+        <Route path="/live-events" element={
+          <React.Suspense fallback={<>...</>}>
+            <LiveEvents />
+          </React.Suspense>
+        } />
+        <Route path="/live-events/:id" element={
+          <React.Suspense fallback={<>...</>}>
+            <SingleSession />
+          </React.Suspense>
+        } />
+        <Route path="/program/:id" element={
+          <React.Suspense fallback={<>...</>}>
+            <Program />
+          </React.Suspense>
+        } />
+        <Route path="/community" element={
+          <React.Suspense fallback={<>...</>}>
+            <Community />
+          </React.Suspense>
+        } />
+        <Route path="/learn" element={
+          <React.Suspense fallback={<>...</>}>
+            <Learn />
+          </React.Suspense>
+        } />
+        <Route path="/learn/:id" element={
+          <React.Suspense fallback={<>...</>}>
+            <Enroll />
+          </React.Suspense>
+        } />
 
         <Route
           path="/CreateProfile"
@@ -167,6 +217,12 @@ function App() {
     </BrowserRouter >
 
   );
+}
+
+const LazyLoad = ({ Component }) => {
+  return <React.Suspense fallback={<>...</>}>
+    <Component />
+  </React.Suspense>
 }
 
 function RequireAuth({ children, loggedIn }) {

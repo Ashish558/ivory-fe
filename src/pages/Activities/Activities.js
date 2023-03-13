@@ -279,7 +279,7 @@ export default function Activities() {
                                     </div>
                                     <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
                                        {activity.categories.map((category, idx) => (
-                                          <div key={category.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
+                                          <div key={category.id} className={`flex flex-col justify-center items-center px-5 pb-3 pt-4 lg:col-span-2 ${styles.activityBox}`}
                                              onClick={() => navigate(`/activities/${category.id}`)}>
                                              <p><img src={category.icon} alt="" /></p>
                                              {
