@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import back from "../../assets/Back.svg";
 import logo from "../../assets/images/login/logolight.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
-import { updateLoggedIn } from '../../redux/slices/user';
+import { updateLoggedIn, updateRedirectAfterLogin } from '../../redux/slices/user';
 import { sendOtp, verifyOtp } from '../../services/auth';
 import styles from "./Login.module.css";
 import "./Otp.module.css";
@@ -100,7 +100,9 @@ const Otp = () => {
           //   event: 'login',
           // });
           if (redirectAfterLogin !== null) {
-            return navigate(redirectAfterLogin)
+            navigate(redirectAfterLogin)
+            dispatch(updateRedirectAfterLogin(null))
+            return
           }
           console.log('verify', res.data.data);
           const { refresh_token, access_token } = res.data.data

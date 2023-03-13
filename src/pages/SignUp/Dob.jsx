@@ -6,7 +6,7 @@ import back from "../../assets/Back.svg";
 import loginMan from "../../assets/images/login/loginMan.png";
 import logo from "../../assets/images/login/logolight.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
-import { updateLoggedIn } from '../../redux/slices/user';
+import { updateLoggedIn, updateRedirectAfterLogin } from '../../redux/slices/user';
 import { registerUser, verifyOtp } from '../../services/auth';
 import { genNumbers } from '../../utils/utils';
 import styles from "./SignUp.module.css";
@@ -76,7 +76,7 @@ const Dob = () => {
     speed: 100,
     touchThreshold: 10
   }
-  
+
   const dateSettings = {
     ...common,
     afterChange: function (currentSlide) {
@@ -130,7 +130,7 @@ const Dob = () => {
   const stateData = locaion?.state;
   const { otp, otp_token, phone, countryCode } = stateData;
   const dispatch = useDispatch()
-    // console.log(stateData);
+  // console.log(stateData);
   const navigate = useNavigate();
   const goBack = () => {
     navigate(from, {
@@ -176,13 +176,15 @@ const Dob = () => {
         verifyOtp(verifyBody)
           .then((res) => {
             if (redirectAfterLogin !== null) {
-              return navigate(redirectAfterLogin)
+              dispatch(updateRedirectAfterLogin(null))
+              navigate(redirectAfterLogin)
+              return
             }
             navigate("/congrates");
             GA_signup()
-          //   window.dataLayer.push({
-          //     event: 'sign_up',
-          //  });
+            //   window.dataLayer.push({
+            //     event: 'sign_up',
+            //  });
             const { refresh_token, access_token } = res.data.data
             dispatch(updateLoggedIn({ loggedIn: true }))
             localStorage.setItem('access', access_token)
