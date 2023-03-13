@@ -6,6 +6,8 @@ import Star from '../../Images/star.png'
 import { useNavigate } from 'react-router-dom';
 import { getPrograms } from '../../services/program';
 import { getPricingDiscountedText, getPricingMainText } from '../../utils/utils';
+import { useGetCachedData } from '../../hooks/useGetCachedData';
+import Loader from '../../components/Loader';
 
 const Courses = () => {
 
@@ -29,19 +31,30 @@ const Courses = () => {
    ]
 
    const [allPrograms, setAllPrograms] = useState([])
+   const [loading, setLoading] = useState(true)
 
    const navigate = useNavigate()
+
 
    useEffect(() => {
       getPrograms()
          .then(res => {
+            setLoading(false)
             if (res.data.data === null) return setAllPrograms([])
             // console.log('programs', res.data.data);
+            const homePrograms = {
+               timestamp: new Date(),
+               data: res.data.data
+            }
+            localStorage.setItem('homePrograms', JSON.stringify(homePrograms))
             setAllPrograms(res.data.data)
          }).catch(err => {
+            setLoading(false)
             console.log(err.response);
          })
    }, [])
+
+   useGetCachedData('homePrograms', setLoading, setAllPrograms)
 
    const handleNavigate = (id) => {
       navigate(`/learn/${id}`)
@@ -51,36 +64,40 @@ const Courses = () => {
       <div className='pt-8'>
          <h1 className='text-xl font-black pl-4 '>Learn with Ivory</h1>
          {
-            allPrograms.map(program => {
-               const { id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount } = program
-               return (
-                  <div className="m-4 box"  onClick={() => handleNavigate(id)}>
-                     <div className='flex align-items '>
-                        <div className='p-1.5 self-stretch'>
-                           <img className='rounded-3xl w-[129px] object-cover h-full' src={image} alt="Program" />
-                        </div>
-                        <div className="pt-4 pl-2">
-                           <h2 className="text-base font-semibold">
-                              {name}
-                           </h2>
-                           <p className='text-xs small-text'>
-                              {'Author name'}
-                           </p>
-
-                           <div className='flex'>
-                              <h2 className='price pt-6'>
-                                 {getPricingMainText(is_free, price, discounted_price, discount)}
+            loading ?
+               <div className='px-3 py-4'>
+                  <Loader size='medium' />
+               </div>
+               :
+               allPrograms.map(program => {
+                  const { id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount } = program
+                  return (
+                     <div className="m-4 box" onClick={() => handleNavigate(id)}>
+                        <div className='flex align-items '>
+                           <div className='p-1.5 self-stretch'>
+                              <img className='rounded-3xl w-[129px] object-cover h-full' src={image} alt="Program" />
+                           </div>
+                           <div className="pt-4 pl-2">
+                              <h2 className="text-base font-semibold">
+                                 {name}
                               </h2>
-                              {
-                                 getPricingDiscountedText(is_free, price, discounted_price, discount)
-                              }
+                              <p className='text-xs small-text'>
+                                 {'Author name'}
+                              </p>
+
+                              <div className='flex'>
+                                 <h2 className='price pt-6'>
+                                    {getPricingMainText(is_free, price, discounted_price, discount)}
+                                 </h2>
+                                 {
+                                    getPricingDiscountedText(is_free, price, discounted_price, discount)
+                                 }
+                              </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-               )
-            }
-            )
+                  )
+               })
          }
 
       </div>

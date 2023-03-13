@@ -17,6 +17,7 @@ import { getMyActivities } from '../../services/user'
 import { useSelector } from 'react-redux'
 import { getBanners } from '../../services/banners'
 import SimpleSlider from '../Home/SimpleSlider'
+import Loader from '../../components/Loader'
 
 export const tempActivities = [
    {
@@ -60,6 +61,7 @@ export default function ActivityType() {
    const [completedTabActive, setCompletedTabActive] = useState(false)
    const { loggedIn } = useSelector(state => state.user)
    const [isActivitiesFetched, setIsActivitiesFetched] = useState(false)
+   const [loading, setLoading] = useState(true)
 
 
    const location = useLocation()
@@ -68,7 +70,7 @@ export default function ActivityType() {
 
    useEffect(() => {
       document.title = `Ivory | Activities | ${category.name ? category.name : ''} `;
-  }, [category]);
+   }, [category]);
 
    useEffect(() => {
       getBanners()
@@ -132,6 +134,7 @@ export default function ActivityType() {
    useEffect(() => {
       getActivities(categoryId)
          .then(res => {
+            setLoading(false)
             setIsActivitiesFetched(true)
 
             // console.log('data', res.data.data);
@@ -139,6 +142,7 @@ export default function ActivityType() {
             setActivities(res.data.data)
          }).catch(err => {
             setIsActivitiesFetched(true)
+            setLoading(false)
             console.log(err.response);
          })
    }, [categoryId])
@@ -148,7 +152,7 @@ export default function ActivityType() {
    // console.log('activities', activities);
    // console.log('banners', banners);
 
- const navToActivities = (categoryId) => {
+   const navToActivities = (categoryId) => {
       navigate(`/activities`)
    }
    return (
@@ -156,9 +160,9 @@ export default function ActivityType() {
          {/* <Header /> */}
          <div className='px-4 pb-12 mb-10'>
             <div className='pt-2 hidden md:block'>
-               <p className='text-lightGray font-medium sm:mx-20'> <span onClick={()=>navToActivities(category.id)} className='cursor-pointer'>Activities</span> {'>'} {category.name} </p>
+               <p className='text-lightGray font-medium'> <span onClick={() => navToActivities(category.id)} className='cursor-pointer'>Activities</span> {'>'} {category.name} </p>
             </div>
-            <div className='mt-4'>
+            <div className='mt-4  max-w-[500px]'>
                <h3 className='text-4xl font-medium mb-2.5 '>  {category.name} </h3>
                {/* <ActivityContent banners={banners} /> */}
                <SimpleSlider banners={banners} isActivityBanner={true} page='activities_page' />
@@ -184,17 +188,30 @@ export default function ActivityType() {
                   </button>
                </div>
             }
-            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4
-            [&>div]:max-w[280px]'>
-               {userActivities.length > 0 ?
-                  filteredUserActivities.map(activity => {
-                     return <Activity {...activity} key={activity.id} />
-                  })
-                  :
-                  activities.map(activity => {
-                     return <Activity {...activity} key={activity.id} />
-                  })
+            <div className='mt-5 sm:grid md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 [&>div]:max-w[280px]'>
+               {
+                  loading ?
+                     <div className='px-3 py-4'>
+                        <Loader size='medium' />
+                     </div>
+                     :
+                     userActivities.length > 0 ?
+                        filteredUserActivities.map(activity => {
+                           return <Activity {...activity} key={activity.id} />
+                        })
+                        :
+                        activities.map(activity => {
+                           return <Activity {...activity} key={activity.id} />
+                        })
                }
+               {
+                  loading === false && activities.length === 0 ?
+                  <div className='mt-5 sm:grid  [&>div]:max-w[280px]'>
+                     <p className='opacity-70'> No activities added! </p>
+                  </div> :
+                  <></>
+               }
+
             </div>
          </div>
       </div>

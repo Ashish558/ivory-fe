@@ -12,12 +12,14 @@ import '../Home/Activities.css'
 import SeeLogo from '../../Images/Group.png'
 import { getCategories } from '../../services/activities';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 
 const Activities = () => {
 
    const [activities, setActivities] = useState([])
    const navigate = useNavigate()
+   const [loading, setLoading] = useState(false)
 
    const tempactivities = [
       {
@@ -72,18 +74,45 @@ const Activities = () => {
    ]
 
    useEffect(() => {
+      setLoading(true)
       getCategories()
          .then(res => {
+            setLoading(false)
             // console.log('categories', res.data.data);
             if (res.data.data === null) return
             let data = res.data.data.filter(item => item.is_recommended === true)
             setActivities(data)
+            const actCategories = {
+               timestamp: new Date(),
+               data: data
+            }
+            localStorage.setItem('actCategories', JSON.stringify(actCategories))
             // console.log(' updated', tempActivities);
          }).catch(err => {
             console.log(err.response);
+            setLoading(false)
          })
    }, [])
 
+   useEffect(() => {
+      Date.prototype.addHours = function (h) {
+         this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+         return this;
+      }
+      let actCategories = localStorage.getItem('actCategories')
+      if (actCategories) {
+         actCategories = JSON.parse(actCategories)
+         let timestamp = new Date(actCategories.timestamp)
+         let timestampValid = new Date(timestamp).addHours(2)
+         // console.log('timestampValid', timestampValid);
+         // console.log('new Date()', new Date());
+         if (timestampValid > new Date()) {
+            let data = actCategories?.data
+            setActivities(data)
+            setLoading(false)
+         }
+      }
+   }, [])
 
    // lg:text-[48px]
 
@@ -99,35 +128,41 @@ const Activities = () => {
                   <img src={Arrow} alt="" />
                </p>
             </div>
-            <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
-               {
-                  activities.map((activity) =>
-                     <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
-                        onClick={() => navigate(`/activities/${activity.id}`)}>
-                        <p><img src={activity.icon} alt="" /></p>
-                        {
-                           activity?.name.length <= '17' ?
-                              <p className='text-center pt-2 font-semibold text-sm'
-                              // style={{ color: activity?.color }}
-                              >{activity?.name}</p>
-                              : <p className='text-center pt-2 font-semibold text-xs'
-                              // style={{ color: activity?.color }}
-                              >{activity?.name}</p>
-                        }
-                     </div>
-                  )
-
-
-               }
-               <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 cursor-pointer'
-                  onClick={() => navigate('/activities')} >
-                  <p><img src={SeeLogo} alt="" /></p>
-                  <div style={{ color: '#1B72C0' }}>
-                     <p className='text-center text-sm pt-2 font-semibold' >See </p>
-                     <p className='text-center text-sm  font-semibold pt-0' >All</p>
+            {
+               loading ?
+                  <div className='py-4 px-3'>
+                     <Loader size='medium' />
                   </div>
-               </div>
-            </div>
+                  :
+                  <div className='grid grid-cols-3 lg:grid-cols-12 max-w-[800px] gap-3 px-3'>
+                     {
+                        activities.map((activity) =>
+                           <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
+                              onClick={() => navigate(`/activities/${activity.id}`)}>
+                              <p><img src={activity.icon} alt="" /></p>
+                              {
+                                 activity?.name.length <= '17' ?
+                                    <p className='text-center pt-2 font-semibold text-sm'
+                                    // style={{ color: activity?.color }}
+                                    >{activity?.name}</p>
+                                    : <p className='text-center pt-2 font-semibold text-xs'
+                                    // style={{ color: activity?.color }}
+                                    >{activity?.name}</p>
+                              }
+                           </div>
+                        )
+                     }
+                     <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 cursor-pointer'
+                        onClick={() => navigate('/activities')} >
+                        <p><img src={SeeLogo} alt="" /></p>
+                        <div style={{ color: '#1B72C0' }}>
+                           <p className='text-center text-sm pt-2 font-semibold' >See </p>
+                           <p className='text-center text-sm  font-semibold pt-0' >All</p>
+                        </div>
+                     </div>
+                  </div>
+            }
+
          </div>
       </div>
    );

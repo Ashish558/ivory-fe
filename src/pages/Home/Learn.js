@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import CheckedIcon from '../../assets/icons/checked-category.svg'
 import ActivityContent from '../../components/ActivityContent/ActivityContent'
 import Filterbar from '../../components/Filterbar/filterbar'
+import Loader from '../../components/Loader'
 import ProgramCard from '../../components/ProgramCard/ProgramCard'
 import Toggle from '../../components/Toggle/Toggle'
 import { getCategories, getInterests } from '../../services/activities'
@@ -36,9 +37,12 @@ const Learn = () => {
    const [onlyFreeActive, setOnlyFreeActive] = useState(false)
    const [onlyLiveActive, setOnlyLiveActive] = useState(true)
 
+   const [allProgramsLoading, setAllProgramsLoading] = useState(true)
+   const [myProgramsLoading, setMyProgramsLoading] = useState(true)
+
    useEffect(() => {
       document.title = `Ivory | Program`;
-    }, []);
+   }, []);
 
    useEffect(() => {
       getInterests(true)
@@ -90,10 +94,12 @@ const Learn = () => {
    useEffect(() => {
       getPrograms()
          .then(res => {
+            setAllProgramsLoading(false)
             if (res.data.data === null) return setAllPrograms([])
             // console.log('programs', res.data.data);
             setAllPrograms(res.data.data)
          }).catch(err => {
+            setAllProgramsLoading(false)
             console.log(err.response);
          })
    }, [])
@@ -101,10 +107,12 @@ const Learn = () => {
    useEffect(() => {
       getAllUserPrograms()
          .then(res => {
+            setMyProgramsLoading(false)
             console.log('user programs', res.data.data);
             if (res.data.data === null) return setUserPrograms([])
             setUserPrograms(res.data.data)
          }).catch(err => {
+            setMyProgramsLoading(false)
             console.log(err.response);
          })
    }, [])
@@ -269,19 +277,34 @@ const Learn = () => {
             <Filterbar items={filterItems} onChange={onChange} />
          </div>
          <div className="lg:grid lg:grid-cols-3  md:mt-12 overflow-x-scroll lg:overflow-hidden mt-3 md:gap-12 z-0" >
-            {myPrograms ?
-               userProgramsFiltered.map((item, index) => (
-                  <ProgramCard key={item.id} {...item.program}
-                     isUserProgram={true}
-                     userProgramId={item.id}
-                     is_completed={item.is_completed}
-                     percentage_completed={item.percentage_completed}
-                     myPrograms={myPrograms}
-                  />
-               )) :
-               allProgramsFiltered.map((item, index) => (
-                  <ProgramCard key={item.id} {...item} />
-               ))
+
+            {
+               myProgramsLoading ?
+                  <div className='px-3 py-4'>
+                     <Loader size='medium' />
+                  </div> :
+                  myPrograms ?
+                     userProgramsFiltered.map((item, index) => (
+                        <ProgramCard key={item.id} {...item.program}
+                           isUserProgram={true}
+                           userProgramId={item.id}
+                           is_completed={item.is_completed}
+                           percentage_completed={item.percentage_completed}
+                           myPrograms={myPrograms}
+                        />
+                     )) : <></>
+            }
+
+            {
+               allProgramsLoading ?
+                  <div className='px-3 py-4'>
+                     <Loader size='medium' />
+                  </div> :
+                  !myPrograms ?
+                     allProgramsFiltered.map((item, index) => (
+                        <ProgramCard key={item.id} {...item} />
+                     ))
+                     : <></>
             }
          </div>
       </div>

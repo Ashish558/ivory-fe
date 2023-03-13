@@ -13,12 +13,15 @@ import Arrow from '../../Images/Icon.png';
 import CheckedIcon from '../../assets/icons/circle-checked.svg'
 import LogoDesktop from '../../Images/Vector(6).png';
 import { getStoryUrl } from "../../utils/utils";
+import Loader from "../../components/Loader";
+import { useGetCachedData } from "../../hooks/useGetCachedData";
 
 const Stories = () => {
    const [storyActive, setStoryActive] = useState(false)
    const [selectedStory, setSelectedStory] = useState({})
    const [selectedIndex, setSelectedIndex] = useState(0)
    const [stories, setStories] = useState([])
+   const [loading, setLoading] = useState(true)
 
    const [singleStory, setSingleStory] = useState({})
    const [singleStoryActive, setSingleStoryActive] = useState(false)
@@ -121,6 +124,7 @@ const Stories = () => {
    const fetchStories = () => {
       getStories(loggedIn)
          .then(res => {
+            setLoading(false)
             let resdata = res.data.data[0]
             // console.log('Stories response', res.data.data)
             // console.log('resdata', resdata)
@@ -142,12 +146,43 @@ const Stories = () => {
             // ]
             let viewed = allStories.filter(item => item.viewed === true)
             let notViewed = allStories.filter(item => item.viewed === false)
+
+            let storiesData = [...notViewed, ...viewed]
+            const story = {
+               timestamp: new Date(),
+               data: storiesData
+            }
+            localStorage.setItem('story', JSON.stringify(story))
             setStories([...notViewed, ...viewed])
+
          })
          .catch(err => {
-            console.log(err.response);
+            setLoading(false)
+            // console.log(err.response);
          })
    }
+
+   useGetCachedData('story', setLoading, setStories)
+
+   // useEffect(() => {
+   //    Date.prototype.addHours = function (h) {
+   //       this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+   //       return this;
+   //    }
+   //    let story = localStorage.getItem('story')
+   //    if (story) {
+   //       story = JSON.parse(story)
+   //       let timestamp = new Date(story.timestamp)
+   //       let timestampValid = new Date(timestamp).addHours(2)
+   //       // console.log('timestampValid', timestampValid);
+   //       // console.log('new Date()', new Date());
+   //       if (timestampValid > new Date()) {
+   //          let data = story?.data
+   //          setStories(data)
+   //          setLoading(false)
+   //       }
+   //    }
+   // }, [])
 
    useEffect(() => {
       fetchStories()
@@ -200,52 +235,57 @@ const Stories = () => {
    return (
       <div>
          {
-            stories.length >= 1 &&
-            <div className=" lg:ml-24 ">
-               <div className='lg:flex lg:items-center lg:mb-20'>
-                  <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
-                  <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
-               </div>
+            stories.length >= 1 ?
+               <div className=" lg:ml-24">
+                  <div className='lg:flex lg:items-center lg:mb-20'>
+                     <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+                  </div>
 
-               {/* <div className=' flex items-center mb-20'>
+                  {/* <div className=' flex items-center mb-20'>
                <h1 className='text-5xl font-medium  '>Start your day <span></span></h1>
                <p className='pl-7'><img src={Arrow} alt="" /></p>
             </div> */}
+                  <Slider {...settings} className='home-stories-slider' >
+                     {stories.map((story, idx) => {
+                        return (
+                           <div>
+                              <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
+                                 {
+                                    story.viewed_by.includes(profileData.id) &&
+                                    <div className='story-checked flex'>
+                                       <img src={CheckedIcon} alt='' />
+                                    </div>
+                                 }
 
+                                 <div className="" >
+                                    <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : story.thumbnail ? story.thumbnail : Logo} alt="" /></p>
+                                    <div className="pl-3 details lg:pl-6">
+                                       <p className="text-sm lg:text-xl text-white">
+                                          {story.title ? story.title : ''}
+                                       </p>
+                                       <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
+                                          <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
+                                          <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
 
-               <Slider {...settings} className='home-stories-slider' >
-                  {stories.map((story, idx) => {
-                     return (
-                        <div>
-                           <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
-                              {
-                                 story.viewed_by.includes(profileData.id) &&
-                                 <div className='story-checked flex'>
-                                    <img src={CheckedIcon} alt='' />
-                                 </div>
-                              }
-
-                              <div className="" >
-                                 <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : story.thumbnail ? story.thumbnail : Logo} alt="" /></p>
-                                 <div className="pl-3 details lg:pl-6">
-                                    <p className="text-sm lg:text-xl text-white">
-                                       {story.title ? story.title : ''}
-                                    </p>
-                                    <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
-                                       <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
-                                       <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
-
-                                       <p className="text-sm text-white pl-1"> {story.views} views</p>
+                                          <p className="text-sm text-white pl-1"> {story.views} views</p>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                        </div>
-                     )
-                  })}
-                  <div></div>
-               </Slider>
-            </div>
+                        )
+                     })}
+                     <div></div>
+                  </Slider>
+               </div>
+               :
+               loading ?
+                  <div className=' lg:ml-24 px-3'>
+                     <Loader size='medium' />
+                  </div> : <></>
+
+
          }
 
          {

@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { getFormattedDuration, getPricingDiscountedText, getPricingMainText, handleScrollToTop } from '../../../utils/utils';
 import { useNavigate } from 'react-router-dom';
+import { useGetCachedData } from '../../../hooks/useGetCachedData';
 
 
 
@@ -65,19 +66,29 @@ const DesktopLearn = () => {
    };
 
    const [allPrograms, setAllPrograms] = useState([])
+   const [loading, setLoading] = useState(true)
 
    const navigate = useNavigate()
 
    useEffect(() => {
       getPrograms()
          .then(res => {
+            setLoading(false)
             if (res.data.data === null) return setAllPrograms([])
             // console.log('programs', res.data.data);
+            const homePrograms = {
+               timestamp: new Date(),
+               data: res.data.data
+            }
+            localStorage.setItem('homePrograms', JSON.stringify(homePrograms))
             setAllPrograms(res.data.data)
          }).catch(err => {
+            setLoading(false)
             console.log(err.response);
          })
    }, [])
+
+   useGetCachedData('homePrograms', setLoading, setAllPrograms)
 
    const handleNavigate = (id) => {
       navigate(`/learn/${id}`)

@@ -5,6 +5,9 @@ import Session from '../../components/Session/Session';
 import Arrow from '../../Images/Icon.png';
 import { getLiveSessions } from '../../services/liveSession';
 import './Sessions.css';
+import { useGetCachedData } from '../../hooks/useGetCachedData'
+import Loader from '../../components/Loader';
+
 // import { settings } from '../LiveEvents/settings';
 
 
@@ -12,20 +15,33 @@ const Sessions = () => {
 
    const [allSessions, setAllSessions] = useState([])
    const navigate = useNavigate()
+   const [loading, setLoading] = useState(true)
 
    const fetchSession = () => {
       getLiveSessions()
          .then((res) => {
+            setLoading(false)
             // console.log(res.data.data);
             if (res.data.data === null) return
             setAllSessions(res.data.data)
+            const liveSessions = {
+               timestamp: new Date(),
+               data: res.data.data
+            }
+            localStorage.setItem('liveSessions', JSON.stringify(liveSessions))
          }).catch((err) => {
+            setLoading(false)
             console.log(err.repsonse)
          });
    }
+   useGetCachedData('liveSessions', setLoading, setAllSessions)
+
    useEffect(() => {
       fetchSession()
    }, [])
+
+   // console.log('allSessions', allSessions);
+
    const settings = {
       infinite: false,
       // centerPadding: "60px",
@@ -84,11 +100,19 @@ const Sessions = () => {
             </p>
          </div>
          <div className='px-4 md:hidden'>
-            <Slider {...settings} >
-               {allSessions.map((session, idx) => {
-                  return <Session key={idx} {...session} scrollToTop={true} />
-               })}
-            </Slider>
+            {
+               loading ?
+                  <div>
+                     <Loader size='medium' />
+                  </div>
+                  :
+                  <Slider {...settings} >
+                     {allSessions.map((session, idx) => {
+                        return <Session key={idx} {...session} scrollToTop={true} />
+                     })}
+                  </Slider>
+            }
+
          </div>
          <div className='px-4 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6 gap-y-6'>
 
