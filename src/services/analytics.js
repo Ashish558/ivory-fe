@@ -20,14 +20,23 @@ export const GA_signup = () => {
     })
 }
 export const GA_login = () => {
+    console.log('login - analytics');
+
+    // window.dataLayer.push({
+    //     event: 'login',
+    //     // category: 'login',
+    //     // action: 'login',
+    //     // label: 'User logged in',
+    // })
     ReactGA.event({
         category: 'login',
         action: 'login',
         label: 'User logged in',
     })
+    // console.log(window.dataLayer);
 }
 
-export const GA_liveSessionRegister= () => {
+export const GA_liveSessionRegister = () => {
     ReactGA.event({
         category: 'liveevent_register ',
         action: 'liveevent_register ',
@@ -42,7 +51,7 @@ export const GA_programRegister = () => {
     })
 }
 
-export const GA_startActivity= () => {
+export const GA_startActivity = () => {
     ReactGA.event({
         category: 'start_activity',
         action: 'start_activity',
@@ -67,11 +76,20 @@ export const GA_beginCheckout = () => {
 }
 
 export const GA_share = (text, item_id) => {
+    // console.log('share - analytics');
+    // window.dataLayer.push({
+    //     event: 'share',
+    //     category: 'share',
+    //     action: `Shared ${text}`,
+    //     content_type: text,
+    //     item_id: `${text}_${item_id}`,
+    // })
     ReactGA.event('share', {
         category: 'share',
         action: `Shared ${text}`,
         content_type: text,
-        item_id
+        // item_id
+        item_id: `${text}_${item_id}`,
     })
 }
 

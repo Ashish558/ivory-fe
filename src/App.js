@@ -108,7 +108,8 @@ function App() {
     // ReactGA.initialize('GTM-PQWLJCR')
 
     //client acc
-    ReactGA.initialize('GTM-PKH9VTQ')
+    // ReactGA.initialize('GTM-PKH9VTQ')
+    ReactGA.initialize('G-WTLT1Q9JWF')
     // ReactGA.initialize('G-WTLT1Q9JWF')
   }, [])
   // console.log(gapi);

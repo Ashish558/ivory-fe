@@ -168,11 +168,11 @@ export default function Story(props) {
       //    content_type: "image",
       //    item_id: id,
       //  });
-      window.dataLayer.push({
-         event: 'share',
-         content_type: "story",
-         item_id: id,
-      });
+      // window.dataLayer.push({
+      //    event: 'share',
+      //    content_type: "story",
+      //    item_id: id,
+      // });
       // html2canvas(imageRef.current, {
       //    allowTaint: true,
       //    useCORS: true,
