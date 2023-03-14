@@ -44,3 +44,7 @@ export const loginUser = (body) => {
 export const refreshToken = (body) => {
    return axios.post(`${BASE_URL}/accounts/users/refresh-token/`, body)
 };
+
+export const getSubcriptions = () => {
+   return axios.get(`${BASE_URL}/subscription/subscriptions/`, getAuthHeaders())
+};

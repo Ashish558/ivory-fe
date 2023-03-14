@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import React,{ useEffect,useState } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+import { BrowserRouter,Navigate,Route,Routes } from "react-router-dom";
 import './App.css';
 import ReactGA from 'react-ga4'
 
@@ -30,6 +30,8 @@ import Navbar from './pages/Navbar/Navbar';
 import NavbarDesktop from './pages/Desktop/NavbarDesktop/NavbarDesktop';
 import Footer from './pages/Home/Footer';
 
+import Package from './pages/Learn/Package/Package';
+
 import { updateLoggedIn, updateProfileData } from './redux/slices/user';
 import { refreshToken } from './services/auth';
 import { getUserDetail } from './services/user';
@@ -52,11 +54,12 @@ const Program = React.lazy(() => import('./pages/Learn/Program/Program'))
 const Community = React.lazy(() => import('./pages/Learn/Community/Community'))
 const Confirmation = React.lazy(() => import('./pages/Learn/Confirmation/Confirmation'))
 
+
 function App() {
   //true for now will change later
-  const [loading, setLoading] = useState(true)
+  const [loading,setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { loggedIn, profileData } = useSelector(state => state.user)
+  const { loggedIn,profileData } = useSelector(state => state.user)
 
   useEffect(() => {
     if (localStorage.getItem('refresh')) {
@@ -67,7 +70,7 @@ function App() {
       refreshToken(body)
         .then(res => {
           // console.log('ref res', res.data.data.access);
-          localStorage.setItem('access', res.data.data.access)
+          localStorage.setItem('access',res.data.data.access)
           dispatch(updateLoggedIn({ loggedIn: true }))
           fetchUserDetails(true)
 
@@ -75,12 +78,12 @@ function App() {
         }).catch(err => {
           setLoading(false)
           dispatch(updateLoggedIn({ loggedIn: false }))
-          console.log('ref err', err.response);
+          console.log('ref err',err.response);
         })
     } else {
       setLoading(false)
     }
-  }, [])
+  },[])
 
   const fetchUserDetails = (isInitial) => {
     getUserDetail()
@@ -92,7 +95,7 @@ function App() {
         }
       })
       .catch(err => {
-        console.log('profile err', err);
+        console.log('profile err',err);
         if (isInitial) {
           dispatch(updateLoggedIn({ loggedIn: false }))
           setLoading(false)
@@ -120,7 +123,7 @@ function App() {
 
   useEffect(() => {
     fetchUserDetails()
-  }, [loggedIn])
+  },[loggedIn])
 
   if (loading === true) return <></>
 
@@ -145,6 +148,7 @@ function App() {
         <Route path="/dob" element={<Dob />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/Congrates" element={<Congrates />} />
+        <Route path="/subscription" element={<Package />} />
 
         <Route path="/home" element={
           <React.Suspense fallback={<>...</>}>
