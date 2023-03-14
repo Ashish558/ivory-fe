@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import logo from "../../assets/images/login/logolight.png";
 import SignupTree from "../../assets/images/login/signupTree.png";
@@ -48,7 +48,7 @@ const Login = () => {
       setError("Phone number must be 11 digits");
     } else if (phone.length > 10) {
       setError("Phone number cannot be more than 11 digits");
-    } 
+    }
     else {
       setCountryCode(e.target.countryCode.value);
       const body = {
@@ -70,7 +70,7 @@ const Login = () => {
   }
   return (
     <div className="overflow-x-hidden bg-[#EEFDFC] overflow-hidden h-screen">
-      
+
 
       <div className="sm:flex  min-h-[667px] overflow-hidden  justify-around  w-screen mt-16 sm:m-0">
         <div className="topAppBar mt-10 ml-8 sm:hidden">
@@ -93,7 +93,7 @@ const Login = () => {
           }}
         >
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
           </div>
           <div className='flex-1 w-full'>
             <Slider {...settings} className='w-full flex-1 h-auto' >
@@ -110,7 +110,7 @@ const Login = () => {
                         </h1>
                       </div>
                       <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
-                        <img src={item.img} alt="" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
+                        <img src={item.img} alt="item_img" className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`} />
                       </div>
                     </div>
                   )
@@ -162,25 +162,25 @@ const Login = () => {
                     Continue
                   </button>
                 ) : (
-                <button       
-                  className="bg-[#B5CFEC] flex items-center lg:h-[43px]  text-xl py-2 px-20 lg:text-sm font-semibold rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 mb-5" disabled
-                >
-                  Continue
-                </button>
-              )}
-              </div>
-              <div className="lg:text-xs lg:text-left text-center w-[328px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
-                By clicking continue, I accept the{" "}
-                <Link to="/" className="text-black font-bold underline">
-                  terms of service
-                </Link>{" "}
-                and{" "}
-                <Link to="/" className="text-black font-bold underline">
-                  {" "}
-                  privacy policy
-                </Link>
-              </div>
-            </form>
+                  <button
+                    className="bg-[#B5CFEC] flex items-center lg:h-[43px]  text-xl py-2 px-20 lg:text-sm font-semibold rounded-full text-white w-10/12 sm:w-full text-center justify-center flex mx-auto mt-5 mb-5" disabled
+                  >
+                    Continue
+                  </button>
+                )}
+            </div>
+            <div className="lg:text-xs lg:text-left text-center w-[328px] text-gray-500  mt-5 mb-5 mx-auto hidden sm:block">
+              By clicking continue, I accept the{" "}
+              <Link to="/" className="text-black font-bold underline">
+                terms of service
+              </Link>{" "}
+              and{" "}
+              <Link to="/" className="text-black font-bold underline">
+                {" "}
+                privacy policy
+              </Link>
+            </div>
+          </form>
           <div
             className=" text-[11px] text-center w-[400px] text-gray-500 px-1 mt-5 mb-5 sm:hidden"
             style={{

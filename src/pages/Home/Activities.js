@@ -125,7 +125,7 @@ const Activities = () => {
                   Recommended activities
                </h1>
                <p className='pl-7 hidden lg:block cursor-pointer' onClick={() => navigate(`/activities`)}>
-                  <img src={Arrow} alt="" />
+                  <img src={Arrow} alt="Arrow" />
                </p>
             </div>
             {
@@ -139,7 +139,7 @@ const Activities = () => {
                         activities.map((activity) =>
                            <div key={activity.id} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 activity-box lg:col-span-2 activitycard'
                               onClick={() => navigate(`/activities/${activity.id}`)}>
-                              <p><img src={activity.icon} alt="" /></p>
+                              <p><img src={activity.icon} alt="activity" /></p>
                               {
                                  activity?.name.length <= '17' ?
                                     <p className='text-center pt-2 font-semibold text-sm'
@@ -154,7 +154,7 @@ const Activities = () => {
                      }
                      <div style={{ backgroundColor: '#CDF7FF' }} className='flex flex-col justify-center items-center px-5 pb-3 pt-4 box lg:col-span-2 cursor-pointer'
                         onClick={() => navigate('/activities')} >
-                        <p><img src={SeeLogo} alt="" /></p>
+                        <p><img src={SeeLogo} alt="eye" /></p>
                         <div style={{ color: '#1B72C0' }}>
                            <p className='text-center text-sm pt-2 font-semibold' >See </p>
                            <p className='text-center text-sm  font-semibold pt-0' >All</p>

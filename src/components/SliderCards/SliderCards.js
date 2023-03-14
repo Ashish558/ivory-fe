@@ -31,11 +31,11 @@ const SliderCards = ({ banners, isActivityBanner, page }) => {
 
    const handleNavigate = banner => {
       setVideoLink(banner.video_link)
-      GA_bannerClick( page ? page :'home_page', banner.title)
+      GA_bannerClick(page ? page : 'home_page', banner.title)
       if (banner.title === "Complete your Profile!") {
-         if(!loggedIn){
+         if (!loggedIn) {
             return navigate('/login')
-         }else{
+         } else {
             return navigate('/CreateProfile')
          }
       }
@@ -57,10 +57,10 @@ const SliderCards = ({ banners, isActivityBanner, page }) => {
                                  className="flex rounded-3xl justify-between items-end mx px-4 py-2 overflow-hidden relative z-10 banner-container">
                                  {/* <div className="flex flex-1 items-center self-stretch relative overflow-hidden"> */}
                                  <img className={`rounded-2xl w-full slider-bg-image h-full object-cover `}
-                                    src={banner.image} alt="" />
+                                    src={banner.image} alt="banner" />
                                  {/* </div> */}
                                  <div className="flex flex-1 items-start text-white pl-2 relative z-20 mb-1">
-                                    
+
                                     <p className="play bg-black rounded-full mr-2 mt-1"></p>
                                     <div className=" text-xl font-bold">
                                        <p className="leading-normal">

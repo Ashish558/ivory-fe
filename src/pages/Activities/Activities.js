@@ -228,7 +228,7 @@ export default function Activities() {
                      <h3 className='text-xl font-bold mb-2.5  lg:mb-4 lg:text-[48px] lg:font-semibold font-[Inter] leading-none '>
                         My activities
                      </h3>
-                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="Arrow" /></p>
                   </div>
                   {myActivities.length > 0 ?
                      myActivities.map((activity, idx) => {
@@ -249,7 +249,7 @@ export default function Activities() {
                <div className=''>
                   <div className=' flex items-center mb-2'>
                      <h3 className='font-bold lg:font-semibold leading-none lg:text-[48px] text-xl mb-2.5 font-[Inter]'> All Activities </h3>
-                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
+                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="Arrow" /></p>
                   </div>
                   {
                      interestsLoading ?
@@ -281,7 +281,7 @@ export default function Activities() {
                                        {activity.categories.map((category, idx) => (
                                           <div key={category.id} className={`flex flex-col justify-center items-center px-5 pb-3 pt-4 lg:col-span-2 ${styles.activityBox}`}
                                              onClick={() => navigate(`/activities/${category.id}`)}>
-                                             <p><img src={category.icon} alt="" /></p>
+                                             <p><img src={category.icon} alt="category" /></p>
                                              {
                                                 category?.name.length <= '17' ?
                                                    <p className='text-center pt-2 font-semibold text-sm'

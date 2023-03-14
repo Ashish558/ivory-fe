@@ -386,7 +386,7 @@ export default function StartActivity({ fetchUserDetails }) {
                                  </p>
                                  {step.image &&
                                     <div className={styles.stepImageContainer}>
-                                       <img src={step.image} className='w-full object-contain' alt='step-image' />
+                                       <img src={step.image} className='w-full object-contain' alt='step_Image' />
                                     </div>
                                  }
                                  <div className='font-normal text-sm md:text-base mt-[13px] lg:mt-1'>
@@ -427,7 +427,7 @@ export default function StartActivity({ fetchUserDetails }) {
                      onClick={shareActivity}
                      children={
                         <>
-                           <img src={ShareIcon} className='mr-2.5' alt='mark' />
+                           <img src={ShareIcon} className='mr-2.5' alt='share' />
                            Share
                         </>
                      }
@@ -444,7 +444,7 @@ export default function StartActivity({ fetchUserDetails }) {
                            <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 text-sm px-3 h-[51px] max-w-[360px]`}
                               onClick={handleUploadClick}
                               children={
-                                 <> <img src={WhatsappIcon} className='mr-3'
+                                 <> <img src={WhatsappIcon} className='mr-3' alt='WhatsappIcon'
                                  /> Submit on Whatsapp
                                     <input type='file' className='hidden' ref={inputRef}
                                        onChange={e => handleUpload(e)} />
@@ -469,7 +469,7 @@ export default function StartActivity({ fetchUserDetails }) {
                         <SecondaryButton className={`w-full ${styles.uploadButton} mt-4 pt-4 flex items-center justify-center pb-4 text-sm px-3 h-[51px] max-w-[360px]`}
                            onClick={handleUploadClick}
                            children={
-                              <> <img src={WhatsappIcon} className='mr-3'
+                              <> <img src={WhatsappIcon} className='mr-3' alt='WhatsappIcon'
                               /> Submit on Whatsapp
                                  <input type='file' className='hidden' ref={inputRef}
                                     onChange={e => handleUpload(e)} />
@@ -495,7 +495,7 @@ export default function StartActivity({ fetchUserDetails }) {
                               onDelete={onDelete} />
                         })}
                      </div>
-                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='' onClick={increaseIndex} />
+                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='NextIcon' onClick={increaseIndex} />
                   </div>
 
                   <div className='relative sm:grid sm:grid-cols-1 sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto hidden md:block'>

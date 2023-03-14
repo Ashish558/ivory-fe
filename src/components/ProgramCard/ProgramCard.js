@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getFormattedDuration,getPricingDiscountedText,getPricingMainText } from '../../utils/utils'
+import { getFormattedDuration, getPricingDiscountedText, getPricingMainText } from '../../utils/utils'
 import './program.css'
-export default function ProgramCard({ id,myPrograms,image,name,live_sessions_count,modules_duration,price,discounted_price,isUserProgram,userProgramId,is_completed,percentage_completed,is_live,is_free,discount,scrollToTop }) {
+export default function ProgramCard({ id, myPrograms, image, name, live_sessions_count, modules_duration, price, discounted_price, isUserProgram, userProgramId, is_completed, percentage_completed, is_live, is_free, discount, scrollToTop }) {
 
    const navigate = useNavigate()
 
@@ -33,7 +33,7 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
             </span>
             <img
                src={image}
-               alt=""
+               alt="program"
                className="h-[124px] w-[124px] sm:h-[228px] sm:w-full object-cover rounded-[20px] sm:rounded-none sm:rounded-t-[48px]"
             />
          </div>
@@ -76,7 +76,7 @@ export default function ProgramCard({ id,myPrograms,image,name,live_sessions_cou
                      price >= 1 ?
                         <div className=" mr-10 lg:mt-5 lg:p-3 relative">
                            <div className="text-xl lg:text-2xl font-bold text-[#1B72C0]  lg:ml-0 flex items-end gap-1 sm:justify-end">
-                              {getPricingMainText(is_free,price,discounted_price,discount)}
+                              {getPricingMainText(is_free, price, discounted_price, discount)}
                               <span className="text-gray-400 line-through font-normal text-xl">
                                  {getPricingDiscountedText(
                                     is_free,

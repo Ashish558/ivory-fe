@@ -35,7 +35,7 @@ const DesktopEvents = () => {
             <div style={{ marginTop: '88px' }} className='ml-24'>
                 <div className=' flex items-center mb-20'>
                     <h1 className='text-5xl font-semibold '>Events<span></span></h1>
-                    <p className='pl-7 '><img src={Arrow} alt="" /></p>
+                    <p className='pl-7 '><img src={Arrow} alt="Arrow" /></p>
                 </div>
 
                 <Slider {...settings}>
@@ -46,7 +46,7 @@ const DesktopEvents = () => {
                             <div class="pl-4">
 
                                 <div className='flex items-center justify-center Live-Desktop  py-1' >
-                                    <p className=''><img src={LiveImg} alt="" /></p>
+                                    <p className=''><img src={LiveImg} alt="Live" /></p>
                                     <p className='font-semibold  text-xl pl-2'><span className='text-white'> Live</span></p>
                                 </div>
 
@@ -56,7 +56,7 @@ const DesktopEvents = () => {
                                 </h2>
                                 <p className='text-sm font-medium date-bg pt-3'>04 Jan, Sunday</p>
                                 <div class="pt-14 flex pb-4">
-                                    <div class=""><img src={User} alt="" /></div>
+                                    <div class=""><img src={User} alt="user" /></div>
                                     <div className='pl-2'>
                                         <p class="text-xl font-semibold big-author-name">Ayush Jain</p>
                                         <p class="text-base big-author-name">130k viewers</p></div>
@@ -70,7 +70,7 @@ const DesktopEvents = () => {
                             <div class="pl-4">
 
                                 <div className='flex items-center justify-center Soon-Desktop  py-1' >
-                                    <p className=''><img src={LiveImg} alt="" /></p>
+                                    <p className=''><img src={LiveImg} alt="Live" /></p>
                                     <p className='font-semibold  text-xl pl-2'><span className='text-white'> Coming Soon</span></p>
                                 </div>
 
@@ -80,7 +80,7 @@ const DesktopEvents = () => {
                                 </h2>
                                 <p className='text-sm font-medium date-bg pt-3'>04 Jan, Sunday</p>
                                 <div class="pt-14 flex pb-4">
-                                    <div class=""><img src={User} alt="" /></div>
+                                    <div class=""><img src={User} alt="user" /></div>
                                     <div className='pl-2'>
                                         <p class="text-xl font-semibold big-author-name">Ayush Jain</p>
                                         <p class="text-base big-author-name">130k viewers</p></div>
@@ -101,7 +101,7 @@ const DesktopEvents = () => {
                                 </h2>
                                 <p className='text-sm font-medium date-bg pt-3'>04 Jan, Sunday</p>
                                 <div class="pt-14 flex pb-4">
-                                    <div class=""><img src={User} alt="" /></div>
+                                    <div class=""><img src={User} alt="user" /></div>
                                     <div className='pl-2'>
                                         <p class="text-xl font-semibold big-author-name">Ayush Jain</p>
                                         <p class="text-base big-author-name">130k viewers</p></div>
@@ -122,7 +122,7 @@ const DesktopEvents = () => {
                                 </h2>
                                 <p className='text-sm font-medium date-bg pt-3'>04 Jan, Sunday</p>
                                 <div class="pt-14 flex pb-4">
-                                    <div class=""><img src={User} alt="" /></div>
+                                    <div class=""><img src={User} alt="user" /></div>
                                     <div className='pl-2'>
                                         <p class="text-xl font-semibold big-author-name">Ayush Jain</p>
                                         <p class="text-base big-author-name">130k viewers</p></div>

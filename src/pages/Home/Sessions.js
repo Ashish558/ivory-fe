@@ -45,7 +45,7 @@ const Sessions = () => {
    const settings = {
       infinite: false,
       // centerPadding: "60px",
-      slidesToShow: 1.2,
+      slidesToShow: 1.35,
       initialSlide: 0,
       arrows: false,
       swipeToSlide: true,
@@ -69,7 +69,7 @@ const Sessions = () => {
          {
             breakpoint: 480,
             settings: {
-               slidesToShow: 1.2,
+               slidesToShow: 1.35,
                initialSlide: 0,
             },
             // state: {
@@ -96,7 +96,7 @@ const Sessions = () => {
                Events
             </h1>
             <p className='pl-7 hidden lg:block cursor-pointer'>
-               <img src={Arrow} onClick={() => navigate('/live-events')} alt="" />
+               <img src={Arrow} onClick={() => navigate('/live-events')} alt="Arrow" />
             </p>
          </div>
          <div className='px-4 md:hidden'>

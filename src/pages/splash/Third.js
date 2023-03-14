@@ -16,7 +16,7 @@ const Third = ({ clearTimeouts }) => {
 
   return (
     <m.div initial={{ opacity: 0.7 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, ease: easeIn, ease: easeOut }} className={`${styles.fullscreen} h-screen overflow-hidden`}>
-      <img className={styles.imgup} src={third} alt="" />
+      <img className={styles.imgup} src={third} alt="third" />
       <div className="flex items-end justify-end content-end w-full h-[]">
         <Link
           to="/home"

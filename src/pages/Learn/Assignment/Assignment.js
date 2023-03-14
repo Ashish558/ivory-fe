@@ -242,150 +242,167 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                </p>
             </div>
 
-            <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
-               <p className='text-xl sm:text-4xl font-medium mb-2.5 px-4 sm:py-4'>
-                  {name}
-               </p>
-               {
-                  video_link !== null ?
-                     <div className='sm:flex sm:items-start sm:justify-start relative sm:w-[100%]'>
-                        {
-                           isAlreadyStarted === false &&
-                           <div className={styles.overlay} onClick={() => setStartModalActive(true)} > </div>
-                        }
-                        <ReactPlayer ref={videoRef}
-                           width='100%'
-                           // height='400px'
-                           className={styles.video}
-                           url={video_link}
-                           controls={true}
-                           disabled={true}
-                        />
-                        {/* <video width='100%' height='400px' className='max-h-[400px]' controls  >
+
+            <div className='lg:flex'>
+
+
+               <div className='mt-3 sm:flex sm:flex-col sm:justify-start sm:items-start sm:mx-20 '>
+                  <p className='text-xl sm:text-4xl font-medium mb-2.5 px-4 sm:py-4'>
+                     {name}
+                  </p>
+                  {
+                     video_link !== null ?
+                        <div className='sm:flex sm:items-start sm:justify-start relative sm:w-[100%]'>
+                           {
+                              isAlreadyStarted === false &&
+                              <div className={styles.overlay} onClick={() => setStartModalActive(true)} > </div>
+                           }
+                           <ReactPlayer ref={videoRef}
+                              width='100%'
+                              // height='400px'
+                              className={styles.video}
+                              url={video_link}
+                              controls={true}
+                              disabled={true}
+                           />
+                           {/* <video width='100%' height='400px' className='max-h-[400px]' controls  >
                            <source src={video_link}  />
                         </video> */}
-                     </div>
-                     :
-                     <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
-                        <img src={image === null ? ActivityIcon : image}
-                           className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
-                     </div>
-               }
-
-            </div>
-
-            <div className='px-4 sm:px-0 mt-5 sm:mx-20'>
-
-               <p className='text-xl sm:text-2xl lg:mt-3 lg:mb-4 font-semibold mb-1.5'> Description </p>
-               <p className='text-sm sm:text-xl lg:max-w-[748px]'>
-                  {description}
-               </p>
-               {
-                  startModalActive === false ?
-                     <span className={`${styles.seeMoreBtn} text-sm sm:text-lg`}
-                        onClick={() => setStartModalActive(true)} >
-                        See More
-                     </span> :
-                     <div>
-                        {steps.map((step, idx) => {
-                           let color = getColors(steps.length, idx)
-                           return (
-                              <div className='mb-6 mt-6 max-w-[650px]'>
-                                 <p className={`font-semibold text-[${color}] mb-3`} style={{ color }} >
-                                    {`${step.name}`}
-                                 </p>
-                                 {step.image &&
-                                    <div className={styles.stepImageContainer}>
-                                       <img src={step.image} alt='step-image' />
-                                    </div>
-                                 }
-                                 <div className='font-normal text-sm md:text-base '>
-                                    {step.description}
-                                 </div>
-                              </div>
-                           )
-                        })}
-                     </div>
-
-               }
-               <div className='flex items-center gap-x-3 mt-8 mb-8 max-w-[350px]'>
-                  {
-                     is_completed === true ?
-                        <PrimaryButton className={`flex items-center pl-4 pr-4 bg-primaryGreen`}
-                           disabled={submissions.length === 0 ? true : false}
-                           onClick={handleComplete}
-                           children={
-                              <>
-                                 <img src={MarkIcon} className='mr-2.5' alt='mark' />
-                                 Completed
-                              </>
-                           }
-                        /> :
-                        <PrimaryButton className={`flex items-center justify-center px-3 `}
-                           disabled={submissions.length === 0 ? true : false}
-                           onClick={handleComplete}
-                           children={
-                              <div className='flex items-center'>
-                                 <div >
-                                    <img src={MarkIcon} alt='mark'
-                                    />
-                                 </div>
-                                 <div>
-                                    <span className='text-sm pl-2 pr-1'>Mark Completed</span>
-                                 </div>
-                              </div>
-                           }
-                        />
+                        </div>
+                        :
+                        <div className='sm:flex sm:items-start sm:justify-start  sm:w-[100%]'>
+                           <img src={image === null ? ActivityIcon : image}
+                              className={`${styles.image} sm:rounded-3xl sm:w-[100%] object-cover sm:mx-0 mx-auto`} alt='Profile' />
+                        </div>
                   }
-                  <SecondaryButton className='flex items-center border border-primary pl-5 pr-5'
-                     disabled={false}
-                     children={
-                        <>
-                           <img src={ShareIcon} className='mr-2.5' alt='mark' />
-                           <span className='text-sm'>Share</span>
-                        </>
-                     }
-                     onClick={() => shareLink(name, name, `https://ivory-test.netlify.app${location.pathname}`)}
-                  />
+
                </div>
 
-               {
-                  submissions.length === 0 ?
-                     <div className='mb-12'>
-                        <p className='font-medium sm:text-lg sm:font-semibold' >
-                           Submit your work to get feedback from our <br></br>expert:
-                        </p>
-                        <div className='h-[51px] bg-[#85FFB2] flex justify-center items-center rounded-full mt-3'
-                           onClick={handleUploadClick}>
-                           <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> <span className='text-sm'>submit via WhatsApp</span>
+               {/*  */}
+
+
+               <div className=' px-4 sm:px-0 mt-5 sm:mx-20'>
+
+                  <p className='text-xl  lg:mt-3 lg:mb-4 font-semibold mb-1.5'> Description </p>
+                  <p className='text-sm  lg:max-w-[748px] lg:mb-20'>
+                     {description}
+                  </p>
+                  {
+                     startModalActive === false ?
+                        <span className={`${styles.seeMoreBtn} text-sm `}
+                           onClick={() => setStartModalActive(true)} >
+                           See More
+                        </span> :
+                        <div>
+                           {steps.map((step, idx) => {
+                              let color = getColors(steps.length, idx)
+                              return (
+                                 <div className='mb-6 mt-6 max-w-[650px]'>
+                                    <p className={`font-semibold text-[${color}] mb-3`} style={{ color }} >
+                                       {`${step.name}`}
+                                    </p>
+                                    {step.image &&
+                                       <div className={styles.stepImageContainer}>
+                                          <img src={step.image} alt='step_image' />
+                                       </div>
+                                    }
+                                    <div className='font-normal text-sm md:text-base '>
+                                       {step.description}
+                                    </div>
+                                 </div>
+                              )
+                           })}
                         </div>
-                        {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
-                           <img src={UploadIcon}
-                              className='mr-3 cursor-pointer'
-                              alt='UploadIcon'
-                              onClick={handleUploadClick} />
-                           <p className='font-semibold' > Upload your work </p>
-                           <input type='file' className='hidden' ref={inputRef}
-                              onChange={e => handleUpload(e)} />
-                        </div> */}
-                     </div> :
-                     <div className='mb-12'>
-                        <p className='font-medium sm:text-lg sm:font-semibold mb-4' >
-                           Want to submit more?
-                        </p>
-                        <SecondaryButton className='w-full pt-2.5 flex items-center justify-center pb-2.5 px-3 h-[40px] max-w-[320px]'
-                           onClick={handleUploadClick}
-                           children={
-                              <> <img src={UploadOutlineIcon} className='mr-3'
-                              /> Upload
-                                 <input type='file' className='hidden' ref={inputRef}
-                                    onChange={e => handleUpload(e)} />
-                              </>
-                           } />
-                     </div>
-               }
+
+                  }
+                  <div className='flex items-center gap-x-3 mt-8 lg:mt-3 lg:mb-10 mb-8 max-w-[350px]'>
+                     {
+                        is_completed === true ?
+                           <PrimaryButton className={`flex items-center pl-4 pr-4 bg-primaryGreen`}
+                              disabled={submissions.length === 0 ? true : false}
+                              onClick={handleComplete}
+                              children={
+                                 <>
+                                    <img src={MarkIcon} className='mr-2.5' alt='mark' />
+                                    Completed
+                                 </>
+                              }
+                           /> :
+                           <PrimaryButton className={`flex items-center justify-center px-3 `}
+                              disabled={submissions.length === 0 ? true : false}
+                              onClick={handleComplete}
+                              children={
+                                 <div className='flex items-center'>
+                                    <div >
+                                       <img src={MarkIcon} alt='mark'
+                                       />
+                                    </div>
+                                    <div>
+                                       <span className='text-sm pl-2 pr-1'>Mark Completed</span>
+                                    </div>
+                                 </div>
+                              }
+                           />
+                     }
+                     <SecondaryButton className='flex items-center border border-primary pl-5 pr-5'
+                        disabled={false}
+                        children={
+                           <>
+                              <img src={ShareIcon} className='mr-2.5' alt='mark' />
+                              <span className='text-sm'>Share</span>
+                           </>
+                        }
+                        onClick={() => shareLink(name, name, `https://ivory-test.netlify.app${location.pathname}`)}
+                     />
+                  </div>
+
+                  {
+                     submissions.length === 0 ?
+                        <div className='mb-12'>
+                           <p className='font-medium text-base font-roboto' >
+                              Submit your work to get feedback from our <br></br>expert:
+                           </p>
+                           <div className='h-[51px] bg-[#85FFB2] flex justify-center items-center rounded-full mt-3'
+                              onClick={handleUploadClick}>
+                              <img src={WhatsappOutline} alt='whatsapp' className='mr-2.5 text-[#1B7B1A]' /> <span className='text-sm font-roboto font-medium'>submit via WhatsApp</span>
+                           </div>
+                           {/* <div className='border-2 border-primary border-dashed w-full max-w-[300px] h-[119px] px-4 flex justify-center items-center mt-4 rounded-3xl opacity-70 mx-auto sm:mx-0'>
+            <img src={UploadIcon}
+               className='mr-3 cursor-pointer'
+               alt='UploadIcon'
+               onClick={handleUploadClick} />
+            <p className='font-semibold' > Upload your work </p>
+            <input type='file' className='hidden' ref={inputRef}
+               onChange={e => handleUpload(e)} />
+         </div> */}
+                        </div> :
+                        <div className='mb-12'>
+                           <p className='font-medium text-base  mb-4' >
+                              Want to submit again?
+                           </p>
+                           {/* <SecondaryButton className='w-full pt-2.5 flex items-center justify-center pb-2.5 px-3 h-[40px] max-w-[320px]'
+            onClick={handleUploadClick}
+            children={
+               <> <img src={UploadOutlineIcon} className='mr-3'
+               /> Upload
+                  <input type='file' className='hidden' ref={inputRef}
+                     onChange={e => handleUpload(e)} />
+               </>
+            } /> */}
+
+                           <button className='h-12 flex w-11/12 rounded-3xl mx-4 mt-3 bg-green text-lime-700'><i class="fa fa-whatsapp text-3xl ml-20 mt-1 mx-2"></i>
+                              <p className='mt-3 text-base mx-1'>submit via WhatsApp</p></button>
+
+                        </div>
+                  }
+
+               </div>
 
             </div>
+
+
+
+
 
             {
                submissions.length > 0 &&
@@ -402,7 +419,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
                               onDelete={onDelete} />
                         })}
                      </div>
-                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='' onClick={increaseIndex} />
+                     <img src={NextIcon} className={`${styles.nextIcon} sm:hdden`} alt='NextIcon' onClick={increaseIndex} />
                   </div>
 
                   <div className='relative sm:grid sm:grid-cols-1 sm:justify-center sm:items-center sm:content-center sm:w-full sm:mx-auto hidden md:block'>
@@ -431,7 +448,7 @@ export default function Assignment({ selectedAssignment, fetchUserAssignments, a
             <div className='border-b border-lightGray w-full opacity-20'> </div>
             <div className='mt-10 px-4'>
                {/* <ActivityContent /> */}
-               <h4 className='font-bold text-xl mt-8 sm:mx-20'>
+               <h4 className='font-semibold text-xl mt-8 sm:mx-20'>
                   Next Assignments
                </h4>
 

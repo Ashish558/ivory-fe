@@ -233,57 +233,57 @@ const Stories = () => {
    // console.log('selectedStory', selectedStory)
 
    return (
-      <div>
+      <div className="overflow-x-hidden">
          {
             stories.length >= 1 ?
-               <div className=" lg:ml-24">
-                  <div className='lg:flex lg:items-center lg:mb-20'>
-                     <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
-                     <p className='pl-7 hidden lg:block'><img src={Arrow} alt="" /></p>
-                  </div>
+            <div className=" lg:ml-24 ">
+               <div className='lg:flex lg:items-center lg:mb-20'>
+                  <h1 className='text-xl font-black pl-4  lg:text-5xl lg:font-semibold'>Start your day</h1>
+                  <p className='pl-7 hidden lg:block'><img src={Arrow} alt="Arrow" /></p>
+               </div>
 
-                  {/* <div className=' flex items-center mb-20'>
+               {/* <div className=' flex items-center mb-20'>
                <h1 className='text-5xl font-medium  '>Start your day <span></span></h1>
                <p className='pl-7'><img src={Arrow} alt="" /></p>
             </div> */}
-                  <Slider {...settings} className='home-stories-slider' >
-                     {stories.map((story, idx) => {
-                        return (
-                           <div>
-                              <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
-                                 {
-                                    story.viewed_by.includes(profileData.id) &&
-                                    <div className='story-checked flex'>
-                                       <img src={CheckedIcon} alt='' />
-                                    </div>
-                                 }
+               <Slider {...settings} className='home-stories-slider' >
+                  {stories.map((story, idx) => {
+                     return (
+                        <div>
+                           <div className="p-3  single-story-container" onClick={() => handleClick(story, idx)} >
+                              {
+                                 story.viewed_by.includes(profileData.id) &&
+                                 <div className='story-checked flex'>
+                                    <img src={CheckedIcon} alt='CheckedIcon' />
+                                 </div>
+                              }
 
-                                 <div className="" >
-                                    <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : story.thumbnail ? story.thumbnail : Logo} alt="" /></p>
-                                    <div className="pl-3 details lg:pl-6">
-                                       <p className="text-sm lg:text-xl text-white">
-                                          {story.title ? story.title : ''}
-                                       </p>
-                                       <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
-                                          <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
-                                          <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
+                              <div className="" >
+                                 <p className="responsive-width lg:w-84"><img className="background-story-1 w-full " src={story.image ? story.image : story.thumbnail ? story.thumbnail : Logo} alt="" /></p>
+                                 <div className="pl-3 details lg:pl-6">
+                                    <p className="text-sm lg:text-xl text-white">
+                                       {story.title ? story.title : ''}
+                                    </p>
+                                    <div className="flex items-center lg:mt-[10px] lg:pb-[26px]">
+                                       <p className="text-white HideplayLogo"> <img src={Logo} alt="" /></p>
+                                       <p className="text-white HideplayDesktopLogo "> <img src={LogoDesktop} alt="" /></p>
 
-                                          <p className="text-sm text-white pl-1"> {story.views} views</p>
-                                       </div>
+                                       <p className="text-sm text-white pl-1"> {story.views} views</p>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                        )
-                     })}
-                     <div></div>
-                  </Slider>
-               </div>
+                        </div>
+                     )
+                  })}
+                  <div></div>
+               </Slider>
+            </div>
                :
-               loading ?
-                  <div className=' lg:ml-24 px-3'>
-                     <Loader size='medium' />
-                  </div> : <></>
+         loading ?
+         <div className=' lg:ml-24 px-3'>
+            <Loader size='medium' />
+         </div> : <></>
 
 
          }

@@ -35,13 +35,13 @@ const DesktopBanner = () => {
          .then(res => {
             console.log('banners resp', res.data.data);
             let tempbanners = res.data.data
-                tempbanners = tempbanners.map(banner => {
-                    if (banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0) {
-                        return
-                    } else {
-                        return banner
-                    }
-                }).filter(item => item !== undefined)
+            tempbanners = tempbanners.map(banner => {
+               if (banner.title === "Complete your Profile!" && profileData?.intrests?.length > 0) {
+                  return
+               } else {
+                  return banner
+               }
+            }).filter(item => item !== undefined)
             // let homeBanners = res.data.data.filter(item => item.location_link === location.pathname)
             setBanners(tempbanners)
          })
@@ -77,7 +77,7 @@ const DesktopBanner = () => {
                                     idx === 0 &&
                                     <div onClick={(e) => { e.stopPropagation(); window.open('https://play.google.com/store/apps/details?id=io.ionic.ivoryapp&hl=en-US&ah=oZ8nR0yAxnh9MZJ8mK76K67bD5Q') }}
                                        className='cursor-pointer'>
-                                       <img src={Download} alt="" />
+                                       <img src={Download} alt="Download" />
                                     </div>
                                  }
                                  <h1 className='big-text'> {banner.title}  </h1>
@@ -88,7 +88,7 @@ const DesktopBanner = () => {
                                  </div>
                               </div>
                               <div>
-                                 <p> <img className='banner-pic' src={banner.image} alt="" /></p>
+                                 <p> <img className='banner-pic' src={banner.image} alt="banner-pic" /></p>
                               </div>
                            </div>
                            <div className='blur-img'>

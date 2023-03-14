@@ -1,5 +1,5 @@
-import React,{ useEffect,useRef,useState } from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import arrow from "../../assets/arrow_back.png"
 import cross from "../../assets/cross.png"
@@ -8,40 +8,35 @@ import ivoryforming from "../../assets/ivoryforming.png"
 import photo from "../../assets/smile.png"
 import Modal from '../../components/Modal/modal'
 import { updateProfileData } from '../../redux/slices/user'
-import { addInterest,getInterests } from '../../services/activities'
-import { editProfile,uploadProfile } from '../../services/user'
+import { addInterest, getInterests } from '../../services/activities'
+import { editProfile, uploadProfile } from '../../services/user'
 import styles from "./Profile.module.css"
 import { GA_updateProfile } from '../../services/analytics'
 
 const Profile = () => {
-  const [name,setName] = useState('')
-  const [mobile_no,setMobile_no] = useState(null)
-  const [email,setemail] = useState("");
-  const [showdiv,setshowdiv] = useState(false);
-  const [addnewtextdiv,setaddnewtextdiv] = useState(false);
-  const [backcolor,setbackcolor] = useState('#FFFFFF');
-  const [blur,setblur] = useState("");
+  const [name, setName] = useState('')
+  const [mobile_no, setMobile_no] = useState(null)
+  const [email, setemail] = useState("");
+  const [showdiv, setshowdiv] = useState(false);
+  const [addnewtextdiv, setaddnewtextdiv] = useState(false);
+  const [backcolor, setbackcolor] = useState('#FFFFFF');
+  const [blur, setblur] = useState("");
 
-  const [interest,setinterest] = useState([]);
-  const [allInterests,setAllInterests] = useState([])
-  const [userInterests,setUserInterests] = useState([])
-  const [interestInput,setInterestInput] = useState('')
-  const [selectedInterest,setSelectedInterest] = useState([])
+  const [interest, setinterest] = useState([]);
+  const [allInterests, setAllInterests] = useState([])
+  const [userInterests, setUserInterests] = useState([])
+  const [interestInput, setInterestInput] = useState('')
+  const [selectedInterest, setSelectedInterest] = useState([])
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [error,setError] = useState('')
-  const [empty,setEmpty] = useState(true)
-  const [addModal,setModal] = useState(false)
+  const [error, setError] = useState('')
+  const [empty, setEmpty] = useState(true)
+  const [addModal, setModal] = useState(false)
 
-  const { loggedIn,profileData } = useSelector(state => state.user)
+  const { loggedIn, profileData } = useSelector(state => state.user)
   const photoRef = useRef(null)
 
-  
-  useEffect(() => {
-    document.title = `Ivory | Edit Profile`;
-  }, []);
-
-  const [gender,setgender] = useState("");
+  const [gender, setgender] = useState("");
   useEffect(() => {
     if (loggedIn === true) {
       setemail(profileData.email !== null ? profileData.email : '')
@@ -50,17 +45,17 @@ const Profile = () => {
       setMobile_no(profileData.mobile_no !== null ? profileData.mobile_no : '')
       setinterest(profileData.intrests)
     }
-  },[profileData,loggedIn])
+  }, [profileData, loggedIn])
 
 
   useEffect(() => {
     fetchInterests()
-  },[])
+  }, [])
 
   const fetchInterests = () => {
     getInterests()
       .then(res => {
-        console.log('All Interests',res.data.data);
+        console.log('All Interests', res.data.data);
 
         let intData = res.data.data
         intData = intData.filter(item => {
@@ -69,13 +64,13 @@ const Profile = () => {
           }
         })
         const profileIntIds = profileData.intrests.map(int => int.id)
-        intData = intData.map(item => ({ ...item,selected: false }))
+        intData = intData.map(item => ({ ...item, selected: false }))
 
         intData = intData.map(item => {
           if (profileIntIds.includes(item.id)) {
-            return { ...item,selected: true }
+            return { ...item, selected: true }
           } else {
-            return { ...item,selected: false }
+            return { ...item, selected: false }
           }
         })
         setAllInterests(intData)
@@ -90,8 +85,8 @@ const Profile = () => {
     if (allInterests.length === 0) return
     let tempInt = allInterests.filter(item => item.selected === true)
     setUserInterests(tempInt)
-  },[allInterests])
-console.log('userInterests',userInterests);
+  }, [allInterests])
+  console.log('userInterests', userInterests);
   let intIds = interest.map(item => item.id)
 
 
@@ -106,9 +101,9 @@ console.log('userInterests',userInterests);
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    editProfile(body,profileData.mobile_no)
+    editProfile(body, profileData.mobile_no)
       .then(res => {
-        GA_updateProfile()     
+        GA_updateProfile()
         dispatch(updateProfileData({ profileData: res.data.data }))
         alert('Profile Data Saved!')
         navigate('/home')
@@ -124,7 +119,7 @@ console.log('userInterests',userInterests);
     const id = int.id;
     let tempint = allInterests.map(int => {
       if (int.id === id) {
-        return { ...int,selected: !int.selected }
+        return { ...int, selected: !int.selected }
       } else {
         return { ...int }
       }
@@ -143,11 +138,11 @@ console.log('userInterests',userInterests);
     e.stopPropagation()
 
     setInterestInput('')
-    addInterest({ name: interestInput,icon: null })
+    addInterest({ name: interestInput, icon: null })
       .then(res => {
 
         addcrossbox()
-        setAllInterests([...allInterests,{ ...res.data.data,selected: true }])
+        setAllInterests([...allInterests, { ...res.data.data, selected: true }])
         const newInterest = {
           id: res.data.data.id,
           name: res.data.data.name,
@@ -175,11 +170,11 @@ console.log('userInterests',userInterests);
   const addnew = () => {
 
     setaddnewtextdiv(true)
-    crossbox ()
+    crossbox()
     setbackcolor('rgb(145 165 186)')
   }
   const addcrossbox = () => {
-    
+
     setaddnewtextdiv(false);
     openinterest()
     // setbackcolor('#001C38')
@@ -190,10 +185,10 @@ console.log('userInterests',userInterests);
     if (file === undefined) return
 
     const formData = new FormData();
-    formData.append("profile_picture",file);
+    formData.append("profile_picture", file);
 
 
-    uploadProfile(formData,profileData.mobile_no)
+    uploadProfile(formData, profileData.mobile_no)
       .then(res => {
         dispatch(updateProfileData({ profileData: res.data.data }))
         alert('profile data saved')
@@ -204,11 +199,11 @@ console.log('userInterests',userInterests);
 
   }
 
-  const deselectInterest = (e,id) => {
+  const deselectInterest = (e, id) => {
     e.stopPropagation()
     let filtered = userInterests.filter(item => item.id !== id)
     let filteredAll = allInterests.map(item => {
-      return item.id === id ? { ...item,selected: false } : { ...item }
+      return item.id === id ? { ...item, selected: false } : { ...item }
     })
     const deselectInterest = interest.filter(item => item.id !== id)
     setinterest(deselectInterest)
@@ -232,13 +227,13 @@ console.log('userInterests',userInterests);
 
           </div>
           <div className={styles.head}>
-            <img src={arrow} alt="" onClick={() => navigate(-1)} />
+            <img src={arrow} alt="arrow" onClick={() => navigate(-1)} />
             <p className={styles.edithead}>Edit Your Profile</p>
           </div>
           <div className={styles.image}>
             <div className={styles.ssmmillee}>
               <img src={profileData.profile_picture ? profileData.profile_picture : photo}
-                className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt=""
+                className={`w-[200px] customStyle ${profileData.profile_picture ? styles.profilePhoto : ''}`} alt="profile_picture "
 
                 onClick={() => photoRef.current.click()} />
               <input className='hidden' type='file' accept="image/png, image/gif, image/jpeg" ref={photoRef}
@@ -319,17 +314,17 @@ console.log('userInterests',userInterests);
                           <img src={CancelIcon}
                             className='ml-1.5 cursor-pointer'
                             alt='cancel'
-                            onClick={(e) => deselectInterest(e,int.id)} />
+                            onClick={(e) => deselectInterest(e, int.id)} />
                         </div>
-                      }):
-                      
+                      }) :
+
                         selectedInterest.map(int => {
                           return <div className='bg-[#BDF4FF] py-1.5 px-3 flex items-center rounded-[8px]'>
                             {int.name}
                             <img src={CancelIcon}
                               className='ml-1.5 cursor-pointer'
                               alt='cancel'
-                              onClick={(e) => deselectInterest(e,int.id)} />
+                              onClick={(e) => deselectInterest(e, int.id)} />
                           </div>
                         })
                       }
@@ -345,7 +340,7 @@ console.log('userInterests',userInterests);
             </div>
             <div className='w-[55vw]'>
 
-              <img src={ivoryforming} className={styles.ivoryForm} alt="" />
+              <img src={ivoryforming} className={styles.ivoryForm} alt="ivoryforming" />
             </div>
           </div>
 
@@ -359,7 +354,7 @@ console.log('userInterests',userInterests);
             body={
               <>
                 <div className={`${styles.int} py-3 flex justify-center items-center ml-5`}>
-                  <img src={cross} onClick={crossbox} alt="" className={styles.closeinterest} />{/*-------------Cross the open interest page selecting---------------*/}
+                  <img src={cross} onClick={crossbox} alt="cross" className={styles.closeinterest} />{/*-------------Cross the open interest page selecting---------------*/}
                   <p className={`${styles.intp} font-semibold `}>Interests</p>
                 </div>
                 <hr className={styles.brk} />
@@ -367,12 +362,12 @@ console.log('userInterests',userInterests);
                 <div className='flex flex-wrap gap-2 sm:ml-6 ml-3'>
 
                   {
-                    allInterests.map((int,i) => {
+                    allInterests.map((int, i) => {
                       return <div className={`text-lg flex justify-center flex-row items-center gap-1 cursor-pointer  rounded-md px-3 py-1 text-black ${filterIndexIds.includes(int.id) ? 'bg-secondary' : 'border border-[#79747E] '}`}
                         // style={{ border: '2px solid #939CA3' }}
                         // {filterIndexIds.includes(int.id)?'bg-red-400':''}
                         key={int.id} onClick={() => toggleInt(int)}>
-                        <img src={int.icon} className='w-5' alt="" />
+                        <img src={int.icon} className='w-5' alt="int_icon" />
                         <h3> {int.name} </h3>
                       </div>
                     })
@@ -398,7 +393,7 @@ console.log('userInterests',userInterests);
               body={
                 <>
                   <div className={`${styles.int} pb-3 flex justify-center items-center ml-5`}>
-                    <img src={arrow} onClick={addcrossbox} alt="" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
+                    <img src={arrow} onClick={addcrossbox} alt="arrow" className={styles.closeinterest} />{/*-------------Close Add Your interest page ---------------*/}
                     <p className={`${styles.intp}`}>Interest</p>
                   </div>
                   <hr className={styles.head1} />

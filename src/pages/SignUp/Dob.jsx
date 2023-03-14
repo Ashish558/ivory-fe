@@ -175,12 +175,6 @@ const Dob = () => {
       .then((res) => {
         verifyOtp(verifyBody)
           .then((res) => {
-            if (redirectAfterLogin !== null) {
-              dispatch(updateRedirectAfterLogin(null))
-              navigate(redirectAfterLogin)
-              return
-            }
-            navigate("/congrates");
             GA_signup()
             //   window.dataLayer.push({
             //     event: 'sign_up',
@@ -190,6 +184,12 @@ const Dob = () => {
             localStorage.setItem('access', access_token)
             localStorage.setItem('refresh', refresh_token)
             localStorage.setItem('phone', phone)
+            if (redirectAfterLogin !== null) {
+              dispatch(updateRedirectAfterLogin(null))
+              navigate(redirectAfterLogin)
+              return
+            }
+            navigate("/congrates");
           })
           .catch((err) => {
             console.log(err.response.data.error);
@@ -221,7 +221,7 @@ const Dob = () => {
       <div className="topAppBar mt-10 ml-8 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img src={back} alt="" onClick={goBack} />
+            <img src={back} alt="back" onClick={goBack} />
           </div>
         </div>
       </div>
@@ -234,7 +234,7 @@ const Dob = () => {
           }}
         >
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
           </div>
           <div className="flex-1 w-full">
             <Slider {...settings} className="w-full flex-1 h-auto">
@@ -255,7 +255,7 @@ const Dob = () => {
                     <div className="flex justify-center mx-auto items-center flex-1 w-[300px] h-[300px] overflow-hidden rounded-full bg-secondary mt-10">
                       <img
                         src={item.img}
-                        alt=""
+                        alt="item_img"
                         className={`md:w-full ${item.imgClassName} mx-auto w-full-h-full object-contain`}
                       />
                     </div>

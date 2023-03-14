@@ -34,7 +34,7 @@ const tempOptions = [
    },
 ]
 
-export default function Mcq2({ image, choices, url, updateStory, type, question}) {
+export default function Mcq2({ image, choices, url, updateStory, type, question }) {
    const [options, setOptions] = useState([])
 
    const [mcqResponse, setMcqResponse] = useState({
@@ -43,7 +43,7 @@ export default function Mcq2({ image, choices, url, updateStory, type, question}
    })
 
    useEffect(() => {
-      if(!choices) return
+      if (!choices) return
       setOptions(choices.map(choice => ({ ...choice, selected: false })))
    }, [choices])
 
@@ -146,7 +146,7 @@ export default function Mcq2({ image, choices, url, updateStory, type, question}
                ?
                mcqResponse.isCorrect === true ?
                   <div className={`${styles.mcqResponseCorrect} lg:row-span-4`}>
-                     <img src={McqCorrectImg} className={styles.storyImage} alt='' />
+                     <img src={McqCorrectImg} className={styles.storyImage} alt='McqCorrectImg' />
                      <div className='px-4'>
                         <h2>
                            Genius
@@ -166,12 +166,12 @@ export default function Mcq2({ image, choices, url, updateStory, type, question}
                      </div>
                      : <></> :
                <div className='flx lg:row-span-4 items-center self-streth flex-1 overflow-aut lg:h-full'>
-                  <img src={image} className={styles.storyImage} />
+                  <img src={image} className={styles.storyImage} alt='McqImage' />
                </div>
          }
          <div className={`${styles.mcqOptions} lg:row-span-2`}>
             <p className='font-semibold mb-4' >
-              {question}
+               {question}
             </p>
             <div className='flex flex-col gap-y-2 justify-around items-center' >
                {options.map(option => {

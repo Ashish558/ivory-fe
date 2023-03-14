@@ -29,7 +29,7 @@ const Second = ({ clearTimeouts }) => {
           </div>
         </div>
       </div>
-      <img className={styles.imgup} src={slideimage2} alt="" />
+      <img className={styles.imgup} src={slideimage2} alt="slideimage2" />
       <div className={styles.down}>
         <span className={styles.headsecond}>
           <p className='text-2xl tracking-widest font-bold'><span style={{ color: "#60FFDE" }}>Engage</span> in interests that sharpen your mind </p>

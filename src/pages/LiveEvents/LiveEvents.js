@@ -177,14 +177,14 @@ export default function LiveEvents() {
 
    return (
       <div className='px-4 py-4 overflow-x-hidden pb-[70px] lg:mt-[70px] lg:px-[70px] z-10'>
-         <img src={Background} className={styles.backgroundImage} />
+         <img src={Background} className={styles.backgroundImage} alt='Background' />
          <div className={styles.container}>
             <h4 className='lg:text-2xl text-xl font-semibold mb-5 lg:mb-4 hidden'> Upcoming live sessions </h4>
 
             <div className='hidden lg:flex items-center gap-x-7 mb-5 mt-4'>
                <h1 className='text-xl font-black cursor-pointer lg:text-5xl lg:font-semibold show-events font-inter'
                   onClick={() => navigate('/live-events')}>Live Events</h1>
-               <p className='p '><img src={Arrow} alt="" /></p>
+               <p className='p '><img src={Arrow} alt="Arrow" /></p>
             </div>
             {
                todaySessionsFiiltered.length > 0 &&

@@ -49,7 +49,7 @@ const SimpleSlider = ({ banners, isActivityBanner, page }) => {
                                  className="flex rounded-3xl justify-between items-end mx px-4 py-2 overflow-hidden relative z-10 banner-container">
                                  {/* <div className="flex flex-1 items-center self-stretch relative overflow-hidden"> */}
                                  <img className="rounded-2xl w-full slider-bg-image h-full object-cover"
-                                    src={banner.image} alt="" />
+                                    src={banner.image} alt="Banner_Image" />
                                  {/* </div> */}
                                  <div className="flex flex-1 items-start text-white pl-2 relative z-20">
                                     <p className="play bg-black rounded-full mr-2 mt-1"></p>

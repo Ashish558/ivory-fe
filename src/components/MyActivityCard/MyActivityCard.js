@@ -12,7 +12,7 @@ export default function MyActivityCard({ icon, name, percentage_completed, new_a
          <p className='text-[36px] text-lightGray mr-8 hidden lg:block'> {idx + 1}. </p>
          <div className={`${styles.container}`} style={{ backgroundColor: `${color}11` }} >
             <m.div transition={{ delay: 5 }} className={styles.hover_activity} >
-               <img src={thumbnail} alt="" />
+               <img src={thumbnail} alt="thumbnail" />
             </m.div>
 
             <div className='flex flex-col items-start flex-1 px-3 py-3'>

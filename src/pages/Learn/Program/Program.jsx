@@ -285,7 +285,7 @@ const Program = () => {
           </div>
         )}
         {/* desktop */}
-        <p className='text-[40px] mb-8 px-10 hidden lg:block font-medium  pt-7'>
+        <p className='text-[40px] mb-8 px-10 hidden lg:block font-medium font-inter  pt-7'>
           {name}
         </p>
 
@@ -307,28 +307,48 @@ const Program = () => {
               </p>
             </div>
           </div>
-          <div className='max-w-[400px] self-stretch overflow-auto max-h-[700px]'>
-            {allModules.map(item => {
-              let isCompleted = false
-              userModules.map(userMod => {
-                if (userMod.module.id === item.id) {
-                  if (userMod.is_completed === true) {
-                    isCompleted = true
+
+
+          <div className='max-w-[400px] '>
+
+            <div className="text-black text-base ml-6 font-bold mt-5 font-inter">
+              8 Videos
+              <span className="text-gray-500 text-normal font-normal">
+                {" "}
+                ( 3 hrs 15 min )
+              </span>{" "}
+              | 4 live sessions
+            </div>
+
+
+            <div className='self-stretch overflow-auto max-h-[700px]'>
+
+              {allModules.map(item => {
+                let isCompleted = false
+                userModules.map(userMod => {
+                  if (userMod.module.id === item.id) {
+                    if (userMod.is_completed === true) {
+                      isCompleted = true
+                    }
                   }
-                }
-              })
-              return <SingleLiveSession key={item.id}
-                {...item}
-                selectedModule={selectedModule}
-                handleModulechange={handleModulechange}
-                isCompleted={isCompleted}
-              />
-            })}
+                })
+                return <SingleLiveSession key={item.id}
+                  {...item}
+                  selectedModule={selectedModule}
+                  handleModulechange={handleModulechange}
+                  isCompleted={isCompleted}
+                />
+              })}
+            </div>
           </div>
         </div>
 
-        <div className="py-3 px-5 mt-2">
-          <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300">
+
+        <div className='border-b  border-gray-300 mx-10 hidden lg:block mt-2'>
+
+        </div>
+        <div className="py-3 px-5  mt-4">
+          <ul className="flex  justify-around lg:justify-start lg:gap-x-8  border-b  border-gray-300 lg:border-[0]">
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => toggleFilters(0)} >
               <span className="px-2  lg:px-5 lg:text-base text-sm lg:hidden">all Modules</span>
@@ -338,14 +358,27 @@ const Program = () => {
             </li>
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => toggleFilters(1)}>
-              <span className="px-2 lg:text-base text-sm">Live Sessions</span>
+
+
+              {
+                tab === 1 ? <span className="px-2 lg:text-base text-sm font-inter text-blue-600 hidden lg:block">Live Sessions</span> : <span className="px-2 lg:text-base text-sm font-inter hidden lg:block">Live Sessions</span>
+              }
+
+
+              <span className="px-2 lg:text-base text-sm lg:hidden">Live Sessions</span>
               {tab === 1 && (
                 <hr className=" border-b-4  w-full border-blue-600 rounded-full" />
               )}
             </li>
             <li className="capitalize font-bold text-normal flex flex-col justify-between h-10"
               onClick={() => toggleFilters(2)}>
-              <span className='lg:text-base text-sm'>
+
+              {
+                tab === 2 ? <span className="px-2 lg:text-base text-sm font-inter text-blue-600 hidden lg:block">Assignments</span> : <span className="px-2 lg:text-base text-sm font-inter hidden lg:block">   Assignments</span>
+              }
+
+
+              <span className='lg:text-base text-sm lg:font-inter lg:hidden'>
                 Assignments
               </span>
               {tab === 2 && (
@@ -411,7 +444,7 @@ const Program = () => {
                       next live session
                     </button>
               }
-              <h1 className="font-bold text-lg">
+              <h1 className="font-bold text-lg lg:text-base">
                 {selectedModule.name}
               </h1>
               <div className="flex flex-col gap-3">
@@ -509,7 +542,7 @@ const Program = () => {
 
       {
         tab === 0 && (
-          <div className="text-black text-base ml-6 font-bold mt-5">
+          <div className="text-black text-base ml-6 font-bold mt-5 lg:hidden">
             8 Videos
             <span className="text-gray-500 text-normal font-normal">
               {" "}

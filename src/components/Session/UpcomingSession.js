@@ -30,7 +30,7 @@ export default function UpcomingSession({ id, name, image, scheduled_on, host, s
                 <img src={liveSessionCard} className='object-cover  w-[100%] h-[180px] lg:h-[228px]' alt='session' />
                 <div className='bg-[#FF922B] p-1 rounded-full text-white px-3 absolute top-5 right-5 z-30 text-xs flex items-center'>
                     <div className='lg:w-[17px]'>
-                        <img src={Clock} alt="" />
+                        <img src={Clock} alt="clock" />
                     </div>
                     <div className='pl-1'>
                         <span className='lg:text-xl'>Coming Soon</span>

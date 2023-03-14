@@ -22,7 +22,7 @@ export function ViewSubmission({ handleClose, source }) {
       <div className={styles.modalContainer}>
          <div className='overflow-auto'>
             <div className='px-4 py-4 flex justify-center items-center'>
-               <img src={source} className={styles.source} />
+               <img src={source} className={styles.source} alt='source' />
             </div>
          </div>
 

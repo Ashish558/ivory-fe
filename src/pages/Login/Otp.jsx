@@ -51,6 +51,7 @@ const Otp = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (stateData.otp !== undefined && stateData.otp.length === 6) {
+
       const otpArray = stateData?.otp.split("");;
       const otpValues = {
         field1: otpArray[0],
@@ -99,17 +100,17 @@ const Otp = () => {
           // window.dataLayer.push({
           //   event: 'login',
           // });
-          if (redirectAfterLogin !== null) {
-            navigate(redirectAfterLogin)
-            dispatch(updateRedirectAfterLogin(null))
-            return
-          }
           console.log('verify', res.data.data);
           const { refresh_token, access_token } = res.data.data
           dispatch(updateLoggedIn({ loggedIn: true }))
           localStorage.setItem('access', access_token)
           localStorage.setItem('refresh', refresh_token)
           localStorage.setItem('phone', phone)
+          if (redirectAfterLogin !== null) {
+            navigate(redirectAfterLogin)
+            dispatch(updateRedirectAfterLogin(null))
+            return
+          }
           navigate("/home");
         }
 
@@ -160,7 +161,7 @@ const Otp = () => {
       <div className="topAppBar pt-10 ml-6 sm:hidden">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img src={back} alt="" onClick={goBack} />
+            <img src={back} alt="back" onClick={goBack} />
           </div>
         </div>
       </div>
@@ -173,7 +174,7 @@ const Otp = () => {
           }}
         >
           <div className="pl-4 md:pl-20 pt-10 self-stretch">
-            <img src={logo} alt="" />
+            <img src={logo} alt="logo" />
           </div>
           <div className="flex-1 w-full">
             <Slider {...settings} className="w-full flex-1 h-auto">

@@ -86,14 +86,14 @@ const DesktopActivities = () => {
         <div style={{ marginTop: '88px', marginRight: '436px' }} className='ml-24'>
             <div className=' flex items-center mb-20'>
                 <h1 className='text-5xl font-semibold '>Recommended activities <span></span></h1>
-                <p className='pl-7'><img src={Arrow} alt="" /></p>
+                <p className='pl-7'><img src={Arrow} alt="Arrow" /></p>
             </div>
             <div className='grid grid-cols-6 gap-4 px-3'>
                 {
                     activities.map((activity) =>
                         <div key={activity.id} className='flex flex-col justify-center items-center px-4 pb-4 pt-5 desktop-Box'>
 
-                            <p><img src={activity?.img} alt="" /></p>
+                            <p><img src={activity?.img} alt="activity" /></p>
 
                             {
                                 activity?.name.length <= '17' ?
