@@ -106,6 +106,7 @@ function App() {
 
     //client acc
     ReactGA.initialize('GTM-PKH9VTQ')
+    // ReactGA.initialize('G-WTLT1Q9JWF')
   }, [])
   // console.log(gapi);
   // console.log(profileData);
